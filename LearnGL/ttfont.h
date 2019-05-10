@@ -14,15 +14,14 @@
 #include <string>
 
 #include <GLFW/glfw3.h>
-
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-// FreeType
+
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
-#include "common/shader.h"
+#include "std/shader.h"
 
 using namespace std;
 using namespace glm;
@@ -59,13 +58,11 @@ public:
         if (FT_Init_FreeType(&ft))
             std::cout << "ERROR::FREETYPE: Could not init FreeType Library" << std::endl;
 
-        // Load font as face
         FT_Face face;
         if (FT_New_Face(ft, "fonts/arial.ttf", 0, &face))
             std::cout << "ERROR::FREETYPE: Failed to load font" << std::endl;
-
-        // Set size to load glyphs as
-        FT_Set_Pixel_Sizes(face, 0, 48);
+        
+        FT_Set_Pixel_Sizes(face, 0, 20);
 
         // Disable byte-alignment restriction
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -176,7 +173,7 @@ public:
 private:
     unsigned int VBO,VAO;
     Shader* shader;
-    std::map<GLchar, Character> Characters;
+    map<GLchar, Character> Characters;
 };
 
 

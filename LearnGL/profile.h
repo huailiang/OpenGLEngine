@@ -9,18 +9,24 @@
 #ifndef transf_h
 #define transf_h
 
-#include <ft2build.h>
-#include FT_FREETYPE_H
-
 #include <iomanip>
 #include <stdio.h>
 #include <iostream>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <string>
 
 using namespace std;
 using namespace glm;
 
+
+template <typename T>
+std::string to_string_with_precision(const T a_value, const int n = 6)
+{
+    std::ostringstream out;
+    out << std::setprecision(n) << a_value;
+    return out.str();
+}
 
 void prt_mat(mat4 mat)
 {

@@ -30,6 +30,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4C283D482285711B000B6FBC /* texture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = texture.h; sourceTree = "<group>"; };
 		4C3B7A1422831371003B212F /* glad.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glad.c; sourceTree = "<group>"; };
 		4C3B7A162283164E003B212F /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		4C3B7A1822831668003B212F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -46,7 +47,6 @@
 		4CEF90E12283CBEA00068D1E /* main.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = main.vs; sourceTree = "<group>"; };
 		4CEF90E32283D04200068D1E /* mesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mesh.h; sourceTree = "<group>"; };
 		4CEF90E52283D04200068D1E /* camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = camera.h; sourceTree = "<group>"; };
-		4CEF90E72283D04200068D1E /* filesystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = filesystem.h; sourceTree = "<group>"; };
 		4CEF90E82283D04200068D1E /* shader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shader.h; sourceTree = "<group>"; };
 		4CEF90E92283D04200068D1E /* model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = model.h; sourceTree = "<group>"; };
 		4CEF90EA2283FD5F00068D1E /* stb_image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
@@ -73,8 +73,8 @@
 		4C551FB422846F46002D535F /* shader */ = {
 			isa = PBXGroup;
 			children = (
-				4CEF90E02283CBEA00068D1E /* main.fs */,
 				4CEF90E12283CBEA00068D1E /* main.vs */,
+				4CEF90E02283CBEA00068D1E /* main.fs */,
 				4C551FB522846F7E002D535F /* ttfont.vs */,
 				4C551FB622846F7E002D535F /* ttfrag.fs */,
 			);
@@ -110,7 +110,7 @@
 			children = (
 				4C551FB722847070002D535F /* fonts */,
 				4C551FB422846F46002D535F /* shader */,
-				4CEF90E22283D02800068D1E /* common */,
+				4CEF90E22283D02800068D1E /* std */,
 				4C3B7A1422831371003B212F /* glad.c */,
 				4CD27D2E2282F4E30038AE21 /* main.cpp */,
 				4CEF92672284174200068D1E /* profile.h */,
@@ -132,17 +132,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		4CEF90E22283D02800068D1E /* common */ = {
+		4CEF90E22283D02800068D1E /* std */ = {
 			isa = PBXGroup;
 			children = (
 				4CEF90EA2283FD5F00068D1E /* stb_image.h */,
 				4CEF90E52283D04200068D1E /* camera.h */,
-				4CEF90E72283D04200068D1E /* filesystem.h */,
 				4CEF90E32283D04200068D1E /* mesh.h */,
 				4CEF90E92283D04200068D1E /* model.h */,
 				4CEF90E82283D04200068D1E /* shader.h */,
+				4C283D482285711B000B6FBC /* texture.h */,
 			);
-			path = common;
+			path = std;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
