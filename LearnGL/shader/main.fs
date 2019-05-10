@@ -1,0 +1,20 @@
+#version 330 core
+
+out vec4 FragColor;
+
+in vec3 vertColor;
+in vec2 texCoord;
+uniform float scale;
+
+uniform sampler2D texture1;
+uniform sampler2D texture2;
+
+void main()
+{
+    
+    vec4 vc = vec4(vertColor * scale, 1);
+    vec4 tc1 = texture(texture1, texCoord);
+    vec4 tc2 = texture(texture2, texCoord);
+    vec4 color = vc * mix(tc1, tc2, 0.2f);
+    FragColor = color;
+}
