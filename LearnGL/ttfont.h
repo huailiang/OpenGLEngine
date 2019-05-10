@@ -45,6 +45,7 @@ public:
     ~TTFont()
     {
         delete shader;
+        Characters.clear();
     }
     
     int initial()

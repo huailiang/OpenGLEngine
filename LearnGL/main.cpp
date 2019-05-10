@@ -20,6 +20,7 @@
 #include "std/camera.h"
 #include "std/shader.h"
 #include "std/texture.h"
+#include "std/light.h"
 #include "profile.h"
 #include "ttfont.h"
 
@@ -30,7 +31,7 @@ const unsigned int SCR_HEIGHT = 600;
 float deltatime = 0;
 float lastTime = 0;
 Camera camera(vec3(0.0f,0.0f,3.0f));
-
+Light* light;
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int heigth);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -151,14 +152,15 @@ int main(int argc, const char * argv[])
     shader.setInt("texture2", 1);
     shader.setVec3("viewPos", camera.Position);
     
-    shader.setVec3("light.direction", 1.0f,0.0f,0.0f);
-    shader.setVec3("light.color", 1.0f, 1.0f, 1.0f);
-    
     // material properties
     shader.setVec3("material.ambient", 1.0f, 1.0f, 1.0f);
     shader.setVec3("material.diffuse", 1.0f, 1.0f, 0.5f);
     shader.setVec3("material.specular", 0.5f, 0.5f, 0.5f);
     shader.setFloat("material.shininess", 32.0f);
+    
+    //light
+    light = new DirectLight(vec3(1.0f),vec3(1.0f,0.0f,0.0f));
+    light->Attach(&shader);
     
     TTFont font;
     
