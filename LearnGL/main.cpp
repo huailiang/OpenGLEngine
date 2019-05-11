@@ -20,18 +20,22 @@
 #include "std/camera.h"
 #include "std/shader.h"
 #include "std/texture.h"
+#include "std/model.h"
 #include "std/light.h"
 #include "profile.h"
 #include "ttfont.h"
 
 using namespace std;
 using namespace glm;
+
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
-float deltatime = 0;
-float lastTime = 0;
+float deltatime,lastTime;
 Camera camera(vec3(0.0f,0.0f,3.0f));
+
+#define _SpotLight_
 Light* light;
+
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int heigth);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -69,6 +73,7 @@ int main(int argc, const char * argv[])
     glEnable(GL_DEPTH_TEST);
     
     Shader shader("shader/main.vs","shader/main.fs");
+    Shader ourShader("shader/model.vs", "shader/model.fs");
     float vertices[] = {
         // positions          // normals           // texture coords
         -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f,
@@ -143,10 +148,10 @@ int main(int argc, const char * argv[])
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     
     unsigned int texture1, texture2;
-    Texture tex1("resources/textures/container.jpg", &texture1);
-    Texture tex2("resources/textures/awesomeface.png", &texture2);
-    
-     // don't forget to activate/use the shader before setting uniforms!
+    TTexture tex1("resources/textures/container.jpg", &texture1);
+    TTexture tex2("resources/textures/awesomeface.png", &texture2);
+
+//     // don't forget to activate/use the shader before setting uniforms!
     shader.use();
     shader.setInt("texture1", 0);
     shader.setInt("texture2", 1);
@@ -159,13 +164,20 @@ int main(int argc, const char * argv[])
     shader.setFloat("material.shininess", 32.0f);
     
     //light
-//    light = new DirectLight(vec3(1.0f),vec3(1.0f,0.0f,0.0f));
-//    light = new PointLight(vec3(1.0f),vec3(0,0,-1),vec3(0,0,4),vec3(1.0f,0.09f,0.032f));
-    light = new SpotLight(vec3(1.0f),vec3(0,0,-1),vec3(0,0,2.0f),vec3(1.0f,0.09f,0.032f),cos(radians(14.5f)),cos(radians(16.5f)));
+#ifdef _SpotLight_
+    light = new SpotLight(vec3(1.0f),vec3(0,0,-1),vec3(0,0,2.0f),vec3(1.0f,0.09f,0.032f),cos(radians(7.5f)),cos(radians(8.5f)));
+#else
+#ifdef _PointLight_
+    light = new PointLight(vec3(1.0f),vec3(0,0,-1),vec3(0,0,4),vec3(1.0f,0.09f,0.032f));
+#else
+     light = new DirectLight(vec3(1.0f),vec3(1.0f,0.0f,0.0f));
+#endif
+#endif
     light->Attach(&shader);
     
     TTFont font;
-    
+    Model Model("resources/objects/nanosuit/nanosuit.obj");
+
     while (!glfwWindowShouldClose(window))
     {
         processInput(window);
@@ -194,12 +206,27 @@ int main(int argc, const char * argv[])
         for (unsigned int i = 0; i < 8; i++)
         {
             glm::mat4 model = glm::mat4(1.0f);
-            model = glm::translate(model, cubePositions[i]);
+            model = translate(model, cubePositions[i]);
+            model = translate(model, vec3(0,0,-2.0f));
             float angle = (8.0f * i + 32) * glfwGetTime();
-            model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+            model = glm::rotate(model, glm::radians(angle), vec3(1.0f, 0.3f, 0.5f));
             shader.setMat4("model", model);
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
+        
+        ourShader.use();
+        mat4 projection = perspective(radians(camera.Zoom), SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+        mat4 oview = camera.GetViewMatrix();
+        ourShader.setMat4("projection", projection);
+        ourShader.setMat4("view", oview);
+        mat4 omodel = mat4(1.0f);
+        omodel = translate(omodel, vec3(-1.2f, -1.75f, -1.5f));
+        omodel = glm::scale(omodel, vec3(0.2f, 0.2f, 0.2f));
+        float angle = 32 * glfwGetTime();
+        omodel = rotate(omodel, radians(angle), vec3(0.0f,1.0f,0.0f));
+        ourShader.setMat4("model", omodel);
+        Model.Draw(ourShader);
+        
         float fps = 1.0f / deltatime;
         font.RenderText("FPS: "+to_string_with_precision(fps,4), 740, 580, 0.5f, vec3(1.0f,0.0f,0.0f));
         font.RenderText("@copyright penghuailiang", 20, 20, 1.0f, vec3(1.0f,1.0f,0.0f));

@@ -15,17 +15,17 @@
 using namespace glm;
 
 
-class Texture
+class TTexture
 {
 public:
     unsigned int textureID;
     
-    Texture(const char* path)
+    TTexture(const char* path)
     {
-        Texture(path, NULL);
+        TTexture(path, NULL);
     }
     
-    Texture(const char* path, unsigned int* texID)
+    TTexture(const char* path, unsigned int* texID)
     {
         this->path=path;
         *texID = LoadTexture();
