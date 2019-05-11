@@ -34,6 +34,7 @@ public:
     }
     
     LightType virtual getType() = 0;
+    
     void virtual Attach(Shader* shader) = 0;
 };
 
@@ -72,7 +73,6 @@ public:
     {
         shader->setVec3("light.color", this->color);
         shader->setVec3("light.direction", this->direction);
-        std::cout<<"direction:"<<direction.x<<" "<<direction.y<<" "<<direction.z<<std::endl;
         shader->setVec3("light.constant", this->constant);
         shader->setVec3("light.position", this->pos);
     }
@@ -91,7 +91,7 @@ public:
     float outerCutOff;
     vec3 direction;
     
-    SpotLight(vec3 color, vec3 pos, vec3 constant,float cutOff,float outerCutOff,vec3 direction)
+    SpotLight(vec3 color, vec3 direction, vec3 pos, vec3 constant,float cutOff,float outerCutOff)
                     :PointLight(color, direction, pos,constant)
     {
         this->cutOff=cutOff;
@@ -101,8 +101,8 @@ public:
     void Attach(Shader* shader)
     {
         PointLight::Attach(shader);
-        shader->setFloat("light.cutOff", cutOff);
-        shader->setFloat("light.outerCutOff", outerCutOff);
+        shader->setFloat("light.cutOff", this->cutOff);
+        shader->setFloat("light.outerCutOff", this->outerCutOff);
     }
     
     LightType getType()
