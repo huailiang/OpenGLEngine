@@ -159,7 +159,9 @@ int main(int argc, const char * argv[])
     shader.setFloat("material.shininess", 32.0f);
     
     //light
-    light = new DirectLight(vec3(1.0f),vec3(1.0f,0.0f,0.0f));
+    
+//    light = new DirectLight(vec3(1.0f),vec3(1.0f,0.0f,0.0f));
+    light = new PointLight(vec3(1.0f),vec3(0,0,-1),vec3(0,0,4),vec3(1.0f,0.09f,0.032f));
     light->Attach(&shader);
     
     TTFont font;

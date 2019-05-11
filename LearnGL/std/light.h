@@ -25,14 +25,15 @@ class Light
 {
 public:
     vec3 color;
+    vec3 direction;
 
-    Light(vec3 color)
+    Light(vec3 color,vec3 direction)
     {
         this->color=color;
+        this->direction=direction;
     }
     
     LightType virtual getType() = 0;
-    
     void virtual Attach(Shader* shader) = 0;
 };
 
@@ -40,12 +41,7 @@ public:
 class DirectLight: public Light
 {
 public:
-    vec3 direction;
-    
-    DirectLight(vec3 color,vec3 direction) : Light(color)
-    {
-        this->direction=direction;
-    }
+    DirectLight(vec3 color,vec3 direction): Light(color, direction) {}
     
     void Attach(Shader* shader)
     {
@@ -65,8 +61,8 @@ public:
     vec3 pos;
     vec3 constant; //衰减系数
     
-    PointLight(vec3 color, vec3 pos, vec3 constant)
-            :Light(color)
+    PointLight(vec3 color, vec3 direction, vec3 pos, vec3 constant)
+            :Light(color, direction)
     {
         this->pos=pos;
         this->constant=constant;
@@ -74,17 +70,17 @@ public:
     
     void Attach(Shader* shader)
     {
-        shader->setVec3("light.color", color);
-        shader->setVec3("light.constant", constant);
-        shader->setVec3("light.position", pos);
-
+        shader->setVec3("light.color", this->color);
+        shader->setVec3("light.direction", this->direction);
+        std::cout<<"direction:"<<direction.x<<" "<<direction.y<<" "<<direction.z<<std::endl;
+        shader->setVec3("light.constant", this->constant);
+        shader->setVec3("light.position", this->pos);
     }
     
-    LightType  getType()
+    LightType getType()
     {
         return LightPoint;
     }
-
 };
 
 
@@ -96,24 +92,23 @@ public:
     vec3 direction;
     
     SpotLight(vec3 color, vec3 pos, vec3 constant,float cutOff,float outerCutOff,vec3 direction)
-                    :PointLight(color,pos,constant)
+                    :PointLight(color, direction, pos,constant)
     {
         this->cutOff=cutOff;
         this->outerCutOff = outerCutOff;
-        this->direction=direction;
     }
     
     void Attach(Shader* shader)
     {
         PointLight::Attach(shader);
+        shader->setFloat("light.cutOff", cutOff);
+        shader->setFloat("light.outerCutOff", outerCutOff);
     }
     
     LightType getType()
     {
         return LightSpot;
     }
-
-
 };
 
 #endif /* light_h */
