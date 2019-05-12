@@ -32,6 +32,8 @@ public:
     ~Terrain()
     {
         delete shader;
+        glDeleteBuffers(1, &vbo);
+        glDeleteVertexArrays(1,&vbo);
     }
     
     void initial()
