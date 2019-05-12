@@ -46,6 +46,9 @@
 		4CB1D90C2286DB35004BEE38 /* model.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = model.fs; sourceTree = "<group>"; };
 		4CB1D90D2286DE69004BEE38 /* libfreetype.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfreetype.6.dylib; path = LearnGL/lib/libfreetype.6.dylib; sourceTree = "<group>"; };
 		4CB1D90F2286DE97004BEE38 /* libassimp.4.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.4.1.0.dylib; path = LearnGL/lib/libassimp.4.1.0.dylib; sourceTree = "<group>"; };
+		4CC436B322882C870095D759 /* terrain.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = terrain.vs; sourceTree = "<group>"; };
+		4CC436B422882C870095D759 /* terrain.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = terrain.fs; sourceTree = "<group>"; };
+		4CC436B522882CFD0095D759 /* terrain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = terrain.h; sourceTree = "<group>"; };
 		4CD27D2B2282F4E30038AE21 /* LearnGL */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LearnGL; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CD27D2E2282F4E30038AE21 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4CD27D3E2283022D0038AE21 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -83,6 +86,8 @@
 		4C551FB422846F46002D535F /* shader */ = {
 			isa = PBXGroup;
 			children = (
+				4CC436B422882C870095D759 /* terrain.fs */,
+				4CC436B322882C870095D759 /* terrain.vs */,
 				4CB1D90C2286DB35004BEE38 /* model.fs */,
 				4CB1D90B2286DB35004BEE38 /* model.vs */,
 				4CEF90E12283CBEA00068D1E /* main.vs */,
@@ -128,6 +133,7 @@
 				4CD27D2E2282F4E30038AE21 /* main.cpp */,
 				4CEF92672284174200068D1E /* profile.h */,
 				4C551FB32284655C002D535F /* ttfont.h */,
+				4CC436B522882CFD0095D759 /* terrain.h */,
 			);
 			path = LearnGL;
 			sourceTree = "<group>";

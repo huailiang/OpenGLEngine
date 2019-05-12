@@ -22,6 +22,7 @@
 #include "std/texture.h"
 #include "std/model.h"
 #include "std/light.h"
+#include "terrain.h"
 #include "profile.h"
 #include "ttfont.h"
 
@@ -119,18 +120,11 @@ int main(int argc, const char * argv[])
         -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f,  1.0f
     };
     vec3 cubePositions[] = {
-        glm::vec3( 0.0f,  0.0f,  0.0f),
-        glm::vec3( 2.0f,  5.0f, -15.0f),
-        glm::vec3(-1.5f, -2.2f, -2.5f),
-        glm::vec3(-3.8f, -2.0f, -12.3f),
-        glm::vec3( 2.4f, -0.4f, -3.5f),
-        glm::vec3(-1.7f,  3.0f, -7.5f),
-        glm::vec3( 1.3f, -2.0f, -2.5f),
-        glm::vec3( 1.5f,  2.0f, -2.5f),
-        glm::vec3( 1.5f,  0.2f, -1.5f),
-        glm::vec3(-1.3f,  1.0f, -1.5f)
+        glm::vec3( 0.0f,  0.0f,  -2.0f),
+        glm::vec3( 2.0f,  1.0f, -4.0f),
     };
     
+    //cube
     unsigned int vbo, vao;
     glGenVertexArrays(1, &vao);
     glGenBuffers(1, &vbo);
@@ -151,7 +145,7 @@ int main(int argc, const char * argv[])
     TTexture tex1("resources/textures/container.jpg", &texture1);
     TTexture tex2("resources/textures/awesomeface.png", &texture2);
 
-//     // don't forget to activate/use the shader before setting uniforms!
+     // don't forget to activate/use the shader before setting uniforms!
     shader.use();
     shader.setInt("texture1", 0);
     shader.setInt("texture2", 1);
@@ -175,6 +169,7 @@ int main(int argc, const char * argv[])
 #endif
     light->Attach(&shader);
     
+    Terrain terrain;
     TTFont font;
     Model Model("resources/objects/nanosuit/nanosuit.obj");
 
@@ -202,13 +197,13 @@ int main(int argc, const char * argv[])
         proj = perspective(radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
         shader.setMat4("view", view);
         shader.setMat4("projection", proj);
+        
         glBindVertexArray(vao);
-        for (unsigned int i = 0; i < 8; i++)
+        for (unsigned int i = 0; i < 2; i++)
         {
             glm::mat4 model = glm::mat4(1.0f);
             model = translate(model, cubePositions[i]);
-            model = translate(model, vec3(0,0,-2.0f));
-            float angle = (8.0f * i + 32) * glfwGetTime();
+            float angle = (8.0f * i) * glfwGetTime();
             model = glm::rotate(model, glm::radians(angle), vec3(1.0f, 0.3f, 0.5f));
             shader.setMat4("model", model);
             glDrawArrays(GL_TRIANGLES, 0, 36);
@@ -220,12 +215,15 @@ int main(int argc, const char * argv[])
         ourShader.setMat4("projection", projection);
         ourShader.setMat4("view", oview);
         mat4 omodel = mat4(1.0f);
-        omodel = translate(omodel, vec3(-1.2f, -1.75f, -1.5f));
-        omodel = glm::scale(omodel, vec3(0.2f, 0.2f, 0.2f));
+        omodel = translate(omodel, vec3(-1.2f, -0.5f, -1.5f));
+        omodel = glm::scale(omodel, vec3(0.12f, 0.12f, 0.12f));
         float angle = 32 * glfwGetTime();
         omodel = rotate(omodel, radians(angle), vec3(0.0f,1.0f,0.0f));
         ourShader.setMat4("model", omodel);
         Model.Draw(ourShader);
+        glBindVertexArray(0);
+        
+        terrain.Draw(proj * view * mat4(1));
         
         float fps = 1.0f / deltatime;
         font.RenderText("FPS: "+to_string_with_precision(fps,4), 740, 580, 0.5f, vec3(1.0f,0.0f,0.0f));
