@@ -74,8 +74,8 @@ int main(int argc, const char * argv[])
     glEnable(GL_STENCIL_TEST);
     glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
     
-    Shader shader("shader/light.vs","shader/light.fs");
-    Shader mShader("shader/model.vs", "shader/model.fs");
+    LightShader shader("shader/light.vs","shader/light.fs",nullptr,vec3(1.0f, 1.0f, 1.0f), vec3(1.0f, 1.0f, 0.5f),vec3(0.5f, 0.5f, 0.5f),32.0f);
+    LightShader mShader("shader/model.vs", "shader/model.fs",   nullptr,vec3(1.0f, 1.0f, 1.0f), vec3(2.0f, 2.0f, 1.5f),vec3(0.5f, 0.5f, 0.5f),32.0f);
     Shader oShader("shader/model.vs", "shader/outline.fs");
     float vertices[] = {
         // positions          // normals           // texture coords
@@ -152,12 +152,7 @@ int main(int argc, const char * argv[])
     shader.setInt("texture1", 0);
     shader.setInt("texture2", 1);
     shader.setVec3("viewPos", camera.Position);
-    
-    // material properties
-    shader.setVec3("material.ambient", 1.0f, 1.0f, 1.0f);
-    shader.setVec3("material.diffuse", 1.0f, 1.0f, 0.5f);
-    shader.setVec3("material.specular", 0.5f, 0.5f, 0.5f);
-    shader.setFloat("material.shininess", 32.0f);
+    shader.ApplyLight();
     
     //light
 #ifdef _SpotLight_
@@ -213,11 +208,11 @@ int main(int argc, const char * argv[])
         
         glStencilFunc(GL_ALWAYS, 1, 0xFF);
         glStencilMask(0xFF);
-        Model.Draw(&mShader,&camera, vec3(-1.2f, -0.5f, -1.5f), vec3(0.12f, 0.12f, 0.12f), -16*timeValue);
+        Model.Draw(&mShader,&camera, light, vec3(-1.2f, -0.5f, -1.5f), vec3(0.12f, 0.12f, 0.12f), -16*timeValue);
         glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
         glStencilMask(0x00);
         glDisable(GL_DEPTH_TEST);
-        Model.Draw(&oShader,&camera, vec3(-1.2f, -0.5f, -1.5f), vec3(0.123f, 0.121f, 0.121f), -16*timeValue);
+        Model.Draw(&oShader,&camera, light, vec3(-1.2f, -0.5f, -1.5f), vec3(0.123f, 0.121f, 0.121f), -16*timeValue);
         glStencilMask(0xFF);
         glEnable(GL_DEPTH_TEST);
         glClear(GL_STENCIL_BUFFER_BIT);

@@ -196,4 +196,37 @@ private:
         }
     }
 };
+
+
+class LightShader : public Shader
+{
+public:    
+    LightShader(const char* vertexPath,
+                const char* fragmentPath,
+                const char* geometryPath = nullptr,
+                glm::vec3 ambinent = glm::vec3(1.0f, 1.0f, 1.0f),
+                glm::vec3 diffuse = glm::vec3(1.0f, 1.0f, 1.0f),
+                glm::vec3 specular = glm::vec3(1.0f, 1.0f, 1.0f),
+                float shiness=32.0f)
+        :Shader(vertexPath,fragmentPath,geometryPath)
+    {
+        this->ambinent = ambinent;
+        this->diffuse = diffuse;
+        this->specular = specular;
+        this->shininess = shiness;
+    }
+    
+    void ApplyLight()
+    {
+        use();
+        setVec3("material.ambient", ambinent);
+        setVec3("material.diffuse", diffuse);
+        setVec3("material.specular", specular);
+        setFloat("material.shininess", shininess);
+    }
+    
+private:
+    glm::vec3 ambinent, diffuse, specular;
+    float shininess;
+};
 #endif

@@ -87,5 +87,4 @@ void main()
     vec4 tc2 = texture(texture2, texCoord);
     vec4 color = vc * mix(tc1, tc2, 0.2f);
     FragColor = vec4(color.rgb * lightcolor, 1);
-//    FragColor=vec4(worldPos.x,0,0,1);
 }

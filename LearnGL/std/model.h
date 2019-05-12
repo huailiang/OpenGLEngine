@@ -11,6 +11,7 @@
 #include "mesh.h"
 #include "shader.h"
 #include "camera.h"
+#include "light.h"
 
 #include <string>
 #include <fstream>
@@ -36,9 +37,10 @@ public:
         loadModel(path);
     }
 
-    void Draw(Shader* shader, Camera* camera, vec3 pos, vec3 scale, float angle)
+    void Draw(Shader* shader, Camera* camera, Light* light, vec3 pos, vec3 scale, float angle)
     {
         shader->use();
+        light->Attach(shader);
         mat4 model = mat4(1.0f);
         model = translate(model, pos);
         model = glm::scale(model, scale);
@@ -48,6 +50,9 @@ public:
         shader->setMat4("view", view);
         mat4 proj = camera->GetProjMatrix();
         shader->setMat4("projection", proj);
+        shader->setVec3("viewPos", camera->Position);
+        LightShader* lshader =static_cast<LightShader*>(shader);
+        if(lshader) lshader->ApplyLight();
         for(unsigned int i = 0; i < meshes.size(); i++)
             meshes[i].Draw(shader);
     }
