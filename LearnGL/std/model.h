@@ -10,6 +10,7 @@
 
 #include "mesh.h"
 #include "shader.h"
+#include "camera.h"
 
 #include <string>
 #include <fstream>
@@ -35,13 +36,18 @@ public:
         loadModel(path);
     }
 
-    void Draw(Shader shader, vec3 pos, vec3 scale, float angle)
+    void Draw(Shader* shader, Camera* camera, vec3 pos, vec3 scale, float angle)
     {
+        shader->use();
         mat4 model = mat4(1.0f);
         model = translate(model, pos);
         model = glm::scale(model, scale);
         model = rotate(model, radians(angle), vec3(0.0f,1.0f,0.0f));
-        shader.setMat4("model", model);
+        shader->setMat4("model", model);
+        mat4 view = camera->GetViewMatrix();
+        shader->setMat4("view", view);
+        mat4 proj = camera->GetProjMatrix();
+        shader->setMat4("projection", proj);
         for(unsigned int i = 0; i < meshes.size(); i++)
             meshes[i].Draw(shader);
     }

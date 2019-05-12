@@ -13,6 +13,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <vector>
+#include "const.h"
 
 using namespace glm;
 
@@ -70,6 +71,18 @@ public:
     mat4 GetViewMatrix()
     {
         return glm::lookAt(Position, Position + Front, Up);
+    }
+    
+    mat4 GetProjMatrix()
+    {
+        return perspective(radians(Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+    }
+    
+    mat4 GetVP()
+    {
+        mat4 view = GetViewMatrix();
+        mat4 proj = GetProjMatrix();
+        return proj * view;
     }
     
     mat4 RotateAt(vec3 pos, vec3 target)

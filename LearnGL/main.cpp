@@ -25,12 +25,11 @@
 #include "terrain.h"
 #include "profile.h"
 #include "ttfont.h"
+#include "std/const.h"
 
 using namespace std;
 using namespace glm;
 
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
 float deltatime,lastTime;
 Camera camera(vec3(0.0f,0.0f,3.0f));
 
@@ -72,9 +71,11 @@ int main(int argc, const char * argv[])
         return -1;
     }
     glEnable(GL_DEPTH_TEST);
+    glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
     
     Shader shader("shader/light.vs","shader/light.fs");
     Shader mShader("shader/model.vs", "shader/model.fs");
+    Shader oShader("shader/model.vs", "shader/outline.fs");
     float vertices[] = {
         // positions          // normals           // texture coords
         -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f,
@@ -171,14 +172,14 @@ int main(int argc, const char * argv[])
     Terrain terrain;
     TTFont font;
     Model Model("resources/objects/nanosuit/nanosuit.obj");
-
+    
     while (!glfwWindowShouldClose(window))
     {
         processInput(window);
         glDisable(GL_BLEND);
         glDisable(GL_CULL_FACE);
         glClearColor(0.2f,0.2f,0.2f,1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
         shader.use();
         float timeValue = glfwGetTime();
         deltatime  = timeValue-lastTime;
@@ -192,27 +193,32 @@ int main(int argc, const char * argv[])
         glBindTexture(GL_TEXTURE_2D, texture2);
         
         mat4 view = camera.GetViewMatrix();
-        mat4 proj = mat4(1.0f);
-        proj = perspective(radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+        mat4 proj = camera.GetProjMatrix();
         shader.setMat4("view", view);
         shader.setMat4("projection", proj);
         light->Attach(&shader);
         glBindVertexArray(vao);
+        glStencilMask(0xFF);
         for (unsigned int i = 0; i < 2; i++)
         {
             glm::mat4 model = glm::mat4(1.0f);
             model = translate(model, cubePositions[i]);
-            float angle = (8.0f * i) * glfwGetTime();
+            float angle = (64 * i) * glfwGetTime();
             model = glm::rotate(model, glm::radians(angle), vec3(1.0f, 0.3f, 0.5f));
             shader.setMat4("model", model);
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
-        
-        mShader.use();
-        mShader.setMat4("projection", proj);
-        mShader.setMat4("view", view);
-        Model.Draw(mShader,vec3(-1.2f, -0.5f, -1.5f), vec3(0.12f, 0.12f, 0.12f), 32 * glfwGetTime());
         glBindVertexArray(0);
+        
+        glStencilFunc(GL_ALWAYS, 1, 0xFF);
+        glStencilMask(0xFF);
+        Model.Draw(&mShader,&camera, vec3(-1.2f, -0.5f, -1.5f), vec3(0.12f, 0.12f, 0.12f), 0);
+        glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+        glStencilMask(0x00);
+        glDisable(GL_DEPTH_TEST);
+//        Model.Draw(&oShader,&camera, vec3(-1.2f, -0.5f, -1.5f), vec3(0.123f, 0.123f, 0.123f), 0);
+        glStencilMask(0xFF);
+        glEnable(GL_DEPTH_TEST);
         
         terrain.Draw(proj * view * mat4(1));
         

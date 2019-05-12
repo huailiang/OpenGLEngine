@@ -40,6 +40,8 @@
 		4C551FB522846F7E002D535F /* ttfont.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = ttfont.vs; sourceTree = "<group>"; };
 		4C551FB622846F7E002D535F /* ttfrag.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = ttfrag.fs; sourceTree = "<group>"; };
 		4C551FB8228477D1002D535F /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = LearnGL/lib/libfreetype.a; sourceTree = "<group>"; };
+		4C73100A22884CDE007ED1FC /* outline.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = outline.fs; sourceTree = "<group>"; };
+		4C73100C22887905007ED1FC /* const.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = const.h; sourceTree = "<group>"; };
 		4C8777D42285A2CE00ACAA18 /* light.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = light.h; sourceTree = "<group>"; };
 		4CB1D90A2286D69F004BEE38 /* arial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = arial.ttf; sourceTree = "<group>"; };
 		4CB1D90B2286DB35004BEE38 /* model.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = model.vs; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 				4CEF90E12283CBEA00068D1E /* light.vs */,
 				4CEF90E02283CBEA00068D1E /* light.fs */,
 				4C551FB522846F7E002D535F /* ttfont.vs */,
+				4C73100A22884CDE007ED1FC /* outline.fs */,
 				4C551FB622846F7E002D535F /* ttfrag.fs */,
 			);
 			path = shader;
@@ -158,6 +161,7 @@
 			children = (
 				4CEF90EA2283FD5F00068D1E /* stb_image.h */,
 				4CEF90E52283D04200068D1E /* camera.h */,
+				4C73100C22887905007ED1FC /* const.h */,
 				4CEF90E32283D04200068D1E /* mesh.h */,
 				4CEF90E92283D04200068D1E /* model.h */,
 				4CEF90E82283D04200068D1E /* shader.h */,

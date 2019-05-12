@@ -49,7 +49,7 @@ public:
         setupMesh();
     }
 
-    void Draw(Shader shader) 
+    void Draw(const Shader* shader)
     {
         unsigned int diffuseNr  = 1;
         unsigned int specularNr = 1;
@@ -70,7 +70,7 @@ public:
              else if(name == "texture_height")
 			    number = std::to_string(heightNr++);
 
-            glUniform1i(glGetUniformLocation(shader.ID, (name + number).c_str()), i);
+            glUniform1i(glGetUniformLocation(shader->ID, (name + number).c_str()), i);
             glBindTexture(GL_TEXTURE_2D, textures[i].id);
         }
         
