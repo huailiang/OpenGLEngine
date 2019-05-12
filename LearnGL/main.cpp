@@ -73,8 +73,8 @@ int main(int argc, const char * argv[])
     }
     glEnable(GL_DEPTH_TEST);
     
-    Shader shader("shader/main.vs","shader/main.fs");
-    Shader ourShader("shader/model.vs", "shader/model.fs");
+    Shader shader("shader/light.vs","shader/light.fs");
+    Shader mShader("shader/model.vs", "shader/model.fs");
     float vertices[] = {
         // positions          // normals           // texture coords
         -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f,
@@ -208,18 +208,10 @@ int main(int argc, const char * argv[])
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
         
-        ourShader.use();
-        mat4 projection = perspective(radians(camera.Zoom), SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-        mat4 oview = camera.GetViewMatrix();
-        ourShader.setMat4("projection", projection);
-        ourShader.setMat4("view", oview);
-        mat4 omodel = mat4(1.0f);
-        omodel = translate(omodel, vec3(-1.2f, -0.5f, -1.5f));
-        omodel = glm::scale(omodel, vec3(0.12f, 0.12f, 0.12f));
-        float angle = 32 * glfwGetTime();
-        omodel = rotate(omodel, radians(angle), vec3(0.0f,1.0f,0.0f));
-        ourShader.setMat4("model", omodel);
-        Model.Draw(ourShader);
+        mShader.use();
+        mShader.setMat4("projection", proj);
+        mShader.setMat4("view", view);
+        Model.Draw(mShader,vec3(-1.2f, -0.5f, -1.5f), vec3(0.12f, 0.12f, 0.12f), 32 * glfwGetTime());
         glBindVertexArray(0);
         
         terrain.Draw(proj * view * mat4(1));
@@ -257,7 +249,6 @@ void processInput(GLFWwindow *window)
         light->UpdateY(0.01f);
     if ( glfwGetKey(window, GLFW_KEY_DOWN)== GLFW_PRESS)
         light->UpdateY(-0.01f);
-
     if (glfwGetKey(window, GLFW_KEY_SPACE)== GLFW_PRESS)
     {
         float timeValue = glfwGetTime();

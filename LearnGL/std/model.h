@@ -18,6 +18,7 @@
 #include <map>
 #include <vector>
 using namespace std;
+using namespace glm;
 
 unsigned int TextureFromFile(const char *path, const string &directory, bool gamma = false);
 
@@ -34,8 +35,13 @@ public:
         loadModel(path);
     }
 
-    void Draw(Shader shader)
+    void Draw(Shader shader, vec3 pos, vec3 scale, float angle)
     {
+        mat4 model = mat4(1.0f);
+        model = translate(model, pos);
+        model = glm::scale(model, scale);
+        model = rotate(model, radians(angle), vec3(0.0f,1.0f,0.0f));
+        shader.setMat4("model", model);
         for(unsigned int i = 0; i < meshes.size(); i++)
             meshes[i].Draw(shader);
     }

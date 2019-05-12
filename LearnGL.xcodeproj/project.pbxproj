@@ -54,8 +54,8 @@
 		4CD27D3E2283022D0038AE21 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		4CD27D472283070B0038AE21 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		4CD27D49228307760038AE21 /* libglfw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglfw3.a; path = ../../../../../../usr/local/lib/libglfw3.a; sourceTree = "<group>"; };
-		4CEF90E02283CBEA00068D1E /* main.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = main.fs; sourceTree = "<group>"; };
-		4CEF90E12283CBEA00068D1E /* main.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = main.vs; sourceTree = "<group>"; };
+		4CEF90E02283CBEA00068D1E /* light.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = light.fs; sourceTree = "<group>"; };
+		4CEF90E12283CBEA00068D1E /* light.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = light.vs; sourceTree = "<group>"; };
 		4CEF90E32283D04200068D1E /* mesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mesh.h; sourceTree = "<group>"; };
 		4CEF90E52283D04200068D1E /* camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = camera.h; sourceTree = "<group>"; };
 		4CEF90E82283D04200068D1E /* shader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shader.h; sourceTree = "<group>"; };
@@ -90,8 +90,8 @@
 				4CC436B322882C870095D759 /* terrain.vs */,
 				4CB1D90C2286DB35004BEE38 /* model.fs */,
 				4CB1D90B2286DB35004BEE38 /* model.vs */,
-				4CEF90E12283CBEA00068D1E /* main.vs */,
-				4CEF90E02283CBEA00068D1E /* main.fs */,
+				4CEF90E12283CBEA00068D1E /* light.vs */,
+				4CEF90E02283CBEA00068D1E /* light.fs */,
 				4C551FB522846F7E002D535F /* ttfont.vs */,
 				4C551FB622846F7E002D535F /* ttfrag.fs */,
 			);

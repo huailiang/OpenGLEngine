@@ -64,6 +64,7 @@ public:
     
     void Draw(glm::mat4 mvp)
     {
+        glStencilMask(0x00);
         shader->use();
         glBindVertexArray(vao);
         glBindTexture(GL_TEXTURE_2D, floorTexture);

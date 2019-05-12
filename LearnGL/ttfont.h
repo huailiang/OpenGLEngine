@@ -129,6 +129,7 @@ public:
         glEnable(GL_CULL_FACE);
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glStencilMask(0x00);
         shader->use();
         shader->setVec3("textColor", color);
         glActiveTexture(GL_TEXTURE0);
