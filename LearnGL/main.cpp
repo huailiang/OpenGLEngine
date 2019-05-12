@@ -167,8 +167,7 @@ int main(int argc, const char * argv[])
      light = new DirectLight(vec3(1.0f),vec3(1.0f,0.0f,0.0f));
 #endif
 #endif
-    light->Attach(&shader);
-    
+
     Terrain terrain;
     TTFont font;
     Model Model("resources/objects/nanosuit/nanosuit.obj");
@@ -197,7 +196,7 @@ int main(int argc, const char * argv[])
         proj = perspective(radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
         shader.setMat4("view", view);
         shader.setMat4("projection", proj);
-        
+        light->Attach(&shader);
         glBindVertexArray(vao);
         for (unsigned int i = 0; i < 2; i++)
         {
@@ -242,14 +241,23 @@ void processInput(GLFWwindow *window)
 {
     if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
-    if (glfwGetKey(window, GLFW_KEY_A)== GLFW_PRESS || glfwGetKey(window, GLFW_KEY_LEFT)== GLFW_PRESS)
+    if (glfwGetKey(window, GLFW_KEY_A)== GLFW_PRESS)
         camera.ProcessKeyboard(LEFT, 0.02f);
-    if (glfwGetKey(window, GLFW_KEY_D)== GLFW_PRESS|| glfwGetKey(window, GLFW_KEY_RIGHT)== GLFW_PRESS)
+    if (glfwGetKey(window, GLFW_KEY_D)== GLFW_PRESS)
         camera.ProcessKeyboard(RIGHT, 0.02f);
-    if (glfwGetKey(window, GLFW_KEY_W)== GLFW_PRESS|| glfwGetKey(window, GLFW_KEY_UP)== GLFW_PRESS)
+    if (glfwGetKey(window, GLFW_KEY_W)== GLFW_PRESS)
         camera.ProcessKeyboard(FORWARD, 0.02f);
-    if (glfwGetKey(window, GLFW_KEY_S)== GLFW_PRESS|| glfwGetKey(window, GLFW_KEY_DOWN)== GLFW_PRESS)
+    if (glfwGetKey(window, GLFW_KEY_S)== GLFW_PRESS)
         camera.ProcessKeyboard(BACKWARD, 0.02f);
+    if ( glfwGetKey(window, GLFW_KEY_LEFT)== GLFW_PRESS)
+        light->UpdateX(-0.01f);
+    if ( glfwGetKey(window, GLFW_KEY_RIGHT)== GLFW_PRESS)
+        light->UpdateX(0.01f);
+    if ( glfwGetKey(window, GLFW_KEY_UP)== GLFW_PRESS)
+        light->UpdateY(0.01f);
+    if ( glfwGetKey(window, GLFW_KEY_DOWN)== GLFW_PRESS)
+        light->UpdateY(-0.01f);
+
     if (glfwGetKey(window, GLFW_KEY_SPACE)== GLFW_PRESS)
     {
         float timeValue = glfwGetTime();

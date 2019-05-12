@@ -33,6 +33,22 @@ public:
         this->direction=direction;
     }
     
+    void UpdateX(float dx)
+    {
+        if(direction.x+dx<radians(60.0f))
+        {
+            direction.x+=dx;
+        }
+    }
+    
+    void UpdateY(float dy)
+    {
+        if(direction.y + dy <radians(60.0f))
+        {
+            direction.y+=dy;
+        }
+    }
+    
     LightType virtual getType() = 0;
     
     void virtual Attach(Shader* shader) = 0;
