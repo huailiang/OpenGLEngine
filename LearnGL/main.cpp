@@ -71,6 +71,7 @@ int main(int argc, const char * argv[])
         return -1;
     }
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_STENCIL_TEST);
     glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
     
     Shader shader("shader/light.vs","shader/light.fs");
@@ -198,12 +199,12 @@ int main(int argc, const char * argv[])
         shader.setMat4("projection", proj);
         light->Attach(&shader);
         glBindVertexArray(vao);
-        glStencilMask(0xFF);
+        glStencilMask(0x00);
         for (unsigned int i = 0; i < 2; i++)
         {
             glm::mat4 model = glm::mat4(1.0f);
             model = translate(model, cubePositions[i]);
-            float angle = (64 * i) * glfwGetTime();
+            float angle = 64 * i * timeValue;
             model = glm::rotate(model, glm::radians(angle), vec3(1.0f, 0.3f, 0.5f));
             shader.setMat4("model", model);
             glDrawArrays(GL_TRIANGLES, 0, 36);
@@ -212,13 +213,14 @@ int main(int argc, const char * argv[])
         
         glStencilFunc(GL_ALWAYS, 1, 0xFF);
         glStencilMask(0xFF);
-        Model.Draw(&mShader,&camera, vec3(-1.2f, -0.5f, -1.5f), vec3(0.12f, 0.12f, 0.12f), 0);
+        Model.Draw(&mShader,&camera, vec3(-1.2f, -0.5f, -1.5f), vec3(0.12f, 0.12f, 0.12f), -16*timeValue);
         glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
         glStencilMask(0x00);
         glDisable(GL_DEPTH_TEST);
-//        Model.Draw(&oShader,&camera, vec3(-1.2f, -0.5f, -1.5f), vec3(0.123f, 0.123f, 0.123f), 0);
+        Model.Draw(&oShader,&camera, vec3(-1.2f, -0.5f, -1.5f), vec3(0.123f, 0.121f, 0.121f), -16*timeValue);
         glStencilMask(0xFF);
         glEnable(GL_DEPTH_TEST);
+        glClear(GL_STENCIL_BUFFER_BIT);
         
         terrain.Draw(proj * view * mat4(1));
         
