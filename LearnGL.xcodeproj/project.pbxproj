@@ -134,6 +134,7 @@
 		4CD27D2D2282F4E30038AE21 /* LearnGL */ = {
 			isa = PBXGroup;
 			children = (
+				4CEB97BB2289AA1600ACDDC6 /* ext */,
 				4C551FB722847070002D535F /* fonts */,
 				4C551FB422846F46002D535F /* shader */,
 				4CEF90E22283D02800068D1E /* std */,
@@ -141,7 +142,6 @@
 				4CEF92672284174200068D1E /* profile.h */,
 				4C551FB32284655C002D535F /* ttfont.h */,
 				4CC436B522882CFD0095D759 /* terrain.h */,
-				4CEB97B622891FA100ACDDC6 /* glad.c */,
 				4CEB97BA2289991000ACDDC6 /* screen.h */,
 			);
 			path = LearnGL;
@@ -162,10 +162,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		4CEF90E22283D02800068D1E /* std */ = {
+		4CEB97BB2289AA1600ACDDC6 /* ext */ = {
 			isa = PBXGroup;
 			children = (
 				4CEF90EA2283FD5F00068D1E /* stb_image.h */,
+				4CEB97B622891FA100ACDDC6 /* glad.c */,
+			);
+			path = ext;
+			sourceTree = "<group>";
+		};
+		4CEF90E22283D02800068D1E /* std */ = {
+			isa = PBXGroup;
+			children = (
 				4CEF90E52283D04200068D1E /* camera.h */,
 				4C73100C22887905007ED1FC /* const.h */,
 				4CEF90E32283D04200068D1E /* mesh.h */,

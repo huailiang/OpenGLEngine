@@ -16,7 +16,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #define STB_IMAGE_IMPLEMENTATION
-#include "std/stb_image.h"
+#include "ext/stb_image.h"
 #include "std/camera.h"
 #include "std/shader.h"
 #include "std/texture.h"
