@@ -26,7 +26,7 @@
 #include "profile.h"
 #include "ttfont.h"
 #include "std/const.h"
-
+#include "screen.h"
 using namespace std;
 using namespace glm;
 
@@ -77,6 +77,7 @@ int main(int argc, const char * argv[])
     LightShader shader("shader/light.vs","shader/light.fs",nullptr,vec3(1.0f, 1.0f, 1.0f), vec3(1.0f, 1.0f, 0.5f),vec3(0.5f, 0.5f, 0.5f),32.0f);
     LightShader mShader("shader/model.vs", "shader/model.fs",   nullptr,vec3(1.0f, 1.0f, 1.0f), vec3(2.0f, 2.0f, 1.5f),vec3(0.5f, 0.5f, 0.5f),32.0f);
     Shader oShader("shader/model.vs", "shader/outline.fs");
+    Shader sShader("shader/screen.vs","shader/screen.fs");
     float vertices[] = {
         // positions          // normals           // texture coords
         -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f,
@@ -125,7 +126,6 @@ int main(int argc, const char * argv[])
         glm::vec3( 0.0f,  0.0f,  -2.0f),
         glm::vec3( 2.0f,  1.0f, -4.0f),
     };
-    
     //cube
     unsigned int vbo, vao;
     glGenVertexArrays(1, &vao);
@@ -134,7 +134,6 @@ int main(int argc, const char * argv[])
     glBindVertexArray(vao);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices,GL_STATIC_DRAW);
-    
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3*sizeof(float)));
@@ -142,6 +141,8 @@ int main(int argc, const char * argv[])
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6*sizeof(float)));
     glEnableVertexAttribArray(2);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+    
+    Screen screen;
     
     unsigned int texture1, texture2;
     TTexture tex1("resources/textures/container.jpg", &texture1);
@@ -172,27 +173,30 @@ int main(int argc, const char * argv[])
     while (!glfwWindowShouldClose(window))
     {
         processInput(window);
-        glDisable(GL_BLEND);
-        glDisable(GL_CULL_FACE);
-        glClearColor(0.2f,0.2f,0.2f,1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-        shader.use();
+        
         float timeValue = glfwGetTime();
         deltatime  = timeValue-lastTime;
         lastTime= timeValue;
         float scale = sin(timeValue) / 3.0f + 0.66f;
+        mat4 view = camera.GetViewMatrix();
+        mat4 proj = camera.GetProjMatrix();
+        shader.use();
         shader.setFloat("scale", scale);
+        shader.setMat4("view", view);
+        shader.setMat4("projection", proj);
+        light->Attach(&shader);
         
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, texture1);
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, texture2);
         
-        mat4 view = camera.GetViewMatrix();
-        mat4 proj = camera.GetProjMatrix();
-        shader.setMat4("view", view);
-        shader.setMat4("projection", proj);
-        light->Attach(&shader);
+        screen.Bind(true);
+        glDisable(GL_BLEND);
+        glDisable(GL_CULL_FACE);
+        glEnable(GL_DEPTH_TEST);
+        glClearColor(0.1f,0.1f,0.1f,1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
         glBindVertexArray(vao);
         glStencilMask(0x00);
         for (unsigned int i = 0; i < 2; i++)
@@ -205,7 +209,26 @@ int main(int argc, const char * argv[])
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
         glBindVertexArray(0);
+        screen.Bind(false);
         
+        glDisable(GL_CULL_FACE);
+        glEnable(GL_DEPTH_TEST);
+        glClearColor(0.2f,0.2f,0.2f,1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+        
+        glBindVertexArray(vao);
+        glStencilMask(0x00);
+        for (unsigned int i = 0; i < 2; i++)
+        {
+            glm::mat4 model = glm::mat4(1.0f);
+            model = translate(model, cubePositions[i]);
+            float angle = 64 * i * timeValue;
+            model = glm::rotate(model, glm::radians(angle), vec3(1.0f, 0.3f, 0.5f));
+            shader.setMat4("model", model);
+            glDrawArrays(GL_TRIANGLES, 0, 36);
+        }
+        
+        //stencial test(draw model twice) for outline
         glStencilFunc(GL_ALWAYS, 1, 0xFF);
         glStencilMask(0xFF);
         Model.Draw(&mShader,&camera, light, vec3(-1.2f, -0.5f, -1.5f), vec3(0.12f, 0.12f, 0.12f), -16*timeValue);
@@ -222,6 +245,8 @@ int main(int argc, const char * argv[])
         float fps = 1.0f / deltatime;
         font.RenderText("FPS: "+to_string_with_precision(fps,4), 740, 580, 0.5f, vec3(1.0f,0.0f,0.0f));
         font.RenderText("@copyright penghuailiang", 20, 20, 1.0f, vec3(1.0f,1.0f,0.0f));
+        
+        screen.RTDraw();
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
@@ -237,21 +262,21 @@ void processInput(GLFWwindow *window)
     if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
     if (glfwGetKey(window, GLFW_KEY_A)== GLFW_PRESS)
-        camera.ProcessKeyboard(LEFT, 0.02f);
+        camera.ProcessKeyboard(LEFT, deltatime);
     if (glfwGetKey(window, GLFW_KEY_D)== GLFW_PRESS)
-        camera.ProcessKeyboard(RIGHT, 0.02f);
+        camera.ProcessKeyboard(RIGHT, deltatime);
     if (glfwGetKey(window, GLFW_KEY_W)== GLFW_PRESS)
-        camera.ProcessKeyboard(FORWARD, 0.02f);
+        camera.ProcessKeyboard(FORWARD, deltatime);
     if (glfwGetKey(window, GLFW_KEY_S)== GLFW_PRESS)
-        camera.ProcessKeyboard(BACKWARD, 0.02f);
+        camera.ProcessKeyboard(BACKWARD, deltatime);
     if ( glfwGetKey(window, GLFW_KEY_LEFT)== GLFW_PRESS)
-        light->UpdateX(-0.01f);
+        light->UpdateX(-0.5f * deltatime);
     if ( glfwGetKey(window, GLFW_KEY_RIGHT)== GLFW_PRESS)
-        light->UpdateX(0.01f);
+        light->UpdateX(0.5f * deltatime);
     if ( glfwGetKey(window, GLFW_KEY_UP)== GLFW_PRESS)
-        light->UpdateY(0.01f);
+        light->UpdateY(0.5f * deltatime);
     if ( glfwGetKey(window, GLFW_KEY_DOWN)== GLFW_PRESS)
-        light->UpdateY(-0.01f);
+        light->UpdateY(-0.5f * deltatime);
     if (glfwGetKey(window, GLFW_KEY_SPACE)== GLFW_PRESS)
     {
         float timeValue = glfwGetTime();
