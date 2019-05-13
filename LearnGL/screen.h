@@ -11,7 +11,6 @@
 
 #include <GLFW/glfw3.h>
 #include <iostream>
-#include <vector>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -89,11 +88,11 @@ private:
         float quadVertices[] = {
                     // positions   // texCoords
                     -0.2f,  1.0f,  0.0f, 1.0f,
-                    -0.2f,  0.7f,  0.0f, 0.0f,
-                    0.2f,   0.7f,  1.0f, 0.0f,
+                    -0.2f,  0.6f,  0.0f, 0.0f,
+                    0.2f,   0.6f,  1.0f, 0.0f,
             
                     -0.2f,  1.0f,  0.0f, 1.0f,
-                    0.2f,   0.7f,  1.0f, 0.0f,
+                    0.2f,   0.6f,  1.0f, 0.0f,
                     0.2f,   1.0f,  1.0f, 1.0f,
                 };
 

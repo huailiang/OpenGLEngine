@@ -1,6 +1,6 @@
 #version 330 core
 
-#define _SpotLight_
+//#define _SpotLight_
 
 out vec4 FragColor;
 
@@ -45,7 +45,7 @@ uniform Light light;
 void main()
 {
     // ambient
-    vec3 ambient = vec3(0.1f, 0.1f, 0.1f) * material.ambient;
+    vec3 ambient = vec3(1.0f) * material.ambient;
     
     //diffuse
     vec3 norm = normalize(normal);
@@ -71,13 +71,14 @@ void main()
     vec3 cst = light.constant;
     float atten = 1.0f/(cst.x+cst.y*distance+cst.z*distance*distance);
 #endif
+
     
     vec3 lightcolor = ambient + diffuse + specular;
     
 #ifdef _PointLight_
     lightcolor = atten  * lightcolor;
 #endif
-
+    
 #ifdef  _SpotLight_
     lightcolor *= intensity;
 #endif

@@ -1,7 +1,7 @@
 #version 330 core
 
 #define _Light_
-#define  _SpotLight_
+//#define  _SpotLight_
 out vec4 FragColor;
 
 in vec2 TexCoords;
@@ -41,7 +41,7 @@ uniform Light light;
 vec3 calLight()
 {
     // ambient
-    vec3 ambient = vec3(0.1f, 0.1f, 0.1f) * material.ambient;
+    vec3 ambient = vec3(1.0f) * material.ambient;
 
     //diffuse
     vec3 norm = normalize(normal);

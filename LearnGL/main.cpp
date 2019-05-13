@@ -16,16 +16,18 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #define STB_IMAGE_IMPLEMENTATION
+#include "std/const.h"
 #include "ext/stb_image.h"
 #include "std/camera.h"
 #include "std/shader.h"
 #include "std/texture.h"
 #include "std/model.h"
+#include "std/skybox.h"
 #include "std/light.h"
 #include "terrain.h"
 #include "profile.h"
 #include "ttfont.h"
-#include "std/const.h"
+
 #include "screen.h"
 using namespace std;
 using namespace glm;
@@ -33,7 +35,7 @@ using namespace glm;
 float deltatime,lastTime;
 Camera camera(vec3(0.0f,0.0f,3.0f));
 
-#define _SpotLight_
+//#define _SpotLight_
 Light* light;
 
 
@@ -143,6 +145,7 @@ int main(int argc, const char * argv[])
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     
     Screen screen;
+    Skybox skybox(&camera);
     
     unsigned int texture1, texture2;
     TTexture tex1("resources/textures/container.jpg", &texture1);
@@ -246,9 +249,13 @@ int main(int argc, const char * argv[])
         font.RenderText("FPS: "+to_string_with_precision(fps,4), 740, 580, 0.5f, vec3(1.0f,0.0f,0.0f));
         font.RenderText("@copyright penghuailiang", 20, 20, 1.0f, vec3(1.0f,1.0f,0.0f));
         
+        skybox.Draw();
+        
         screen.RTDraw();
         glfwSwapBuffers(window);
         glfwPollEvents();
+        
+        
     }
     
     glDeleteVertexArrays(1, &vao);
