@@ -27,17 +27,28 @@ public:
     
     TTexture(const char* path, unsigned int* texID)
     {
-        this->path=path;
-        *texID = LoadTexture();
+        TTexture(path,texID,true);
     }
     
-    unsigned int LoadTexture()
+    TTexture(const char* path, unsigned int* texID,bool flipY)
     {
-        stbi_set_flip_vertically_on_load(true); // flip y
+         TTexture(path,texID,true, GL_REPEAT);
+    }
+    
+    TTexture(const char* path, unsigned int* texID, bool flipY, int wrap)
+    {
+        this->path=path;
+        *texID = LoadTexture(flipY, wrap);
+    }
+
+    
+    unsigned int LoadTexture(bool flipY, int wrap)
+    {
+        stbi_set_flip_vertically_on_load(flipY); // flip y
         glGenTextures(1, &textureID);
         glBindTexture(GL_TEXTURE_2D, textureID);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrap);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrap);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
