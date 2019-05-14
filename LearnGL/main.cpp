@@ -34,7 +34,7 @@ using namespace glm;
 
 float deltatime,lastTime;
 Camera camera(vec3(0.0f,0.0f,3.0f));
-
+bool normal;
 //#define _SpotLight_
 Light* light;
 
@@ -73,11 +73,9 @@ int main(int argc, const char * argv[])
         return -1;
     }
     glEnable(GL_DEPTH_TEST);
-    glEnable(GL_STENCIL_TEST);
-    glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
-    
-    LightShader shader("shader/light.vs","shader/light.fs",nullptr,vec3(1.0f, 1.0f, 1.0f), vec3(1.0f, 1.0f, 0.5f),vec3(0.5f, 0.5f, 0.5f),32.0f);
-    LightShader mShader("shader/model.vs", "shader/model.fs",   nullptr,vec3(1.0f, 1.0f, 1.0f), vec3(2.0f, 2.0f, 1.5f),vec3(0.5f, 0.5f, 0.5f),32.0f);
+    LightShader shader("shader/light.vs","shader/light.fs");
+    LightShader mShader("shader/model.vs", "shader/model.fs");
+    Shader nShader("shader/normal.vs","shader/normal.fs","shader/normal.gs");
     Shader oShader("shader/model.vs", "shader/outline.fs");
     Shader sShader("shader/screen.vs","shader/screen.fs");
     float vertices[] = {
@@ -188,20 +186,19 @@ int main(int argc, const char * argv[])
         shader.setMat4("view", view);
         shader.setMat4("projection", proj);
         light->Attach(&shader);
-        
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, texture1);
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, texture2);
         
-        screen.Bind(true);
         glDisable(GL_BLEND);
         glDisable(GL_CULL_FACE);
         glEnable(GL_DEPTH_TEST);
+        
+        screen.Bind(true);
         glClearColor(0.1f,0.1f,0.1f,1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glBindVertexArray(vao);
-        glStencilMask(0x00);
         for (unsigned int i = 0; i < 2; i++)
         {
             glm::mat4 model = glm::mat4(1.0f);
@@ -214,13 +211,9 @@ int main(int argc, const char * argv[])
         glBindVertexArray(0);
         screen.Bind(false);
         
-        glDisable(GL_CULL_FACE);
-        glEnable(GL_DEPTH_TEST);
         glClearColor(0.2f,0.2f,0.2f,1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-        
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glBindVertexArray(vao);
-        glStencilMask(0x00);
         for (unsigned int i = 0; i < 2; i++)
         {
             glm::mat4 model = glm::mat4(1.0f);
@@ -231,22 +224,11 @@ int main(int argc, const char * argv[])
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
         
-        //stencial test(draw model twice) for outline
-        glStencilFunc(GL_ALWAYS, 1, 0xFF);
-        glStencilMask(0xFF);
         Model.Draw(&mShader,&camera, light, vec3(-1.2f, -0.5f, -1.5f), vec3(0.12f, 0.12f, 0.12f), -16*timeValue);
-        glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
-        glStencilMask(0x00);
-        glDisable(GL_DEPTH_TEST);
-        Model.Draw(&oShader,&camera, light, vec3(-1.2f, -0.5f, -1.5f), vec3(0.123f, 0.121f, 0.121f), -16*timeValue);
-        glStencilMask(0xFF);
-        glEnable(GL_DEPTH_TEST);
-        glClear(GL_STENCIL_BUFFER_BIT);
-        
+        if(normal) Model.Draw(&nShader,&camera, light, vec3(-1.2f, -0.5f, -1.5f), vec3(0.12f, 0.12f, 0.12f), -16*timeValue);
         terrain.Draw(&camera);
         skybox.Draw();
         screen.RTDraw();
-
         font.RenderText("FPS: "+to_string_with_precision(1.0f / deltatime,4), 740, 580, 0.5f, vec3(1.0f,0.0f,0.0f));
         font.RenderText("@copyright penghuailiang", 20, 20, 1.0f, vec3(1.0f,1.0f,0.0f));
         
@@ -282,6 +264,8 @@ void processInput(GLFWwindow *window)
         light->UpdateY(0.5f * deltatime);
     if ( glfwGetKey(window, GLFW_KEY_DOWN)== GLFW_PRESS)
         light->UpdateY(-0.5f * deltatime);
+    if ( glfwGetKey(window, GLFW_KEY_N)== GLFW_PRESS)
+        normal = !normal;
     if (glfwGetKey(window, GLFW_KEY_SPACE)== GLFW_PRESS)
     {
         float timeValue = glfwGetTime()*0.2f;

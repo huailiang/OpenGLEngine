@@ -92,12 +92,12 @@ public:
                          GL_UNSIGNED_BYTE,
                          face->glyph->bitmap.buffer
                          );
-            // Set texture options
+            
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-            // Now store character for later use
+            
             Character character = {
                 texture,
                 glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
@@ -107,7 +107,7 @@ public:
             Characters.insert(std::pair<GLchar, Character>(c, character));
         }
         glBindTexture(GL_TEXTURE_2D, 0);
-        // Destroy FreeType once we're finished
+        
         FT_Done_Face(face);
         FT_Done_FreeType(ft);
         
@@ -129,7 +129,6 @@ public:
         glEnable(GL_CULL_FACE);
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        glStencilMask(0x00);
         shader->use();
         shader->setVec3("textColor", color);
         glActiveTexture(GL_TEXTURE0);
@@ -156,14 +155,12 @@ public:
                 { xpos + w, ypos,       1.0, 1.0 },
                 { xpos + w, ypos + h,   1.0, 0.0 }
             };
-            // Render glyph texture over quad
+            
             glBindTexture(GL_TEXTURE_2D, ch.TextureID);
-            // Update content of VBO memory
             glBindBuffer(GL_ARRAY_BUFFER, VBO);
             glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices); // Be sure to use glBufferSubData and not glBufferData
 
             glBindBuffer(GL_ARRAY_BUFFER, 0);
-            // Render quad
             glDrawArrays(GL_TRIANGLES, 0, 6);
             // Now advance cursors for next glyph (note that advance is number of 1/64 pixels)
             x += (ch.Advance >> 6) * scale; // Bitshift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))

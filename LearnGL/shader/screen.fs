@@ -56,7 +56,6 @@ void main()
 //    blur();
 //    gray();
     
-    vec4 col = texture(screenTexture, TexCoords);
-    col.a = 1.0f;
-    FragColor = col;
+    vec3 col = texture(screenTexture, TexCoords).rgb;
+    FragColor = vec4(col, 1.0);
 }

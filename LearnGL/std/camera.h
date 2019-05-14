@@ -87,7 +87,7 @@ public:
     
     mat4 RotateAt(vec3 pos, vec3 target)
     {
-        Position=pos;
+        Position = pos;
         Front = target - pos;
         return GetViewMatrix();
     }
