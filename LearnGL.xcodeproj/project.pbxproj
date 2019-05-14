@@ -36,6 +36,7 @@
 		4C29DAFF228AB2F50037A97E /* normal.gs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = normal.gs; sourceTree = "<group>"; };
 		4C29DB00228AB7740037A97E /* normal.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = normal.fs; sourceTree = "<group>"; };
 		4C29DB01228AB7740037A97E /* normal.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = normal.vs; sourceTree = "<group>"; };
+		4C29DB02228ADBB20037A97E /* grass.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = grass.vs; sourceTree = "<group>"; };
 		4C3B7A162283164E003B212F /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		4C3B7A1822831668003B212F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		4C551FB32284655C002D535F /* ttfont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ttfont.h; sourceTree = "<group>"; };
@@ -98,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				4CC436B322882C870095D759 /* terrain.vs */,
+				4C29DB02228ADBB20037A97E /* grass.vs */,
 				4CC436B422882C870095D759 /* terrain.fs */,
 				4CB1D90B2286DB35004BEE38 /* model.vs */,
 				4C29DB01228AB7740037A97E /* normal.vs */,

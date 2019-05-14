@@ -27,7 +27,6 @@
 #include "terrain.h"
 #include "profile.h"
 #include "ttfont.h"
-
 #include "screen.h"
 using namespace std;
 using namespace glm;
@@ -72,6 +71,7 @@ int main(int argc, const char * argv[])
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
+    
     glEnable(GL_DEPTH_TEST);
     LightShader shader("shader/light.vs","shader/light.fs");
     LightShader mShader("shader/model.vs", "shader/model.fs");
