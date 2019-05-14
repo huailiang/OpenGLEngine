@@ -244,14 +244,12 @@ int main(int argc, const char * argv[])
         glClear(GL_STENCIL_BUFFER_BIT);
         
         terrain.Draw(&camera);
-        
-        float fps = 1.0f / deltatime;
-        font.RenderText("FPS: "+to_string_with_precision(fps,4), 740, 580, 0.5f, vec3(1.0f,0.0f,0.0f));
+        skybox.Draw();
+        screen.RTDraw();
+
+        font.RenderText("FPS: "+to_string_with_precision(1.0f / deltatime,4), 740, 580, 0.5f, vec3(1.0f,0.0f,0.0f));
         font.RenderText("@copyright penghuailiang", 20, 20, 1.0f, vec3(1.0f,1.0f,0.0f));
         
-        skybox.Draw();
-        
-        screen.RTDraw();
         glfwSwapBuffers(window);
         glfwPollEvents();
         
