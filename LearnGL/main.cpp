@@ -284,10 +284,14 @@ void processInput(GLFWwindow *window)
         light->UpdateY(-0.5f * deltatime);
     if (glfwGetKey(window, GLFW_KEY_SPACE)== GLFW_PRESS)
     {
-        float timeValue = glfwGetTime();
-        float camX =  10.0f * sin(timeValue);
-        float camZ = 10.0f * cos(timeValue);
-        camera.RotateAt(vec3(camX,0,camZ), vec3(0,0,0));
+        float timeValue = glfwGetTime()*0.2f;
+        float ang = radians(timeValue);
+        vec3 center = vec3(0.0f, 0.0f, -2.0f);
+        vec3 pos = camera.Position;
+        vec3 npos = pos;
+        npos.x = (pos.x - center.x) * cos(ang) - (pos.z- center.z)*sin(ang) + center.x;
+        npos.z = (pos.z - center.z) * cos(ang) + (pos.x - center.x) * sin(ang) + center.z;
+        camera.RotateAt(npos, center);
     }
 }
 
