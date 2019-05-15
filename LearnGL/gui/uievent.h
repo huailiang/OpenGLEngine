@@ -16,7 +16,7 @@ class UIEvent
 public:
     UIEvent()
     {
-        std::cout<<"uievent called: "<<__FILE__<<"("<<__LINE__<<")"<<std::endl;
+//        std::cout<<"uievent called: "<<__FILE__<<"("<<__LINE__<<")"<<std::endl;
     }
     
     virtual bool IsTarget(float x,float y) { return false;}

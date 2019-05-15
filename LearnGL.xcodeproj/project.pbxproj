@@ -110,6 +110,7 @@
 				4C269F82228C3DC700261AAD /* label.h */,
 				4C269F83228C3DD200261AAD /* button.h */,
 				4C269F84228C3DE700261AAD /* image.h */,
+				4C551FB32284655C002D535F /* ttfont.h */,
 			);
 			path = gui;
 			sourceTree = "<group>";
@@ -173,7 +174,6 @@
 				4CEF90E22283D02800068D1E /* std */,
 				4CD27D2E2282F4E30038AE21 /* main.cpp */,
 				4CEF92672284174200068D1E /* profile.h */,
-				4C551FB32284655C002D535F /* ttfont.h */,
 				4CC436B522882CFD0095D759 /* terrain.h */,
 				4CEB97BA2289991000ACDDC6 /* screen.h */,
 			);

@@ -28,23 +28,26 @@
 #include "gui/label.h"
 #include "profile.h"
 #include "terrain.h"
-#include "ttfont.h"
 #include "screen.h"
 using namespace std;
 using namespace glm;
+
+
 
 float deltatime,lastTime;
 Camera camera(vec3(0.0f,0.0f,3.0f));
 bool normal;
 //#define _SpotLight_
 Light* light;
-EventMgr EventMgr::instance;
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int heigth);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow* window);
+
+EventMgr EventMgr::instance;
+TTFont TTFont::instance;
 
 int main(int argc, const char * argv[])
 {
@@ -75,7 +78,7 @@ int main(int argc, const char * argv[])
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
-    
+    TTFont::getInstance()->initial();
     glEnable(GL_DEPTH_TEST);
     LightShader shader("shader/light.vs","shader/light.fs");
     LightShader mShader("shader/model.vs", "shader/model.fs");
@@ -172,7 +175,7 @@ int main(int argc, const char * argv[])
 #endif
 
     Terrain terrain;
-    TTFont font;
+//    TTFont font;
     Model Model("resources/objects/nanosuit/nanosuit.obj");
     
     while (!glfwWindowShouldClose(window))
@@ -233,9 +236,8 @@ int main(int argc, const char * argv[])
         terrain.Draw(&camera);
         skybox.Draw();
         screen.RTDraw();
-        font.RenderText("FPS: "+to_string_with_precision(1.0f / deltatime,4), 740, 580, 0.5f, vec3(1.0f,0.0f,0.0f));
-        font.RenderText("@copyright penghuailiang", 20, 20, 1.0f, vec3(1.0f,1.0f,0.0f));
-        
+        Label label("@copyright penghuailiang", vec2(20,20),vec3(1.0f,1.0f,0.0f));
+        Label label2("FPS: "+to_string_with_precision(1.0f / deltatime,4), vec2(740, 580), vec3(1,0,0), 0.5f);
         glfwSwapBuffers(window);
         glfwPollEvents();
     }

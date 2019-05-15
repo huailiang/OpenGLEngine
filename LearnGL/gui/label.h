@@ -10,33 +10,47 @@
 #define label_h
 
 #include <glm/glm.hpp>
+#include <string>
 #include "uibase.h"
 #include "uievent.h"
 #include "eventmgr.h"
+#include "ttfont.h"
+
 
 class Label : public UIBase, public UIEvent
 {
     
 public:
-    Label(const char* text)
+    Label(){ std::cout<<"warn: called default constructor of label"<<std::endl; }
+    
+    Label(std::string text, glm::vec2 pos, glm::vec3 color)
     {
-        Label(false,text);
+        Label(text,pos,color,1.0f);
     }
-
-    Label(bool interact, const char* text)
+    
+    Label(std::string text, glm::vec2 pos, glm::vec3 color, float scale)
     {
+        Label(text,pos,color,scale,false);
+    }
+    
+    Label(std::string text, glm::vec2 pos, glm::vec3 color,float scale, bool interact)
+    {
+        this->scales = scale;
         this->interact = interact;
         this->text = text;
+        this->color = color;
+        SetPos(pos.x, pos.y);
         if(interact)
         {
             EventMgr::getInstance()->RegistEvt(*this);
         }
+        Draw();
     }
-    
     
     void Draw()
     {
-        
+        TTFont* font = TTFont::getInstance();
+        font->RenderText(text, posx, posy, scales, color);
     }
     
     bool IsTarget(float x, float y)
@@ -51,7 +65,8 @@ public:
     
 private:
     glm::vec3 color;
-    const char* text;
+    std::string text;
+    float scales;
 };
 
 #endif /* label_h */
