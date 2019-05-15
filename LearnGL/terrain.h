@@ -65,7 +65,7 @@ public:
             1.0f,  0.5f,  0.0f,  1.0f,  0.0f
         };
         
-        grass_num=8000;
+        grass_num=800;
         for(int i=0;i<grass_num;i++)
         {
             float x = (rand()%300)/10.0f-15.0f;

@@ -24,8 +24,10 @@
 #include "std/model.h"
 #include "std/skybox.h"
 #include "std/light.h"
-#include "terrain.h"
+#include "gui/eventmgr.h"
+#include "gui/label.h"
 #include "profile.h"
+#include "terrain.h"
 #include "ttfont.h"
 #include "screen.h"
 using namespace std;
@@ -36,10 +38,11 @@ Camera camera(vec3(0.0f,0.0f,3.0f));
 bool normal;
 //#define _SpotLight_
 Light* light;
-
+EventMgr EventMgr::instance;
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int heigth);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow* window);
 
@@ -65,6 +68,7 @@ int main(int argc, const char * argv[])
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetCursorPosCallback(window, mouse_callback);
+    glfwSetMouseButtonCallback(window, mouse_button_callback);
     glfwSetScrollCallback(window, scroll_callback);
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
@@ -234,8 +238,6 @@ int main(int argc, const char * argv[])
         
         glfwSwapBuffers(window);
         glfwPollEvents();
-        
-        
     }
     
     glDeleteVertexArrays(1, &vao);
@@ -268,7 +270,7 @@ void processInput(GLFWwindow *window)
         normal = !normal;
     if (glfwGetKey(window, GLFW_KEY_SPACE)== GLFW_PRESS)
     {
-        float timeValue = glfwGetTime()*0.2f;
+        float timeValue = glfwGetTime()*0.04f;
         float ang = radians(timeValue);
         vec3 center = vec3(0.0f, 0.0f, -2.0f);
         vec3 pos = camera.Position;
@@ -297,6 +299,27 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
     xoffset *= sensitivity;
     yoffset *= sensitivity;
     camera.ProcessMouseMovement(xoffset, yoffset);
+}
+
+
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+{
+    if (action == GLFW_PRESS)
+        switch(button)
+        {
+            case GLFW_MOUSE_BUTTON_LEFT:
+                cout<<"Mosue left button clicked!"<<lastX<<" "<<lastY<<endl;
+                 EventMgr::getInstance()->Triger(lastX, lastY);
+                break;
+            case GLFW_MOUSE_BUTTON_MIDDLE:
+                cout<<"Mosue middle button clicked!"<<endl;
+                break;
+            case GLFW_MOUSE_BUTTON_RIGHT:
+                cout<<"Mosue right button clicked!"<<endl;
+                break;
+            default:
+                return;
+        }
 }
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)

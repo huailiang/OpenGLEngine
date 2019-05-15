@@ -32,6 +32,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4C269F80228C3C4800261AAD /* eventmgr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = eventmgr.h; sourceTree = "<group>"; };
+		4C269F81228C3DB000261AAD /* uibase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = uibase.h; sourceTree = "<group>"; };
+		4C269F82228C3DC700261AAD /* label.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = label.h; sourceTree = "<group>"; };
+		4C269F83228C3DD200261AAD /* button.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = button.h; sourceTree = "<group>"; };
+		4C269F84228C3DE700261AAD /* image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = image.h; sourceTree = "<group>"; };
+		4C269F85228C423900261AAD /* uievent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = uievent.h; sourceTree = "<group>"; };
 		4C283D482285711B000B6FBC /* texture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = texture.h; sourceTree = "<group>"; };
 		4C29DAFF228AB2F50037A97E /* normal.gs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = normal.gs; sourceTree = "<group>"; };
 		4C29DB00228AB7740037A97E /* normal.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = normal.fs; sourceTree = "<group>"; };
@@ -95,6 +101,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C269F7F228C3C2C00261AAD /* gui */ = {
+			isa = PBXGroup;
+			children = (
+				4C269F80228C3C4800261AAD /* eventmgr.h */,
+				4C269F85228C423900261AAD /* uievent.h */,
+				4C269F81228C3DB000261AAD /* uibase.h */,
+				4C269F82228C3DC700261AAD /* label.h */,
+				4C269F83228C3DD200261AAD /* button.h */,
+				4C269F84228C3DE700261AAD /* image.h */,
+			);
+			path = gui;
+			sourceTree = "<group>";
+		};
 		4C551FB422846F46002D535F /* shader */ = {
 			isa = PBXGroup;
 			children = (
@@ -147,8 +166,9 @@
 		4CD27D2D2282F4E30038AE21 /* LearnGL */ = {
 			isa = PBXGroup;
 			children = (
-				4CEB97BB2289AA1600ACDDC6 /* ext */,
 				4C551FB722847070002D535F /* fonts */,
+				4CEB97BB2289AA1600ACDDC6 /* ext */,
+				4C269F7F228C3C2C00261AAD /* gui */,
 				4C551FB422846F46002D535F /* shader */,
 				4CEF90E22283D02800068D1E /* std */,
 				4CD27D2E2282F4E30038AE21 /* main.cpp */,
