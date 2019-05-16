@@ -28,13 +28,26 @@ public:
         ui_events.push_back(evt);
     }
     
-    void Triger(float x, float y)
+    void RemoveEvt(UIEvent* evt)
+    {
+        vector<UIEvent*>::iterator iter=ui_events.begin();
+        for(; iter!=ui_events.end();)
+        {
+            if(*iter == evt)
+            {
+                ui_events.erase(iter);
+                break;
+            }
+        }
+    }
+    
+    void Triger(float x, float y, int action)
     {
         size_t size = ui_events.size();
         for (size_t i=0; i<size; i++)
         {
             UIEvent* et = ui_events[i];
-            if(et->IsTarget(x, y))
+            if(action == GLFW_RELEASE && et->IsHit(x, y))
             {
                 et->OnTriger();
             }

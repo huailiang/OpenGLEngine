@@ -11,6 +11,13 @@
 
 #include <iostream>
 
+enum UIEventType
+{
+    Press,
+    Pop,
+    Click
+};
+
 class UIEvent
 {
 public:
@@ -21,7 +28,7 @@ public:
         std::cout<<"copy constructor called"<<std::endl;
     }
     
-    virtual bool IsTarget(float x,float y) = 0;
+    virtual bool IsHit(float x,float y) = 0;
     
     virtual void OnTriger() = 0 ;
 };

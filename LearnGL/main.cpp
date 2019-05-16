@@ -306,22 +306,21 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 {
-    if (action == GLFW_PRESS)
-        switch(button)
-        {
-            case GLFW_MOUSE_BUTTON_LEFT:
-                cout<<"Mosue left button clicked!"<<lastX<<" "<<lastY<<endl;
-                 EventMgr::getInstance()->Triger(lastX, lastY);
-                break;
-            case GLFW_MOUSE_BUTTON_MIDDLE:
-                cout<<"Mosue middle button clicked!"<<endl;
-                break;
-            case GLFW_MOUSE_BUTTON_RIGHT:
-                cout<<"Mosue right button clicked!"<<endl;
-                break;
-            default:
-                return;
-        }
+    switch(button)
+    {
+        case GLFW_MOUSE_BUTTON_LEFT:
+            cout<<"Mosue left button "<<lastX<<" "<<lastY<<endl;
+             EventMgr::getInstance()->Triger(lastX, lastY, action);
+            break;
+        case GLFW_MOUSE_BUTTON_MIDDLE:
+            cout<<"Mosue middle button "<<endl;
+            break;
+        case GLFW_MOUSE_BUTTON_RIGHT:
+            cout<<"Mosue right button"<<endl;
+            break;
+        default:
+            return;
+    }
 }
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)

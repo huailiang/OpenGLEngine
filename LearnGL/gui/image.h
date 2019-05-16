@@ -21,7 +21,7 @@ public:
         
     }
 
-    bool IsTarget(float x, float y)
+    bool IsHit(float x, float y)
     {
         return false;
     }

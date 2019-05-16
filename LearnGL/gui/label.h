@@ -30,7 +30,7 @@ public:
     
     Label(std::string text,const glm::vec2 pos,const glm::vec3 color,const float scale)
     {
-        Label(text,pos,color,scale,false);
+        Label(text,pos,color,scale,true);
     }
     
     Label(std::string text,const glm::vec2 pos,const glm::vec3 color,const float scale,const bool interact)
@@ -47,15 +47,24 @@ public:
         Draw();
     }
     
+    ~Label()
+    {
+        if(interact)
+        {
+            EventMgr::getInstance()->RemoveEvt(this);
+        }
+    }
+    
     void Draw()
     {
         TTFont* font = TTFont::getInstance();
         font->RenderText(text, posx, posy, scales, color);
     }
     
-    bool IsTarget(float x, float y)
+    bool IsHit(float x, float y)
     {
-        return false;
+        cout<<"click x: "<<x<<" y:"<<y<<endl;
+        return abs(x-posx)<5 && abs(y-posy)<5;
     }
     
     void OnTriger()
