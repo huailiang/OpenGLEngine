@@ -300,7 +300,6 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
     switch(button)
     {
         case GLFW_MOUSE_BUTTON_LEFT:
-            cout<<"Mouse left button "<<lastX<<" "<<lastY<<endl;
              EventMgr::getInstance()->Triger(lastX, lastY, action);
             break;
         case GLFW_MOUSE_BUTTON_MIDDLE:

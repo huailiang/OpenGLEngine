@@ -34,11 +34,13 @@ struct Character
     GLuint Advance;    // Horizontal offset to advance to next glyph
 };
 
+#define FONT_SIZE 20
+
 class TTFont
 {
 public:
 
-    void RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scale, const glm::vec3 color)
+    float RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scale, const glm::vec3 color)
     {
         glEnable(GL_CULL_FACE);
         glEnable(GL_BLEND);
@@ -47,16 +49,14 @@ public:
         shader->setVec3("textColor", color);
         glActiveTexture(GL_TEXTURE0);
         glBindVertexArray(VAO);
-
-        // Iterate through all characters
+        
+        GLfloat start = x;
         std::string::const_iterator c;
         for (c = text.begin(); c != text.end(); c++)
         {
             Character ch = Characters[*c];
-
             GLfloat xpos = x + ch.Bearing.x * scale;
             GLfloat ypos = y - (ch.Size.y - ch.Bearing.y) * scale;
-
             GLfloat w = ch.Size.x * scale;
             GLfloat h = ch.Size.y * scale;
             
@@ -81,6 +81,7 @@ public:
         }
         glBindVertexArray(0);
         glBindTexture(GL_TEXTURE_2D, 0);
+        return x - start;
     }
     
     int initial()
@@ -91,14 +92,12 @@ public:
         shader->setMat4("projection", proj);
         
         FT_Library ft;
-        if (FT_Init_FreeType(&ft))
-            std::cout << "ERROR::FREETYPE: Could not init FreeType Library" << std::endl;
+        if (FT_Init_FreeType(&ft)) std::cout << "ERROR::FREETYPE: Could not init FreeType Library" << std::endl;
         
         FT_Face face;
-        if (FT_New_Face(ft, "fonts/arial.ttf", 0, &face))
-            std::cout << "ERROR::FREETYPE: Failed to load font" << std::endl;
+        if (FT_New_Face(ft, "fonts/arial.ttf", 0, &face)) std::cout << "ERROR::FREETYPE: Failed to load font" << std::endl;
         
-        FT_Set_Pixel_Sizes(face, 0, 20);
+        FT_Set_Pixel_Sizes(face, 0, FONT_SIZE);
         
         // Disable byte-alignment restriction
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -165,9 +164,7 @@ public:
     }
 
 private:
-    TTFont()
-    {
-    }
+    TTFont() { }
     
     ~TTFont()
     {

@@ -50,18 +50,20 @@ public:
     void Draw()
     {
         TTFont* font = TTFont::getInstance();
-        font->RenderText(text, posx, posy, scales, color);
+        len = font->RenderText(text, posx, posy, scales, color);
     }
     
     bool IsHit(float x, float y)
     {
-        cout<<"click x: "<<x<<" y:"<<y<<endl;
-        return abs(x-posx)<5 && abs(y-posy)<5;
+        float xrg = len * 0.5f;
+        float yrg = FONT_SIZE * 0.5f;
+        bool hit = abs(x-getCenterX())< xrg && abs(SCR_HEIGHT - y - posy)< yrg;
+        return hit;
     }
     
     void OnTriger()
     {
-        cout<<"interact triger"<<endl;
+        cout<<"interact triger: "<<text<<endl;
     }
     
     void setText(const std::string text)
@@ -69,9 +71,15 @@ public:
         this->text = text;
     }
     
+    float getCenterX()
+    {
+        return len * 0.5f + posx;
+    }
+    
 private:
     glm::vec3 color;
     std::string text;
+    float len;
     float scales;
 };
 
