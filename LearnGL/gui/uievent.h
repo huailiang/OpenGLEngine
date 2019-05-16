@@ -14,14 +14,11 @@
 class UIEvent
 {
 public:
-    UIEvent()
-    {
-//        std::cout<<"uievent called: "<<__FILE__<<"("<<__LINE__<<")"<<std::endl;
-    }
+    UIEvent() { }
     
-    virtual bool IsTarget(float x,float y) { return false;}
+    virtual bool IsTarget(float x,float y) =0 ;
     
-    virtual void OnTriger() {}
+    virtual void OnTriger() = 0 ;
 };
 
 #endif /* uievent_h */

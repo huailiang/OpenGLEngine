@@ -42,7 +42,7 @@ public:
         SetPos(pos.x, pos.y);
         if(interact)
         {
-            EventMgr::getInstance()->RegistEvt(*this);
+            EventMgr::getInstance()->RegistEvt(this);
         }
         Draw();
     }

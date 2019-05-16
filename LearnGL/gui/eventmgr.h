@@ -23,7 +23,7 @@ public:
         return &instance;
     }
     
-    void RegistEvt(UIEvent evt)
+    void RegistEvt(UIEvent* evt)
     {
         ui_events.push_back(evt);
     }
@@ -33,9 +33,10 @@ public:
         size_t size = ui_events.size();
         for (size_t i=0; i<size; i++)
         {
-            if(ui_events[i].IsTarget(x, y))
+            UIEvent* et = ui_events[i];
+            if(et->IsTarget(x, y))
             {
-                ui_events[i].OnTriger();
+                et->OnTriger();
             }
         }
     }
@@ -47,7 +48,7 @@ private:
     EventMgr& operator=(const EventMgr &);
     static EventMgr instance;
     
-    std::vector<UIEvent> ui_events;
+    std::vector<UIEvent*> ui_events;
 };
 
 
