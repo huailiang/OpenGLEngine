@@ -13,11 +13,19 @@
 #include "../terrain.h"
 
 
-
 class Scene1 : public Scene
 {
     
 public:
+   ~Scene1()
+    {
+        delete terrain;
+        terrain = NULL;
+        delete model;
+        model = NULL;
+        delete shader;
+        shader = NULL;
+    }
     
     SceneType getType()
     {

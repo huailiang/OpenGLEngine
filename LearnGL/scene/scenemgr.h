@@ -17,7 +17,24 @@
 
 class SceneMgr
 {
+private:
+    SceneMgr() { }
+    ~SceneMgr() { }
+    SceneMgr(const SceneMgr &);
+    SceneMgr& operator=(const SceneMgr &);
+    static SceneMgr instance;
+    
 public:
+    static SceneMgr* getInstance()
+    {
+        return &instance;
+    }
+    
+    void Init()
+    {
+        ChangeTo(TY_Scene1);
+    }
+    
     void LeaveScene()
     {
         if(current)
@@ -45,27 +62,56 @@ public:
     {
         if(current)
         {
-            current->DrawUI();
-            current->DrawChar();
-            current->DrawTerrain();
+            current->DrawScene();
         }
     }
     
     void ChangeTo(SceneType type)
     {
+        Scene* sc = NULL;
         if(type == TY_Scene1)
         {
-            ChangeTo(new Scene1());
+            sc = new Scene1();
         }
         if(type == TY_Scene2)
         {
-            ChangeTo(new Scene2());
+            sc = new Scene2();
         }
         if(type == TY_Scene3)
         {
-            ChangeTo(new Scene3());
+            sc =new Scene3();
+        }
+        if(sc)
+        {
+            sc->Initial();
+            ChangeTo(sc);
         }
     }
+    
+    void ProcessKeyboard(GLFWwindow *window, float deltatime)
+    {
+        if(current)
+        {
+            current->ProcessKeyboard(window, deltatime);
+        }
+    }
+    
+    void ProcessMouseMove(double xoffset,double yoffset)
+    {
+        if(current)
+        {
+            current->ProcessMouseMove(xoffset, yoffset);
+        }
+    }
+    
+    void ProcessMouseScroll(double xoffset,double yoffset)
+    {
+        if(current)
+        {
+            current->ProcessMouseScroll(xoffset, yoffset);
+        }
+    }
+
 
     
 private:

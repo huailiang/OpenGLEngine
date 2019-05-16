@@ -22,10 +22,7 @@ using namespace std;
 using namespace glm;
 
 float deltatime,lastTime;
-Camera camera(vec3(0.0f,0.0f,3.0f));
 bool normal;
-//#define _SpotLight_
-Light* light;
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int heigth);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -36,6 +33,7 @@ void processInput(GLFWwindow* window);
 UIManager UIManager::instance;
 EventMgr EventMgr::instance;
 TTFont TTFont::instance;
+SceneMgr SceneMgr::instance;
 
 void Test(UIEvent* contex)
 {
@@ -74,101 +72,54 @@ int main(int argc, const char * argv[])
     }
    
     Screen screen;
-    Skybox skybox(&camera);
+
     TTFont::getInstance()->initial();
-    Terrain terrain;
-    Model Model("resources/objects/nanosuit/nanosuit.obj");
+    SceneMgr::getInstance()->Init();
+//    Terrain terrain;
+//    Model Model("resources/objects/nanosuit/nanosuit.obj");
 
     glEnable(GL_DEPTH_TEST);
     LightShader shader("shader/light.vs","shader/light.fs");
-    LightShader mShader("shader/model.vs", "shader/model.fs");
     Shader nShader("shader/normal.vs","shader/normal.fs","shader/normal.gs");
     Shader oShader("shader/model.vs", "shader/outline.fs");
     Shader sShader("shader/screen.vs","shader/screen.fs");
-    float vertices[] = {
-        // positions          // normals           // texture coords
-        -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f,
-        0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  0.0f,
-        0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  1.0f,
-        0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  1.0f,
-        -0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  1.0f,
-        -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f,
-        
-        -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f,  0.0f,
-        0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f,  0.0f,
-        0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f,  1.0f,
-        0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f,  1.0f,
-        -0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f,  1.0f,
-        -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f,  0.0f,
-        
-        -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f,  0.0f,
-        -0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  1.0f,  1.0f,
-        -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f,  1.0f,
-        -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f,  1.0f,
-        -0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  0.0f,  0.0f,
-        -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f,  0.0f,
-        
-        0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  1.0f,  0.0f,
-        0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  1.0f,  1.0f,
-        0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  0.0f,  1.0f,
-        0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  0.0f,  1.0f,
-        0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  0.0f,  0.0f,
-        0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  1.0f,  0.0f,
-        
-        -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  0.0f,  1.0f,
-        0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  1.0f,  1.0f,
-        0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  1.0f,  0.0f,
-        0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  1.0f,  0.0f,
-        -0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  0.0f,  0.0f,
-        -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  0.0f,  1.0f,
-        
-        -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f,  1.0f,
-        0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  1.0f,  1.0f,
-        0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  1.0f,  0.0f,
-        0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  1.0f,  0.0f,
-        -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  0.0f,  0.0f,
-        -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f,  1.0f
-    };
-    vec3 cubePositions[] = {
-        glm::vec3( 0.0f,  0.0f,  -2.0f),
-        glm::vec3( 2.0f,  1.0f, -4.0f),
-    };
+
     //cube
-    unsigned int vbo, vao;
-    glGenVertexArrays(1, &vao);
-    glGenBuffers(1, &vbo);
+//    unsigned int vbo, vao;
+//    glGenVertexArrays(1, &vao);
+//    glGenBuffers(1, &vbo);
+//
+//    glBindVertexArray(vao);
+//    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+//    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices,GL_STATIC_DRAW);
+//    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+//    glEnableVertexAttribArray(0);
+//    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3*sizeof(float)));
+//    glEnableVertexAttribArray(1);
+//    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6*sizeof(float)));
+//    glEnableVertexAttribArray(2);
+//    glBindBuffer(GL_ARRAY_BUFFER, 0);
+//
+//     // don't forget to activate/use the shader before setting uniforms!
+//    shader.use();
+//    shader.setInt("texture1", 0);
+//    shader.setInt("texture2", 1);
+//    shader.setVec3("viewPos", camera.Position);
+//    shader.ApplyLight();
+//    unsigned int texture1, texture2;
+//    TTexture("resources/textures/container.jpg", &texture1);
+//    TTexture("resources/textures/awesomeface.png", &texture2);
     
-    glBindVertexArray(vao);
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices,GL_STATIC_DRAW);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3*sizeof(float)));
-    glEnableVertexAttribArray(1);
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6*sizeof(float)));
-    glEnableVertexAttribArray(2);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    
-     // don't forget to activate/use the shader before setting uniforms!
-    shader.use();
-    shader.setInt("texture1", 0);
-    shader.setInt("texture2", 1);
-    shader.setVec3("viewPos", camera.Position);
-    shader.ApplyLight();
-    unsigned int texture1, texture2;
-    TTexture("resources/textures/container.jpg", &texture1);
-    TTexture("resources/textures/awesomeface.png", &texture2);
-    
-    //light
-#ifdef _SpotLight_
-    light = new SpotLight(vec3(1.0f),vec3(0,0,-1),vec3(0,0,2.0f),vec3(1.0f,0.09f,0.032f),cos(radians(7.5f)),cos(radians(8.5f)));
-#else
-#ifdef _PointLight_
-    light = new PointLight(vec3(1.0f),vec3(0,0,-1),vec3(0,0,4),vec3(1.0f,0.09f,0.032f));
-#else
-     light = new DirectLight(vec3(1.0f),vec3(1.0f,0.0f,0.0f));
-#endif
-#endif
+//    //light
+//#ifdef _SpotLight_
+//    light = new SpotLight(vec3(1.0f),vec3(0,0,-1),vec3(0,0,2.0f),vec3(1.0f,0.09f,0.032f),cos(radians(7.5f)),cos(radians(8.5f)));
+//#else
+//#ifdef _PointLight_
+//    light = new PointLight(vec3(1.0f),vec3(0,0,-1),vec3(0,0,4),vec3(1.0f,0.09f,0.032f));
+//#else
+//     light = new DirectLight(vec3(1.0f),vec3(1.0f,0.0f,0.0f));
+//#endif
+//#endif
 
     screen.Bind(true);
     glClearColor(0.0f,0.0f,0.0f,1.0f);
@@ -176,9 +127,9 @@ int main(int argc, const char * argv[])
     Label(vec2(120,20),vec3(1.0f), 1, "offline screen render");
     screen.Bind(false);
     
-    Label lb(vec2(20,20), vec3(1.0f,1.0f,0.0f));
-    Label lb2(vec2(740, 580), vec3(1,0,0), 0.5f);
-    lb2.RegistCallback(Test);
+//    Label lb(vec2(20,20), vec3(1.0f,1.0f,0.0f));
+//    Label lb2(vec2(740, 580), vec3(1,0,0), 0.5f);
+//    lb2.RegistCallback(Test);
     
     while (!glfwWindowShouldClose(window))
     {
@@ -187,50 +138,31 @@ int main(int argc, const char * argv[])
         float timeValue = glfwGetTime();
         deltatime  = timeValue-lastTime;
         lastTime= timeValue;
-        float scale = sin(timeValue) / 3.0f + 0.66f;
-        mat4 view = camera.GetViewMatrix();
-        mat4 proj = camera.GetProjMatrix();
-        shader.use();
-        shader.setFloat("scale", scale);
-        shader.setMat4("view", view);
-        shader.setMat4("projection", proj);
-        light->Attach(&shader);
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, texture1);
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, texture2);
-
-        glDisable(GL_BLEND);
-        glDisable(GL_CULL_FACE);
-        glEnable(GL_DEPTH_TEST);
+        SceneMgr::getInstance()->Draw(deltatime);
         
-        glClearColor(0.2f,0.2f,0.2f,1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glBindVertexArray(vao);
-        for (unsigned int i = 0; i < 2; i++)
-        {
-            glm::mat4 model = glm::mat4(1.0f);
-            model = translate(model, cubePositions[i]);
-            float angle = 64 * i * timeValue;
-            model = glm::rotate(model, glm::radians(angle), vec3(1.0f, 0.3f, 0.5f));
-            shader.setMat4("model", model);
-            glDrawArrays(GL_TRIANGLES, 0, 36);
-        }
-
-        Model.Draw(&mShader,&camera, light, vec3(-1.2f, -0.5f, -1.5f), vec3(0.12f, 0.12f, 0.12f), -16*timeValue);
-        if(normal) Model.Draw(&nShader,&camera, light, vec3(-1.2f, -0.5f, -1.5f), vec3(0.12f, 0.12f, 0.12f), -16*timeValue);
-        terrain.Draw(&camera);
-        skybox.Draw();
+//        float scale = sin(timeValue) / 3.0f + 0.66f;
+//        mat4 view = camera.GetViewMatrix();
+//        mat4 proj = camera.GetProjMatrix();
+//        shader.use();
+//        shader.setFloat("scale", scale);
+//        shader.setMat4("view", view);
+//        shader.setMat4("projection", proj);
+//        light->Attach(&shader);
+//        glActiveTexture(GL_TEXTURE0);
+//        glBindTexture(GL_TEXTURE_2D, texture1);
+//        glActiveTexture(GL_TEXTURE1);
+//        glBindTexture(GL_TEXTURE_2D, texture2);
+//
+//        Model.Draw(&mShader,&camera, light, vec3(-1.2f, -0.5f, -1.5f), vec3(0.12f, 0.12f, 0.12f), -16*timeValue);
+//        if(normal) Model.Draw(&nShader,&camera, light, vec3(-1.2f, -0.5f, -1.5f), vec3(0.12f, 0.12f, 0.12f), -16*timeValue);
         screen.RTDraw();
-        lb.setText("@copyright penghuailiang");
-        lb2.setText("FPS: "+to_string_with_precision(1.0f / deltatime,4));
+        
         UIManager::getInstance()->Draw();
+        
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
    
-    glDeleteVertexArrays(1, &vao);
-    glDeleteBuffers(1, &vbo);
     glfwTerminate();
     return 0;
 }
@@ -239,35 +171,9 @@ void processInput(GLFWwindow *window)
 {
     if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
-    if (glfwGetKey(window, GLFW_KEY_A)== GLFW_PRESS)
-        camera.ProcessKeyboard(LEFT, deltatime);
-    if (glfwGetKey(window, GLFW_KEY_D)== GLFW_PRESS)
-        camera.ProcessKeyboard(RIGHT, deltatime);
-    if (glfwGetKey(window, GLFW_KEY_W)== GLFW_PRESS)
-        camera.ProcessKeyboard(FORWARD, deltatime);
-    if (glfwGetKey(window, GLFW_KEY_S)== GLFW_PRESS)
-        camera.ProcessKeyboard(BACKWARD, deltatime);
-    if ( glfwGetKey(window, GLFW_KEY_LEFT)== GLFW_PRESS)
-        light->UpdateX(-0.5f * deltatime);
-    if ( glfwGetKey(window, GLFW_KEY_RIGHT)== GLFW_PRESS)
-        light->UpdateX(0.5f * deltatime);
-    if ( glfwGetKey(window, GLFW_KEY_UP)== GLFW_PRESS)
-        light->UpdateY(0.5f * deltatime);
-    if ( glfwGetKey(window, GLFW_KEY_DOWN)== GLFW_PRESS)
-        light->UpdateY(-0.5f * deltatime);
+    SceneMgr::getInstance()->ProcessKeyboard(window, deltatime);
     if ( glfwGetKey(window, GLFW_KEY_N)== GLFW_PRESS)
         normal = !normal;
-    if (glfwGetKey(window, GLFW_KEY_SPACE)== GLFW_PRESS)
-    {
-        float timeValue = glfwGetTime()*0.04f;
-        float ang = radians(timeValue);
-        vec3 center = vec3(0.0f, 0.0f, -2.0f);
-        vec3 pos = camera.Position;
-        vec3 npos = pos;
-        npos.x = (pos.x - center.x) * cos(ang) - (pos.z- center.z)*sin(ang) + center.x;
-        npos.z = (pos.z - center.z) * cos(ang) + (pos.x - center.x) * sin(ang) + center.z;
-        camera.RotateAt(npos, center);
-    }
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
@@ -280,14 +186,13 @@ float lastX = 400, lastY = 300;
 void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 {
     float xoffset = xpos - lastX;
-    float yoffset = lastY - ypos; // 注意这里是相反的，因为y坐标是从底部往顶部依次增大的
+    float yoffset = lastY - ypos;
     lastX = xpos;
     lastY = ypos;
-    
     float sensitivity = 0.2f;
     xoffset *= sensitivity;
     yoffset *= sensitivity;
-    camera.ProcessMouseMovement(xoffset, yoffset);
+    SceneMgr::getInstance()->ProcessMouseMove(xoffset, yoffset);
 }
 
 
@@ -311,5 +216,5 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
-    camera.ProcessMouseScroll(yoffset);
+    SceneMgr::getInstance()->ProcessMouseScroll(xoffset, yoffset);
 }

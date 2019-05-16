@@ -40,7 +40,6 @@ public:
         this->path=path;
         *texID = LoadTexture(flipY, wrap);
     }
-
     
     unsigned int LoadTexture(bool flipY, int wrap)
     {

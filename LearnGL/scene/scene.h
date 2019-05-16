@@ -25,12 +25,6 @@ enum SceneType
 
 //#define _SpotLight_
 
-/*
- Scene build seqence:
-    camera->
-        light->
-            scene
- */
 class Scene
 {
 private:
@@ -38,14 +32,30 @@ private:
     void ChangeScene(UIEvent* contex)
     {
     }
-    
 
 public:
-    Scene()
+    ~Scene()
     {
-        if(camera==NULL)
+        delete camera;
+        delete skybox;
+        delete light;
+        camera = NULL;
+        light = NULL;
+        skybox = NULL;
+    }
+    
+    /*
+     seqence: camera-> skybox-> light-> scene->
+     */
+    void Initial()
+    {
+        if(camera == NULL)
         {
             camera = new Camera(glm::vec3(0.0f,0.0f,3.0f));
+        }
+        if(skybox == NULL)
+        {
+            skybox = new Skybox(camera);
         }
         if(light == NULL)
         {
@@ -58,23 +68,91 @@ public:
     
     virtual void InitLight() = 0;
     
-    virtual void InitScene() = 0;
+    virtual void InitScene() { }
     
     virtual void DrawUI()
     {
-        Label label1(vec2(120,20), vec3(1.0f), 1, "Scene1");
-        Label label2(vec2(120,80), vec3(1.0f), 1, "Scene2");
-        Label label3(vec2(120,140),vec3(1.0f), 1, "Scene3");
+        Label label1(vec2(120,380), vec3(1.0f), 1, "Scene1");
+        Label label2(vec2(120,320), vec3(1.0f), 1, "Scene2");
+        Label label3(vec2(120,260), vec3(1.0f), 1, "Scene3");
     }
     
     virtual void DrawTerrain() = 0;
     
-    void DrawChar() { }
+    virtual void DrawChar() { }
+    
+    void DrawScene()
+    {
+        glDisable(GL_BLEND);
+        glDisable(GL_CULL_FACE);
+        glEnable(GL_DEPTH_TEST);
+        glClearColor(0.2f,0.2f,0.2f,1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        DrawTerrain();
+        if(skybox) skybox->Draw();
+        DrawChar();
+        DrawUI();
+    }
+    
+    void ProcessKeyboard(GLFWwindow *window, float deltatime)
+    {
+        if(camera)
+        {
+            if (glfwGetKey(window, GLFW_KEY_A)== GLFW_PRESS)
+                camera->ProcessKeyboard(LEFT, deltatime);
+            if (glfwGetKey(window, GLFW_KEY_D)== GLFW_PRESS)
+                camera->ProcessKeyboard(RIGHT, deltatime);
+            if (glfwGetKey(window, GLFW_KEY_W)== GLFW_PRESS)
+                camera->ProcessKeyboard(FORWARD, deltatime);
+            if (glfwGetKey(window, GLFW_KEY_S)== GLFW_PRESS)
+                camera->ProcessKeyboard(BACKWARD, deltatime);
+            if (glfwGetKey(window, GLFW_KEY_SPACE)== GLFW_PRESS)
+            {
+                float timeValue = glfwGetTime()*0.04f;
+                float ang = radians(timeValue);
+                vec3 center = vec3(0.0f, 0.0f, -2.0f);
+                vec3 pos = camera->Position;
+                vec3 npos = pos;
+                npos.x = (pos.x - center.x) * cos(ang) - (pos.z- center.z)*sin(ang) + center.x;
+                npos.z = (pos.z - center.z) * cos(ang) + (pos.x - center.x) * sin(ang) + center.z;
+                camera->RotateAt(npos, center);
+            }
+        }
+        if(light)
+        {
+            if ( glfwGetKey(window, GLFW_KEY_LEFT)== GLFW_PRESS)
+                light->UpdateX(-0.5f * deltatime);
+            if ( glfwGetKey(window, GLFW_KEY_RIGHT)== GLFW_PRESS)
+                light->UpdateX(0.5f * deltatime);
+            if ( glfwGetKey(window, GLFW_KEY_UP)== GLFW_PRESS)
+                light->UpdateY(0.5f * deltatime);
+            if ( glfwGetKey(window, GLFW_KEY_DOWN)== GLFW_PRESS)
+                light->UpdateY(-0.5f * deltatime);
+        }
+    }
   
+    
+    void ProcessMouseMove(double xoffset,double yoffset)
+    {
+        if(camera)
+        {
+            camera->ProcessMouseMovement(xoffset, yoffset);
+        }
+    }
+    
+    void ProcessMouseScroll(double xoffset, double yoffset)
+    {
+        if(camera)
+        {
+            camera->ProcessMouseScroll(yoffset);
+        }
+    }
+
     
 protected:
     Camera* camera;
     Light* light;
+    Skybox* skybox;
 };
 
 
