@@ -27,7 +27,7 @@ public:
         shader = NULL;
     }
     
-    SceneType getType()
+    int getType()
     {
         return TY_Scene1;
     }

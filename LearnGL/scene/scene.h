@@ -10,30 +10,21 @@
 #define scene_h
 
 #include "../common.h"
-#include "../gui/uimgr.h"
-#include "../gui/label.h"
-#include "../gui/uievent.h"
 #include "../std/camera.h"
 #include "../std/light.h"
 
-enum SceneType
-{
-    TY_Scene1,
-    TY_Scene2,
-    TY_Scene3,
-};
+
+#define TY_Scene1 0
+#define TY_Scene2 1
+#define TY_Scene3 2
+
 
 class Scene
 {
-private:
     
-    static void Test(UIEvent* contex)
-    {
-        Label* label = dynamic_cast<Label*>(contex);
-        cout<<"callback "<<label->getText()<<endl;
-    }
 public:
-    ~Scene()
+    
+    virtual ~Scene()
     {
         delete camera;
         delete skybox;
@@ -41,13 +32,11 @@ public:
         camera = NULL;
         light = NULL;
         skybox = NULL;
-        delete label1;
-        delete label2;
-        delete label3;
     }
+  
     
     /*
-     seqence: camera-> skybox-> light-> scene->
+     init: camera-> skybox-> light-> scene-> ui
      */
     void Initial()
     {
@@ -67,19 +56,13 @@ public:
         DrawUI();
     }
     
-    virtual SceneType getType() = 0;
+    virtual int getType() = 0;
     
     virtual void InitLight() = 0;
     
     virtual void InitScene() { }
     
-    virtual void DrawUI()
-    {
-        label1 = new Label(vec2(120,380), vec3(1.0f), 1, "Scene1");
-        label2 = new Label(vec2(120,320), vec3(1.0f), 1, "Scene2");
-        label3 = new Label(vec2(120,260), vec3(1.0f), 1, "Scene3");
-        label1->RegistCallback(Test);
-    }
+    virtual void DrawUI() { }
     
     virtual void DrawTerrain() = 0;
     
@@ -95,7 +78,6 @@ public:
         DrawTerrain();
         if(skybox) skybox->Draw();
         DrawChar();
-//        DrawUI();
     }
     
     void ProcessKeyboard(GLFWwindow *window, float deltatime)
@@ -157,10 +139,7 @@ protected:
     Camera* camera;
     Light* light;
     Skybox* skybox;
-    
-    Label* label1;
-    Label* label2;
-    Label* label3;
+
 };
 
 

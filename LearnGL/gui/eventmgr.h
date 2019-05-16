@@ -25,7 +25,6 @@ public:
     void RegistEvt(UIEvent* evt)
     {
         ui_events.push_back(evt);
-        std::cout<<"RegistEvt: "<<ui_events.size()<<std::endl;
     }
     
     void RemoveEvt(UIEvent* evt)
@@ -35,7 +34,6 @@ public:
             if(*iter == evt)
             {
                 ui_events.erase(iter);
-                std::cout<<"remove: "<<ui_events.size()<<std::endl;
                 break;
             }
         }

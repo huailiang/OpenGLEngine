@@ -25,6 +25,7 @@ typedef void (*ClickCallback)(UIEvent* contex);
 class UIEvent
 {
 public:
+    int evtid;
     
     UIEvent() { }
     

@@ -15,7 +15,7 @@ class Scene3 : public Scene
 {
     
 public:
-    SceneType getType()
+    int getType()
     {
         return TY_Scene3;
     }

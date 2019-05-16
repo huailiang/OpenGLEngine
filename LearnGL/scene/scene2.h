@@ -23,7 +23,7 @@ public:
         glDeleteBuffers(1, &vbo);
     }
     
-    SceneType getType()
+    int getType()
     {
         return TY_Scene2;
     }

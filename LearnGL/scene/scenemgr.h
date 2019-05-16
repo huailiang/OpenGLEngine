@@ -13,16 +13,42 @@
 #include "scene1.h"
 #include "scene2.h"
 #include "scene3.h"
-
+#include "../gui/uimgr.h"
+#include "../gui/label.h"
+#include "../gui/uievent.h"
 
 class SceneMgr
 {
 private:
     SceneMgr() { }
-    ~SceneMgr() { }
+    
+    ~SceneMgr()
+    {
+        delete label1;
+        delete label2;
+        delete label3;
+        label1 = NULL;
+        label2 = NULL;
+        label3 = NULL;
+        if(current)
+        {
+            delete current;
+            current = NULL;
+        }
+    }
+    
     SceneMgr(const SceneMgr &);
     SceneMgr& operator=(const SceneMgr &);
     static SceneMgr instance;
+    
+    static void Test(UIEvent* contex)
+    {
+        Label* label = dynamic_cast<Label*>(contex);
+        cout<<"change to scene: "<<label->getText()<<endl;
+        int evtid = contex->evtid;
+        instance.ChangeTo(TY_Scene1 + evtid);
+    }
+
     
 public:
     static SceneMgr* getInstance()
@@ -30,11 +56,15 @@ public:
         return &instance;
     }
     
-    ~SceneMgr() { LeaveScene(); }
-    
     void Init()
     {
         ChangeTo(TY_Scene1);
+        label1 = new Label(vec2(120,380), vec3(1.0f), 1, "Scene1", 0);
+        label2 = new Label(vec2(120,320), vec3(1.0f), 1, "Scene2", 1);
+        label3 = new Label(vec2(120,260), vec3(1.0f), 1, "Scene3", 2);
+        label1->RegistCallback(Test);
+        label2->RegistCallback(Test);
+        label3->RegistCallback(Test);
     }
     
     void LeaveScene()
@@ -68,7 +98,7 @@ public:
         }
     }
     
-    void ChangeTo(SceneType type)
+    void ChangeTo(int type)
     {
         Scene* sc = NULL;
         if(type == TY_Scene1)
@@ -118,7 +148,7 @@ public:
     
 private:
     Scene *current;
-    
+    Label *label1, *label2, *label3;
 };
 
 #endif /* scenemgr_h */
