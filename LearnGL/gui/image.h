@@ -18,16 +18,12 @@
 class Image : public UIBase, public UIEvent
 {
 public:
-    void Draw()
-    {
-        
-    }
+    void Draw() { }
 
     bool IsHit(float x, float y)
     {
         return false;
     }
-    
     
     Image()
     {

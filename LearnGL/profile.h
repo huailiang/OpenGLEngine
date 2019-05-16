@@ -10,11 +10,7 @@
 #define transf_h
 
 #include <iomanip>
-#include <stdio.h>
-#include <iostream>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <string>
+#include "common.h"
 
 using namespace std;
 using namespace glm;
