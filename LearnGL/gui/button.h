@@ -29,10 +29,7 @@ public:
         return false;
     }
     
-    void OnTriger()
-    {
-        
-    }
+    void OnTriger() { }
     
     Button()
     {

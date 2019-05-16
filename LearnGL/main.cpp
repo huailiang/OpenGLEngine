@@ -4,18 +4,9 @@
 //  Copyright © 2019 彭怀亮. All rights reserved.
 //
 
-#include <iostream>
-#include <string>
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-#include <cmath>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
 
-#define STB_IMAGE_IMPLEMENTATION
-#include "std/const.h"
-#include "ext/stb_image.h"
+
+#include "common.h"
 #include "std/camera.h"
 #include "std/shader.h"
 #include "std/texture.h"
@@ -47,6 +38,12 @@ void processInput(GLFWwindow* window);
 UIManager UIManager::instance;
 EventMgr EventMgr::instance;
 TTFont TTFont::instance;
+
+void Test(UIEvent* contex)
+{
+    Label* label = dynamic_cast<Label*>(contex);
+    cout<<"callback "<<label->getText()<<endl;
+}
 
 int main(int argc, const char * argv[])
 {
@@ -183,6 +180,7 @@ int main(int argc, const char * argv[])
     
     Label lb(vec2(20,20), vec3(1.0f,1.0f,0.0f));
     Label lb2(vec2(740, 580), vec3(1,0,0), 0.5f);
+    lb2.RegistCallback(Test);
     
     while (!glfwWindowShouldClose(window))
     {

@@ -28,10 +28,6 @@ public:
         return false;
     }
     
-    void OnTriger()
-    {
-        
-    }
     
     Image()
     {

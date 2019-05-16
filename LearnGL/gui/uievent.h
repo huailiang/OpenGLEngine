@@ -18,9 +18,14 @@ enum UIEventType
     Click
 };
 
+class UIEvent;
+
+typedef void (*ClickCallback)(UIEvent* contex);
+
 class UIEvent
 {
 public:
+    
     UIEvent() { }
     
     UIEvent(const UIEvent& other)
@@ -30,7 +35,24 @@ public:
     
     virtual bool IsHit(float x,float y) = 0;
     
-    virtual void OnTriger() = 0 ;
+    virtual void OnTriger() { } 
+    
+    void RegistCallback(ClickCallback cb)
+    {
+        this->callback = cb;
+    }
+    
+    void Dispacher()
+    {
+        if(callback)
+        {
+            callback(this);
+        }
+    }
+
+private:
+    ClickCallback callback;
+
 };
 
 #endif /* uievent_h */

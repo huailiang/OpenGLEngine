@@ -55,15 +55,15 @@ public:
     
     bool IsHit(float x, float y)
     {
-        float xrg = len * 0.5f;
-        float yrg = FONT_SIZE * 0.5f;
-        bool hit = abs(x-getCenterX())< xrg && abs(SCR_HEIGHT - y - posy)< yrg;
+        float xr = len * 0.5f;
+        float yr = FONT_SIZE * 0.5f;
+        bool hit = abs(x-getCenterX()) < xr && abs(SCR_HEIGHT - y - posy) < yr;
         return hit;
     }
     
     void OnTriger()
     {
-        cout<<"interact triger: "<<text<<endl;
+      /*  cout<<"interact triger: "<<text<<endl;*/
     }
     
     void setText(const std::string text)
@@ -76,9 +76,16 @@ public:
         return len * 0.5f + posx;
     }
     
+    std::string getText()
+    {
+        return this->text;
+    }
+    
+    
+
 private:
-    glm::vec3 color;
     std::string text;
+    glm::vec3 color;
     float len;
     float scales;
 };

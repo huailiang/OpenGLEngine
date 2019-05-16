@@ -9,8 +9,9 @@
 #ifndef uimgr_h
 #define uimgr_h
 
-#include <vector>
+
 #include "uibase.h"
+
 
 class UIManager
 {
@@ -55,7 +56,7 @@ private:
     UIManager(const UIManager&);
     UIManager& operator=(const UIManager &);
     static UIManager instance;
-    
+
     std::vector<UIBase*> vector;
 };
 

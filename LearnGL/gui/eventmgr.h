@@ -14,6 +14,7 @@
 #include <iostream>
 #include "uievent.h"
 
+
 class EventMgr
 {
 public:
@@ -49,6 +50,7 @@ public:
             if(action == GLFW_RELEASE && et->IsHit(x, y))
             {
                 et->OnTriger();
+                et->Dispacher();
             }
         }
     }
