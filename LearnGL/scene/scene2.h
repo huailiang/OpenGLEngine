@@ -30,7 +30,7 @@ public:
     
     void InitLight()
     {
-        light = new DirectLight(vec3(1.0f),vec3(1.0f,0.0f,0.0f));
+        light = new DirectLight(vec3(1.0f), vec3(1.0f,0.0f,0.0f));
     }
     
     void InitScene()
@@ -120,10 +120,7 @@ public:
     void DrawChar()
     {
         float timeValue = glfwGetTime();
-        vec3 cubePositions[] = {
-            glm::vec3( 0.0f,  0.0f,  -2.0f),
-            glm::vec3( 2.0f,  1.0f, -4.0f),
-        };
+        vec3 cubePositions[] = { glm::vec3( 0.0f,  0.0f,  -2.0f), glm::vec3( 2.0f,  1.0f, -4.0f) };
         glBindVertexArray(vao);
         for (unsigned int i = 0; i < 2; i++)
         {

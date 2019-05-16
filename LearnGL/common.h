@@ -9,8 +9,12 @@
 #ifndef common_h
 #define common_h
 
+#include <fstream>
+#include <sstream>
 #include <iostream>
 #include <string>
+#include <map>
+#include <vector>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <cmath>

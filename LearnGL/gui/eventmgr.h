@@ -9,9 +9,7 @@
 #ifndef EventMgr_h
 #define EventMgr_h
 
-#include <glm/glm.hpp>
-#include <vector>
-#include <iostream>
+#include "../common.h"
 #include "uievent.h"
 
 

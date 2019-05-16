@@ -34,7 +34,7 @@ public:
     
     void InitLight()
     {
-        light = new DirectLight(vec3(1.0f),vec3(1.0f,0.0f,0.0f));
+        light = new DirectLight(vec3(1.0f), vec3(1.0f,0.0f,0.0f));
     }
     
     void InitScene()
@@ -63,7 +63,7 @@ public:
             model = new Model("resources/objects/nanosuit/nanosuit.obj");
         }
         float timeValue = glfwGetTime();
-        model->Draw(shader, camera, light, vec3(-1.2f, -0.5f, -1.5f), vec3(0.12f, 0.12f, 0.12f), -16*timeValue);
+        model->Draw(shader, camera, light, vec3(0.2f, -0.5f, -1.5f), vec3(0.12f), -16*timeValue);
     }
     
 private:

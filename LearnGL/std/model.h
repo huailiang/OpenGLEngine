@@ -1,9 +1,6 @@
 #ifndef MODEL_H
 #define MODEL_H
 
-#include <glad/glad.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
@@ -12,13 +9,8 @@
 #include "shader.h"
 #include "camera.h"
 #include "light.h"
+#include "../common.h"
 
-#include <string>
-#include <fstream>
-#include <sstream>
-#include <iostream>
-#include <map>
-#include <vector>
 using namespace std;
 using namespace glm;
 
