@@ -30,6 +30,8 @@ public:
         return &instance;
     }
     
+    ~SceneMgr() { LeaveScene(); }
+    
     void Init()
     {
         ChangeTo(TY_Scene1);

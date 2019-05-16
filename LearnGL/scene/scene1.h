@@ -15,8 +15,7 @@
 
 class Scene1 : public Scene
 {
-
-
+    
 public:
    ~Scene1()
     {

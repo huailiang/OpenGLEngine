@@ -41,6 +41,9 @@ public:
         camera = NULL;
         light = NULL;
         skybox = NULL;
+        delete label1;
+        delete label2;
+        delete label3;
     }
     
     /*
@@ -61,6 +64,7 @@ public:
             InitLight();
             InitScene();
         }
+        DrawUI();
     }
     
     virtual SceneType getType() = 0;
@@ -71,11 +75,10 @@ public:
     
     virtual void DrawUI()
     {
-        Label label1(vec2(120,380), vec3(1.0f), 1, "Scene1");
-        Label label2(vec2(120,320), vec3(1.0f), 1, "Scene2");
-        Label label3(vec2(120,260), vec3(1.0f), 1, "Scene3");
-        
-        label1.RegistCallback(Test);
+        label1 = new Label(vec2(120,380), vec3(1.0f), 1, "Scene1");
+        label2 = new Label(vec2(120,320), vec3(1.0f), 1, "Scene2");
+        label3 = new Label(vec2(120,260), vec3(1.0f), 1, "Scene3");
+        label1->RegistCallback(Test);
     }
     
     virtual void DrawTerrain() = 0;
@@ -92,7 +95,7 @@ public:
         DrawTerrain();
         if(skybox) skybox->Draw();
         DrawChar();
-        DrawUI();
+//        DrawUI();
     }
     
     void ProcessKeyboard(GLFWwindow *window, float deltatime)
@@ -154,6 +157,10 @@ protected:
     Camera* camera;
     Light* light;
     Skybox* skybox;
+    
+    Label* label1;
+    Label* label2;
+    Label* label3;
 };
 
 
