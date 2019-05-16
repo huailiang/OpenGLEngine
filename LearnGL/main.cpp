@@ -75,51 +75,11 @@ int main(int argc, const char * argv[])
 
     TTFont::getInstance()->initial();
     SceneMgr::getInstance()->Init();
-//    Terrain terrain;
-//    Model Model("resources/objects/nanosuit/nanosuit.obj");
 
     glEnable(GL_DEPTH_TEST);
-    LightShader shader("shader/light.vs","shader/light.fs");
-    Shader nShader("shader/normal.vs","shader/normal.fs","shader/normal.gs");
     Shader oShader("shader/model.vs", "shader/outline.fs");
     Shader sShader("shader/screen.vs","shader/screen.fs");
 
-    //cube
-//    unsigned int vbo, vao;
-//    glGenVertexArrays(1, &vao);
-//    glGenBuffers(1, &vbo);
-//
-//    glBindVertexArray(vao);
-//    glBindBuffer(GL_ARRAY_BUFFER, vbo);
-//    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices,GL_STATIC_DRAW);
-//    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
-//    glEnableVertexAttribArray(0);
-//    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3*sizeof(float)));
-//    glEnableVertexAttribArray(1);
-//    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6*sizeof(float)));
-//    glEnableVertexAttribArray(2);
-//    glBindBuffer(GL_ARRAY_BUFFER, 0);
-//
-//     // don't forget to activate/use the shader before setting uniforms!
-//    shader.use();
-//    shader.setInt("texture1", 0);
-//    shader.setInt("texture2", 1);
-//    shader.setVec3("viewPos", camera.Position);
-//    shader.ApplyLight();
-//    unsigned int texture1, texture2;
-//    TTexture("resources/textures/container.jpg", &texture1);
-//    TTexture("resources/textures/awesomeface.png", &texture2);
-    
-//    //light
-//#ifdef _SpotLight_
-//    light = new SpotLight(vec3(1.0f),vec3(0,0,-1),vec3(0,0,2.0f),vec3(1.0f,0.09f,0.032f),cos(radians(7.5f)),cos(radians(8.5f)));
-//#else
-//#ifdef _PointLight_
-//    light = new PointLight(vec3(1.0f),vec3(0,0,-1),vec3(0,0,4),vec3(1.0f,0.09f,0.032f));
-//#else
-//     light = new DirectLight(vec3(1.0f),vec3(1.0f,0.0f,0.0f));
-//#endif
-//#endif
 
     screen.Bind(true);
     glClearColor(0.0f,0.0f,0.0f,1.0f);
@@ -139,24 +99,7 @@ int main(int argc, const char * argv[])
         deltatime  = timeValue-lastTime;
         lastTime= timeValue;
         SceneMgr::getInstance()->Draw(deltatime);
-        
-//        float scale = sin(timeValue) / 3.0f + 0.66f;
-//        mat4 view = camera.GetViewMatrix();
-//        mat4 proj = camera.GetProjMatrix();
-//        shader.use();
-//        shader.setFloat("scale", scale);
-//        shader.setMat4("view", view);
-//        shader.setMat4("projection", proj);
-//        light->Attach(&shader);
-//        glActiveTexture(GL_TEXTURE0);
-//        glBindTexture(GL_TEXTURE_2D, texture1);
-//        glActiveTexture(GL_TEXTURE1);
-//        glBindTexture(GL_TEXTURE_2D, texture2);
-//
-//        Model.Draw(&mShader,&camera, light, vec3(-1.2f, -0.5f, -1.5f), vec3(0.12f, 0.12f, 0.12f), -16*timeValue);
-//        if(normal) Model.Draw(&nShader,&camera, light, vec3(-1.2f, -0.5f, -1.5f), vec3(0.12f, 0.12f, 0.12f), -16*timeValue);
         screen.RTDraw();
-        
         UIManager::getInstance()->Draw();
         
         glfwSwapBuffers(window);

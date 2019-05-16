@@ -23,16 +23,15 @@ enum SceneType
     TY_Scene3,
 };
 
-//#define _SpotLight_
-
 class Scene
 {
 private:
     
-    void ChangeScene(UIEvent* contex)
+    static void Test(UIEvent* contex)
     {
+        Label* label = dynamic_cast<Label*>(contex);
+        cout<<"callback "<<label->getText()<<endl;
     }
-
 public:
     ~Scene()
     {
@@ -75,6 +74,8 @@ public:
         Label label1(vec2(120,380), vec3(1.0f), 1, "Scene1");
         Label label2(vec2(120,320), vec3(1.0f), 1, "Scene2");
         Label label3(vec2(120,260), vec3(1.0f), 1, "Scene3");
+        
+        label1.RegistCallback(Test);
     }
     
     virtual void DrawTerrain() = 0;

@@ -15,7 +15,8 @@
 
 class Scene1 : public Scene
 {
-    
+
+
 public:
    ~Scene1()
     {
@@ -40,6 +41,7 @@ public:
     void InitScene()
     {
         shader = new LightShader("shader/model.vs", "shader/model.fs");
+        nmShader = new Shader("shader/normal.vs","shader/normal.fs","shader/normal.gs");
     }
     
     void DrawUI()
@@ -64,12 +66,14 @@ public:
         }
         float timeValue = glfwGetTime();
         model->Draw(shader, camera, light, vec3(0.2f, -0.5f, -1.5f), vec3(0.12f), -16*timeValue);
+//        model->Draw(nmShader, camera, light, vec3(0.2f, -0.5f, -1.5f), vec3(0.12f), -16*timeValue);
     }
     
 private:
     Terrain* terrain;
     Model* model;
     LightShader* shader;
+    Shader* nmShader;
     unsigned int texture1, texture2;
 };
 
