@@ -16,7 +16,12 @@ class UIEvent
 public:
     UIEvent() { }
     
-    virtual bool IsTarget(float x,float y) =0 ;
+    UIEvent(const UIEvent& other)
+    {
+        std::cout<<"copy constructor called"<<std::endl;
+    }
+    
+    virtual bool IsTarget(float x,float y) = 0;
     
     virtual void OnTriger() = 0 ;
 };

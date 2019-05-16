@@ -30,9 +30,9 @@ public:
         TTexture(path,texID,true);
     }
     
-    TTexture(const char* path, unsigned int* texID,bool flipY)
+    TTexture(const char* path, unsigned int* texID, bool flipY)
     {
-         TTexture(path,texID,true, GL_REPEAT);
+         TTexture(path, texID, true, GL_REPEAT);
     }
     
     TTexture(const char* path, unsigned int* texID, bool flipY, int wrap)

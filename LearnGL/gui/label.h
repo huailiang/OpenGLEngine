@@ -23,17 +23,17 @@ class Label : public UIBase, public UIEvent
 public:
     Label(){ std::cout<<"warn: called default constructor of label"<<std::endl; }
     
-    Label(std::string text, glm::vec2 pos, glm::vec3 color)
+    Label(std::string text,const glm::vec2 pos, const glm::vec3 color)
     {
         Label(text,pos,color,1.0f);
     }
     
-    Label(std::string text, glm::vec2 pos, glm::vec3 color, float scale)
+    Label(std::string text,const glm::vec2 pos,const glm::vec3 color,const float scale)
     {
         Label(text,pos,color,scale,false);
     }
     
-    Label(std::string text, glm::vec2 pos, glm::vec3 color,float scale, bool interact)
+    Label(std::string text,const glm::vec2 pos,const glm::vec3 color,const float scale,const bool interact)
     {
         this->scales = scale;
         this->interact = interact;

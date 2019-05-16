@@ -38,7 +38,7 @@ class TTFont
 {
 public:
 
-    void RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color)
+    void RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scale, const glm::vec3 color)
     {
         glEnable(GL_CULL_FACE);
         glEnable(GL_BLEND);

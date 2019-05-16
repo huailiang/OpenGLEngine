@@ -50,7 +50,7 @@ std::string to_string_with_precision(const T a_value, const int n = 6)
     return out.str();
 }
 
-void prt_mat(mat4 mat)
+void prt_mat(const mat4 mat)
 {
     cout.setf(ios::fixed);
     cout<<setprecision(2);
@@ -60,12 +60,12 @@ void prt_mat(mat4 mat)
     cout<<mat[3][0]<<"\t"<<mat[3][1]<<"\t"<<mat[3][2]<<"\t"<<mat[3][3]<<endl<<endl;
 }
 
-void prt_vec(vec3* vec)
+void prt_vec(const vec3* vec)
 {
     cout<<vec->x<<" "<<vec->y<<" "<<vec->z<<endl<<endl;
 }
 
-void prt_vec(vec4* vec)
+void prt_vec(const vec4* vec)
 {
     cout<<vec->x<<" "<<vec->y<<" "<<vec->z<<" "<<vec->w<<endl<<endl;
 }
