@@ -14,26 +14,16 @@
 #include "uibase.h"
 #include "uievent.h"
 #include "eventmgr.h"
+#include "uimgr.h"
 #include "ttfont.h"
 
 
 class Label : public UIBase, public UIEvent
 {
-    
 public:
     Label(){ std::cout<<"warn: called default constructor of label"<<std::endl; }
     
-    Label(std::string text,const glm::vec2 pos, const glm::vec3 color)
-    {
-        Label(text,pos,color,1.0f);
-    }
-    
-    Label(std::string text,const glm::vec2 pos,const glm::vec3 color,const float scale)
-    {
-        Label(text,pos,color,scale,true);
-    }
-    
-    Label(std::string text,const glm::vec2 pos,const glm::vec3 color,const float scale,const bool interact)
+    Label(const glm::vec2 pos,const glm::vec3 color=glm::vec3(1), const float scale = 1.0f, const std::string text="", const bool interact=true)
     {
         this->scales = scale;
         this->interact = interact;
@@ -44,6 +34,7 @@ public:
         {
             EventMgr::getInstance()->RegistEvt(this);
         }
+        UIManager::getInstance()->Regist(this);
         Draw();
     }
     
@@ -53,6 +44,7 @@ public:
         {
             EventMgr::getInstance()->RemoveEvt(this);
         }
+        UIManager::getInstance()->Remove(this);
     }
     
     void Draw()
@@ -69,7 +61,12 @@ public:
     
     void OnTriger()
     {
-        
+        cout<<"interact triger"<<endl;
+    }
+    
+    void setText(const std::string text)
+    {
+        this->text = text;
     }
     
 private:

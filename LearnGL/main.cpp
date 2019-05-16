@@ -10,8 +10,6 @@
 #include <GLFW/glfw3.h>
 #include <cmath>
 #include <glm/glm.hpp>
-
-#include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
@@ -24,15 +22,15 @@
 #include "std/model.h"
 #include "std/skybox.h"
 #include "std/light.h"
+#include "gui/uimgr.h"
 #include "gui/eventmgr.h"
 #include "gui/label.h"
 #include "profile.h"
 #include "terrain.h"
 #include "screen.h"
+
 using namespace std;
 using namespace glm;
-
-
 
 float deltatime,lastTime;
 Camera camera(vec3(0.0f,0.0f,3.0f));
@@ -46,6 +44,7 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow* window);
 
+UIManager UIManager::instance;
 EventMgr EventMgr::instance;
 TTFont TTFont::instance;
 
@@ -78,7 +77,13 @@ int main(int argc, const char * argv[])
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
+   
+    Screen screen;
+    Skybox skybox(&camera);
     TTFont::getInstance()->initial();
+    Terrain terrain;
+    Model Model("resources/objects/nanosuit/nanosuit.obj");
+
     glEnable(GL_DEPTH_TEST);
     LightShader shader("shader/light.vs","shader/light.fs");
     LightShader mShader("shader/model.vs", "shader/model.fs");
@@ -149,19 +154,15 @@ int main(int argc, const char * argv[])
     glEnableVertexAttribArray(2);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     
-    Screen screen;
-    Skybox skybox(&camera);
-    
-    unsigned int texture1, texture2;
-    TTexture tex1("resources/textures/container.jpg", &texture1);
-    TTexture tex2("resources/textures/awesomeface.png", &texture2);
-
      // don't forget to activate/use the shader before setting uniforms!
     shader.use();
     shader.setInt("texture1", 0);
     shader.setInt("texture2", 1);
     shader.setVec3("viewPos", camera.Position);
     shader.ApplyLight();
+    unsigned int texture1, texture2;
+    TTexture("resources/textures/container.jpg", &texture1);
+    TTexture("resources/textures/awesomeface.png", &texture2);
     
     //light
 #ifdef _SpotLight_
@@ -174,9 +175,14 @@ int main(int argc, const char * argv[])
 #endif
 #endif
 
-    Terrain terrain;
-//    TTFont font;
-    Model Model("resources/objects/nanosuit/nanosuit.obj");
+    screen.Bind(true);
+    glClearColor(0.0f,0.0f,0.0f,1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    Label(vec2(120,20),vec3(1.0f), 1, "offline screen render");
+    screen.Bind(false);
+    
+    Label lb(vec2(20,20), vec3(1.0f,1.0f,0.0f));
+    Label lb2(vec2(740, 580), vec3(1,0,0), 0.5f);
     
     while (!glfwWindowShouldClose(window))
     {
@@ -197,26 +203,10 @@ int main(int argc, const char * argv[])
         glBindTexture(GL_TEXTURE_2D, texture1);
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, texture2);
-        
+
         glDisable(GL_BLEND);
         glDisable(GL_CULL_FACE);
         glEnable(GL_DEPTH_TEST);
-        
-        screen.Bind(true);
-        glClearColor(0.1f,0.1f,0.1f,1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glBindVertexArray(vao);
-        for (unsigned int i = 0; i < 2; i++)
-        {
-            glm::mat4 model = glm::mat4(1.0f);
-            model = translate(model, cubePositions[i]);
-            float angle = 64 * i * timeValue;
-            model = glm::rotate(model, glm::radians(angle), vec3(1.0f, 0.3f, 0.5f));
-            shader.setMat4("model", model);
-            glDrawArrays(GL_TRIANGLES, 0, 36);
-        }
-        glBindVertexArray(0);
-        screen.Bind(false);
         
         glClearColor(0.2f,0.2f,0.2f,1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -230,18 +220,19 @@ int main(int argc, const char * argv[])
             shader.setMat4("model", model);
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
-        
+
         Model.Draw(&mShader,&camera, light, vec3(-1.2f, -0.5f, -1.5f), vec3(0.12f, 0.12f, 0.12f), -16*timeValue);
         if(normal) Model.Draw(&nShader,&camera, light, vec3(-1.2f, -0.5f, -1.5f), vec3(0.12f, 0.12f, 0.12f), -16*timeValue);
         terrain.Draw(&camera);
         skybox.Draw();
         screen.RTDraw();
-        Label label("@copyright penghuailiang", vec2(20,20),vec3(1.0f,1.0f,0.0f));
-        Label label2("FPS: "+to_string_with_precision(1.0f / deltatime,4), vec2(740, 580), vec3(1,0,0), 0.5f);
+        lb.setText("@copyright penghuailiang");
+        lb2.setText("FPS: "+to_string_with_precision(1.0f / deltatime,4));
+        UIManager::getInstance()->Draw();
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
-    
+   
     glDeleteVertexArrays(1, &vao);
     glDeleteBuffers(1, &vbo);
     glfwTerminate();
@@ -309,7 +300,7 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
     switch(button)
     {
         case GLFW_MOUSE_BUTTON_LEFT:
-            cout<<"Mosue left button "<<lastX<<" "<<lastY<<endl;
+            cout<<"Mouse left button "<<lastX<<" "<<lastY<<endl;
              EventMgr::getInstance()->Triger(lastX, lastY, action);
             break;
         case GLFW_MOUSE_BUTTON_MIDDLE:

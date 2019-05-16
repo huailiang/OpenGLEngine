@@ -12,6 +12,8 @@
 #include <glm/glm.hpp>
 #include "uibase.h"
 #include "uievent.h"
+#include "eventmgr.h"
+#include "uimgr.h"
 
 class Image : public UIBase, public UIEvent
 {
@@ -29,6 +31,20 @@ public:
     void OnTriger()
     {
         
+    }
+    
+    Image()
+    {
+        UIManager::getInstance()->Regist(this);
+    }
+    
+    ~Image()
+    {
+        if(interact)
+        {
+            EventMgr::getInstance()->RemoveEvt(this);
+        }
+        UIManager::getInstance()->Remove(this);
     }
     
 };

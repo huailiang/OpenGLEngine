@@ -29,8 +29,8 @@ public:
     {
         shader=new Shader("shader/terrain.vs","shader/terrain.fs");
         shader2=new Shader("shader/grass.vs","shader/terrain.fs");
-        TTexture texture("resources/textures/metal.png", &floorTexture);
-        TTexture texture2("resources/textures/grass.png", &grassTexture,false,GL_CLAMP_TO_EDGE);
+        TTexture("resources/textures/metal.png", &floorTexture);
+        TTexture("resources/textures/grass.png", &grassTexture,false,GL_CLAMP_TO_EDGE);
         initial();
     }
     

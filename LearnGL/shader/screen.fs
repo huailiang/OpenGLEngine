@@ -21,7 +21,6 @@ void gray()
 void blur()
 {
     const float offset = 1.0 / 60.0;
-    
     vec2 offsets[9] = vec2[](
                              vec2(-offset,  offset), // 左上
                              vec2( 0.0f,    offset), // 正上
@@ -56,6 +55,7 @@ void main()
 //    blur();
 //    gray();
     
-    vec3 col = texture(screenTexture, TexCoords).rgb;
-    FragColor = vec4(col, 1.0);
+//    vec3 col = texture(screenTexture, TexCoords).rgb;
+//    float a = col.r + col.g + col.b < 0.1f ? 0 : 0.3;
+    FragColor = texture(screenTexture, TexCoords);
 }

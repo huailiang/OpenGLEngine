@@ -30,8 +30,7 @@ public:
     
     void RemoveEvt(UIEvent* evt)
     {
-        vector<UIEvent*>::iterator iter=ui_events.begin();
-        for(; iter!=ui_events.end();)
+        for(vector<UIEvent*>::iterator iter=ui_events.begin(); iter!=ui_events.end();iter++)
         {
             if(*iter == evt)
             {
@@ -55,8 +54,8 @@ public:
     }
     
 private:
-    EventMgr() { std::cout<<"EventMgr created!"<<std::endl; }
-    ~EventMgr() { std::cout<<"EventMgr destroyed!"<<std::endl; }
+    EventMgr() { /*std::cout<<"EventMgr created!"<<std::endl;*/ }
+    ~EventMgr() { /*std::cout<<"EventMgr destroyed!"<<std::endl;*/ }
     EventMgr(const EventMgr &);
     EventMgr& operator=(const EventMgr &);
     static EventMgr instance;

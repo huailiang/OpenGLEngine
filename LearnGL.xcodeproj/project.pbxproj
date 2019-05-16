@@ -49,6 +49,7 @@
 		4C551FB522846F7E002D535F /* ttfont.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = ttfont.vs; sourceTree = "<group>"; };
 		4C551FB622846F7E002D535F /* ttfrag.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = ttfrag.fs; sourceTree = "<group>"; };
 		4C551FB8228477D1002D535F /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = LearnGL/lib/libfreetype.a; sourceTree = "<group>"; };
+		4C5EAD31228D112300893D25 /* uimgr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = uimgr.h; sourceTree = "<group>"; };
 		4C73100A22884CDE007ED1FC /* outline.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = outline.fs; sourceTree = "<group>"; };
 		4C73100C22887905007ED1FC /* const.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = const.h; sourceTree = "<group>"; };
 		4C8777D42285A2CE00ACAA18 /* light.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = light.h; sourceTree = "<group>"; };
@@ -105,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				4C269F80228C3C4800261AAD /* eventmgr.h */,
+				4C5EAD31228D112300893D25 /* uimgr.h */,
 				4C269F85228C423900261AAD /* uievent.h */,
 				4C269F81228C3DB000261AAD /* uibase.h */,
 				4C269F82228C3DC700261AAD /* label.h */,
