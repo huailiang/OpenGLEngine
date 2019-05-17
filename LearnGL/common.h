@@ -15,6 +15,8 @@
 #include <string>
 #include <map>
 #include <vector>
+#include<stdio.h>
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <cmath>
@@ -28,5 +30,16 @@
 #include "std/const.h"
 
 
+#define DeclareSington(TYPE)  \
+private:    \
+    TYPE() { }  \
+    TYPE(const TYPE &); \
+    TYPE& operator=(const TYPE &);  \
+    static TYPE instance;   \
+public: \
+    static TYPE* getInstance() { return &instance; } \
+
+
+#define MAX(a, b) ((a) > (b) ? (a):(b))
 
 #endif /* common_h */

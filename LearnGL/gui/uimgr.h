@@ -15,12 +15,11 @@
 
 class UIManager
 {
+    
+    DeclareSington(UIManager)
+    
 public:
-    static UIManager* getInstance()
-    {
-        return &instance;
-    }
-
+    
     void Regist(UIBase* ui)
     {
         vector.push_back(ui);
@@ -51,12 +50,7 @@ public:
     }
     
 private:
-    UIManager() { }
-    ~UIManager() { }
-    UIManager(const UIManager&);
-    UIManager& operator=(const UIManager &);
-    static UIManager instance;
-
+    
     std::vector<UIBase*> vector;
 };
 

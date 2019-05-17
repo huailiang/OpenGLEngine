@@ -16,9 +16,9 @@
 
 class SceneMgr
 {
-private:
-    SceneMgr() { }
+    DeclareSington(SceneMgr)
     
+private:
     ~SceneMgr()
     {
         LeaveScene();
@@ -32,10 +32,6 @@ private:
         lb_fps = NULL;
     }
     
-    SceneMgr(const SceneMgr &);
-    SceneMgr& operator=(const SceneMgr &);
-    static SceneMgr instance;
-    
     static void ClickScene(UIEvent* contex, void* arg)
     {
         Label* label = dynamic_cast<Label*>(contex);
@@ -46,10 +42,6 @@ private:
 
     
 public:
-    static SceneMgr* getInstance()
-    {
-        return &instance;
-    }
     
     void Init()
     {

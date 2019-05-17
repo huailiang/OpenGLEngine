@@ -15,12 +15,10 @@
 
 class EventMgr
 {
-public:
     
-    static EventMgr* getInstance()
-    {
-        return &instance;
-    }
+    DeclareSington(EventMgr)
+    
+public:
     
     void RegistEvt(UIEvent* evt)
     {
@@ -53,13 +51,8 @@ public:
         }
     }
     
-private:
-    EventMgr() { /*std::cout<<"EventMgr created!"<<std::endl;*/ }
-    ~EventMgr() { /*std::cout<<"EventMgr destroyed!"<<std::endl;*/ }
-    EventMgr(const EventMgr &);
-    EventMgr& operator=(const EventMgr &);
-    static EventMgr instance;
     
+private:
     std::vector<UIEvent*> ui_events;
 };
 
