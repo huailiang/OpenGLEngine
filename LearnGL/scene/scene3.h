@@ -20,27 +20,18 @@ public:
         return TY_Scene3;
     }
     
-    void InitLight()
-    {
-        
-    }
+    void InitLight() { }
     
-    void InitScene()
-    {
-        
-    }
+    void InitScene() { }
     
-    void DrawUI()
-    {
-        Scene::DrawUI();
-    }
+    void DrawUI() { }
     
     void DrawTerrain()
     {
         
     }
     
-    void DrawChar()
+    void DrawItems()
     {
         
     }

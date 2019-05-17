@@ -61,7 +61,7 @@ public:
         terrain->Draw(camera);
     }
     
-    void DrawChar()
+    void DrawItems()
     {
         if(model==NULL)
         {

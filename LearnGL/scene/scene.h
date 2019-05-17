@@ -69,7 +69,7 @@ public:
     
     virtual void DrawTerrain() = 0;
     
-    virtual void DrawChar() { }
+    virtual void DrawItems() { }
     
     void DrawScene()
     {
@@ -80,7 +80,7 @@ public:
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         DrawTerrain();
         if(skybox) skybox->Draw();
-        DrawChar();
+        DrawItems();
     }
     
     void ProcessKeyboard(GLFWwindow *window, float deltatime)
