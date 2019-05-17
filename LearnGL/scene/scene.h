@@ -39,6 +39,10 @@ public:
         skybox = NULL;
     }
   
+    virtual glm::vec3 getCameraPos()
+    {
+        return glm::vec3(0.0f,0.0f,3.0f);
+    }
     
     /*
      init: camera-> skybox-> light-> scene-> ui
@@ -47,7 +51,7 @@ public:
     {
         if(camera == NULL)
         {
-            camera = new Camera(glm::vec3(0.0f,0.0f,3.0f));
+            camera = new Camera(getCameraPos());
         }
         if(skybox == NULL)
         {
@@ -71,14 +75,17 @@ public:
     
     virtual void DrawScene() { }
     
-    
-    void DrawScenes()
+    void ClearScene()
     {
         glDisable(GL_BLEND);
         glDisable(GL_CULL_FACE);
         glEnable(GL_DEPTH_TEST);
         glClearColor(0.2f,0.2f,0.2f,1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    }
+    
+    void DrawScenes()
+    {
         DrawScene();
         if(skybox) skybox->Draw();
     }

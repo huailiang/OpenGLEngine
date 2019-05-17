@@ -27,6 +27,12 @@ public:
         shadowShader = NULL;
     }
     
+    glm::vec3 getCameraPos()
+    {
+        return glm::vec3(0.0f,0.0f,6.0f);
+    }
+
+    
     int getType()
     {
         return TY_Scene3;
@@ -38,7 +44,7 @@ public:
     {
         depthShader  = new Shader("shader/shadowdepth.vs","shader/shadowdepth.fs");
         shadowShader  = new Shader("shader/shadow.vs","shader/shadow.fs");
-        debugShader = new Shader("shader/sample.vs", "shader/debug.fs");
+        debugShader = new Shader("shader/screen.vs", "shader/debug.fs");
         
         InitPlane();
         InitCube();
@@ -108,9 +114,9 @@ public:
         glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
         glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), &quadVertices, GL_STATIC_DRAW);
         glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
         glEnableVertexAttribArray(1);
-        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
     }
     
     void DrawUI() { }
@@ -128,14 +134,12 @@ public:
         
         glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
         glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
-        glClear(GL_DEPTH_BUFFER_BIT);
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, woodTexture);
+        Scene::ClearScene();
         renderScene(*depthShader);
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
         
+        Scene::ClearScene();
         glViewport(0, 0, RENDER_WIDTH, RENDER_HEIGTH);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         shadowShader->use();
         shadowShader->setMat4("projection", camera->GetProjMatrix());
         shadowShader->setMat4("view", camera->GetViewMatrix());
@@ -147,6 +151,7 @@ public:
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, depthMap);
         renderScene(*shadowShader);
+        renderQuad();
     }
     
     
@@ -158,32 +163,37 @@ public:
         glBindVertexArray(planeVAO);
         glDrawArrays(GL_TRIANGLES, 0, 6);
         // cubes
-        model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(0.0f, 1.5f, 0.0));
-        model = glm::scale(model, glm::vec3(0.5f));
-        shader.setMat4("model", model);
-        renderCube();
-        model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(2.0f, 0.0f, 1.0));
-        model = glm::scale(model, glm::vec3(0.5f));
-        shader.setMat4("model", model);
-        renderCube();
-        model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(-1.0f, 0.0f, 2.0));
-        model = glm::rotate(model, glm::radians(60.0f), glm::normalize(glm::vec3(1.0, 0.0, 1.0)));
-        model = glm::scale(model, glm::vec3(0.25));
-        shader.setMat4("model", model);
-        renderCube();
-    }
-    
-    void renderCube()
-    {
         glBindVertexArray(cubeVAO);
-        glDrawArrays(GL_TRIANGLES, 0, 36);
+        renderCube(glm::vec3(0.0f, 1.5f, 0.0),0.5f, 0.0f, shader);
+        renderCube(glm::vec3(2.0f, 0.0f, 1.0), 0.5f, 0.0f, shader);
+        renderCube(glm::vec3(-1.0f, 0.0f, 2.0), 0.25f, 16 * glfwGetTime(), shader);
         glBindVertexArray(0);
     }
     
+    void renderQuad()
+    {
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+        debugShader->use();
+        debugShader->setFloat("near_plane", 1.0f);
+        debugShader->setFloat("far_plane", 7.5f);
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, depthMap);
+        glBindVertexArray(quadVAO);
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+        glBindVertexArray(0);
+    }
     
+    void renderCube(glm::vec3 pos, float scale, float ang, const Shader &shader)
+    {
+        glm::mat4 model(1.0f);
+        model = glm::translate(model, pos);
+        model = glm::rotate(model, glm::radians(ang), glm::normalize(glm::vec3(1.0, 0.0, 1.0)));
+        model = glm::scale(model, glm::vec3(scale));
+        shader.setMat4("model", model);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+    }
+
 private:
     Shader *depthShader, *shadowShader, *debugShader;
     unsigned int woodTexture ;

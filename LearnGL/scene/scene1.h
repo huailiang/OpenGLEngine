@@ -55,6 +55,7 @@ public:
     
     void DrawScene()
     {
+        Scene::ClearScene();
         if(terrain==NULL)
         {
             terrain=new Terrain();

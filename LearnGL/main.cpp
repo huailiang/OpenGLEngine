@@ -70,12 +70,12 @@ int main(int argc, const char * argv[])
     Shader oShader("shader/model.vs", "shader/outline.fs");
     Shader sShader("shader/screen.vs","shader/screen.fs");
     
-    Screen screen;
-    screen.Bind(true);
-    glClearColor(0.0f,0.0f,0.0f,1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    Label(vec2(0,20),vec3(1.0f), 1, "offline screen render @copyright penghuailiang");
-    screen.Bind(false);
+//    Screen screen;
+//    screen.Bind(true);
+//    glClearColor(0.0f,0.0f,0.0f,1.0f);
+//    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//    Label(vec2(0,20),vec3(1.0f), 1, "offline screen render @copyright penghuailiang");
+//    screen.Bind(false);
     
     while (!glfwWindowShouldClose(window))
     {
@@ -85,7 +85,7 @@ int main(int argc, const char * argv[])
         deltatime  = timeValue-lastTime;
         lastTime= timeValue;
         SceneMgr::getInstance()->Draw(deltatime);
-        screen.RTDraw();
+//        screen.RTDraw();
         UIManager::getInstance()->Draw();
         
         glfwSwapBuffers(window);

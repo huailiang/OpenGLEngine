@@ -27,8 +27,8 @@ void main()
     vec4 color = texture(texture1, TexCoords);
 #ifdef _DEBUG_DEPTH_
     float depth = LinearizeDepth(color.r) / far_plane ;
-    FragColor = vec4(depth, depth, depth, 1);
+    FragColor = vec4(1,0,0,1);// vec4(depth, depth, depth, 1);
 #else
-    FragColor = color;
+    FragColor = vec4(1,0,0,1);//color;
 #endif
 }
