@@ -80,8 +80,8 @@
 		4CEB97B822896D3B00ACDDC6 /* screen.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = screen.fs; sourceTree = "<group>"; };
 		4CEB97B922896D3B00ACDDC6 /* screen.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = screen.vs; sourceTree = "<group>"; };
 		4CEB97BA2289991000ACDDC6 /* screen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = screen.h; sourceTree = "<group>"; };
-		4CEB97BC2289AB9A00ACDDC6 /* skybox.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = skybox.vs; sourceTree = "<group>"; };
-		4CEB97BD2289AB9A00ACDDC6 /* skybox.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = skybox.fs; sourceTree = "<group>"; };
+		4CEB97BC2289AB9A00ACDDC6 /* cube.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = cube.vs; sourceTree = "<group>"; };
+		4CEB97BD2289AB9A00ACDDC6 /* cube.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = cube.fs; sourceTree = "<group>"; };
 		4CEB97BE2289ABF500ACDDC6 /* skybox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = skybox.h; sourceTree = "<group>"; };
 		4CEF90E02283CBEA00068D1E /* light.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = light.fs; sourceTree = "<group>"; };
 		4CEF90E12283CBEA00068D1E /* light.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = light.vs; sourceTree = "<group>"; };
@@ -146,8 +146,8 @@
 				4C73100A22884CDE007ED1FC /* outline.fs */,
 				4CEF90E12283CBEA00068D1E /* light.vs */,
 				4CEF90E02283CBEA00068D1E /* light.fs */,
-				4CEB97BC2289AB9A00ACDDC6 /* skybox.vs */,
-				4CEB97BD2289AB9A00ACDDC6 /* skybox.fs */,
+				4CEB97BC2289AB9A00ACDDC6 /* cube.vs */,
+				4CEB97BD2289AB9A00ACDDC6 /* cube.fs */,
 				4CEB97B922896D3B00ACDDC6 /* screen.vs */,
 				4CEB97B822896D3B00ACDDC6 /* screen.fs */,
 				4C551FB522846F7E002D535F /* ttfont.vs */,

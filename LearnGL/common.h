@@ -48,18 +48,21 @@ public: \
 
 
 
-const float quadVertices[] = {
-    // positions   // texCoords
-    0.6f,  -0.6f,  0.0f, 1.0f,
-    0.6f,  -1.0f,  0.0f, 0.0f,
-    1.0f,  -1.0f,  1.0f, 0.0f,
+const float quadVertices[] =
+{
+    // positions        // texCoords
+    0.6f,  -0.6f, 0.0f, 0.0f, 1.0f,
+    0.6f,  -1.0f, 0.0f, 0.0f, 0.0f,
+    1.0f,  -1.0f, 0.0f, 1.0f, 0.0f,
     
-    0.6f,  -0.6f,  0.0f, 1.0f,
-    1.0f,  -1.0f,  1.0f, 0.0f,
-    1.0f,  -0.6f,  1.0f, 1.0f,
+    0.6f,  -0.6f,  0.0f, 0.0f, 1.0f,
+    1.0f,  -1.0f,  0.0f, 1.0f, 0.0f,
+    1.0f,  -0.6f,  0.0f, 1.0f, 1.0f,
 };
 
-const float cubeVertices[] = {
+//position, normal, texcoord
+const float cubeVertices[] =
+{
     // back face
     -1.0f, -1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 0.0f, 0.0f, // bottom-left
     1.0f,  1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 1.0f, 1.0f, // top-right
@@ -104,7 +107,8 @@ const float cubeVertices[] = {
     -1.0f,  1.0f,  1.0f,  0.0f,  1.0f,  0.0f, 0.0f, 0.0f  // bottom-left
 };
 
-float planeVertices[] = {
+float planeVertices[] =
+{
     // positions            // normals         // texcoords
     25.0f, -0.5f,  25.0f,  0.0f, 1.0f, 0.0f,  25.0f,  0.0f,
     -25.0f, -0.5f,  25.0f,  0.0f, 1.0f, 0.0f,   0.0f,  0.0f,

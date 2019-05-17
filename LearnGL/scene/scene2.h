@@ -91,6 +91,7 @@ public:
             model = translate(model, cubePositions[i]);
             float angle = 64 * i * timeValue;
             model = glm::rotate(model, glm::radians(angle), vec3(1.0f, 0.3f, 0.5f));
+            model = glm::scale(model, vec3(0.5f));
             shader->setMat4("model", model);
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }

@@ -38,6 +38,7 @@ public:
     {
         depthShader  = new Shader("shader/shadowdepth.vs","shader/shadowdepth.fs");
         shadowShader  = new Shader("shader/shadow.vs","shader/shadow.fs");
+        debugShader = new Shader("shader/sample.vs", "shader/debug.fs");
         
         InitPlane();
         InitCube();
@@ -184,7 +185,7 @@ public:
     
     
 private:
-    Shader *depthShader, *shadowShader;
+    Shader *depthShader, *shadowShader, *debugShader;
     unsigned int woodTexture ;
     unsigned int planeVBO, planeVAO;
     unsigned int cubeVAO, cubeVBO;

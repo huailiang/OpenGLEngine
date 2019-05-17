@@ -22,7 +22,7 @@ public:
     Skybox(Camera* camera)
     {
         this->camera=camera;
-        shader = new Shader("shader/skybox.vs","shader/skybox.fs");
+        shader = new Shader("shader/cube.vs","shader/cube.fs");
         init_tex();
         init_buff();
     }

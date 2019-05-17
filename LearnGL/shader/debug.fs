@@ -7,7 +7,7 @@ out vec4 FragColor;
 
 in vec2 TexCoords;
 
-uniform sampler2D texture;
+uniform sampler2D texture1;
 
 #ifdef _DEBUG_DEPTH_
 
