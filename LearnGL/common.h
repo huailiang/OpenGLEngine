@@ -15,7 +15,8 @@
 #include <string>
 #include <map>
 #include <vector>
-#include<stdio.h>
+#include <stdio.h>
+#include <stdio.h>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -27,7 +28,13 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "ext/stb_image.h"
 
-#include "std/const.h"
+
+const unsigned int SCR_WIDTH = 800;
+const unsigned int SCR_HEIGHT = 600;
+
+//initial with sreen*2
+unsigned int RENDER_WIDTH = 1600;
+unsigned int RENDER_HEIGTH = 1200;
 
 
 #define DeclareSington(TYPE)  \
@@ -41,5 +48,6 @@ public: \
 
 
 #define MAX(a, b) ((a) > (b) ? (a):(b))
+
 
 #endif /* common_h */

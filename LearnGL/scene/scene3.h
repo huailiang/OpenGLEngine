@@ -69,13 +69,13 @@ public:
     {
         float planeVertices[] = {
             // positions            // normals         // texcoords
-            25.0f, -0.5f,  25.0f,  0.0f, 1.0f, 0.0f,  25.0f,  0.0f,
-            -25.0f, -0.5f,  25.0f,  0.0f, 1.0f, 0.0f,   0.0f,  0.0f,
-            -25.0f, -0.5f, -25.0f,  0.0f, 1.0f, 0.0f,   0.0f, 25.0f,
+            125.0f, -0.5f,  125.0f,  0.0f, 1.0f, 0.0f,  25.0f,  0.0f,
+            -125.0f, -0.5f,  125.0f,  0.0f, 1.0f, 0.0f,   0.0f,  0.0f,
+            -125.0f, -0.5f, -125.0f,  0.0f, 1.0f, 0.0f,   0.0f, 25.0f,
             
-            25.0f, -0.5f,  25.0f,  0.0f, 1.0f, 0.0f,  25.0f,  0.0f,
-            -25.0f, -0.5f, -25.0f,  0.0f, 1.0f, 0.0f,   0.0f, 25.0f,
-            25.0f, -0.5f, -25.0f,  0.0f, 1.0f, 0.0f,  25.0f, 25.0f
+            125.0f, -0.5f,  125.0f,  0.0f, 1.0f, 0.0f,  25.0f,  0.0f,
+            -125.0f, -0.5f, -125.0f,  0.0f, 1.0f, 0.0f,   0.0f, 25.0f,
+            125.0f, -0.5f, -125.0f,  0.0f, 1.0f, 0.0f,  25.0f, 25.0f
         };
         
         glGenVertexArrays(1, &planeVAO);
@@ -178,7 +178,7 @@ public:
         renderScene(*depthShader);
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
         
-        glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
+        glViewport(0, 0, RENDER_WIDTH, RENDER_HEIGTH);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         shadowShader->use();
         shadowShader->setMat4("projection", camera->GetProjMatrix());
@@ -191,7 +191,6 @@ public:
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, depthMap);
         renderScene(*shadowShader);
-        
     }
     
     

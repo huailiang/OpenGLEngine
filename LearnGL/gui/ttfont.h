@@ -30,6 +30,8 @@ struct Character
 
 class TTFont
 {
+    DeclareSington(TTFont)
+    
 public:
 
     float RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scale, const glm::vec3 color)
@@ -91,7 +93,6 @@ public:
         
         FT_Set_Pixel_Sizes(face, 0, FONT_SIZE);
         
-        // Disable byte-alignment restriction
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
         
         // Load first 128 characters of ASCII set
@@ -102,7 +103,6 @@ public:
                 std::cout << "ERROR::FREETYTPE: Failed to load Glyph" << std::endl;
                 continue;
             }
-            // Generate texture
             GLuint texture;
             glGenTextures(1, &texture);
             glBindTexture(GL_TEXTURE_2D, texture);
@@ -123,8 +123,7 @@ public:
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
             
-            Character character = {
-                texture,
+            Character character = { texture,
                 glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
                 glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
                 (GLuint)face->glyph->advance.x
@@ -149,14 +148,7 @@ public:
         return 0;
     }
 
-    
-    static TTFont* getInstance()
-    {
-        return &instance;
-    }
-
 private:
-    TTFont() { }
     
     ~TTFont()
     {
@@ -167,7 +159,6 @@ private:
     unsigned int VBO,VAO;
     Shader* shader;
     map<GLchar, Character> Characters;
-    static TTFont instance;
 };
 
 

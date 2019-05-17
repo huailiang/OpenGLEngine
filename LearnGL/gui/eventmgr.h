@@ -39,11 +39,16 @@ public:
     
     void Triger(float x, float y, int action)
     {
+        
+        float scale = RENDER_WIDTH / (SCR_WIDTH * 2.0f);
+        float xx = x / scale;
+        scale = RENDER_HEIGTH / (SCR_HEIGHT * 2.0f);
+        float yy = y / scale;
         size_t size = ui_events.size();
         for (size_t i=0; i<size; i++)
         {
             UIEvent* et = ui_events[i];
-            if(action == GLFW_RELEASE && et->IsHit(x, y))
+            if(action == GLFW_RELEASE && et->IsHit(xx, yy))
             {
                 et->OnTriger();
                 et->Dispacher();

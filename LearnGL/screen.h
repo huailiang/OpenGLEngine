@@ -33,6 +33,7 @@ public:
     
     void RTDraw()
     {
+        glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
         glEnable(GL_CULL_FACE);
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE);
@@ -42,6 +43,7 @@ public:
         glBindTexture(GL_TEXTURE_2D, textureColorbuffer);
         glDrawArrays(GL_TRIANGLES, 0, 6);
         glBindVertexArray(0);
+        glViewport(0,0,RENDER_WIDTH,RENDER_HEIGTH);
     }
     
     void Bind(bool bind)
@@ -98,6 +100,7 @@ private:
                     1.0f,  -0.6f,  1.0f, 1.0f,
                 };
 
+        
         glGenVertexArrays(1, &quadVAO);
         glGenBuffers(1, &quadVBO);
         glBindVertexArray(quadVAO);
@@ -107,6 +110,7 @@ private:
         glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
         glEnableVertexAttribArray(1);
         glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
+        
     }
     
     unsigned int rbo;

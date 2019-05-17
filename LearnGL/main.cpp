@@ -22,7 +22,6 @@ using namespace std;
 using namespace glm;
 
 float deltatime,lastTime;
-bool normal;
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int heigth);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -64,17 +63,14 @@ int main(int argc, const char * argv[])
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
-   
-    Screen screen;
-
+    
     TTFont::getInstance()->initial();
     SceneMgr::getInstance()->Init();
-
     glEnable(GL_DEPTH_TEST);
     Shader oShader("shader/model.vs", "shader/outline.fs");
     Shader sShader("shader/screen.vs","shader/screen.fs");
-
-
+    
+    Screen screen;
     screen.Bind(true);
     glClearColor(0.0f,0.0f,0.0f,1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -105,14 +101,13 @@ void processInput(GLFWwindow *window)
     if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
     SceneMgr::getInstance()->ProcessKeyboard(window, deltatime);
-    if ( glfwGetKey(window, GLFW_KEY_N)== GLFW_PRESS)
-        normal = !normal;
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
-    cout<<"view changed"<<endl;
-    glViewport(0,0,width,height);
+    RENDER_WIDTH = width;
+    RENDER_HEIGTH = height;
+    glViewport(0, 0, width, height);
 }
 
 float lastX = 400, lastY = 300;

@@ -47,6 +47,7 @@ public:
             EventMgr::getInstance()->RemoveEvt(this);
         }
         UIManager::getInstance()->Remove(this);
+        TTFont::getInstance()->RenderText("", 0, 0, 0, glm::vec3(0));
     }
     
     void Draw()

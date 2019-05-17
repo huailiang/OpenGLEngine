@@ -31,20 +31,15 @@ public:
         gShaderFile.exceptions (std::ifstream::failbit | std::ifstream::badbit);
         try 
         {
-            // open files
             vShaderFile.open(vertexPath);
             fShaderFile.open(fragmentPath);
             std::stringstream vShaderStream, fShaderStream;
-            // read file's buffer contents into streams
             vShaderStream << vShaderFile.rdbuf();
-            fShaderStream << fShaderFile.rdbuf();		
-            // close file handlers
+            fShaderStream << fShaderFile.rdbuf();
             vShaderFile.close();
             fShaderFile.close();
-            // convert stream into string
             vertexCode = vShaderStream.str();
-            fragmentCode = fShaderStream.str();			
-            ;      // if geometry shader path is present, also load a geometry shader
+            fragmentCode = fShaderStream.str();
             if(geometryPath != nullptr)
             {
                 gShaderFile.open(geometryPath);
