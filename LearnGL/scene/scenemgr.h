@@ -45,7 +45,7 @@ public:
     
     void Init()
     {
-        ChangeTo(TY_Scene1);
+        ChangeTo(TY_Scene3);
         lb_scene1 = new Label(vec2(120,380), vec3(1.0f), 1, "Scene1", 0);
         lb_scene2 = new Label(vec2(120,320), vec3(1.0f), 1, "Scene2", 1);
         lb_scene3 = new Label(vec2(120,260), vec3(1.0f), 1, "Scene3", 2);
@@ -83,7 +83,7 @@ public:
     {
         if(current)
         {
-            current->DrawScene();
+            current->DrawScenes();
         }
         if(lb_fps)
         {

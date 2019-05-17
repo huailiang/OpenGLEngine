@@ -15,6 +15,8 @@
 #include "../gui/uimgr.h"
 #include "../gui/label.h"
 #include "../gui/uievent.h"
+#include "../std/shader.h"
+#include "../std/texture.h"
 
 
 #define TY_Scene1 0
@@ -67,20 +69,18 @@ public:
     
     virtual void DrawUI() { }
     
-    virtual void DrawTerrain() = 0;
+    virtual void DrawScene() { }
     
-    virtual void DrawItems() { }
     
-    void DrawScene()
+    void DrawScenes()
     {
         glDisable(GL_BLEND);
         glDisable(GL_CULL_FACE);
         glEnable(GL_DEPTH_TEST);
         glClearColor(0.2f,0.2f,0.2f,1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        DrawTerrain();
+        DrawScene();
         if(skybox) skybox->Draw();
-        DrawItems();
     }
     
     void ProcessKeyboard(GLFWwindow *window, float deltatime)

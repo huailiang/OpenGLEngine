@@ -52,17 +52,15 @@ public:
         lb_normal->RegistCallback(OnClick, this);
     }
     
-    void DrawTerrain()
+    
+    void DrawScene()
     {
         if(terrain==NULL)
         {
             terrain=new Terrain();
         }
         terrain->Draw(camera);
-    }
-    
-    void DrawItems()
-    {
+
         if(model==NULL)
         {
             model = new Model("resources/objects/nanosuit/nanosuit.obj");
