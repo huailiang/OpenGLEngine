@@ -20,8 +20,8 @@ class Terrain
 public:
     Terrain()
     {
-        shader=new Shader("shader/terrain.vs","shader/terrain.fs");
-        shader2=new Shader("shader/grass.vs","shader/terrain.fs");
+        shader=new Shader("shader/sample.vs","shader/sample.fs");
+        shader2=new Shader("shader/instance.vs","shader/sample.fs");
         TTexture("resources/textures/metal.png", &floorTexture);
         TTexture("resources/textures/grass.png", &grassTexture,false,GL_CLAMP_TO_EDGE);
         initial();
@@ -36,17 +36,6 @@ public:
     
     void initial()
     {
-        // floor
-        float floor_verts[] = {
-            // positions         texture Coords
-            15.0f, -0.5f,  15.0f,  2.0f, 0.0f,
-            -15.0f, -0.5f,  15.0f,  0.0f, 0.0f,
-            -15.0f, -0.5f, -15.0f,  0.0f, 2.0f,
-            
-            15.0f, -0.5f,  15.0f,  2.0f, 0.0f,
-            -15.0f, -0.5f, -15.0f,  0.0f, 2.0f,
-            15.0f, -0.5f, -15.0f,  2.0f, 2.0f
-        };
 
         float grass_verts[] = {
             0.0f,  0.5f,  0.0f,  0.0f,  0.0f,
@@ -70,11 +59,13 @@ public:
         glGenBuffers(1, &floor_vbo);
         glBindVertexArray(floor_vao);
         glBindBuffer(GL_ARRAY_BUFFER,floor_vbo);
-        glBufferData(GL_ARRAY_BUFFER,sizeof(floor_verts), floor_verts, GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER,sizeof(planeVertices), planeVertices, GL_STATIC_DRAW);
         glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 3, GL_FLOAT,GL_FALSE,5 * sizeof(float), (void*)0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
         glEnableVertexAttribArray(1);
-        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+        glEnableVertexAttribArray(2);
+        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
         glBindVertexArray(0);
         
         glGenVertexArrays(1, &grass_vao);

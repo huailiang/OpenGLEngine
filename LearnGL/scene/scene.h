@@ -105,8 +105,7 @@ public:
                 npos.x = (pos.x - center.x) * cos(ang) - (pos.z- center.z)*sin(ang) + center.x;
                 npos.z = (pos.z - center.z) * cos(ang) + (pos.x - center.x) * sin(ang) + center.z;
                 camera->RotateAt(npos, center);
-            }
-        }
+            }        }
         if(light)
         {
             if ( glfwGetKey(window, GLFW_KEY_LEFT)== GLFW_PRESS)

@@ -89,18 +89,6 @@ private:
     
     void InitQuad()
     {
-        float quadVertices[] = {
-                    // positions   // texCoords
-                    0.6f,  -0.6f,  0.0f, 1.0f,
-                    0.6f,  -1.0f,  0.0f, 0.0f,
-                    1.0f,  -1.0f,  1.0f, 0.0f,
-            
-                    0.6f,  -0.6f,  0.0f, 1.0f,
-                    1.0f,  -1.0f,  1.0f, 0.0f,
-                    1.0f,  -0.6f,  1.0f, 1.0f,
-                };
-
-        
         glGenVertexArrays(1, &quadVAO);
         glGenBuffers(1, &quadVBO);
         glBindVertexArray(quadVAO);
