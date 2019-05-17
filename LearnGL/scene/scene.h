@@ -12,6 +12,9 @@
 #include "../common.h"
 #include "../std/camera.h"
 #include "../std/light.h"
+#include "../gui/uimgr.h"
+#include "../gui/label.h"
+#include "../gui/uievent.h"
 
 
 #define TY_Scene1 0

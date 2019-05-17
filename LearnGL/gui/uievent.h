@@ -20,7 +20,7 @@ enum UIEventType
 
 class UIEvent;
 
-typedef void (*ClickCallback)(UIEvent* contex);
+typedef void (*ClickCallback)(UIEvent*,void*);
 
 class UIEvent
 {
@@ -40,19 +40,26 @@ public:
     
     void RegistCallback(ClickCallback cb)
     {
+        RegistCallback(cb, NULL);
+    }
+    
+    void RegistCallback(ClickCallback cb, void* arg)
+    {
         this->callback = cb;
+        this->arg = arg;
     }
     
     void Dispacher()
     {
         if(callback)
         {
-            callback(this);
+            callback(this, arg);
         }
     }
 
 private:
     ClickCallback callback;
+    void* arg;
 
 };
 

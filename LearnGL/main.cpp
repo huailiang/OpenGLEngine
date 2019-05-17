@@ -35,12 +35,6 @@ EventMgr EventMgr::instance;
 TTFont TTFont::instance;
 SceneMgr SceneMgr::instance;
 
-void Test(UIEvent* contex)
-{
-    Label* label = dynamic_cast<Label*>(contex);
-    cout<<"callback "<<label->getText()<<endl;
-}
-
 int main(int argc, const char * argv[])
 {
     glfwInit();
@@ -84,12 +78,8 @@ int main(int argc, const char * argv[])
     screen.Bind(true);
     glClearColor(0.0f,0.0f,0.0f,1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    Label(vec2(120,20),vec3(1.0f), 1, "offline screen render");
+    Label(vec2(0,20),vec3(1.0f), 1, "offline screen render @copyright penghuailiang");
     screen.Bind(false);
-    
-//    Label lb(vec2(20,20), vec3(1.0f,1.0f,0.0f));
-//    Label lb2(vec2(740, 580), vec3(1,0,0), 0.5f);
-//    lb2.RegistCallback(Test);
     
     while (!glfwWindowShouldClose(window))
     {

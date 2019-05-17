@@ -13,9 +13,6 @@
 #include "scene1.h"
 #include "scene2.h"
 #include "scene3.h"
-#include "../gui/uimgr.h"
-#include "../gui/label.h"
-#include "../gui/uievent.h"
 
 class SceneMgr
 {
@@ -24,24 +21,22 @@ private:
     
     ~SceneMgr()
     {
-        delete label1;
-        delete label2;
-        delete label3;
-        label1 = NULL;
-        label2 = NULL;
-        label3 = NULL;
-        if(current)
-        {
-            delete current;
-            current = NULL;
-        }
+        LeaveScene();
+        delete lb_scene1;
+        delete lb_scene2;
+        delete lb_scene3;
+        delete lb_fps;
+        lb_scene1 = NULL;
+        lb_scene2 = NULL;
+        lb_scene3 = NULL;
+        lb_fps = NULL;
     }
     
     SceneMgr(const SceneMgr &);
     SceneMgr& operator=(const SceneMgr &);
     static SceneMgr instance;
     
-    static void Test(UIEvent* contex)
+    static void ClickScene(UIEvent* contex, void* arg)
     {
         Label* label = dynamic_cast<Label*>(contex);
         cout<<"change to scene: "<<label->getText()<<endl;
@@ -59,12 +54,13 @@ public:
     void Init()
     {
         ChangeTo(TY_Scene1);
-        label1 = new Label(vec2(120,380), vec3(1.0f), 1, "Scene1", 0);
-        label2 = new Label(vec2(120,320), vec3(1.0f), 1, "Scene2", 1);
-        label3 = new Label(vec2(120,260), vec3(1.0f), 1, "Scene3", 2);
-        label1->RegistCallback(Test);
-        label2->RegistCallback(Test);
-        label3->RegistCallback(Test);
+        lb_scene1 = new Label(vec2(120,380), vec3(1.0f), 1, "Scene1", 0);
+        lb_scene2 = new Label(vec2(120,320), vec3(1.0f), 1, "Scene2", 1);
+        lb_scene3 = new Label(vec2(120,260), vec3(1.0f), 1, "Scene3", 2);
+        lb_fps = new Label(vec2(740,580), vec3(1,0,0), 0.5f, "");
+        lb_scene1->RegistCallback(ClickScene, this);
+        lb_scene2->RegistCallback(ClickScene, this);
+        lb_scene3->RegistCallback(ClickScene, this);
     }
     
     void LeaveScene()
@@ -80,6 +76,7 @@ public:
     {
         if(current &&current->getType() == scene->getType())
         {
+            std::cout<<"You are already enter scene "<<current->getType()<<std::endl;
             return false;
         }
         LeaveScene();
@@ -95,6 +92,10 @@ public:
         if(current)
         {
             current->DrawScene();
+        }
+        if(lb_fps)
+        {
+            lb_fps->setText("FPS: "+to_string_with_precision(1/delta,4));
         }
     }
     
@@ -143,12 +144,11 @@ public:
             current->ProcessMouseScroll(xoffset, yoffset);
         }
     }
-
-
     
 private:
     Scene *current;
-    Label *label1, *label2, *label3;
+    Label *lb_scene1, *lb_scene2, *lb_scene3;
+    Label *lb_fps;
 };
 
 #endif /* scenemgr_h */
