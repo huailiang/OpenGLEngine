@@ -47,7 +47,6 @@ public: \
     static TYPE* getInstance() { return &instance; } \
 
 
-
 const float quadVertices[] =
 {
     // positions    // texCoords

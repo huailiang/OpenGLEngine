@@ -111,6 +111,14 @@ public:
         glVertexAttribDivisor(5, 1);
     }
 
+    void DrawShadow()
+    {
+        glBindVertexArray(floor_vao);
+        glBindTexture(GL_TEXTURE_2D, floorTexture);
+        glDrawArrays(GL_TRIANGLES,0,6);
+        glBindVertexArray(0);
+    }
+    
     void Draw(Camera* camera)
     {
         glStencilMask(0x00);

@@ -97,6 +97,7 @@ public:
     
     void DrawScenes()
     {
+        timeValue = glfwGetTime();
         if(drawShadow())
         {
             glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
@@ -190,6 +191,8 @@ protected:
     Shader* depthShader;
     unsigned int SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
     unsigned int depthMap;
+    
+    float timeValue;
     
 private:
     unsigned int depthMapFBO;

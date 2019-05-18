@@ -98,23 +98,23 @@ public:
     
     void ChangeTo(int type)
     {
-        Scene* sc = NULL;
+        Scene* scene = NULL;
         if(type == TY_Scene1)
         {
-            sc = new Scene1();
+            scene = new Scene1();
         }
         if(type == TY_Scene2)
         {
-            sc = new Scene2();
+            scene = new Scene2();
         }
         if(type == TY_Scene3)
         {
-            sc =new Scene3();
+            scene =new Scene3();
         }
-        if(sc)
+        if(scene)
         {
-            sc->Initial();
-            ChangeTo(sc);
+            scene->Initial();
+            ChangeTo(scene);
         }
     }
     

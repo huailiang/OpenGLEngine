@@ -54,11 +54,12 @@ public:
     void DrawShadow(Shader *depthShader)
     {
         Scene::DrawShadow(depthShader);
+        terrain->DrawShadow();
+        model->DrawShadow(depthShader, camera, light, vec3(0.2f, -0.5f, -1.5f), vec3(0.12f), -16*timeValue);
     }
     
     void DrawScene()
     {
-        float timeValue = glfwGetTime();
         terrain->Draw(camera);
         model->Draw(shader, camera, light, vec3(0.2f, -0.5f, -1.5f), vec3(0.12f), -16*timeValue);
         if(shownormal)

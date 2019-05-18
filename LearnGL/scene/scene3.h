@@ -93,7 +93,7 @@ public:
         glBindVertexArray(cubeVAO);
         renderCube(glm::vec3(0.0f, 0.2f, -1.6), 0.5f, 0.0f, shader);
         renderCube(glm::vec3(2.0f, 0.0f, -1.0), 0.5f, 0.0f, shader);
-        renderCube(glm::vec3(-1.0f,0.0f, -2.0), 0.25f, 16 * glfwGetTime(), shader);
+        renderCube(glm::vec3(-1.0f,0.0f, -2.0), 0.25f, 16 * timeValue, shader);
         glBindVertexArray(0);
     }
     
