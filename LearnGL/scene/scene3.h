@@ -31,7 +31,7 @@ public:
         debugShader = NULL;
     }
     
-    glm::vec3 getCameraPos() { return glm::vec3(0.0f,0.0f,6.0f); }
+    glm::vec3 getCameraPos() { return glm::vec3(0.0f,0.0f,4.0f); }
 
     int getType() { return TY_Scene3; }
     
@@ -73,12 +73,12 @@ public:
     
     void DrawScene()
     {
-        lightPos = glm::vec3(-2.0f + sin(radians(16 * glfwGetTime())) , 4.0f, -1.0f);
         glm::mat4 lightProjection, lightView;
         glm::mat4 lightSpaceMatrix;
-        float near_plane = 1.0f, far_plane = 7.5f;
+        float near_plane = 1.0f, far_plane = 17.5f;
         lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, near_plane, far_plane);
-        lightView = glm::lookAt(lightPos, glm::vec3(0.0f), glm::vec3(0.0, 1.0, 0.0));
+        lightView = glm::lookAt(-light->direction, glm::vec3(0,0,-2), glm::vec3(0.0, 1.0, 0.0));
+        lightView = static_cast<DirectLight*>(light)->GetLigthViewMatrix(glm::vec3(0,0,-2));
         lightSpaceMatrix = lightProjection * lightView;
         depthShader->use();
         depthShader->setMat4("lightSpaceMatrix", lightSpaceMatrix);
@@ -94,7 +94,6 @@ public:
         shadowShader->setMat4("projection", camera->GetProjMatrix());
         shadowShader->setMat4("view", camera->GetViewMatrix());
         shadowShader->setVec3("viewPos", camera->Position);
-//        shadowShader->setVec3("lightPos", lightPos);
         light->Apply(shadowShader);
         shadowShader->setMat4("lightSpaceMatrix", lightSpaceMatrix);
         glActiveTexture(GL_TEXTURE0);
@@ -115,9 +114,9 @@ public:
         glDrawArrays(GL_TRIANGLES, 0, 6);
         // cubes
         glBindVertexArray(cubeVAO);
-        renderCube(glm::vec3(0.0f, 1.5f, 0.0),0.5f, 0.0f, shader);
-        renderCube(glm::vec3(2.0f, 0.0f, 1.0), 0.5f, 0.0f, shader);
-        renderCube(glm::vec3(-1.0f, 0.0f, 2.0), 0.25f, 16 * glfwGetTime(), shader);
+        renderCube(glm::vec3(0.0f, 1.0f, -1.6), 0.5f, 0.0f, shader);
+        renderCube(glm::vec3(2.0f, 0.0f, -1.0), 0.5f, 0.0f, shader);
+        renderCube(glm::vec3(-1.0f,0.0f, -2.0), 0.25f, 16 * glfwGetTime(), shader);
         glBindVertexArray(0);
     }
     
@@ -153,7 +152,6 @@ private:
     const unsigned int SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
     unsigned int depthMapFBO;
     unsigned int depthMap;
-    glm::vec3 lightPos;
 };
 
 #endif /* scene3_h */

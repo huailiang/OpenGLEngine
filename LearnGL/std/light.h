@@ -33,8 +33,6 @@ public:
         this->direction=direction;
     }
     
-    virtual mat4 GetLigthSpaceMatrix() = 0;
-    
     void UpdateX(float dx)
     {
         if(direction.x+dx<radians(60.0f))
@@ -68,13 +66,12 @@ public:
         shader->setVec3("light.direction", direction);
     }
     
-    mat4 GetLigthSpaceMatrix()
+    mat4 GetLigthViewMatrix(vec3 target)
     {
-        vec3 pos(2.0f,2.0f,8.0f);
-        vec3 center = pos + direction;
-        mat4 view  = lookAt(pos, center, vec3(0,1,0));
-        mat4 proj = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, -100.0f, 100.0f);
-        return proj * view;
+        vec3 dir = normalize(direction);
+        int sc = 4;
+        vec3 pos = target - vec3(sc*dir.x, sc*dir.y,sc*dir.z);
+        return lookAt(pos, target, vec3(0,1,0));
     }
 
     LightType  getType()
@@ -99,9 +96,7 @@ public:
     mat4 GetLigthSpaceMatrix()
     {
         vec3 center = pos + direction;
-        mat4 view  = lookAt(pos, center, vec3(0,1,0));
-        mat4 proj = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, -100.0f, 100.0f);
-        return proj * view;
+        return lookAt(pos, center, vec3(0,1,0));
     }
 
     void Apply(Shader* shader)
