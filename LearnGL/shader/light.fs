@@ -1,6 +1,6 @@
 #version 330 core
 
-//#define _SpotLight_
+//#define _SpotLight_  //_DirectLight_
 
 out vec4 FragColor;
 
@@ -50,6 +50,9 @@ void main()
     //diffuse
     vec3 norm = normalize(normal);
     vec3 lightDir = normalize(-light.direction);
+#ifdef _PointLight_
+    lightDir = normalize(light.position - worldPos);
+#endif
     float diff = max(dot(norm, lightDir), 0.0f);
     vec3 diffuse = light.color * diff * material.diffuse;
     

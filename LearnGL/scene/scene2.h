@@ -66,7 +66,7 @@ public:
         shader->setFloat("scale", 1);
         shader->setMat4("view", view);
         shader->setMat4("projection", proj);
-        light->Attach(shader);
+        light->Apply(shader);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, texture1);
         glActiveTexture(GL_TEXTURE1);

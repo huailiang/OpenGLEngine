@@ -32,7 +32,7 @@ public:
     void Draw(Shader* shader, Camera* camera, Light* light, vec3 pos, vec3 scale, float angle)
     {
         shader->use();
-        light->Attach(shader);
+        light->Apply(shader);
         mat4 model = mat4(1.0f);
         model = translate(model, pos);
         model = glm::scale(model, scale);

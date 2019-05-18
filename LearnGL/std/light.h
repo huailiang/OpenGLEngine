@@ -53,7 +53,7 @@ public:
     
     LightType virtual getType() = 0;
     
-    void virtual Attach(Shader* shader) = 0;
+    void virtual Apply(Shader* shader) = 0;
 };
 
 
@@ -62,7 +62,7 @@ class DirectLight: public Light
 public:
     DirectLight(vec3 color,vec3 direction): Light(color, direction) {}
     
-    void Attach(Shader* shader)
+    void Apply(Shader* shader)
     {
         shader->setVec3("light.color", color);
         shader->setVec3("light.direction", direction);
@@ -104,7 +104,7 @@ public:
         return proj * view;
     }
 
-    void Attach(Shader* shader)
+    void Apply(Shader* shader)
     {
         shader->setVec3("light.color", this->color);
         shader->setVec3("light.direction", this->direction);
@@ -133,9 +133,9 @@ public:
         this->outerCutOff = outerCutOff;
     }
     
-    void Attach(Shader* shader)
+    void Apply(Shader* shader)
     {
-        PointLight::Attach(shader);
+        PointLight::Apply(shader);
         shader->setFloat("light.cutOff", this->cutOff);
         shader->setFloat("light.outerCutOff", this->outerCutOff);
     }

@@ -25,15 +25,20 @@ public:
         glDeleteBuffers(1, &quadVBO);
         delete shadowShader;
         delete depthShader;
+        delete debugShader;
         depthShader = NULL;
         shadowShader = NULL;
+        debugShader = NULL;
     }
     
     glm::vec3 getCameraPos() { return glm::vec3(0.0f,0.0f,6.0f); }
 
     int getType() { return TY_Scene3; }
     
-    void InitLight() { }
+    void InitLight()
+    {
+        light = new DirectLight(vec3(1.0f), vec3(1.0f,-2.0f,2.0f));
+    }
     
     void InitScene()
     {
@@ -89,7 +94,8 @@ public:
         shadowShader->setMat4("projection", camera->GetProjMatrix());
         shadowShader->setMat4("view", camera->GetViewMatrix());
         shadowShader->setVec3("viewPos", camera->Position);
-        shadowShader->setVec3("lightPos", lightPos);
+//        shadowShader->setVec3("lightPos", lightPos);
+        light->Apply(shadowShader);
         shadowShader->setMat4("lightSpaceMatrix", lightSpaceMatrix);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, woodTexture);
