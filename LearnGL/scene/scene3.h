@@ -27,6 +27,8 @@ public:
         delete depthShader;
         depthShader = NULL;
         shadowShader = NULL;
+        delete lb_ligt;
+        lb_ligt=NULL;
     }
     
     glm::vec3 getCameraPos() { return glm::vec3(0.0f,0.0f,6.0f); }
@@ -39,7 +41,7 @@ public:
     {
         depthShader  = new Shader("shader/shadowdepth.vs","shader/shadowdepth.fs");
         shadowShader  = new Shader("shader/shadow.vs","shader/shadow.fs");
-        debugShader = new Shader("shader/screen.vs", "shader/debug.fs");
+        debugShader = new Shader("shader/debug.vs", "shader/debug.fs");
         
         InitPlane();
         InitCube();

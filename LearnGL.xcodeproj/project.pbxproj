@@ -32,6 +32,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4C0B07AF228FEB0F00243C4B /* debug.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = debug.vs; sourceTree = "<group>"; };
 		4C269F80228C3C4800261AAD /* eventmgr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = eventmgr.h; sourceTree = "<group>"; };
 		4C269F81228C3DB000261AAD /* uibase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = uibase.h; sourceTree = "<group>"; };
 		4C269F82228C3DC700261AAD /* label.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = label.h; sourceTree = "<group>"; };
@@ -77,8 +78,6 @@
 		4CD27D472283070B0038AE21 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		4CD27D49228307760038AE21 /* libglfw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglfw3.a; path = ../../../../../../usr/local/lib/libglfw3.a; sourceTree = "<group>"; };
 		4CEB97B622891FA100ACDDC6 /* glad.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glad.c; sourceTree = "<group>"; };
-		4CEB97B822896D3B00ACDDC6 /* screen.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = screen.fs; sourceTree = "<group>"; };
-		4CEB97B922896D3B00ACDDC6 /* screen.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = screen.vs; sourceTree = "<group>"; };
 		4CEB97BA2289991000ACDDC6 /* screen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = screen.h; sourceTree = "<group>"; };
 		4CEB97BC2289AB9A00ACDDC6 /* cube.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = cube.vs; sourceTree = "<group>"; };
 		4CEB97BD2289AB9A00ACDDC6 /* cube.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = cube.fs; sourceTree = "<group>"; };
@@ -133,6 +132,7 @@
 				4C29DB02228ADBB20037A97E /* instance.vs */,
 				4CC436B322882C870095D759 /* sample.vs */,
 				4CC436B422882C870095D759 /* sample.fs */,
+				4C0B07AF228FEB0F00243C4B /* debug.vs */,
 				4C56090A228ED97E00F87470 /* debug.fs */,
 				4C560906228E88F200F87470 /* shadowdepth.vs */,
 				4C560907228E88F200F87470 /* shadowdepth.fs */,
@@ -148,8 +148,6 @@
 				4CEF90E02283CBEA00068D1E /* light.fs */,
 				4CEB97BC2289AB9A00ACDDC6 /* cube.vs */,
 				4CEB97BD2289AB9A00ACDDC6 /* cube.fs */,
-				4CEB97B922896D3B00ACDDC6 /* screen.vs */,
-				4CEB97B822896D3B00ACDDC6 /* screen.fs */,
 				4C551FB522846F7E002D535F /* ttfont.vs */,
 				4C551FB622846F7E002D535F /* ttfrag.fs */,
 			);
