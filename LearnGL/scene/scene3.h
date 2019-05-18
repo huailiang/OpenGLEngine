@@ -21,22 +21,17 @@ public:
         glDeleteVertexArrays(1, &cubeVAO);
         glDeleteBuffers(1, &planeVBO);
         glDeleteBuffers(1, &cubeVBO);
+        glDeleteVertexArrays(1, &quadVAO);
+        glDeleteBuffers(1, &quadVBO);
         delete shadowShader;
         delete depthShader;
         depthShader = NULL;
         shadowShader = NULL;
     }
     
-    glm::vec3 getCameraPos()
-    {
-        return glm::vec3(0.0f,0.0f,6.0f);
-    }
+    glm::vec3 getCameraPos() { return glm::vec3(0.0f,0.0f,6.0f); }
 
-    
-    int getType()
-    {
-        return TY_Scene3;
-    }
+    int getType() { return TY_Scene3; }
     
     void InitLight() { }
     
@@ -48,6 +43,7 @@ public:
         
         InitPlane();
         InitCube();
+        InitQuad();
        
         glGenFramebuffers(1, &depthMapFBO);
         glGenTextures(1, &depthMap);
@@ -119,7 +115,17 @@ public:
         glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
     }
     
-    void DrawUI() { }
+    static void OnClick(UIEvent* e, void* arg)
+    {
+        Scene3* scene = (Scene3*)(arg);
+        scene->lightPos = glm::vec3(-2.0f + sin(radians(8 * glfwGetTime())) , 4.0f, -1.0f);
+    }
+
+    void DrawUI()
+    {
+        lb_ligt = new Label(vec2(580, 360), vec3(1,1,0), 0.6f, "light");
+        lb_ligt->RegistCallback(OnClick, this);
+    }
     
     void DrawScene()
     {
@@ -131,13 +137,12 @@ public:
         lightSpaceMatrix = lightProjection * lightView;
         depthShader->use();
         depthShader->setMat4("lightSpaceMatrix", lightSpaceMatrix);
-        
         glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
         glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
         Scene::ClearScene();
         renderScene(*depthShader);
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
-        
+
         Scene::ClearScene();
         glViewport(0, 0, RENDER_WIDTH, RENDER_HEIGTH);
         shadowShader->use();
@@ -172,15 +177,13 @@ public:
     
     void renderQuad()
     {
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE);
         debugShader->use();
         debugShader->setFloat("near_plane", 1.0f);
         debugShader->setFloat("far_plane", 7.5f);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, depthMap);
         glBindVertexArray(quadVAO);
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+        glDrawArrays(GL_TRIANGLES, 0, 6);
         glBindVertexArray(0);
     }
     
@@ -194,6 +197,10 @@ public:
         glDrawArrays(GL_TRIANGLES, 0, 36);
     }
 
+    
+public:
+    glm::vec3 lightPos;
+    
 private:
     Shader *depthShader, *shadowShader, *debugShader;
     unsigned int woodTexture ;
@@ -203,7 +210,8 @@ private:
     const unsigned int SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
     unsigned int depthMapFBO;
     unsigned int depthMap;
-    glm::vec3 lightPos;
+   
+    Label* lb_ligt;
 };
 
 #endif /* scene3_h */
