@@ -42,7 +42,7 @@ public:
     
     void InitScene()
     {
-        depthShader  = new Shader("shader/shadowdepth.vs","shader/shadowdepth.fs");
+        depthShader  = new Shader("shader/depth.vs","shader/depth.fs");
         shadowShader  = new Shader("shader/shadow.vs","shader/shadow.fs");
         debugShader = new Shader("shader/debug.vs", "shader/debug.fs");
         
@@ -50,45 +50,23 @@ public:
         InitCube(cubeVAO, cubeVBO);
         InitQuad(quadVAO, quadVBO);
         TTexture("resources/textures/wood.png", &woodTexture);
-        glGenFramebuffers(1, &depthMapFBO);
-        glGenTextures(1, &depthMap);
-        glBindTexture(GL_TEXTURE_2D, depthMap);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, SHADOW_WIDTH, SHADOW_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-        
-        glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthMap, 0);
-        glDrawBuffer(GL_NONE);
-        glReadBuffer(GL_NONE);
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
-        
         shadowShader->use();
         shadowShader->setInt("diffuseTexture", 0);
         shadowShader->setInt("shadowMap", 1);
     }
     
+    void DrawShadow(Shader *depthShader)
+    {
+        Scene::DrawShadow(depthShader);
+        RenderScene(*depthShader);
+    }
+
     
     void DrawScene()
     {
-        glm::mat4 lightProjection, lightView;
         glm::mat4 lightSpaceMatrix;
-        float near_plane = 1.0f, far_plane = 7.5f;
-        lightProjection = glm::ortho(-4.0f, 4.0f, -4.0f, 4.0f, near_plane, far_plane);
-        lightView = static_cast<DirectLight*>(light)->GetLigthViewMatrix(glm::vec3(0,0,-2));
-        lightSpaceMatrix = lightProjection * lightView;
-        depthShader->use();
-        depthShader->setMat4("lightSpaceMatrix", lightSpaceMatrix);
-        glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
-        glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
-        Scene::ClearScene();
-        renderScene(*depthShader);
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-        Scene::ClearScene();
-        glViewport(0, 0, RENDER_WIDTH, RENDER_HEIGTH);
+        float near_plane = 0.1f, far_plane = 7.5f;
+        lightSpaceMatrix = static_cast<DirectLight*>(light)->GetLigthSpaceMatrix(glm::vec3(0,0,-2), near_plane, far_plane, 4, 4);
         shadowShader->use();
         shadowShader->setMat4("projection", camera->GetProjMatrix());
         shadowShader->setMat4("view", camera->GetViewMatrix());
@@ -99,12 +77,12 @@ public:
         glBindTexture(GL_TEXTURE_2D, woodTexture);
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, depthMap);
-        renderScene(*shadowShader);
-        renderQuad();
+        RenderScene(*shadowShader);
+        RenderQuad();
     }
     
     
-    void renderScene(const Shader &shader)
+    void RenderScene(const Shader &shader)
     {
         // floor
         glm::mat4 model = glm::mat4(1.0f);
@@ -119,7 +97,7 @@ public:
         glBindVertexArray(0);
     }
     
-    void renderQuad()
+    void RenderQuad()
     {
         debugShader->use();
         debugShader->setFloat("near_plane", 1.0f);
@@ -148,9 +126,6 @@ private:
     unsigned int planeVBO, planeVAO;
     unsigned int cubeVAO, cubeVBO;
     unsigned int quadVAO, quadVBO;
-    const unsigned int SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
-    unsigned int depthMapFBO;
-    unsigned int depthMap;
 };
 
 #endif /* scene3_h */

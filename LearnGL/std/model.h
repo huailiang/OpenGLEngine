@@ -28,23 +28,44 @@ public:
     {
         loadModel(path);
     }
+    
+    mat4 GetModelMatrix(vec3 pos, vec3 scale, float angle)
+    {
+        mat4 model(1);
+        model = translate(model, pos);
+        model = glm::scale(model, scale);
+        model = rotate(model, radians(angle), vec3(0.0f,1.0f,0.0f));
+        return model;
+    }
 
     void Draw(Shader* shader, Camera* camera, Light* light, vec3 pos, vec3 scale, float angle)
     {
         shader->use();
         light->Apply(shader);
-        mat4 model = mat4(1.0f);
-        model = translate(model, pos);
-        model = glm::scale(model, scale);
-        model = rotate(model, radians(angle), vec3(0.0f,1.0f,0.0f));
-        shader->setMat4("model", model);
-        mat4 view = camera->GetViewMatrix();
-        shader->setMat4("view", view);
-        mat4 proj = camera->GetProjMatrix();
-        shader->setMat4("projection", proj);
+        shader->setMat4("model", GetModelMatrix(pos, scale, angle));
+        shader->setMat4("view", camera->GetViewMatrix());
+        shader->setMat4("projection", camera->GetProjMatrix());
         shader->setVec3("viewPos", camera->Position);
         LightShader* lshader =static_cast<LightShader*>(shader);
         if(lshader) lshader->ApplyLight();
+        for(unsigned int i = 0; i < meshes.size(); i++)
+            meshes[i].Draw(shader);
+    }
+    
+    void DrawShadow(Shader* shader, Camera* camera, Light* light, vec3 pos, vec3 scale, float angle)
+    {
+        shader->use();
+        shader->setMat4("model", GetModelMatrix(pos, scale, angle));
+        mat4 matrix(1);
+        if(light->getType() == LightDirect)
+        {
+            matrix = static_cast<DirectLight*>(light)->GetLigthSpaceMatrix(pos,0.1f,10.0f, 4, 4);
+        }
+        else
+        {
+            matrix = dynamic_cast<PointLight*>(light)->GetLigthSpaceMatrix(0.1f,10.0f, 4, 4);
+        }
+        shader->setMat4("lightSpaceMatrix", matrix);
         for(unsigned int i = 0; i < meshes.size(); i++)
             meshes[i].Draw(shader);
     }

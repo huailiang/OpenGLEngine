@@ -29,20 +29,19 @@ public:
         lb_normal = NULL;
     }
     
-    int getType()
-    {
-        return TY_Scene1;
-    }
+    int getType() { return TY_Scene1; }
     
     void InitLight()
     {
-        light = new DirectLight(vec3(1.0f), vec3(1.0f,0.0f,0.0f));
+        light = new DirectLight(vec3(1.0f,0.0f,0.0f), vec3(-1.0f));
     }
     
     void InitScene()
     {
         shader = new LightShader("shader/model.vs", "shader/model.fs");
         nmShader = new Shader("shader/normal.vs","shader/normal.fs","shader/normal.gs");
+        model = new Model("resources/objects/nanosuit/nanosuit.obj");
+        terrain = new Terrain();
     }
     
     void DrawUI()
@@ -52,28 +51,21 @@ public:
         lb_normal->RegistCallback(OnClick, this);
     }
     
+    void DrawShadow(Shader *depthShader)
+    {
+        Scene::DrawShadow(depthShader);
+    }
     
     void DrawScene()
     {
-        Scene::ClearScene();
-        if(terrain==NULL)
-        {
-            terrain=new Terrain();
-        }
-        terrain->Draw(camera);
-
-        if(model==NULL)
-        {
-            model = new Model("resources/objects/nanosuit/nanosuit.obj");
-        }
         float timeValue = glfwGetTime();
+        terrain->Draw(camera);
         model->Draw(shader, camera, light, vec3(0.2f, -0.5f, -1.5f), vec3(0.12f), -16*timeValue);
         if(shownormal)
         {
             model->Draw(nmShader, camera, light, vec3(0.2f, -0.5f, -1.5f), vec3(0.12f), -16*timeValue);
         }
     }
-    
     
     static void OnClick(UIEvent* e, void* arg)
     {

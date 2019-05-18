@@ -38,6 +38,11 @@ public:
         light = NULL;
         skybox = NULL;
     }
+    
+    virtual bool drawShadow()
+    {
+        return true;
+    }
   
     virtual glm::vec3 getCameraPos()
     {
@@ -49,18 +54,14 @@ public:
      */
     void Initial()
     {
-        if(camera == NULL)
+        camera = new Camera(getCameraPos());
+        skybox = new Skybox(camera);
+        InitLight();
+        InitScene();
+        if(drawShadow())
         {
-            camera = new Camera(getCameraPos());
-        }
-        if(skybox == NULL)
-        {
-            skybox = new Skybox(camera);
-        }
-        if(light == NULL)
-        {
-            InitLight();
-            InitScene();
+            depthShader  = new Shader("shader/depth.vs","shader/depth.fs");
+            InitDepthBuffer();
         }
         DrawUI();
     }
@@ -72,6 +73,16 @@ public:
     virtual void InitScene() { }
     
     virtual void DrawUI() { }
+    
+    virtual void DrawShadow(Shader *depthShader)
+    {
+        glm::mat4 lightSpaceMatrix;
+        float near_plane = 0.1f, far_plane = 7.5f;
+        lightSpaceMatrix = static_cast<DirectLight*>(light)->GetLigthSpaceMatrix(glm::vec3(0,0,-2), near_plane, far_plane, 4, 4);
+        depthShader->use();
+        depthShader->setMat4("lightSpaceMatrix", lightSpaceMatrix);
+        glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
+    }
     
     virtual void DrawScene() { }
     
@@ -86,6 +97,15 @@ public:
     
     void DrawScenes()
     {
+        if(drawShadow())
+        {
+            glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
+            ClearScene();
+            DrawShadow(depthShader);
+            glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        }
+        ClearScene();
+        glViewport(0, 0, RENDER_WIDTH, RENDER_HEIGTH);
         DrawScene();
         if(skybox) skybox->Draw();
     }
@@ -144,12 +164,35 @@ public:
         }
     }
 
+private:
+    void InitDepthBuffer()
+    {
+        glGenFramebuffers(1, &depthMapFBO);
+        glGenTextures(1, &depthMap);
+        glBindTexture(GL_TEXTURE_2D, depthMap);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, SHADOW_WIDTH, SHADOW_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        
+        glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthMap, 0);
+        glDrawBuffer(GL_NONE);
+        glReadBuffer(GL_NONE);
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    }
     
 protected:
     Camera* camera;
-    Light* light;
+    Light*  light;
     Skybox* skybox;
-
+    Shader* depthShader;
+    unsigned int SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
+    unsigned int depthMap;
+    
+private:
+    unsigned int depthMapFBO;
 };
 
 

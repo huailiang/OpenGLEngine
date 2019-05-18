@@ -23,10 +23,9 @@ public:
         glDeleteBuffers(1, &vbo);
     }
     
-    int getType()
-    {
-        return TY_Scene2;
-    }
+    int getType() { return TY_Scene2; }
+    
+    bool drawShadow() { return false; }
     
     void InitLight()
     {

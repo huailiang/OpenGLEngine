@@ -50,8 +50,8 @@
 		4C551FB522846F7E002D535F /* ttfont.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = ttfont.vs; sourceTree = "<group>"; };
 		4C551FB622846F7E002D535F /* ttfrag.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = ttfrag.fs; sourceTree = "<group>"; };
 		4C551FB8228477D1002D535F /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = LearnGL/lib/libfreetype.a; sourceTree = "<group>"; };
-		4C560906228E88F200F87470 /* shadowdepth.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shadowdepth.vs; sourceTree = "<group>"; };
-		4C560907228E88F200F87470 /* shadowdepth.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shadowdepth.fs; sourceTree = "<group>"; };
+		4C560906228E88F200F87470 /* depth.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = depth.vs; sourceTree = "<group>"; };
+		4C560907228E88F200F87470 /* depth.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = depth.fs; sourceTree = "<group>"; };
 		4C560908228E8A4800F87470 /* shadow.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shadow.vs; sourceTree = "<group>"; };
 		4C560909228E8A4800F87470 /* shadow.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shadow.fs; sourceTree = "<group>"; };
 		4C56090A228ED97E00F87470 /* debug.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = debug.fs; sourceTree = "<group>"; };
@@ -134,15 +134,15 @@
 				4CC436B422882C870095D759 /* sample.fs */,
 				4C0B07AF228FEB0F00243C4B /* debug.vs */,
 				4C56090A228ED97E00F87470 /* debug.fs */,
-				4C560906228E88F200F87470 /* shadowdepth.vs */,
-				4C560907228E88F200F87470 /* shadowdepth.fs */,
+				4C560906228E88F200F87470 /* depth.vs */,
+				4C560907228E88F200F87470 /* depth.fs */,
 				4C560908228E8A4800F87470 /* shadow.vs */,
 				4C560909228E8A4800F87470 /* shadow.fs */,
 				4CB1D90B2286DB35004BEE38 /* model.vs */,
+				4CB1D90C2286DB35004BEE38 /* model.fs */,
 				4C29DB01228AB7740037A97E /* normal.vs */,
 				4C29DAFF228AB2F50037A97E /* normal.gs */,
 				4C29DB00228AB7740037A97E /* normal.fs */,
-				4CB1D90C2286DB35004BEE38 /* model.fs */,
 				4C73100A22884CDE007ED1FC /* outline.fs */,
 				4CEF90E12283CBEA00068D1E /* light.vs */,
 				4CEF90E02283CBEA00068D1E /* light.fs */,

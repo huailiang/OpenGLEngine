@@ -37,9 +37,10 @@ public:
         this->vertices = vertices;
         this->indices = indices;
         this->textures = textures;
-        setupMesh();
+        SetupMesh();
     }
-
+    
+    
     void Draw(const Shader* shader)
     {
         unsigned int diffuseNr  = 1;
@@ -65,18 +66,21 @@ public:
             glBindTexture(GL_TEXTURE_2D, textures[i].id);
         }
         
-        // draw mesh
+        DrawMesh();
+        glActiveTexture(GL_TEXTURE0);
+    }
+
+    void DrawMesh()
+    {
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
-
-        glActiveTexture(GL_TEXTURE0);
     }
 
 private:
     unsigned int VBO, EBO;
-
-    void setupMesh()
+    
+    void SetupMesh()
     {
         glGenVertexArrays(1, &VAO);
         glGenBuffers(1, &VBO);
@@ -112,4 +116,6 @@ private:
         glBindVertexArray(0);
     }
 };
+
+
 #endif
