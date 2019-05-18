@@ -56,8 +56,8 @@ public:
         glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, SHADOW_WIDTH, SHADOW_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
         
         glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthMap, 0);
@@ -75,9 +75,8 @@ public:
     {
         glm::mat4 lightProjection, lightView;
         glm::mat4 lightSpaceMatrix;
-        float near_plane = 1.0f, far_plane = 17.5f;
-        lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, near_plane, far_plane);
-        lightView = glm::lookAt(-light->direction, glm::vec3(0,0,-2), glm::vec3(0.0, 1.0, 0.0));
+        float near_plane = 1.0f, far_plane = 7.5f;
+        lightProjection = glm::ortho(-4.0f, 4.0f, -4.0f, 4.0f, near_plane, far_plane);
         lightView = static_cast<DirectLight*>(light)->GetLigthViewMatrix(glm::vec3(0,0,-2));
         lightSpaceMatrix = lightProjection * lightView;
         depthShader->use();
@@ -114,7 +113,7 @@ public:
         glDrawArrays(GL_TRIANGLES, 0, 6);
         // cubes
         glBindVertexArray(cubeVAO);
-        renderCube(glm::vec3(0.0f, 1.0f, -1.6), 0.5f, 0.0f, shader);
+        renderCube(glm::vec3(0.0f, 0.2f, -1.6), 0.5f, 0.0f, shader);
         renderCube(glm::vec3(2.0f, 0.0f, -1.0), 0.5f, 0.0f, shader);
         renderCube(glm::vec3(-1.0f,0.0f, -2.0), 0.25f, 16 * glfwGetTime(), shader);
         glBindVertexArray(0);
