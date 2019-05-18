@@ -27,8 +27,6 @@ public:
         delete depthShader;
         depthShader = NULL;
         shadowShader = NULL;
-        delete lb_ligt;
-        lb_ligt=NULL;
     }
     
     glm::vec3 getCameraPos() { return glm::vec3(0.0f,0.0f,6.0f); }
@@ -43,10 +41,10 @@ public:
         shadowShader  = new Shader("shader/shadow.vs","shader/shadow.fs");
         debugShader = new Shader("shader/debug.vs", "shader/debug.fs");
         
-        InitPlane();
-        InitCube();
-        InitQuad();
-       
+        InitPlane(planeVAO, planeVBO);
+        InitCube(cubeVAO, cubeVBO);
+        InitQuad(quadVAO, quadVBO);
+        TTexture("resources/textures/wood.png", &woodTexture);
         glGenFramebuffers(1, &depthMapFBO);
         glGenTextures(1, &depthMap);
         glBindTexture(GL_TEXTURE_2D, depthMap);
@@ -65,72 +63,12 @@ public:
         shadowShader->use();
         shadowShader->setInt("diffuseTexture", 0);
         shadowShader->setInt("shadowMap", 1);
-        
-        lightPos = glm::vec3(-2.0f, 4.0f, -1.0f);
     }
     
-    void InitPlane()
-    {
-        glGenVertexArrays(1, &planeVAO);
-        glGenBuffers(1, &planeVBO);
-        glBindVertexArray(planeVAO);
-        glBindBuffer(GL_ARRAY_BUFFER, planeVBO);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(planeVertices), planeVertices, GL_STATIC_DRAW);
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
-        glEnableVertexAttribArray(1);
-        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-        glEnableVertexAttribArray(2);
-        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-        glBindVertexArray(0);
-        
-        TTexture("resources/textures/wood.png", &woodTexture);
-    }
-    
-    void InitCube()
-    {
-        glGenVertexArrays(1, &cubeVAO);
-        glGenBuffers(1, &cubeVBO);
-        glBindBuffer(GL_ARRAY_BUFFER, cubeVBO);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(cubeVertices), cubeVertices, GL_STATIC_DRAW);
-        glBindVertexArray(cubeVAO);
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
-        glEnableVertexAttribArray(1);
-        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-        glEnableVertexAttribArray(2);
-        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-        glBindVertexArray(0);
-    }
-    
-    void InitQuad()
-    {
-        glGenVertexArrays(1, &quadVAO);
-        glGenBuffers(1, &quadVBO);
-        glBindVertexArray(quadVAO);
-        glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), &quadVertices, GL_STATIC_DRAW);
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
-        glEnableVertexAttribArray(1);
-        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
-    }
-    
-    static void OnClick(UIEvent* e, void* arg)
-    {
-        Scene3* scene = (Scene3*)(arg);
-        scene->lightPos = glm::vec3(-2.0f + sin(radians(8 * glfwGetTime())) , 4.0f, -1.0f);
-    }
-
-    void DrawUI()
-    {
-        lb_ligt = new Label(vec2(580, 360), vec3(1,1,0), 0.6f, "light");
-        lb_ligt->RegistCallback(OnClick, this);
-    }
     
     void DrawScene()
     {
+        lightPos = glm::vec3(-2.0f + sin(radians(16 * glfwGetTime())) , 4.0f, -1.0f);
         glm::mat4 lightProjection, lightView;
         glm::mat4 lightSpaceMatrix;
         float near_plane = 1.0f, far_plane = 7.5f;
@@ -200,9 +138,6 @@ public:
     }
 
     
-public:
-    glm::vec3 lightPos;
-    
 private:
     Shader *depthShader, *shadowShader, *debugShader;
     unsigned int woodTexture ;
@@ -212,8 +147,7 @@ private:
     const unsigned int SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
     unsigned int depthMapFBO;
     unsigned int depthMap;
-   
-    Label* lb_ligt;
+    glm::vec3 lightPos;
 };
 
 #endif /* scene3_h */
