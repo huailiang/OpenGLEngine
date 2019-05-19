@@ -25,8 +25,10 @@ public:
         model = NULL;
         delete shader;
         shader = NULL;
-        delete lb_normal;
-        lb_normal = NULL;
+        delete btn_normal;
+        btn_normal = NULL;
+        delete btn_debug;
+        btn_debug = NULL;
     }
     
     int getType() { return TY_Scene1; }
@@ -47,8 +49,10 @@ public:
     void DrawUI()
     {
         Scene::DrawUI();
-        lb_normal = new Button(vec2(720, 360), vec3(1,1,0), 0.6f, "normal");
-        lb_normal->RegistCallback(OnClick, this);
+        btn_normal = new Button(vec2(720, 360), vec3(1,1,0), 0.6f, "normal");
+        btn_normal->RegistCallback(OnNormalClick, this);
+        btn_normal = new Button(vec2(720, 330), vec3(1,1,0), 0.6f, "debug");
+        btn_normal->RegistCallback(OnDebugClick, this);
     }
     
     void DrawShadow(Shader *depthShader)
@@ -68,15 +72,22 @@ public:
         }
     }
     
-    static void OnClick(UIEvent* e, void* arg)
+    static void OnNormalClick(UIEvent* e, void* arg)
     {
         Scene1* scene = (Scene1*)(arg);
         scene->shownormal=!scene->shownormal;
     }
     
+    static void OnDebugClick(UIEvent* e, void* arg)
+    {
+        Scene1* scene = (Scene1*)(arg);
+        scene->debug=!scene->debug;
+    }
+
+    
     
 private:
-    Button* lb_normal;
+    Button* btn_normal, *btn_debug;
     Terrain* terrain;
     Model* model;
     LightShader* shader;

@@ -124,7 +124,7 @@ public:
         ClearScene();
         glViewport(0, 0, RENDER_WIDTH, RENDER_HEIGTH);
         DrawScene();
-        if(drawShadow()) RenderQuad();
+        if(drawShadow() && debug) RenderQuad();
         if(skybox) skybox->Draw();
     }
     
@@ -212,7 +212,6 @@ private:
         glDrawArrays(GL_TRIANGLES, 0, 6);
         glBindVertexArray(0);
     }
-
     
 protected:
     Camera* camera;
@@ -222,6 +221,7 @@ protected:
     unsigned int depthMap;
     float timeValue;
     mat4 lightMatrix;
+    bool debug;
     
 private:
     Shader* depthShader, *debugShader;

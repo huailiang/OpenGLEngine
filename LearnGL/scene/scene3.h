@@ -36,6 +36,7 @@ public:
     
     void InitScene()
     {
+        debug = true;
         shadowShader  = new Shader("shader/shadow.vs","shader/shadow.fs");
         InitPlane(planeVAO, planeVBO);
         InitCube(cubeVAO, cubeVBO);
