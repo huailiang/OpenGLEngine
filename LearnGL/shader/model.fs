@@ -41,7 +41,7 @@ uniform Light light;
 vec3 calLight()
 {
     // ambient
-    vec3 ambient = vec3(0.8f) * material.ambient;
+    vec3 ambient = vec3(0.3f) * material.ambient;
 
     //diffuse
     vec3 norm = normalize(normal);

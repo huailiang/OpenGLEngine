@@ -33,7 +33,7 @@ public:
     
     void InitLight()
     {
-        light = new DirectLight(vec3(0.0f,0.0f,1.0f), vec3(-1.0f));
+        light = new DirectLight(vec3(1.0f), vec3(-1.0f));
     }
     
     void InitScene()
@@ -47,7 +47,7 @@ public:
     void DrawUI()
     {
         Scene::DrawUI();
-        lb_normal = new Label(vec2(580, 360), vec3(1,1,0), 0.6f, "normal");
+        lb_normal = new Label(vec2(720, 360), vec3(1,1,0), 0.6f, "normal");
         lb_normal->RegistCallback(OnClick, this);
     }
     
