@@ -65,6 +65,9 @@
 		4C73100A22884CDE007ED1FC /* outline.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = outline.fs; sourceTree = "<group>"; };
 		4C8777D42285A2CE00ACAA18 /* light.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = light.h; sourceTree = "<group>"; };
 		4CA88EBA2290FD3A004E2510 /* instance.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = instance.fs; sourceTree = "<group>"; };
+		4CA88EBB22915331004E2510 /* button.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = button.fs; sourceTree = "<group>"; };
+		4CA88EBC22915331004E2510 /* button.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = button.vs; sourceTree = "<group>"; };
+		4CA88EBD229154B1004E2510 /* button.gs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = button.gs; sourceTree = "<group>"; };
 		4CB1D90A2286D69F004BEE38 /* arial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = arial.ttf; sourceTree = "<group>"; };
 		4CB1D90B2286DB35004BEE38 /* model.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = model.vs; sourceTree = "<group>"; };
 		4CB1D90C2286DB35004BEE38 /* model.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = model.fs; sourceTree = "<group>"; };
@@ -130,6 +133,9 @@
 		4C551FB422846F46002D535F /* shader */ = {
 			isa = PBXGroup;
 			children = (
+				4CA88EBC22915331004E2510 /* button.vs */,
+				4CA88EBD229154B1004E2510 /* button.gs */,
+				4CA88EBB22915331004E2510 /* button.fs */,
 				4C29DB02228ADBB20037A97E /* instance.vs */,
 				4CA88EBA2290FD3A004E2510 /* instance.fs */,
 				4CC436B322882C870095D759 /* sample.vs */,

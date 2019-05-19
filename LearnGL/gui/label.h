@@ -37,6 +37,7 @@ public:
             EventMgr::getInstance()->RegistEvt(this);
         }
         UIManager::getInstance()->Regist(this);
+        InitBackground();
         Draw();
     }
     
@@ -48,10 +49,12 @@ public:
         }
         UIManager::getInstance()->Remove(this);
         TTFont::getInstance()->RenderText("", 0, 0, 0, glm::vec3(0));
+        Delete();
     }
     
     void Draw()
     {
+        DrawBackground();
         TTFont* font = TTFont::getInstance();
         len = font->RenderText(text, posx, posy, scales, color);
     }
@@ -84,13 +87,51 @@ public:
         return this->text;
     }
     
+private:
     
-
+    void DrawBackground()
+    {
+        float x = getCenterX()/SCR_WIDTH;
+        float y = posy / SCR_HEIGHT;
+        float w = 2.5 * len / (float)SCR_WIDTH;
+        float h = 2.4 * FONT_SIZE * scales/ (float)SCR_HEIGHT;
+        shader->use();
+        shader->setVec4("aArg", x, y+ 0.12*h, w, h);
+        glBindVertexArray(vao);
+        glDrawArrays(GL_POINTS, 0, 1);
+        glBindVertexArray(0);
+    }
+    
+    void InitBackground()
+    {
+        float vertices[] = {0.0f,  0.0f};
+        shader = new Shader("shader/button.vs","shader/button.fs","shader/button.gs");
+        glGenVertexArrays(1, &vao);
+        glGenBuffers(1, &vbo);
+        glBindVertexArray(vao);
+        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), &vertices, GL_STATIC_DRAW);
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
+        glBindVertexArray(0);
+    }
+    
+    void Delete()
+    {
+        glDeleteVertexArrays(1, &vao);
+        glDeleteBuffers(1, &vbo);
+        delete shader;
+        shader = NULL;
+    }
+    
 private:
     std::string text;
     glm::vec3 color;
     float len;
     float scales;
+    
+    unsigned int vbo, vao;
+    Shader* shader;
 };
 
 #endif /* label_h */
