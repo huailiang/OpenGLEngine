@@ -47,7 +47,7 @@ public:
     void DrawUI()
     {
         Scene::DrawUI();
-        lb_normal = new Label(vec2(720, 360), vec3(1,1,0), 0.6f, "normal");
+        lb_normal = new Button(vec2(720, 360), vec3(1,1,0), 0.6f, "normal");
         lb_normal->RegistCallback(OnClick, this);
     }
     
@@ -76,7 +76,7 @@ public:
     
     
 private:
-    Label* lb_normal;
+    Button* lb_normal;
     Terrain* terrain;
     Model* model;
     LightShader* shader;

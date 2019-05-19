@@ -14,6 +14,7 @@
 #include "../std/light.h"
 #include "../gui/uimgr.h"
 #include "../gui/label.h"
+#include "../gui/button.h"
 #include "../gui/uievent.h"
 #include "../std/shader.h"
 #include "../std/texture.h"
