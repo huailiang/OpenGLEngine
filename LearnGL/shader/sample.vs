@@ -5,11 +5,15 @@ layout (location = 1) in vec3 aNormal;
 layout (location = 2) in vec2 aTexCoords;
 
 out vec2 TexCoords;
+out vec4 LightPos;
 
-uniform mat4 mvp;
+uniform mat4 model;
+uniform mat4 vp;
+uniform mat4 lightSpaceMatrix;
 
 void main()
 {
     TexCoords = aTexCoords;
-    gl_Position = mvp  * vec4(aPos, 1.0);
+    LightPos = lightSpaceMatrix * model  * vec4(aPos, 1.0);
+    gl_Position = vp * model * vec4(aPos, 1.0);
 }

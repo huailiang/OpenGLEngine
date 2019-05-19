@@ -37,6 +37,12 @@ public:
         camera = NULL;
         light = NULL;
         skybox = NULL;
+        delete debugShader;
+        delete depthShader;
+        debugShader = NULL;
+        depthShader = NULL;
+        glDeleteVertexArrays(1, &quadVAO);
+        glDeleteBuffers(1, &quadVBO);
     }
     
     virtual bool drawShadow()
@@ -56,12 +62,15 @@ public:
     {
         camera = new Camera(getCameraPos());
         skybox = new Skybox(camera);
+        lightMatrix = glm::mat4(1);
         InitLight();
         InitScene();
         if(drawShadow())
         {
             depthShader  = new Shader("shader/depth.vs","shader/depth.fs");
+            debugShader = new Shader("shader/debug.vs", "shader/debug.fs");
             InitDepthBuffer();
+            InitQuad(quadVAO, quadVBO);
         }
         DrawUI();
     }
@@ -76,11 +85,17 @@ public:
     
     virtual void DrawShadow(Shader *depthShader)
     {
-        glm::mat4 lightSpaceMatrix;
         float near_plane = 0.1f, far_plane = 7.5f;
-        lightSpaceMatrix = static_cast<DirectLight*>(light)->GetLigthSpaceMatrix(glm::vec3(0,0,-2), near_plane, far_plane, 4, 4);
+        if(light->getType() == LightDirect)
+        {
+            lightMatrix = static_cast<DirectLight*>(light)->GetLigthSpaceMatrix(glm::vec3(0,0,-2),near_plane, far_plane, 4, 4);
+        }
+        else
+        {
+            lightMatrix = dynamic_cast<PointLight*>(light)->GetLigthSpaceMatrix(near_plane, far_plane, 4, 4);
+        }
         depthShader->use();
-        depthShader->setMat4("lightSpaceMatrix", lightSpaceMatrix);
+        depthShader->setMat4("lightSpaceMatrix", lightMatrix);
         glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
     }
     
@@ -108,6 +123,7 @@ public:
         ClearScene();
         glViewport(0, 0, RENDER_WIDTH, RENDER_HEIGTH);
         DrawScene();
+        if(drawShadow()) RenderQuad();
         if(skybox) skybox->Draw();
     }
     
@@ -184,18 +200,32 @@ private:
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
     
+    void RenderQuad()
+    {
+        debugShader->use();
+        debugShader->setFloat("near_plane", 1.0f);
+        debugShader->setFloat("far_plane", 7.5f);
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, depthMap);
+        glBindVertexArray(quadVAO);
+        glDrawArrays(GL_TRIANGLES, 0, 6);
+        glBindVertexArray(0);
+    }
+
+    
 protected:
     Camera* camera;
     Light*  light;
     Skybox* skybox;
-    Shader* depthShader;
     unsigned int SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
     unsigned int depthMap;
-    
     float timeValue;
+    mat4 lightMatrix;
     
 private:
+    Shader* depthShader, *debugShader;
     unsigned int depthMapFBO;
+    unsigned int quadVAO, quadVBO;
 };
 
 

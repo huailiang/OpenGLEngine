@@ -33,7 +33,7 @@ public:
     
     void InitLight()
     {
-        light = new DirectLight(vec3(1.0f,0.0f,0.0f), vec3(-1.0f));
+        light = new DirectLight(vec3(0.0f,0.0f,1.0f), vec3(-1.0f));
     }
     
     void InitScene()
@@ -54,13 +54,13 @@ public:
     void DrawShadow(Shader *depthShader)
     {
         Scene::DrawShadow(depthShader);
-        terrain->DrawShadow();
+        terrain->DrawShadow(depthShader);
         model->DrawShadow(depthShader, camera, light, vec3(0.2f, -0.5f, -1.5f), vec3(0.12f), -16*timeValue);
     }
     
     void DrawScene()
     {
-        terrain->Draw(camera);
+        terrain->Draw(camera, lightMatrix, light, depthMap);
         model->Draw(shader, camera, light, vec3(0.2f, -0.5f, -1.5f), vec3(0.12f), -16*timeValue);
         if(shownormal)
         {
@@ -85,7 +85,6 @@ private:
                            
 public:
     bool shownormal;
-
 };
 
 

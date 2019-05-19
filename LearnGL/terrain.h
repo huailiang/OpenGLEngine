@@ -20,16 +20,20 @@ class Terrain
 public:
     Terrain()
     {
-        shader=new Shader("shader/sample.vs","shader/sample.fs");
-        shader2=new Shader("shader/instance.vs","shader/sample.fs");
+        shader = new Shader("shader/sample.vs","shader/sample.fs");
+        shader2 = new Shader("shader/instance.vs","shader/instance.fs");
         TTexture("resources/textures/metal.png", &floorTexture);
         TTexture("resources/textures/grass.png", &grassTexture,false,GL_CLAMP_TO_EDGE);
+        
         initial();
     }
     
     ~Terrain()
     {
         delete shader;
+        delete shader2;
+        shader = NULL;
+        shader2 = NULL;
         glDeleteBuffers(1, &floor_vbo);
         glDeleteVertexArrays(1,&floor_vbo);
     }
@@ -47,11 +51,11 @@ public:
             1.0f,  0.5f,  0.0f,  1.0f,  0.0f
         };
         
-        grass_num=800;
-        for(int i=0;i<grass_num;i++)
+        grass_num = 800;
+        for(int i=0; i<grass_num; i++)
         {
-            float x = (rand()%300)/10.0f-15.0f;
-            float z = (rand()%300)/10.0f-15.0f;
+            float x = (rand() % 300)/10.0f - 15.0f;
+            float z = (rand() % 300)/10.0f - 15.0f;
             vegetation.push_back(vec3(x,0.0f,z));
         }
         
@@ -109,24 +113,53 @@ public:
         glVertexAttribDivisor(3, 1);
         glVertexAttribDivisor(4, 1);
         glVertexAttribDivisor(5, 1);
+        
+        shader->use();
+        shader->setInt("texture1",  0);
+        shader->setInt("shadow", 1);
+        shader2->use();
+        shader->setInt("texture1", 0);
     }
 
-    void DrawShadow()
+    void DrawShadow(const Shader *shader)
     {
+        shader->setMat4("model", glm::mat4(1));
         glBindVertexArray(floor_vao);
         glBindTexture(GL_TEXTURE_2D, floorTexture);
         glDrawArrays(GL_TRIANGLES,0,6);
         glBindVertexArray(0);
     }
     
-    void Draw(Camera* camera)
+    void Draw(Camera* camera, glm::mat4 lightMatrix, Light* light, unsigned int depthMap)
     {
-        glStencilMask(0x00);
         shader->use();
         glBindVertexArray(floor_vao);
+        shader->setMat4("vp", camera->GetVP());
+        shader->setMat4("model", glm::mat4(1));
+        light->Apply(shader);
+        shader->setMat4("lightSpaceMatrix", lightMatrix);
+        glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, floorTexture);
-        glm::mat4 mvp = camera->GetVP() * glm::mat4(1);
-        shader->setMat4("mvp", mvp);
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, depthMap);
+        glDrawArrays(GL_TRIANGLES,0,6);
+        glBindVertexArray(0);
+        
+#ifdef _Instance_
+        DrawGrassInstance(camera);
+#else
+        DrawGrassDirect(camera);
+#endif
+    }
+    
+    void DrawSample(Camera* camera)
+    {
+        shader->use();
+        glBindVertexArray(floor_vao);
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, floorTexture);
+        shader->setMat4("vp", camera->GetVP());
+        shader->setMat4("model", glm::mat4(1));
         glDrawArrays(GL_TRIANGLES,0,6);
         glBindVertexArray(0);
         
@@ -140,8 +173,9 @@ public:
     void DrawGrassDirect(Camera* camera)
     {
         shader2->use();
-        glBindVertexArray(grass_vao);
+        glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, grassTexture);
+        glBindVertexArray(grass_vao);
         for (GLuint i=0; i<grass_num; i++)
         {
             glm::mat4 model(1.0f);
@@ -156,6 +190,8 @@ public:
     void DrawGrassInstance(Camera* camera)
     {
         shader2->use();
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, grassTexture);
         glm::mat4 model(1.0f);
         shader2->setMat4("mvp", camera->GetVP() * model);
         glBindTexture(GL_TEXTURE_2D, grassTexture);

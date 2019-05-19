@@ -56,16 +56,6 @@ public:
     {
         shader->use();
         shader->setMat4("model", GetModelMatrix(pos, scale, angle));
-        mat4 matrix(1);
-        if(light->getType() == LightDirect)
-        {
-            matrix = static_cast<DirectLight*>(light)->GetLigthSpaceMatrix(pos,0.1f,10.0f, 4, 4);
-        }
-        else
-        {
-            matrix = dynamic_cast<PointLight*>(light)->GetLigthSpaceMatrix(0.1f,10.0f, 4, 4);
-        }
-        shader->setMat4("lightSpaceMatrix", matrix);
         for(unsigned int i = 0; i < meshes.size(); i++)
             meshes[i].Draw(shader);
     }

@@ -21,14 +21,8 @@ public:
         glDeleteVertexArrays(1, &cubeVAO);
         glDeleteBuffers(1, &planeVBO);
         glDeleteBuffers(1, &cubeVBO);
-        glDeleteVertexArrays(1, &quadVAO);
-        glDeleteBuffers(1, &quadVBO);
         delete shadowShader;
-        delete depthShader;
-        delete debugShader;
-        depthShader = NULL;
         shadowShader = NULL;
-        debugShader = NULL;
     }
     
     glm::vec3 getCameraPos() { return glm::vec3(0.0f,0.0f,4.0f); }
@@ -42,13 +36,10 @@ public:
     
     void InitScene()
     {
-        depthShader  = new Shader("shader/depth.vs","shader/depth.fs");
         shadowShader  = new Shader("shader/shadow.vs","shader/shadow.fs");
-        debugShader = new Shader("shader/debug.vs", "shader/debug.fs");
-        
         InitPlane(planeVAO, planeVBO);
         InitCube(cubeVAO, cubeVBO);
-        InitQuad(quadVAO, quadVBO);
+        
         TTexture("resources/textures/wood.png", &woodTexture);
         shadowShader->use();
         shadowShader->setInt("diffuseTexture", 0);
@@ -78,7 +69,6 @@ public:
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, depthMap);
         RenderScene(*shadowShader);
-        RenderQuad();
     }
     
     
@@ -97,17 +87,6 @@ public:
         glBindVertexArray(0);
     }
     
-    void RenderQuad()
-    {
-        debugShader->use();
-        debugShader->setFloat("near_plane", 1.0f);
-        debugShader->setFloat("far_plane", 7.5f);
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, depthMap);
-        glBindVertexArray(quadVAO);
-        glDrawArrays(GL_TRIANGLES, 0, 6);
-        glBindVertexArray(0);
-    }
     
     void renderCube(glm::vec3 pos, float scale, float ang, const Shader &shader)
     {
@@ -121,11 +100,11 @@ public:
 
     
 private:
-    Shader *depthShader, *shadowShader, *debugShader;
+    Shader *shadowShader;
     unsigned int woodTexture ;
     unsigned int planeVBO, planeVAO;
     unsigned int cubeVAO, cubeVBO;
-    unsigned int quadVAO, quadVBO;
+    
 };
 
 #endif /* scene3_h */

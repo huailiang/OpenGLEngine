@@ -46,11 +46,11 @@ public:
     void Init()
     {
         ChangeTo(TY_Scene1);
-        lb_scene1 = new Label(vec2(120,380), vec3(1.0f), 1, "Scene1", 0);
-        lb_scene2 = new Label(vec2(120,320), vec3(1.0f), 1, "Scene2", 1);
-        lb_scene3 = new Label(vec2(120,260), vec3(1.0f), 1, "Scene3", 2);
+        lb_scene1 = new Label(vec2(120,380), vec3(1), 1, "Scene1", 0);
+        lb_scene2 = new Label(vec2(120,320), vec3(1), 1, "Scene2", 1);
+        lb_scene3 = new Label(vec2(120,260), vec3(1), 1, "Scene3", 2);
         lb_fps = new Label(vec2(740,580), vec3(1,0,0), 0.5f);
-        lb_copy = new Label(vec2(670,20), vec3(1),0.4f);
+        lb_copy = new Label(vec2(20), vec3(1), 0.4f);
         lb_scene1->RegistCallback(ClickScene, this);
         lb_scene2->RegistCallback(ClickScene, this);
         lb_scene3->RegistCallback(ClickScene, this);
