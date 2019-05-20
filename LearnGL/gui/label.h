@@ -40,7 +40,7 @@ public:
         Draw();
     }
     
-    ~Label()
+    virtual ~Label()
     {
         if(interact)
         {

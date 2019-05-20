@@ -31,11 +31,6 @@ public:
 
     ~Button()
     {
-        if(interact)
-        {
-            EventMgr::getInstance()->RemoveEvt(this);
-        }
-        UIManager::getInstance()->Remove(this);
         glDeleteVertexArrays(1, &vao);
         glDeleteBuffers(1, &vbo);
         delete shader;
@@ -66,7 +61,7 @@ private:
     void InitBackground()
     {
         float vertices[] = {0.0f,  0.0f};
-        shader = new Shader("shader/button.vs","shader/button.fs","shader/button.gs");
+        shader = new Shader("shader/gizmos/button.vs","shader/gizmos/pixel.fs","shader/gizmos/button.gs");
         glGenVertexArrays(1, &vao);
         glGenBuffers(1, &vbo);
         glBindVertexArray(vao);

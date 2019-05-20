@@ -41,7 +41,7 @@ public:
     void InitScene()
     {
         shader = new LightShader("shader/model.vs", "shader/model.fs");
-        nmShader = new Shader("shader/normal.vs","shader/normal.fs","shader/normal.gs");
+        nmShader = new Shader("shader/gizmos/normal.vs","shader/gizmos/pixel.fs","shader/gizmos/normal.gs");
         model = new Model("resources/objects/nanosuit/nanosuit.obj");
         terrain = new Terrain();
     }
@@ -51,8 +51,8 @@ public:
         Scene::DrawUI();
         btn_normal = new Button(vec2(720, 360), vec3(1,1,0), 0.6f, "normal");
         btn_normal->RegistCallback(OnNormalClick, this);
-        btn_normal = new Button(vec2(720, 330), vec3(1,1,0), 0.6f, "debug");
-        btn_normal->RegistCallback(OnDebugClick, this);
+        btn_debug = new Button(vec2(720, 330), vec3(1,1,0), 0.6f, "debug");
+        btn_debug->RegistCallback(OnDebugClick, this);
     }
     
     void DrawShadow(Shader *depthShader)

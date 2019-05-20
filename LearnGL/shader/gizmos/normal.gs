@@ -6,6 +6,8 @@ in VS_OUT {
     vec3 normal;
 } gs_in[];
 
+out vec3 fColor;
+
 const float MAGNITUDE = 0.2;
 
 void GenerateLine(int index)
@@ -19,6 +21,7 @@ void GenerateLine(int index)
 
 void main()
 {
+    fColor = vec3(1,1,0);
     GenerateLine(0); // first vertex normal
     GenerateLine(1); // second vertex normal
     GenerateLine(2); // third vertex normal
