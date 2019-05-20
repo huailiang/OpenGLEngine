@@ -33,6 +33,8 @@ public:
         this->direction=direction;
     }
     
+    virtual ~Light() { }
+    
     void UpdateX(float dx)
     {
         if(direction.x+dx<radians(60.0f))
@@ -59,6 +61,8 @@ class DirectLight: public Light
 {
 public:
     DirectLight(vec3 color,vec3 direction): Light(color, direction) {}
+    
+    virtual ~DirectLight() { }
     
     void Apply(Shader* shader)
     {
@@ -94,6 +98,8 @@ public:
         this->pos=pos;
         this->constant=constant;
     }
+    
+    virtual ~PointLight() { }
     
     mat4 GetLigthSpaceMatrix(float near, float far, float up = 8, float left = 8)
     {

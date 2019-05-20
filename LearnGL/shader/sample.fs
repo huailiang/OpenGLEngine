@@ -54,7 +54,6 @@ float ShadowCalculation()
 
 void main()
 {
-    
     vec4 color = texture(texture1, TexCoords);
     float shadow = ShadowCalculation();
     color = (1.0 - shadow) * color;

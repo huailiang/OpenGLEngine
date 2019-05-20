@@ -60,13 +60,12 @@ private:
     
     void InitBackground()
     {
-        float vertices[] = {0.0f,  0.0f};
         shader = new Shader("shader/gizmos/button.vs","shader/gizmos/pixel.fs","shader/gizmos/button.gs");
         glGenVertexArrays(1, &vao);
         glGenBuffers(1, &vbo);
         glBindVertexArray(vao);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), &vertices, GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(zeroVertices), &zeroVertices, GL_STATIC_DRAW);
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
         glBindVertexArray(0);

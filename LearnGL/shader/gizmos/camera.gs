@@ -1,31 +1,43 @@
 #version 330 core
 layout (points) in;
-layout (triangle_strip, max_vertices = 4) out;
+layout (line_strip, max_vertices = 8) out;
 
 in VS_OUT {
-    vec4 arg;
+    vec4 ltn;
+    vec4 lbn;
+    vec4 rtn;
+    vec4 rbn;
+    vec4 ltf;
+    vec4 lbf;
+    vec4 rtf;
+    vec4 rbf;
 } gs_in[];
 
 out vec3 fColor;
 
-void Generate(vec4 position, float half_w, float half_h)
+void Generate()
 {
     fColor = vec3(0.5f);
-    gl_Position = position + vec4(-half_w, -half_h, 0.0, 0.0);
+    gl_Position = gs_in[0].ltn;
     EmitVertex();
-    gl_Position = position + vec4(half_w, -half_h, 0.0, 0.0);
+    gl_Position = gs_in[0].lbn;
     EmitVertex();
-    gl_Position = position + vec4(-half_w, half_h, 0.0, 0.0);
+    gl_Position = gs_in[0].rtn;
     EmitVertex();
-    gl_Position = position + vec4(half_w, half_h, 0.0, 0.0);
+    gl_Position = gs_in[0].rbn;
+    EmitVertex();
+    gl_Position = gs_in[0].ltf;
+    EmitVertex();
+    gl_Position = gs_in[0].lbf;
+    EmitVertex();
+    gl_Position = gs_in[0].rtf;
+    EmitVertex();
+    gl_Position = gs_in[0].rbf;
     EmitVertex();
     EndPrimitive();
 }
 
 void main()
 {
-    vec4 arg = gs_in[0].arg;
-    arg.x = arg.x * 2.0f - 1.0f;
-    arg.y = arg.y * 2.0f - 1.0f;
-    Generate(vec4(arg.x, arg.y, 0.9, 1.0), arg.z*0.5f, arg.w*0.5f);
+    Generate();
 }
