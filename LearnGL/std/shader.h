@@ -19,40 +19,13 @@ public:
     Shader(const char* vertexPath, const char* fragmentPath, const char* geometryPath = nullptr)
     {
         // 1. retrieve the vertex/fragment source code from filePath
-        std::string vertexCode;
-        std::string fragmentCode;
+        std::string vertexCode = openFile(vertexPath);
+        std::string fragmentCode = openFile(fragmentPath);
+        vertexCode = PreprocessIncludes(vertexCode);
+        fragmentCode = PreprocessIncludes(fragmentCode);
         std::string geometryCode;
-        std::ifstream vShaderFile;
-        std::ifstream fShaderFile;
-        std::ifstream gShaderFile;
-        // ensure ifstream objects can throw exceptions:
-        vShaderFile.exceptions (std::ifstream::failbit | std::ifstream::badbit);
-        fShaderFile.exceptions (std::ifstream::failbit | std::ifstream::badbit);
-        gShaderFile.exceptions (std::ifstream::failbit | std::ifstream::badbit);
-        try 
-        {
-            vShaderFile.open(vertexPath);
-            fShaderFile.open(fragmentPath);
-            std::stringstream vShaderStream, fShaderStream;
-            vShaderStream << vShaderFile.rdbuf();
-            fShaderStream << fShaderFile.rdbuf();
-            vShaderFile.close();
-            fShaderFile.close();
-            vertexCode = vShaderStream.str();
-            fragmentCode = fShaderStream.str();
-            if(geometryPath != nullptr)
-            {
-                gShaderFile.open(geometryPath);
-                std::stringstream gShaderStream;
-                gShaderStream << gShaderFile.rdbuf();
-                gShaderFile.close();
-                geometryCode = gShaderStream.str();
-            }
-        }
-        catch (std::ifstream::failure e)
-        {
-            std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
-        }
+        if(geometryPath != nullptr)  geometryCode = openFile(geometryPath);
+        
         const char* vShaderCode = vertexCode.c_str();
         const char* fShaderCode = fragmentCode.c_str();
         // 2. compile shaders
@@ -68,7 +41,7 @@ public:
         glCompileShader(fragment);
         checkCompileErrors(fragment, "FRAGMENT");
         // if geometry shader is given, compile geometry shader
-        unsigned int geometry;
+        unsigned int geometry = 0;
         if(geometryPath != nullptr)
         {
             const char * gShaderCode = geometryCode.c_str();
@@ -90,8 +63,41 @@ public:
         glDeleteShader(fragment);
         if(geometryPath != nullptr)
             glDeleteShader(geometry);
-
     }
+    
+    
+    std::string PreprocessIncludes(const std::string& source, int level = 0)
+    {
+        if(level > 32)
+            throw "header inclusion depth limit reached, might be caused by cyclic header inclusion";
+        
+        std::regex re("^[ ]*#[ ]*include[ ]+[\"<](.*)[\">].*");
+        std::stringstream input;
+        std::stringstream output;
+        input << source;
+        
+        size_t line_number = 1;
+        std::smatch matches;
+        
+        std::string line;
+        while(std::getline(input,line))
+        {
+            if (std::regex_search(line, matches, re))
+            {
+                std::string include_file = matches[1];
+                std::string include_string = openFile(include_file.c_str());
+                output << PreprocessIncludes(include_string, level + 1) << std::endl;
+            }
+            else
+            {
+                output <<  line << std::endl;
+            }
+            ++line_number;
+        }
+        return output.str();
+    }
+    
+    
     
     void use() 
     { 
@@ -156,6 +162,27 @@ public:
     }
 
 private:
+    
+    std::string openFile(const char* path)
+    {
+        std::string text;
+        std::ifstream file;
+        file.exceptions (std::ifstream::failbit | std::ifstream::badbit);
+        try
+        {
+            file.open(path);
+            std::stringstream stream;
+            stream << file.rdbuf();
+            file.close();
+            text = stream.str();
+        }
+        catch (std::ifstream::failure e)
+        {
+            std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
+        }
+        return text;
+    }
+
     
     void checkCompileErrors(GLuint shader, std::string type)
     {

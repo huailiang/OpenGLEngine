@@ -34,6 +34,8 @@ public:
         std::cout<<"copy constructor called"<<std::endl;
     }
     
+    virtual ~UIEvent() { }
+    
     virtual bool IsHit(float x,float y) = 0;
     
     virtual void OnTriger() { } 
@@ -56,6 +58,9 @@ public:
             callback(this, arg);
         }
     }
+
+protected:
+    bool interact;
 
 private:
     ClickCallback callback;

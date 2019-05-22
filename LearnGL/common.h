@@ -17,6 +17,7 @@
 #include <vector>
 #include <stdio.h>
 #include <stdio.h>
+#include <regex>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -28,6 +29,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "ext/stb_image.h"
 
+#include "std/shader.h"
 
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
@@ -36,6 +38,7 @@ const unsigned int SCR_HEIGHT = 600;
 unsigned int RENDER_WIDTH = 1600;
 unsigned int RENDER_HEIGTH = 1200;
 
+Shader* outlineShader;
 
 #define DeclareSington(TYPE)  \
 private:    \
@@ -165,6 +168,7 @@ void InitQuad(unsigned int &quadVAO, unsigned int &quadVBO)
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
 }
+
 
 
 #endif /* common_h */

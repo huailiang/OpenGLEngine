@@ -17,6 +17,8 @@
 		4CD27D482283070B0038AE21 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD27D472283070B0038AE21 /* CoreVideo.framework */; };
 		4CD27D4A228307760038AE21 /* libglfw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD27D49228307760038AE21 /* libglfw3.a */; };
 		4CEB97B722891FA100ACDDC6 /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB97B622891FA100ACDDC6 /* glad.c */; };
+		4CF61A622295923600C450B7 /* brdf.glsl in Sources */ = {isa = PBXBuildFile; fileRef = 4CF61A602295923600C450B7 /* brdf.glsl */; };
+		4CF61A632295923600C450B7 /* const.glsl in Sources */ = {isa = PBXBuildFile; fileRef = 4CF61A612295923600C450B7 /* const.glsl */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -95,6 +97,8 @@
 		4CEF90E92283D04200068D1E /* model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = model.h; sourceTree = "<group>"; };
 		4CEF90EA2283FD5F00068D1E /* stb_image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
 		4CEF92672284174200068D1E /* profile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = profile.h; sourceTree = "<group>"; };
+		4CF61A602295923600C450B7 /* brdf.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = brdf.glsl; sourceTree = "<group>"; };
+		4CF61A612295923600C450B7 /* const.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = const.glsl; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +152,7 @@
 		4C551FB422846F46002D535F /* shader */ = {
 			isa = PBXGroup;
 			children = (
+				4CF61A5E2295902900C450B7 /* lib */,
 				4C39CA8B22924D5800371C30 /* gizmos */,
 				4C29DB02228ADBB20037A97E /* instance.vs */,
 				4CA88EBA2290FD3A004E2510 /* instance.fs */,
@@ -265,6 +270,15 @@
 			path = std;
 			sourceTree = "<group>";
 		};
+		4CF61A5E2295902900C450B7 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				4CF61A602295923600C450B7 /* brdf.glsl */,
+				4CF61A612295923600C450B7 /* const.glsl */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -321,7 +335,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CF61A632295923600C450B7 /* const.glsl in Sources */,
 				4CD27D2F2282F4E30038AE21 /* main.cpp in Sources */,
+				4CF61A622295923600C450B7 /* brdf.glsl in Sources */,
 				4CEB97B722891FA100ACDDC6 /* glad.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

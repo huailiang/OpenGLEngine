@@ -22,7 +22,6 @@ public:
     
 protected:
     float posx, posy;
-    bool interact;
 };
 
 #endif /* UIBase_h */

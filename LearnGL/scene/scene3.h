@@ -50,7 +50,7 @@ public:
     void DrawShadow(Shader *depthShader)
     {
         Scene::DrawShadow(depthShader);
-        RenderScene(*depthShader);
+        RenderScene(depthShader);
     }
 
     
@@ -69,34 +69,34 @@ public:
         glBindTexture(GL_TEXTURE_2D, woodTexture);
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, depthMap);
-        RenderScene(*shadowShader);
+        RenderScene(shadowShader);
     }
     
     
-    void RenderScene(const Shader &shader)
+    void RenderScene(const Shader *shader)
     {
         // floor
         glm::mat4 model = glm::mat4(1.0f);
-        shader.setMat4("model", model);
+        shader->setMat4("model", model);
         glBindVertexArray(planeVAO);
         glDrawArrays(GL_TRIANGLES, 0, 6);
         // cubes
-        glBindVertexArray(cubeVAO);
         renderCube(glm::vec3(0.0f, 0.2f, -1.6), 0.5f, 0.0f, shader);
         renderCube(glm::vec3(2.0f, 0.0f, -1.0), 0.5f, 0.0f, shader);
         renderCube(glm::vec3(-1.0f,0.0f, -2.0), 0.25f, 16 * timeValue, shader);
-        glBindVertexArray(0);
     }
     
     
-    void renderCube(glm::vec3 pos, float scale, float ang, const Shader &shader)
+    void renderCube(glm::vec3 pos, float scale, float ang, const Shader *shader)
     {
+        glBindVertexArray(cubeVAO);
         glm::mat4 model(1.0f);
         model = glm::translate(model, pos);
         model = glm::rotate(model, glm::radians(ang), glm::normalize(glm::vec3(1.0, 0.0, 1.0)));
         model = glm::scale(model, glm::vec3(scale));
-        shader.setMat4("model", model);
+        shader->setMat4("model", model);
         glDrawArrays(GL_TRIANGLES, 0, 36);
+        glBindVertexArray(0);
     }
 
     

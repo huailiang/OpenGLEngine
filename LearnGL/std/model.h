@@ -40,6 +40,20 @@ public:
 
     void Draw(Shader* shader, Camera* camera, Light* light, vec3 pos, vec3 scale, float angle)
     {
+        renderModel(shader, camera, light, pos, scale, angle);
+    }
+    
+    void DrawShadow(Shader* shader, Camera* camera, Light* light, vec3 pos, vec3 scale, float angle)
+    {
+        shader->use();
+        shader->setMat4("model", GetModelMatrix(pos, scale, angle));
+        for(unsigned int i = 0; i < meshes.size(); i++)
+            meshes[i].DrawMesh();
+    }
+
+private:
+    void renderModel(Shader* shader, Camera* camera, Light* light, vec3 pos, vec3 scale, float angle)
+    {
         shader->use();
         light->Apply(shader);
         shader->setMat4("model", GetModelMatrix(pos, scale, angle));
@@ -52,15 +66,7 @@ public:
             meshes[i].Draw(shader);
     }
     
-    void DrawShadow(Shader* shader, Camera* camera, Light* light, vec3 pos, vec3 scale, float angle)
-    {
-        shader->use();
-        shader->setMat4("model", GetModelMatrix(pos, scale, angle));
-        for(unsigned int i = 0; i < meshes.size(); i++)
-            meshes[i].DrawMesh();
-    }
-
-private:
+    
     void loadModel(string const &path)
     {
         Assimp::Importer importer;

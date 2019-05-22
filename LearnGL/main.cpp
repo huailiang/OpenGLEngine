@@ -64,21 +64,23 @@ int main(int argc, const char * argv[])
         return -1;
     }
     
-    glEnable(GL_DEPTH_TEST);
+    
+    outlineShader = new Shader("shader/model.vs","shader/outline.fs");
+    
     TTFont::getInstance()->initial();
     SceneMgr::getInstance()->Init();
-    
-    
+
+
     while (!glfwWindowShouldClose(window))
     {
         processInput(window);
-        
+
         float timeValue = glfwGetTime();
         deltatime  = timeValue-lastTime;
         lastTime= timeValue;
         SceneMgr::getInstance()->Draw(deltatime);
         UIManager::getInstance()->Draw();
-        
+
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
