@@ -10,6 +10,38 @@ Running on the macos
 5. glm
 
 
+## Feature
+
+1. support include library in glsl
+
+```c
+#include "lib/brdf.glsl"
+```
+
+2. support define glsl macro in cpp
+
+if you used macro like this in your glsl:
+
+```c
+#ifdef _CALLBACK__ 
+for(int i=0;i<LIGHT_NUM;i++)
+{
+	[...]
+}
+#else
+[...]
+#endif
+```
+
+you can generate kinds of varances before compile in c++:
+
+```cpp
+Shader("model.vs","outline.fs",nullptr, Macro("_CALLBACK__","","LIGHT_NUM","4")
+```
+
+
+You can review synthetic shader in /temp/ folder.
+
 ## Light 
 
 #define _SpotLight_ in main.cpp & at main.fs 
