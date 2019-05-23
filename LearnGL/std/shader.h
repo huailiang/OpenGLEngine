@@ -16,18 +16,21 @@ class Shader
 public:
     unsigned int ID;
     
-    Shader(const char* vertexPath, const char* fragmentPath, const char* geometryPath = nullptr)
+    typedef std::string (*SetMacro)();
+    
+    
+    Shader(const char* vertexPath, const char* fragmentPath, const char* geometryPath = nullptr, std::string macro= "")
     {
         // 1. retrieve the vertex/fragment source code from filePath
         std::string vertexCode = openFile(vertexPath);
         std::string fragmentCode = openFile(fragmentPath);
-        vertexCode = PreprocessIncludes(vertexCode);
-        fragmentCode = PreprocessIncludes(fragmentCode);
+        vertexCode = PreprocessIncludes(vertexCode, macro);
+        fragmentCode = PreprocessIncludes(fragmentCode, macro);
         std::string geometryCode;
         if(geometryPath != nullptr)  geometryCode = openFile(geometryPath);
-        
         const char* vShaderCode = vertexCode.c_str();
         const char* fShaderCode = fragmentCode.c_str();
+//        std::cout<<fragmentCode<<std::endl;
         // 2. compile shaders
         unsigned int vertex, fragment;
         // vertex shader
@@ -66,7 +69,7 @@ public:
     }
     
     
-    std::string PreprocessIncludes(const std::string& source, int level = 0)
+    std::string PreprocessIncludes(const std::string& source, std::string macro ="", int level = 0)
     {
         if(level > 32)
             throw "header inclusion depth limit reached, might be caused by cyclic header inclusion";
@@ -78,19 +81,29 @@ public:
         
         size_t line_number = 1;
         std::smatch matches;
-        
+        bool find = false;
         std::string line;
+        
         while(std::getline(input,line))
         {
             if (std::regex_search(line, matches, re))
             {
                 std::string include_file = matches[1];
                 std::string include_string = openFile(include_file.c_str());
-                output << PreprocessIncludes(include_string, level + 1) << std::endl;
+                output << PreprocessIncludes(include_string, "", level + 1) << std::endl;
             }
             else
             {
                 output <<  line << std::endl;
+            }
+            if(!find && level == 0)
+            {
+                std::size_t found = line.find("");
+                if(found != std::string::npos)
+                {
+                    output<<macro<<std::endl;
+                    find = true;
+                }
             }
             ++line_number;
         }
@@ -103,7 +116,7 @@ public:
     { 
         glUseProgram(ID); 
     }
-    // utility uniform functions
+    
     void setBool(const std::string &name, bool value) const
     {         
         glUniform1i(glGetUniformLocation(ID, name.c_str()), (int)value); 

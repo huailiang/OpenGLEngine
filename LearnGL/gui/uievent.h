@@ -34,7 +34,10 @@ public:
         std::cout<<"copy constructor called"<<std::endl;
     }
     
-    virtual ~UIEvent() { }
+    virtual ~UIEvent()
+    {
+        callback = NULL;
+    }
     
     virtual bool IsHit(float x,float y) = 0;
     
@@ -63,7 +66,7 @@ protected:
     bool interact;
 
 private:
-    ClickCallback callback;
+    ClickCallback callback = NULL;
     void* arg;
 
 };

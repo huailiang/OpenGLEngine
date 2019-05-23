@@ -170,5 +170,42 @@ void InitQuad(unsigned int &quadVAO, unsigned int &quadVBO)
 }
 
 
+#define MACRO(k1, v1) \
+    stream << "#define " << k1; \
+    if(v1) stream << "  "<<v1;  \
+    stream << std::endl;
+
+
+std::string Macro(const char* k1)
+{
+    std::stringstream stream;
+    MACRO(k1, NULL)
+    return stream.str();
+}
+
+std::string Macro(const char* k1, const char* v1)
+{
+    std::stringstream stream;
+    MACRO(k1, v1)
+    return stream.str();
+}
+
+std::string Macro(const char* k1, const char* v1, const char* k2, const char* v2)
+{
+    std::stringstream stream;
+    MACRO(k1, v1)
+    MACRO(k2, v2)
+    return stream.str();
+}
+
+std::string Macro(const char* k1, const void* v1, const char* k2, const void* v2, const char* k3, const char* v3)
+{
+    std::stringstream stream;
+    MACRO(k1, v1)
+    MACRO(k2, v2)
+    MACRO(k3, v3)
+    return stream.str();
+}
+
 
 #endif /* common_h */
