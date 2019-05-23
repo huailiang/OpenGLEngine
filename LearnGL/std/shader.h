@@ -66,6 +66,12 @@ public:
         glDeleteShader(fragment);
         if(geometryPath != nullptr)
             glDeleteShader(geometry);
+        
+#ifdef DEBUG
+        Save(vertexCode, vertexPath);
+        Save(fragmentCode, fragmentPath);
+        if(geometryPath!=nullptr)Save(geometryCode, geometryPath);
+#endif
     }
     
     
@@ -176,13 +182,34 @@ public:
 
 private:
     
-    std::string openFile(const char* path)
+    //complete shader for debug
+    void Save(std::string text, const char* name)
+    {
+        std::string path(name);
+        path = "temp/"+path;
+        std::ofstream file;
+        file.exceptions (std::ofstream::failbit | std::ofstream::badbit);
+        try
+        {
+            file.open(path,std::ostream::app);
+            file << text;
+            file.close();
+        }
+        catch (std::ofstream::failure e)
+        {
+            std::cout << "ERROR::SHADER::SAVE, " <<name<< std::endl;
+        }
+    }
+    
+    std::string openFile(const char* name)
     {
         std::string text;
         std::ifstream file;
         file.exceptions (std::ifstream::failbit | std::ifstream::badbit);
         try
         {
+            std::string path(name);
+            path = "shader/" + path;
             file.open(path);
             std::stringstream stream;
             stream << file.rdbuf();
@@ -191,7 +218,7 @@ private:
         }
         catch (std::ifstream::failure e)
         {
-            std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
+            std::cout << "ERROR::SHADER::READ, "<<name << std::endl;
         }
         return text;
     }

@@ -80,7 +80,7 @@ public:
     
     int initial()
     {
-        shader =new Shader("shader/ttfont.vs","shader/ttfrag.fs");
+        shader =new Shader("ttfont.vs","ttfrag.fs");
         mat4 proj = ortho(0.0f, 800.0f, 0.0f, 600.0f);
         shader->use();
         shader->setMat4("projection", proj);

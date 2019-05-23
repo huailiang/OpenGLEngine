@@ -35,7 +35,7 @@ public:
     void InitScene()
     {
         InitCube(vao, vbo);
-        shader = new LightShader("shader/light.vs","shader/light.fs");
+        shader = new LightShader("light.vs","light.fs");
         shader->use();
         shader->setInt("texture1", 0);
         shader->setInt("texture2", 1);

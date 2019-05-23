@@ -60,7 +60,7 @@ private:
     
     void InitBackground()
     {
-        shader = new Shader("shader/gizmos/button.vs","shader/gizmos/pixel.fs","shader/gizmos/button.gs");
+        shader = new Shader("gizmos/button.vs","gizmos/pixel.fs","gizmos/button.gs");
         glGenVertexArrays(1, &vao);
         glGenBuffers(1, &vbo);
         glBindVertexArray(vao);

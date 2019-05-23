@@ -19,7 +19,7 @@ class Screen
 public:
     Screen()
     {
-        shader = new Shader("shader/screen.vs","shader/screen.fs");
+        shader = new Shader("screen.vs","screen.fs");
         InitQuad();
         InitFrame();
     }

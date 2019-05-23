@@ -40,8 +40,8 @@ public:
     
     void InitScene()
     {
-        shader = new LightShader("shader/model.vs", "shader/model.fs");
-        nmShader = new Shader("shader/gizmos/normal.vs","shader/gizmos/pixel.fs","shader/gizmos/normal.gs");
+        shader = new LightShader("model.vs", "model.fs");
+        nmShader = new Shader("gizmos/normal.vs","gizmos/pixel.fs","gizmos/normal.gs");
         model = new Model("resources/objects/nanosuit/nanosuit.obj");
         terrain = new Terrain();
     }

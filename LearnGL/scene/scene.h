@@ -68,8 +68,8 @@ public:
         InitScene();
         if(drawShadow())
         {
-            depthShader  = new Shader("shader/depth.vs","shader/depth.fs");
-            debugShader = new Shader("shader/debug.vs", "shader/debug.fs");
+            depthShader  = new Shader("depth.vs","depth.fs");
+            debugShader = new Shader("debug.vs", "debug.fs");
             InitDepthBuffer();
             InitQuad(quadVAO, quadVBO);
         }

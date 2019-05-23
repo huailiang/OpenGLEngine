@@ -1,7 +1,7 @@
 #ifndef _BRDF_
 #define _BRDF_
 
-#include "shader/lib/const.glsl"
+#include "lib/const.glsl"
 
 float DistributionGGX(vec3 N, vec3 H, float roughness)
 {

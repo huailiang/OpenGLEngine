@@ -20,8 +20,8 @@ class Terrain
 public:
     Terrain()
     {
-        shader = new Shader("shader/sample.vs","shader/sample.fs");
-        shader2 = new Shader("shader/instance.vs","shader/instance.fs");
+        shader = new Shader("sample.vs","sample.fs");
+        shader2 = new Shader("instance.vs","instance.fs");
         TTexture("resources/textures/metal.png", &floorTexture);
         TTexture("resources/textures/grass.png", &grassTexture,false,GL_CLAMP_TO_EDGE);
         
