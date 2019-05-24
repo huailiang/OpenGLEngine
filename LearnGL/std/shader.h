@@ -21,8 +21,8 @@ public:
         // 1. retrieve the vertex/fragment source code from filePath
         std::string vertexCode = openFile(vertexPath);
         std::string fragmentCode = openFile(fragmentPath);
-        vertexCode = PreprocessIncludes(vertexCode, macro);
-        fragmentCode = PreprocessIncludes(fragmentCode, macro);
+        vertexCode = preprocessIncludes(vertexCode, macro);
+        fragmentCode = preprocessIncludes(fragmentCode, macro);
         std::string geometryCode;
         if(geometryPath != nullptr)  geometryCode = openFile(geometryPath);
         const char* vShaderCode = vertexCode.c_str();
@@ -64,57 +64,14 @@ public:
             glDeleteShader(geometry);
         
 #ifdef DEBUG
-        Save(vertexCode, vertexPath);
-        Save(fragmentCode, fragmentPath);
-        if(geometryPath!=nullptr)Save(geometryCode, geometryPath);
+        save(vertexCode, vertexPath);
+        save(fragmentCode, fragmentPath);
+        if(geometryPath!=nullptr) save(geometryCode, geometryPath);
 #endif
     }
     
     
-    std::string PreprocessIncludes(const std::string& source, std::string macro ="", int level = 0)
-    {
-        if(level > 32)
-            throw "header inclusion depth limit reached, might be caused by cyclic header inclusion";
-        
-        std::regex re("^[ ]*#[ ]*include[ ]+[\"<](.*)[\">].*");
-        std::stringstream input;
-        std::stringstream output;
-        input << source;
-        
-        size_t line_number = 1;
-        std::smatch matches;
-        bool find = false;
-        std::string line;
-        
-        while(std::getline(input,line))
-        {
-            if (std::regex_search(line, matches, re))
-            {
-                std::string include_file = matches[1];
-                std::string include_string = openFile(include_file.c_str());
-                output << PreprocessIncludes(include_string, "", level + 1) << std::endl;
-            }
-            else
-            {
-                output <<  line << std::endl;
-            }
-            if(!find && level == 0)
-            {
-                std::size_t found = line.find("");
-                if(found != std::string::npos)
-                {
-                    output<<macro<<std::endl;
-                    find = true;
-                }
-            }
-            ++line_number;
-        }
-        return output.str();
-    }
-    
-    
-    
-    void use() 
+    void use()
     { 
         glUseProgram(ID); 
     }
@@ -178,8 +135,49 @@ public:
 
 private:
     
+    std::string preprocessIncludes(const std::string& source, std::string macro ="", int level = 0)
+    {
+        if(level > 32)
+        throw "header inclusion depth limit reached, might be caused by cyclic header inclusion";
+        
+        std::regex re("^[ ]*#[ ]*include[ ]+[\"<](.*)[\">].*");
+        std::stringstream input;
+        std::stringstream output;
+        input << source;
+        
+        size_t line_number = 1;
+        std::smatch matches;
+        bool find = false;
+        std::string line;
+        
+        while(std::getline(input,line))
+        {
+            if (std::regex_search(line, matches, re))
+            {
+                std::string include_file = matches[1];
+                std::string include_string = openFile(include_file.c_str());
+                output << preprocessIncludes(include_string, "", level + 1) << std::endl;
+            }
+            else
+            {
+                output <<  line << std::endl;
+            }
+            if(!find && level == 0)
+            {
+                std::size_t found = line.find("");
+                if(found != std::string::npos)
+                {
+                    output<<macro<<std::endl;
+                    find = true;
+                }
+            }
+            ++line_number;
+        }
+        return output.str();
+    }
+    
     //complete shader for debug
-    void Save(std::string text, const char* name)
+    void save(std::string text, const char* name)
     {
         std::string path(name);
         path = "temp/"+path;

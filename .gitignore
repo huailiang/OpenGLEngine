@@ -1,4 +1,5 @@
-LearnGL/temp/
+LearnGL/temp/*.fs
+LearnGL/temp/*.vs
 **/.vs/
 **/.vscode/
 **/build/project/

@@ -86,6 +86,7 @@
 		4CD27D472283070B0038AE21 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		4CD27D49228307760038AE21 /* libglfw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglfw3.a; path = ../../../../../../usr/local/lib/libglfw3.a; sourceTree = "<group>"; };
 		4CE4985E2297CD340020EDCB /* util.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = util.glsl; sourceTree = "<group>"; };
+		4CE498622297E6D30020EDCB /* camera.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = camera.glsl; sourceTree = "<group>"; };
 		4CEB97B622891FA100ACDDC6 /* glad.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glad.c; sourceTree = "<group>"; };
 		4CEB97BA2289991000ACDDC6 /* screen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = screen.h; sourceTree = "<group>"; };
 		4CEB97BC2289AB9A00ACDDC6 /* cube.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = cube.vs; sourceTree = "<group>"; };
@@ -277,6 +278,7 @@
 			children = (
 				4CF61A602295923600C450B7 /* brdf.glsl */,
 				4CC5E1A52297859C00CDD37A /* light.glsl */,
+				4CE498622297E6D30020EDCB /* camera.glsl */,
 				4CE4985E2297CD340020EDCB /* util.glsl */,
 				4CF61A612295923600C450B7 /* const.glsl */,
 			);
