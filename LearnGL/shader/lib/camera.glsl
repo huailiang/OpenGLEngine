@@ -15,14 +15,14 @@ layout (std140) uniform Block
 {
 	mat4 cam_proj;
 	mat4 cam_view;
-//    vec3 cam_pos;
+    vec3 cam_pos;
 };
 
 
-//vec3 Engine_ViewPos
-//{
-//    return cam_pos;
-//}
+vec3 Engine_ViewPos()
+{
+    return cam_pos;
+}
 
 
 mat4 Engine_VP()
@@ -34,8 +34,5 @@ mat4 Engine_MVP(mat4 model)
 {
 	return Engine_VP() * model;
 }
-
-
-
 
 #endif
