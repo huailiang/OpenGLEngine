@@ -79,6 +79,7 @@
 		4CC436B322882C870095D759 /* sample.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = sample.vs; sourceTree = "<group>"; };
 		4CC436B422882C870095D759 /* sample.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = sample.fs; sourceTree = "<group>"; };
 		4CC436B522882CFD0095D759 /* terrain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = terrain.h; sourceTree = "<group>"; };
+		4CC5E1A52297859C00CDD37A /* light.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = light.glsl; sourceTree = "<group>"; };
 		4CD27D2B2282F4E30038AE21 /* LearnGL */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LearnGL; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CD27D2E2282F4E30038AE21 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4CD27D3E2283022D0038AE21 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -274,6 +275,7 @@
 			isa = PBXGroup;
 			children = (
 				4CF61A602295923600C450B7 /* brdf.glsl */,
+				4CC5E1A52297859C00CDD37A /* light.glsl */,
 				4CF61A612295923600C450B7 /* const.glsl */,
 			);
 			path = lib;

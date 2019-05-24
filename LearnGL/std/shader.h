@@ -16,9 +16,6 @@ class Shader
 public:
     unsigned int ID;
     
-    typedef std::string (*SetMacro)();
-    
-    
     Shader(const char* vertexPath, const char* fragmentPath, const char* geometryPath = nullptr, std::string macro= "")
     {
         // 1. retrieve the vertex/fragment source code from filePath
@@ -30,7 +27,6 @@ public:
         if(geometryPath != nullptr)  geometryCode = openFile(geometryPath);
         const char* vShaderCode = vertexCode.c_str();
         const char* fShaderCode = fragmentCode.c_str();
-//        std::cout<<fragmentCode<<std::endl;
         // 2. compile shaders
         unsigned int vertex, fragment;
         // vertex shader
@@ -191,7 +187,7 @@ private:
         file.exceptions (std::ofstream::failbit | std::ofstream::badbit);
         try
         {
-            file.open(path,std::ostream::app);
+            file.open(path,std::ostream::trunc);
             file << text;
             file.close();
         }
