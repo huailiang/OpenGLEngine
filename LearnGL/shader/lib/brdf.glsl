@@ -25,6 +25,7 @@ float DistributionGGX(vec3 N, vec3 H, float roughness)
     return nom / max(denom, 0.001); // prevent divide by zero for roughness=0.0 and NdotH=1.0
 }
 
+
 /*
  微面元遮挡函数
  */

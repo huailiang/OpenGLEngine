@@ -22,6 +22,21 @@
 #define atan2(y,x) atan(x,y)
 
 
+vec2 pow(vec2 x, float y)
+{
+    return vec2(pow(x.x, y), pow(x.y,y));
+}
+
+vec3 pow(vec3 x, float y)
+{
+    return vec3(pow(x.x, y), pow(x.y,y), pow(x.z, y));
+}
+
+vec4 pow(vec4 x, float y)
+{
+    return vec4(pow(x.x, y), pow(x.y,y), pow(x.z, y), pow(x.w, y));
+}
+
 // Unpack normal as DXT5nm (1, y, 1, x) or BC5 (x, y, 0, 1)
 // Note neutral texture like "bump" is (0, 0, 1, 1) to work with both plain RGB normal and DXT5nm/BC5
 vec3 UnpackNormalmapRGorAG(vec4 packednormal)
@@ -65,9 +80,90 @@ float DecodeFloatRGBA(vec4 enc)
 }
 
 
+/*
+ 灰度公式 区分线性空间和gammaf空间
+ */
 float Luminance(vec3 rgb)
 {
     return dot(rgb, ColorSpaceLuminance.rgb);
+}
+
+
+bool IsGammaSpace()
+{
+#ifdef COLORSPACE_GAMMA
+    return true;
+#else
+    return false;
+#endif
+}
+
+
+float GammaToLinearSpaceExact (float value)
+{
+    if (value <= 0.04045F)
+        return value / 12.92F;
+    else if (value < 1.0F)
+        return pow((value + 0.055F)/1.055F, 2.4F);
+    else
+        return pow(value, 2.2F);
+}
+
+vec3 GammaToLinearSpace (vec3 sRGB)
+{
+    // Approximate version from http://chilliant.blogspot.com.au/2012/08/srgb-approximations-for-hlsl.html?m=1
+    return sRGB * (sRGB * (sRGB * 0.305306011f + 0.682171111f) + 0.012522878f);
+    
+    // Precise version, useful for debugging.
+    //return vec3(GammaToLinearSpaceExact(sRGB.r), GammaToLinearSpaceExact(sRGB.g), GammaToLinearSpaceExact(sRGB.b));
+}
+
+float LinearToGammaSpaceExact (float value)
+{
+    if (value <= 0.0F)
+        return 0.0F;
+    else if (value <= 0.0031308F)
+        return 12.92F * value;
+    else if (value < 1.0F)
+        return 1.055F * pow(value, 0.4166667F) - 0.055F;
+    else
+        return pow(value, 0.45454545F);
+}
+
+vec3 LinearToGammaSpace (vec3 linRGB)
+{
+    linRGB = max(linRGB, vec3(0.f, 0.f, 0.f));
+    // An almost-perfect approximation from http://chilliant.blogspot.com.au/2012/08/srgb-approximations-for-hlsl.html?m=1
+    return max(1.055f * pow(linRGB, 0.416666667f) - 0.055f, 0.0f);
+    
+    // Exact version, useful for debugging.
+    //return vec3(LinearToGammaSpaceExact(linRGB.r), LinearToGammaSpaceExact(linRGB.g), LinearToGammaSpaceExact(linRGB.b));
+}
+
+// Decodes HDR textures
+// handles dLDR, RGBM formats
+vec3 DecodeHDR (vec4 data, vec4 decodeInstructions)
+{
+    // Take into account texture alpha if decodeInstructions.w is true(the alpha value affects the RGB channels)
+    float alpha = decodeInstructions.w * (data.a - 1.0) + 1.0;
+    
+    // If Linear mode is not supported we can skip exponent part
+#if defined(COLORSPACE_GAMMA)
+    return (decodeInstructions.x * alpha) * data.rgb;
+#else
+#   if defined(USE_NATIVE_HDR)
+    return decodeInstructions.x * data.rgb; // Multiplier for future HDRI relative to absolute conversion.
+#   else
+    return (decodeInstructions.x * pow(alpha, decodeInstructions.y)) * data.rgb;
+#   endif
+#endif
+}
+
+// required when using a perspective projection matrix
+float LinearizeDepth(float depth, float near_plane, float far_plane)
+{
+    float z = depth * 2.0 - 1.0; // Back to NDC
+    return (2.0 * near_plane * far_plane) / (far_plane + near_plane - z * (far_plane - near_plane));
 }
 
 
