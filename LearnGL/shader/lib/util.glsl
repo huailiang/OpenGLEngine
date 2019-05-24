@@ -1,5 +1,5 @@
-#ifndef _STANDARD_
-#define _STANDARD_
+#ifndef _UTIL_
+#define _UTIL_
 
 #include "lib/const.glsl"
 
@@ -166,5 +166,11 @@ float LinearizeDepth(float depth, float near_plane, float far_plane)
     return (2.0 * near_plane * far_plane) / (far_plane + near_plane - z * (far_plane - near_plane));
 }
 
+// 
+vec3 Proj2Coord01(vec4 pos)
+{
+    vec3 projCoords = pos.xyz / pos.w;
+    return projCoords * 0.5 + 0.5;
+}
 
 #endif

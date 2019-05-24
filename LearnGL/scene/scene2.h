@@ -35,7 +35,8 @@ public:
     
     void InitLight()
     {
-        light = new DirectLight(vec3(1.0f), vec3(1.0f,0.0f,0.0f));
+//        light = new DirectLight(vec3(1.0f), vec3(1.0f,0.0f,0.0f));
+        light = new SpotLight(vec3(1), vec3(1,0,0), vec3(0,0,-1), vec3(0.3,0.09,0.032),6.0f,8.0f);
     }
     
     void InitScene()
@@ -48,7 +49,7 @@ public:
     
     void InitShader()
     {
-        shader = new LightShader("light.vs","light.fs");
+        shader = new LightShader("light.vs","light.fs", nullptr, Macro(light->getMacro().c_str()));
         shader->use();
         shader->setInt("texture1", 0);
         shader->setInt("texture2", 1);
@@ -73,7 +74,7 @@ public:
     {
         Scene::ClearScene();
         
-        vec3 cubePositions[] = { glm::vec3( 0.0f,  0.0f,  -2.0f), glm::vec3( 2.0f,  1.0f, -4.0f) };
+        vec3 cubePositions[] = { glm::vec3( 0.0f,  0.0f,  -2.0f), glm::vec3(2.0f,  1.0f, -4.0f) };
         shader->use();
         shader->setFloat("scale", 1);
         light->Apply(shader);
@@ -95,10 +96,18 @@ public:
         }
     }
     
+    void OnLightChange(int key)
+    {
+        if(light && shader)
+        {
+            light->Apply(shader);
+        }
+    }
+    
     
     void HandleClick(int evtid)
     {
-        delete shader;
+//        delete shader;
     }
     
 private:

@@ -3,8 +3,10 @@
 
 
 /*
-* ubo is designed for performance
-* There is main camera's data
+*
+* 使用ubo 也是为了性能优化
+* 这里主要存储了主摄像机的数据
+*
 */
 
 

@@ -1,12 +1,10 @@
 #ifndef _LIGHT_
 #define _LIGHT_
 
-//#define _SpotLight_
-
 #include "lib/camera.glsl"
 
 /*
-light cast material 
+ light cast material
 */
 struct Material
 {
@@ -17,7 +15,7 @@ struct Material
 };
 
 /*
-light inference config
+ light inference config
 */
 struct Light
 {
@@ -78,12 +76,12 @@ vec3 Blinn_Specular()
 
 vec3 LightColor()
 {
-    vec3 ambient = vec3(0.8f) * material.ambient;
+    vec3 ambient = vec3(0.08f) * material.ambient;
     vec3 diffuse = Diffuse();
     vec3 specular = Specular();
 
 #ifdef  _SpotLight_
-    lightDir = normalize(light.position - worldPos);
+    vec3 lightDir = normalize(light.position - worldPos);
     float theta = dot(lightDir, normalize(-light.direction));
     float epsilon = (light.cutOff - light.outerCutOff);
     float intensity = clamp((theta - light.outerCutOff) / epsilon, 0.25f, 1.0f);

@@ -29,29 +29,31 @@ public:
 
     Light(vec3 color,vec3 direction)
     {
-        this->color=color;
-        this->direction=direction;
+        this->color = color;
+        this->direction = direction;
     }
     
     virtual ~Light() { }
     
     void UpdateX(float dx)
     {
-        if(direction.x+dx<radians(60.0f))
+        if(direction.x + dx < radians(60.0f))
         {
-            direction.x+=dx;
+            direction.x += dx;
         }
     }
     
     void UpdateY(float dy)
     {
-        if(direction.y + dy <radians(60.0f))
+        if(direction.y + dy < radians(60.0f))
         {
-            direction.y+=dy;
+            direction.y += dy;
         }
     }
     
     LightType virtual getType() = 0;
+    
+    std::string virtual getMacro() = 0;
     
     void virtual Apply(Shader* shader) = 0;
 };
@@ -83,6 +85,11 @@ public:
     LightType  getType()
     {
         return LightDirect;
+    }
+    
+    std::string getMacro()
+    {
+        return "_DirectLight_";
     }
 };
 
@@ -121,6 +128,12 @@ public:
     {
         return LightPoint;
     }
+    
+    std::string getMacro()
+    {
+        return "_PointLight_";
+    }
+
 };
 
 
@@ -134,8 +147,8 @@ public:
     SpotLight(vec3 color, vec3 direction, vec3 pos, vec3 constant,float cutOff,float outerCutOff)
                     :PointLight(color, direction, pos,constant)
     {
-        this->cutOff=cutOff;
-        this->outerCutOff = outerCutOff;
+        this->cutOff= cos(cutOff);
+        this->outerCutOff = cos(outerCutOff);
     }
     
     void Apply(Shader* shader)
@@ -149,6 +162,12 @@ public:
     {
         return LightSpot;
     }
+    
+    std::string getMacro()
+    {
+        return "_SpotLight_";
+    }
+
 };
 
 #endif /* light_h */

@@ -102,6 +102,8 @@ public:
     
     virtual void DrawScene() { }
     
+    virtual void OnLightChange(int key) { }
+    
     void ClearScene()
     {
         glDisable(GL_BLEND);
@@ -158,16 +160,27 @@ public:
         if(light)
         {
             if ( glfwGetKey(window, GLFW_KEY_LEFT)== GLFW_PRESS)
-                light->UpdateX(-0.5f * deltatime);
+            {
+                light->UpdateX(-deltatime);
+                OnLightChange(GLFW_KEY_LEFT);
+            }
             if ( glfwGetKey(window, GLFW_KEY_RIGHT)== GLFW_PRESS)
-                light->UpdateX(0.5f * deltatime);
+            {
+                light->UpdateX(deltatime);
+                OnLightChange(GLFW_KEY_RIGHT);
+            }
             if ( glfwGetKey(window, GLFW_KEY_UP)== GLFW_PRESS)
-                light->UpdateY(0.5f * deltatime);
+            {
+                light->UpdateY(deltatime);
+                OnLightChange(GLFW_KEY_UP);
+            }
             if ( glfwGetKey(window, GLFW_KEY_DOWN)== GLFW_PRESS)
-                light->UpdateY(-0.5f * deltatime);
+            {
+                light->UpdateY(-deltatime);
+                OnLightChange(GLFW_KEY_DOWN);
+            }
         }
     }
-  
     
     void ProcessMouseMove(double xoffset,double yoffset)
     {

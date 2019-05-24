@@ -250,11 +250,12 @@ public:
     LightShader(const char* vertexPath,
                 const char* fragmentPath,
                 const char* geometryPath = nullptr,
+                std::string macro= "",
                 glm::vec3 ambinent = glm::vec3(1.0f, 1.0f, 1.0f),
                 glm::vec3 diffuse = glm::vec3(1.0f, 1.0f, 1.0f),
                 glm::vec3 specular = glm::vec3(1.0f, 1.0f, 1.0f),
                 float shiness=32.0f)
-        :Shader(vertexPath,fragmentPath,geometryPath)
+        :Shader(vertexPath,fragmentPath,geometryPath, macro)
     {
         this->ambinent = ambinent;
         this->diffuse = diffuse;
