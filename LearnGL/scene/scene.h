@@ -184,7 +184,15 @@ public:
             camera->ProcessMouseScroll(yoffset);
         }
     }
+    
+    
+protected:
+    void ApplyCamera(Shader* shader)
+    {
+        camera->Attach(shader);
+    }
 
+    
 private:
     void InitDepthBuffer()
     {
@@ -215,6 +223,7 @@ private:
         glDrawArrays(GL_TRIANGLES, 0, 6);
         glBindVertexArray(0);
     }
+    
     
 protected:
     Camera* camera;

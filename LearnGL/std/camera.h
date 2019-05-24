@@ -51,6 +51,7 @@ public:
         WorldUp = up;
         Yaw = yaw;
         Pitch = pitch;
+        InitUbo();
         updateCameraVectors();
     }
     
@@ -61,6 +62,7 @@ public:
         WorldUp = vec3(upX, upY, upZ);
         Yaw = yaw;
         Pitch = pitch;
+        InitUbo();
         updateCameraVectors();
     }
     
@@ -127,8 +129,38 @@ public:
         if (Zoom >= 45.0f)
             Zoom = 45.0f;
     }
+    
+    
+    void Attach(Shader* shader)
+    {
+        //config
+        unsigned int uniform = glGetUniformBlockIndex(shader->ID, "Block");
+        //link
+        glUniformBlockBinding(shader->ID, uniform, 0);
+        //bind to ubo
+        glBindBufferRange(GL_UNIFORM_BUFFER, 0, ubo, 0, 2 * sizeof(glm::mat4));
+        //update
+        updateUbo();
+    }
+    
 
 private:
+    void InitUbo()
+    {
+        glGenBuffers(1, &ubo);
+        glBindBuffer(GL_UNIFORM_BUFFER, ubo);
+        glBufferData(GL_UNIFORM_BUFFER, 2 * sizeof(glm::mat4), NULL, GL_STATIC_DRAW);
+        glBindBuffer(GL_UNIFORM_BUFFER, 0);
+    }
+    
+    void updateUbo()
+    {
+        glBindBuffer(GL_UNIFORM_BUFFER, ubo);
+        glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(glm::mat4), glm::value_ptr(GetProjMatrix()));
+        glBufferSubData(GL_UNIFORM_BUFFER, sizeof(glm::mat4), sizeof(glm::mat4), glm::value_ptr(GetViewMatrix()));
+        glBindBuffer(GL_UNIFORM_BUFFER, 0);
+    }
+    
     void updateCameraVectors()
     {
         glm::vec3 front;
@@ -138,6 +170,11 @@ private:
         Front = glm::normalize(front);
         Right = glm::normalize(glm::cross(Front, WorldUp));
         Up    = glm::normalize(glm::cross(Right, Front));
+        updateUbo();
     }
+    
+    
+private:
+    unsigned int ubo;
 };
 #endif

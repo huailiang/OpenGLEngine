@@ -55,6 +55,7 @@ public:
         shader->setInt("texture2", 1);
         shader->setVec3("viewPos", camera->Position);
         shader->ApplyLight();
+        ApplyCamera(shader);
     }
 
     

@@ -11,18 +11,18 @@ ubo is designed for performance
 There is main camera's data
 */
 
-layout (std140) uniform Camera
+layout (std140) uniform Block
 {
 	mat4 cam_proj;
 	mat4 cam_view;
-	vec3 cam_pos;
+//    vec3 cam_pos;
 };
 
 
-vec3 Engine_ViewPos
-{
-	return cam_pos;
-}
+//vec3 Engine_ViewPos
+//{
+//    return cam_pos;
+//}
 
 
 mat4 Engine_VP()
