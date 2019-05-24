@@ -64,6 +64,16 @@ vec3 Specular()
     return light.color * spec * material.specular;
 }
 
+vec3 Blinn_Specular()
+{
+    vec3 norm = normalize(normal);
+    vec3 lightDir = normalize(-light.direction);
+    vec3 viewDir = normalize(viewPos - worldPos);
+    vec3 halfwayDir = normalize(lightDir + viewDir);
+    float spec = pow(max(dot(normal, halfwayDir), 0.0), material.shininess);
+    return light.color * spec * material.specular;
+}
+
 
 vec3 LightColor()
 {

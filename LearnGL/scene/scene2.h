@@ -21,6 +21,12 @@ public:
         shader = NULL;
         glDeleteVertexArrays(1, &vao);
         glDeleteBuffers(1, &vbo);
+        delete btn_direct;
+        delete btn_point;
+        delete btn_spot;
+        btn_direct = NULL;
+        btn_point = NULL;
+        btn_spot = NULL;
     }
     
     int getType() { return TY_Scene2; }
@@ -35,21 +41,32 @@ public:
     void InitScene()
     {
         InitCube(vao, vbo);
+        InitShader();
+        TTexture("resources/textures/container.jpg", &texture1);
+        TTexture("resources/textures/awesomeface.png", &texture2);
+    }
+    
+    void InitShader()
+    {
+        const char* macros[] = { "", "_PointLight_", "_SpotLight_"};
         shader = new LightShader("light.vs","light.fs");
         shader->use();
         shader->setInt("texture1", 0);
         shader->setInt("texture2", 1);
         shader->setVec3("viewPos", camera->Position);
         shader->ApplyLight();
-
-        TTexture("resources/textures/container.jpg", &texture1);
-        TTexture("resources/textures/awesomeface.png", &texture2);
     }
 
     
     void DrawUI()
     {
         Scene::DrawUI();
+        btn_direct = new Button(vec2(720, 360), vec3(1,1,0), 0.6f, "dirc-light", 0);
+        btn_direct->RegistCallback(OnLightClick, this);
+        btn_point = new Button(vec2(720, 330), vec3(1,1,0), 0.6f, "point-light", 1);
+        btn_point->RegistCallback(OnLightClick, this);
+        btn_spot = new Button(vec2(720, 300), vec3(1,1,0), 0.6f, "spot-light", 2);
+        btn_spot->RegistCallback(OnLightClick, this);
     }
     
     
@@ -83,7 +100,25 @@ public:
         }
     }
     
+    
+    void HandleClick(int evtid)
+    {
+        delete shader;
+    }
+    
 private:
+    static void OnLightClick(UIEvent* contex, void* arg)
+    {
+        int evtid = contex->evtid;
+        std::cout<<"evtid: "<<evtid<<std::endl;
+        Scene2* scene = (Scene2*)(arg);
+        scene->HandleClick(evtid);
+    }
+
+    
+private:
+    Button* btn_direct, *btn_point, *btn_spot;
+
     unsigned int vbo, vao;
     unsigned int texture1, texture2;
     LightShader* shader;
