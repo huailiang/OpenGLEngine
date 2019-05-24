@@ -1,19 +1,18 @@
 #version 330 core
 
+
 #include "lib/light.glsl"
 #include "lib/util.glsl"
 
 out vec4 FragColor;
 
 in vec3 vertColor;
-// in vec3 normal;
-// in vec3 worldPos;
 in vec2 texCoord;
+
 
 uniform float scale;
 uniform sampler2D texture1;
 uniform sampler2D texture2;
-// uniform vec3 viewPos;
 
 void main()
 {

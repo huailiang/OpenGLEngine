@@ -156,7 +156,7 @@ private:
     
     void updateUbo()
     {
-        if(ubo>0)
+        if(ubo)
         {
             glBindBuffer(GL_UNIFORM_BUFFER, ubo);
             glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(mat4), glm::value_ptr(GetProjMatrix()));

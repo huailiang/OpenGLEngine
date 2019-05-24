@@ -3,6 +3,7 @@
 
 //#define _SpotLight_
 
+#include "lib/camera.glsl"
 
 /*
 light cast material 
@@ -37,7 +38,7 @@ struct Light
 
 in vec3 worldPos;
 in vec3 normal;
-uniform vec3 viewPos;
+
 uniform Light light;
 uniform Material material;
 
@@ -58,7 +59,7 @@ vec3 Specular()
 {
     vec3 norm = normalize(normal);
     vec3 lightDir = normalize(-light.direction);
-    vec3 viewDir = normalize(viewPos - worldPos);
+    vec3 viewDir = normalize(Camera_WorldPos() - worldPos);
     vec3 reflectDir = reflect(-lightDir, norm);
     float spec = pow(max(dot(viewDir, reflectDir), 0.0f), material.shininess);
     return light.color * spec * material.specular;
@@ -68,7 +69,7 @@ vec3 Blinn_Specular()
 {
     vec3 norm = normalize(normal);
     vec3 lightDir = normalize(-light.direction);
-    vec3 viewDir = normalize(viewPos - worldPos);
+    vec3 viewDir = normalize(Camera_WorldPos() - worldPos);
     vec3 halfwayDir = normalize(lightDir + viewDir);
     float spec = pow(max(dot(normal, halfwayDir), 0.0), material.shininess);
     return light.color * spec * material.specular;

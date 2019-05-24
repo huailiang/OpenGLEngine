@@ -48,12 +48,10 @@ public:
     
     void InitShader()
     {
-        const char* macros[] = { "", "_PointLight_", "_SpotLight_"};
         shader = new LightShader("light.vs","light.fs");
         shader->use();
         shader->setInt("texture1", 0);
         shader->setInt("texture2", 1);
-        shader->setVec3("viewPos", camera->Position);
         shader->ApplyLight();
         ApplyCamera(shader);
     }
@@ -76,8 +74,6 @@ public:
         Scene::ClearScene();
         
         vec3 cubePositions[] = { glm::vec3( 0.0f,  0.0f,  -2.0f), glm::vec3( 2.0f,  1.0f, -4.0f) };
-        mat4 view = camera->GetViewMatrix();
-        mat4 proj = camera->GetProjMatrix();
         shader->use();
         shader->setFloat("scale", 1);
         light->Apply(shader);
