@@ -1,6 +1,6 @@
 //
 //  terrain.h
-//  LearnGL
+//  OpenGLEngine
 //
 //  Created by 彭怀亮 on 5/12/19.
 //  Copyright © 2019 彭怀亮. All rights reserved.

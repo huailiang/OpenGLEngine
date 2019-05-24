@@ -1,6 +1,6 @@
 //
 //  texture.h
-//  LearnGL
+//  OpenGLEngine
 //
 //  Created by 彭怀亮 on 5/10/19.
 //  Copyright © 2019 彭怀亮. All rights reserved.

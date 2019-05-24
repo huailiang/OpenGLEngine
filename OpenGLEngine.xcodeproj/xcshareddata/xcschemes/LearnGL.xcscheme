@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4CD27D2A2282F4E30038AE21"
-               BuildableName = "LearnGL"
-               BlueprintName = "LearnGL"
-               ReferencedContainer = "container:LearnGL.xcodeproj">
+               BuildableName = "OpenGLEngine"
+               BlueprintName = "OpenGLEngine"
+               ReferencedContainer = "container:OpenGLEngine.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4CD27D2A2282F4E30038AE21"
-            BuildableName = "LearnGL"
-            BlueprintName = "LearnGL"
-            ReferencedContainer = "container:LearnGL.xcodeproj">
+            BuildableName = "OpenGLEngine"
+            BlueprintName = "OpenGLEngine"
+            ReferencedContainer = "container:OpenGLEngine.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4CD27D2A2282F4E30038AE21"
-            BuildableName = "LearnGL"
-            BlueprintName = "LearnGL"
-            ReferencedContainer = "container:LearnGL.xcodeproj">
+            BuildableName = "OpenGLEngine"
+            BlueprintName = "OpenGLEngine"
+            ReferencedContainer = "container:OpenGLEngine.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4CD27D2A2282F4E30038AE21"
-            BuildableName = "LearnGL"
-            BlueprintName = "LearnGL"
-            ReferencedContainer = "container:LearnGL.xcodeproj">
+            BuildableName = "OpenGLEngine"
+            BlueprintName = "OpenGLEngine"
+            ReferencedContainer = "container:OpenGLEngine.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

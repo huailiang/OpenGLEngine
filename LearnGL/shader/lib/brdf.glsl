@@ -54,7 +54,7 @@ float GeometrySmith(vec3 N, vec3 V, vec3 L, float roughness)
 
 
 /*
- 菲涅尔方程
+ 菲涅尔函数
  */
 vec3 FresnelSchlick(float cosTheta, vec3 F0)
 {
