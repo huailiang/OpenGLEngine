@@ -101,6 +101,7 @@ public:
             Position -= Right * velocity;
         if (direction == RIGHT)
             Position += Right * velocity;
+        updateUbo();
     }
 
     void ProcessMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch = true)
@@ -143,7 +144,7 @@ public:
         updateUbo();
     }
     
-
+    
 private:
     void InitUbo()
     {
@@ -155,13 +156,16 @@ private:
     
     void updateUbo()
     {
-        glBindBuffer(GL_UNIFORM_BUFFER, ubo);
-        glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(mat4), glm::value_ptr(GetProjMatrix()));
-        glBufferSubData(GL_UNIFORM_BUFFER, sizeof(mat4), sizeof(mat4), glm::value_ptr(GetViewMatrix()));
-         glBufferSubData(GL_UNIFORM_BUFFER, 2*sizeof(mat4), sizeof(vec3), glm::value_ptr(Position));
-        glBindBuffer(GL_UNIFORM_BUFFER, 0);
+        if(ubo>0)
+        {
+            glBindBuffer(GL_UNIFORM_BUFFER, ubo);
+            glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(mat4), glm::value_ptr(GetProjMatrix()));
+            glBufferSubData(GL_UNIFORM_BUFFER, sizeof(mat4), sizeof(mat4), glm::value_ptr(GetViewMatrix()));
+            glBufferSubData(GL_UNIFORM_BUFFER, 2*sizeof(mat4), sizeof(vec3), glm::value_ptr(Position));
+            glBindBuffer(GL_UNIFORM_BUFFER, 0);
+        }
     }
-    
+
     void updateCameraVectors()
     {
         glm::vec3 front;
@@ -176,6 +180,6 @@ private:
     
     
 private:
-    unsigned int ubo;
+    unsigned int ubo = 0;
 };
 #endif

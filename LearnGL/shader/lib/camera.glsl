@@ -4,12 +4,10 @@
 
 /*
 ubo is designed for performance
+ 
+ There is main camera's data
 */
 
-
-/*
-There is main camera's data
-*/
 
 layout (std140) uniform Block
 {

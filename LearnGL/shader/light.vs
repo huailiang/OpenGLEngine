@@ -11,12 +11,10 @@ out vec3 worldPos;
 #include "lib/camera.glsl"
 
 uniform mat4 model;
-//uniform mat4 view;
-//uniform mat4 projection;
 
 void main()
 {
-    gl_Position = cam_proj * cam_view * model * vec4(aPos, 1.0f);
+    gl_Position = Engine_MVP(model) * vec4(aPos, 1.0f);
     worldPos = (model * vec4(aPos, 1.0f)).xyz;
     normal = mat3(transpose(inverse(model))) * aNormal;
     vertColor = vec3(1.0f,1.0f,1.0f);
