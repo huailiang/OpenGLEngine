@@ -63,8 +63,9 @@ ui可以画Label, Button
 
 ## 5. 更多就不枚举了
 
-比如使用GPU Instance 批量画草， geomotry Shader显示法线， 更多的功能等你去探索
+比如使用GPU Instance 批量画草， geomotry Shader显示法线，变换帧缓存后处理， PBR、BRDF、 IBL 更多的功能等你去探索
 
+后期会逐步扩展引擎， 比如AR模块、lua热更模块、编写更多的geomotry以便调试
 
 # 语法
 
