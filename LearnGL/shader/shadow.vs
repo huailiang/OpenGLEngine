@@ -10,9 +10,8 @@ out vec3 normal;
 out vec2 texCoords;
 out vec4 fragPosLightSpace;
 
+#include "lib/camera.glsl"
 
-uniform mat4 projection;
-uniform mat4 view;
 uniform mat4 model;
 uniform mat4 lightSpaceMatrix;
 
@@ -22,5 +21,5 @@ void main()
     normal = transpose(inverse(mat3(model))) * aNormal;
     texCoords = aTexCoords;
     fragPosLightSpace = lightSpaceMatrix * vec4(worldPos, 1.0);
-    gl_Position = projection * view * model * vec4(aPos, 1.0);
+    gl_Position = Engine_MVP(model) * vec4(aPos, 1.0);
 }

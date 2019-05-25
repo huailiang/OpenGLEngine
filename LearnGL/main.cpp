@@ -64,8 +64,6 @@ int main(int argc, const char * argv[])
         return -1;
     }
     
-    outlineShader = new Shader("model.vs","outline.fs",nullptr, Macro("_DIRECT_"));
-    
     TTFont::getInstance()->initial();
     SceneMgr::getInstance()->Init();
 

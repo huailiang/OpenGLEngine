@@ -39,7 +39,6 @@ const float PI = 3.14159265359;
 unsigned int RENDER_WIDTH = 1600;
 unsigned int RENDER_HEIGTH = 1200;
 
-Shader* outlineShader;
 
 #define DeclareSington(TYPE)  \
 private:    \

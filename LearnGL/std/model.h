@@ -57,8 +57,6 @@ private:
         shader->use();
         light->Apply(shader);
         shader->setMat4("model", GetModelMatrix(pos, scale, angle));
-        shader->setMat4("view", camera->GetViewMatrix());
-        shader->setMat4("projection", camera->GetProjMatrix());
         LightShader* lshader =static_cast<LightShader*>(shader);
         if(lshader) lshader->ApplyLight();
         for(unsigned int i = 0; i < meshes.size(); i++)

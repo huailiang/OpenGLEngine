@@ -38,6 +38,7 @@ public:
     {
         debug = true;
         shadowShader  = new LightShader("shadow.vs","shadow.fs");
+        ApplyCamera(shadowShader);
         InitPlane(planeVAO, planeVBO);
         InitCube(cubeVAO, cubeVBO);
         
@@ -60,8 +61,6 @@ public:
         float near_plane = 0.1f, far_plane = 7.5f;
         lightSpaceMatrix = static_cast<DirectLight*>(light)->GetLigthSpaceMatrix(glm::vec3(0,0,-2), near_plane, far_plane, 4, 4);
         shadowShader->use();
-        shadowShader->setMat4("projection", camera->GetProjMatrix());
-        shadowShader->setMat4("view", camera->GetViewMatrix());
         light->Apply(shadowShader);
         shadowShader->setMat4("lightSpaceMatrix", lightSpaceMatrix);
         glActiveTexture(GL_TEXTURE0);
