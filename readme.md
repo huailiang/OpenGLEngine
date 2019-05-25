@@ -61,6 +61,10 @@ ui可以画Label, Button
 右下角即灯光空间的depth-buffer
 
 
+## 5. 更多就不枚举了
+
+比如使用GPU Instance 批量画草， geomotry Shader显示法线， 更多的功能等你去探索
+
 
 # 语法
 
