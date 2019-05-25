@@ -43,6 +43,7 @@ public:
         shader = new LightShader("model.vs", "model.fs");
         ApplyCamera(shader);
         nmShader = new Shader("gizmos/normal.vs","gizmos/pixel.fs","gizmos/normal.gs");
+        ApplyCamera(nmShader);
         model = new Model("resources/objects/nanosuit/nanosuit.obj");
         terrain = new Terrain();
     }

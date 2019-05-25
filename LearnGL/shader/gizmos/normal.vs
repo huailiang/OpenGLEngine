@@ -6,13 +6,13 @@ out VS_OUT {
     vec3 normal;
 } vs_out;
 
-uniform mat4 projection;
-uniform mat4 view;
+#include "lib/camera.glsl"
+
 uniform mat4 model;
 
 void main()
 {
-    mat3 normalMatrix = mat3(transpose(inverse(view * model)));
-    vs_out.normal = vec3(projection * vec4(normalMatrix * aNormal, 0.0));
-    gl_Position = projection * view * model * vec4(aPos, 1.0);
+    mat3 normalMatrix = mat3(transpose(inverse(CAMERA_VIEW * model)));
+    vs_out.normal = vec3(CAMERA_PROJ * vec4(normalMatrix * aNormal, 0.0));
+    gl_Position = Engine_MVP(model) * vec4(aPos, 1.0);
 }

@@ -12,26 +12,26 @@
 
 layout (std140) uniform Block
 {
-	mat4 cam_proj;
-	mat4 cam_view;
-    vec3 cam_pos;
+	mat4 CAMERA_PROJ;
+	mat4 CAMERA_VIEW;
+    vec3 CAMERA_POS;
 };
 
 
 mat4 Engine_VP()
 {
-	return cam_proj * cam_view;
+	return CAMERA_PROJ * CAMERA_VIEW;
 }
 
 mat4 INV_VIEW()
 {
-    return inverse(cam_view);
+    return inverse(CAMERA_VIEW);
 }
 
 
 mat4 INV_PROJ()
 {
-    return inverse(cam_proj);
+    return inverse(CAMERA_PROJ);
 }
 
 
@@ -43,19 +43,19 @@ mat4 Engine_MVP(mat4 model)
 
 vec3 Camera_WorldPos()
 {
-    return cam_pos;
+    return CAMERA_POS;
 }
 
 
 vec4 Camera_ViewPos()
 {
-    return cam_view * vec4(cam_pos,1);
+    return CAMERA_VIEW * vec4(CAMERA_POS,1);
 }
 
 
 vec4 Camera_ProjPos()
 {
-    return Engine_VP() * vec4(cam_pos,1);
+    return Engine_VP() * vec4(CAMERA_POS,1);
 }
 
 #endif
