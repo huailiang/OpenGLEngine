@@ -19,9 +19,10 @@
 class Skybox
 {
 public:
-    Skybox(Camera* camera)
+    Skybox(Camera* camera,std::string name)
     {
         this->camera=camera;
+        this->name = name;
         shader = new Shader("cube.vs","cube.fs");
         init_tex();
         init_buff();
@@ -54,12 +55,13 @@ public:
 private:
     void init_tex()
     {
-        faces.push_back("resources/textures/skybox/right.jpg");
-        faces.push_back("resources/textures/skybox/left.jpg");
-        faces.push_back("resources/textures/skybox/top.jpg");
-        faces.push_back("resources/textures/skybox/bottom.jpg");
-        faces.push_back("resources/textures/skybox/front.jpg");
-        faces.push_back("resources/textures/skybox/back.jpg");
+        std::string path = "resources/textures/skybox/"+name+"/";
+        faces.push_back(path + "right.jpg");
+        faces.push_back(path + "left.jpg");
+        faces.push_back(path + "top.jpg");
+        faces.push_back(path + "bottom.jpg");
+        faces.push_back(path + "front.jpg");
+        faces.push_back(path + "back.jpg");
         cubemapTexture = loadCubemap(faces);
     }
     
@@ -165,6 +167,7 @@ private:
     unsigned int cubemapTexture;
     Shader* shader;
     Camera* camera;
+    std::string name;
 };
 
 #endif /* skybox_h */

@@ -29,13 +29,15 @@ public:
         btn_spot = NULL;
     }
     
+    std::string getSkybox() { return "mp_5dim"; }
+    
     int getType() { return TY_Scene2; }
     
     bool drawShadow() { return false; }
     
     void InitLight()
     {
-        light = new DirectLight(vec3(1.0f), vec3(-1.0f));
+        light = new DirectLight(vec3(1.0f), vec3(-1,0,-2));
     }
     
     void InitScene()
@@ -107,7 +109,7 @@ public:
     {
         delete shader;
         delete light;
-        if(evtid == 0) light = new DirectLight(vec3(1), vec3(-1));
+        if(evtid == 0) light = new DirectLight(vec3(1), vec3(-1,0,-2));
         if(evtid == 1) light = new PointLight(vec3(1), vec3(0,0,-1), vec3(0,0,2), vec3(0.1,0.2,0.01));
         if(evtid == 2) light = new SpotLight(vec3(1), vec3(0,0,-1), vec3(0,0,2), vec3(1,0.1,0), 7, 8);
         InitShader();

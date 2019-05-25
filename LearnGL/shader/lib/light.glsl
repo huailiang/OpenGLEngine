@@ -96,6 +96,11 @@ vec3 LightColor()
     float atten = 1.0f/(cst.x+cst.y*distance+cst.z*distance*distance);
 #endif
 
+#ifdef _DirectLight_
+    diffuse *= 2;
+#endif
+
+    
 vec3 lightcolor = ambient + diffuse + specular;
     
 #ifdef _PointLight_
@@ -106,6 +111,7 @@ vec3 lightcolor = ambient + diffuse + specular;
     lightcolor *= intensity;
 #endif
 
+    
     return lightcolor;
 }
 

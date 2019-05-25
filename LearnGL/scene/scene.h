@@ -56,13 +56,18 @@ public:
         return glm::vec3(0.0f,0.0f,3.0f);
     }
     
+    virtual std::string getSkybox()
+    {
+        return "lake";
+    }
+    
     /*
      init: camera-> skybox-> light-> scene-> ui
      */
     void Initial()
     {
         camera = new Camera(getCameraPos());
-        skybox = new Skybox(camera);
+        skybox = new Skybox(camera, getSkybox());
         lightMatrix = glm::mat4(1);
         InitLight();
         InitScene();
