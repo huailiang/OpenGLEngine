@@ -83,8 +83,11 @@ vec3 LightColor()
 #ifdef  _SpotLight_
     vec3 lightDir = normalize(light.position - worldPos);
     float theta = dot(lightDir, normalize(-light.direction));
+    //with soft edge
     float epsilon = (light.cutOff - light.outerCutOff);
     float intensity = clamp((theta - light.outerCutOff) / epsilon, 0.25f, 1.0f);
+    //without soft edge
+    //f/loat intensity = theta < light.cutOff ? 0 : 1;
 #endif
     
 #ifdef _PointLight_
@@ -96,7 +99,7 @@ vec3 LightColor()
 vec3 lightcolor = ambient + diffuse + specular;
     
 #ifdef _PointLight_
-    lightcolor = atten  * lightcolor;
+    lightcolor *= atten;
 #endif
     
 #ifdef  _SpotLight_

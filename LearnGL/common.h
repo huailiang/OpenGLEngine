@@ -33,6 +33,7 @@
 
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
+const float PI = 3.14159265359;
 
 //initial with sreen*2
 unsigned int RENDER_WIDTH = 1600;

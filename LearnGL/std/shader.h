@@ -21,8 +21,8 @@ public:
         // 1. retrieve the vertex/fragment source code from filePath
         std::string vertexCode = openFile(vertexPath);
         std::string fragmentCode = openFile(fragmentPath);
-        vertexCode = preprocessIncludes(vertexCode, macro);
-        fragmentCode = preprocessIncludes(fragmentCode, macro);
+        vertexCode = pre_process(vertexCode, macro);
+        fragmentCode = pre_process(fragmentCode, macro);
         std::string geometryCode;
         if(geometryPath != nullptr)  geometryCode = openFile(geometryPath);
         const char* vShaderCode = vertexCode.c_str();
@@ -135,16 +135,21 @@ public:
 
 private:
     
-    std::string preprocessIncludes(const std::string& source, std::string macro ="", int level = 0)
+    std::string pre_process(const std::string& source,const std::string macro)
+    {
+        auto str = preprocess(source,macro,0);
+        headers.clear();
+        return str;
+    }
+    
+    std::string preprocess(const std::string& source,const std::string macro, int level)
     {
         if(level > 32)
         throw "header inclusion depth limit reached, might be caused by cyclic header inclusion";
-        
         std::regex re("^[ ]*#[ ]*include[ ]+[\"<](.*)[\">].*");
         std::stringstream input;
         std::stringstream output;
         input << source;
-        
         size_t line_number = 1;
         std::smatch matches;
         bool find = false;
@@ -155,8 +160,12 @@ private:
             if (std::regex_search(line, matches, re))
             {
                 std::string include_file = matches[1];
-                std::string include_string = openFile(include_file.c_str());
-                output << preprocessIncludes(include_string, "", level + 1) << std::endl;
+                if(std::find(headers.begin(), headers.end(), include_file)==headers.end())
+                {
+                    headers.push_back(include_file);
+                    std::string include_string = openFile(include_file.c_str());
+                    output << preprocess(include_string, "", level + 1) << std::endl;
+                }
             }
             else
             {
@@ -216,7 +225,6 @@ private:
         }
         return text;
     }
-
     
     void checkCompileErrors(GLuint shader, std::string type)
     {
@@ -241,6 +249,10 @@ private:
             }
         }
     }
+    
+private:
+    std::vector<std::string> headers;
+    
 };
 
 
