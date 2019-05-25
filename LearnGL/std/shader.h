@@ -273,6 +273,8 @@ public:
         this->diffuse = diffuse;
         this->specular = specular;
         this->shininess = shiness;
+        
+        ApplyLight();
     }
     
     void ApplyLight()

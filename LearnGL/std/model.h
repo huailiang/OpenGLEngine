@@ -73,10 +73,11 @@ private:
         if(!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) // if is Not Zero
         {
             cout << "ERROR::ASSIMP:: " << importer.GetErrorString() << endl;
-            return;
         }
-        directory = path.substr(0, path.find_last_of('/'));
-        processNode(scene->mRootNode, scene);
+        else{
+            directory = path.substr(0, path.find_last_of('/'));
+            processNode(scene->mRootNode, scene);
+        }
     }
 
     void processNode(aiNode *node, const aiScene *scene)

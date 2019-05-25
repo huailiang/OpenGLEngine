@@ -1,13 +1,8 @@
 #version 330 core
 
-#ifdef  _SpotLight_
-#define _PointLight_
-#endif
-
 out vec4 FragColor;
 
 #include "lib/util.glsl"
-#include "lib/struct.glsl"
 
 in vec2 TexCoords;
 in vec4 LightPos;
@@ -17,7 +12,6 @@ uniform sampler2D texture1;
 //apply shadow
 uniform sampler2D shadow;
 
-uniform Light light;
 
 void main()
 {

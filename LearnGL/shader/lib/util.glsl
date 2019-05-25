@@ -2,6 +2,7 @@
 #define _UTIL_
 
 #include "lib/const.glsl"
+#include "lib/struct.glsl"
 
 //saturate is defined in cg/hlsl
 #define saturate(x) clamp(x, 0.0, 1.0)
@@ -173,9 +174,10 @@ vec3 Proj2Coord01(vec4 pos)
     return projCoords * 0.5 + 0.5;
 }
 
-float ShadowCalculation(sampler2D shadowmap,  vec4 lightPos)
+// for direct light
+float ShadowCalculation(sampler2D shadowmap,  vec4 lightspacePos)
 {
-    vec3 projCoords = Proj2Coord01(lightPos);
+    vec3 projCoords = Proj2Coord01(lightspacePos);
     float closestDepth = texture(shadowmap, projCoords.xy).r;
     // get depth of current fragment from light's perspective
     float currentDepth = projCoords.z;
@@ -185,5 +187,6 @@ float ShadowCalculation(sampler2D shadowmap,  vec4 lightPos)
     if(projCoords.z > 1.0) shadow = 0.0;
     return shadow;
 }
+
 
 #endif

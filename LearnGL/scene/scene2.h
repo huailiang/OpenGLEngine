@@ -54,7 +54,6 @@ public:
         shader->use();
         shader->setInt("texture1", 0);
         shader->setInt("texture2", 1);
-        shader->ApplyLight();
         ApplyCamera(shader);
     }
 

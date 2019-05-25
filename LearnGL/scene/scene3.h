@@ -37,7 +37,7 @@ public:
     void InitScene()
     {
         debug = true;
-        shadowShader  = new Shader("shadow.vs","shadow.fs");
+        shadowShader  = new LightShader("shadow.vs","shadow.fs");
         InitPlane(planeVAO, planeVBO);
         InitCube(cubeVAO, cubeVBO);
         
@@ -62,7 +62,6 @@ public:
         shadowShader->use();
         shadowShader->setMat4("projection", camera->GetProjMatrix());
         shadowShader->setMat4("view", camera->GetViewMatrix());
-        shadowShader->setVec3("viewPos", camera->Position);
         light->Apply(shadowShader);
         shadowShader->setMat4("lightSpaceMatrix", lightSpaceMatrix);
         glActiveTexture(GL_TEXTURE0);
@@ -101,7 +100,7 @@ public:
 
     
 private:
-    Shader *shadowShader;
+    LightShader *shadowShader;
     unsigned int woodTexture ;
     unsigned int planeVBO, planeVAO;
     unsigned int cubeVAO, cubeVBO;
