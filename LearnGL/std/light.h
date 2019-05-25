@@ -147,8 +147,8 @@ public:
     SpotLight(vec3 color, vec3 direction, vec3 pos, vec3 constant,float cutOff,float outerCutOff)
                     :PointLight(color, direction, pos,constant)
     {
-        this->cutOff= cos(PI * cutOff / 180.f);
-        this->outerCutOff = cos(PI * outerCutOff / 180.f);
+        this->cutOff= cos(glm::radians(cutOff));
+        this->outerCutOff = cos(glm::radians(outerCutOff));
     }
     
     void Apply(Shader* shader)
