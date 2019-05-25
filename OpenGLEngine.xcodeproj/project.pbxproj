@@ -66,6 +66,7 @@
 		4C5EAD37228D562A00893D25 /* scene2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = scene2.h; sourceTree = "<group>"; };
 		4C5EAD38228D5D1B00893D25 /* scene3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = scene3.h; sourceTree = "<group>"; };
 		4C73100A22884CDE007ED1FC /* outline.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = outline.fs; sourceTree = "<group>"; };
+		4C731CD5229924F9009C721F /* struct.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = struct.glsl; sourceTree = "<group>"; };
 		4C8777D42285A2CE00ACAA18 /* light.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = light.h; sourceTree = "<group>"; };
 		4CA88EBA2290FD3A004E2510 /* instance.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = instance.fs; sourceTree = "<group>"; };
 		4CA88EBB22915331004E2510 /* pixel.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = pixel.fs; sourceTree = "<group>"; };
@@ -79,7 +80,7 @@
 		4CC436B322882C870095D759 /* sample.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = sample.vs; sourceTree = "<group>"; };
 		4CC436B422882C870095D759 /* sample.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = sample.fs; sourceTree = "<group>"; };
 		4CC436B522882CFD0095D759 /* terrain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = terrain.h; sourceTree = "<group>"; };
-		4CC5E1A52297859C00CDD37A /* light.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = light.glsl; sourceTree = "<group>"; };
+		4CC5E1A52297859C00CDD37A /* phong.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = phong.glsl; sourceTree = "<group>"; };
 		4CD27D2B2282F4E30038AE21 /* OpenGLEngine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OpenGLEngine; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CD27D2E2282F4E30038AE21 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4CD27D3E2283022D0038AE21 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -277,7 +278,8 @@
 			isa = PBXGroup;
 			children = (
 				4CF61A602295923600C450B7 /* brdf.glsl */,
-				4CC5E1A52297859C00CDD37A /* light.glsl */,
+				4CC5E1A52297859C00CDD37A /* phong.glsl */,
+				4C731CD5229924F9009C721F /* struct.glsl */,
 				4CE498622297E6D30020EDCB /* camera.glsl */,
 				4CE4985E2297CD340020EDCB /* util.glsl */,
 				4CF61A612295923600C450B7 /* const.glsl */,

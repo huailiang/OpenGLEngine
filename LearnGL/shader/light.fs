@@ -1,7 +1,7 @@
 #version 330 core
 
 
-#include "lib/light.glsl"
+#include "lib/phong.glsl"
 #include "lib/util.glsl"
 
 out vec4 FragColor;

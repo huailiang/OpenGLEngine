@@ -4,6 +4,8 @@
 #define _PointLight_
 #endif
 
+#include "lib/struct.glsl"
+
 out vec4 FragColor;
 
 in VS_OUT {
@@ -15,22 +17,6 @@ in VS_OUT {
 
 uniform sampler2D diffuseTexture;
 uniform sampler2D shadowMap;
-
-struct Light
-{
-    vec3 direction;
-    vec3 color;
-#ifdef  _SpotLight_
-#define _PointLight_
-    float cutOff;
-    float outerCutOff;
-#endif
-    
-#ifdef _PointLight_
-    vec3 position;
-    vec3 constant;
-#endif
-};
 
 uniform Light light;
 uniform vec3 viewPos;

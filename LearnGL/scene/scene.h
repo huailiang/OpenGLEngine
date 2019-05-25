@@ -164,12 +164,12 @@ public:
         }
         if(light)
         {
-            if ( glfwGetKey(window, GLFW_KEY_LEFT)== GLFW_PRESS)
+            if (glfwGetKey(window, GLFW_KEY_LEFT)== GLFW_PRESS)
             {
                 light->UpdateX(-deltatime);
                 OnLightChange(GLFW_KEY_LEFT);
             }
-            if ( glfwGetKey(window, GLFW_KEY_RIGHT)== GLFW_PRESS)
+            if (glfwGetKey(window, GLFW_KEY_RIGHT)== GLFW_PRESS)
             {
                 light->UpdateX(deltatime);
                 OnLightChange(GLFW_KEY_RIGHT);

@@ -1,7 +1,6 @@
 #version 330 core
 
 #define _DEBUG_DEPTH_
-//#define _DEBUG_COLOR_
 
 out vec4 FragColor;
 

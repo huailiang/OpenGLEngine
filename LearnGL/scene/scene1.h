@@ -70,7 +70,6 @@ public:
         {
             model->Draw(nmShader, camera, light, vec3(0.2f, -0.5f, -1.5f), vec3(0.12f), -16*timeValue);
         }
-        
     }
     
     static void OnNormalClick(UIEvent* e, void* arg)

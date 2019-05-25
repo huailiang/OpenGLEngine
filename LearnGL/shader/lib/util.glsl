@@ -173,4 +173,17 @@ vec3 Proj2Coord01(vec4 pos)
     return projCoords * 0.5 + 0.5;
 }
 
+float ShadowCalculation(sampler2D shadowmap,  vec4 lightPos)
+{
+    vec3 projCoords = Proj2Coord01(lightPos);
+    float closestDepth = texture(shadowmap, projCoords.xy).r;
+    // get depth of current fragment from light's perspective
+    float currentDepth = projCoords.z;
+    // calculate bias (based on depth map resolution and slope)
+    float bias = 0.005;
+    float shadow = currentDepth - bias > closestDepth  ? 1.0 : 0.0;
+    if(projCoords.z > 1.0) shadow = 0.0;
+    return shadow;
+}
+
 #endif
