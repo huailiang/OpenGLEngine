@@ -155,13 +155,17 @@ public:
         glBindTexture(GL_TEXTURE_2D, ao);
 
         mat4 model(1);
-        for (int row = 0; row < nrRows; ++row)
+        for (int row = 0; row < nGrid; ++row)
         {
-            for (int col = 0; col < nrColumns; ++col)
+            for (int col = 0; col < nGrid; ++col)
             {
                 model = glm::mat4(1.0f);
-                model = translate(model, vec3((float)(col - (nrColumns / 2)) * spacing, (float)(row - (nrRows / 2)) * spacing, 0));
+                model = translate(model, vec3((float)(col - (nGrid / 2)) * spacing, (float)(row - (nGrid / 2)) * spacing, 0));
                 shader->setMat4("model", model);
+                shader->setVec3("lightPositions[0]", vec3(0,0,4));
+                shader->setVec3("lightColors[0]", vec3(40));
+                shader->setVec3("lightPositions[1]", vec3(0,2,1));
+                shader->setVec3("lightColors[1]", vec3(20));
                 glDrawElements(GL_TRIANGLE_STRIP, (GLsizei)indexCount, GL_UNSIGNED_INT, 0);
             }
         }
@@ -173,8 +177,7 @@ private:
     Shader *shader;
     unsigned int vao, vbo, ebo;
     unsigned int albedo, normal, metallic, roughness, ao;
-    int nrRows = 7;
-    int nrColumns = 7;
+    int nGrid = 6;
     float spacing = 2.5;
     size_t indexCount;
 };
