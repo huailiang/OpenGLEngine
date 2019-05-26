@@ -89,7 +89,6 @@
 		4CE4985E2297CD340020EDCB /* util.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = util.glsl; sourceTree = "<group>"; };
 		4CE498622297E6D30020EDCB /* camera.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = camera.glsl; sourceTree = "<group>"; };
 		4CEB97B622891FA100ACDDC6 /* glad.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glad.c; sourceTree = "<group>"; };
-		4CEB97BA2289991000ACDDC6 /* screen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = screen.h; sourceTree = "<group>"; };
 		4CEB97BC2289AB9A00ACDDC6 /* cube.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = cube.vs; sourceTree = "<group>"; };
 		4CEB97BD2289AB9A00ACDDC6 /* cube.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = cube.fs; sourceTree = "<group>"; };
 		4CEB97BE2289ABF500ACDDC6 /* skybox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = skybox.h; sourceTree = "<group>"; };
@@ -229,7 +228,6 @@
 				4C5EAD33228D544C00893D25 /* scene */,
 				4CEF92672284174200068D1E /* profile.h */,
 				4CC436B522882CFD0095D759 /* terrain.h */,
-				4CEB97BA2289991000ACDDC6 /* screen.h */,
 				4CD27D2E2282F4E30038AE21 /* main.cpp */,
 				4C5EAD32228D447200893D25 /* common.h */,
 			);

@@ -39,6 +39,7 @@ const float PI = 3.14159265359;
 unsigned int RENDER_WIDTH = 1600;
 unsigned int RENDER_HEIGTH = 1200;
 
+unsigned int DRAW_MODE = GL_TRIANGLES;
 
 #define DeclareSington(TYPE)  \
 private:    \
@@ -207,5 +208,9 @@ std::string Macro(const char* k1, const void* v1, const char* k2, const void* v2
     return stream.str();
 }
 
+void SetRenderMode(unsigned int mode)
+{
+    DRAW_MODE = mode;
+}
 
 #endif /* common_h */

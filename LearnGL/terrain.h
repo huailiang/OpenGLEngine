@@ -142,7 +142,7 @@ public:
         glBindTexture(GL_TEXTURE_2D, floorTexture);
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, depthMap);
-        glDrawArrays(GL_TRIANGLES,0,6);
+        glDrawArrays(DRAW_MODE,0,6);
         glBindVertexArray(0);
         
 #ifdef _Instance_
@@ -160,7 +160,7 @@ public:
         glBindTexture(GL_TEXTURE_2D, floorTexture);
         shader->setMat4("vp", camera->GetVP());
         shader->setMat4("model", glm::mat4(1));
-        glDrawArrays(GL_TRIANGLES,0,6);
+        glDrawArrays(DRAW_MODE,0,6);
         glBindVertexArray(0);
         
 #ifdef _Instance_
@@ -182,7 +182,7 @@ public:
             model = glm::translate(model, vegetation[i]);
             glm::mat4 mvp = camera->GetVP() * model;
             shader2->setMat4("mvp", mvp);
-            glDrawArrays(GL_TRIANGLES,0,6);
+            glDrawArrays(DRAW_MODE,0,6);
         }
         glBindVertexArray(0);
     }
@@ -196,7 +196,7 @@ public:
         shader2->setMat4("mvp", camera->GetVP() * model);
         glBindTexture(GL_TEXTURE_2D, grassTexture);
         glBindVertexArray(grass_vao);
-        glDrawArraysInstanced(GL_TRIANGLES, 0, 6, grass_num);
+        glDrawArraysInstanced(DRAW_MODE, 0, 6, grass_num);
         glBindVertexArray(0);
     }
     

@@ -15,7 +15,6 @@
 #include "gui/label.h"
 #include "profile.h"
 #include "terrain.h"
-#include "screen.h"
 #include "scene/scenemgr.h"
 
 using namespace std;
@@ -91,6 +90,9 @@ void processInput(GLFWwindow *window)
     if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
     SceneMgr::getInstance()->ProcessKeyboard(window, deltatime);
+    if (glfwGetKey(window, GLFW_KEY_1)== GLFW_PRESS) SetRenderMode(GL_TRIANGLES);
+    if (glfwGetKey(window, GLFW_KEY_2)== GLFW_PRESS) SetRenderMode(GL_LINES);
+    if (glfwGetKey(window, GLFW_KEY_3)== GLFW_PRESS) SetRenderMode(GL_POINTS);
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
@@ -121,14 +123,9 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
         case GLFW_MOUSE_BUTTON_LEFT:
              EventMgr::getInstance()->Triger(lastX, lastY, action);
             break;
-        case GLFW_MOUSE_BUTTON_MIDDLE:
-            cout<<"Mosue middle button "<<endl;
-            break;
         case GLFW_MOUSE_BUTTON_RIGHT:
             cout<<"Mosue right button"<<endl;
             break;
-        default:
-            return;
     }
 }
 

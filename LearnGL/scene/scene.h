@@ -238,7 +238,7 @@ private:
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, depthMap);
         glBindVertexArray(quadVAO);
-        glDrawArrays(GL_TRIANGLES, 0, 6);
+        glDrawArrays(DRAW_MODE, 0, 6);
         glBindVertexArray(0);
     }
     

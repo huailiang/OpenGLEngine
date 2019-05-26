@@ -77,7 +77,7 @@ public:
         glm::mat4 model = glm::mat4(1.0f);
         shader->setMat4("model", model);
         glBindVertexArray(planeVAO);
-        glDrawArrays(GL_TRIANGLES, 0, 6);
+        glDrawArrays(DRAW_MODE, 0, 6);
         // cubes
         renderCube(glm::vec3(0.0f, 0.2f, -1.6), 0.5f, 0.0f, shader);
         renderCube(glm::vec3(2.0f, 0.0f, -1.0), 0.5f, 0.0f, shader);
@@ -93,7 +93,7 @@ public:
         model = glm::rotate(model, glm::radians(ang), glm::normalize(glm::vec3(1.0, 0.0, 1.0)));
         model = glm::scale(model, glm::vec3(scale));
         shader->setMat4("model", model);
-        glDrawArrays(GL_TRIANGLES, 0, 36);
+        glDrawArrays(DRAW_MODE, 0, 36);
         glBindVertexArray(0);
     }
 
