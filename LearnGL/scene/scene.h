@@ -23,6 +23,7 @@
 #define TY_Scene1 0
 #define TY_Scene2 1
 #define TY_Scene3 2
+#define TY_Scene4 3
 
 
 class Scene

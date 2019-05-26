@@ -8,6 +8,7 @@ out vec2 texCoord;
 out vec3 normal;
 out vec3 worldPos;
 
+#include "lib/brdf.glsl"
 #include "lib/camera.glsl"
 
 uniform mat4 model;

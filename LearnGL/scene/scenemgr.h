@@ -13,6 +13,7 @@
 #include "scene1.h"
 #include "scene2.h"
 #include "scene3.h"
+#include "scene4.h"
 
 class SceneMgr
 {
@@ -25,10 +26,12 @@ private:
         delete lb_scene1;
         delete lb_scene2;
         delete lb_scene3;
+        delete lb_scene4;
         delete lb_fps;
         lb_scene1 = NULL;
         lb_scene2 = NULL;
         lb_scene3 = NULL;
+        lb_scene4 = NULL;
         lb_fps = NULL;
     }
     
@@ -45,15 +48,17 @@ public:
     
     void Init()
     {
-        ChangeTo(TY_Scene2);
-        lb_scene1 = new Label(vec2(60,380), vec3(1), 1, "Scene1", 0);
-        lb_scene2 = new Label(vec2(60,320), vec3(1), 1, "Scene2", 1);
-        lb_scene3 = new Label(vec2(60,260), vec3(1), 1, "Scene3", 2);
+        ChangeTo(TY_Scene4);
+        lb_scene1 = new Label(vec2(60,380), vec3(1), 1, "Scene1", TY_Scene1);
+        lb_scene2 = new Label(vec2(60,330), vec3(1), 1, "Scene2", TY_Scene2);
+        lb_scene3 = new Label(vec2(60,280), vec3(1), 1, "Scene3", TY_Scene3);
+        lb_scene4 = new Label(vec2(60,230), vec3(1), 1, "Scene4", TY_Scene4);
         lb_fps = new Label(vec2(740,580), vec3(1,0,0), 0.5f);
         lb_copy = new Label(vec2(20), vec3(1), 0.4f);
         lb_scene1->RegistCallback(ClickScene, this);
         lb_scene2->RegistCallback(ClickScene, this);
         lb_scene3->RegistCallback(ClickScene, this);
+        lb_scene4->RegistCallback(ClickScene, this);
     }
     
     void LeaveScene()
@@ -86,31 +91,17 @@ public:
         {
             current->DrawScenes();
         }
-        if(lb_fps)
-        {
-            lb_fps->setText("FPS: "+to_string_with_precision(1/delta,4));
-        }
-        if(lb_copy)
-        {
-            lb_copy->setText("@copyright (c) penghuailiang");
-        }
+        lb_fps->setText("FPS: "+to_string_with_precision(1/delta,4));
+        lb_copy->setText("@copyright (c) penghuailiang");
     }
     
     void ChangeTo(int type)
     {
         Scene* scene = NULL;
-        if(type == TY_Scene1)
-        {
-            scene = new Scene1();
-        }
-        if(type == TY_Scene2)
-        {
-            scene = new Scene2();
-        }
-        if(type == TY_Scene3)
-        {
-            scene =new Scene3();
-        }
+        if(type == TY_Scene1)   scene = new Scene1();
+        if(type == TY_Scene2)   scene = new Scene2();
+        if(type == TY_Scene3)   scene =new Scene3();
+        if(type == TY_Scene4)   scene =new Scene4();
         if(scene)
         {
             scene->Initial();
@@ -144,7 +135,7 @@ public:
     
 private:
     Scene *current;
-    Label *lb_scene1, *lb_scene2, *lb_scene3;
+    Label *lb_scene1, *lb_scene2, *lb_scene3, *lb_scene4;
     Label *lb_fps, *lb_copy;
 };
 

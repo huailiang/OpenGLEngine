@@ -4,6 +4,7 @@
 #include "lib/phong.glsl"
 #include "lib/util.glsl"
 
+
 out vec4 FragColor;
 
 in vec3 vertColor;

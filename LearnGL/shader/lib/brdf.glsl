@@ -62,4 +62,57 @@ vec3 FresnelSchlick(float cosTheta, vec3 F0)
 }
 
 
+/*
+  Cook-Torrance BRDF
+*/
+vec3 BRDF(vec3 normal, vec3 view, vec3 light, float matel, float roughness, vec3 albedo)
+{
+    vec3 N = normalize(normal);
+    vec3 V = normalize(view);
+    vec3 L = normalize(light);
+    vec3 H = normalize(V+L);
+    
+    vec3 F0 = vec3(0.04);
+    F0 = mix(F0, albedo, matel);
+    
+    float NDF = DistributionGGX(N, H, roughness);
+    float G   = GeometrySmith(N, V, L, roughness);
+    vec3 F    = FresnelSchlick(clamp(dot(H, V), 0.0, 1.0), F0);
+    vec3 nominator    = NDF * G * F;
+    float denominator = 4 * max(dot(N, V), 0.0) * max(dot(N, L), 0.0);
+    return nominator / max(denominator, 0.001);
+}
+
+/*
+对应的公式参考
+  https://learnopengl.com/PBR/IBL/Diffuse-irradiance
+ 
+ 传进来的lightColor 需要算好随着距离衰减（平行光除外）
+ */
+vec3 PBR(vec3 normal, vec3 view, vec3 light, float matel, float roughness, vec3 albedo, vec3 lightColor)
+{
+    // Cook-Torrance  BRDF
+    vec3 N = normalize(normal);
+    vec3 V = normalize(view);
+    vec3 L = normalize(light);
+    vec3 H = normalize(V + L);
+    
+    vec3 F0 = vec3(0.04);
+    F0 = mix(F0, albedo, matel);
+    
+    float NDF = DistributionGGX(N, H, roughness);
+    float G   = GeometrySmith(N, V, L, roughness);
+    vec3 F    = FresnelSchlick(clamp(dot(H, V), 0.0, 1.0), F0);
+    vec3 nominator    = NDF * G * F;
+    float denominator = 4 * max(dot(N, V), 0.0) * max(dot(N, L), 0.0);
+    vec3 specular = nominator / max(denominator, 0.001);
+    
+    // diffuse + specular
+    vec3 kS = F;
+    vec3 kD = vec3(1.0) - kS;
+    kD *= 1.0 - matel;
+    float NdotL = max(dot(N, L), 0.0);
+    return (kD * albedo / PI + specular) * lightColor * NdotL;
+}
+
 #endif
