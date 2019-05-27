@@ -48,7 +48,7 @@ public:
     
     void Init()
     {
-        ChangeTo(TY_Scene4);
+        ChangeTo(TY_Scene2);
         lb_scene1 = new Label(vec2(60,380), vec3(1), 1, "Scene1", TY_Scene1);
         lb_scene2 = new Label(vec2(60,330), vec3(1), 1, "Scene2", TY_Scene2);
         lb_scene3 = new Label(vec2(60,280), vec3(1), 1, "Scene3", TY_Scene3);

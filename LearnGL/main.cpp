@@ -4,6 +4,9 @@
 //  Copyright © 2019 彭怀亮. All rights reserved.
 //
 #include "common.h"
+#define STB_IMAGE_IMPLEMENTATION
+#include "ext/stb_image.h"
+
 #include "std/camera.h"
 #include "std/shader.h"
 #include "std/texture.h"
