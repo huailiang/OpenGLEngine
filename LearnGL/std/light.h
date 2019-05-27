@@ -27,29 +27,13 @@ public:
     vec3 color;
     vec3 direction;
 
-    Light(vec3 color,vec3 direction)
-    {
-        this->color = color;
-        this->direction = direction;
-    }
+    Light(vec3 color,vec3 direction);
     
     virtual ~Light() { }
     
-    void UpdateX(float dx)
-    {
-        if(direction.x + dx < radians(60.0f))
-        {
-            direction.x += dx;
-        }
-    }
+    void UpdateX(float dx);
     
-    void UpdateY(float dy)
-    {
-        if(direction.y + dy < radians(60.0f))
-        {
-            direction.y += dy;
-        }
-    }
+    void UpdateY(float dy);
     
     LightType virtual getType() = 0;
     
@@ -66,31 +50,13 @@ public:
     
     virtual ~DirectLight() { }
     
-    void Apply(Shader* shader)
-    {
-        shader->setVec3("light.color", color);
-        shader->setVec3("light.direction", direction);
-    }
+    void Apply(Shader* shader);
     
-    mat4 GetLigthSpaceMatrix(vec3 target,float near, float far, float up = 8, float left = 8)
-    {
-        vec3 dir = normalize(direction);
-        int sc = 4;
-        vec3 pos = target - vec3(sc*dir.x, sc*dir.y,sc*dir.z);
-        mat4 view =  lookAt(pos, target, vec3(0,1,0));
-        mat4 proj = glm::ortho(-left, left, -up, up, near, far);
-        return proj * view;
-    }
+    mat4 GetLigthSpaceMatrix(vec3 target,float near, float far, float up = 8, float left = 8);
 
-    LightType  getType()
-    {
-        return LightDirect;
-    }
+    LightType  getType();
     
-    std::string getMacro()
-    {
-        return "_DirectLight_";
-    }
+    std::string getMacro();
 };
 
 class PointLight : public Light
@@ -108,32 +74,13 @@ public:
     
     virtual ~PointLight() { }
     
-    mat4 GetLigthSpaceMatrix(float near, float far, float up = 8, float left = 8)
-    {
-        vec3 center = pos + direction;
-        mat4 view = lookAt(pos, center, vec3(0,1,0));
-        mat4 proj = glm::ortho(-left, left, -up, up, near, far);
-        return proj * view;
-    }
-
-    void Apply(Shader* shader)
-    {
-        shader->setVec3("light.color", this->color);
-        shader->setVec3("light.direction", this->direction);
-        shader->setVec3("light.constant", this->constant);
-        shader->setVec3("light.position", this->pos);
-    }
+    mat4 GetLigthSpaceMatrix(float near, float far, float up = 8, float left = 8);
     
-    LightType getType()
-    {
-        return LightPoint;
-    }
+    void Apply(Shader* shader);
     
-    std::string getMacro()
-    {
-        return "_PointLight_";
-    }
-
+    LightType getType();
+    
+    std::string getMacro();
 };
 
 
@@ -151,22 +98,11 @@ public:
         this->outerCutOff = cos(glm::radians(outerCutOff));
     }
     
-    void Apply(Shader* shader)
-    {
-        PointLight::Apply(shader);
-        shader->setFloat("light.cutOff", this->cutOff);
-        shader->setFloat("light.outerCutOff", this->outerCutOff);
-    }
+    void Apply(Shader* shader);
     
-    LightType getType()
-    {
-        return LightSpot;
-    }
+    LightType getType();
     
-    std::string getMacro()
-    {
-        return "_SpotLight_";
-    }
+    std::string getMacro();
 
 };
 

@@ -17,6 +17,9 @@
 		4CD27D482283070B0038AE21 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD27D472283070B0038AE21 /* CoreVideo.framework */; };
 		4CD27D4A228307760038AE21 /* libglfw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD27D49228307760038AE21 /* libglfw3.a */; };
 		4CD3BDF1229C6128007F9C15 /* common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CD3BDF0229C6128007F9C15 /* common.cpp */; };
+		4CD3BDF3229C6313007F9C15 /* shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CD3BDF2229C6313007F9C15 /* shader.cpp */; };
+		4CD3BDF5229C6489007F9C15 /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CD3BDF4229C6489007F9C15 /* camera.cpp */; };
+		4CD3BDF9229C66C9007F9C15 /* light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CD3BDF8229C66C9007F9C15 /* light.cpp */; };
 		4CEB97B722891FA100ACDDC6 /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB97B622891FA100ACDDC6 /* glad.c */; };
 		4CF61A622295923600C450B7 /* brdf.glsl in Sources */ = {isa = PBXBuildFile; fileRef = 4CF61A602295923600C450B7 /* brdf.glsl */; };
 		4CF61A632295923600C450B7 /* const.glsl in Sources */ = {isa = PBXBuildFile; fileRef = 4CF61A612295923600C450B7 /* const.glsl */; };
@@ -91,6 +94,9 @@
 		4CD27D472283070B0038AE21 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		4CD27D49228307760038AE21 /* libglfw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglfw3.a; path = ../../../../../../usr/local/lib/libglfw3.a; sourceTree = "<group>"; };
 		4CD3BDF0229C6128007F9C15 /* common.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = common.cpp; sourceTree = "<group>"; };
+		4CD3BDF2229C6313007F9C15 /* shader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = shader.cpp; sourceTree = "<group>"; };
+		4CD3BDF4229C6489007F9C15 /* camera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = camera.cpp; sourceTree = "<group>"; };
+		4CD3BDF8229C66C9007F9C15 /* light.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = light.cpp; sourceTree = "<group>"; };
 		4CE4985E2297CD340020EDCB /* util.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = util.glsl; sourceTree = "<group>"; };
 		4CE498622297E6D30020EDCB /* camera.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = camera.glsl; sourceTree = "<group>"; };
 		4CEB97B622891FA100ACDDC6 /* glad.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glad.c; sourceTree = "<group>"; };
@@ -271,11 +277,14 @@
 			isa = PBXGroup;
 			children = (
 				4CEF90E52283D04200068D1E /* camera.h */,
+				4CD3BDF4229C6489007F9C15 /* camera.cpp */,
 				4CEF90E32283D04200068D1E /* mesh.h */,
 				4CEF90E92283D04200068D1E /* model.h */,
 				4CEF90E82283D04200068D1E /* shader.h */,
+				4CD3BDF2229C6313007F9C15 /* shader.cpp */,
 				4C283D482285711B000B6FBC /* texture.h */,
 				4C8777D42285A2CE00ACAA18 /* light.h */,
+				4CD3BDF8229C66C9007F9C15 /* light.cpp */,
 				4CEB97BE2289ABF500ACDDC6 /* skybox.h */,
 			);
 			path = std;
@@ -350,6 +359,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CD3BDF5229C6489007F9C15 /* camera.cpp in Sources */,
+				4CD3BDF3229C6313007F9C15 /* shader.cpp in Sources */,
+				4CD3BDF9229C66C9007F9C15 /* light.cpp in Sources */,
 				4CF61A632295923600C450B7 /* const.glsl in Sources */,
 				4CD27D2F2282F4E30038AE21 /* main.cpp in Sources */,
 				4CF61A622295923600C450B7 /* brdf.glsl in Sources */,

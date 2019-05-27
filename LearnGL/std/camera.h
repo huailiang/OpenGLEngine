@@ -61,102 +61,28 @@ public:
         glDeleteBuffers(1, &ubo);
     }
     
-    mat4 GetViewMatrix()
-    {
-        return glm::lookAt(Position, Position + Front, Up);
-    }
+    mat4 GetViewMatrix();
     
-    mat4 GetProjMatrix()
-    {
-        return perspective(radians(FOV), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-    }
+    mat4 GetProjMatrix();
     
-    mat4 GetVP()
-    {
-        mat4 view = GetViewMatrix();
-        mat4 proj = GetProjMatrix();
-        return proj * view;
-    }
+    mat4 GetVP();
     
-    mat4 RotateAt(const vec3 pos, const vec3 target)
-    {
-        Position = pos;
-        Front = normalize(target - pos);
-        updateCameraVectors();
-        return GetViewMatrix();
-    }
-
-    void ProcessKeyboard(const Camera_Movement direction, float deltaTime)
-    {
-        float velocity = MovementSpeed * deltaTime;
-        if (direction == FORWARD)
-            Position += Front * velocity;
-        if (direction == BACKWARD)
-            Position -= Front * velocity;
-        if (direction == LEFT)
-            Position -= Right * velocity;
-        if (direction == RIGHT)
-            Position += Right * velocity;
-        updateUbo();
-    }
-
-    void ProcessMouseMovement(float xoffset, float yoffset)
-    {
-        xoffset *= MouseSensitivity;
-        yoffset *= MouseSensitivity;
-        Front.x   += xoffset;
-        Front.y += yoffset;
-        updateCameraVectors();
-    }
-
-    void ProcessMouseScroll(float yoffset)
-    {
-        if (FOV >= 1.0f && FOV <= 45.0f) FOV -= yoffset;
-        if (FOV <= 1.0f) FOV = 1.0f;
-        if (FOV >= 45.0f) FOV = 45.0f;
-    }
+    mat4 RotateAt(const vec3 pos, const vec3 target);
     
+    void ProcessKeyboard(const Camera_Movement direction, float deltaTime);
     
-    void Attach(Shader* shader)
-    {
-        //config
-        unsigned int uniform = glGetUniformBlockIndex(shader->ID, "Block");
-        //link
-        glUniformBlockBinding(shader->ID, uniform, 0);
-        //bind to ubo
-        glBindBufferRange(GL_UNIFORM_BUFFER, 0, ubo, 0, 2 * sizeof(glm::mat4));
-        //update
-        updateUbo();
-    }
+    void ProcessMouseMovement(float xoffset, float yoffset);
     
+    void ProcessMouseScroll(float yoffset);
+    
+    void Attach(Shader* shader);
     
 private:
-    void InitUbo()
-    {
-        glGenBuffers(1, &ubo);
-        glBindBuffer(GL_UNIFORM_BUFFER, ubo);
-        glBufferData(GL_UNIFORM_BUFFER, 2 * sizeof(mat4) + sizeof(vec3), NULL, GL_STATIC_DRAW);
-        glBindBuffer(GL_UNIFORM_BUFFER, 0);
-    }
+    void InitUbo();
     
-    void updateUbo()
-    {
-        if(ubo)
-        {
-            glBindBuffer(GL_UNIFORM_BUFFER, ubo);
-            glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(mat4), glm::value_ptr(GetProjMatrix()));
-            glBufferSubData(GL_UNIFORM_BUFFER, sizeof(mat4), sizeof(mat4), glm::value_ptr(GetViewMatrix()));
-            glBufferSubData(GL_UNIFORM_BUFFER, 2 * sizeof(mat4), sizeof(vec3), glm::value_ptr(Position));
-            glBindBuffer(GL_UNIFORM_BUFFER, 0);
-        }
-    }
-
-    void updateCameraVectors()
-    {
-        Right = normalize(glm::cross(Front, WorldUp));
-        Up    = normalize(glm::cross(Right, Front));
-        updateUbo();
-    }
+    void updateUbo();
+    
+    void updateCameraVectors();
     
 private:
     unsigned int ubo = 0;
