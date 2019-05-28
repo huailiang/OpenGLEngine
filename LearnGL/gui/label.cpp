@@ -8,6 +8,27 @@
 
 #include "label.h"
 
+Label::Label(const glm::vec2 pos) :UIBase(pos)
+{
+    std::cout<<"warn: called default constructor of label"<<std::endl;
+}
+
+Label::Label(const glm::vec2 pos,const glm::vec3 color, const float scale, const std::string text, const int evtid,const bool interact)
+    :UIBase(pos)
+{
+    UIEvent::evtid = evtid;
+    this->scales = scale;
+    this->interact = interact;
+    this->text = text;
+    this->color = color;
+    SetPos(pos.x, pos.y);
+    if(interact)
+    {
+        EventMgr::getInstance()->RegistEvt(this);
+    }
+    UIManager::getInstance()->Regist(this);
+    Draw();
+}
 
 Label::~Label()
 {

@@ -9,17 +9,19 @@
 #ifndef UIBase_h
 #define UIBase_h
 
+#include <glm/glm.hpp>
 
 class UIBase
 {
 public:
+    
+    UIBase(float x, float y);
+    
+    UIBase(const glm::vec2 pos);
+    
     virtual void Draw() = 0;
     
-    void SetPos(float x, float y)
-    {
-        this->posx = x;
-        this->posy = y;
-    }
+    void SetPos(float x, float y);
     
 protected:
     float posx, posy;
