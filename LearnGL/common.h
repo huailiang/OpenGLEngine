@@ -20,7 +20,6 @@
 #include <regex>
 
 #include <glad/glad.h>
-//#include <GLFW/glfw3.h>
 #include <cmath>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -29,7 +28,7 @@
 
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
-const float PI = 3.14159265359;
+const double PI = 3.14159265359;
 
 //initial with sreen*2
 extern unsigned int RENDER_WIDTH;

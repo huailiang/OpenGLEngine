@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C300137229CCE2200D2A279 /* label.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C300136229CCE2200D2A279 /* label.cpp */; };
 		4C3B7A172283164E003B212F /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C3B7A162283164E003B212F /* IOKit.framework */; };
 		4C3B7A1922831668003B212F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C3B7A1822831668003B212F /* Cocoa.framework */; };
 		4C551FB9228477D1002D535F /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C551FB8228477D1002D535F /* libfreetype.a */; };
@@ -49,6 +50,7 @@
 		4C29DAFF228AB2F50037A97E /* normal.gs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = normal.gs; sourceTree = "<group>"; };
 		4C29DB01228AB7740037A97E /* normal.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = normal.vs; sourceTree = "<group>"; };
 		4C29DB02228ADBB20037A97E /* instance.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = instance.vs; sourceTree = "<group>"; };
+		4C300136229CCE2200D2A279 /* label.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = label.cpp; sourceTree = "<group>"; };
 		4C39CA8C22924E1200371C30 /* camera.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = camera.vs; sourceTree = "<group>"; };
 		4C39CA8D22924E1200371C30 /* camera.gs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = camera.gs; sourceTree = "<group>"; };
 		4C3B7A162283164E003B212F /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
@@ -142,6 +144,7 @@
 				4C5EAD31228D112300893D25 /* uimgr.h */,
 				4C269F81228C3DB000261AAD /* uibase.h */,
 				4C269F82228C3DC700261AAD /* label.h */,
+				4C300136229CCE2200D2A279 /* label.cpp */,
 				4C269F83228C3DD200261AAD /* button.h */,
 				4C269F84228C3DE700261AAD /* image.h */,
 				4C551FB32284655C002D535F /* ttfont.h */,
@@ -361,6 +364,7 @@
 			files = (
 				4CD3BDF5229C6489007F9C15 /* camera.cpp in Sources */,
 				4CD3BDF3229C6313007F9C15 /* shader.cpp in Sources */,
+				4C300137229CCE2200D2A279 /* label.cpp in Sources */,
 				4CD3BDF9229C66C9007F9C15 /* light.cpp in Sources */,
 				4CF61A632295923600C450B7 /* const.glsl in Sources */,
 				4CD27D2F2282F4E30038AE21 /* main.cpp in Sources */,

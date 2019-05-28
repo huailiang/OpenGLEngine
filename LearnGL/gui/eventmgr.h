@@ -11,7 +11,9 @@
 
 #include "../common.h"
 #include "uievent.h"
+#include <GLFW/glfw3.h>
 
+using namespace std;
 
 class EventMgr
 {

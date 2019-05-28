@@ -40,50 +40,19 @@ public:
         Draw();
     }
     
-    virtual ~Label()
-    {
-        if(interact)
-        {
-            EventMgr::getInstance()->RemoveEvt(this);
-        }
-        UIManager::getInstance()->Remove(this);
-        TTFont::getInstance()->RenderText("", 0, 0, 0, glm::vec3(0));
-    }
+    virtual ~Label();
     
-    virtual void Draw()
-    {
-        TTFont* font = TTFont::getInstance();
-        len = font->RenderText(text, posx, posy, scales, color);
-    }
+    virtual void Draw();
     
-    bool IsHit(float x, float y)
-    {
-        float xr = len * 0.5f;
-        float yr = FONT_SIZE * 0.5f;
-        bool hit = abs(x-getCenterX()) < xr && abs(SCR_HEIGHT - y - posy) < yr;
-        return hit;
-    }
+    bool IsHit(float x, float y);
     
-    void OnTriger()
-    {
-      /*  cout<<"interact triger: "<<text<<endl;*/
-    }
+    virtual void OnTriger();
     
-    void setText(const std::string text)
-    {
-        this->text = text;
-    }
+    void setText(const std::string text);
     
-    float getCenterX()
-    {
-        return len * 0.5f + posx;
-    }
+    float getCenterX();
     
-    std::string getText()
-    {
-        return this->text;
-    }
-
+    std::string getText();
     
 protected:
     std::string text;

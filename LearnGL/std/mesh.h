@@ -73,7 +73,7 @@ public:
     void DrawMesh()
     {
         glBindVertexArray(VAO);
-        glDrawElements(DRAW_MODE, indices.size(), GL_UNSIGNED_INT, 0);
+        glDrawElements(DRAW_MODE, (GLsizei)indices.size(), GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
     }
 
