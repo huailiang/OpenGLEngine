@@ -43,25 +43,12 @@ public:
     
     virtual void OnTriger() { } 
     
-    void RegistCallback(ClickCallback cb)
-    {
-        RegistCallback(cb, NULL);
-    }
+    void RegistCallback(ClickCallback cb);
     
-    void RegistCallback(ClickCallback cb, void* arg)
-    {
-        this->callback = cb;
-        this->arg = arg;
-    }
+    void RegistCallback(ClickCallback cb, void* arg);
     
-    void Dispacher()
-    {
-        if(callback)
-        {
-            callback(this, arg);
-        }
-    }
-
+    void Dispacher();
+    
 protected:
     bool interact;
 

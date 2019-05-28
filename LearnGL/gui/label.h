@@ -18,16 +18,16 @@
 #include "ttfont.h"
 
 
-class Label : public UIBase, public UIEvent
+class UILabel : public UIBase, public UIEvent
 {
 public:
     
-    Label(const glm::vec2 pos);
+    UILabel(const glm::vec2 pos);
     
-    Label(const glm::vec2 pos,const glm::vec3 color = glm::vec3(1), const float scale = 1.0f,
+    UILabel(const glm::vec2 pos,const glm::vec3 color = glm::vec3(1), const float scale = 1.0f,
           const std::string text="", const int evtid = 0,const bool interact=true);
     
-    virtual ~Label();
+    virtual ~UILabel();
     
     virtual void Draw();
     

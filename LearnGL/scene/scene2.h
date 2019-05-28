@@ -61,11 +61,11 @@ public:
     void DrawUI()
     {
         Scene::DrawUI();
-        btn_direct = new Button(vec2(720, 360), vec3(1,1,0), 0.6f, "dirc-light", 0);
+        btn_direct = new UIButton(vec2(720, 360), vec3(1,1,0), 0.6f, "dirc-light", 0);
         btn_direct->RegistCallback(OnLightClick, this);
-        btn_point = new Button(vec2(720, 330), vec3(1,1,0), 0.6f, "point-light", 1);
+        btn_point = new UIButton(vec2(720, 330), vec3(1,1,0), 0.6f, "point-light", 1);
         btn_point->RegistCallback(OnLightClick, this);
-        btn_spot = new Button(vec2(720, 300), vec3(1,1,0), 0.6f, "spot-light", 2);
+        btn_spot = new UIButton(vec2(720, 300), vec3(1,1,0), 0.6f, "spot-light", 2);
         btn_spot->RegistCallback(OnLightClick, this);
     }
     
@@ -124,7 +124,7 @@ private:
 
     
 private:
-    Button* btn_direct, *btn_point, *btn_spot;
+    UIButton* btn_direct, *btn_point, *btn_spot;
 
     unsigned int vbo, vao;
     unsigned int texture1, texture2;

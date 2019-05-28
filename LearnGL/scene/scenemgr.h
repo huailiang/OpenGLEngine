@@ -37,7 +37,7 @@ private:
     
     static void ClickScene(UIEvent* contex, void* arg)
     {
-        Label* label = dynamic_cast<Label*>(contex);
+        UILabel* label = dynamic_cast<UILabel*>(contex);
         cout<<"change to scene: "<<label->getText()<<endl;
         int evtid = contex->evtid;
         instance.ChangeTo(TY_Scene1 + evtid);
@@ -49,12 +49,12 @@ public:
     void Init()
     {
         ChangeTo(TY_Scene2);
-        lb_scene1 = new Label(vec2(60,380), vec3(1), 1, "Scene1", TY_Scene1);
-        lb_scene2 = new Label(vec2(60,330), vec3(1), 1, "Scene2", TY_Scene2);
-        lb_scene3 = new Label(vec2(60,280), vec3(1), 1, "Scene3", TY_Scene3);
-        lb_scene4 = new Label(vec2(60,230), vec3(1), 1, "Scene4", TY_Scene4);
-        lb_fps = new Label(vec2(740,580), vec3(1,0,0), 0.5f);
-        lb_copy = new Label(vec2(20), vec3(1), 0.4f);
+        lb_scene1 = new UILabel(vec2(60,380), vec3(1), 1, "Scene1", TY_Scene1);
+        lb_scene2 = new UILabel(vec2(60,330), vec3(1), 1, "Scene2", TY_Scene2);
+        lb_scene3 = new UILabel(vec2(60,280), vec3(1), 1, "Scene3", TY_Scene3);
+        lb_scene4 = new UILabel(vec2(60,230), vec3(1), 1, "Scene4", TY_Scene4);
+        lb_fps = new UILabel(vec2(740,580), vec3(1,0,0), 0.5f);
+        lb_copy = new UILabel(vec2(20), vec3(1), 0.4f);
         lb_scene1->RegistCallback(ClickScene, this);
         lb_scene2->RegistCallback(ClickScene, this);
         lb_scene3->RegistCallback(ClickScene, this);
@@ -135,8 +135,8 @@ public:
     
 private:
     Scene *current;
-    Label *lb_scene1, *lb_scene2, *lb_scene3, *lb_scene4;
-    Label *lb_fps, *lb_copy;
+    UILabel *lb_scene1, *lb_scene2, *lb_scene3, *lb_scene4;
+    UILabel *lb_fps, *lb_copy;
 };
 
 #endif /* scenemgr_h */

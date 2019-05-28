@@ -8,12 +8,12 @@
 
 #include "label.h"
 
-Label::Label(const glm::vec2 pos) :UIBase(pos)
+UILabel::UILabel(const glm::vec2 pos) :UIBase(pos)
 {
     std::cout<<"warn: called default constructor of label"<<std::endl;
 }
 
-Label::Label(const glm::vec2 pos,const glm::vec3 color, const float scale, const std::string text, const int evtid,const bool interact)
+UILabel::UILabel(const glm::vec2 pos,const glm::vec3 color, const float scale, const std::string text, const int evtid,const bool interact)
     :UIBase(pos)
 {
     UIEvent::evtid = evtid;
@@ -30,7 +30,7 @@ Label::Label(const glm::vec2 pos,const glm::vec3 color, const float scale, const
     Draw();
 }
 
-Label::~Label()
+UILabel::~UILabel()
 {
     if(interact)
     {
@@ -40,13 +40,13 @@ Label::~Label()
     TTFont::getInstance()->RenderText("", 0, 0, 0, glm::vec3(0));
 }
 
-void Label::Draw()
+void UILabel::Draw()
 {
     TTFont* font = TTFont::getInstance();
     len = font->RenderText(text, posx, posy, scales, color);
 }
 
-bool Label::IsHit(float x, float y)
+bool UILabel::IsHit(float x, float y)
 {
     float xr = len * 0.5f;
     float yr = FONT_SIZE * 0.5f;
@@ -54,22 +54,22 @@ bool Label::IsHit(float x, float y)
     return hit;
 }
 
-void Label::OnTriger()
+void UILabel::OnTriger()
 {
     /*  cout<<"interact triger: "<<text<<endl;*/
 }
 
-void Label::setText(const std::string text)
+void UILabel::setText(const std::string text)
 {
     this->text = text;
 }
 
-float Label::getCenterX()
+float UILabel::getCenterX()
 {
     return len * 0.5f + posx;
 }
 
-std::string Label::getText()
+std::string UILabel::getText()
 {
     return this->text;
 }

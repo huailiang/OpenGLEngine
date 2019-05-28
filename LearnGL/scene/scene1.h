@@ -51,9 +51,9 @@ public:
     void DrawUI()
     {
         Scene::DrawUI();
-        btn_normal = new Button(vec2(720, 360), vec3(1,1,0), 0.6f, "normal");
+        btn_normal = new UIButton(vec2(720, 360), vec3(1,1,0), 0.6f, "normal");
         btn_normal->RegistCallback(OnNormalClick, this);
-        btn_debug = new Button(vec2(720, 330), vec3(1,1,0), 0.6f, "debug");
+        btn_debug = new UIButton(vec2(720, 330), vec3(1,1,0), 0.6f, "debug");
         btn_debug->RegistCallback(OnDebugClick, this);
     }
     
@@ -89,7 +89,7 @@ public:
     
     
 private:
-    Button* btn_normal, *btn_debug;
+    UIButton* btn_normal, *btn_debug;
     Terrain* terrain;
     Model* model;
     LightShader* shader;

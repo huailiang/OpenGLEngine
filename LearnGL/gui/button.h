@@ -17,14 +17,14 @@
 #include "ttfont.h"
 #include "label.h"
 
-class Button : public Label
+class UIButton : public UILabel
 {
 public:
         
-    Button(const glm::vec2 pos,const glm::vec3 color = glm::vec3(1), const float scale = 1.0f,
+    UIButton(const glm::vec2 pos,const glm::vec3 color = glm::vec3(1), const float scale = 1.0f,
            const std::string text="", const int evtid = 0,const bool interact=true);
     
-    ~Button();
+    ~UIButton();
     
     void Draw();
     

@@ -9,14 +9,14 @@
 #include "button.h"
 
 
-Button::Button(const glm::vec2 pos,const glm::vec3 color, const float scale,const std::string text, const int evtid,const bool interact):
-Label(pos,color,scale,text, evtid, interact)
+UIButton::UIButton(const glm::vec2 pos,const glm::vec3 color, const float scale,const std::string text, const int evtid,const bool interact):
+UILabel(pos,color,scale,text, evtid, interact)
 {
     InitBackground();
 }
 
 
-Button::~Button()
+UIButton::~UIButton()
 {
     glDeleteVertexArrays(1, &vao);
     glDeleteBuffers(1, &vbo);
@@ -25,13 +25,13 @@ Button::~Button()
 }
 
 
-void Button::Draw()
+void UIButton::Draw()
 {
     DrawBackground();
-    Label::Draw();
+    UILabel::Draw();
 }
 
-void Button::DrawBackground()
+void UIButton::DrawBackground()
 {
     float x = getCenterX()/SCR_WIDTH;
     float y = posy / SCR_HEIGHT;
@@ -44,7 +44,7 @@ void Button::DrawBackground()
     glBindVertexArray(0);
 }
 
-void Button::InitBackground()
+void UIButton::InitBackground()
 {
     shader = new Shader("gizmos/button.vs","gizmos/pixel.fs","gizmos/button.gs");
     glGenVertexArrays(1, &vao);
