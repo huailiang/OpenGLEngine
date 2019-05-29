@@ -10,7 +10,9 @@
 #define texture_h
 
 #include <glm/glm.hpp>
+#ifndef _QT_EDIT_
 #include <glad/glad.h>
+#endif
 #include "common.h"
 
 using namespace glm;
