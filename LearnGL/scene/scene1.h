@@ -10,7 +10,7 @@
 #define scene1_h
 
 #include "scene.h"
-#include "../terrain.h"
+#include "../std/terrain.h"
 
 
 class Scene1 : public Scene

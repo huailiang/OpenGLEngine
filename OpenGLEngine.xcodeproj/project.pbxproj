@@ -19,6 +19,7 @@
 		4C6A9097229E5D84007F2953 /* skybox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C6A9096229E5D84007F2953 /* skybox.cpp */; };
 		4C6A9099229E5D8C007F2953 /* texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C6A9098229E5D8C007F2953 /* texture.cpp */; };
 		4C6A909B229E6DDC007F2953 /* model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C6A909A229E6DDC007F2953 /* model.cpp */; };
+		4C6A909D229E78EC007F2953 /* terrain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C6A909C229E78EC007F2953 /* terrain.cpp */; };
 		4CB1D90E2286DE69004BEE38 /* libfreetype.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CB1D90D2286DE69004BEE38 /* libfreetype.6.dylib */; };
 		4CB1D9102286DE97004BEE38 /* libassimp.4.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CB1D90F2286DE97004BEE38 /* libassimp.4.1.0.dylib */; };
 		4CD27D2F2282F4E30038AE21 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CD27D2E2282F4E30038AE21 /* main.cpp */; };
@@ -89,6 +90,7 @@
 		4C6A9096229E5D84007F2953 /* skybox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = skybox.cpp; sourceTree = "<group>"; };
 		4C6A9098229E5D8C007F2953 /* texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = texture.cpp; sourceTree = "<group>"; };
 		4C6A909A229E6DDC007F2953 /* model.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = model.cpp; sourceTree = "<group>"; };
+		4C6A909C229E78EC007F2953 /* terrain.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = terrain.cpp; sourceTree = "<group>"; };
 		4C73100A22884CDE007ED1FC /* outline.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = outline.fs; sourceTree = "<group>"; };
 		4C731CD5229924F9009C721F /* struct.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = struct.glsl; sourceTree = "<group>"; };
 		4C8777D42285A2CE00ACAA18 /* light.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = light.h; sourceTree = "<group>"; };
@@ -262,7 +264,6 @@
 				4CEF90E22283D02800068D1E /* std */,
 				4C5EAD33228D544C00893D25 /* scene */,
 				4CEF92672284174200068D1E /* profile.h */,
-				4CC436B522882CFD0095D759 /* terrain.h */,
 				4CD27D2E2282F4E30038AE21 /* main.cpp */,
 				4C5EAD32228D447200893D25 /* common.h */,
 				4CD3BDF0229C6128007F9C15 /* common.cpp */,
@@ -311,6 +312,8 @@
 				4CD3BDF8229C66C9007F9C15 /* light.cpp */,
 				4CEB97BE2289ABF500ACDDC6 /* skybox.h */,
 				4C6A9096229E5D84007F2953 /* skybox.cpp */,
+				4CC436B522882CFD0095D759 /* terrain.h */,
+				4C6A909C229E78EC007F2953 /* terrain.cpp */,
 			);
 			path = std;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 				4C300147229CE35600D2A279 /* uievent.cpp in Sources */,
 				4CF61A632295923600C450B7 /* const.glsl in Sources */,
 				4CD27D2F2282F4E30038AE21 /* main.cpp in Sources */,
+				4C6A909D229E78EC007F2953 /* terrain.cpp in Sources */,
 				4CF61A622295923600C450B7 /* brdf.glsl in Sources */,
 				4CEB97B722891FA100ACDDC6 /* glad.c in Sources */,
 				4C300143229CE20600D2A279 /* mesh.cpp in Sources */,
