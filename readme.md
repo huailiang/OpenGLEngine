@@ -2,6 +2,8 @@
 
 在mac上实现了一套渲染引擎，后期会扩展到移动平台
 
+我们在Qt环境下，使用相同的代码实现了相同的效果， [点击前往](https://github.com/huailiang/qt_engine), 可能这样会更适合你做编辑器扩展。
+
 # 依赖的库
 *  openGL
 *  glad
