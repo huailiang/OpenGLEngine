@@ -20,6 +20,7 @@
 #include <regex>
 
 #include <glad/glad.h>
+#include <GLFW/glfw3.h>
 #include <cmath>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -35,6 +36,13 @@ extern unsigned int RENDER_WIDTH;
 extern unsigned int RENDER_HEIGTH;
 
 extern unsigned int DRAW_MODE;
+
+#ifdef _QT_EDIT_
+#define WORKDIR "/Users/penghuailiang/Documents/projects/QT/qt_engine/" // Qt env 
+extern QTime q_time;
+#else
+#define WORKDIR ""  //xcode wroking directory can be setted in Scheme
+#endif
 
 #define DeclareSington(TYPE)  \
 private:    \

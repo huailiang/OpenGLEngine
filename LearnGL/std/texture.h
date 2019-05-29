@@ -11,6 +11,7 @@
 
 #include <glm/glm.hpp>
 #include <glad/glad.h>
+#include "common.h"
 
 using namespace glm;
 

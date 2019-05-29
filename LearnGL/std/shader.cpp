@@ -203,6 +203,7 @@ std::string Shader::openFile(const char* name)
     {
         std::string path(name);
         path = "shader/" + path;
+        path = WORKDIR + path;
         file.open(path);
         std::stringstream stream;
         stream << file.rdbuf();

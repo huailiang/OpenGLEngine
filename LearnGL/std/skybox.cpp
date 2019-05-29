@@ -88,6 +88,7 @@ unsigned int Skybox::loadCubemap(std::vector<std::string> faces)
 void Skybox::init_tex()
 {
     std::string path = "resources/textures/skybox/"+name+"/";
+    path = WORKDIR + path;
     faces.push_back(path + "right.jpg");
     faces.push_back(path + "left.jpg");
     faces.push_back(path + "top.jpg");

@@ -12,7 +12,9 @@
 
 TTexture::TTexture(const char* path, unsigned int* texID, bool flipY, int wrap)
 {
-    this->path=path;
+    std::string spath(path);
+    spath = WORKDIR + spath;
+    this->path=spath.c_str();
     *texID = LoadTexture(flipY, wrap);
 }
 

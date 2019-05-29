@@ -13,6 +13,26 @@ unsigned int RENDER_WIDTH = 1600;
 unsigned int RENDER_HEIGTH = 1200;
 unsigned int DRAW_MODE = GL_TRIANGLES;
 
+#ifdef _QT_EDIT_
+QTime q_time;
+#endif
+
+
+void GlobalInit()
+{
+#ifdef _QT_EDIT_
+    q_time.start();
+#endif
+}
+
+float GetRuntime()
+{
+#ifdef _QT_EDIT_
+    return q_time.elapsed()*0.001f;
+#endif
+    return glfwGetTime();
+}
+
 
 void InitPlane(unsigned int &planeVAO, unsigned int &planeVBO)
 {
