@@ -46,7 +46,7 @@ std::string to_string_with_precision(const T a_value, const int n = 6)
     return out.str();
 }
 
-void prt_mat(const mat4 mat)
+void print_mat4(const mat4& mat)
 {
     cout.setf(ios::fixed);
     cout<<setprecision(2);
@@ -56,34 +56,57 @@ void prt_mat(const mat4 mat)
     cout<<mat[3][0]<<"\t"<<mat[3][1]<<"\t"<<mat[3][2]<<"\t"<<mat[3][3]<<endl<<endl;
 }
 
-void prt_vec(const vec3* vec)
+void print_mat4(const mat4& mat, const char* tag)
 {
-    cout<<vec->x<<" "<<vec->y<<" "<<vec->z<<endl<<endl;
+    cout.setf(ios::fixed);
+    cout<<setprecision(2);
+    cout<<tag<<endl;
+    cout<<mat[0][0]<<"\t"<<mat[0][1]<<"\t"<<mat[0][2]<<"\t"<<mat[0][3]<<endl;
+    cout<<mat[1][0]<<"\t"<<mat[1][1]<<"\t"<<mat[1][2]<<"\t"<<mat[1][3]<<endl;
+    cout<<mat[2][0]<<"\t"<<mat[2][1]<<"\t"<<mat[2][2]<<"\t"<<mat[2][3]<<endl;
+    cout<<mat[3][0]<<"\t"<<mat[3][1]<<"\t"<<mat[3][2]<<"\t"<<mat[3][3]<<endl<<endl;
 }
 
-void prt_vec(const vec4* vec)
+
+
+void print_vec3(const vec3& vec) 
 {
-    cout<<vec->x<<" "<<vec->y<<" "<<vec->z<<" "<<vec->w<<endl<<endl;
+    cout<<"("<<vec.x<<", "<<vec.y<<", "<<vec.z<<")"<<endl<<endl;
 }
 
-void test()
+void print_vec4(const vec4& vec)
+{
+    cout<<"("<<vec.x<<", "<<vec.y<<", "<<vec.z<<", "<<vec.w<<")"<<endl<<endl;
+}
+
+void print_vec3(const vec3& vec, const char* tag)
+{
+    cout<<tag<<": ("<<vec.x<<", "<<vec.y<<", "<<vec.z<<")"<<endl<<endl;
+}
+
+void print_vec4(const vec4& vec,const char* tag)
+{
+    cout.setf(ios::fixed);
+    cout<<setprecision(3);
+    cout<<tag<<": ("<<vec.x<<", "<<vec.y<<", "<<vec.z<<", "<<vec.w<<")"<<endl<<endl;
+}
+
+void profile_test()
 {
     vec4 vec(1.0f,1.0f,0.0f,1.0f);
-    prt_vec(&vec);
+    print_vec4(vec,"debug1");
     mat4 trans;
-    prt_mat(trans);
+    print_mat4(trans);
     trans= mat4(1.0f);
-    prt_mat(trans);
+    print_mat4(trans,"ident");
     trans= translate(trans,vec3(1.0f, 1.0f, 0.0f));
-    prt_mat(trans);
+    print_mat4(trans);
     vec = trans * vec;
-    prt_vec(&vec);
-    
+    print_vec4(vec);
     mat4 m4 = ortho(0, 800, 0, 640, 0, 100);
-    prt_mat(m4);
-    
+    print_mat4(m4);
     m4 = perspective(radians(45.0f), 1920.0f/1080.0f, 2.0f, 10.0f);
-    prt_mat(m4);
+    print_mat4(m4);
 }
 
 

@@ -10,9 +10,7 @@
 #define skybox_h
 
 #include <vector>
-#include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
-#include "shader.h"
 #include "shader.h"
 #include "camera.h"
 
@@ -130,13 +128,12 @@ private:
     // -Y (bottom)
     // +Z (front)
     // -Z (back)
-    // -------------------------------------------------------
     unsigned int loadCubemap(std::vector<std::string> faces)
     {
         unsigned int textureID;
         glGenTextures(1, &textureID);
         glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
-        stbi_set_flip_vertically_on_load(false); 
+        stbi_set_flip_vertically_on_load(false);
         int width, height, nrChannels;
         for (unsigned int i = 0; i < faces.size(); i++)
         {
