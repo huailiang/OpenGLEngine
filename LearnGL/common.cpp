@@ -29,8 +29,9 @@ float GetRuntime()
 {
 #ifdef _QT_EDIT_
     return q_time.elapsed()*0.001f;
-#endif
+#else
     return glfwGetTime();
+#endif
 }
 
 

@@ -9,6 +9,9 @@
 #ifndef common_h
 #define common_h
 
+#ifdef _QT_EDIT_
+#include <QtOpenGL>
+#endif
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -18,8 +21,9 @@
 #include <stdio.h>
 #include <stdio.h>
 #include <regex>
-
+#ifndef _QT_EDIT_
 #include <glad/glad.h>
+#endif
 #include <GLFW/glfw3.h>
 #include <cmath>
 #include <glm/glm.hpp>
@@ -126,6 +130,9 @@ const float planeVertices[] =
 
 const float zeroVertices[] = {0.0f,  0.0f};
 
+void GlobalInit();
+
+float GetRuntime();
 
 void InitPlane(unsigned int &planeVAO, unsigned int &planeVBO);
 
