@@ -5,8 +5,6 @@
 //
 
 
-//#define STB_IMAGE_IMPLEMENTATION
-//#include "ext/stb_image.h"
 #include "common.h"
 #include "std/camera.h"
 #include "std/shader.h"
