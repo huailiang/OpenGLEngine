@@ -527,11 +527,11 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 238UB5UD4H;
-				HEADER_SEARCH_PATHS = "\"$(gl_header)/\"";
+				HEADER_SEARCH_PATHS = $root_header;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/LearnGL/lib",
-					"\"$(gl_lib)/\"",
+					"\"$(root_lib)/\"",
 				);
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
@@ -547,11 +547,11 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 238UB5UD4H;
-				HEADER_SEARCH_PATHS = "\"$(gl_header)/\"";
+				HEADER_SEARCH_PATHS = $root_header;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/LearnGL/lib",
-					"\"$(gl_lib)/\"",
+					"\"$(root_lib)/\"",
 				);
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
