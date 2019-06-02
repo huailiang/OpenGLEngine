@@ -73,7 +73,7 @@ vec3 LightColor()
 #endif
 
 #ifdef _DirectLight_
-    diffuse *= 2;
+    diffuse *= 2.0;
 #endif
 
     

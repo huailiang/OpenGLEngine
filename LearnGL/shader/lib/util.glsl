@@ -23,17 +23,17 @@
 #define atan2(y,x) atan(x,y)
 
 
-vec2 pow(vec2 x, float y)
+vec2 pow2(vec2 x, float y)
 {
     return vec2(pow(x.x, y), pow(x.y,y));
 }
 
-vec3 pow(vec3 x, float y)
+vec3 pow3(vec3 x, float y)
 {
     return vec3(pow(x.x, y), pow(x.y,y), pow(x.z, y));
 }
 
-vec4 pow(vec4 x, float y)
+vec4 pow4(vec4 x, float y)
 {
     return vec4(pow(x.x, y), pow(x.y,y), pow(x.z, y), pow(x.w, y));
 }
@@ -44,8 +44,8 @@ vec3 UnpackNormalmapRGorAG(vec4 packednormal)
 {
     packednormal.x *= packednormal.w;
     vec3 normal;
-    normal.xy = packednormal.xy * 2 - 1;
-    normal.z = sqrt(1 - saturate(dot(packednormal.xy, packednormal.xy)));
+    normal.xy = packednormal.xy * 2.0 - 1.0;
+    normal.z = sqrt(1.0 - saturate(dot(packednormal.xy, packednormal.xy)));
     return normal;
 }
 
@@ -56,7 +56,7 @@ vec3 UnpackNormalmap(vec4 packednormal)
 #ifdef _DX5nm_
     normal = UnpackNormalmapRGorAG(packednormal);
 #else
-    normal.xy = packednormal.xy * 2 -1;
+    normal.xy = packednormal.xy * 2.0 -1.0;
     normal.z = packednormal.w;
 #endif
     return normal;
@@ -76,7 +76,7 @@ vec4 EncodeFloatRGBA(float v)
 
 float DecodeFloatRGBA(vec4 enc)
 {
-    vec4 kDecodeDot = vec4(1.0, 1/255.0, 1/65025.0, 1/16581375.0);
+    vec4 kDecodeDot = vec4(1.0, 1.0/255.0, 1.0/65025.0, 1.0/16581375.0);
     return dot( enc, kDecodeDot );
 }
 
@@ -135,7 +135,7 @@ vec3 LinearToGammaSpace (vec3 linRGB)
 {
     linRGB = max(linRGB, vec3(0.f, 0.f, 0.f));
     // An almost-perfect approximation from http://chilliant.blogspot.com.au/2012/08/srgb-approximations-for-hlsl.html?m=1
-    return max(1.055f * pow(linRGB, 0.416666667f) - 0.055f, 0.0f);
+    return max(1.055f * pow3(linRGB, 0.416666667f) - 0.055f, 0.0f);
     
     // Exact version, useful for debugging.
     //return vec3(LinearToGammaSpaceExact(linRGB.r), LinearToGammaSpaceExact(linRGB.g), LinearToGammaSpaceExact(linRGB.b));

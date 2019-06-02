@@ -19,7 +19,7 @@ void main()
 {
     vec3 lightcolor = LightColor();
     
-    vec4 vc = vec4(vertColor * 1, 1);
+    vec4 vc = vec4(vertColor * 1.0, 1.0);
     vec4 tc1 = texture(texture1, texCoord);
     vec4 tc2 = texture(texture2, texCoord);
     vec4 color = vc * mix(tc1, tc2, 0.2f);

@@ -79,7 +79,7 @@ vec3 BRDF(vec3 normal, vec3 view, vec3 light, float matel, float roughness, vec3
     float G   = GeometrySmith(N, V, L, roughness);
     vec3 F    = FresnelSchlick(clamp(dot(H, V), 0.0, 1.0), F0);
     vec3 nominator    = NDF * G * F;
-    float denominator = 4 * max(dot(N, V), 0.0) * max(dot(N, L), 0.0);
+    float denominator = 4.0 * max(dot(N, V), 0.0) * max(dot(N, L), 0.0);
     return nominator / max(denominator, 0.001);
 }
 
@@ -104,7 +104,7 @@ vec3 PBR(vec3 normal, vec3 view, vec3 light, float matel, float roughness, vec3 
     float G   = GeometrySmith(N, V, L, roughness);
     vec3 F    = FresnelSchlick(clamp(dot(H, V), 0.0, 1.0), F0);
     vec3 nominator    = NDF * G * F;
-    float denominator = 4 * max(dot(N, V), 0.0) * max(dot(N, L), 0.0);
+    float denominator = 4.0 * max(dot(N, V), 0.0) * max(dot(N, L), 0.0);
     vec3 specular = nominator / max(denominator, 0.001);
     
     // diffuse + specular
