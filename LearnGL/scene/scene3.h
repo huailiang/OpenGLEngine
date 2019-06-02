@@ -21,8 +21,7 @@ public:
         glDeleteVertexArrays(1, &cubeVAO);
         glDeleteBuffers(1, &planeVBO);
         glDeleteBuffers(1, &cubeVBO);
-        delete shadowShader;
-        shadowShader = NULL;
+        SAFE_DELETE(shadowShader);
     }
     
     glm::vec3 getCameraPos() { return glm::vec3(0.0f,0.0f,4.0f); }

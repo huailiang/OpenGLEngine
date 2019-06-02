@@ -33,16 +33,11 @@ public:
     
     virtual ~Scene()
     {
-        delete camera;
-        delete skybox;
-        delete light;
-        camera = NULL;
-        light = NULL;
-        skybox = NULL;
-        delete debugShader;
-        delete depthShader;
-        debugShader = NULL;
-        depthShader = NULL;
+        SAFE_DELETE(camera);
+        SAFE_DELETE(skybox);
+        SAFE_DELETE(light);
+        SAFE_DELETE(debugShader);
+        SAFE_DELETE(depthShader);
         glDeleteVertexArrays(1, &quadVAO);
         glDeleteBuffers(1, &quadVBO);
     }

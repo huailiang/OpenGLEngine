@@ -18,8 +18,7 @@ class Scene4 : public Scene
 public:
     ~Scene4()
     {
-        delete shader;
-        shader = NULL;
+        SAFE_DELETE(shader);
         glDeleteBuffers(1, &vbo);
         glDeleteBuffers(1, &ebo);
         glDeleteVertexArrays(1, &vao);

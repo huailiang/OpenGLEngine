@@ -19,16 +19,11 @@ class Scene1 : public Scene
 public:
    ~Scene1()
     {
-        delete terrain;
-        terrain = NULL;
-        delete model;
-        model = NULL;
-        delete shader;
-        shader = NULL;
-        delete btn_normal;
-        btn_normal = NULL;
-        delete btn_debug;
-        btn_debug = NULL;
+        SAFE_DELETE(terrain);
+        SAFE_DELETE(model);
+        SAFE_DELETE(shader);
+        SAFE_DELETE(btn_normal);
+        SAFE_DELETE(btn_debug);
     }
     
     int getType() { return TY_Scene1; }

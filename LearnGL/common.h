@@ -48,6 +48,7 @@ extern QTime q_time;
 #define WORKDIR ""  //xcode wroking directory can be setted in Scheme
 #endif
 
+
 #define DeclareSington(TYPE)  \
 private:    \
     TYPE() { }  \
@@ -56,6 +57,11 @@ private:    \
     static TYPE instance;   \
 public: \
     static TYPE* getInstance() { return &instance; } \
+
+
+#define SAFE_DELETE(ptr) \
+if(ptr != NULL) \
+{delete ptr; ptr = NULL;}
 
 
 const float quadVertices[] =

@@ -63,6 +63,11 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath, const char* geo
 }
 
 
+Shader::~Shader()
+{
+    glDeleteProgram(ID);
+}
+
 void Shader::use()
 {
     glUseProgram(ID);
@@ -163,7 +168,7 @@ std::string Shader::preprocess(const std::string& source,const std::string macro
         }
         if(!find && level == 0)
         {
-            std::size_t found = line.find("");
+            std::size_t found = line.find("#version");
             if(found != std::string::npos)
             {
                 output<<macro<<std::endl;

@@ -23,16 +23,11 @@ private:
     ~SceneMgr()
     {
         LeaveScene();
-        delete lb_scene1;
-        delete lb_scene2;
-        delete lb_scene3;
-        delete lb_scene4;
-        delete lb_fps;
-        lb_scene1 = NULL;
-        lb_scene2 = NULL;
-        lb_scene3 = NULL;
-        lb_scene4 = NULL;
-        lb_fps = NULL;
+        SAFE_DELETE(lb_scene1);
+        SAFE_DELETE(lb_scene2);
+        SAFE_DELETE(lb_scene3);
+        SAFE_DELETE(lb_scene4);
+        SAFE_DELETE(lb_fps);
     }
     
     static void ClickScene(UIEvent* contex, void* arg)

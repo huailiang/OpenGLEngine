@@ -17,16 +17,12 @@ class Scene2 : public Scene
 public:
     ~Scene2()
     {
-        delete shader;
-        shader = NULL;
+        SAFE_DELETE(shader);
         glDeleteVertexArrays(1, &vao);
         glDeleteBuffers(1, &vbo);
-        delete btn_direct;
-        delete btn_point;
-        delete btn_spot;
-        btn_direct = NULL;
-        btn_point = NULL;
-        btn_spot = NULL;
+        SAFE_DELETE(btn_direct);
+        SAFE_DELETE(btn_point);
+        SAFE_DELETE(btn_spot);
     }
     
     std::string getSkybox() { return "mp_5dim"; }
