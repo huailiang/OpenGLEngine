@@ -1,8 +1,9 @@
 # 基于OpenGL实现的渲染引擎
 
-在mac上实现了一套渲染引擎，后期会扩展到移动平台
 
 我们在Qt环境下，使用相同的代码实现了相同的效果， [点击前往](https://github.com/huailiang/qt_engine), 可能这样会更适合你做编辑器扩展。
+
+同时我们使用引擎也实现了一套在移动平台的代码，[点击前往](https://github.com/huailiang/GLESEngine)， 基于opengl es3.0
 
 # 依赖的库
 *  openGL
@@ -102,7 +103,20 @@ for(int i=0;i<LIGHT_NUM;i++)
 Shader("model.vs","outline.fs",nullptr, Macro("_CALLBACK__","","LIGHT_NUM","4")
 ```
 
-## 3.Debug支持
+## 3. ES支持
+
+对于和ES版本的转换， 你不必太关注更多的细节， 引擎在预编译shader的时候，会自动处理好如下：
+
+* 浮点数精度问题
+
+es浮点数默认是：precision mediump float;
+
+* version声明
+
+引擎实现移动版本会自动转化为 #version 300 es
+
+
+## 4.Debug支持
 
  如果shader报错，会显示对应的行号，你可以去temp目录查看预编译好的shader， 迅速定位到问题。
 

@@ -152,12 +152,27 @@ std::string Shader::preprocess(const std::string& source,const std::string macro
     
     while(std::getline(input,line))
     {
+        bool title  = false;
+        if(!find && level == 0)
+        {
+            std::size_t found = line.find("#version");
+            title = found != std::string::npos;
+#ifdef _GLES_
+            line = "#version 300 es";
+#endif
+            find = true;
+        }
+        
         if (std::regex_search(line, matches, re))
         {
             std::string include_file = matches[1];
             if(std::find(headers.begin(), headers.end(), include_file)==headers.end())
             {
                 headers.push_back(include_file);
+#ifdef _GLES_
+                size_t idx = include_file.rfind("/");
+                include_file = include_file.replace(0, idx+1, "");
+#endif
                 std::string include_string = openFile(include_file.c_str());
                 output << preprocess(include_string, "", level + 1) << std::endl;
             }
@@ -166,14 +181,12 @@ std::string Shader::preprocess(const std::string& source,const std::string macro
         {
             output <<  line << std::endl;
         }
-        if(!find && level == 0)
+        if(title)
         {
-            std::size_t found = line.find("#version");
-            if(found != std::string::npos)
-            {
-                output<<macro<<std::endl;
-                find = true;
-            }
+#ifdef _GLES_
+            output<<"precision mediump float;"<<std::endl;
+#endif
+            output<<macro<<std::endl;
         }
         ++line_number;
     }
@@ -184,7 +197,11 @@ std::string Shader::preprocess(const std::string& source,const std::string macro
 void Shader::save(std::string text, const char* name)
 {
     std::string path(name);
+#ifdef _GLES_
+    path = "/tmp/"+path;
+#else
     path = "temp/"+path;
+#endif
     std::ofstream file;
     file.exceptions (std::ofstream::failbit | std::ofstream::badbit);
     try
