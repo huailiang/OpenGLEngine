@@ -37,7 +37,11 @@ unsigned int TTexture::LoadTexture(bool flipY, int wrap)
 #endif
     if (data)
     {
+#ifndef _GLES_
+        GLenum glformat = GetFormat();
+#else
         GLenum glformat = GL_RGBA;
+#endif
         glTexImage2D(GL_TEXTURE_2D, 0, glformat, width, height, 0, glformat, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
     }

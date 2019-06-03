@@ -8,7 +8,11 @@
 
 #include "texture.h"
 #include <iostream>
+#ifdef _GLES_
+#include "FilePath.h"
+#else
 #include "../ext/stb_image.h"
+#endif
 
 TTexture::TTexture(const char* path, unsigned int* texID, bool flipY, int wrap)
 {
@@ -20,18 +24,24 @@ TTexture::TTexture(const char* path, unsigned int* texID, bool flipY, int wrap)
 
 unsigned int TTexture::LoadTexture(bool flipY, int wrap)
 {
-    stbi_set_flip_vertically_on_load(flipY); // flip y
     glGenTextures(1, &textureID);
     glBindTexture(GL_TEXTURE_2D, textureID);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrap);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrap);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    
+#ifndef _GLES_
     unsigned char *data = stbi_load(path, &width, &height, &format, 0);
+#else
+    char *data = LoadImage(std::string(path), &width, &height);
+#endif
     if (data)
     {
+#ifndef _GLES_
         GLenum glformat = GetFormat();
+#else
+        GLenum glformat = GL_RGBA;
+#endif
         glTexImage2D(GL_TEXTURE_2D, 0, glformat, width, height, 0, glformat, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
     }
@@ -39,7 +49,11 @@ unsigned int TTexture::LoadTexture(bool flipY, int wrap)
     {
         std::cout << "Texture failed to load at path: " << path << std::endl;
     }
+#ifndef _GLES_
     stbi_image_free(data);
+#else
+    free(data);
+#endif
     return textureID;
 }
 

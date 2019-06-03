@@ -7,8 +7,13 @@
 //
 
 #include "skybox.h"
+#ifdef _GLES_
+#include "FilePath.h"
+#else
 #define STB_IMAGE_IMPLEMENTATION
 #include "../ext/stb_image.h"
+#endif
+
 
 Skybox::Skybox(Camera* camera,std::string name)
 {
@@ -59,10 +64,13 @@ unsigned int Skybox::loadCubemap(std::vector<std::string> faces)
     unsigned int textureID;
     glGenTextures(1, &textureID);
     glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+#ifndef _GLES_
     stbi_set_flip_vertically_on_load(false);
+#endif
     int width, height, nrChannels;
     for (unsigned int i = 0; i < faces.size(); i++)
     {
+#ifndef _GLES_
         unsigned char *data = stbi_load(faces[i].c_str(), &width, &height, &nrChannels, 0);
         if (data)
         {
@@ -74,7 +82,15 @@ unsigned int Skybox::loadCubemap(std::vector<std::string> faces)
             std::cout << "Cubemap texture failed to load at path: " << faces[i] << std::endl;
             stbi_image_free(data);
         }
+#else
+        size_t idx = faces[i].rfind("/");
+        std::string path = faces[i].replace(0, idx+1, "");
+        char* data = LoadImage(path, &width, &height);
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+        free(data);
+#endif
     }
+
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);

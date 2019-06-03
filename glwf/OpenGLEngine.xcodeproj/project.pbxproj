@@ -557,22 +557,22 @@
 		4CE8602922A4F1EE000677DC /* std */ = {
 			isa = PBXGroup;
 			children = (
-				4CE8602A22A4F1EE000677DC /* mesh.cpp */,
 				4CE8602B22A4F1EE000677DC /* shader.h */,
-				4CE8602C22A4F1EE000677DC /* skybox.h */,
-				4CE8602D22A4F1EE000677DC /* light.h */,
-				4CE8602E22A4F1EE000677DC /* camera.cpp */,
+				4CE8603422A4F1EE000677DC /* shader.cpp */,
 				4CE8602F22A4F1EE000677DC /* camera.h */,
+				4CE8602E22A4F1EE000677DC /* camera.cpp */,
+				4CE8602D22A4F1EE000677DC /* light.h */,
 				4CE8603022A4F1EE000677DC /* light.cpp */,
+				4CE8603922A4F1EE000677DC /* texture.h */,
 				4CE8603122A4F1EE000677DC /* texture.cpp */,
 				4CE8603222A4F1EE000677DC /* mesh.h */,
+				4CE8602A22A4F1EE000677DC /* mesh.cpp */,
 				4CE8603322A4F1EE000677DC /* terrain.h */,
-				4CE8603422A4F1EE000677DC /* shader.cpp */,
+				4CE8603822A4F1EE000677DC /* terrain.cpp */,
+				4CE8602C22A4F1EE000677DC /* skybox.h */,
 				4CE8603522A4F1EE000677DC /* skybox.cpp */,
 				4CE8603622A4F1EE000677DC /* model.h */,
 				4CE8603722A4F1EE000677DC /* model.cpp */,
-				4CE8603822A4F1EE000677DC /* terrain.cpp */,
-				4CE8603922A4F1EE000677DC /* texture.h */,
 			);
 			path = std;
 			sourceTree = "<group>";
