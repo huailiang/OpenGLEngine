@@ -140,6 +140,12 @@ es浮点数默认是：precision mediump float;
 注意：	只有在DEBUG模式下， 才会生成预编译的shader， Release下为了效率是不生成预编译的shder的。
 
 
+## 5. qt 编辑器
+
+主要是qt是跨平台的， qt可以支持编写界面，用以扩展引擎编辑器，这里只是初步的实现。
+
+<br><img src='image/qt.jpg'> <br>
+
 
 <br>
 penghuailiang<br>
