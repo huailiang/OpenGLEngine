@@ -7,7 +7,10 @@
 //
 
 #include "common.h"
+#include <sys/timeb.h>
 
+unsigned int SCR_WIDTH = 800;
+unsigned int SCR_HEIGHT = 600;
 
 unsigned int RENDER_WIDTH = 1600;
 unsigned int RENDER_HEIGTH = 1200;
@@ -15,8 +18,9 @@ unsigned int DRAW_MODE = GL_TRIANGLES;
 
 #ifdef _QT_EDIT_
 QTime q_time;
+#else
+time_t start_time;
 #endif
-
 
 void GlobalInit()
 {
@@ -30,7 +34,10 @@ float GetRuntime()
 #ifdef _QT_EDIT_
     return q_time.elapsed()*0.001f;
 #else
-    return glfwGetTime();
+    timeb t;
+    ftime(&t);
+    if (start_time == 0) start_time = t.time;
+    return t.time - start_time + t.millitm * 0.001f;
 #endif
 }
 
@@ -116,4 +123,12 @@ std::string Macro(const char* k1, const void* v1, const char* k2, const void* v2
 void SetRenderMode(unsigned int mode)
 {
     DRAW_MODE = mode;
+}
+
+void SetWindowSize(int width, int height)
+{
+    SCR_WIDTH = width;
+    SCR_HEIGHT = height;
+    RENDER_WIDTH = width * 2;
+    RENDER_HEIGTH = height * 2;
 }

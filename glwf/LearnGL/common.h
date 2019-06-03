@@ -31,8 +31,8 @@
 #include <glm/gtc/type_ptr.hpp>
 
 
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
+extern unsigned int SCR_WIDTH;
+extern unsigned int SCR_HEIGHT;
 const double PI = 3.14159265359;
 
 //initial with sreen*2
@@ -161,4 +161,7 @@ std::string Macro(const char* k1, const char* v1, const char* k2, const char* v2
 std::string Macro(const char* k1, const void* v1, const char* k2, const void* v2, const char* k3, const char* v3);
 
 void SetRenderMode(unsigned int mode);
+
+void SetWindowSize(int width, int height);
+
 #endif /* common_h */
