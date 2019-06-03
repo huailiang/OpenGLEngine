@@ -5,9 +5,9 @@
 #include <QDebug>
 #include <QOpenGLFunctions_3_3_Core>
 #include <qtimer.h>
-#include "std/shader.h"
-#include "std/camera.h"
-#include "std/light.h"
+#include "../code/std/shader.h"
+#include "../code/std/camera.h"
+#include "../code/std/light.h"
 
 namespace Ui {
 class GLWidget;

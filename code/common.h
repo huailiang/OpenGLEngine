@@ -42,7 +42,7 @@ extern unsigned int RENDER_HEIGTH;
 extern unsigned int DRAW_MODE;
 
 #ifdef _QT_EDIT_
-#define WORKDIR "/Users/penghuailiang/Documents/projects/QT/qt_engine/" // Qt env 
+#define WORKDIR "/Users/penghuailiang/Documents/projects/GL/OpenGLEngine/" // Qt env
 extern QTime q_time;
 #else
 #define WORKDIR ""  //xcode wroking directory can be setted in Scheme

@@ -1,6 +1,6 @@
 #include "enginewidget.h"
 #include "ui_enginewidget.h"
-#include "std/texture.h"
+#include "../code/std/texture.h"
 
 engineWidget::engineWidget(QWidget *parent) :
     QOpenGLWidget(parent),

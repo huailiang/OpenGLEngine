@@ -1,13 +1,12 @@
-#include "common.h"
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QGLFormat>
 #include <QtDebug>
-
 #include <iostream>
-#include "profile.h"
+#include "../code/common.h"
+#include "../code/profile.h"
+#include "../code/std/shader.h"
 #include "glwidget.h"
-#include "std/shader.h"
 #include "mainwindow.h"
 
 

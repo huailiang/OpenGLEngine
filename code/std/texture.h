@@ -13,7 +13,7 @@
 #ifndef _QT_EDIT_
 #include <glad/glad.h>
 #endif
-#include "common.h"
+#include "../common.h"
 
 using namespace glm;
 

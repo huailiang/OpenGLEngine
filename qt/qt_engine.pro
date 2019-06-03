@@ -27,27 +27,27 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
-    ext/glad.c \
-    common.cpp \
-    std/camera.cpp \
-    std/light.cpp \
+    ../code/ext/glad.c \
+    ../code/common.cpp \
+    ../code/std/camera.cpp \
+    ../code/std/light.cpp \
     mainwindow.cpp \
     enginewidget.cpp \
-    std/skybox.cpp \
-    std/texture.cpp \
-    std/shader.cpp
+    ../code/std/skybox.cpp \
+    ../code/std/texture.cpp \
+    ../code/std/shader.cpp
 
 HEADERS += \
-    common.h \
-    profile.h \
-    std/shader.h \
-    ext/stb_image.h \
-    std/texture.h \
-    std/camera.h \
-    std/light.h \
+    ../code/profile.h \
+    ../code/std/shader.h \
+    ../code/ext/stb_image.h \
+    ../code/std/texture.h \
+    ../code/std/camera.h \
+    ../code/std/light.h \
     mainwindow.h \
     enginewidget.h \
-    std/skybox.h
+    ../code/std/skybox.h \
+    ../code/common.h
 
 FORMS += \
     mainwindow.ui \
