@@ -209,7 +209,7 @@ void Shader::save(std::string text, const char* name)
     path = "/tmp/"+path;
 #else
     path = "temp/"+path;
-#endif
+#endif // _GLES_
 
     std::ofstream file;
     file.exceptions (std::ofstream::failbit | std::ofstream::badbit);

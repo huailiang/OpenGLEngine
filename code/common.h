@@ -19,12 +19,29 @@
 #include <map>
 #include <vector>
 #include <stdio.h>
-#include <stdio.h>
 #include <regex>
+
+#ifndef _GLES_
 #ifndef _QT_EDIT_
 #include <glad/glad.h>
-#endif
+#endif // _QT_EDIT_
 #include <GLFW/glfw3.h>
+#else
+#ifdef __APPLE__
+#include <OpenGLES/ES3/gl.h>
+#else
+#include <GLES3/gl3.h>
+#include <EGL/egl.h>
+#include <EGL/eglext.h>
+#endif // __APPLE__
+#endif // _GLES_
+
+#ifdef ANDROID
+#include <android/log.h>
+#include <android_native_app_glue.h>
+#include <android/asset_manager.h>
+#endif
+
 #include <cmath>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
