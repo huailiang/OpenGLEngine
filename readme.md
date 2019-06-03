@@ -1,9 +1,6 @@
 # 基于OpenGL实现的渲染引擎
 
 
-我们在Qt环境下，使用相同的代码实现了相同的效果， [点击前往](https://github.com/huailiang/qt_engine), 可能这样会更适合你做编辑器扩展。
-
-同时我们使用引擎也实现了一套在移动平台的代码，[点击前往](https://github.com/huailiang/GLESEngine)， 基于opengl es3.0
 
 # 依赖的库
 *  openGL
@@ -11,6 +8,26 @@
 * grewf
 * freetype
 * glm
+
+## Tip
+
+如果当前是打开的是qt工程，你需要在*common.h*设置资源工作路径：
+
+```c++
+#define WORKDIR "/users/username/qt_engine"
+```
+
+如果当前打开的是glfw或者es工程， 你需要在xcode->product->scheme 设置working directory:
+
+
+<br><img src='image/dir.jpg'> <br>
+
+
+## Version
+
+* qt 5.11
+* opengl 330
+* opengles 300
 
 
 # 特征
