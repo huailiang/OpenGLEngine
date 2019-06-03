@@ -2,11 +2,11 @@
 **/temp/*.vs
 **/.vs/
 **/.vscode/
-qt/build/*.h
-qt/build/*.o
-qt/build/*.cpp
-qt/build/qt_engine*
-qt/build/Makefile
+qt_proj/build/*.h
+qt_proj/build/*.o
+qt_proj/build/*.cpp
+qt_proj/build/qt_engine*
+qt_proj/build/Makefile
 **/build/project/
 **/build/CMakeCache*
 **/build/cmake_install.cmake
