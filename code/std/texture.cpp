@@ -24,6 +24,9 @@ TTexture::TTexture(const char* path, unsigned int* texID, bool flipY, int wrap)
 
 unsigned int TTexture::LoadTexture(bool flipY, int wrap)
 {
+#ifndef _GLES_
+    stbi_set_flip_vertically_on_load(flipY);
+#endif
     glGenTextures(1, &textureID);
     glBindTexture(GL_TEXTURE_2D, textureID);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrap);

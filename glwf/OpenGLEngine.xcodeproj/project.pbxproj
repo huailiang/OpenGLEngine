@@ -48,6 +48,40 @@
 /* Begin PBXFileReference section */
 		4C3B7A162283164E003B212F /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		4C3B7A1822831668003B212F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		4C402CE322A51AF2008C89D4 /* pbr.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = pbr.fs; sourceTree = "<group>"; };
+		4C402CE422A51AF2008C89D4 /* ttfrag.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = ttfrag.fs; sourceTree = "<group>"; };
+		4C402CE522A51AF2008C89D4 /* shadow.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shadow.fs; sourceTree = "<group>"; };
+		4C402CE622A51AF2008C89D4 /* instance.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = instance.vs; sourceTree = "<group>"; };
+		4C402CE722A51AF2008C89D4 /* light.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = light.vs; sourceTree = "<group>"; };
+		4C402CE822A51AF2008C89D4 /* model.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = model.fs; sourceTree = "<group>"; };
+		4C402CEA22A51AF2008C89D4 /* pixel.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = pixel.fs; sourceTree = "<group>"; };
+		4C402CEB22A51AF2008C89D4 /* normal.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = normal.vs; sourceTree = "<group>"; };
+		4C402CEC22A51AF2008C89D4 /* normal.gs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = normal.gs; sourceTree = "<group>"; };
+		4C402CED22A51AF2008C89D4 /* camera.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = camera.vs; sourceTree = "<group>"; };
+		4C402CEE22A51AF2008C89D4 /* button.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = button.vs; sourceTree = "<group>"; };
+		4C402CEF22A51AF2008C89D4 /* camera.gs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = camera.gs; sourceTree = "<group>"; };
+		4C402CF022A51AF2008C89D4 /* button.gs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = button.gs; sourceTree = "<group>"; };
+		4C402CF122A51AF2008C89D4 /* outline.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = outline.fs; sourceTree = "<group>"; };
+		4C402CF222A51AF2008C89D4 /* debug.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = debug.fs; sourceTree = "<group>"; };
+		4C402CF322A51AF2008C89D4 /* depth.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = depth.fs; sourceTree = "<group>"; };
+		4C402CF422A51AF2008C89D4 /* cube.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = cube.fs; sourceTree = "<group>"; };
+		4C402CF522A51AF2008C89D4 /* sample.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = sample.fs; sourceTree = "<group>"; };
+		4C402CF622A51AF2008C89D4 /* model.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = model.vs; sourceTree = "<group>"; };
+		4C402CF722A51AF2008C89D4 /* sample.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = sample.vs; sourceTree = "<group>"; };
+		4C402CF822A51AF2008C89D4 /* depth.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = depth.vs; sourceTree = "<group>"; };
+		4C402CFA22A51AF2008C89D4 /* struct.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = struct.glsl; sourceTree = "<group>"; };
+		4C402CFB22A51AF2008C89D4 /* const.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = const.glsl; sourceTree = "<group>"; };
+		4C402CFC22A51AF2008C89D4 /* brdf.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = brdf.glsl; sourceTree = "<group>"; };
+		4C402CFD22A51AF2008C89D4 /* camera.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = camera.glsl; sourceTree = "<group>"; };
+		4C402CFE22A51AF2008C89D4 /* phong.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = phong.glsl; sourceTree = "<group>"; };
+		4C402CFF22A51AF2008C89D4 /* util.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = util.glsl; sourceTree = "<group>"; };
+		4C402D0022A51AF2008C89D4 /* cube.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = cube.vs; sourceTree = "<group>"; };
+		4C402D0122A51AF2008C89D4 /* debug.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = debug.vs; sourceTree = "<group>"; };
+		4C402D0222A51AF2008C89D4 /* shadow.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shadow.vs; sourceTree = "<group>"; };
+		4C402D0322A51AF2008C89D4 /* instance.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = instance.fs; sourceTree = "<group>"; };
+		4C402D0422A51AF2008C89D4 /* ttfont.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = ttfont.vs; sourceTree = "<group>"; };
+		4C402D0522A51AF2008C89D4 /* pbr.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = pbr.vs; sourceTree = "<group>"; };
+		4C402D0622A51AF2008C89D4 /* light.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = light.fs; sourceTree = "<group>"; };
 		4CD27D2B2282F4E30038AE21 /* OpenGLEngine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OpenGLEngine; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CD27D3E2283022D0038AE21 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		4CD27D472283070B0038AE21 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
@@ -495,11 +529,70 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C402CE222A51AF2008C89D4 /* shader */ = {
+			isa = PBXGroup;
+			children = (
+				4C402CF922A51AF2008C89D4 /* lib */,
+				4C402CE922A51AF2008C89D4 /* gizmos */,
+				4C402CF722A51AF2008C89D4 /* sample.vs */,
+				4C402CF522A51AF2008C89D4 /* sample.fs */,
+				4C402CE522A51AF2008C89D4 /* shadow.fs */,
+				4C402CE722A51AF2008C89D4 /* light.vs */,
+				4C402D0622A51AF2008C89D4 /* light.fs */,
+				4C402CF122A51AF2008C89D4 /* outline.fs */,
+				4C402D0122A51AF2008C89D4 /* debug.vs */,
+				4C402CF222A51AF2008C89D4 /* debug.fs */,
+				4C402D0022A51AF2008C89D4 /* cube.vs */,
+				4C402CF422A51AF2008C89D4 /* cube.fs */,
+				4C402CF622A51AF2008C89D4 /* model.vs */,
+				4C402CE822A51AF2008C89D4 /* model.fs */,
+				4C402CF822A51AF2008C89D4 /* depth.vs */,
+				4C402CF322A51AF2008C89D4 /* depth.fs */,
+				4C402D0222A51AF2008C89D4 /* shadow.vs */,
+				4C402CE622A51AF2008C89D4 /* instance.vs */,
+				4C402D0322A51AF2008C89D4 /* instance.fs */,
+				4C402D0422A51AF2008C89D4 /* ttfont.vs */,
+				4C402CE422A51AF2008C89D4 /* ttfrag.fs */,
+				4C402D0522A51AF2008C89D4 /* pbr.vs */,
+				4C402CE322A51AF2008C89D4 /* pbr.fs */,
+			);
+			name = shader;
+			path = ../shader;
+			sourceTree = "<group>";
+		};
+		4C402CE922A51AF2008C89D4 /* gizmos */ = {
+			isa = PBXGroup;
+			children = (
+				4C402CEA22A51AF2008C89D4 /* pixel.fs */,
+				4C402CEB22A51AF2008C89D4 /* normal.vs */,
+				4C402CEC22A51AF2008C89D4 /* normal.gs */,
+				4C402CED22A51AF2008C89D4 /* camera.vs */,
+				4C402CEE22A51AF2008C89D4 /* button.vs */,
+				4C402CEF22A51AF2008C89D4 /* camera.gs */,
+				4C402CF022A51AF2008C89D4 /* button.gs */,
+			);
+			path = gizmos;
+			sourceTree = "<group>";
+		};
+		4C402CF922A51AF2008C89D4 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				4C402CFA22A51AF2008C89D4 /* struct.glsl */,
+				4C402CFB22A51AF2008C89D4 /* const.glsl */,
+				4C402CFC22A51AF2008C89D4 /* brdf.glsl */,
+				4C402CFD22A51AF2008C89D4 /* camera.glsl */,
+				4C402CFE22A51AF2008C89D4 /* phong.glsl */,
+				4C402CFF22A51AF2008C89D4 /* util.glsl */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
 		4CD27D222282F4E30038AE21 = {
 			isa = PBXGroup;
 			children = (
 				4CE8602322A4F1EE000677DC /* code */,
 				4CD27D2C2282F4E30038AE21 /* Products */,
+				4C402CE222A51AF2008C89D4 /* shader */,
 				4CD27D352282F5320038AE21 /* Frameworks */,
 			);
 			sourceTree = "<group>";
