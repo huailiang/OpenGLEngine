@@ -203,13 +203,14 @@ void Shader::save(std::string text, const char* name)
 {
     std::string path(name);
 #ifdef _GLES_
+#ifndef TARGET_IPHONE_SIMULATOR
+    return;
+#endif
     path = "/tmp/"+path;
 #else
     path = "temp/"+path;
 #endif
-#ifndef TARGET_IPHONE_SIMULATOR
-    return;
-#endif
+
     std::ofstream file;
     file.exceptions (std::ofstream::failbit | std::ofstream::badbit);
     try
