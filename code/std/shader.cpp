@@ -7,6 +7,9 @@
 //
 
 #include "shader.h"
+#ifdef _GLES_
+#include "FilePath.h"
+#endif
 
 Shader::Shader(const char* vertexPath, const char* fragmentPath, const char* geometryPath, std::string macro)
 {
@@ -35,11 +38,13 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath, const char* geo
     unsigned int geometry = 0;
     if(geometryPath != nullptr)
     {
+#ifndef _GLES_
         const char * gShaderCode = geometryCode.c_str();
         geometry = glCreateShader(GL_GEOMETRY_SHADER);
         glShaderSource(geometry, 1, &gShaderCode, NULL);
         glCompileShader(geometry);
         checkCompileErrors(geometry, "GEOMETRY");
+#endif
     }
     
     ID = glCreateProgram();
@@ -202,6 +207,9 @@ void Shader::save(std::string text, const char* name)
 #else
     path = "temp/"+path;
 #endif
+#ifndef TARGET_IPHONE_SIMULATOR
+    return;
+#endif
     std::ofstream file;
     file.exceptions (std::ofstream::failbit | std::ofstream::badbit);
     try
@@ -223,9 +231,13 @@ std::string Shader::openFile(const char* name)
     file.exceptions (std::ifstream::failbit | std::ifstream::badbit);
     try
     {
+#ifdef _GLES_
+        std::string path = getPath(name);
+#else
         std::string path(name);
         path = "shader/" + path;
         path = WORKDIR + path;
+#endif
         file.open(path);
         std::stringstream stream;
         stream << file.rdbuf();
