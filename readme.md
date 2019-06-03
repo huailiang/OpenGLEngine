@@ -17,10 +17,14 @@
 #define WORKDIR "/users/username/qt_engine"
 ```
 
-如果当前打开的是glfw或者es工程， 你需要在xcode->product->scheme 设置working directory:
+如果当前打开的是glfw， 你需要在xcode->product->scheme 设置working directory:
 
 
 <br><img src='image/dir.jpg'> <br>
+
+在es工程， 我们使用native的接口读取资源。
+
+
 
 
 ## Version
@@ -131,6 +135,8 @@ es浮点数默认是：precision mediump float;
 * version声明
 
 引擎实现移动版本会自动转化为 #version 300 es
+
+<br><img src='image/es.jpg'> <br>
 
 
 ## 4.Debug支持
