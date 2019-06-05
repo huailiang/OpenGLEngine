@@ -11,20 +11,25 @@
 
 #include <glm/glm.hpp>
 
-class UIBase
+namespace engine
 {
-public:
     
-    UIBase(float x, float y);
+    class UIBase
+    {
+    public:
+        
+        UIBase(float x, float y);
+        
+        UIBase(const glm::vec2 pos);
+        
+        virtual void Draw() = 0;
+        
+        void SetPos(float x, float y);
+        
+    protected:
+        float posx, posy;
+    };
     
-    UIBase(const glm::vec2 pos);
-    
-    virtual void Draw() = 0;
-    
-    void SetPos(float x, float y);
-    
-protected:
-    float posx, posy;
-};
+}
 
 #endif /* UIBase_h */

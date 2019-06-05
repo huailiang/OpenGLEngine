@@ -8,60 +8,65 @@
 
 #include "avatar.h"
 
-
-Avatar::Avatar(const char* name)
+namespace engine
 {
-    vector<string> items;
-    tool::ReadSummary(name, items);
-    materials.clear();
-    for (size_t i=0; i<items.size(); i++)
+
+    Avatar::Avatar(const char* name)
     {
-        MeshData* data = tool::ReadMesh(items[i]);
-        Material* mat = new Material(data);
-        materials.push_back(mat);
+        vector<string> items;
+        ReadSummary(name, items);
+        materials.clear();
+        for (size_t i=0; i<items.size(); i++)
+        {
+            MeshData* data = ReadMesh(items[i]);
+            Material* mat = new Material(data);
+            materials.push_back(mat);
+        }
     }
-}
 
 
-Avatar::~Avatar()
-{
-    for (size_t i=0;i<materials.size(); i++)
+    Avatar::~Avatar()
     {
-        delete materials[i];
+        for (size_t i=0;i<materials.size(); i++)
+        {
+            delete materials[i];
+        }
+        materials.clear();
     }
-    materials.clear();
-}
 
 
-mat4 Avatar::GetModelMatrix(vec3 pos, vec3 scale, float angle)
-{
-    mat4 model(1);
-    model = translate(model, pos);
-    model = glm::scale(model, scale);
-    model = rotate(model, radians(angle), vec3(0.0f,1.0f,0.0f));
-    return model;
-}
-
-void Avatar::Draw(Shader* shader, Camera* camera, Light* light, vec3 pos, vec3 scale, float angle)
-{
-    shader->use();
-    light->Apply(shader);
-    shader->setMat4("model", GetModelMatrix(pos, scale, angle));
-    LightShader* lshader =static_cast<LightShader*>(shader);
-    if(lshader) lshader->ApplyLight();
-    for (size_t i=0; i<materials.size(); i++)
+    mat4 Avatar::GetModelMatrix(vec3 pos, vec3 scale, float angle)
     {
-        materials[i]->Draw(shader);
+        mat4 model(1);
+        model = translate(model, pos);
+        model = glm::scale(model, scale);
+        model = rotate(model, radians(angle), vec3(0.0f,1.0f,0.0f));
+        return model;
     }
-}
 
-
-void Avatar::DrawShadow(Shader* shader, Camera* camera, Light* light, vec3 pos, vec3 scale, float angle)
-{
-    shader->use();
-    shader->setMat4("model", GetModelMatrix(pos, scale, angle));
-    for (size_t i=0; i<materials.size(); i++)
+    void Avatar::Draw(Shader* shader, Camera* camera, Light* light, vec3 pos, vec3 scale, float angle)
     {
-        materials[i]->DrawMesh();
+        shader->use();
+        light->Apply(shader);
+        shader->setMat4("model", GetModelMatrix(pos, scale, angle));
+        LightShader* lshader =static_cast<LightShader*>(shader);
+        if(lshader) lshader->ApplyLight();
+        for (size_t i=0; i<materials.size(); i++)
+        {
+            materials[i]->Draw(shader);
+        }
     }
+
+
+    void Avatar::DrawShadow(Shader* shader, Camera* camera, Light* light, vec3 pos, vec3 scale, float angle)
+    {
+        shader->use();
+        shader->setMat4("model", GetModelMatrix(pos, scale, angle));
+        for (size_t i=0; i<materials.size(); i++)
+        {
+            materials[i]->DrawMesh();
+        }
+    }
+
+
 }

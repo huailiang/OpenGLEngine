@@ -8,6 +8,8 @@
 
 #include "uievent.h"
 
+namespace engine
+{
 
 void UIEvent::RegistCallback(ClickCallback cb)
 {
@@ -27,4 +29,6 @@ void UIEvent::Dispacher()
     {
         callback(this, arg);
     }
+}
+
 }

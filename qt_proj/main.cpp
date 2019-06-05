@@ -11,6 +11,7 @@
 
 
 using namespace std;
+using namespace engine;
 
 #ifdef USE_OPENGL_330
     #define GL_MAJOR 3

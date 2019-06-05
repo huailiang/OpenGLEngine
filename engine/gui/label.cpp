@@ -8,6 +8,10 @@
 
 #include "label.h"
 
+namespace engine
+{
+
+
 UILabel::UILabel(const glm::vec2 pos) :UIBase(pos)
 {
     std::cout<<"warn: called default constructor of label"<<std::endl;
@@ -72,4 +76,6 @@ float UILabel::getCenterX()
 std::string UILabel::getText()
 {
     return this->text;
+}
+
 }

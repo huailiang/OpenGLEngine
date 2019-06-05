@@ -14,28 +14,31 @@
 
 using namespace glm;
 
-
-class TTexture
+namespace engine
 {
-public:
-    unsigned int textureID;
-    
-    TTexture(const char* path, unsigned int* texID= nullptr, bool flipY= true, int wrap = GL_REPEAT);
-    
-    ~TTexture();
-    
-    ivec2 GetShape();
-    
-    GLenum GetFormat();
-    
-    unsigned int LoadTexture(bool flipY, int wrap);
-    
-    
-private:
-    int width, height, format;
-    const char* path;
-};
+
+    class TTexture
+    {
+    public:
+        unsigned int textureID;
+        
+        TTexture(const char* path, unsigned int* texID= nullptr, bool flipY= true, int wrap = GL_REPEAT);
+        
+        ~TTexture();
+        
+        ivec2 GetShape();
+        
+        GLenum GetFormat();
+        
+        unsigned int LoadTexture(bool flipY, int wrap);
+        
+        
+    private:
+        int width, height, format;
+        const char* path;
+    };
 
 
+}
 
 #endif /* texture_h */

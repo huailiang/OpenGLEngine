@@ -11,6 +11,10 @@
 #include "FilePath.h"
 #endif
 
+namespace engine
+{
+
+
 Shader::Shader(const char* vertexPath, const char* fragmentPath, const char* geometryPath, std::string macro)
 {
     // 1. retrieve the vertex/fragment source code from filePath
@@ -274,4 +278,7 @@ void Shader::checkCompileErrors(GLuint shader, std::string type)
             std::cout << "ERROR::PROGRAM_LINKING_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
         }
     }
+}
+
+
 }

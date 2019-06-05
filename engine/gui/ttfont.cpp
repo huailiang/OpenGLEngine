@@ -8,6 +8,10 @@
 
 #include "ttfont.h"
 
+namespace engine
+{
+
+
 TTFont::~TTFont()
 {
     delete shader;
@@ -128,4 +132,6 @@ int TTFont::initial()
     glBindVertexArray(0);
     
     return 0;
+}
+
 }

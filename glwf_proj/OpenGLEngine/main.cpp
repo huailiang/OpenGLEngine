@@ -21,6 +21,8 @@
 
 using namespace std;
 using namespace glm;
+using namespace engine;
+
 
 float deltatime,lastTime;
 
@@ -50,7 +52,7 @@ int main(int argc, const char * argv[])
         if(strcmp(argv[1], "tools") == 0)
         {
             string name(argv[2]);
-            tool::LoadObj(name);
+            engine::LoadObj(name);
         }
         else
         {
@@ -160,3 +162,5 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
     SceneMgr::getInstance()->ProcessMouseScroll(xoffset, yoffset);
 }
+
+

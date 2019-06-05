@@ -12,6 +12,8 @@
 #include "light.h"
 #include "skybox.h"
 
+using namespace engine;
+
 unsigned int vao,vbo,texture1,texture2;
 Shader* shader;
 ESContext* esContext;

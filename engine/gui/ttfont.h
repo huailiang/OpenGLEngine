@@ -18,36 +18,41 @@
 using namespace std;
 using namespace glm;
 
-struct Character
+namespace engine
 {
-    GLuint TextureID;
-    glm::ivec2 Size;
-    glm::ivec2 Bearing;  // Offset from baseline to left/top of glyph
-    GLuint Advance;    // Horizontal offset to advance to next glyph
-};
 
-#define FONT_SIZE 20
-
-class TTFont
-{
-    DeclareSington(TTFont)
     
-public:
+    struct Character
+    {
+        GLuint TextureID;
+        glm::ivec2 Size;
+        glm::ivec2 Bearing;  // Offset from baseline to left/top of glyph
+        GLuint Advance;    // Horizontal offset to advance to next glyph
+    };
 
-    float RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scale, const glm::vec3 color);
-    
-    int initial();
+    #define FONT_SIZE 20
 
-private:
-    
-    ~TTFont();
-    
-private:
-    unsigned int VBO,VAO;
-    Shader* shader;
-    map<GLchar, Character> Characters;
-};
+    class TTFont
+    {
+        DeclareSington(TTFont)
+        
+    public:
+
+        float RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scale, const glm::vec3 color);
+        
+        int initial();
+
+    private:
+        
+        ~TTFont();
+        
+    private:
+        unsigned int VBO,VAO;
+        Shader* shader;
+        map<GLchar, Character> Characters;
+    };
 
 
+}
 
 #endif /* ttfont_h */

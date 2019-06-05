@@ -17,7 +17,7 @@
 #define TINYOBJLOADER_IMPLEMENTATION
 #include "tiny_obj_loader.h"
 
-namespace tool
+namespace engine
 {
     string curr_obj;
     map<string,GLuint> loaded_textures;

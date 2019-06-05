@@ -15,51 +15,54 @@
 
 using namespace std;
 
-class EventMgr
+namespace engine
 {
-    
-    DeclareSington(EventMgr)
-    
-public:
-    
-    void RegistEvt(UIEvent* evt)
+
+    class EventMgr
     {
-        ui_events.push_back(evt);
-    }
-    
-    void RemoveEvt(UIEvent* evt)
-    {
-        for(vector<UIEvent*>::iterator iter=ui_events.begin(); iter!=ui_events.end();iter++)
+        
+        DeclareSington(EventMgr)
+        
+    public:
+        
+        void RegistEvt(UIEvent* evt)
         {
-            if(*iter == evt)
+            ui_events.push_back(evt);
+        }
+        
+        void RemoveEvt(UIEvent* evt)
+        {
+            for(vector<UIEvent*>::iterator iter=ui_events.begin(); iter!=ui_events.end();iter++)
             {
-                ui_events.erase(iter);
-                break;
+                if(*iter == evt)
+                {
+                    ui_events.erase(iter);
+                    break;
+                }
             }
         }
-    }
-    
-    void Triger(float x, float y, int action)
-    {
-        float scale = RENDER_WIDTH / (SCR_WIDTH * 2.0f);
-        float xx = x / scale;
-        scale = RENDER_HEIGTH / (SCR_HEIGHT * 2.0f);
-        float yy = y / scale;
-        for (size_t i=0; i<ui_events.size(); i++)
+        
+        void Triger(float x, float y, int action)
         {
-            UIEvent* et = ui_events[i];
-            if(action == GLFW_RELEASE && et->IsHit(xx, yy))
+            float scale = RENDER_WIDTH / (SCR_WIDTH * 2.0f);
+            float xx = x / scale;
+            scale = RENDER_HEIGTH / (SCR_HEIGHT * 2.0f);
+            float yy = y / scale;
+            for (size_t i=0; i<ui_events.size(); i++)
             {
-                et->OnTriger();
-                et->Dispacher();
+                UIEvent* et = ui_events[i];
+                if(action == GLFW_RELEASE && et->IsHit(xx, yy))
+                {
+                    et->OnTriger();
+                    et->Dispacher();
+                }
             }
         }
-    }
-    
-    
-private:
-    std::vector<UIEvent*> ui_events;
-};
+        
+        
+    private:
+        std::vector<UIEvent*> ui_events;
+    };
 
-
+}
 #endif /* EventMgr_h */

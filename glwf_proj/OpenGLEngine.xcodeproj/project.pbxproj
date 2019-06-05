@@ -209,15 +209,15 @@
 			children = (
 				4C37751322A54FA20074744F /* uimgr.h */,
 				4C37751422A54FA20074744F /* uibase.cpp */,
+				4C37751D22A54FA20074744F /* ttfont.h */,
 				4C37751522A54FA20074744F /* ttfont.cpp */,
 				4C37751622A54FA20074744F /* label.h */,
-				4C37751722A54FA20074744F /* button.cpp */,
+				4C37751B22A54FA20074744F /* label.cpp */,
 				4C37751822A54FA20074744F /* uibase.h */,
 				4C37751922A54FA20074744F /* uievent.h */,
 				4C37751A22A54FA20074744F /* uievent.cpp */,
-				4C37751B22A54FA20074744F /* label.cpp */,
 				4C37751C22A54FA20074744F /* button.h */,
-				4C37751D22A54FA20074744F /* ttfont.h */,
+				4C37751722A54FA20074744F /* button.cpp */,
 				4C37751E22A54FA20074744F /* eventmgr.h */,
 			);
 			name = gui;

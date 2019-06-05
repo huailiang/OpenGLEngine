@@ -9,6 +9,8 @@
 #include "../engine/std/camera.h"
 #include "../engine/std/light.h"
 
+using namespace engine;
+
 namespace Ui {
 class GLWidget;
 }

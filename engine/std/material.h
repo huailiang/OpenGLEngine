@@ -13,54 +13,58 @@
 #include "shader.h"
 
 #define TEXTURE_NUM 4
-
-struct Vertex
+namespace engine
 {
-    glm::vec3 Position;
-    //uv
-    glm::vec2 TexCoords;
-    //normal
-    glm::vec3 Normal;
-};
 
-struct MeshData
-{
-    unsigned int num_indice;
-    unsigned int *indices;
-    unsigned int num_vert;
-    Vertex* vertices;
-    
-    GLuint diffuse_texture;
-    GLuint normal_texure;
-    GLuint ambient_texture;
-    GLuint specul_texture;
-    
-    
-    ~MeshData()
+    struct Vertex
     {
-        delete []indices;
-        delete []vertices;
-    }
-};
+        glm::vec3 Position;
+        //uv
+        glm::vec2 TexCoords;
+        //normal
+        glm::vec3 Normal;
+    };
+
+    struct MeshData
+    {
+        unsigned int num_indice;
+        unsigned int *indices;
+        unsigned int num_vert;
+        Vertex* vertices;
+        
+        GLuint diffuse_texture;
+        GLuint normal_texure;
+        GLuint ambient_texture;
+        GLuint specul_texture;
+        
+        
+        ~MeshData()
+        {
+            delete []indices;
+            delete []vertices;
+        }
+    };
 
 
-class Material
-{
-public:
+    class Material
+    {
+    public:
+        
+        Material(MeshData* data);
+        
+        ~Material();
+        
+        void SetupMesh();
+        
+        void Draw(Shader* shader);
+        
+        void DrawMesh();
+        
+    private:
+        MeshData* data;
+        unsigned int ebo, vao, vbo;
+    };
     
-    Material(MeshData* data);
-    
-    ~Material();
-    
-    void SetupMesh();
-    
-    void Draw(Shader* shader);
-    
-    void DrawMesh();
-    
-private:
-    MeshData* data;
-    unsigned int ebo, vao, vbo;
-};
+}
 
 #endif /* material_h */

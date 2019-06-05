@@ -8,19 +8,22 @@
 
 #include "uibase.h"
 
-
-
-UIBase::UIBase(float x, float y): posx(x), posy(y)
+namespace engine
 {
-}
+
+    UIBase::UIBase(float x, float y): posx(x), posy(y)
+    {
+    }
 
 
-UIBase::UIBase(const glm::vec2 pos): posx(pos.x), posy(pos.y)
-{   
-}
+    UIBase::UIBase(const glm::vec2 pos): posx(pos.x), posy(pos.y)
+    {
+    }
 
-void UIBase::SetPos(float x, float y)
-{
-    this->posx = x;
-    this->posy = y;
+    void UIBase::SetPos(float x, float y)
+    {
+        this->posx = x;
+        this->posy = y;
+    }
+
 }

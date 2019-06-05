@@ -8,6 +8,8 @@
 
 #include "button.h"
 
+namespace engine
+{
 
 UIButton::UIButton(const glm::vec2 pos,const glm::vec3 color, const float scale,const std::string text, const int evtid,const bool interact):
 UILabel(pos,color,scale,text, evtid, interact)
@@ -55,4 +57,6 @@ void UIButton::InitBackground()
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
     glBindVertexArray(0);
+}
+
 }

@@ -8,6 +8,8 @@
 
 #include "material.h"
 
+namespace engine
+{
 
 Material::Material(MeshData* data)
 {
@@ -88,3 +90,4 @@ void Material::Draw(Shader* shader)
 }
 
 
+}

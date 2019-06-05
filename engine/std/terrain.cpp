@@ -8,6 +8,8 @@
 
 #include "terrain.h"
 
+namespace engine
+{
 
 Terrain::Terrain()
 {
@@ -190,4 +192,7 @@ void Terrain::DrawGrassInstance(Camera* camera)
     glBindVertexArray(grass_vao);
     glDrawArraysInstanced(DRAW_MODE, 0, 6, grass_num);
     glBindVertexArray(0);
+}
+
+
 }

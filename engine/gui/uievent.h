@@ -11,6 +11,9 @@
 
 #include <iostream>
 
+namespace engine
+{
+
 enum UIEventType
 {
     Press,
@@ -58,4 +61,5 @@ private:
 
 };
 
+}
 #endif /* uievent_h */

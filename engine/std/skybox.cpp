@@ -14,6 +14,9 @@
 #include "../ext/stb_image.h"
 #endif
 
+namespace engine
+{
+
 
 Skybox::Skybox(Camera* camera,std::string name)
 {
@@ -171,3 +174,4 @@ void Skybox::init_buff()
 }
 
 
+}

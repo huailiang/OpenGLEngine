@@ -8,94 +8,99 @@
 
 #include "light.h"
 
-Light::Light(vec3 color,vec3 direction)
+namespace engine
 {
-    this->color = color;
-    this->direction = direction;
-}
 
-
-void Light::UpdateX(float dx)
-{
-    if(direction.x + dx < radians(60.0f))
+    Light::Light(vec3 color,vec3 direction)
     {
-        direction.x += dx;
+        this->color = color;
+        this->direction = direction;
     }
-}
 
-void Light::UpdateY(float dy)
-{
-    if(direction.y + dy < radians(60.0f))
+
+    void Light::UpdateX(float dx)
     {
-        direction.y += dy;
+        if(direction.x + dx < radians(60.0f))
+        {
+            direction.x += dx;
+        }
     }
-}
 
-void DirectLight::Apply(Shader* shader)
-{
-    shader->setVec3("light.color", color);
-    shader->setVec3("light.direction", direction);
-}
+    void Light::UpdateY(float dy)
+    {
+        if(direction.y + dy < radians(60.0f))
+        {
+            direction.y += dy;
+        }
+    }
 
-mat4 DirectLight::GetLigthSpaceMatrix(vec3 target,float near, float far, float up, float left)
-{
-    vec3 dir = normalize(direction);
-    int sc = 4;
-    vec3 pos = target - vec3(sc*dir.x, sc*dir.y,sc*dir.z);
-    mat4 view =  lookAt(pos, target, vec3(0,1,0));
-    mat4 proj = glm::ortho(-left, left, -up, up, near, far);
-    return proj * view;
-}
+    void DirectLight::Apply(Shader* shader)
+    {
+        shader->setVec3("light.color", color);
+        shader->setVec3("light.direction", direction);
+    }
 
-LightType  DirectLight::getType()
-{
-    return LightDirect;
-}
+    mat4 DirectLight::GetLigthSpaceMatrix(vec3 target,float near, float far, float up, float left)
+    {
+        vec3 dir = normalize(direction);
+        int sc = 4;
+        vec3 pos = target - vec3(sc*dir.x, sc*dir.y,sc*dir.z);
+        mat4 view =  lookAt(pos, target, vec3(0,1,0));
+        mat4 proj = glm::ortho(-left, left, -up, up, near, far);
+        return proj * view;
+    }
 
-std::string DirectLight::getMacro()
-{
-    return "_DirectLight_";
-}
+    LightType  DirectLight::getType()
+    {
+        return LightDirect;
+    }
 
-mat4 PointLight::GetLigthSpaceMatrix(float near, float far, float up, float left)
-{
-    vec3 center = pos + direction;
-    mat4 view = lookAt(pos, center, vec3(0,1,0));
-    mat4 proj = glm::ortho(-left, left, -up, up, near, far);
-    return proj * view;
-}
+    std::string DirectLight::getMacro()
+    {
+        return "_DirectLight_";
+    }
 
-void PointLight::Apply(Shader* shader)
-{
-    shader->setVec3("light.color", this->color);
-    shader->setVec3("light.direction", this->direction);
-    shader->setVec3("light.constant", this->constant);
-    shader->setVec3("light.position", this->pos);
-}
+    mat4 PointLight::GetLigthSpaceMatrix(float near, float far, float up, float left)
+    {
+        vec3 center = pos + direction;
+        mat4 view = lookAt(pos, center, vec3(0,1,0));
+        mat4 proj = glm::ortho(-left, left, -up, up, near, far);
+        return proj * view;
+    }
 
-LightType PointLight::getType()
-{
-    return LightPoint;
-}
+    void PointLight::Apply(Shader* shader)
+    {
+        shader->setVec3("light.color", this->color);
+        shader->setVec3("light.direction", this->direction);
+        shader->setVec3("light.constant", this->constant);
+        shader->setVec3("light.position", this->pos);
+    }
 
-std::string PointLight::getMacro()
-{
-    return "_PointLight_";
-}
+    LightType PointLight::getType()
+    {
+        return LightPoint;
+    }
 
-void SpotLight::Apply(Shader* shader)
-{
-    PointLight::Apply(shader);
-    shader->setFloat("light.cutOff", this->cutOff);
-    shader->setFloat("light.outerCutOff", this->outerCutOff);
-}
+    std::string PointLight::getMacro()
+    {
+        return "_PointLight_";
+    }
 
-LightType SpotLight::getType()
-{
-    return LightSpot;
-}
+    void SpotLight::Apply(Shader* shader)
+    {
+        PointLight::Apply(shader);
+        shader->setFloat("light.cutOff", this->cutOff);
+        shader->setFloat("light.outerCutOff", this->outerCutOff);
+    }
 
-std::string SpotLight::getMacro()
-{
-    return "_SpotLight_";
+    LightType SpotLight::getType()
+    {
+        return LightSpot;
+    }
+
+    std::string SpotLight::getMacro()
+    {
+        return "_SpotLight_";
+    }
+
 }

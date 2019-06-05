@@ -25,6 +25,7 @@
 #define TY_Scene3 2
 #define TY_Scene4 3
 
+using namespace engine;
 
 class Scene
 {

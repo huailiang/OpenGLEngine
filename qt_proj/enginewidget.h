@@ -11,6 +11,8 @@
 #include "../engine/std/light.h"
 #include "../engine/std/skybox.h"
 
+using namespace engine;
+
 namespace Ui {
 class engineWidget;
 }

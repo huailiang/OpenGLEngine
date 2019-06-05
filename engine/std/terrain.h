@@ -18,37 +18,42 @@
 
 #define _Instance_
 
-class Terrain
+namespace engine
 {
-public:
-    
-    Terrain();
-    
-    ~Terrain();
-    
-    void initial();
-    
-    void InitInstance();
 
-    void DrawShadow(const Shader *shader);
+    class Terrain
+    {
+    public:
+        
+        Terrain();
+        
+        ~Terrain();
+        
+        void initial();
+        
+        void InitInstance();
+
+        void DrawShadow(const Shader *shader);
+        
+        void Draw(Camera* camera, glm::mat4 lightMatrix, Light* light, unsigned int depthMap);
+        
+        void DrawSample(Camera* camera);
+        
+        void DrawGrassDirect(Camera* camera);
+        
+        void DrawGrassInstance(Camera* camera);
+        
+    private:
+        
+        unsigned int floor_vao, floor_vbo;
+        unsigned int grass_vao, grass_vbo, instVbo;
+        unsigned int floorTexture, grassTexture;
+        std::vector<vec3> vegetation;
+        unsigned int grass_num;
+        Shader* shader;
+        Shader* shader2;
+    };
     
-    void Draw(Camera* camera, glm::mat4 lightMatrix, Light* light, unsigned int depthMap);
-    
-    void DrawSample(Camera* camera);
-    
-    void DrawGrassDirect(Camera* camera);
-    
-    void DrawGrassInstance(Camera* camera);
-    
-private:
-    
-    unsigned int floor_vao, floor_vbo;
-    unsigned int grass_vao, grass_vbo, instVbo;
-    unsigned int floorTexture, grassTexture;
-    std::vector<vec3> vegetation;
-    unsigned int grass_num;
-    Shader* shader;
-    Shader* shader2;
-};
+}
 
 #endif /* terrain_h */

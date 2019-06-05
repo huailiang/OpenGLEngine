@@ -17,28 +17,33 @@
 #include "ttfont.h"
 #include "label.h"
 
-class UIButton : public UILabel
+namespace engine
 {
-public:
-        
-    UIButton(const glm::vec2 pos,const glm::vec3 color = glm::vec3(1), const float scale = 1.0f,
-           const std::string text="", const int evtid = 0,const bool interact=true);
-    
-    ~UIButton();
-    
-    void Draw();
-    
-private:
-    
-    void DrawBackground();
-    
-    void InitBackground();
-    
-protected:
-    unsigned int vbo, vao;
-    Shader* shader;
-    
-};
 
+
+    class UIButton : public UILabel
+    {
+    public:
+            
+        UIButton(const glm::vec2 pos,const glm::vec3 color = glm::vec3(1), const float scale = 1.0f,
+               const std::string text="", const int evtid = 0,const bool interact=true);
+        
+        ~UIButton();
+        
+        void Draw();
+        
+    private:
+        
+        void DrawBackground();
+        
+        void InitBackground();
+        
+    protected:
+        unsigned int vbo, vao;
+        Shader* shader;
+        
+    };
+
+}
 #endif /* button_h */
 
