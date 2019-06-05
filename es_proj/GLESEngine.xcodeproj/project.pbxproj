@@ -681,16 +681,16 @@
 		4C7AF65B22A54EA700B63173 /* std */ = {
 			isa = PBXGroup;
 			children = (
-				4C7AF65D22A54EA700B63173 /* shader.h */,
-				4C7AF65E22A54EA700B63173 /* skybox.h */,
-				4C7AF65F22A54EA700B63173 /* light.h */,
-				4C7AF66022A54EA700B63173 /* camera.cpp */,
 				4C7AF66122A54EA700B63173 /* camera.h */,
+				4C7AF66022A54EA700B63173 /* camera.cpp */,
+				4C7AF65F22A54EA700B63173 /* light.h */,
 				4C7AF66222A54EA700B63173 /* light.cpp */,
-				4C7AF66322A54EA700B63173 /* texture.cpp */,
+				4C7AF65D22A54EA700B63173 /* shader.h */,
 				4C7AF66622A54EA700B63173 /* shader.cpp */,
+				4C7AF65E22A54EA700B63173 /* skybox.h */,
 				4C7AF66722A54EA700B63173 /* skybox.cpp */,
 				4C7AF66B22A54EA700B63173 /* texture.h */,
+				4C7AF66322A54EA700B63173 /* texture.cpp */,
 			);
 			name = std;
 			path = ../../engine/std;
@@ -723,8 +723,8 @@
 				4C8062C3229FC059005FD1F9 /* AppDelegate.m */,
 				4C8062C5229FC059005FD1F9 /* ViewController.h */,
 				4C8062C6229FC059005FD1F9 /* ViewController.mm */,
-				4C42795222A54A0B003AE42A /* common.cpp */,
 				4C42795322A54A0C003AE42A /* common.h */,
+				4C42795222A54A0B003AE42A /* common.cpp */,
 				4C42795422A54A0C003AE42A /* profile.h */,
 				4C443B8022A25D2D00866F29 /* Scene.h */,
 				4C443B7F22A25D2D00866F29 /* Scene.cpp */,

@@ -11,7 +11,8 @@
 
 #include "scene.h"
 #include "terrain.h"
-
+#include "avatar.h"
+#include "tool.h"
 
 class Scene1 : public Scene
 {
@@ -19,6 +20,7 @@ class Scene1 : public Scene
 public:
    ~Scene1()
     {
+        SAFE_DELETE(avatar);
         SAFE_DELETE(terrain);
         SAFE_DELETE(model);
         SAFE_DELETE(shader);
@@ -41,6 +43,8 @@ public:
         ApplyCamera(nmShader);
         model = new Model("resources/objects/nanosuit/nanosuit.obj");
         terrain = new Terrain();
+    
+        avatar = new Avatar("nanosuit");
     }
     
     void DrawUI()
@@ -57,6 +61,7 @@ public:
         Scene::DrawShadow(depthShader);
         terrain->DrawShadow(depthShader);
         model->DrawShadow(depthShader, camera, light, vec3(0.2f, -0.5f, -1.5f), vec3(0.12f), -16*timeValue);
+        avatar->DrawShadow(depthShader, camera, light, vec3(0.2f, -0.5f, -1.5f), vec3(0.12f), -16*timeValue);
     }
     
     void DrawScene()
@@ -67,6 +72,7 @@ public:
         {
             model->Draw(nmShader, camera, light, vec3(0.2f, -0.5f, -1.5f), vec3(0.12f), -16*timeValue);
         }
+        avatar->Draw(shader, camera, light, vec3(-0.6f, -0.5f, -1.5f), vec3(0.12f), -16*timeValue);
     }
     
     static void OnNormalClick(UIEvent* e, void* arg)
@@ -82,7 +88,6 @@ public:
     }
 
     
-    
 private:
     UIButton* btn_normal, *btn_debug;
     Terrain* terrain;
@@ -90,7 +95,7 @@ private:
     LightShader* shader;
     Shader* nmShader;
     unsigned int texture1, texture2;
-                           
+    Avatar *avatar;
 public:
     bool shownormal;
 };

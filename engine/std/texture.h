@@ -22,6 +22,8 @@ public:
     
     TTexture(const char* path, unsigned int* texID= nullptr, bool flipY= true, int wrap = GL_REPEAT);
     
+    ~TTexture();
+    
     ivec2 GetShape();
     
     GLenum GetFormat();

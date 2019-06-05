@@ -177,24 +177,12 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
         if(mesh->mTextureCoords[0]) // does the mesh contain texture coordinates?
         {
             glm::vec2 vec;
-            // a vertex can contain up to 8 different texture coordinates. We thus make the assumption that we won't
-            // use models where a vertex can have multiple texture coordinates so we always take the first set (0).
             vec.x = mesh->mTextureCoords[0][i].x;
             vec.y = mesh->mTextureCoords[0][i].y;
             vertex.TexCoords = vec;
         }
         else
             vertex.TexCoords = glm::vec2(0.0f, 0.0f);
-        // tangent
-        vector.x = mesh->mTangents[i].x;
-        vector.y = mesh->mTangents[i].y;
-        vector.z = mesh->mTangents[i].z;
-        vertex.Tangent = vector;
-        // bitangent
-        vector.x = mesh->mBitangents[i].x;
-        vector.y = mesh->mBitangents[i].y;
-        vector.z = mesh->mBitangents[i].z;
-        vertex.Bitangent = vector;
         vertices.push_back(vertex);
     }
     for(unsigned int i = 0; i < mesh->mNumFaces; i++)
@@ -205,12 +193,7 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
     }
     
     aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
-    // we assume a convention for sampler names in the shaders. Each diffuse texture should be named
-    // as 'texture_diffuseN' where N is a sequential number ranging from 1 to MAX_SAMPLER_NUMBER.
-    // Same applies to other texture as the following list summarizes:
-    // diffuse: texture_diffuseN
-    // specular: texture_specularN
-    // normal: texture_normalN
+
     
     // 1. diffuse maps
     vector<Texture> diffuseMaps = loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
@@ -225,7 +208,6 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
     std::vector<Texture> heightMaps = loadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height");
     textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
     
-    // return a mesh object created from the extracted mesh data
     return Mesh(vertices, indices, textures);
 }
 

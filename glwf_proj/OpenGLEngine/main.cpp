@@ -18,12 +18,14 @@
 #include "profile.h"
 #include "terrain.h"
 #include "scene/scenemgr.h"
+#include "tool.h"
 
 using namespace std;
 using namespace glm;
 
 float deltatime,lastTime;
 
+int run_engine();
 void framebuffer_size_callback(GLFWwindow* window, int width, int heigth);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
@@ -35,7 +37,31 @@ EventMgr EventMgr::instance;
 TTFont TTFont::instance;
 SceneMgr SceneMgr::instance;
 
+
+
 int main(int argc, const char * argv[])
+{
+    if (argc<=1)
+    {
+//        return tool::LoadObj("planet");
+        return run_engine();
+    }
+    else
+    {
+        if(strcmp(argv[1], "tools") == 0)
+        {
+            string name(argv[2]);
+            tool::LoadObj(name);
+        }
+        else
+        {
+            return run_engine();
+        }
+    }
+    return 1;
+}
+
+int run_engine()
 {
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -46,7 +72,7 @@ int main(int argc, const char * argv[])
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
     
-    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LearnGL", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "OpenGLEngine", NULL, NULL);
     if (window == NULL)
     {
         cout<<"failed created window"<<endl;
@@ -67,25 +93,25 @@ int main(int argc, const char * argv[])
     
     TTFont::getInstance()->initial();
     SceneMgr::getInstance()->Init();
-
-
+    
     while (!glfwWindowShouldClose(window))
     {
         processInput(window);
-
+        
         float timeValue = glfwGetTime();
         deltatime  = timeValue-lastTime;
         lastTime= timeValue;
         SceneMgr::getInstance()->Draw(deltatime);
         UIManager::getInstance()->Draw();
-
+        
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
-   
+    
     glfwTerminate();
     return 0;
 }
+
 
 void processInput(GLFWwindow *window)
 {

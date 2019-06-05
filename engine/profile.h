@@ -6,8 +6,8 @@
 //  Copyright © 2019 彭怀亮. All rights reserved.
 //
 
-#ifndef transf_h
-#define transf_h
+#ifndef profile_h
+#define profile_h
 
 #include <iomanip>
 #include "common.h"
@@ -67,8 +67,6 @@ void print_mat4(const mat4& mat, const char* tag)
     cout<<mat[3][0]<<"\t"<<mat[3][1]<<"\t"<<mat[3][2]<<"\t"<<mat[3][3]<<endl<<endl;
 }
 
-
-
 void print_vec3(const vec3& vec) 
 {
     cout<<"("<<vec.x<<", "<<vec.y<<", "<<vec.z<<")"<<endl<<endl;
@@ -110,4 +108,4 @@ void profile_test()
 }
 
 
-#endif /* transf_h */
+#endif /* profile_h */

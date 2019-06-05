@@ -13,11 +13,11 @@ in vec2 TexCoords;
 #endif // _Light_
 
 
-uniform sampler2D texture_diffuse1;
+uniform sampler2D texture_diffuse;
 
 void main()
 {
-    FragColor = texture(texture_diffuse1, TexCoords);
+    FragColor = texture(texture_diffuse, TexCoords);
 #ifdef _Light_
     vec3 litColor = LightColor();
     FragColor = FragColor * vec4(litColor,1);

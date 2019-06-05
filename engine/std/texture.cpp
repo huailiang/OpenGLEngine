@@ -22,6 +22,12 @@ TTexture::TTexture(const char* path, unsigned int* texID, bool flipY, int wrap)
     *texID = LoadTexture(flipY, wrap);
 }
 
+
+TTexture::~TTexture()
+{
+//    glad_glDeleteTextures(1, &textureID);
+}
+
 unsigned int TTexture::LoadTexture(bool flipY, int wrap)
 {
 #ifndef _GLES_
