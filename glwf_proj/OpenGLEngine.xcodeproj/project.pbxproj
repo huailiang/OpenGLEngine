@@ -11,13 +11,11 @@
 		4C1B57B922A6ADBF00A7AFF1 /* material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C1B57B722A6ADBF00A7AFF1 /* material.cpp */; };
 		4C1B57BC22A7BE3800A7AFF1 /* texturemgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C1B57BA22A7BE3800A7AFF1 /* texturemgr.cpp */; };
 		4C1B57BF22A7E03700A7AFF1 /* avatar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C1B57BD22A7E03700A7AFF1 /* avatar.cpp */; };
-		4C37750722A54F6F0074744F /* mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C3774F722A54F6F0074744F /* mesh.cpp */; };
 		4C37750822A54F6F0074744F /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C3774FB22A54F6F0074744F /* camera.cpp */; };
 		4C37750922A54F6F0074744F /* light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C3774FD22A54F6F0074744F /* light.cpp */; };
 		4C37750A22A54F6F0074744F /* texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C3774FE22A54F6F0074744F /* texture.cpp */; };
 		4C37750B22A54F6F0074744F /* shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C37750122A54F6F0074744F /* shader.cpp */; };
 		4C37750C22A54F6F0074744F /* skybox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C37750222A54F6F0074744F /* skybox.cpp */; };
-		4C37750D22A54F6F0074744F /* model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C37750422A54F6F0074744F /* model.cpp */; };
 		4C37750E22A54F6F0074744F /* terrain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C37750522A54F6F0074744F /* terrain.cpp */; };
 		4C37751F22A54FA20074744F /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = 4C37751122A54FA20074744F /* glad.c */; };
 		4C37752022A54FA20074744F /* uibase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C37751422A54FA20074744F /* uibase.cpp */; };
@@ -58,7 +56,6 @@
 		4C1B57BB22A7BE3800A7AFF1 /* texturemgr.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = texturemgr.hpp; sourceTree = "<group>"; };
 		4C1B57BD22A7E03700A7AFF1 /* avatar.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = avatar.cpp; sourceTree = "<group>"; };
 		4C1B57BE22A7E03700A7AFF1 /* avatar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = avatar.h; sourceTree = "<group>"; };
-		4C3774F722A54F6F0074744F /* mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mesh.cpp; sourceTree = "<group>"; };
 		4C3774F822A54F6F0074744F /* shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shader.h; sourceTree = "<group>"; };
 		4C3774F922A54F6F0074744F /* skybox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = skybox.h; sourceTree = "<group>"; };
 		4C3774FA22A54F6F0074744F /* light.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = light.h; sourceTree = "<group>"; };
@@ -66,12 +63,9 @@
 		4C3774FC22A54F6F0074744F /* camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = camera.h; sourceTree = "<group>"; };
 		4C3774FD22A54F6F0074744F /* light.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = light.cpp; sourceTree = "<group>"; };
 		4C3774FE22A54F6F0074744F /* texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = texture.cpp; sourceTree = "<group>"; };
-		4C3774FF22A54F6F0074744F /* mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mesh.h; sourceTree = "<group>"; };
 		4C37750022A54F6F0074744F /* terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = terrain.h; sourceTree = "<group>"; };
 		4C37750122A54F6F0074744F /* shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = shader.cpp; sourceTree = "<group>"; };
 		4C37750222A54F6F0074744F /* skybox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = skybox.cpp; sourceTree = "<group>"; };
-		4C37750322A54F6F0074744F /* model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = model.h; sourceTree = "<group>"; };
-		4C37750422A54F6F0074744F /* model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = model.cpp; sourceTree = "<group>"; };
 		4C37750522A54F6F0074744F /* terrain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = terrain.cpp; sourceTree = "<group>"; };
 		4C37750622A54F6F0074744F /* texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = texture.h; sourceTree = "<group>"; };
 		4C37751022A54FA20074744F /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
@@ -182,10 +176,6 @@
 				4C3774FB22A54F6F0074744F /* camera.cpp */,
 				4C3774FA22A54F6F0074744F /* light.h */,
 				4C3774FD22A54F6F0074744F /* light.cpp */,
-				4C3774FF22A54F6F0074744F /* mesh.h */,
-				4C3774F722A54F6F0074744F /* mesh.cpp */,
-				4C37750322A54F6F0074744F /* model.h */,
-				4C37750422A54F6F0074744F /* model.cpp */,
 				4C37750022A54F6F0074744F /* terrain.h */,
 				4C37750522A54F6F0074744F /* terrain.cpp */,
 				4C3774F822A54F6F0074744F /* shader.h */,
@@ -413,9 +403,7 @@
 			files = (
 				4C37752322A54FA20074744F /* uievent.cpp in Sources */,
 				4C37750E22A54F6F0074744F /* terrain.cpp in Sources */,
-				4C37750722A54F6F0074744F /* mesh.cpp in Sources */,
 				4C37750822A54F6F0074744F /* camera.cpp in Sources */,
-				4C37750D22A54F6F0074744F /* model.cpp in Sources */,
 				4C37752022A54FA20074744F /* uibase.cpp in Sources */,
 				4C1B57BF22A7E03700A7AFF1 /* avatar.cpp in Sources */,
 				4C1B57BC22A7BE3800A7AFF1 /* texturemgr.cpp in Sources */,

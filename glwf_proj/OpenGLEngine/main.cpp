@@ -9,7 +9,6 @@
 #include "camera.h"
 #include "shader.h"
 #include "texture.h"
-#include "model.h"
 #include "skybox.h"
 #include "light.h"
 #include "uimgr.h"

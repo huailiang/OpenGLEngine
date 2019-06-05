@@ -22,7 +22,6 @@ public:
     {
         SAFE_DELETE(avatar);
         SAFE_DELETE(terrain);
-        SAFE_DELETE(model);
         SAFE_DELETE(shader);
         SAFE_DELETE(btn_normal);
         SAFE_DELETE(btn_debug);
@@ -41,7 +40,6 @@ public:
         ApplyCamera(shader);
         nmShader = new Shader("gizmos/normal.vs","gizmos/pixel.fs","gizmos/normal.gs");
         ApplyCamera(nmShader);
-        model = new Model("resources/objects/nanosuit/nanosuit.obj");
         terrain = new Terrain();
     
         avatar = new Avatar("nanosuit");
@@ -60,19 +58,17 @@ public:
     {
         Scene::DrawShadow(depthShader);
         terrain->DrawShadow(depthShader);
-        model->DrawShadow(depthShader, camera, light, vec3(0.2f, -0.5f, -1.5f), vec3(0.12f), -16*timeValue);
         avatar->DrawShadow(depthShader, camera, light, vec3(0.2f, -0.5f, -1.5f), vec3(0.12f), -16*timeValue);
     }
     
     void DrawScene()
     {
         terrain->Draw(camera, lightMatrix, light, depthMap);
-        model->Draw(shader, camera, light, vec3(0.2f, -0.5f, -1.5f), vec3(0.12f), -16*timeValue);
+        avatar->Draw(shader, camera, light, vec3(0.2f, -0.5f, -1.5f), vec3(0.12f), -16*timeValue);
         if(shownormal)
         {
-            model->Draw(nmShader, camera, light, vec3(0.2f, -0.5f, -1.5f), vec3(0.12f), -16*timeValue);
+            avatar->Draw(nmShader, camera, light, vec3(0.2f, -0.5f, -1.5f), vec3(0.12f), -16*timeValue);
         }
-        avatar->Draw(shader, camera, light, vec3(-0.6f, -0.5f, -1.5f), vec3(0.12f), -16*timeValue);
     }
     
     static void OnNormalClick(UIEvent* e, void* arg)
@@ -91,7 +87,6 @@ public:
 private:
     UIButton* btn_normal, *btn_debug;
     Terrain* terrain;
-    Model* model;
     LightShader* shader;
     Shader* nmShader;
     unsigned int texture1, texture2;
