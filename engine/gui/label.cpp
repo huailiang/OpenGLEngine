@@ -12,70 +12,70 @@ namespace engine
 {
 
 
-UILabel::UILabel(const glm::vec2 pos) :UIBase(pos)
-{
-    std::cout<<"warn: called default constructor of label"<<std::endl;
-}
-
-UILabel::UILabel(const glm::vec2 pos,const glm::vec3 color, const float scale, const std::string text, const int evtid,const bool interact)
-    :UIBase(pos)
-{
-    UIEvent::evtid = evtid;
-    this->scales = scale;
-    this->interact = interact;
-    this->text = text;
-    this->color = color;
-    SetPos(pos.x, pos.y);
-    if(interact)
+    UILabel::UILabel(const glm::vec2 pos) :UIBase(pos)
     {
-        EventMgr::getInstance()->RegistEvt(this);
+        std::cout<<"warn: called default constructor of label"<<std::endl;
     }
-    UIManager::getInstance()->Regist(this);
-    Draw();
-}
 
-UILabel::~UILabel()
-{
-    if(interact)
+    UILabel::UILabel(const glm::vec2 pos,const glm::vec3 color, const float scale, const std::string text, const int evtid,const bool interact)
+        :UIBase(pos)
     {
-        EventMgr::getInstance()->RemoveEvt(this);
+        UIEvent::evtid = evtid;
+        this->scales = scale;
+        this->interact = interact;
+        this->text = text;
+        this->color = color;
+        SetPos(pos.x, pos.y);
+        if(interact)
+        {
+            EventMgr::getInstance()->RegistEvt(this);
+        }
+        UIManager::getInstance()->Regist(this);
+        Draw();
     }
-    UIManager::getInstance()->Remove(this);
-    TTFont::getInstance()->RenderText("", 0, 0, 0, glm::vec3(0));
-}
 
-void UILabel::Draw()
-{
-    TTFont* font = TTFont::getInstance();
-    len = font->RenderText(text, posx, posy, scales, color);
-}
+    UILabel::~UILabel()
+    {
+        if(interact)
+        {
+            EventMgr::getInstance()->RemoveEvt(this);
+        }
+        UIManager::getInstance()->Remove(this);
+        TTFont::getInstance()->RenderText("", 0, 0, 0, glm::vec3(0));
+    }
 
-bool UILabel::IsHit(float x, float y)
-{
-    float xr = len * 0.5f;
-    float yr = FONT_SIZE * 0.5f;
-    bool hit = abs(x-getCenterX()) < xr && abs(SCR_HEIGHT - y - posy) < yr;
-    return hit;
-}
+    void UILabel::Draw()
+    {
+        TTFont* font = TTFont::getInstance();
+        len = font->RenderText(text, posx, posy, scales, color);
+    }
 
-void UILabel::OnTriger()
-{
-    /*  cout<<"interact triger: "<<text<<endl;*/
-}
+    bool UILabel::IsHit(float x, float y)
+    {
+        float xr = len * 0.5f;
+        float yr = FONT_SIZE * 0.5f;
+        bool hit = abs(x-getCenterX()) < xr && abs(SCR_HEIGHT - y - posy) < yr;
+        return hit;
+    }
 
-void UILabel::setText(const std::string text)
-{
-    this->text = text;
-}
+    void UILabel::OnTriger()
+    {
+        /*  cout<<"interact triger: "<<text<<endl;*/
+    }
 
-float UILabel::getCenterX()
-{
-    return len * 0.5f + posx;
-}
+    void UILabel::setText(const std::string text)
+    {
+        this->text = text;
+    }
 
-std::string UILabel::getText()
-{
-    return this->text;
-}
+    float UILabel::getCenterX()
+    {
+        return len * 0.5f + posx;
+    }
+
+    std::string UILabel::getText()
+    {
+        return this->text;
+    }
 
 }

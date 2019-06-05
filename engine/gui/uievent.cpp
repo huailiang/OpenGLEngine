@@ -11,24 +11,24 @@
 namespace engine
 {
 
-void UIEvent::RegistCallback(ClickCallback cb)
-{
-    RegistCallback(cb, NULL);
-}
-
-
-void UIEvent::RegistCallback(ClickCallback cb, void* arg)
-{
-    this->callback = cb;
-    this->arg = arg;
-}
-
-void UIEvent::Dispacher()
-{
-    if(callback)
+    void UIEvent::RegistCallback(ClickCallback cb)
     {
-        callback(this, arg);
+        RegistCallback(cb, NULL);
     }
-}
+
+
+    void UIEvent::RegistCallback(ClickCallback cb, void* arg)
+    {
+        this->callback = cb;
+        this->arg = arg;
+    }
+
+    void UIEvent::Dispacher()
+    {
+        if(callback)
+        {
+            callback(this, arg);
+        }
+    }
 
 }
