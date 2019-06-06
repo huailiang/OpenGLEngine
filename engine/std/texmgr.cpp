@@ -12,6 +12,9 @@
 namespace engine
 {
     
+    TexMgr TexMgr::instance;
+    
+    
     bool TexMgr::FindTexture(GLuint& texid, size_t& idx)
     {
         for (size_t i=0; i<_num_tex; i++)

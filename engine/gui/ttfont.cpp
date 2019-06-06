@@ -11,7 +11,8 @@
 namespace engine
 {
 
-
+    TTFont TTFont::instance;
+    
     TTFont::~TTFont()
     {
         delete shader;

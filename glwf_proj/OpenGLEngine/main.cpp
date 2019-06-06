@@ -33,18 +33,13 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow* window);
 
-UIManager UIManager::instance;
-EventMgr EventMgr::instance;
-TTFont TTFont::instance;
 SceneMgr SceneMgr::instance;
-TexMgr TexMgr::instance;
 
 
 int main(int argc, const char * argv[])
 {
     if (argc<=1)
     {
-//        return tool::LoadObj("planet");
         return run_engine();
     }
     else

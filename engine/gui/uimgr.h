@@ -11,6 +11,8 @@
 
 
 #include "uibase.h"
+#include "../common.h"
+
 
 namespace engine
 {
@@ -19,38 +21,15 @@ namespace engine
     class UIManager
     {
         
-        DeclareSington(UIManager)
+        DeclareSington(UIManager);
         
     public:
         
-        void Regist(UIBase* ui)
-        {
-            vector.push_back(ui);
-        }
+        void Regist(UIBase* ui);
         
-        void Remove(UIBase* ui)
-        {
-            for(std::vector<UIBase*>::iterator iter = vector.begin();iter!=vector.end();iter++)
-            {
-                if(*iter == ui)
-                {
-                    vector.erase(iter);
-                    break;
-                }
-            }
-        }
+        void Remove(UIBase* ui);
         
-        void Draw()
-        {
-            for(size_t i=0;i<vector.size();i++)
-            {
-                UIBase* ui = vector[i];
-                if(ui)
-                {
-                    ui->Draw();
-                }
-            }
-        }
+        void Draw();
         
     private:
         

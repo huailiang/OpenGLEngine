@@ -22,11 +22,15 @@ namespace engine
  texture manager
  store all texture loaded, to avoid load repeat
  */
+    
+    
+    
     class TexMgr
     {
         
         DeclareSington(TexMgr)
         
+                
     public:
     
         bool FindTexture(GLuint& texid, size_t& idx);
@@ -41,9 +45,6 @@ namespace engine
         
         bool RemvTexture(std::string& texture);
         
-        /*
-         called when scene change
-         */
         void UnloadAllTexture();
         
     private:
@@ -53,6 +54,7 @@ namespace engine
         size_t _num_tex;
         
     };
+    
 
 }
 #endif /* texmgr_h */

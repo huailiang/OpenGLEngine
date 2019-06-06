@@ -27,6 +27,7 @@ namespace engine
     int CheckDir(const char* path)
     {
 #ifdef __APPLE__
+#ifndef _GLES_
         if(opendir(path)==NULL)
         {
             char temp[200];
@@ -42,9 +43,9 @@ namespace engine
             return -1;//can not make a dir;
         }
 #endif
+#endif
         return 0;
     }
-    
     
     void getTextures(tinyobj::mesh_t& mesh, std::vector<tinyobj::material_t>& materials,std::string* vec)
     {
