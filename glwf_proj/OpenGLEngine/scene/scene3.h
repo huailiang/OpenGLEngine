@@ -99,9 +99,9 @@ public:
     
 private:
     LightShader *shadowShader;
-    unsigned int woodTexture ;
-    unsigned int planeVBO, planeVAO;
-    unsigned int cubeVAO, cubeVBO;
+    GLuint woodTexture ;
+    GLuint planeVBO, planeVAO;
+    GLuint cubeVAO, cubeVBO;
     
 };
 

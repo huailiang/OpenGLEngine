@@ -47,9 +47,9 @@ namespace engine
         
     private:
         
-        unsigned int vao, vbo;
+        GLuint vao, vbo;
         std::vector<std::string> faces;
-        unsigned int cubemapTexture;
+        GLuint cubemapTexture;
         Shader* shader;
         Camera* camera;
         std::string name;

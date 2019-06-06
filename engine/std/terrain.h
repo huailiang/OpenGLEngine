@@ -35,7 +35,7 @@ namespace engine
 
         void DrawShadow(const Shader *shader);
         
-        void Draw(Camera* camera, glm::mat4 lightMatrix, Light* light, unsigned int depthMap);
+        void Draw(Camera* camera, glm::mat4 lightMatrix, Light* light, GLuint depthMap);
         
         void DrawSample(Camera* camera);
         
@@ -47,7 +47,7 @@ namespace engine
         
         unsigned int floor_vao, floor_vbo;
         unsigned int grass_vao, grass_vbo, instVbo;
-        unsigned int floorTexture, grassTexture;
+        GLuint floorTexture, grassTexture;
         std::vector<vec3> vegetation;
         unsigned int grass_num;
         Shader* shader;

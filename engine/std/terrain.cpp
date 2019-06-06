@@ -124,7 +124,7 @@ namespace engine
         glBindVertexArray(0);
     }
 
-    void Terrain::Draw(Camera* camera, glm::mat4 lightMatrix, Light* light, unsigned int depthMap)
+    void Terrain::Draw(Camera* camera, glm::mat4 lightMatrix, Light* light, GLuint depthMap)
     {
         shader->use();
         glBindVertexArray(floor_vao);

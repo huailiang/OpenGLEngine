@@ -89,7 +89,7 @@ private:
     Terrain* terrain;
     LightShader* shader;
     Shader* nmShader;
-    unsigned int texture1, texture2;
+    GLuint texture1, texture2;
     Avatar *avatar;
 public:
     bool shownormal;

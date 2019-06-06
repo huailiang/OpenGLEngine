@@ -9,6 +9,7 @@
 
 #include "tool.h"
 #include "texture.h"
+#include "texmgr.h"
 #include <memory>
 #ifdef __APPLE__
 #include <dirent.h>
@@ -49,7 +50,8 @@ namespace engine
     map<string,GLuint>::iterator findTexture(string texture)
     {
         map<string,GLuint>::iterator it;
-        for (it = loaded_textures.begin(); it!=loaded_textures.end(); it++) {
+        for (it = loaded_textures.begin(); it!=loaded_textures.end(); it++)
+        {
             if(strcmp(texture.data(), it->first.c_str()) == 0)
             {
                 return it;

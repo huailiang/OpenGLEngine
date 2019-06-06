@@ -8,6 +8,7 @@
 
 #include "texture.h"
 #include <iostream>
+#include "texmgr.h"
 #ifdef _GLES_
 #include "FilePath.h"
 #else
@@ -17,7 +18,7 @@
 namespace engine
 {
 
-    TTexture::TTexture(const char* path, unsigned int* texID, bool flipY, int wrap)
+    TTexture::TTexture(const char* path, GLuint* texID, bool flipY, int wrap)
     {
         std::string spath(path);
         spath = WORKDIR + spath;
@@ -28,7 +29,7 @@ namespace engine
 
     TTexture::~TTexture()
     {
-    //    glad_glDeleteTextures(1, &textureID);
+        RemvTexture(textureID);
     }
 
     unsigned int TTexture::LoadTexture(bool flipY, int wrap)

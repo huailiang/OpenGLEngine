@@ -42,6 +42,8 @@ namespace engine
         {
             delete []indices;
             delete []vertices;
+            indices = NULL;
+            vertices = NULL;
         }
     };
 
@@ -62,7 +64,9 @@ namespace engine
         
     private:
         MeshData* data;
-        unsigned int ebo, vao, vbo;
+        
+        GLuint ebo, vao, vbo;
+        
     };
     
 }

@@ -20,9 +20,10 @@ namespace engine
     class TTexture
     {
     public:
-        unsigned int textureID;
         
-        TTexture(const char* path, unsigned int* texID= nullptr, bool flipY= true, int wrap = GL_REPEAT);
+        GLuint textureID;
+        
+        TTexture(const char* path, GLuint* texID= nullptr, bool flipY= true, int wrap = GL_REPEAT);
         
         ~TTexture();
         
@@ -35,7 +36,9 @@ namespace engine
         
     private:
         int width, height, format;
+        
         const char* path;
+        
     };
 
 

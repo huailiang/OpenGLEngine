@@ -160,11 +160,11 @@ namespace engine
 
     float GetRuntime();
 
-    void InitPlane(unsigned int &planeVAO, unsigned int &planeVBO);
+    void InitPlane(GLuint &planeVAO, GLuint &planeVBO);
 
-    void InitCube(unsigned int &cubeVAO, unsigned int &cubeVBO);
+    void InitCube(GLuint &cubeVAO, GLuint &cubeVBO);
 
-    void InitQuad(unsigned int &quadVAO, unsigned int &quadVBO);
+    void InitQuad(GLuint &quadVAO, GLuint &quadVBO);
 
     #define MACRO(k1, v1) \
         stream << "#define " << k1; \

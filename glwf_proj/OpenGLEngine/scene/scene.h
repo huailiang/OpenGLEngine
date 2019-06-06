@@ -252,8 +252,8 @@ protected:
     
 private:
     Shader* depthShader, *debugShader;
-    unsigned int depthMapFBO;
-    unsigned int quadVAO, quadVBO;
+    GLuint depthMapFBO;
+    GLuint quadVAO, quadVBO;
 };
 
 

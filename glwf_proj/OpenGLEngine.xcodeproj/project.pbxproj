@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		4C1B57B322A68D7900A7AFF1 /* tool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C1B57B222A68D7900A7AFF1 /* tool.cpp */; };
 		4C1B57B922A6ADBF00A7AFF1 /* material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C1B57B722A6ADBF00A7AFF1 /* material.cpp */; };
-		4C1B57BC22A7BE3800A7AFF1 /* texturemgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C1B57BA22A7BE3800A7AFF1 /* texturemgr.cpp */; };
+		4C1B57BC22A7BE3800A7AFF1 /* texmgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C1B57BA22A7BE3800A7AFF1 /* texmgr.cpp */; };
 		4C1B57BF22A7E03700A7AFF1 /* avatar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C1B57BD22A7E03700A7AFF1 /* avatar.cpp */; };
 		4C37750822A54F6F0074744F /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C3774FB22A54F6F0074744F /* camera.cpp */; };
 		4C37750922A54F6F0074744F /* light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C3774FD22A54F6F0074744F /* light.cpp */; };
@@ -51,8 +51,8 @@
 		4C1B57B222A68D7900A7AFF1 /* tool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tool.cpp; sourceTree = "<group>"; };
 		4C1B57B722A6ADBF00A7AFF1 /* material.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = material.cpp; sourceTree = "<group>"; };
 		4C1B57B822A6ADBF00A7AFF1 /* material.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = material.h; sourceTree = "<group>"; };
-		4C1B57BA22A7BE3800A7AFF1 /* texturemgr.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = texturemgr.cpp; sourceTree = "<group>"; };
-		4C1B57BB22A7BE3800A7AFF1 /* texturemgr.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = texturemgr.hpp; sourceTree = "<group>"; };
+		4C1B57BA22A7BE3800A7AFF1 /* texmgr.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = texmgr.cpp; sourceTree = "<group>"; };
+		4C1B57BB22A7BE3800A7AFF1 /* texmgr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = texmgr.h; sourceTree = "<group>"; };
 		4C1B57BD22A7E03700A7AFF1 /* avatar.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = avatar.cpp; sourceTree = "<group>"; };
 		4C1B57BE22A7E03700A7AFF1 /* avatar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = avatar.h; sourceTree = "<group>"; };
 		4C3774F822A54F6F0074744F /* shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shader.h; sourceTree = "<group>"; };
@@ -154,16 +154,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4C1B57B022A68D7900A7AFF1 /* tool */ = {
+		4C1B57B022A68D7900A7AFF1 /* util */ = {
 			isa = PBXGroup;
 			children = (
 				4C1B57B122A68D7900A7AFF1 /* tool.h */,
 				4C1B57B222A68D7900A7AFF1 /* tool.cpp */,
-				4C1B57BB22A7BE3800A7AFF1 /* texturemgr.hpp */,
-				4C1B57BA22A7BE3800A7AFF1 /* texturemgr.cpp */,
+				4C1B57BB22A7BE3800A7AFF1 /* texmgr.h */,
+				4C1B57BA22A7BE3800A7AFF1 /* texmgr.cpp */,
 			);
-			name = tool;
-			path = ../engine/tool;
+			name = util;
+			path = ../engine/util;
 			sourceTree = "<group>";
 		};
 		4C3774F622A54F6F0074744F /* std */ = {
@@ -317,7 +317,7 @@
 				4C37750F22A54FA20074744F /* ext */,
 				4C37751222A54FA20074744F /* gui */,
 				4C3774F622A54F6F0074744F /* std */,
-				4C1B57B022A68D7900A7AFF1 /* tool */,
+				4C1B57B022A68D7900A7AFF1 /* util */,
 				4CE8605022A4F1EE000677DC /* scene */,
 				4C42797A22A54AD0003AE42A /* common.cpp */,
 				4C42797D22A54AD0003AE42A /* common.h */,
@@ -402,7 +402,7 @@
 				4C37750822A54F6F0074744F /* camera.cpp in Sources */,
 				4C37752022A54FA20074744F /* uibase.cpp in Sources */,
 				4C1B57BF22A7E03700A7AFF1 /* avatar.cpp in Sources */,
-				4C1B57BC22A7BE3800A7AFF1 /* texturemgr.cpp in Sources */,
+				4C1B57BC22A7BE3800A7AFF1 /* texmgr.cpp in Sources */,
 				4C37752122A54FA20074744F /* ttfont.cpp in Sources */,
 				4C37751F22A54FA20074744F /* glad.c in Sources */,
 				4C42797E22A54AD0003AE42A /* common.cpp in Sources */,

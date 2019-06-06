@@ -46,7 +46,7 @@ namespace engine
     }
 
 
-    void InitPlane(unsigned int &planeVAO, unsigned int &planeVBO)
+    void InitPlane(GLuint &planeVAO, GLuint &planeVBO)
     {
         glGenVertexArrays(1, &planeVAO);
         glGenBuffers(1, &planeVBO);
@@ -62,7 +62,7 @@ namespace engine
         glBindVertexArray(0);
     }
 
-    void InitCube(unsigned int &cubeVAO, unsigned int &cubeVBO)
+    void InitCube(GLuint &cubeVAO, GLuint &cubeVBO)
     {
         glGenVertexArrays(1, &cubeVAO);
         glGenBuffers(1, &cubeVBO);
@@ -79,7 +79,7 @@ namespace engine
         glBindVertexArray(0);
     }
 
-    void InitQuad(unsigned int &quadVAO, unsigned int &quadVBO)
+    void InitQuad(GLuint &quadVAO, GLuint &quadVBO)
     {
         glGenVertexArrays(1, &quadVAO);
         glGenBuffers(1, &quadVBO);

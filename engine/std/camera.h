@@ -88,7 +88,7 @@ namespace engine
         void updateCameraVectors();
         
     private:
-        unsigned int ubo = 0;
+        GLuint ubo = 0;
         
     };
     

@@ -174,8 +174,8 @@ public:
     
 private:
     Shader *shader;
-    unsigned int vao, vbo, ebo;
-    unsigned int albedo, normal, metallic, roughness, ao;
+    GLuint vao, vbo, ebo;
+    GLuint albedo, normal, metallic, roughness, ao;
     int nGrid = 6;
     float spacing = 2.5;
     size_t indexCount;
