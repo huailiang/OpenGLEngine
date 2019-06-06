@@ -29,7 +29,7 @@ namespace engine
 
     TTexture::~TTexture()
     {
-        RemvTexture(textureID);
+        TexMgr::getInstance()->RemvTexture(textureID);
     }
 
     unsigned int TTexture::LoadTexture(bool flipY, int wrap)

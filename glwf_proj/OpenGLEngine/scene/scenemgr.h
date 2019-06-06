@@ -14,6 +14,7 @@
 #include "scene2.h"
 #include "scene3.h"
 #include "scene4.h"
+#include "texmgr.h"
 
 class SceneMgr
 {

@@ -11,8 +11,10 @@
 
 #include "common.h"
 #include "shader.h"
+#include "texmgr.h"
 
 #define TEXTURE_NUM 4
+
 namespace engine
 {
 
@@ -44,6 +46,10 @@ namespace engine
             delete []vertices;
             indices = NULL;
             vertices = NULL;
+            TexMgr::getInstance()->RemvTexture(diffuse_texture);
+            TexMgr::getInstance()->RemvTexture(normal_texure);
+            TexMgr::getInstance()->RemvTexture(ambient_texture);
+            TexMgr::getInstance()->RemvTexture(specul_texture);
         }
     };
 

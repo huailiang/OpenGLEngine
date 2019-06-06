@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4C1B57B322A68D7900A7AFF1 /* tool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C1B57B222A68D7900A7AFF1 /* tool.cpp */; };
+		4C1B57B322A68D7900A7AFF1 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C1B57B222A68D7900A7AFF1 /* util.cpp */; };
 		4C1B57B922A6ADBF00A7AFF1 /* material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C1B57B722A6ADBF00A7AFF1 /* material.cpp */; };
 		4C1B57BC22A7BE3800A7AFF1 /* texmgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C1B57BA22A7BE3800A7AFF1 /* texmgr.cpp */; };
 		4C1B57BF22A7E03700A7AFF1 /* avatar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C1B57BD22A7E03700A7AFF1 /* avatar.cpp */; };
@@ -47,8 +47,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		4C1B57B122A68D7900A7AFF1 /* tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tool.h; sourceTree = "<group>"; };
-		4C1B57B222A68D7900A7AFF1 /* tool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tool.cpp; sourceTree = "<group>"; };
+		4C1B57B122A68D7900A7AFF1 /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
+		4C1B57B222A68D7900A7AFF1 /* util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = util.cpp; sourceTree = "<group>"; };
 		4C1B57B722A6ADBF00A7AFF1 /* material.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = material.cpp; sourceTree = "<group>"; };
 		4C1B57B822A6ADBF00A7AFF1 /* material.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = material.h; sourceTree = "<group>"; };
 		4C1B57BA22A7BE3800A7AFF1 /* texmgr.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = texmgr.cpp; sourceTree = "<group>"; };
@@ -154,18 +154,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4C1B57B022A68D7900A7AFF1 /* util */ = {
-			isa = PBXGroup;
-			children = (
-				4C1B57B122A68D7900A7AFF1 /* tool.h */,
-				4C1B57B222A68D7900A7AFF1 /* tool.cpp */,
-				4C1B57BB22A7BE3800A7AFF1 /* texmgr.h */,
-				4C1B57BA22A7BE3800A7AFF1 /* texmgr.cpp */,
-			);
-			name = util;
-			path = ../engine/util;
-			sourceTree = "<group>";
-		};
 		4C3774F622A54F6F0074744F /* std */ = {
 			isa = PBXGroup;
 			children = (
@@ -185,6 +173,10 @@
 				4C1B57B722A6ADBF00A7AFF1 /* material.cpp */,
 				4C1B57BE22A7E03700A7AFF1 /* avatar.h */,
 				4C1B57BD22A7E03700A7AFF1 /* avatar.cpp */,
+				4C1B57B122A68D7900A7AFF1 /* util.h */,
+				4C1B57B222A68D7900A7AFF1 /* util.cpp */,
+				4C1B57BB22A7BE3800A7AFF1 /* texmgr.h */,
+				4C1B57BA22A7BE3800A7AFF1 /* texmgr.cpp */,
 			);
 			name = std;
 			path = ../engine/std;
@@ -317,7 +309,6 @@
 				4C37750F22A54FA20074744F /* ext */,
 				4C37751222A54FA20074744F /* gui */,
 				4C3774F622A54F6F0074744F /* std */,
-				4C1B57B022A68D7900A7AFF1 /* util */,
 				4CE8605022A4F1EE000677DC /* scene */,
 				4C42797A22A54AD0003AE42A /* common.cpp */,
 				4C42797D22A54AD0003AE42A /* common.h */,
@@ -407,7 +398,7 @@
 				4C37751F22A54FA20074744F /* glad.c in Sources */,
 				4C42797E22A54AD0003AE42A /* common.cpp in Sources */,
 				4C37750C22A54F6F0074744F /* skybox.cpp in Sources */,
-				4C1B57B322A68D7900A7AFF1 /* tool.cpp in Sources */,
+				4C1B57B322A68D7900A7AFF1 /* util.cpp in Sources */,
 				4C1B57B922A6ADBF00A7AFF1 /* material.cpp in Sources */,
 				4C37752422A54FA20074744F /* label.cpp in Sources */,
 				4C4279AD22A54C26003AE42A /* main.cpp in Sources */,

@@ -17,7 +17,7 @@
 #include "profile.h"
 #include "terrain.h"
 #include "scene/scenemgr.h"
-#include "tool.h"
+#include "util.h"
 
 using namespace std;
 using namespace glm;
@@ -37,7 +37,7 @@ UIManager UIManager::instance;
 EventMgr EventMgr::instance;
 TTFont TTFont::instance;
 SceneMgr SceneMgr::instance;
-
+TexMgr TexMgr::instance;
 
 
 int main(int argc, const char * argv[])

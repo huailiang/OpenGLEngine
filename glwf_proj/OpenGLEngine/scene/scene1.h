@@ -12,7 +12,7 @@
 #include "scene.h"
 #include "terrain.h"
 #include "avatar.h"
-#include "tool.h"
+#include "util.h"
 
 class Scene1 : public Scene
 {

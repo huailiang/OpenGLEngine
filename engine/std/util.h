@@ -10,9 +10,9 @@
 #define tool_h
 
 
-
 #include "common.h"
 #include "material.h"
+#include "texmgr.h"
 
 namespace engine
 {

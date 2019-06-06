@@ -14,7 +14,7 @@
 #include "common.h"
 #include "material.h"
 #include "shader.h"
-#include "tool.h"
+#include "util.h"
 
 using namespace std;
 

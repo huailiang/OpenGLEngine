@@ -12,13 +12,7 @@
 namespace engine
 {
     
-    vector<string> _textures;
-    vector<GLuint> _texids;
-    vector<size_t> _references;
-    size_t _num_tex;
-
-    
-    bool FindTexture(GLuint& texid, size_t& idx)
+    bool TexMgr::FindTexture(GLuint& texid, size_t& idx)
     {
         for (size_t i=0; i<_num_tex; i++)
         {
@@ -32,7 +26,7 @@ namespace engine
     }
 
     
-    bool FindTexture(string& texture, GLuint& texid, size_t& idx)
+    bool TexMgr::FindTexture(string& texture, GLuint& texid, size_t& idx)
     {
         for (size_t i=0; i<_num_tex; i++)
         {
@@ -47,7 +41,7 @@ namespace engine
     }
 
     
-    void LoadTexture(std::string& texture, GLuint& texid)
+    void TexMgr::LoadTex(std::string& texture, GLuint& texid)
     {
         size_t idx = 0;
         if (!FindTexture(texture, texid, idx))
@@ -66,7 +60,7 @@ namespace engine
     }
     
     
-    void RealRemove(size_t idx)
+    void TexMgr::RealRemove(size_t idx)
     {
         size_t ref=_references[idx];
         if (ref < 1)
@@ -87,7 +81,7 @@ namespace engine
         }
     }
 
-    bool RemvTexture(GLuint texid)
+    bool TexMgr::RemvTexture(GLuint texid)
     {
         size_t idx = 0;
         if (FindTexture(texid, idx))
@@ -98,7 +92,7 @@ namespace engine
         return false;
     }
     
-    bool RemvTexture(std::string& texture)
+    bool TexMgr::RemvTexture(std::string& texture)
     {
         size_t idx = 0;
         GLuint texid;
@@ -111,7 +105,7 @@ namespace engine
     }
     
     
-    void UnloadAllTexture()
+    void TexMgr::UnloadAllTexture()
     {
         for (size_t i=0; i<_num_tex; i++)
         {

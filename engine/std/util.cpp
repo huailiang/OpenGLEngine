@@ -7,9 +7,8 @@
 //
 
 
-#include "tool.h"
-#include "texture.h"
-#include "texmgr.h"
+#include "util.h"
+
 #include <memory>
 #ifdef __APPLE__
 #include <dirent.h>
@@ -46,19 +45,6 @@ namespace engine
         return 0;
     }
     
-    
-    map<string,GLuint>::iterator findTexture(string texture)
-    {
-        map<string,GLuint>::iterator it;
-        for (it = loaded_textures.begin(); it!=loaded_textures.end(); it++)
-        {
-            if(strcmp(texture.data(), it->first.c_str()) == 0)
-            {
-                return it;
-            }
-        }
-        return loaded_textures.end();
-    }
     
     void getTextures(tinyobj::mesh_t& mesh, std::vector<tinyobj::material_t>& materials,std::string* vec)
     {
@@ -112,17 +98,8 @@ namespace engine
         readstring(f, str);
         if(!str.empty())
         {
-            str = "resources/objects/" + curr_obj +"/"+str;
-            map<string,GLuint>::iterator it = findTexture(str);
-            if(it != loaded_textures.end())
-            {
-                id = it->second;
-            }
-            else
-            {
-                TTexture(str.c_str(), &id);
-                loaded_textures.insert(map<string,GLuint>::value_type(str,id));
-            }
+            str = "resources/objects/" + curr_obj +"/" + str;
+            TexMgr::getInstance()->LoadTex(str, id);
         }
     }
     
