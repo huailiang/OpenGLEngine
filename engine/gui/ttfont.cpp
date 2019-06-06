@@ -7,6 +7,7 @@
 //
 
 #include "ttfont.h"
+#include "FilePath.h"
 
 namespace engine
 {
@@ -79,6 +80,9 @@ namespace engine
         std::string path = "resources/fonts/arial.ttf";
 #ifdef _QT_EDIT_
         path = WORKDIR + path;
+#endif
+#ifdef __APPLE__
+        path = getPath("arial.ttf");
 #endif
         if (FT_New_Face(ft, path.c_str(), 0, &face)) std::cout << "ERROR::FREETYPE: Failed to load font" << std::endl;
         

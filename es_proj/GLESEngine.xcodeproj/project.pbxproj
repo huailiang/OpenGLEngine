@@ -87,6 +87,15 @@
 		4C97AAC322A50D01005F6388 /* ttfont.vs in Resources */ = {isa = PBXBuildFile; fileRef = 4C97AAA122A50D01005F6388 /* ttfont.vs */; };
 		4C97AAC422A50D01005F6388 /* pbr.vs in Resources */ = {isa = PBXBuildFile; fileRef = 4C97AAA222A50D01005F6388 /* pbr.vs */; };
 		4C97AAC522A50D01005F6388 /* light.fs in Resources */ = {isa = PBXBuildFile; fileRef = 4C97AAA322A50D01005F6388 /* light.fs */; };
+		4CE2223322A91EE00095ECCA /* libFreetype2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE2223222A91EE00095ECCA /* libFreetype2.a */; };
+		4CE2223622A91EFB0095ECCA /* arial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4CE2223522A91EFB0095ECCA /* arial.ttf */; };
+		4CE2224622A91F0B0095ECCA /* eventmgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2223922A91F0B0095ECCA /* eventmgr.cpp */; };
+		4CE2224722A91F0B0095ECCA /* uibase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2223A22A91F0B0095ECCA /* uibase.cpp */; };
+		4CE2224822A91F0B0095ECCA /* ttfont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2223B22A91F0B0095ECCA /* ttfont.cpp */; };
+		4CE2224922A91F0B0095ECCA /* button.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2223D22A91F0B0095ECCA /* button.cpp */; };
+		4CE2224A22A91F0B0095ECCA /* uievent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2224022A91F0B0095ECCA /* uievent.cpp */; };
+		4CE2224B22A91F0B0095ECCA /* label.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2224122A91F0B0095ECCA /* label.cpp */; };
+		4CE2224C22A91F0B0095ECCA /* uimgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2224222A91F0B0095ECCA /* uimgr.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -301,6 +310,22 @@
 		4C97AAA122A50D01005F6388 /* ttfont.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ttfont.vs; sourceTree = "<group>"; };
 		4C97AAA222A50D01005F6388 /* pbr.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = pbr.vs; sourceTree = "<group>"; };
 		4C97AAA322A50D01005F6388 /* light.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = light.fs; sourceTree = "<group>"; };
+		4CE2223222A91EE00095ECCA /* libFreetype2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFreetype2.a; sourceTree = "<group>"; };
+		4CE2223522A91EFB0095ECCA /* arial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = arial.ttf; sourceTree = "<group>"; };
+		4CE2223822A91F0B0095ECCA /* uimgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uimgr.h; sourceTree = "<group>"; };
+		4CE2223922A91F0B0095ECCA /* eventmgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = eventmgr.cpp; sourceTree = "<group>"; };
+		4CE2223A22A91F0B0095ECCA /* uibase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = uibase.cpp; sourceTree = "<group>"; };
+		4CE2223B22A91F0B0095ECCA /* ttfont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ttfont.cpp; sourceTree = "<group>"; };
+		4CE2223C22A91F0B0095ECCA /* label.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = label.h; sourceTree = "<group>"; };
+		4CE2223D22A91F0B0095ECCA /* button.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = button.cpp; sourceTree = "<group>"; };
+		4CE2223E22A91F0B0095ECCA /* uibase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uibase.h; sourceTree = "<group>"; };
+		4CE2223F22A91F0B0095ECCA /* uievent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uievent.h; sourceTree = "<group>"; };
+		4CE2224022A91F0B0095ECCA /* uievent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = uievent.cpp; sourceTree = "<group>"; };
+		4CE2224122A91F0B0095ECCA /* label.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = label.cpp; sourceTree = "<group>"; };
+		4CE2224222A91F0B0095ECCA /* uimgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = uimgr.cpp; sourceTree = "<group>"; };
+		4CE2224322A91F0B0095ECCA /* button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = button.h; sourceTree = "<group>"; };
+		4CE2224422A91F0B0095ECCA /* ttfont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ttfont.h; sourceTree = "<group>"; };
+		4CE2224522A91F0B0095ECCA /* eventmgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eventmgr.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -308,6 +333,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CE2223322A91EE00095ECCA /* libFreetype2.a in Frameworks */,
 				4C8AC06822A3A45500036684 /* Foundation.framework in Frameworks */,
 				4C8AC06622A3A44300036684 /* CoreGraphics.framework in Frameworks */,
 				4C443B8522A25F8E00866F29 /* libc++.tbd in Frameworks */,
@@ -668,6 +694,7 @@
 		4C443B7722A24F3000866F29 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4CE2223422A91EFB0095ECCA /* fonts */,
 				4C402C9F22A50E17008C89D4 /* texture */,
 				4C97AA7F22A50D01005F6388 /* shader */,
 			);
@@ -738,6 +765,7 @@
 			isa = PBXGroup;
 			children = (
 				4C73C0ED22A8BADC002A8AD0 /* ext */,
+				4CE2223722A91F0B0095ECCA /* gui */,
 				4C7AF65B22A54EA700B63173 /* std */,
 				4C66666B22A29C19002BA996 /* utils */,
 				4C8062C2229FC059005FD1F9 /* AppDelegate.h */,
@@ -761,6 +789,7 @@
 		4C8062D8229FC072005FD1F9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4CE2223222A91EE00095ECCA /* libFreetype2.a */,
 				4C8AC06722A3A45500036684 /* Foundation.framework */,
 				4C8AC06522A3A44300036684 /* CoreGraphics.framework */,
 				4C443B8422A25F8E00866F29 /* libc++.tbd */,
@@ -829,6 +858,37 @@
 				4C97AA9C22A50D01005F6388 /* util.glsl */,
 			);
 			path = lib;
+			sourceTree = "<group>";
+		};
+		4CE2223422A91EFB0095ECCA /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				4CE2223522A91EFB0095ECCA /* arial.ttf */,
+			);
+			name = fonts;
+			path = ../../resources/fonts;
+			sourceTree = "<group>";
+		};
+		4CE2223722A91F0B0095ECCA /* gui */ = {
+			isa = PBXGroup;
+			children = (
+				4CE2223822A91F0B0095ECCA /* uimgr.h */,
+				4CE2224222A91F0B0095ECCA /* uimgr.cpp */,
+				4CE2224522A91F0B0095ECCA /* eventmgr.h */,
+				4CE2223922A91F0B0095ECCA /* eventmgr.cpp */,
+				4CE2223E22A91F0B0095ECCA /* uibase.h */,
+				4CE2223A22A91F0B0095ECCA /* uibase.cpp */,
+				4CE2224422A91F0B0095ECCA /* ttfont.h */,
+				4CE2223B22A91F0B0095ECCA /* ttfont.cpp */,
+				4CE2223C22A91F0B0095ECCA /* label.h */,
+				4CE2224122A91F0B0095ECCA /* label.cpp */,
+				4CE2223F22A91F0B0095ECCA /* uievent.h */,
+				4CE2224022A91F0B0095ECCA /* uievent.cpp */,
+				4CE2224322A91F0B0095ECCA /* button.h */,
+				4CE2223D22A91F0B0095ECCA /* button.cpp */,
+			);
+			name = gui;
+			path = ../../engine/gui;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -901,6 +961,7 @@
 				4C97AABE22A50D01005F6388 /* util.glsl in Resources */,
 				4C97AAA622A50D01005F6388 /* shadow.fs in Resources */,
 				4C97AAB222A50D01005F6388 /* debug.fs in Resources */,
+				4CE2223622A91EFB0095ECCA /* arial.ttf in Resources */,
 				4C402CC822A50E3B008C89D4 /* marble.jpg in Resources */,
 				4C402CD522A50E3B008C89D4 /* metal.png in Resources */,
 				4C402CCF22A50E3B008C89D4 /* bottom.jpg in Resources */,
@@ -960,19 +1021,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CE2224A22A91F0B0095ECCA /* uievent.cpp in Sources */,
 				4C443B8122A25D2D00866F29 /* Scene.cpp in Sources */,
 				4C7AF67022A54EA700B63173 /* shader.cpp in Sources */,
 				4C66674A22A2A3A3002BA996 /* FilePath.cpp in Sources */,
+				4CE2224B22A91F0B0095ECCA /* label.cpp in Sources */,
 				4C7AF66E22A54EA700B63173 /* light.cpp in Sources */,
+				4CE2224722A91F0B0095ECCA /* uibase.cpp in Sources */,
 				4C42795522A54A0C003AE42A /* common.cpp in Sources */,
 				4C8062C7229FC059005FD1F9 /* ViewController.mm in Sources */,
 				4C73C0EB22A8BAB3002A8AD0 /* texmgr.cpp in Sources */,
+				4CE2224622A91F0B0095ECCA /* eventmgr.cpp in Sources */,
 				4C7AF66D22A54EA700B63173 /* camera.cpp in Sources */,
+				4CE2224822A91F0B0095ECCA /* ttfont.cpp in Sources */,
 				4C8062D2229FC059005FD1F9 /* main.mm in Sources */,
 				4C73C0EC22A8BAB3002A8AD0 /* util.cpp in Sources */,
 				4C8062C4229FC059005FD1F9 /* AppDelegate.m in Sources */,
 				4C7AF66F22A54EA700B63173 /* texture.cpp in Sources */,
 				4C7AF67122A54EA700B63173 /* skybox.cpp in Sources */,
+				4CE2224C22A91F0B0095ECCA /* uimgr.cpp in Sources */,
+				4CE2224922A91F0B0095ECCA /* button.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1130,7 +1198,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = /usr/local/lib/;
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib/,
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yunstudio.-glfw.GLESEngine";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1155,7 +1226,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = /usr/local/lib/;
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib/,
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yunstudio.-glfw.GLESEngine";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

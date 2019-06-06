@@ -34,6 +34,7 @@ namespace engine
     
     void EventMgr::Triger(float x, float y, int action)
     {
+#ifndef _GLES_
         float scale = RENDER_WIDTH / (SCR_WIDTH * 2.0f);
         float xx = x / scale;
         scale = RENDER_HEIGTH / (SCR_HEIGHT * 2.0f);
@@ -47,6 +48,7 @@ namespace engine
                 et->Dispacher();
             }
         }
+#endif
     }
     
 

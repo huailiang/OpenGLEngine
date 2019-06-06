@@ -11,6 +11,7 @@
 #include "camera.h"
 #include "light.h"
 #include "skybox.h"
+#include "label.h"
 
 using namespace engine;
 
@@ -20,6 +21,7 @@ ESContext* esContext;
 Camera* camera;
 Light* light;
 Skybox* skybox;
+UILabel* label;
 
 void Clean()
 {
@@ -56,6 +58,7 @@ void Draw(ESContext *esContext)
     }
     glBindVertexArray(0);
     if(skybox) skybox->Draw();
+    if(label) label->drawText("hello world");
 }
 
 void ShutDown(ESContext* context)
@@ -178,6 +181,8 @@ bool InitScene(ESContext* context)
     camera = new Camera(glm::vec3(0.0f,0.0f,3.0f));
     skybox = new Skybox(camera, "mp_5dim");
     light = new DirectLight(vec3(1.0f), vec3(-1, 0, -2));
+    TTFont::getInstance()->initial();
+    label = new UILabel(vec2(30,560), vec3(1), 1);
     InitCube(vao, vbo);
     shader = new LightShader("light.vs","light.fs", nullptr, Macro(light->getMacro().c_str()));
     shader->use();
