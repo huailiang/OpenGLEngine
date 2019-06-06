@@ -46,7 +46,7 @@ namespace engine
         size_t idx = 0;
         if (!FindTexture(texture, texid, idx))
         {
-            TTexture(texture.c_str(), &texid);
+            Texture(texture.c_str(), &texid);
             
             _textures.push_back(texture);
             _texids.push_back(texid);

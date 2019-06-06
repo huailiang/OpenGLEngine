@@ -15,8 +15,8 @@ namespace engine
     {
         shader = new Shader("sample.vs","sample.fs");
         shader2 = new Shader("instance.vs","instance.fs");
-        TTexture("resources/textures/metal.png", &floorTexture);
-        TTexture("resources/textures/grass.png", &grassTexture,false,GL_CLAMP_TO_EDGE);
+        Texture("resources/textures/metal.png", &floorTexture);
+        Texture("resources/textures/grass.png", &grassTexture,false,GL_CLAMP_TO_EDGE);
         
         initial();
     }

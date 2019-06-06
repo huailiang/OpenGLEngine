@@ -45,11 +45,11 @@ public:
         shader->setInt("roughnessMap", 3);
         shader->setInt("aoMap", 4);
         
-        TTexture("resources/textures/pbr/rusted_iron/albedo.png", &albedo);
-        TTexture("resources/textures/pbr/rusted_iron/normal.png", &normal);
-        TTexture("resources/textures/pbr/rusted_iron/metallic.png", &metallic);
-        TTexture("resources/textures/pbr/rusted_iron/roughness.png", &roughness);
-        TTexture("resources/textures/pbr/rusted_iron/ao.png", &ao);
+        Texture("resources/textures/pbr/rusted_iron/albedo.png", &albedo);
+        Texture("resources/textures/pbr/rusted_iron/normal.png", &normal);
+        Texture("resources/textures/pbr/rusted_iron/metallic.png", &metallic);
+        Texture("resources/textures/pbr/rusted_iron/roughness.png", &roughness);
+        Texture("resources/textures/pbr/rusted_iron/ao.png", &ao);
         
         InitBuffer();
     }

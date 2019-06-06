@@ -17,15 +17,15 @@ using namespace glm;
 namespace engine
 {
 
-    class TTexture
+    class Texture
     {
     public:
         
         GLuint textureID;
         
-        TTexture(const char* path, GLuint* texID= nullptr, bool flipY= true, int wrap = GL_REPEAT);
+        Texture(const char* path, GLuint* texID= nullptr, bool flipY= true, int wrap = GL_REPEAT);
         
-        ~TTexture();
+        ~Texture();
         
         ivec2 GetShape();
         

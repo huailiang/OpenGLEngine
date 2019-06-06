@@ -41,7 +41,7 @@ public:
         InitPlane(planeVAO, planeVBO);
         InitCube(cubeVAO, cubeVBO);
         
-        TTexture("resources/textures/wood.png", &woodTexture);
+        Texture("resources/textures/wood.png", &woodTexture);
         shadowShader->use();
         shadowShader->setInt("diffuseTexture", 0);
         shadowShader->setInt("shadowMap", 1);

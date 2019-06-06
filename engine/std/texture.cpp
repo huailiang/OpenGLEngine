@@ -18,7 +18,7 @@
 namespace engine
 {
 
-    TTexture::TTexture(const char* path, GLuint* texID, bool flipY, int wrap)
+    Texture::Texture(const char* path, GLuint* texID, bool flipY, int wrap)
     {
         std::string spath(path);
         spath = WORKDIR + spath;
@@ -27,12 +27,12 @@ namespace engine
     }
 
 
-    TTexture::~TTexture()
+    Texture::~Texture()
     {
         TexMgr::getInstance()->RemvTexture(textureID);
     }
 
-    unsigned int TTexture::LoadTexture(bool flipY, int wrap)
+    unsigned int Texture::LoadTexture(bool flipY, int wrap)
     {
     #ifndef _GLES_
         stbi_set_flip_vertically_on_load(flipY);
@@ -70,12 +70,12 @@ namespace engine
         return textureID;
     }
 
-    ivec2 TTexture::GetShape()
+    ivec2 Texture::GetShape()
     {
         return ivec2(width,height);
     }
 
-    GLenum TTexture::GetFormat()
+    GLenum Texture::GetFormat()
     {
         GLenum glformat;
         if (this->format == 1)
