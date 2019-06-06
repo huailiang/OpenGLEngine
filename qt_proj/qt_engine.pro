@@ -31,6 +31,8 @@ SOURCES += \
     ../engine/common.cpp \
     ../engine/std/camera.cpp \
     ../engine/std/light.cpp \
+    ../engine/std/util.cpp \
+    ../engine/std/texmgr.cpp \
     mainwindow.cpp \
     enginewidget.cpp \
     ../engine/std/skybox.cpp \
@@ -41,9 +43,12 @@ HEADERS += \
     ../engine/profile.h \
     ../engine/std/shader.h \
     ../engine/ext/stb_image.h \
+    ../engine/ext/tiny_obj_loader.h \
     ../engine/std/texture.h \
     ../engine/std/camera.h \
     ../engine/std/light.h \
+    ../engine/std/util.h \
+    ../engine/std/texmgr.h \
     mainwindow.h \
     enginewidget.h \
     ../engine/std/skybox.h \

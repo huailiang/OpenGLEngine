@@ -42,8 +42,8 @@ void engineWidget::initializeGL()
     skybox = new Skybox(camera, "mp_5dim");
     InitCube(vao, vbo);
     InitShader();
-    TTexture("resources/textures/container.jpg", &texture1);
-    TTexture("resources/textures/awesomeface.png", &texture2);
+    Texture("resources/textures/container.jpg", &texture1);
+    Texture("resources/textures/awesomeface.png", &texture2);
 }
 
 void engineWidget::resizeGL(int w, int h)

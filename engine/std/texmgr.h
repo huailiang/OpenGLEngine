@@ -10,7 +10,7 @@
 #define texmgr_h
 
 #include "texture.h"
-#include "common.h"
+#include "../common.h"
 
 using namespace std;
 

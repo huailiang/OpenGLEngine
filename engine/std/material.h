@@ -9,7 +9,7 @@
 #ifndef material_h
 #define material_h
 
-#include "common.h"
+#include "../common.h"
 #include "shader.h"
 #include "texmgr.h"
 

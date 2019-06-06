@@ -15,7 +15,7 @@
 #endif
 
 #define TINYOBJLOADER_IMPLEMENTATION
-#include "tiny_obj_loader.h"
+#include "../ext/tiny_obj_loader.h"
 
 namespace engine
 {
