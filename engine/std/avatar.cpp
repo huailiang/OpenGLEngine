@@ -44,7 +44,7 @@ namespace engine
         return model;
     }
 
-    void Avatar::Draw(Shader* shader, Camera* camera, Light* light, vec3 pos, vec3 scale, float angle)
+    void Avatar::Draw(Shader* shader, Light* light, vec3 pos, vec3 scale, float angle)
     {
         shader->use();
         light->Apply(shader);
@@ -58,7 +58,7 @@ namespace engine
     }
 
 
-    void Avatar::DrawShadow(Shader* shader, Camera* camera, Light* light, vec3 pos, vec3 scale, float angle)
+    void Avatar::DrawShadow(Shader* shader, Light* light, vec3 pos, vec3 scale, float angle)
     {
         shader->use();
         shader->setMat4("model", GetModelMatrix(pos, scale, angle));

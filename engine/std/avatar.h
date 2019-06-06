@@ -9,9 +9,9 @@
 #ifndef avatar_h
 #define avatar_h
 
+#include "../common.h"
 #include "camera.h"
 #include "light.h"
-#include "common.h"
 #include "material.h"
 #include "shader.h"
 #include "util.h"
@@ -21,7 +21,6 @@ using namespace std;
 namespace engine
 {
 
-    
     class Avatar
     {
         
@@ -32,12 +31,14 @@ namespace engine
         
         mat4 GetModelMatrix(vec3 pos, vec3 scale, float angle);
         
-        void Draw(Shader* shader, Camera* camera, Light* light, vec3 pos, vec3 scale, float angl);
+        void Draw(Shader* shader, Light* light, vec3 pos, vec3 scale, float angl);
         
-        void DrawShadow(Shader* shader, Camera* camera, Light* light, vec3 pos, vec3 scale, float angle);
+        void DrawShadow(Shader* shader, Light* light, vec3 pos, vec3 scale, float angle);
         
     private:
+
         vector<Material*> materials;
+
     };
     
 }

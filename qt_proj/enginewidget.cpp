@@ -1,6 +1,7 @@
 #include "enginewidget.h"
 #include "ui_enginewidget.h"
 #include "../engine/std/texture.h"
+#include "../engine/gui/ttfont.h"
 
 engineWidget::engineWidget(QWidget *parent) :
     QOpenGLWidget(parent),
@@ -12,6 +13,7 @@ engineWidget::engineWidget(QWidget *parent) :
 
 engineWidget::~engineWidget()
 {
+    delete avatar;
     delete ui;
     delete camera;
     delete light;
@@ -40,10 +42,13 @@ void engineWidget::initializeGL()
     camera = new Camera(glm::vec3(0.0f,0.0f,3.0f));
     light = new DirectLight(vec3(1.0f), vec3(-1,0,-2));
     skybox = new Skybox(camera, "mp_5dim");
+    avatar = new Avatar("nanosuit");
     InitCube(vao, vbo);
     InitShader();
     Texture("resources/textures/container.jpg", &texture1);
     Texture("resources/textures/awesomeface.png", &texture2);
+    TTFont::getInstance()->initial();
+    label = new UILabel(vec2(30,560), vec3(1), 1);
 }
 
 void engineWidget::resizeGL(int w, int h)
@@ -80,7 +85,11 @@ void engineWidget::paintGL()
     }
     glBindVertexArray(0);
 
+    avatar->Draw(shader, light, vec3(-1.0f, -0.5f, -1.5f), vec3(0.12f), -16*GetRuntime());
+
     if(skybox) skybox->Draw();
+
+    label->drawText("Hello, OpenGL");
 }
 
 
@@ -96,5 +105,9 @@ void engineWidget::InitShader()
     shader->setInt("texture1", 0);
     shader->setInt("texture2", 1);
     camera->Attach(shader);
+
+    shader2 = new LightShader("model.vs", "model.fs");
+    shader2->use();
+    camera->Attach(shader2);
 }
 

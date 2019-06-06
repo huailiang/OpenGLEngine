@@ -180,6 +180,9 @@ namespace engine
         try
         {
             string basedir = "resources/mesh/"+curr_obj+"/";
+#ifdef _QT_EDIT_
+            basedir = WORKDIR + basedir;
+#endif
             CheckDir(basedir.c_str());
             ofs.open(basedir+"summary",std::ofstream::binary | std::ios::out);
             unsigned int num = (unsigned int)shapes.size();
@@ -242,7 +245,11 @@ namespace engine
         try
         {
             curr_obj = name;
-            ifs.open("resources/mesh/"+name+"/summary", std::ifstream::binary | std::ios::in);
+            std::string path = "resources/mesh/"+name+"/summary";
+#ifdef _QT_EDIT_
+            path = WORKDIR + path;
+#endif
+            ifs.open(path, std::ifstream::binary | std::ios::in);
             unsigned int num = 0;
             items.clear();
             ifs.seekg(0, ios::beg);
@@ -266,7 +273,11 @@ namespace engine
         ifs.exceptions (std::ifstream::failbit | std::ifstream::badbit);
         try
         {
-            ifs.open("resources/mesh/"+curr_obj+"/"+name, std::ifstream::binary | std::ios::in);
+          std::string path = "resources/mesh/"+curr_obj+"/"+name;
+#ifdef _QT_EDIT_
+            path = WORKDIR + path;
+#endif
+            ifs.open(path, std::ifstream::binary | std::ios::in);
             unsigned int inds = 0,verts = 0;
             ifs.seekg(0, ios::beg);
             ifs.read((char*)(&inds), sizeof(unsigned int));
@@ -300,6 +311,6 @@ namespace engine
         {
             std::cerr<<"read mesh error "<<name<<std::endl;
         }
-        return NULL;
+        return nullptr;
     }
 }

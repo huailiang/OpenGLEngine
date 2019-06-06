@@ -33,11 +33,20 @@ SOURCES += \
     ../engine/std/light.cpp \
     ../engine/std/util.cpp \
     ../engine/std/texmgr.cpp \
-    mainwindow.cpp \
-    enginewidget.cpp \
     ../engine/std/skybox.cpp \
     ../engine/std/texture.cpp \
-    ../engine/std/shader.cpp
+    ../engine/std/shader.cpp \
+    ../engine/std/avatar.cpp \
+    ../engine/std/material.cpp \
+    ../engine/gui/eventmgr.cpp \
+    ../engine/gui/button.cpp \
+    ../engine/gui/label.cpp \
+    ../engine/gui/ttfont.cpp \
+    ../engine/gui/uibase.cpp \
+    ../engine/gui/uimgr.cpp \
+    ../engine/gui/uievent.cpp \
+    mainwindow.cpp \
+    enginewidget.cpp \
 
 HEADERS += \
     ../engine/profile.h \
@@ -49,10 +58,19 @@ HEADERS += \
     ../engine/std/light.h \
     ../engine/std/util.h \
     ../engine/std/texmgr.h \
+    ../engine/std/skybox.h \
+    ../engine/common.h \
+    ../engine/std/avatar.h \
+    ../engine/std/material.h \
+    ../engine/gui/eventmgr.h \
+    ../engine/gui/button.h \
+    ../engine/gui/label.h \
+    ../engine/gui/ttfont.h \
+    ../engine/gui/uibase.h \
+    ../engine/gui/uimgr.h \
+    ../engine/gui/uievent.h \
     mainwindow.h \
     enginewidget.h \
-    ../engine/std/skybox.h \
-    ../engine/common.h
 
 FORMS += \
     mainwindow.ui \
@@ -61,7 +79,7 @@ FORMS += \
 DEFINES += _QT_EDIT_
 
 INCLUDEPATH += /usr/local/include/
-#LIBS+=-lopengl
+LIBS+="$$PWD/../lib/libfreetype.6.dylib"
 
 debug: DBG = -dgb
 GL = -gl4

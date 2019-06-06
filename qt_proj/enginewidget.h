@@ -10,6 +10,8 @@
 #include "../engine/std/camera.h"
 #include "../engine/std/light.h"
 #include "../engine/std/skybox.h"
+#include "../engine/std/avatar.h"
+#include "../engine/gui/label.h"
 
 using namespace engine;
 
@@ -38,11 +40,14 @@ private:
 private:
     unsigned int vbo, vao;
     LightShader* shader;
+    Shader* shader2;
     Camera* camera;
     Light* light;
     unsigned int texture1, texture2;
     Skybox* skybox;
+    Avatar* avatar;
     int m_timerId;
+    UILabel* label;
     Ui::engineWidget *ui;
 };
 

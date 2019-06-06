@@ -39,6 +39,8 @@ namespace engine
         virtual void OnTriger();
         
         void setText(const std::string text);
+
+        void drawText(const std::string text);
         
         float getCenterX();
         

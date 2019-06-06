@@ -58,16 +58,16 @@ public:
     {
         Scene::DrawShadow(depthShader);
         terrain->DrawShadow(depthShader);
-        avatar->DrawShadow(depthShader, camera, light, vec3(0.2f, -0.5f, -1.5f), vec3(0.12f), -16*timeValue);
+        avatar->DrawShadow(depthShader, light, vec3(0.2f, -0.5f, -1.5f), vec3(0.12f), -16*timeValue);
     }
     
     void DrawScene()
     {
         terrain->Draw(camera, lightMatrix, light, depthMap);
-        avatar->Draw(shader, camera, light, vec3(0.2f, -0.5f, -1.5f), vec3(0.12f), -16*timeValue);
+        avatar->Draw(shader, light, vec3(0.2f, -0.5f, -1.5f), vec3(0.12f), -16*timeValue);
         if(shownormal)
         {
-            avatar->Draw(nmShader, camera, light, vec3(0.2f, -0.5f, -1.5f), vec3(0.12f), -16*timeValue);
+            avatar->Draw(nmShader, light, vec3(0.2f, -0.5f, -1.5f), vec3(0.12f), -16*timeValue);
         }
     }
     

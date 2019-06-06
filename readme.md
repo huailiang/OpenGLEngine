@@ -3,11 +3,11 @@
 
 
 # 依赖的库
+
 *  openGL
-*  glad
-* grewf
-* freetype
-* glm
+*  freetype
+*  glm
+*  glad -(not used on iOS)
 
 ## Tip
 
@@ -32,7 +32,7 @@
 * qt 5.11
 * opengl 330
 * opengles 300
-
+* freetype.6
 
 # 特征
 
@@ -107,7 +107,7 @@ ui可以画Label, Button
 
 你可以在glsl使用#ifdef类似c的语法这样定义
 
-```c
+```c++
 #ifdef _CALLBACK__ 
 for(int i=0;i<LIGHT_NUM;i++)
 {

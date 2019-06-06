@@ -76,7 +76,11 @@ namespace engine
         if (FT_Init_FreeType(&ft)) std::cout << "ERROR::FREETYPE: Could not init FreeType Library" << std::endl;
         
         FT_Face face;
-        if (FT_New_Face(ft, "resources/fonts/arial.ttf", 0, &face)) std::cout << "ERROR::FREETYPE: Failed to load font" << std::endl;
+        std::string path = "resources/fonts/arial.ttf";
+#ifdef _QT_EDIT_
+        path = WORKDIR + path;
+#endif
+        if (FT_New_Face(ft, path.c_str(), 0, &face)) std::cout << "ERROR::FREETYPE: Failed to load font" << std::endl;
         
         FT_Set_Pixel_Sizes(face, 0, FONT_SIZE);
         
@@ -126,9 +130,9 @@ namespace engine
         glGenBuffers(1, &VBO);
         glBindVertexArray(VAO);
         glBindBuffer(GL_ARRAY_BUFFER, VBO);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 6 * 4, nullptr, GL_DYNAMIC_DRAW);
         glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), 0);
+        glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), nullptr);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindVertexArray(0);
         

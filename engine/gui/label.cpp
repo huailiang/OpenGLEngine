@@ -23,7 +23,6 @@ namespace engine
         UIEvent::evtid = evtid;
         this->scales = scale;
         this->interact = interact;
-        this->text = text;
         this->color = color;
         SetPos(pos.x, pos.y);
         if(interact)
@@ -31,7 +30,7 @@ namespace engine
             EventMgr::getInstance()->RegistEvt(this);
         }
         UIManager::getInstance()->Regist(this);
-        Draw();
+        drawText(text);
     }
 
     UILabel::~UILabel()
@@ -66,6 +65,12 @@ namespace engine
     void UILabel::setText(const std::string text)
     {
         this->text = text;
+    }
+
+    void UILabel::drawText(const std::string text)
+    {
+        setText(text);
+        Draw();
     }
 
     float UILabel::getCenterX()
