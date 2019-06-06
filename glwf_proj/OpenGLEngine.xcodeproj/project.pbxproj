@@ -31,7 +31,6 @@
 		4CD27D482283070B0038AE21 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD27D472283070B0038AE21 /* CoreVideo.framework */; };
 		4CE861ED22A4F86F000677DC /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE861EB22A4F86F000677DC /* libfreetype.a */; };
 		4CE861EE22A4F86F000677DC /* libglfw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE861EC22A4F86F000677DC /* libglfw3.a */; };
-		4CE861F122A4F87F000677DC /* libassimp.4.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE861EF22A4F87F000677DC /* libassimp.4.1.0.dylib */; };
 		4CE861F222A4F87F000677DC /* libfreetype.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE861F022A4F87F000677DC /* libfreetype.6.dylib */; };
 /* End PBXBuildFile section */
 
@@ -134,7 +133,6 @@
 		4CD27D472283070B0038AE21 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		4CE861EB22A4F86F000677DC /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = ../lib/libfreetype.a; sourceTree = "<group>"; };
 		4CE861EC22A4F86F000677DC /* libglfw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglfw3.a; path = ../lib/libglfw3.a; sourceTree = "<group>"; };
-		4CE861EF22A4F87F000677DC /* libassimp.4.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.4.1.0.dylib; path = ../lib/libassimp.4.1.0.dylib; sourceTree = "<group>"; };
 		4CE861F022A4F87F000677DC /* libfreetype.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfreetype.6.dylib; path = ../lib/libfreetype.6.dylib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -147,7 +145,6 @@
 				4C3B7A172283164E003B212F /* IOKit.framework in Frameworks */,
 				4CD27D482283070B0038AE21 /* CoreVideo.framework in Frameworks */,
 				4CE861ED22A4F86F000677DC /* libfreetype.a in Frameworks */,
-				4CE861F122A4F87F000677DC /* libassimp.4.1.0.dylib in Frameworks */,
 				4CE861F222A4F87F000677DC /* libfreetype.6.dylib in Frameworks */,
 				4CE861EE22A4F86F000677DC /* libglfw3.a in Frameworks */,
 				4CD27D46228307050038AE21 /* OpenGL.framework in Frameworks */,
@@ -303,7 +300,6 @@
 		4CD27D352282F5320038AE21 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4CE861EF22A4F87F000677DC /* libassimp.4.1.0.dylib */,
 				4CE861F022A4F87F000677DC /* libfreetype.6.dylib */,
 				4CE861EB22A4F86F000677DC /* libfreetype.a */,
 				4CE861EC22A4F86F000677DC /* libglfw3.a */,
