@@ -7,11 +7,13 @@
 //
 
 #include "ttfont.h"
+
+#ifdef _GLES_
 #include "FilePath.h"
+#endif
 
 namespace engine
 {
-
     TTFont TTFont::instance;
     
     TTFont::~TTFont()
@@ -19,7 +21,6 @@ namespace engine
         delete shader;
         Characters.clear();
     }
-
 
     float TTFont::RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scale, const glm::vec3 color)
     {
@@ -81,7 +82,7 @@ namespace engine
 #ifdef _QT_EDIT_
         path = WORKDIR + path;
 #endif
-#ifdef __APPLE__
+#ifdef _GLES_
         path = getPath("arial.ttf");
 #endif
         if (FT_New_Face(ft, path.c_str(), 0, &face)) std::cout << "ERROR::FREETYPE: Failed to load font" << std::endl;
@@ -90,6 +91,7 @@ namespace engine
         
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
         
+        FT_GlyphSlot glyph = face->glyph;
         // Load first 128 characters of ASCII set
         for (GLubyte c = 0; c < 128; c++)
         {
@@ -98,31 +100,17 @@ namespace engine
                 std::cout << "ERROR::FREETYTPE: Failed to load Glyph" << std::endl;
                 continue;
             }
+            
             GLuint texture;
             glGenTextures(1, &texture);
             glBindTexture(GL_TEXTURE_2D, texture);
-            glTexImage2D(
-                         GL_TEXTURE_2D,
-                         0,
-                         GL_RED,
-                         face->glyph->bitmap.width,
-                         face->glyph->bitmap.rows,
-                         0,
-                         GL_RED,
-                         GL_UNSIGNED_BYTE,
-                         face->glyph->bitmap.buffer
-                         );
-            
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, glyph->bitmap.width, glyph->bitmap.rows, 0, GL_RED, GL_UNSIGNED_BYTE, glyph->bitmap.buffer);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
             
-            Character character = { texture,
-                glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
-                glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
-                (GLuint)face->glyph->advance.x
-            };
+            Character character = {texture, ivec2(glyph->bitmap.width, glyph->bitmap.rows), ivec2(glyph->bitmap_left, glyph->bitmap_top), (GLuint)glyph->advance.x};
             Characters.insert(std::pair<GLchar, Character>(c, character));
         }
         glBindTexture(GL_TEXTURE_2D, 0);
