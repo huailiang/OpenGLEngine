@@ -34,6 +34,7 @@ void Clean()
 void Draw(ESContext *esContext)
 {
     Clean();
+
     
     vec3 cubePositions[] = { glm::vec3( 0.0f,  0.0f,  -2.0f), glm::vec3(2.0f,  1.0f, -4.0f) };
     shader->use();
@@ -58,7 +59,7 @@ void Draw(ESContext *esContext)
     }
     glBindVertexArray(0);
     if(skybox) skybox->Draw();
-    if(label) label->drawText("hello world");
+    if(label) label->drawText("hello, opengl es");
 }
 
 void ShutDown(ESContext* context)
@@ -112,33 +113,33 @@ GLboolean initWindow()
     {
         return GL_FALSE;
     }
+    
+    EGLint numConfigs = 0;
+    EGLint attribList[] =
     {
-        EGLint numConfigs = 0;
-        EGLint attribList[] =
-        {
-            EGL_RED_SIZE,       5,
-            EGL_GREEN_SIZE,     6,
-            EGL_BLUE_SIZE,      5,
-            EGL_ALPHA_SIZE,     ( flags & ES_WINDOW_ALPHA ) ? 8 : EGL_DONT_CARE,
-            EGL_DEPTH_SIZE,     ( flags & ES_WINDOW_DEPTH ) ? 8 : EGL_DONT_CARE,
-            EGL_STENCIL_SIZE,   ( flags & ES_WINDOW_STENCIL ) ? 8 : EGL_DONT_CARE,
-            EGL_SAMPLE_BUFFERS, ( flags & ES_WINDOW_MULTISAMPLE ) ? 1 : 0,
-            // if EGL_KHR_create_context extension is supported, then we will use
-            // EGL_OPENGL_ES3_BIT_KHR instead of EGL_OPENGL_ES2_BIT in the attribute list
-            EGL_RENDERABLE_TYPE, GetContextRenderableType ( esContext->eglDisplay ),
-            EGL_NONE
-        };
-        
-        // Choose config
-        if (!eglChooseConfig (esContext->eglDisplay, attribList, &config, 1, &numConfigs))
-        {
-            return GL_FALSE;
-        }
-        if (numConfigs < 1)
-        {
-            return GL_FALSE;
-        }
+        EGL_RED_SIZE,       5,
+        EGL_GREEN_SIZE,     6,
+        EGL_BLUE_SIZE,      5,
+        EGL_ALPHA_SIZE,     ( flags & ES_WINDOW_ALPHA ) ? 8 : EGL_DONT_CARE,
+        EGL_DEPTH_SIZE,     ( flags & ES_WINDOW_DEPTH ) ? 8 : EGL_DONT_CARE,
+        EGL_STENCIL_SIZE,   ( flags & ES_WINDOW_STENCIL ) ? 8 : EGL_DONT_CARE,
+        EGL_SAMPLE_BUFFERS, ( flags & ES_WINDOW_MULTISAMPLE ) ? 1 : 0,
+        // if EGL_KHR_create_context extension is supported, then we will use
+        // EGL_OPENGL_ES3_BIT_KHR instead of EGL_OPENGL_ES2_BIT in the attribute list
+        EGL_RENDERABLE_TYPE, GetContextRenderableType ( esContext->eglDisplay ),
+        EGL_NONE
+    };
+    
+    // Choose config
+    if (!eglChooseConfig (esContext->eglDisplay, attribList, &config, 1, &numConfigs))
+    {
+        return GL_FALSE;
     }
+    if (numConfigs < 1)
+    {
+        return GL_FALSE;
+    }
+    
     
 #ifdef ANDROID
     // For Android, need to get the EGL_NATIVE_VISUAL_ID and set it using ANativeWindow_setBuffersGeometry

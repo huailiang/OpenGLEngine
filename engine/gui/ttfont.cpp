@@ -66,13 +66,13 @@ namespace engine
         return x - start;
     }
 
-
     int TTFont::initial()
     {
         shader =new Shader("ttfont.vs","ttfrag.fs");
         mat4 proj = ortho(0.0f, 800.0f, 0.0f, 600.0f);
         shader->use();
         shader->setMat4("projection", proj);
+        shader->setInt("text", 0);
         
         FT_Library ft;
         if (FT_Init_FreeType(&ft)) std::cout << "ERROR::FREETYPE: Could not init FreeType Library" << std::endl;
@@ -104,12 +104,15 @@ namespace engine
             GLuint texture;
             glGenTextures(1, &texture);
             glBindTexture(GL_TEXTURE_2D, texture);
+#ifdef _GLES_
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, glyph->bitmap.width, glyph->bitmap.rows, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, glyph->bitmap.buffer);
+#else
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, glyph->bitmap.width, glyph->bitmap.rows, 0, GL_RED, GL_UNSIGNED_BYTE, glyph->bitmap.buffer);
+#endif
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-            
             Character character = {texture, ivec2(glyph->bitmap.width, glyph->bitmap.rows), ivec2(glyph->bitmap_left, glyph->bitmap_top), (GLuint)glyph->advance.x};
             Characters.insert(std::pair<GLchar, Character>(c, character));
         }
