@@ -57,8 +57,12 @@ int main(int argc, const char * argv[])
     return 1;
 }
 
+
 int run_engine()
 {
+    std::cout<<Hash("resource/obj/sui/export hello world.png")<<endl;
+    return  0;
+    
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);

@@ -1,6 +1,12 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+"""
+此工具用来自动生成ios 不同分辨率的icon以及相关的json配置
+用法：
+python exportAppIcon.py /path/xxx.png
+"""
+
 import sys
 import os
 

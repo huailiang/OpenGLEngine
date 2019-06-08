@@ -184,6 +184,8 @@ namespace engine
 
     void SetWindowSize(int width, int height);
     
+    unsigned int Hash(std::string str);
+    
 }
 
 #endif /* common_h */

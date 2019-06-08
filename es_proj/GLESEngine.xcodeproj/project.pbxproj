@@ -128,8 +128,8 @@
 		4CD4F10222AB7BFA00C7B080 /* hand_dif.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0E322AB7BFA00C7B080 /* hand_dif.png */; };
 		4CD4F10322AB7BFA00C7B080 /* helmet_showroom_ddn.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0E422AB7BFA00C7B080 /* helmet_showroom_ddn.png */; };
 		4CD4F10422AB7BFA00C7B080 /* body_showroom_ddn.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0E522AB7BFA00C7B080 /* body_showroom_ddn.png */; };
+		4CD4F10722AB907B00C7B080 /* arial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4CE2223522A91EFB0095ECCA /* arial.ttf */; };
 		4CE2223322A91EE00095ECCA /* libFreetype2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE2223222A91EE00095ECCA /* libFreetype2.a */; };
-		4CE2223622A91EFB0095ECCA /* arial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4CE2223522A91EFB0095ECCA /* arial.ttf */; };
 		4CE2224622A91F0B0095ECCA /* eventmgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2223922A91F0B0095ECCA /* eventmgr.cpp */; };
 		4CE2224722A91F0B0095ECCA /* uibase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2223A22A91F0B0095ECCA /* uibase.cpp */; };
 		4CE2224822A91F0B0095ECCA /* ttfont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2223B22A91F0B0095ECCA /* ttfont.cpp */; };
@@ -686,6 +686,7 @@
 				4CD4F0FE22AB7BFA00C7B080 /* cell_leg_alpha.png in Resources */,
 				4C97AAA922A50D01005F6388 /* model.fs in Resources */,
 				4CD4F0F522AB7BFA00C7B080 /* leg_showroom_spec.png in Resources */,
+				4CD4F10722AB907B00C7B080 /* arial.ttf in Resources */,
 				4C97AAB122A50D01005F6388 /* outline.fs in Resources */,
 				4C97AAB722A50D01005F6388 /* sample.vs in Resources */,
 				4CD4F0EC22AB7BFA00C7B080 /* back.jpg in Resources */,
@@ -704,7 +705,6 @@
 				4C97AAB222A50D01005F6388 /* debug.fs in Resources */,
 				4CD4F0E922AB7BFA00C7B080 /* glass_dif.png in Resources */,
 				4CD4F0EE22AB7BFA00C7B080 /* leg_showroom_ddn.png in Resources */,
-				4CE2223622A91EFB0095ECCA /* arial.ttf in Resources */,
 				4C402CC822A50E3B008C89D4 /* marble.jpg in Resources */,
 				4C402CD522A50E3B008C89D4 /* metal.png in Resources */,
 				4C402CCF22A50E3B008C89D4 /* bottom.jpg in Resources */,

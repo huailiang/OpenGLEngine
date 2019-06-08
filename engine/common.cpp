@@ -12,7 +12,6 @@
 namespace engine
 {
 
-        
     unsigned int SCR_WIDTH = 800;
     unsigned int SCR_HEIGHT = 600;
 
@@ -135,6 +134,21 @@ namespace engine
         SCR_HEIGHT = height;
         RENDER_WIDTH = width * 2;
         RENDER_HEIGTH = height * 2;
+    }
+    
+    unsigned int Hash(std::string str)
+    {
+        if (str.empty()) {
+            return 0;
+        }
+        unsigned int hash =0;
+        int seed = 1;
+        for (int i=0; i<str.size(); i++) {
+            
+            hash = (hash << seed) + (short)str[i] + hash;
+            std::cout<<str[i]<<" "<<(short)str[i]<<" "<<hash<<std::endl;
+        }
+        return hash;
     }
 
 }
