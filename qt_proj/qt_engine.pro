@@ -38,6 +38,7 @@ SOURCES += \
     ../engine/std/shader.cpp \
     ../engine/std/avatar.cpp \
     ../engine/std/material.cpp \
+    ../engine/std/asset.cpp \
     ../engine/gui/eventmgr.cpp \
     ../engine/gui/button.cpp \
     ../engine/gui/label.cpp \
@@ -59,6 +60,7 @@ HEADERS += \
     ../engine/std/util.h \
     ../engine/std/texmgr.h \
     ../engine/std/skybox.h \
+    ../engine/std/asset.h \
     ../engine/common.h \
     ../engine/std/avatar.h \
     ../engine/std/material.h \

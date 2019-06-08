@@ -23,26 +23,47 @@ namespace engine
         return true;
     }
     
-    bool isTexure(int ext)
+    bool isTexure(EXT ext)
     {
-        return ext && 0x00f0 > 0;
+        return (ext & 0x00f0) > 0;
     }
     
-    
-    bool isEngineAsset(int ext)
+    std::string getTextureExt(EXT ext)
     {
-        return ext && 0x0f00 > 0;
+        if(!isTexure(ext))
+        {
+            std::cerr<<ext<<" is not a texure format"<<std::endl;
+            return "";
+        }
+        std::string exts[] = {".png",".jpg",".tga",".bmp", ".hdr"};
+        return exts[(ext>>4)-1];
+    }
+    
+    EXT getTextureFormat(const char* ext)
+    {
+        std::string exts[] = {".png",".jpg",".tga",".bmp", ".hdr"};
+        for (int i=0; i<5; i++) {
+            if(strcmp(exts[i].c_str(),ext)==0)
+            {
+                return (i+1)<<4;
+            }
+        }
+        return NONE;
+    }
+    
+    bool isEngineAsset(EXT ext)
+    {
+        return (ext & 0x0f00) > 0;
     }
     
     
     std::string getResPath(std::string path)
     {
 #ifdef _QT_EDIT_
-        return WORKDIR + std::to_string(Hash(path));
+        std::string xpath = std::string(WORKDIR) + "bundle/";
+        return xpath + std::to_string(Hash(path));
 #else
 #ifdef _GLES_
-        size_t idx = path.rfind('/');
-        path = path.substr(idx+1);
         return getPath(std::to_string(Hash(path)));
 #else
         return "bundle/"+ std::to_string(Hash(path));

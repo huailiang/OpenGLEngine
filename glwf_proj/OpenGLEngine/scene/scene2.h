@@ -40,8 +40,8 @@ public:
     {
         InitCube(vao, vbo);
         InitShader();
-        Texture("resources/textures/container.jpg", &texture1);
-        Texture("resources/textures/awesomeface.png", &texture2);
+        Texture("textures/container", JPG, &texture1);
+        Texture("textures/awesomeface",PNG, &texture2);
     }
     
     void InitShader()

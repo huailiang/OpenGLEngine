@@ -18,6 +18,7 @@
 #include "terrain.h"
 #include "scene/scenemgr.h"
 #include "util.h"
+#include "asset.h"
 
 using namespace std;
 using namespace glm;
@@ -40,6 +41,8 @@ int main(int argc, const char * argv[])
 {
     if (argc<=1)
     {
+//        engine::LoadObj("nanosuit");
+//        return 1;
         return run_engine();
     }
     else

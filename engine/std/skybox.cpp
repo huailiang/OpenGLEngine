@@ -7,6 +7,7 @@
 //
 
 #include "skybox.h"
+#include "asset.h"
 #ifdef _GLES_
 #include "FilePath.h"
 #else
@@ -74,7 +75,8 @@ namespace engine
         for (unsigned int i = 0; i < faces.size(); i++)
         {
     #ifndef _GLES_
-            unsigned char *data = stbi_load(faces[i].c_str(), &width, &height, &nrChannels, 0);
+            std::string path = getResPath(faces[i]);
+            unsigned char *data = stbi_load(path.c_str(), &width, &height, &nrChannels, 0);
             if (data)
             {
                 glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
@@ -86,9 +88,8 @@ namespace engine
                 stbi_image_free(data);
             }
     #else
-            size_t idx = faces[i].rfind("/");
-            std::string path = faces[i].replace(0, idx+1, "");
-            char* data = LoadImage(path, &width, &height);
+            std::string path = getResPath(faces[i]);
+            char* data = LoadImage(path,".jpg", &width, &height);
             glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
             free(data);
     #endif
@@ -106,8 +107,7 @@ namespace engine
 
     void Skybox::init_tex()
     {
-        std::string path = "resources/textures/skybox/"+name+"/";
-        path = WORKDIR + path;
+        std::string path = "textures/skybox/"+name+"/";
         faces.push_back(path + "right.jpg");
         faces.push_back(path + "left.jpg");
         faces.push_back(path + "top.jpg");

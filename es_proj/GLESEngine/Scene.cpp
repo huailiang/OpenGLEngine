@@ -13,6 +13,7 @@
 #include "skybox.h"
 #include "label.h"
 #include "avatar.h"
+#include "asset.h"
 
 
 using namespace engine;
@@ -195,8 +196,8 @@ bool InitScene(ESContext* context)
     shader->setInt("texture1", 0);
     shader->setInt("texture2", 1);
     camera->Attach(shader);
-    Texture("container.jpg",&texture1);
-    Texture("awesomeface.png",&texture2);
+    Texture("textures/container", JPG, &texture1);
+    Texture("textures/awesomeface", PNG, &texture2);
     context->drawFunc = Draw;
     context->shutdownFunc = ShutDown;
     context->updateWindow = SetWindowSize;

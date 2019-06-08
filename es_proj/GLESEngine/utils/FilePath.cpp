@@ -32,22 +32,6 @@ __attribute__ ( ( packed ) )
 } TGA_HEADER;
 
 
-string getWrokingDir()
-{
-    char *ptr;
-    CFBundleRef mainBundle = CFBundleGetMainBundle();
-    CFURLRef resourcesURL = CFBundleCopyBundleURL(mainBundle);
-    CFStringRef str = CFURLCopyFileSystemPath(resourcesURL, kCFURLPOSIXPathStyle);
-    CFRelease(resourcesURL);
-    ptr = new char[CFStringGetLength(str)+1];
-    CFStringGetCString(str, ptr, FILENAME_MAX, kCFStringEncodingASCII);
-    CFRelease(str);
-    
-    std::string res(ptr);
-    delete[] ptr;
-    return res;
-}
-
 char* getsPath(const char *filename)
 {
     char *ptr;
@@ -159,19 +143,16 @@ string getContentFromPath(const string& filepath)
     return getContentFromPath(filepath.c_str());
 }
 
-char* LoadImage(const char* filename, int *width, int *height)
+char* LoadImage(const char* filename, string extension, int *width, int *height)
 {
     const char *filepath = getsPath(filename);
     CGDataProviderRef texturefiledata = CGDataProviderCreateWithFilename(filepath);
     
     if(!texturefiledata)   return NULL;
     
-    string extension;
-    StringManipulator::GetExtensitonType(filename,extension);
-    StringManipulator::ToLowerCase(extension);
-    bool Ispng = StringManipulator::IsEqual(extension,"png") == 0;
-    bool IsJpg = StringManipulator::IsEqual(extension,"jpg") == 0;
-    bool IsTga = StringManipulator::IsEqual(extension,"tga") == 0;
+    bool Ispng = StringManipulator::IsEqual(extension,".png") == 0;
+    bool IsJpg = StringManipulator::IsEqual(extension,".jpg") == 0;
+    bool IsTga = StringManipulator::IsEqual(extension,".tga") == 0;
     
     CGImageRef textureImage;
     if(IsJpg)
@@ -198,9 +179,9 @@ char* LoadImage(const char* filename, int *width, int *height)
     CGImageRelease(textureImage);
     return (char*)imageData;
 }
-char* LoadImage(const string& filename, int *width, int *height)
+char* LoadImage(const string& filename, string extension, int *width, int *height)
 {
-    return LoadImage(filename.c_str(), width, height);
+    return LoadImage(filename.c_str(), extension, width, height);
 }
 
 size_t ReadFile(esFile *pFile, int bytesToRead, void *buffer)

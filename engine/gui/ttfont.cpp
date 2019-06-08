@@ -7,7 +7,7 @@
 //
 
 #include "ttfont.h"
-
+#include "../std/asset.h"
 #ifdef _GLES_
 #include "FilePath.h"
 #endif
@@ -78,13 +78,7 @@ namespace engine
         if (FT_Init_FreeType(&ft)) std::cout << "ERROR::FREETYPE: Could not init FreeType Library" << std::endl;
         
         FT_Face face;
-        std::string path = "resources/fonts/arial.ttf";
-#ifdef _QT_EDIT_
-        path = WORKDIR + path;
-#endif
-#ifdef _GLES_
-        path = getPath("arial.ttf");
-#endif
+        std::string path = getResPath("fonts/arial.ttf");
         if (FT_New_Face(ft, path.c_str(), 0, &face)) std::cout << "ERROR::FREETYPE: Failed to load font" << std::endl;
         
         FT_Set_Pixel_Sizes(face, 0, FONT_SIZE);

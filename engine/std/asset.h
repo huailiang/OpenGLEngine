@@ -35,14 +35,22 @@ namespace engine
     #define SUM   0x0100 //.sum
     #define MESH  0x0200 //.mesh
     #define MAT   0x0300 //.mat
+    
+    #define NONE  0x0000
+    
+    typedef unsigned int EXT;
 
     extern std::map<unsigned int,int> asset_map;
     
     bool initial();
     
-    bool isTexure(int ext);
+    bool isTexure(EXT ext);
     
-    bool isEngineAsset(int ext);
+    std::string getTextureExt(EXT ext);
+    
+    EXT getTextureFormat(const char* ext);
+    
+    bool isEngineAsset(EXT ext);
      
     std::string getResPath(std::string path);
     

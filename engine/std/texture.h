@@ -10,7 +10,8 @@
 #define texture_h
 
 #include <glm/glm.hpp>
-#include "../common.h"
+#include "asset.h"
+
 
 using namespace glm;
 
@@ -23,7 +24,7 @@ namespace engine
         
         GLuint textureID;
         
-        Texture(const char* path, GLuint* texID= nullptr, bool flipY= true, int wrap = GL_REPEAT);
+        Texture(const char* path, EXT ext, GLuint* texID= nullptr, bool flipY= true, int wrap = GL_REPEAT);
         
         ~Texture();
         
@@ -31,7 +32,7 @@ namespace engine
         
         GLenum GetFormat();
         
-        unsigned int LoadTexture(bool flipY, int wrap);
+        unsigned int LoadTexture(bool flipY, EXT ext, int wrap);
         
         
     private:

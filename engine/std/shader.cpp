@@ -217,9 +217,7 @@ namespace engine
     #endif // _GLES_
 
         size_t idx = path.rfind("/");
-        std::string dir = path.substr(0,idx);
-        std::cout<<dir<<std::endl;
-        CheckDir(dir.c_str());
+        CheckDir(path.substr(0,idx).c_str());
         
         std::ofstream file;
         file.exceptions (std::ofstream::failbit | std::ofstream::badbit);

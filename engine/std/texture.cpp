@@ -18,12 +18,12 @@
 namespace engine
 {
 
-    Texture::Texture(const char* path, GLuint* texID, bool flipY, int wrap)
+    Texture::Texture(const char* path, EXT ext, GLuint* texID, bool flipY, int wrap)
     {
         std::string spath(path);
-        spath = WORKDIR + spath;
+        spath = getResPath(spath + getTextureExt(ext));
         this->path=spath.c_str();
-        *texID = LoadTexture(flipY, wrap);
+        *texID = LoadTexture(flipY, ext, wrap);
     }
 
 
@@ -32,7 +32,7 @@ namespace engine
         TexMgr::getInstance()->RemvTexture(textureID);
     }
 
-    unsigned int Texture::LoadTexture(bool flipY, int wrap)
+    unsigned int Texture::LoadTexture(bool flipY, EXT ext,int wrap)
     {
     #ifndef _GLES_
         stbi_set_flip_vertically_on_load(flipY);
@@ -46,7 +46,7 @@ namespace engine
     #ifndef _GLES_
         unsigned char *data = stbi_load(path, &width, &height, &format, 0);
     #else
-        char *data = LoadImage(std::string(path), &width, &height);
+        char *data = LoadImage(std::string(path), getTextureExt(ext), &width, &height);
     #endif
         if (data)
         {
@@ -60,7 +60,7 @@ namespace engine
         }
         else
         {
-            std::cout << "Texture failed to load at path: " << path << std::endl;
+            std::cout << "Texture failed: " << path << std::endl;
         }
     #ifndef _GLES_
         stbi_image_free(data);

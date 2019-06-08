@@ -142,7 +142,7 @@ namespace engine
             return 0;
         }
         unsigned int hash =0;
-        int seed = 1;
+        int seed = 5;
         for (int i=0; i<str.size(); i++) {
             
             hash = (hash << seed) + (short)str[i] + hash;

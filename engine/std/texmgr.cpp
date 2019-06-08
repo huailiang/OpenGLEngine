@@ -44,13 +44,13 @@ namespace engine
     }
 
     
-    void TexMgr::LoadTex(std::string& texture, GLuint& texid)
+    void TexMgr::LoadTex(std::string& texture, EXT ext, GLuint& texid)
     {
         size_t idx = 0;
+        if(texture.empty() || ext== NONE) return;
         if (!FindTexture(texture, texid, idx))
         {
-            Texture(texture.c_str(), &texid);
-            
+            Texture(texture.c_str(),ext, &texid);
             _textures.push_back(texture);
             _texids.push_back(texid);
             _references.push_back(1);

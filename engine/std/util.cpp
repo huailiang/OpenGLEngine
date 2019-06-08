@@ -99,17 +99,17 @@ namespace engine
     
     void readtex(ifstream& f, GLuint& id)
     {
-        string str;
-        readstring(f, str);
+        string str = "";
+        int ext = 0;
+        f.read((char*)&ext,sizeof(int));
+        if(ext > 0)
+        {
+            readstring(f, str);
+        }
         if(!str.empty())
         {
-            
-#ifdef _GLES_
-            str = getPath(str);
-#else
-            str = "resources/objects/" + curr_obj +"/" + str;
-#endif
-            TexMgr::getInstance()->LoadTex(str, id);
+            str = "objects/" + curr_obj +"/" + str;
+            TexMgr::getInstance()->LoadTex(str,(EXT)ext, id);
         }
     }
     
@@ -224,7 +224,26 @@ namespace engine
             ofs.write((char*)&num,sizeof(unsigned int));
             num = (unsigned int)vertices.size();
             ofs.write((char*)&num,sizeof(unsigned int));
-            for(int i=0;i<TEXTURE_NUM;i++)  writestring(ofs, texture[i]);
+            for(int i=0;i<TEXTURE_NUM;i++)
+            {
+                std::cout<<texture[i]<<std::endl;
+                size_t idx = texture[i].rfind('.');
+                if (idx > 1024) //invalid
+                {
+                    int ext =0;
+                    ofs.write((char*)&ext,sizeof(int));
+                }
+                else
+                {
+                    std::string ex = texture[i].substr(idx);
+                    int ext = getTextureFormat(ex.c_str());
+                    ofs.write((char*)&ext,sizeof(int));
+                    
+                    std::string name = texture[i].substr(0,idx);
+                    std::cout<<"write: "<<name<<" ext:"<<ext<<std::endl;
+                    writestring(ofs, name);
+                }
+            }
             for(size_t i=0;i<indices.size();i++) {
                  ofs.write((char*)&indices[i],sizeof(unsigned int));
             }
@@ -254,13 +273,7 @@ namespace engine
         try
         {
             curr_obj = name;
-            std::string path = "resources/mesh/"+name+"/summary.sum";
-#ifdef _QT_EDIT_
-            path = WORKDIR + path;
-#endif
-#ifdef _GLES_
-            path = getPath("summary.sum");
-#endif
+            std::string path = getResPath("mesh/"+name+"/summary.sum");
             ifs.open(path, std::ifstream::binary | std::ios::in);
             unsigned int num = 0;
             items.clear();
@@ -285,13 +298,7 @@ namespace engine
         ifs.exceptions (std::ifstream::failbit | std::ifstream::badbit);
         try
         {
-          std::string path = "resources/mesh/"+curr_obj+"/"+name+".mesh";
-#ifdef _QT_EDIT_
-            path = WORKDIR + path;
-#endif
-#ifdef _GLES_
-            path = getPath(name+".mesh");
-#endif
+            std::string path = getResPath("mesh/"+curr_obj+"/"+name+".mesh");
             ifs.open(path, std::ifstream::binary | std::ios::in);
             unsigned int inds = 0,verts = 0;
             ifs.seekg(0, ios::beg);

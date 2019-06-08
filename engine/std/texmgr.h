@@ -10,7 +10,8 @@
 #define texmgr_h
 
 #include "texture.h"
-#include "../common.h"
+#include "asset.h"
+
 
 using namespace std;
 
@@ -39,7 +40,7 @@ namespace engine
         
         void RealRemove(size_t idx);
         
-        void LoadTex(std::string& texture, GLuint& texid);
+        void LoadTex(std::string& texture, EXT ext, GLuint& texid);
         
         bool RemvTexture(GLuint texid);
         

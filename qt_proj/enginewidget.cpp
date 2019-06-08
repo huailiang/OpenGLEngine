@@ -1,6 +1,7 @@
 #include "enginewidget.h"
 #include "ui_enginewidget.h"
 #include "../engine/std/texture.h"
+#include "../engine/std/asset.h"
 #include "../engine/gui/ttfont.h"
 
 engineWidget::engineWidget(QWidget *parent) :
@@ -45,8 +46,8 @@ void engineWidget::initializeGL()
     avatar = new Avatar("nanosuit");
     InitCube(vao, vbo);
     InitShader();
-    Texture("resources/textures/container.jpg", &texture1);
-    Texture("resources/textures/awesomeface.png", &texture2);
+    Texture("textures/container", JPG, &texture1);
+    Texture("textures/awesomeface",PNG, &texture2);
     TTFont::getInstance()->initial();
     label = new UILabel(vec2(30,560), vec3(1), 1);
 }

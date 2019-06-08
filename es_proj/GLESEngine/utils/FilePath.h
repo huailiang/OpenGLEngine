@@ -22,8 +22,6 @@ using namespace std;
 string getPath(const char *filename);
 string getPath(const string& filename);
 
-string getWrokingDir();
-
 /** Reads every byte from the file specified by a given path.
  * @param filepath the path obtained from getPath, check getPath
  * @return the files content, u should delete the path from outside
@@ -37,8 +35,8 @@ string getContentFromPath(const string& filepath);
  * @param width height the image width and height
  * @return the data pointer to the image. dont forget to free memory by calling free.
  */
-char* LoadImage(const char* filename, int *width, int *height);
-char* LoadImage(const string& filename, int *width, int *height);
+char* LoadImage(const char* filename, string extension, int *width, int *height);
+char* LoadImage(const string& filename, string extension, int *width, int *height);
 
 size_t ReadFile(esFile *pFile, int bytesToRead, void *buffer);
 

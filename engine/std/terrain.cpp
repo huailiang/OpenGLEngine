@@ -7,6 +7,7 @@
 //
 
 #include "terrain.h"
+#include "asset.h"
 
 namespace engine
 {
@@ -15,8 +16,8 @@ namespace engine
     {
         shader = new Shader("sample.vs","sample.fs");
         shader2 = new Shader("instance.vs","instance.fs");
-        Texture("resources/textures/metal.png", &floorTexture);
-        Texture("resources/textures/grass.png", &grassTexture,false,GL_CLAMP_TO_EDGE);
+        Texture("textures/metal", PNG, &floorTexture);
+        Texture("textures/grass",PNG, &grassTexture,false,GL_CLAMP_TO_EDGE);
         
         initial();
     }
