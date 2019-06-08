@@ -1,10 +1,5 @@
 /*
  *  FilePath.cpp
- *  Virtual Vision
- *
- *  Created by Abdallah Dib Abdallah.dib@virtual-vison.net
- *  Copyright 2011 Virtual Vision. All rights reserved.
- *
  */
 
 #include "FilePath.h"
@@ -37,6 +32,22 @@ __attribute__ ( ( packed ) )
 } TGA_HEADER;
 
 
+string getWrokingDir()
+{
+    char *ptr;
+    CFBundleRef mainBundle = CFBundleGetMainBundle();
+    CFURLRef resourcesURL = CFBundleCopyBundleURL(mainBundle);
+    CFStringRef str = CFURLCopyFileSystemPath(resourcesURL, kCFURLPOSIXPathStyle);
+    CFRelease(resourcesURL);
+    ptr = new char[CFStringGetLength(str)+1];
+    CFStringGetCString(str, ptr, FILENAME_MAX, kCFStringEncodingASCII);
+    CFRelease(str);
+    
+    std::string res(ptr);
+    delete[] ptr;
+    return res;
+}
+
 char* getsPath(const char *filename)
 {
     char *ptr;
@@ -59,7 +70,6 @@ char* getsPath(const char *filename)
         ptr = new char[res.length()+1];
         strcpy(ptr, res.c_str());
     }
-    
     else
     {
         ptr = new char[fnm.length()+1];
@@ -71,9 +81,14 @@ char* getsPath(const char *filename)
 
 string getPath(const char *filename)
 {
-    char *ptr;
     std::string fnm(filename);
-    if(fnm.find("/") == fnm.npos)
+    return getPath(fnm);
+}
+
+string getPath(const string& filename)
+{
+    char *ptr;
+    if(filename.find("/") == filename.npos)
     {
         CFBundleRef mainBundle = CFBundleGetMainBundle();
         CFURLRef resourcesURL = CFBundleCopyBundleURL(mainBundle);
@@ -91,21 +106,14 @@ string getPath(const char *filename)
         ptr = new char[res.length()+1];
         strcpy(ptr, res.c_str());
     }
-    
     else
     {
-        ptr = new char[fnm.length()+1];
-        strcpy(ptr, fnm.c_str());
+        ptr = new char[filename.length()+1];
+        strcpy(ptr, filename.c_str());
     }
-    
     string s(ptr);
     delete[] ptr;
     return s;
-}
-
-string getPath(const string& filename)
-{
-    return getPath(filename.c_str());
 }
 
 string getContentFromPath(const char *filepath)

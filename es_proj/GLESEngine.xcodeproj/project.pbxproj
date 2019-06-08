@@ -103,7 +103,6 @@
 		4CD4F0E922AB7BFA00C7B080 /* glass_dif.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0CA22AB7BF900C7B080 /* glass_dif.png */; };
 		4CD4F0EA22AB7BFA00C7B080 /* helmet_diff.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0CB22AB7BF900C7B080 /* helmet_diff.png */; };
 		4CD4F0EB22AB7BFA00C7B080 /* cell_ddn.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0CC22AB7BF900C7B080 /* cell_ddn.png */; };
-		4CD4F0EC22AB7BFA00C7B080 /* back.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0CD22AB7BF900C7B080 /* back.jpg */; };
 		4CD4F0ED22AB7BFA00C7B080 /* helmet_showroom_refl.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0CE22AB7BF900C7B080 /* helmet_showroom_refl.png */; };
 		4CD4F0EE22AB7BFA00C7B080 /* leg_showroom_ddn.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0CF22AB7BF900C7B080 /* leg_showroom_ddn.png */; };
 		4CD4F0EF22AB7BFA00C7B080 /* leg_showroom_refl.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0D022AB7BF900C7B080 /* leg_showroom_refl.png */; };
@@ -116,7 +115,6 @@
 		4CD4F0F622AB7BFA00C7B080 /* cell_body_alpha.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0D722AB7BFA00C7B080 /* cell_body_alpha.png */; };
 		4CD4F0F722AB7BFA00C7B080 /* body_dif.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0D822AB7BFA00C7B080 /* body_dif.png */; };
 		4CD4F0F822AB7BFA00C7B080 /* leg_dif.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0D922AB7BFA00C7B080 /* leg_dif.png */; };
-		4CD4F0F922AB7BFA00C7B080 /* front.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0DA22AB7BFA00C7B080 /* front.jpg */; };
 		4CD4F0FA22AB7BFA00C7B080 /* arm_dif.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0DB22AB7BFA00C7B080 /* arm_dif.png */; };
 		4CD4F0FB22AB7BFA00C7B080 /* hand_showroom_ddn.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0DC22AB7BFA00C7B080 /* hand_showroom_ddn.png */; };
 		4CD4F0FC22AB7BFA00C7B080 /* cell_helmet_alpha.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0DD22AB7BFA00C7B080 /* cell_helmet_alpha.png */; };
@@ -257,7 +255,6 @@
 		4CD4F0CA22AB7BF900C7B080 /* glass_dif.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = glass_dif.png; path = ../../objects/nanosuit/glass_dif.png; sourceTree = "<group>"; };
 		4CD4F0CB22AB7BF900C7B080 /* helmet_diff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = helmet_diff.png; path = ../../objects/nanosuit/helmet_diff.png; sourceTree = "<group>"; };
 		4CD4F0CC22AB7BF900C7B080 /* cell_ddn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cell_ddn.png; path = ../../objects/nanosuit/cell_ddn.png; sourceTree = "<group>"; };
-		4CD4F0CD22AB7BF900C7B080 /* back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = back.jpg; path = ../../objects/nanosuit/back.jpg; sourceTree = "<group>"; };
 		4CD4F0CE22AB7BF900C7B080 /* helmet_showroom_refl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = helmet_showroom_refl.png; path = ../../objects/nanosuit/helmet_showroom_refl.png; sourceTree = "<group>"; };
 		4CD4F0CF22AB7BF900C7B080 /* leg_showroom_ddn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = leg_showroom_ddn.png; path = ../../objects/nanosuit/leg_showroom_ddn.png; sourceTree = "<group>"; };
 		4CD4F0D022AB7BF900C7B080 /* leg_showroom_refl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = leg_showroom_refl.png; path = ../../objects/nanosuit/leg_showroom_refl.png; sourceTree = "<group>"; };
@@ -270,7 +267,6 @@
 		4CD4F0D722AB7BFA00C7B080 /* cell_body_alpha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cell_body_alpha.png; path = ../../objects/nanosuit/cell_body_alpha.png; sourceTree = "<group>"; };
 		4CD4F0D822AB7BFA00C7B080 /* body_dif.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = body_dif.png; path = ../../objects/nanosuit/body_dif.png; sourceTree = "<group>"; };
 		4CD4F0D922AB7BFA00C7B080 /* leg_dif.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = leg_dif.png; path = ../../objects/nanosuit/leg_dif.png; sourceTree = "<group>"; };
-		4CD4F0DA22AB7BFA00C7B080 /* front.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = front.jpg; path = ../../objects/nanosuit/front.jpg; sourceTree = "<group>"; };
 		4CD4F0DB22AB7BFA00C7B080 /* arm_dif.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arm_dif.png; path = ../../objects/nanosuit/arm_dif.png; sourceTree = "<group>"; };
 		4CD4F0DC22AB7BFA00C7B080 /* hand_showroom_ddn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hand_showroom_ddn.png; path = ../../objects/nanosuit/hand_showroom_ddn.png; sourceTree = "<group>"; };
 		4CD4F0DD22AB7BFA00C7B080 /* cell_helmet_alpha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cell_helmet_alpha.png; path = ../../objects/nanosuit/cell_helmet_alpha.png; sourceTree = "<group>"; };
@@ -328,7 +324,6 @@
 				4CD4F0C722AB7BF900C7B080 /* arm_showroom_ddn.png */,
 				4CD4F0E022AB7BFA00C7B080 /* arm_showroom_refl.png */,
 				4CD4F0D322AB7BFA00C7B080 /* arm_showroom_spec.png */,
-				4CD4F0CD22AB7BF900C7B080 /* back.jpg */,
 				4CD4F0D822AB7BFA00C7B080 /* body_dif.png */,
 				4CD4F0E522AB7BFA00C7B080 /* body_showroom_ddn.png */,
 				4CD4F0E222AB7BFA00C7B080 /* body_showroom_refl.png */,
@@ -339,7 +334,6 @@
 				4CD4F0D522AB7BFA00C7B080 /* cell_hand_alpha.png */,
 				4CD4F0DD22AB7BFA00C7B080 /* cell_helmet_alpha.png */,
 				4CD4F0DF22AB7BFA00C7B080 /* cell_leg_alpha.png */,
-				4CD4F0DA22AB7BFA00C7B080 /* front.jpg */,
 				4CD4F0DE22AB7BFA00C7B080 /* glass_ddn.png */,
 				4CD4F0CA22AB7BF900C7B080 /* glass_dif.png */,
 				4CD4F0D122AB7BF900C7B080 /* glass_refl.png */,
@@ -689,7 +683,6 @@
 				4CD4F10722AB907B00C7B080 /* arial.ttf in Resources */,
 				4C97AAB122A50D01005F6388 /* outline.fs in Resources */,
 				4C97AAB722A50D01005F6388 /* sample.vs in Resources */,
-				4CD4F0EC22AB7BFA00C7B080 /* back.jpg in Resources */,
 				4C97AAB522A50D01005F6388 /* sample.fs in Resources */,
 				4C97AAC022A50D01005F6388 /* debug.vs in Resources */,
 				4C97AABD22A50D01005F6388 /* phong.glsl in Resources */,
@@ -754,7 +747,6 @@
 				4C97AAC222A50D01005F6388 /* instance.fs in Resources */,
 				4CD4F0FA22AB7BFA00C7B080 /* arm_dif.png in Resources */,
 				4C97AAC122A50D01005F6388 /* shadow.vs in Resources */,
-				4CD4F0F922AB7BFA00C7B080 /* front.jpg in Resources */,
 				4C402CD722A50E3B008C89D4 /* matrix.jpg in Resources */,
 				4C97AAAD22A50D01005F6388 /* camera.vs in Resources */,
 				4C02E1DE22AB78FF002821B9 /* Arms in Resources */,
@@ -958,6 +950,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 238UB5UD4H;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -988,6 +981,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 238UB5UD4H;
 				GCC_PREPROCESSOR_DEFINITIONS = (
