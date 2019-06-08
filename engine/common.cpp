@@ -146,7 +146,7 @@ namespace engine
         for (int i=0; i<str.size(); i++) {
             
             hash = (hash << seed) + (short)str[i] + hash;
-            std::cout<<str[i]<<" "<<(short)str[i]<<" "<<hash<<std::endl;
+//            std::cout<<str[i]<<" "<<(short)str[i]<<" "<<hash<<std::endl;
         }
         return hash;
     }

@@ -23,6 +23,8 @@ namespace engine
     
     extern string curr_obj;
     
+    int CheckDir(const char* path);
+    
     bool LoadObj(std::string name);
     
     void WriteMesh(std::string name,vector<int>& indices, vector<Vertex>& vertices,std::string texture[]);

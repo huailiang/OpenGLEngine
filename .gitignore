@@ -1,5 +1,4 @@
-**/temp/*.fs
-**/temp/*.vs
+**/temp/
 **/.vs/
 **/.vscode/
 qt_proj/build/*.h

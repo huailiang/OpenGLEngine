@@ -27,6 +27,7 @@
 		4C3B7A1922831668003B212F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C3B7A1822831668003B212F /* Cocoa.framework */; };
 		4C42797E22A54AD0003AE42A /* common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C42797A22A54AD0003AE42A /* common.cpp */; };
 		4C4279AD22A54C26003AE42A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C4279AC22A54C26003AE42A /* main.cpp */; };
+		4C5F3FD322ABF95C005B7CFD /* asset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C5F3FD222ABF95C005B7CFD /* asset.cpp */; };
 		4C73C0F322A8C0F9002A8AD0 /* eventmgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C73C0F222A8C0F9002A8AD0 /* eventmgr.cpp */; };
 		4C73C0F522A8C18C002A8AD0 /* uimgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C73C0F422A8C18C002A8AD0 /* uimgr.cpp */; };
 		4CD27D46228307050038AE21 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD27D3E2283022D0038AE21 /* OpenGL.framework */; };
@@ -130,6 +131,8 @@
 		4C4279B222A54C32003AE42A /* scene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = scene.h; path = OpenGLEngine/scene/scene.h; sourceTree = SOURCE_ROOT; };
 		4C4279B322A54C32003AE42A /* scene1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = scene1.h; path = OpenGLEngine/scene/scene1.h; sourceTree = SOURCE_ROOT; };
 		4C5680D222A61B5600D313AC /* tiny_obj_loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tiny_obj_loader.h; sourceTree = "<group>"; };
+		4C5F3FD122ABF95C005B7CFD /* asset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asset.h; sourceTree = "<group>"; };
+		4C5F3FD222ABF95C005B7CFD /* asset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = asset.cpp; sourceTree = "<group>"; };
 		4C73C0F222A8C0F9002A8AD0 /* eventmgr.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = eventmgr.cpp; sourceTree = "<group>"; };
 		4C73C0F422A8C18C002A8AD0 /* uimgr.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = uimgr.cpp; sourceTree = "<group>"; };
 		4CD27D2B2282F4E30038AE21 /* OpenGLEngine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OpenGLEngine; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,6 +164,8 @@
 		4C3774F622A54F6F0074744F /* std */ = {
 			isa = PBXGroup;
 			children = (
+				4C5F3FD122ABF95C005B7CFD /* asset.h */,
+				4C5F3FD222ABF95C005B7CFD /* asset.cpp */,
 				4C3774FC22A54F6F0074744F /* camera.h */,
 				4C3774FB22A54F6F0074744F /* camera.cpp */,
 				4C3774FA22A54F6F0074744F /* light.h */,
@@ -404,6 +409,7 @@
 				4C37751F22A54FA20074744F /* glad.c in Sources */,
 				4C73C0F322A8C0F9002A8AD0 /* eventmgr.cpp in Sources */,
 				4C42797E22A54AD0003AE42A /* common.cpp in Sources */,
+				4C5F3FD322ABF95C005B7CFD /* asset.cpp in Sources */,
 				4C37750C22A54F6F0074744F /* skybox.cpp in Sources */,
 				4C1B57B322A68D7900A7AFF1 /* util.cpp in Sources */,
 				4C1B57B922A6ADBF00A7AFF1 /* material.cpp in Sources */,

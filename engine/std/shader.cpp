@@ -7,6 +7,7 @@
 //
 
 #include "shader.h"
+#include "util.h"
 #ifdef _GLES_
 #include "FilePath.h"
 #endif
@@ -215,6 +216,11 @@ namespace engine
         path = "temp/"+path;
     #endif // _GLES_
 
+        size_t idx = path.rfind("/");
+        std::string dir = path.substr(0,idx);
+        std::cout<<dir<<std::endl;
+        CheckDir(dir.c_str());
+        
         std::ofstream file;
         file.exceptions (std::ofstream::failbit | std::ofstream::badbit);
         try

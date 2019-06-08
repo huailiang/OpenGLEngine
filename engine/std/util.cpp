@@ -193,7 +193,7 @@ namespace engine
             basedir = WORKDIR + basedir;
 #endif
             CheckDir(basedir.c_str());
-            ofs.open(basedir+"summary",std::ofstream::binary | std::ios::out);
+            ofs.open(basedir+"summary.sum",std::ofstream::binary | std::ios::out);
             unsigned int num = (unsigned int)shapes.size();
             ofs.write((char*)&num,sizeof(unsigned int));
             for (size_t i =0; i<shapes.size(); i++)
@@ -219,7 +219,7 @@ namespace engine
         try
         {
             string basedir = "resources/mesh/"+curr_obj+"/";
-            ofs.open(basedir+name,std::ofstream::binary | std::ios::out);
+            ofs.open(basedir+name+".mesh",std::ofstream::binary | std::ios::out);
             unsigned int num = (unsigned int)indices.size();
             ofs.write((char*)&num,sizeof(unsigned int));
             num = (unsigned int)vertices.size();
@@ -254,12 +254,12 @@ namespace engine
         try
         {
             curr_obj = name;
-            std::string path = "resources/mesh/"+name+"/summary";
+            std::string path = "resources/mesh/"+name+"/summary.sum";
 #ifdef _QT_EDIT_
             path = WORKDIR + path;
 #endif
 #ifdef _GLES_
-            path = getPath("summary");
+            path = getPath("summary.sum");
 #endif
             ifs.open(path, std::ifstream::binary | std::ios::in);
             unsigned int num = 0;
@@ -285,12 +285,12 @@ namespace engine
         ifs.exceptions (std::ifstream::failbit | std::ifstream::badbit);
         try
         {
-          std::string path = "resources/mesh/"+curr_obj+"/"+name;
+          std::string path = "resources/mesh/"+curr_obj+"/"+name+".mesh";
 #ifdef _QT_EDIT_
             path = WORKDIR + path;
 #endif
 #ifdef _GLES_
-            path = getPath(name);
+            path = getPath(name+".mesh");
 #endif
             ifs.open(path, std::ifstream::binary | std::ios::in);
             unsigned int inds = 0,verts = 0;
