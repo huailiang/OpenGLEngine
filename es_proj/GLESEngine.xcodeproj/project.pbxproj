@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C02E1CF22AB77A0002821B9 /* material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C02E1CC22AB77A0002821B9 /* material.cpp */; };
+		4C02E1D022AB77A0002821B9 /* avatar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C02E1CD22AB77A0002821B9 /* avatar.cpp */; };
+		4C02E1DA22AB78FF002821B9 /* Helmet in Resources */ = {isa = PBXBuildFile; fileRef = 4C02E1D222AB78FF002821B9 /* Helmet */; };
+		4C02E1DB22AB78FF002821B9 /* Body in Resources */ = {isa = PBXBuildFile; fileRef = 4C02E1D322AB78FF002821B9 /* Body */; };
+		4C02E1DC22AB78FF002821B9 /* Legs in Resources */ = {isa = PBXBuildFile; fileRef = 4C02E1D422AB78FF002821B9 /* Legs */; };
+		4C02E1DD22AB78FF002821B9 /* hands in Resources */ = {isa = PBXBuildFile; fileRef = 4C02E1D522AB78FF002821B9 /* hands */; };
+		4C02E1DE22AB78FF002821B9 /* Arms in Resources */ = {isa = PBXBuildFile; fileRef = 4C02E1D622AB78FF002821B9 /* Arms */; };
+		4C02E1DF22AB78FF002821B9 /* Lights in Resources */ = {isa = PBXBuildFile; fileRef = 4C02E1D722AB78FF002821B9 /* Lights */; };
+		4C02E1E022AB78FF002821B9 /* summary in Resources */ = {isa = PBXBuildFile; fileRef = 4C02E1D822AB78FF002821B9 /* summary */; };
+		4C02E1E122AB78FF002821B9 /* Visor in Resources */ = {isa = PBXBuildFile; fileRef = 4C02E1D922AB78FF002821B9 /* Visor */; };
 		4C402CAA22A50E2B008C89D4 /* container2_specular.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C402CA022A50E2B008C89D4 /* container2_specular.png */; };
 		4C402CAB22A50E2B008C89D4 /* brickwall_normal.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C402CA122A50E2B008C89D4 /* brickwall_normal.jpg */; };
 		4C402CAC22A50E2B008C89D4 /* bricks2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C402CA222A50E2B008C89D4 /* bricks2.jpg */; };
@@ -87,6 +97,37 @@
 		4C97AAC322A50D01005F6388 /* ttfont.vs in Resources */ = {isa = PBXBuildFile; fileRef = 4C97AAA122A50D01005F6388 /* ttfont.vs */; };
 		4C97AAC422A50D01005F6388 /* pbr.vs in Resources */ = {isa = PBXBuildFile; fileRef = 4C97AAA222A50D01005F6388 /* pbr.vs */; };
 		4C97AAC522A50D01005F6388 /* light.fs in Resources */ = {isa = PBXBuildFile; fileRef = 4C97AAA322A50D01005F6388 /* light.fs */; };
+		4CD4F0E622AB7BFA00C7B080 /* arm_showroom_ddn.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0C722AB7BF900C7B080 /* arm_showroom_ddn.png */; };
+		4CD4F0E722AB7BFA00C7B080 /* cell_arm_alpha.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0C822AB7BF900C7B080 /* cell_arm_alpha.png */; };
+		4CD4F0E822AB7BFA00C7B080 /* helmet_showroom_spec.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0C922AB7BF900C7B080 /* helmet_showroom_spec.png */; };
+		4CD4F0E922AB7BFA00C7B080 /* glass_dif.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0CA22AB7BF900C7B080 /* glass_dif.png */; };
+		4CD4F0EA22AB7BFA00C7B080 /* helmet_diff.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0CB22AB7BF900C7B080 /* helmet_diff.png */; };
+		4CD4F0EB22AB7BFA00C7B080 /* cell_ddn.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0CC22AB7BF900C7B080 /* cell_ddn.png */; };
+		4CD4F0EC22AB7BFA00C7B080 /* back.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0CD22AB7BF900C7B080 /* back.jpg */; };
+		4CD4F0ED22AB7BFA00C7B080 /* helmet_showroom_refl.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0CE22AB7BF900C7B080 /* helmet_showroom_refl.png */; };
+		4CD4F0EE22AB7BFA00C7B080 /* leg_showroom_ddn.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0CF22AB7BF900C7B080 /* leg_showroom_ddn.png */; };
+		4CD4F0EF22AB7BFA00C7B080 /* leg_showroom_refl.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0D022AB7BF900C7B080 /* leg_showroom_refl.png */; };
+		4CD4F0F022AB7BFA00C7B080 /* glass_refl.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0D122AB7BF900C7B080 /* glass_refl.png */; };
+		4CD4F0F122AB7BFA00C7B080 /* body_showroom_spec.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0D222AB7BF900C7B080 /* body_showroom_spec.png */; };
+		4CD4F0F222AB7BFA00C7B080 /* arm_showroom_spec.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0D322AB7BFA00C7B080 /* arm_showroom_spec.png */; };
+		4CD4F0F322AB7BFA00C7B080 /* hand_showroom_spec.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0D422AB7BFA00C7B080 /* hand_showroom_spec.png */; };
+		4CD4F0F422AB7BFA00C7B080 /* cell_hand_alpha.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0D522AB7BFA00C7B080 /* cell_hand_alpha.png */; };
+		4CD4F0F522AB7BFA00C7B080 /* leg_showroom_spec.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0D622AB7BFA00C7B080 /* leg_showroom_spec.png */; };
+		4CD4F0F622AB7BFA00C7B080 /* cell_body_alpha.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0D722AB7BFA00C7B080 /* cell_body_alpha.png */; };
+		4CD4F0F722AB7BFA00C7B080 /* body_dif.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0D822AB7BFA00C7B080 /* body_dif.png */; };
+		4CD4F0F822AB7BFA00C7B080 /* leg_dif.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0D922AB7BFA00C7B080 /* leg_dif.png */; };
+		4CD4F0F922AB7BFA00C7B080 /* front.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0DA22AB7BFA00C7B080 /* front.jpg */; };
+		4CD4F0FA22AB7BFA00C7B080 /* arm_dif.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0DB22AB7BFA00C7B080 /* arm_dif.png */; };
+		4CD4F0FB22AB7BFA00C7B080 /* hand_showroom_ddn.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0DC22AB7BFA00C7B080 /* hand_showroom_ddn.png */; };
+		4CD4F0FC22AB7BFA00C7B080 /* cell_helmet_alpha.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0DD22AB7BFA00C7B080 /* cell_helmet_alpha.png */; };
+		4CD4F0FD22AB7BFA00C7B080 /* glass_ddn.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0DE22AB7BFA00C7B080 /* glass_ddn.png */; };
+		4CD4F0FE22AB7BFA00C7B080 /* cell_leg_alpha.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0DF22AB7BFA00C7B080 /* cell_leg_alpha.png */; };
+		4CD4F0FF22AB7BFA00C7B080 /* arm_showroom_refl.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0E022AB7BFA00C7B080 /* arm_showroom_refl.png */; };
+		4CD4F10022AB7BFA00C7B080 /* hand_showroom_refl.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0E122AB7BFA00C7B080 /* hand_showroom_refl.png */; };
+		4CD4F10122AB7BFA00C7B080 /* body_showroom_refl.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0E222AB7BFA00C7B080 /* body_showroom_refl.png */; };
+		4CD4F10222AB7BFA00C7B080 /* hand_dif.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0E322AB7BFA00C7B080 /* hand_dif.png */; };
+		4CD4F10322AB7BFA00C7B080 /* helmet_showroom_ddn.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0E422AB7BFA00C7B080 /* helmet_showroom_ddn.png */; };
+		4CD4F10422AB7BFA00C7B080 /* body_showroom_ddn.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD4F0E522AB7BFA00C7B080 /* body_showroom_ddn.png */; };
 		4CE2223322A91EE00095ECCA /* libFreetype2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE2223222A91EE00095ECCA /* libFreetype2.a */; };
 		4CE2223622A91EFB0095ECCA /* arial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4CE2223522A91EFB0095ECCA /* arial.ttf */; };
 		4CE2224622A91F0B0095ECCA /* eventmgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2223922A91F0B0095ECCA /* eventmgr.cpp */; };
@@ -99,6 +140,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C02E1CB22AB77A0002821B9 /* avatar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avatar.h; sourceTree = "<group>"; };
+		4C02E1CC22AB77A0002821B9 /* material.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = material.cpp; sourceTree = "<group>"; };
+		4C02E1CD22AB77A0002821B9 /* avatar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = avatar.cpp; sourceTree = "<group>"; };
+		4C02E1CE22AB77A0002821B9 /* material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = material.h; sourceTree = "<group>"; };
+		4C02E1D222AB78FF002821B9 /* Helmet */ = {isa = PBXFileReference; lastKnownFileType = file; path = Helmet; sourceTree = "<group>"; };
+		4C02E1D322AB78FF002821B9 /* Body */ = {isa = PBXFileReference; lastKnownFileType = file; path = Body; sourceTree = "<group>"; };
+		4C02E1D422AB78FF002821B9 /* Legs */ = {isa = PBXFileReference; lastKnownFileType = file; path = Legs; sourceTree = "<group>"; };
+		4C02E1D522AB78FF002821B9 /* hands */ = {isa = PBXFileReference; lastKnownFileType = file; path = hands; sourceTree = "<group>"; };
+		4C02E1D622AB78FF002821B9 /* Arms */ = {isa = PBXFileReference; lastKnownFileType = file; path = Arms; sourceTree = "<group>"; };
+		4C02E1D722AB78FF002821B9 /* Lights */ = {isa = PBXFileReference; lastKnownFileType = file; path = Lights; sourceTree = "<group>"; };
+		4C02E1D822AB78FF002821B9 /* summary */ = {isa = PBXFileReference; lastKnownFileType = file; path = summary; sourceTree = "<group>"; };
+		4C02E1D922AB78FF002821B9 /* Visor */ = {isa = PBXFileReference; lastKnownFileType = file; path = Visor; sourceTree = "<group>"; };
 		4C402CA022A50E2B008C89D4 /* container2_specular.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = container2_specular.png; path = ../../resources/textures/container2_specular.png; sourceTree = "<group>"; };
 		4C402CA122A50E2B008C89D4 /* brickwall_normal.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = brickwall_normal.jpg; path = ../../resources/textures/brickwall_normal.jpg; sourceTree = "<group>"; };
 		4C402CA222A50E2B008C89D4 /* bricks2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = bricks2.jpg; path = ../../resources/textures/bricks2.jpg; sourceTree = "<group>"; };
@@ -198,6 +251,37 @@
 		4C97AAA122A50D01005F6388 /* ttfont.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ttfont.vs; sourceTree = "<group>"; };
 		4C97AAA222A50D01005F6388 /* pbr.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = pbr.vs; sourceTree = "<group>"; };
 		4C97AAA322A50D01005F6388 /* light.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = light.fs; sourceTree = "<group>"; };
+		4CD4F0C722AB7BF900C7B080 /* arm_showroom_ddn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arm_showroom_ddn.png; path = ../../objects/nanosuit/arm_showroom_ddn.png; sourceTree = "<group>"; };
+		4CD4F0C822AB7BF900C7B080 /* cell_arm_alpha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cell_arm_alpha.png; path = ../../objects/nanosuit/cell_arm_alpha.png; sourceTree = "<group>"; };
+		4CD4F0C922AB7BF900C7B080 /* helmet_showroom_spec.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = helmet_showroom_spec.png; path = ../../objects/nanosuit/helmet_showroom_spec.png; sourceTree = "<group>"; };
+		4CD4F0CA22AB7BF900C7B080 /* glass_dif.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = glass_dif.png; path = ../../objects/nanosuit/glass_dif.png; sourceTree = "<group>"; };
+		4CD4F0CB22AB7BF900C7B080 /* helmet_diff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = helmet_diff.png; path = ../../objects/nanosuit/helmet_diff.png; sourceTree = "<group>"; };
+		4CD4F0CC22AB7BF900C7B080 /* cell_ddn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cell_ddn.png; path = ../../objects/nanosuit/cell_ddn.png; sourceTree = "<group>"; };
+		4CD4F0CD22AB7BF900C7B080 /* back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = back.jpg; path = ../../objects/nanosuit/back.jpg; sourceTree = "<group>"; };
+		4CD4F0CE22AB7BF900C7B080 /* helmet_showroom_refl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = helmet_showroom_refl.png; path = ../../objects/nanosuit/helmet_showroom_refl.png; sourceTree = "<group>"; };
+		4CD4F0CF22AB7BF900C7B080 /* leg_showroom_ddn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = leg_showroom_ddn.png; path = ../../objects/nanosuit/leg_showroom_ddn.png; sourceTree = "<group>"; };
+		4CD4F0D022AB7BF900C7B080 /* leg_showroom_refl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = leg_showroom_refl.png; path = ../../objects/nanosuit/leg_showroom_refl.png; sourceTree = "<group>"; };
+		4CD4F0D122AB7BF900C7B080 /* glass_refl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = glass_refl.png; path = ../../objects/nanosuit/glass_refl.png; sourceTree = "<group>"; };
+		4CD4F0D222AB7BF900C7B080 /* body_showroom_spec.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = body_showroom_spec.png; path = ../../objects/nanosuit/body_showroom_spec.png; sourceTree = "<group>"; };
+		4CD4F0D322AB7BFA00C7B080 /* arm_showroom_spec.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arm_showroom_spec.png; path = ../../objects/nanosuit/arm_showroom_spec.png; sourceTree = "<group>"; };
+		4CD4F0D422AB7BFA00C7B080 /* hand_showroom_spec.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hand_showroom_spec.png; path = ../../objects/nanosuit/hand_showroom_spec.png; sourceTree = "<group>"; };
+		4CD4F0D522AB7BFA00C7B080 /* cell_hand_alpha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cell_hand_alpha.png; path = ../../objects/nanosuit/cell_hand_alpha.png; sourceTree = "<group>"; };
+		4CD4F0D622AB7BFA00C7B080 /* leg_showroom_spec.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = leg_showroom_spec.png; path = ../../objects/nanosuit/leg_showroom_spec.png; sourceTree = "<group>"; };
+		4CD4F0D722AB7BFA00C7B080 /* cell_body_alpha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cell_body_alpha.png; path = ../../objects/nanosuit/cell_body_alpha.png; sourceTree = "<group>"; };
+		4CD4F0D822AB7BFA00C7B080 /* body_dif.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = body_dif.png; path = ../../objects/nanosuit/body_dif.png; sourceTree = "<group>"; };
+		4CD4F0D922AB7BFA00C7B080 /* leg_dif.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = leg_dif.png; path = ../../objects/nanosuit/leg_dif.png; sourceTree = "<group>"; };
+		4CD4F0DA22AB7BFA00C7B080 /* front.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = front.jpg; path = ../../objects/nanosuit/front.jpg; sourceTree = "<group>"; };
+		4CD4F0DB22AB7BFA00C7B080 /* arm_dif.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arm_dif.png; path = ../../objects/nanosuit/arm_dif.png; sourceTree = "<group>"; };
+		4CD4F0DC22AB7BFA00C7B080 /* hand_showroom_ddn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hand_showroom_ddn.png; path = ../../objects/nanosuit/hand_showroom_ddn.png; sourceTree = "<group>"; };
+		4CD4F0DD22AB7BFA00C7B080 /* cell_helmet_alpha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cell_helmet_alpha.png; path = ../../objects/nanosuit/cell_helmet_alpha.png; sourceTree = "<group>"; };
+		4CD4F0DE22AB7BFA00C7B080 /* glass_ddn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = glass_ddn.png; path = ../../objects/nanosuit/glass_ddn.png; sourceTree = "<group>"; };
+		4CD4F0DF22AB7BFA00C7B080 /* cell_leg_alpha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cell_leg_alpha.png; path = ../../objects/nanosuit/cell_leg_alpha.png; sourceTree = "<group>"; };
+		4CD4F0E022AB7BFA00C7B080 /* arm_showroom_refl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arm_showroom_refl.png; path = ../../objects/nanosuit/arm_showroom_refl.png; sourceTree = "<group>"; };
+		4CD4F0E122AB7BFA00C7B080 /* hand_showroom_refl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hand_showroom_refl.png; path = ../../objects/nanosuit/hand_showroom_refl.png; sourceTree = "<group>"; };
+		4CD4F0E222AB7BFA00C7B080 /* body_showroom_refl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = body_showroom_refl.png; path = ../../objects/nanosuit/body_showroom_refl.png; sourceTree = "<group>"; };
+		4CD4F0E322AB7BFA00C7B080 /* hand_dif.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hand_dif.png; path = ../../objects/nanosuit/hand_dif.png; sourceTree = "<group>"; };
+		4CD4F0E422AB7BFA00C7B080 /* helmet_showroom_ddn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = helmet_showroom_ddn.png; path = ../../objects/nanosuit/helmet_showroom_ddn.png; sourceTree = "<group>"; };
+		4CD4F0E522AB7BFA00C7B080 /* body_showroom_ddn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = body_showroom_ddn.png; path = ../../objects/nanosuit/body_showroom_ddn.png; sourceTree = "<group>"; };
 		4CE2223222A91EE00095ECCA /* libFreetype2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFreetype2.a; sourceTree = "<group>"; };
 		4CE2223522A91EFB0095ECCA /* arial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = arial.ttf; sourceTree = "<group>"; };
 		4CE2223822A91F0B0095ECCA /* uimgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uimgr.h; sourceTree = "<group>"; };
@@ -233,6 +317,53 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C02E1D122AB78FF002821B9 /* nanosuit */ = {
+			isa = PBXGroup;
+			children = (
+				4C02E1D222AB78FF002821B9 /* Helmet */,
+				4C02E1D322AB78FF002821B9 /* Body */,
+				4C02E1D422AB78FF002821B9 /* Legs */,
+				4C02E1D522AB78FF002821B9 /* hands */,
+				4CD4F0DB22AB7BFA00C7B080 /* arm_dif.png */,
+				4CD4F0C722AB7BF900C7B080 /* arm_showroom_ddn.png */,
+				4CD4F0E022AB7BFA00C7B080 /* arm_showroom_refl.png */,
+				4CD4F0D322AB7BFA00C7B080 /* arm_showroom_spec.png */,
+				4CD4F0CD22AB7BF900C7B080 /* back.jpg */,
+				4CD4F0D822AB7BFA00C7B080 /* body_dif.png */,
+				4CD4F0E522AB7BFA00C7B080 /* body_showroom_ddn.png */,
+				4CD4F0E222AB7BFA00C7B080 /* body_showroom_refl.png */,
+				4CD4F0D222AB7BF900C7B080 /* body_showroom_spec.png */,
+				4CD4F0C822AB7BF900C7B080 /* cell_arm_alpha.png */,
+				4CD4F0D722AB7BFA00C7B080 /* cell_body_alpha.png */,
+				4CD4F0CC22AB7BF900C7B080 /* cell_ddn.png */,
+				4CD4F0D522AB7BFA00C7B080 /* cell_hand_alpha.png */,
+				4CD4F0DD22AB7BFA00C7B080 /* cell_helmet_alpha.png */,
+				4CD4F0DF22AB7BFA00C7B080 /* cell_leg_alpha.png */,
+				4CD4F0DA22AB7BFA00C7B080 /* front.jpg */,
+				4CD4F0DE22AB7BFA00C7B080 /* glass_ddn.png */,
+				4CD4F0CA22AB7BF900C7B080 /* glass_dif.png */,
+				4CD4F0D122AB7BF900C7B080 /* glass_refl.png */,
+				4CD4F0E322AB7BFA00C7B080 /* hand_dif.png */,
+				4CD4F0DC22AB7BFA00C7B080 /* hand_showroom_ddn.png */,
+				4CD4F0E122AB7BFA00C7B080 /* hand_showroom_refl.png */,
+				4CD4F0D422AB7BFA00C7B080 /* hand_showroom_spec.png */,
+				4CD4F0CB22AB7BF900C7B080 /* helmet_diff.png */,
+				4CD4F0E422AB7BFA00C7B080 /* helmet_showroom_ddn.png */,
+				4CD4F0CE22AB7BF900C7B080 /* helmet_showroom_refl.png */,
+				4CD4F0C922AB7BF900C7B080 /* helmet_showroom_spec.png */,
+				4CD4F0D922AB7BFA00C7B080 /* leg_dif.png */,
+				4CD4F0CF22AB7BF900C7B080 /* leg_showroom_ddn.png */,
+				4CD4F0D022AB7BF900C7B080 /* leg_showroom_refl.png */,
+				4CD4F0D622AB7BFA00C7B080 /* leg_showroom_spec.png */,
+				4C02E1D622AB78FF002821B9 /* Arms */,
+				4C02E1D722AB78FF002821B9 /* Lights */,
+				4C02E1D822AB78FF002821B9 /* summary */,
+				4C02E1D922AB78FF002821B9 /* Visor */,
+			);
+			name = nanosuit;
+			path = ../../resources/mesh/nanosuit;
+			sourceTree = "<group>";
+		};
 		4C402C9F22A50E17008C89D4 /* texture */ = {
 			isa = PBXGroup;
 			children = (
@@ -294,6 +425,7 @@
 		4C443B7722A24F3000866F29 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4C02E1D122AB78FF002821B9 /* nanosuit */,
 				4CE2223422A91EFB0095ECCA /* fonts */,
 				4C402C9F22A50E17008C89D4 /* texture */,
 				4C97AA7F22A50D01005F6388 /* shader */,
@@ -324,10 +456,14 @@
 		4C7AF65B22A54EA700B63173 /* std */ = {
 			isa = PBXGroup;
 			children = (
-				4C73C0E722A8BAB3002A8AD0 /* texmgr.cpp */,
+				4C02E1CB22AB77A0002821B9 /* avatar.h */,
+				4C02E1CD22AB77A0002821B9 /* avatar.cpp */,
+				4C02E1CE22AB77A0002821B9 /* material.h */,
+				4C02E1CC22AB77A0002821B9 /* material.cpp */,
 				4C73C0E822A8BAB3002A8AD0 /* texmgr.h */,
-				4C73C0E922A8BAB3002A8AD0 /* util.cpp */,
+				4C73C0E722A8BAB3002A8AD0 /* texmgr.cpp */,
 				4C73C0EA22A8BAB3002A8AD0 /* util.h */,
+				4C73C0E922A8BAB3002A8AD0 /* util.cpp */,
 				4C7AF66122A54EA700B63173 /* camera.h */,
 				4C7AF66022A54EA700B63173 /* camera.cpp */,
 				4C7AF65F22A54EA700B63173 /* light.h */,
@@ -547,26 +683,37 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C97AAB822A50D01005F6388 /* depth.vs in Resources */,
+				4CD4F0FE22AB7BFA00C7B080 /* cell_leg_alpha.png in Resources */,
 				4C97AAA922A50D01005F6388 /* model.fs in Resources */,
+				4CD4F0F522AB7BFA00C7B080 /* leg_showroom_spec.png in Resources */,
 				4C97AAB122A50D01005F6388 /* outline.fs in Resources */,
 				4C97AAB722A50D01005F6388 /* sample.vs in Resources */,
+				4CD4F0EC22AB7BFA00C7B080 /* back.jpg in Resources */,
 				4C97AAB522A50D01005F6388 /* sample.fs in Resources */,
 				4C97AAC022A50D01005F6388 /* debug.vs in Resources */,
 				4C97AABD22A50D01005F6388 /* phong.glsl in Resources */,
 				4C402CE022A50E46008C89D4 /* window.png in Resources */,
+				4CD4F10122AB7BFA00C7B080 /* body_showroom_refl.png in Resources */,
 				4C97AAB422A50D01005F6388 /* cube.fs in Resources */,
 				4C402CAD22A50E2B008C89D4 /* bricks2_disp.jpg in Resources */,
 				4C97AABE22A50D01005F6388 /* util.glsl in Resources */,
+				4C02E1DD22AB78FF002821B9 /* hands in Resources */,
+				4CD4F0FD22AB7BFA00C7B080 /* glass_ddn.png in Resources */,
 				4C97AAA622A50D01005F6388 /* shadow.fs in Resources */,
+				4C02E1E022AB78FF002821B9 /* summary in Resources */,
 				4C97AAB222A50D01005F6388 /* debug.fs in Resources */,
+				4CD4F0E922AB7BFA00C7B080 /* glass_dif.png in Resources */,
+				4CD4F0EE22AB7BFA00C7B080 /* leg_showroom_ddn.png in Resources */,
 				4CE2223622A91EFB0095ECCA /* arial.ttf in Resources */,
 				4C402CC822A50E3B008C89D4 /* marble.jpg in Resources */,
 				4C402CD522A50E3B008C89D4 /* metal.png in Resources */,
 				4C402CCF22A50E3B008C89D4 /* bottom.jpg in Resources */,
 				4C402CB122A50E2B008C89D4 /* grass.png in Resources */,
+				4CD4F0EB22AB7BFA00C7B080 /* cell_ddn.png in Resources */,
 				4C402CE122A50E46008C89D4 /* toy_box_disp.png in Resources */,
 				4C402CAB22A50E2B008C89D4 /* brickwall_normal.jpg in Resources */,
 				4C97AAAB22A50D01005F6388 /* normal.vs in Resources */,
+				4C02E1DB22AB78FF002821B9 /* Body in Resources */,
 				4C402CD622A50E3B008C89D4 /* newport_loft.hdr in Resources */,
 				4C402CD222A50E3B008C89D4 /* back.jpg in Resources */,
 				4C402CDF22A50E46008C89D4 /* toy_box_normal.png in Resources */,
@@ -575,31 +722,59 @@
 				4C97AAC322A50D01005F6388 /* ttfont.vs in Resources */,
 				4C8062CF229FC059005FD1F9 /* LaunchScreen.storyboard in Resources */,
 				4C402CB222A50E2B008C89D4 /* bricks2_normal.jpg in Resources */,
+				4C02E1DF22AB78FF002821B9 /* Lights in Resources */,
+				4CD4F10322AB7BFA00C7B080 /* helmet_showroom_ddn.png in Resources */,
 				4C97AAB022A50D01005F6388 /* button.gs in Resources */,
 				4C8062CC229FC059005FD1F9 /* Assets.xcassets in Resources */,
 				4C402CD022A50E3B008C89D4 /* left.jpg in Resources */,
+				4CD4F0EA22AB7BFA00C7B080 /* helmet_diff.png in Resources */,
 				4C97AABB22A50D01005F6388 /* brdf.glsl in Resources */,
+				4CD4F0E822AB7BFA00C7B080 /* helmet_showroom_spec.png in Resources */,
+				4CD4F0F722AB7BFA00C7B080 /* body_dif.png in Resources */,
+				4CD4F10022AB7BFA00C7B080 /* hand_showroom_refl.png in Resources */,
+				4CD4F0F222AB7BFA00C7B080 /* arm_showroom_spec.png in Resources */,
 				4C402CDE22A50E46008C89D4 /* toy_box_diffuse.png in Resources */,
 				4C97AAC422A50D01005F6388 /* pbr.vs in Resources */,
 				4C402CB322A50E2B008C89D4 /* container2.png in Resources */,
+				4CD4F0FF22AB7BFA00C7B080 /* arm_showroom_refl.png in Resources */,
 				4C97AAB922A50D01005F6388 /* struct.glsl in Resources */,
+				4CD4F0F122AB7BFA00C7B080 /* body_showroom_spec.png in Resources */,
+				4C02E1DA22AB78FF002821B9 /* Helmet in Resources */,
 				4C97AAC522A50D01005F6388 /* light.fs in Resources */,
+				4CD4F0F322AB7BFA00C7B080 /* hand_showroom_spec.png in Resources */,
 				4C97AAB322A50D01005F6388 /* depth.fs in Resources */,
 				4C8062CA229FC059005FD1F9 /* Main.storyboard in Resources */,
 				4C402CAF22A50E2B008C89D4 /* container.jpg in Resources */,
 				4C402CB022A50E2B008C89D4 /* brickwall.jpg in Resources */,
+				4CD4F0E722AB7BFA00C7B080 /* cell_arm_alpha.png in Resources */,
+				4CD4F0F422AB7BFA00C7B080 /* cell_hand_alpha.png in Resources */,
 				4C97AAA422A50D01005F6388 /* pbr.fs in Resources */,
 				4C402CD322A50E3B008C89D4 /* right.jpg in Resources */,
+				4CD4F0E622AB7BFA00C7B080 /* arm_showroom_ddn.png in Resources */,
 				4C97AAC222A50D01005F6388 /* instance.fs in Resources */,
+				4CD4F0FA22AB7BFA00C7B080 /* arm_dif.png in Resources */,
 				4C97AAC122A50D01005F6388 /* shadow.vs in Resources */,
+				4CD4F0F922AB7BFA00C7B080 /* front.jpg in Resources */,
 				4C402CD722A50E3B008C89D4 /* matrix.jpg in Resources */,
 				4C97AAAD22A50D01005F6388 /* camera.vs in Resources */,
+				4C02E1DE22AB78FF002821B9 /* Arms in Resources */,
 				4C97AAA722A50D01005F6388 /* instance.vs in Resources */,
 				4C97AABC22A50D01005F6388 /* camera.glsl in Resources */,
+				4CD4F0F822AB7BFA00C7B080 /* leg_dif.png in Resources */,
 				4C97AAA522A50D01005F6388 /* ttfrag.fs in Resources */,
+				4CD4F0F022AB7BFA00C7B080 /* glass_refl.png in Resources */,
+				4CD4F10222AB7BFA00C7B080 /* hand_dif.png in Resources */,
+				4CD4F0FC22AB7BFA00C7B080 /* cell_helmet_alpha.png in Resources */,
+				4C02E1E122AB78FF002821B9 /* Visor in Resources */,
+				4CD4F0F622AB7BFA00C7B080 /* cell_body_alpha.png in Resources */,
+				4CD4F0EF22AB7BFA00C7B080 /* leg_showroom_refl.png in Resources */,
+				4C02E1DC22AB78FF002821B9 /* Legs in Resources */,
 				4C402CDD22A50E46008C89D4 /* wood.png in Resources */,
+				4CD4F0ED22AB7BFA00C7B080 /* helmet_showroom_refl.png in Resources */,
 				4C402CAA22A50E2B008C89D4 /* container2_specular.png in Resources */,
+				4CD4F0FB22AB7BFA00C7B080 /* hand_showroom_ddn.png in Resources */,
 				4C402CD122A50E3B008C89D4 /* top.jpg in Resources */,
+				4CD4F10422AB7BFA00C7B080 /* body_showroom_ddn.png in Resources */,
 				4C402CAE22A50E2B008C89D4 /* awesomeface.png in Resources */,
 				4C97AAAF22A50D01005F6388 /* camera.gs in Resources */,
 				4C402CD422A50E3B008C89D4 /* front.jpg in Resources */,
@@ -621,6 +796,7 @@
 			files = (
 				4CE2224A22A91F0B0095ECCA /* uievent.cpp in Sources */,
 				4C443B8122A25D2D00866F29 /* Scene.cpp in Sources */,
+				4C02E1D022AB77A0002821B9 /* avatar.cpp in Sources */,
 				4C7AF67022A54EA700B63173 /* shader.cpp in Sources */,
 				4C66674A22A2A3A3002BA996 /* FilePath.cpp in Sources */,
 				4CE2224B22A91F0B0095ECCA /* label.cpp in Sources */,
@@ -628,6 +804,7 @@
 				4CE2224722A91F0B0095ECCA /* uibase.cpp in Sources */,
 				4C42795522A54A0C003AE42A /* common.cpp in Sources */,
 				4C8062C7229FC059005FD1F9 /* ViewController.mm in Sources */,
+				4C02E1CF22AB77A0002821B9 /* material.cpp in Sources */,
 				4C73C0EB22A8BAB3002A8AD0 /* texmgr.cpp in Sources */,
 				4CE2224622A91F0B0095ECCA /* eventmgr.cpp in Sources */,
 				4C7AF66D22A54EA700B63173 /* camera.cpp in Sources */,

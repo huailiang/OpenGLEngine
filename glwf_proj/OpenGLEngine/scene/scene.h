@@ -120,7 +120,7 @@ public:
     
     void DrawScenes()
     {
-        timeValue = glfwGetTime();
+        timeValue = GetRuntime();
         if(drawShadow())
         {
             glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
@@ -149,7 +149,7 @@ public:
                 camera->ProcessKeyboard(BACKWARD, deltatime);
             if (glfwGetKey(window, GLFW_KEY_SPACE)== GLFW_PRESS)
             {
-                float timeValue = glfwGetTime()*0.04f;
+                float timeValue = GetRuntime()*0.04f;
                 float ang = radians(timeValue);
                 vec3 center = vec3(0.0f, 0.0f, -2.0f);
                 vec3 pos = camera->Position;

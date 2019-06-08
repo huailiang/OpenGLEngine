@@ -14,6 +14,10 @@
 #include <dirent.h>
 #endif
 
+#ifdef _GLES_
+#include "FilePath.h"
+#endif
+
 #define TINYOBJLOADER_IMPLEMENTATION
 #include "../ext/tiny_obj_loader.h"
 
@@ -99,7 +103,12 @@ namespace engine
         readstring(f, str);
         if(!str.empty())
         {
+            
+#ifdef _GLES_
+            str = getPath(str);
+#else
             str = "resources/objects/" + curr_obj +"/" + str;
+#endif
             TexMgr::getInstance()->LoadTex(str, id);
         }
     }
@@ -249,6 +258,9 @@ namespace engine
 #ifdef _QT_EDIT_
             path = WORKDIR + path;
 #endif
+#ifdef _GLES_
+            path = getPath("summary");
+#endif
             ifs.open(path, std::ifstream::binary | std::ios::in);
             unsigned int num = 0;
             items.clear();
@@ -276,6 +288,9 @@ namespace engine
           std::string path = "resources/mesh/"+curr_obj+"/"+name;
 #ifdef _QT_EDIT_
             path = WORKDIR + path;
+#endif
+#ifdef _GLES_
+            path = getPath(name);
 #endif
             ifs.open(path, std::ifstream::binary | std::ios::in);
             unsigned int inds = 0,verts = 0;

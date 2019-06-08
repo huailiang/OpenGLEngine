@@ -12,6 +12,8 @@
 #include "light.h"
 #include "skybox.h"
 #include "label.h"
+#include "avatar.h"
+
 
 using namespace engine;
 
@@ -22,6 +24,8 @@ Camera* camera;
 Light* light;
 Skybox* skybox;
 UILabel* label;
+Avatar*  avatar;
+
 
 void Clean()
 {
@@ -35,7 +39,6 @@ void Draw(ESContext *esContext)
 {
     Clean();
 
-    
     vec3 cubePositions[] = { glm::vec3( 0.0f,  0.0f,  -2.0f), glm::vec3(2.0f,  1.0f, -4.0f) };
     shader->use();
     shader->setFloat("scale", 1);
@@ -58,6 +61,7 @@ void Draw(ESContext *esContext)
         glDrawArrays(DRAW_MODE, 0, 36);
     }
     glBindVertexArray(0);
+    avatar->Draw(shader, light, vec3(-2.0f, -0.5f, -1.5f), vec3(0.12f), -16*GetRuntime());
     if(skybox) skybox->Draw();
     if(label) label->drawText("hello, opengl es");
 }
@@ -184,6 +188,7 @@ bool InitScene(ESContext* context)
     light = new DirectLight(vec3(1.0f), vec3(-1, 0, -2));
     TTFont::getInstance()->initial();
     label = new UILabel(vec2(30,560), vec3(1), 1);
+    avatar = new Avatar("nanosuit");
     InitCube(vao, vbo);
     shader = new LightShader("light.vs","light.fs", nullptr, Macro(light->getMacro().c_str()));
     shader->use();

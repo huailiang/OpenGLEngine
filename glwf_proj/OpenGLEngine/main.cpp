@@ -94,7 +94,7 @@ int run_engine()
     {
         processInput(window);
         
-        float timeValue = glfwGetTime();
+        float timeValue = GetRuntime();
         deltatime  = timeValue-lastTime;
         lastTime= timeValue;
         SceneMgr::getInstance()->Draw(deltatime);
