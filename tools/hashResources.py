@@ -10,6 +10,10 @@ import ctypes
 """
 此工具根据路径生成文件对应路径的hash值为名的文件
 
+所有的文件都是用hash，打到ios mainbundle中，
+
+1. 可以避免不同路径下同名文件
+2. 避免直接暴露资源名，加密
 
 make so:
   gcc -o libc.so -shared -fPIC libc.c
