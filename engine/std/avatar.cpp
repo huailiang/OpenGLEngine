@@ -18,8 +18,8 @@ namespace engine
         materials.clear();
         for (size_t i=0; i<items.size(); i++)
         {
-            MeshData* data = ReadMesh(items[i]);
-            Material* mat = new Material(data);
+            ObjMaterial* mat = new ObjMaterial(ReadMesh(items[i]));
+            ReadObjMaterial(items[i], mat);
             materials.push_back(mat);
         }
     }

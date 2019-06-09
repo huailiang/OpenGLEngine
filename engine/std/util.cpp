@@ -38,7 +38,6 @@ namespace engine
             memset(temp, '\0', sizeof(temp));
             strcat(temp, "mkdir -p ");
             strcat(temp, path);
-            std::cout<<"checkdir:"<<temp<<std::endl;
             system(temp);
             return 1;//create success
         }
@@ -122,6 +121,121 @@ namespace engine
     }
 
     
+    void WriteSummary(std::vector<tinyobj::shape_t>& shapes)
+    {
+        std::ofstream ofs;
+        ofs.exceptions (std::ofstream::failbit | std::ofstream::badbit);
+        try
+        {
+            string basedir = "resources/engine/"+curr_obj+"/";
+            CheckDir(basedir.c_str());
+            ofs.open(basedir+"summary.sum",std::ofstream::binary | std::ios::out);
+            unsigned int num = (unsigned int)shapes.size();
+            ofs.write((char*)&num,sizeof(unsigned int));
+            for (size_t i =0; i<shapes.size(); i++) writestring(ofs, shapes[i].name);
+            ofs.close();
+        }
+        catch (std::ofstream::failure e)
+        {
+            std::cout << "ERROR::MESH SUMMARY "<< std::endl;
+        }
+        vector<string> vec;
+        ReadSummary(curr_obj, vec);
+    }
+    
+    
+    void WriteMaterial(string name,std::string texture[])
+    {
+        std::ofstream ofs;
+        ofs.exceptions (std::ofstream::failbit | std::ofstream::badbit);
+        try
+        {
+            string basedir = "resources/engine/"+curr_obj+"/";
+            ofs.open(basedir+name+".mat",std::ofstream::binary | std::ios::out);
+            for(int i=0;i<TEXTURE_NUM;i++)
+            {
+                std::cout<<texture[i]<<std::endl;
+                size_t idx = texture[i].rfind('.');
+                if (idx > 1024) //invalid
+                {
+                    int ext =0;
+                    ofs.write((char*)&ext,sizeof(int));
+                }
+                else
+                {
+                    std::string ex = texture[i].substr(idx);
+                    int ext = getTextureFormat(ex.c_str());
+                    ofs.write((char*)&ext,sizeof(int));
+                    std::string name = texture[i].substr(0,idx);
+                    writestring(ofs, name);
+                }
+            }
+        }catch (std::ofstream::failure e)
+        {
+            std::cout << "ERROR::MATERIAL::SAVE, " <<name<< std::endl;
+        }
+    }
+    
+    
+    void WriteMesh(std::string name,vector<int>& indices, vector<Vertex>& vertices)
+    {
+        std::ofstream ofs;
+        ofs.exceptions (std::ofstream::failbit | std::ofstream::badbit);
+        try
+        {
+            string basedir = "resources/engine/"+curr_obj+"/";
+            ofs.open(basedir+name+".mesh",std::ofstream::binary | std::ios::out);
+            unsigned int num = (unsigned int)indices.size();
+            ofs.write((char*)&num,sizeof(unsigned int));
+            num = (unsigned int)vertices.size();
+            ofs.write((char*)&num,sizeof(unsigned int));
+            for(size_t i=0;i<indices.size();i++) {
+                 ofs.write((char*)&indices[i],sizeof(unsigned int));
+            }
+            for (size_t i=0; i<vertices.size(); i++) {
+                ofs.write((char*)&vertices[i].Position.x,sizeof(float));
+                ofs.write((char*)&vertices[i].Position.y,sizeof(float));
+                ofs.write((char*)&vertices[i].Position.z,sizeof(float));
+                ofs.write((char*)&vertices[i].TexCoords.x,sizeof(float));
+                ofs.write((char*)&vertices[i].TexCoords.y,sizeof(float));
+                ofs.write((char*)&vertices[i].Normal.x,sizeof(float));
+                ofs.write((char*)&vertices[i].Normal.y,sizeof(float));
+                ofs.write((char*)&vertices[i].Normal.z,sizeof(float));
+            }
+            ofs.close();
+        }
+        catch (std::ofstream::failure e)
+        {
+            std::cout << "ERROR::MESH::SAVE, " <<name<< std::endl;
+        }
+    }
+    
+    
+    void ReadSummary(const std::string name, vector<string>& items)
+    {
+        std::ifstream ifs;
+        ifs.exceptions (std::ifstream::failbit | std::ifstream::badbit);
+        try
+        {
+            curr_obj = name;
+            std::string path = getResPath("engine/"+name+"/summary.sum");
+            ifs.open(path, std::ifstream::binary | std::ios::in);
+            unsigned int num = 0;
+            items.clear();
+            ifs.seekg(0, ios::beg);
+            ifs.read((char*)(&num), sizeof(unsigned int));
+            string str;
+            for (size_t i=0; i<num; i++) {
+                readstring(ifs, str);
+                items.push_back(str);
+            }
+        }
+        catch (std::ifstream::failure e)
+        {
+            std::cerr<<"read summary error "<<name<<std::endl;
+        }
+    }
+
     bool LoadObj(const std::string name)
     {
         curr_obj = name;
@@ -138,7 +252,6 @@ namespace engine
         for (size_t s=0; s<shapes.size(); s++)
         {
             tinyobj::mesh_t mesh = shapes[s].mesh;
-            
             vector<int> indices;
             vector<int> old_indices;
             vector<Vertex> vertices;
@@ -174,123 +287,36 @@ namespace engine
             }
             std::string texture[TEXTURE_NUM];
             getTextures(mesh, materials,texture);
-            WriteMesh(shapes[s].name, indices, vertices, texture);
+            WriteMesh(shapes[s].name, indices, vertices);
+            WriteMaterial(shapes[s].name,texture);
             std::cout<<"export "<<shapes[s].name<<std::endl;
         }
-        std::cout<<name<<" export finish"<<std::endl;
+        std::cout<<name<<" export finish "<<std::endl;
         return ret;
     }
     
-    
-    void WriteSummary(std::vector<tinyobj::shape_t>& shapes)
-    {
-        std::ofstream ofs;
-        ofs.exceptions (std::ofstream::failbit | std::ofstream::badbit);
-        try
-        {
-            string basedir = "resources/mesh/"+curr_obj+"/";
-#ifdef _QT_EDIT_
-            basedir = WORKDIR + basedir;
-#endif
-            CheckDir(basedir.c_str());
-            ofs.open(basedir+"summary.sum",std::ofstream::binary | std::ios::out);
-            unsigned int num = (unsigned int)shapes.size();
-            ofs.write((char*)&num,sizeof(unsigned int));
-            for (size_t i =0; i<shapes.size(); i++)
-            {
-                writestring(ofs, shapes[i].name);
-            }
-            ofs.close();
-        }
-        catch (std::ofstream::failure e)
-        {
-            std::cout << "ERROR::MESH SUMMARY "<< std::endl;
-        }
-        vector<string> vec;
-        ReadSummary(curr_obj, vec);
-    }
-    
-    
-    
-    void WriteMesh(std::string name,vector<int>& indices, vector<Vertex>& vertices,std::string texture[])
-    {
-        std::ofstream ofs;
-        ofs.exceptions (std::ofstream::failbit | std::ofstream::badbit);
-        try
-        {
-            string basedir = "resources/mesh/"+curr_obj+"/";
-            ofs.open(basedir+name+".mesh",std::ofstream::binary | std::ios::out);
-            unsigned int num = (unsigned int)indices.size();
-            ofs.write((char*)&num,sizeof(unsigned int));
-            num = (unsigned int)vertices.size();
-            ofs.write((char*)&num,sizeof(unsigned int));
-            for(int i=0;i<TEXTURE_NUM;i++)
-            {
-                std::cout<<texture[i]<<std::endl;
-                size_t idx = texture[i].rfind('.');
-                if (idx > 1024) //invalid
-                {
-                    int ext =0;
-                    ofs.write((char*)&ext,sizeof(int));
-                }
-                else
-                {
-                    std::string ex = texture[i].substr(idx);
-                    int ext = getTextureFormat(ex.c_str());
-                    ofs.write((char*)&ext,sizeof(int));
-                    
-                    std::string name = texture[i].substr(0,idx);
-                    std::cout<<"write: "<<name<<" ext:"<<ext<<std::endl;
-                    writestring(ofs, name);
-                }
-            }
-            for(size_t i=0;i<indices.size();i++) {
-                 ofs.write((char*)&indices[i],sizeof(unsigned int));
-            }
-            for (size_t i=0; i<vertices.size(); i++) {
-                ofs.write((char*)&vertices[i].Position.x,sizeof(float));
-                ofs.write((char*)&vertices[i].Position.y,sizeof(float));
-                ofs.write((char*)&vertices[i].Position.z,sizeof(float));
-                ofs.write((char*)&vertices[i].TexCoords.x,sizeof(float));
-                ofs.write((char*)&vertices[i].TexCoords.y,sizeof(float));
-                ofs.write((char*)&vertices[i].Normal.x,sizeof(float));
-                ofs.write((char*)&vertices[i].Normal.y,sizeof(float));
-                ofs.write((char*)&vertices[i].Normal.z,sizeof(float));
-            }
-            ofs.close();
-        }
-        catch (std::ofstream::failure e)
-        {
-            std::cout << "ERROR::MESH::SAVE, " <<name<< std::endl;
-        }
-    }
-    
-    
-    void ReadSummary(const std::string name, vector<string>& items)
+    void ReadObjMaterial(std::string name, ObjMaterial* mat)
     {
         std::ifstream ifs;
         ifs.exceptions (std::ifstream::failbit | std::ifstream::badbit);
         try
         {
-            curr_obj = name;
-            std::string path = getResPath("mesh/"+name+"/summary.sum");
+            std::string path = getResPath("engine/"+curr_obj+"/"+name+".mat");
             ifs.open(path, std::ifstream::binary | std::ios::in);
-            unsigned int num = 0;
-            items.clear();
-            ifs.seekg(0, ios::beg);
-            ifs.read((char*)(&num), sizeof(unsigned int));
-            string str;
-            for (size_t i=0; i<num; i++) {
-                readstring(ifs, str);
-                items.push_back(str);
+            readtex(ifs, mat->diffuse_texture);
+            readtex(ifs, mat->normal_texure);
+            readtex(ifs, mat->specul_texture);
+            readtex(ifs, mat->ambient_texture);
+            if(mat->data==NULL)
+            {
+                mat->data = ReadMesh(name);
             }
         }
         catch (std::ifstream::failure e)
         {
-            std::cerr<<"read summary error "<<name<<std::endl;
+            std::cerr<<"read material error "<<name<<std::endl;
         }
     }
-
     
     MeshData* ReadMesh(std::string name)
     {
@@ -298,7 +324,7 @@ namespace engine
         ifs.exceptions (std::ifstream::failbit | std::ifstream::badbit);
         try
         {
-            std::string path = getResPath("mesh/"+curr_obj+"/"+name+".mesh");
+            std::string path = getResPath("engine/"+curr_obj+"/"+name+".mesh");
             ifs.open(path, std::ifstream::binary | std::ios::in);
             unsigned int inds = 0,verts = 0;
             ifs.seekg(0, ios::beg);
@@ -310,10 +336,7 @@ namespace engine
             mesh->indices = new unsigned int[inds];
             mesh->num_vert = verts;
             mesh->vertices = new Vertex[verts];
-            readtex(ifs, mesh->diffuse_texture);
-            readtex(ifs, mesh->normal_texure);
-            readtex(ifs, mesh->specul_texture);
-            readtex(ifs, mesh->ambient_texture);
+            
 
             for (size_t i=0; i<inds; i++)
             {

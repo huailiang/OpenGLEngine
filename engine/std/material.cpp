@@ -60,34 +60,47 @@ namespace engine
 
     void Material::Draw(Shader* shader)
     {
-        int i  = 0;
-        if(data->diffuse_texture > 0)
-        {
-            glActiveTexture(GL_TEXTURE0 + i);
-            glUniform1i(glGetUniformLocation(shader->ID, "texture_diffuse"), i++);
-            glBindTexture(GL_TEXTURE_2D, data->diffuse_texture);
-        }
-        if(data->normal_texure > 0)
-        {
-            glActiveTexture(GL_TEXTURE0 + i);
-            glUniform1i(glGetUniformLocation(shader->ID, "texture_normal"), i++);
-            glBindTexture(GL_TEXTURE_2D, data->normal_texure);
-        }
-        if(data ->specul_texture > 0)
-        {
-            glActiveTexture(GL_TEXTURE0 + i);
-            glUniform1i(glGetUniformLocation(shader->ID, "texture_specular"), i++);
-            glBindTexture(GL_TEXTURE_2D, data->specul_texture);
-        }
-        if(data->specul_texture > 0)
-        {
-            glActiveTexture(GL_TEXTURE0 + i);
-            glUniform1i(glGetUniformLocation(shader->ID, "texture_ambient"), i++);
-            glBindTexture(GL_TEXTURE_2D, data->ambient_texture);
-        }
-        
         DrawMesh();
     }
 
+    ObjMaterial::ObjMaterial(MeshData* data) : Material(data) { }
+    
+    ObjMaterial::~ObjMaterial()
+    {
+        TexMgr::getInstance()->RemvTexture(diffuse_texture);
+        TexMgr::getInstance()->RemvTexture(normal_texure);
+        TexMgr::getInstance()->RemvTexture(ambient_texture);
+        TexMgr::getInstance()->RemvTexture(specul_texture);
+    }
+    
+    void ObjMaterial::Draw(Shader* shader)
+    {
+        int i  = 0;
+        if(diffuse_texture > 0)
+        {
+            glActiveTexture(GL_TEXTURE0 + i);
+            glUniform1i(glGetUniformLocation(shader->ID, "texture_diffuse"), i++);
+            glBindTexture(GL_TEXTURE_2D, diffuse_texture);
+        }
+        if(normal_texure > 0)
+        {
+            glActiveTexture(GL_TEXTURE0 + i);
+            glUniform1i(glGetUniformLocation(shader->ID, "texture_normal"), i++);
+            glBindTexture(GL_TEXTURE_2D, normal_texure);
+        }
+        if(specul_texture > 0)
+        {
+            glActiveTexture(GL_TEXTURE0 + i);
+            glUniform1i(glGetUniformLocation(shader->ID, "texture_specular"), i++);
+            glBindTexture(GL_TEXTURE_2D, specul_texture);
+        }
+        if(specul_texture > 0)
+        {
+            glActiveTexture(GL_TEXTURE0 + i);
+            glUniform1i(glGetUniformLocation(shader->ID, "texture_ambient"), i++);
+            glBindTexture(GL_TEXTURE_2D, ambient_texture);
+        }
+        Material::Draw(shader);
+    }
 
 }

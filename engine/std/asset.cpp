@@ -16,17 +16,11 @@
 namespace engine
 {
     
-    std::map<unsigned int,int> asset_map;
-    
-    bool initial()
-    {
-        return true;
-    }
-    
     bool isTexure(EXT ext)
     {
         return (ext & 0x00f0) > 0;
     }
+    
     
     std::string getTextureExt(EXT ext)
     {
@@ -39,6 +33,7 @@ namespace engine
         return exts[(ext>>4)-1];
     }
     
+    
     EXT getTextureFormat(const char* ext)
     {
         std::string exts[] = {".png",".jpg",".tga",".bmp", ".hdr"};
@@ -50,6 +45,7 @@ namespace engine
         }
         return NONE;
     }
+    
     
     bool isEngineAsset(EXT ext)
     {

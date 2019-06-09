@@ -9,7 +9,7 @@
 #ifndef material_h
 #define material_h
 
-#include "../common.h"
+#include "mesh.h"
 #include "shader.h"
 #include "texmgr.h"
 
@@ -18,60 +18,46 @@
 namespace engine
 {
 
-    struct Vertex
-    {
-        glm::vec3 Position;
-        //uv
-        glm::vec2 TexCoords;
-        //normal
-        glm::vec3 Normal;
-    };
-
-    struct MeshData
-    {
-        unsigned int num_indice;
-        unsigned int *indices;
-        unsigned int num_vert;
-        Vertex* vertices;
-        
-        GLuint diffuse_texture;
-        GLuint normal_texure;
-        GLuint ambient_texture;
-        GLuint specul_texture;
-        
-        
-        ~MeshData()
-        {
-            delete []indices;
-            delete []vertices;
-            indices = NULL;
-            vertices = NULL;
-            TexMgr::getInstance()->RemvTexture(diffuse_texture);
-            TexMgr::getInstance()->RemvTexture(normal_texure);
-            TexMgr::getInstance()->RemvTexture(ambient_texture);
-            TexMgr::getInstance()->RemvTexture(specul_texture);
-        }
-    };
-
-
     class Material
     {
     public:
         
         Material(MeshData* data);
         
-        ~Material();
+        virtual ~Material();
         
         void SetupMesh();
         
-        void Draw(Shader* shader);
+        virtual void Draw(Shader* shader);
         
         void DrawMesh();
         
-    private:
+    public:
+        
         MeshData* data;
         
+    protected:
+        
         GLuint ebo, vao, vbo;
+        
+    };
+    
+    
+    class ObjMaterial : public Material
+    {
+    public:
+        
+        ObjMaterial(MeshData* data);
+        
+        virtual ~ObjMaterial();
+        
+        virtual void Draw(Shader* shader);
+        
+    public:
+        GLuint diffuse_texture;
+        GLuint normal_texure;
+        GLuint ambient_texture;
+        GLuint specul_texture;
         
     };
     

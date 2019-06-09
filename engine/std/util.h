@@ -26,10 +26,10 @@ namespace engine
     int CheckDir(const char* path);
     
     bool LoadObj(std::string name);
-    
-    void WriteMesh(std::string name,vector<int>& indices, vector<Vertex>& vertices,std::string texture[]);
 
     MeshData* ReadMesh(std::string name);
+    
+    void ReadObjMaterial(std::string name, ObjMaterial* mat);
     
     void ReadSummary(const std::string name, vector<string>& items);
         

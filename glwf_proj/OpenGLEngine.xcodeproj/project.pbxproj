@@ -130,6 +130,7 @@
 		4C4279B122A54C32003AE42A /* scene3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = scene3.h; path = OpenGLEngine/scene/scene3.h; sourceTree = SOURCE_ROOT; };
 		4C4279B222A54C32003AE42A /* scene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = scene.h; path = OpenGLEngine/scene/scene.h; sourceTree = SOURCE_ROOT; };
 		4C4279B322A54C32003AE42A /* scene1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = scene1.h; path = OpenGLEngine/scene/scene1.h; sourceTree = SOURCE_ROOT; };
+		4C52BE9522ACC2BE00D78ACB /* mesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mesh.h; sourceTree = "<group>"; };
 		4C5680D222A61B5600D313AC /* tiny_obj_loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tiny_obj_loader.h; sourceTree = "<group>"; };
 		4C5F3FD122ABF95C005B7CFD /* asset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asset.h; sourceTree = "<group>"; };
 		4C5F3FD222ABF95C005B7CFD /* asset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = asset.cpp; sourceTree = "<group>"; };
@@ -178,6 +179,7 @@
 				4C37750222A54F6F0074744F /* skybox.cpp */,
 				4C37750622A54F6F0074744F /* texture.h */,
 				4C3774FE22A54F6F0074744F /* texture.cpp */,
+				4C52BE9522ACC2BE00D78ACB /* mesh.h */,
 				4C1B57B822A6ADBF00A7AFF1 /* material.h */,
 				4C1B57B722A6ADBF00A7AFF1 /* material.cpp */,
 				4C1B57BE22A7E03700A7AFF1 /* avatar.h */,

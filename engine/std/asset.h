@@ -39,10 +39,6 @@ namespace engine
     #define NONE  0x0000
     
     typedef unsigned int EXT;
-
-    extern std::map<unsigned int,int> asset_map;
-    
-    bool initial();
     
     bool isTexure(EXT ext);
     

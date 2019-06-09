@@ -63,6 +63,7 @@ HEADERS += \
     ../engine/std/asset.h \
     ../engine/common.h \
     ../engine/std/avatar.h \
+    ../engine/std/mesh.h \
     ../engine/std/material.h \
     ../engine/gui/eventmgr.h \
     ../engine/gui/button.h \
