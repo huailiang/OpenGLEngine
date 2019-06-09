@@ -70,32 +70,6 @@ namespace engine
         return len;
     }
     
-    void readv2(ifstream& f, glm::vec2& v)
-    {
-        f.read((char*)&v.x,sizeof(float));
-        f.read((char*)&v.y,sizeof(float));
-    }
-    
-    void readv3(ifstream& f, glm::vec3& v)
-    {
-        f.read((char*)&(v.x),sizeof(float));
-        f.read((char*)&(v.y),sizeof(float));
-        f.read((char*)&(v.z),sizeof(float));
-    }
-    
-    void readstring(ifstream& f, string& str)
-    {
-        size_t len;
-        f.read((char*)&len, sizeof(size_t));
-        if(len > 0)
-        {
-            char* temp = new char[len+1];
-            f.read(temp, len);
-            temp[len] = '\0';
-            str = temp;
-            delete []temp;
-        }
-    }
     
     void readtex(ifstream& f, GLuint& id)
     {

@@ -8,7 +8,7 @@
 
 
 /*
- 资源管理器 配合工具使用
+ 资源管理器 请配合工具使用
 */
 
 #ifndef asset_h
@@ -49,7 +49,6 @@ namespace engine
     bool isEngineAsset(EXT ext);
      
     std::string getResPath(std::string path);
-    
     
 }
 

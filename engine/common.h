@@ -186,6 +186,12 @@ namespace engine
     
     unsigned int Hash(std::string str);
     
+    void readv2(std::ifstream& f, glm::vec2& v);
+    
+    void readv3(std::ifstream& f, glm::vec3& v);
+    
+    void readstring(std::ifstream& f, std::string& str);
+    
 }
 
 #endif /* common_h */

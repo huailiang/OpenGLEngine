@@ -16,6 +16,9 @@
 namespace engine
 {
     
+    std::string exts[] = {".png",".jpg",".tga",".bmp", ".hdr"};
+    
+    
     bool isTexure(EXT ext)
     {
         return (ext & 0x00f0) > 0;
@@ -29,14 +32,13 @@ namespace engine
             std::cerr<<ext<<" is not a texure format"<<std::endl;
             return "";
         }
-        std::string exts[] = {".png",".jpg",".tga",".bmp", ".hdr"};
+        
         return exts[(ext>>4)-1];
     }
     
     
     EXT getTextureFormat(const char* ext)
     {
-        std::string exts[] = {".png",".jpg",".tga",".bmp", ".hdr"};
         for (int i=0; i<5; i++) {
             if(strcmp(exts[i].c_str(),ext)==0)
             {
