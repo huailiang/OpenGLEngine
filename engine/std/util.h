@@ -26,7 +26,7 @@ namespace engine
     int CheckDir(const char* path);
     
     bool LoadObj(std::string name);
-
+    
     MeshData* ReadMesh(std::string name);
     
     void ReadObjMaterial(std::string name, ObjMaterial* mat);

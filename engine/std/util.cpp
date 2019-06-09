@@ -9,6 +9,7 @@
 
 #include "util.h"
 
+
 #include <memory>
 #ifdef __APPLE__
 #include <dirent.h>
@@ -176,6 +177,15 @@ namespace engine
         }
     }
     
+    void writeV3(std::ofstream& ofs, VertType type, VertType t, float* ptr)
+    {
+        if((type & t) > 0)
+        {
+            ofs.write((char*)ptr++,sizeof(float));
+            ofs.write((char*)ptr++,sizeof(float));
+            ofs.write((char*)ptr++,sizeof(float));
+        }
+    }
     
     void WriteMesh(std::string name,vector<int>& indices, vector<Vertex>& vertices)
     {
@@ -188,6 +198,8 @@ namespace engine
             unsigned int num = (unsigned int)indices.size();
             ofs.write((char*)&num,sizeof(unsigned int));
             num = (unsigned int)vertices.size();
+            ofs.write((char*)&num,sizeof(unsigned int));
+            num = 0x0111; //mesh type
             ofs.write((char*)&num,sizeof(unsigned int));
             for(size_t i=0;i<indices.size();i++) {
                  ofs.write((char*)&indices[i],sizeof(unsigned int));
@@ -326,16 +338,17 @@ namespace engine
         {
             std::string path = getResPath("engine/"+curr_obj+"/"+name+".mesh");
             ifs.open(path, std::ifstream::binary | std::ios::in);
-            unsigned int inds = 0,verts = 0;
+            unsigned int inds = 0,verts = 0, type = 0x0;
             ifs.seekg(0, ios::beg);
             ifs.read((char*)(&inds), sizeof(unsigned int));
             ifs.read((char*)(&verts), sizeof(unsigned int));
-            
+            ifs.read((char*)(&type), sizeof(unsigned int));
             MeshData* mesh = new MeshData();
+            mesh->type = type;
             mesh->num_indice = inds;
             mesh->indices = new unsigned int[inds];
             mesh->num_vert = verts;
-            mesh->vertices = new Vertex[verts];
+            mesh->vertices = new Vert*[verts];
             
 
             for (size_t i=0; i<inds; i++)
@@ -343,10 +356,10 @@ namespace engine
                 ifs.read((char*)(&mesh->indices[i]), sizeof(unsigned int));
             }
             for (size_t i=0; i<verts; i++) {
-                Vertex vertex;
-                readv3(ifs, vertex.Position);
-                readv2(ifs, vertex.TexCoords);
-                readv3(ifs, vertex.Normal);
+                Vertex* vertex=new Vertex();
+                readv3(ifs, vertex->Position);
+                readv2(ifs, vertex->TexCoords);
+                readv3(ifs, vertex->Normal);
                 mesh->vertices[i] = vertex;
             }
             ifs.close();

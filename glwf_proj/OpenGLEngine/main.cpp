@@ -19,6 +19,7 @@
 #include "scene/scenemgr.h"
 #include "util.h"
 #include "asset.h"
+#include <stdlib.h>
 
 using namespace std;
 using namespace glm;
@@ -41,8 +42,7 @@ int main(int argc, const char * argv[])
 {
     if (argc<=1)
     {
-//        engine::LoadObj("nanosuit");
-//        return 1;
+//        engine::LoadObj("nanosuit"); return 1;
         return run_engine();
     }
     else
@@ -51,6 +51,13 @@ int main(int argc, const char * argv[])
         {
             string name(argv[2]);
             engine::LoadObj(name);
+        }
+        else if(strcmp(argv[1], "mesh") == 0)
+        {
+            string name(argv[2]);
+            int type = atoi(argv[3]);
+            int num = atoi(argv[4]);
+            std::cout<<"name:"<<name<<" v:"<<type<<" num:"<<num<<endl;
         }
         else
         {
