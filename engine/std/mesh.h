@@ -14,15 +14,43 @@
 
 namespace engine
 {
-
-
-    struct Vertex
+    
+    #define Vt_Pos     0x0001
+    #define Vt_UV      0x0010
+    #define Vt_Normal  0x0100
+    #define Vt_Color   0x1000
+    
+    typedef unsigned int VertType;
+    
+    struct Vert { };
+    
+    struct Vertex : Vert
     {
         glm::vec3 Position;
-        //uv
+        // uv
         glm::vec2 TexCoords;
-        //normal
+        // normal
         glm::vec3 Normal;
+    };
+    
+    struct ColorVertex : Vert
+    {
+        glm::vec3 Position;
+        // uv
+        glm::vec2 TexCoords;
+        // color
+        glm::vec3 Color;
+    };
+    
+    struct CompxVertex:Vert
+    {
+        glm::vec3 Position;
+        // uv
+        glm::vec2 TexCoords;
+        // normal
+        glm::vec3 Normal;
+        // color
+        glm::vec3 Color;
     };
 
     struct MeshData
@@ -31,12 +59,7 @@ namespace engine
         unsigned int *indices;
         unsigned int num_vert;
         Vertex* vertices;
-        
-//        GLuint diffuse_texture;
-//        GLuint normal_texure;
-//        GLuint ambient_texture;
-//        GLuint specul_texture;
-        
+        VertType type;
         
         ~MeshData()
         {
@@ -44,11 +67,28 @@ namespace engine
             delete []vertices;
             indices = NULL;
             vertices = NULL;
-//            TexMgr::getInstance()->RemvTexture(diffuse_texture);
-//            TexMgr::getInstance()->RemvTexture(normal_texure);
-//            TexMgr::getInstance()->RemvTexture(ambient_texture);
-//            TexMgr::getInstance()->RemvTexture(specul_texture);
         }
+        
+        bool hasPos()
+        {
+            return (type & Vt_Pos) > 0;
+        }
+        
+        bool hasUV()
+        {
+            return (type & Vt_UV) > 0;
+        }
+        
+        bool hasNormal()
+        {
+            return (type & Vt_Normal) > 0;
+        }
+        
+        bool hasColor()
+        {
+            return (type & Vt_Color) > 0;
+        }
+        
     };
 
 
