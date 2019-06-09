@@ -28,7 +28,7 @@ CONFIG += c++11
 SOURCES += \
     main.cpp \
     ../engine/ext/glad.c \
-    ../engine/common.cpp \
+    ../engine/engine.cpp \
     ../engine/std/camera.cpp \
     ../engine/std/light.cpp \
     ../engine/std/util.cpp \
@@ -61,7 +61,7 @@ HEADERS += \
     ../engine/std/texmgr.h \
     ../engine/std/skybox.h \
     ../engine/std/asset.h \
-    ../engine/common.h \
+    ../engine/engine.h \
     ../engine/std/avatar.h \
     ../engine/std/mesh.h \
     ../engine/std/material.h \

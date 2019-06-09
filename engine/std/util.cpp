@@ -243,7 +243,7 @@ namespace engine
             vector<Vertex> vertices;
             size_t index_offset = 0;
             int indx_new = 0;
-            for(int i = 0; i < mesh.num_face_vertices.size(); i++) {
+            for(size_t i = 0; i < mesh.num_face_vertices.size(); i++) {
                 size_t num = mesh.num_face_vertices[i];
                 Vertex vertex;
                 for (size_t v = 0; v < num; v++) {
@@ -293,7 +293,7 @@ namespace engine
             readtex(ifs, mat->normal_texure);
             readtex(ifs, mat->specul_texture);
             readtex(ifs, mat->ambient_texture);
-            if(mat->data==NULL)
+            if(mat->data==nullptr)
             {
                 mat->data = ReadMesh(name);
             }

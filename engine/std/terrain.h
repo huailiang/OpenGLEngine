@@ -9,7 +9,6 @@
 #ifndef terrain_h
 #define terrain_h
 
-#include "common.h"
 #include "shader.h"
 #include "texture.h"
 #include "camera.h"

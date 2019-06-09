@@ -9,7 +9,7 @@
 #ifndef scene_h
 #define scene_h
 
-#include "common.h"
+#include "engine.h"
 #include "camera.h"
 #include "light.h"
 #include "uimgr.h"

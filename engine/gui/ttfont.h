@@ -12,7 +12,6 @@
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
-#include "../common.h"
 #include "../std/shader.h"
 
 using namespace std;

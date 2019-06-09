@@ -3,7 +3,6 @@
 #include <QGLFormat>
 #include <QtDebug>
 #include <iostream>
-#include "../engine/common.h"
 #include "../engine/profile.h"
 #include "../engine/std/shader.h"
 #include "glwidget.h"

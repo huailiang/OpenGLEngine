@@ -25,7 +25,7 @@
 		4C37752422A54FA20074744F /* label.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C37751B22A54FA20074744F /* label.cpp */; };
 		4C3B7A172283164E003B212F /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C3B7A162283164E003B212F /* IOKit.framework */; };
 		4C3B7A1922831668003B212F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C3B7A1822831668003B212F /* Cocoa.framework */; };
-		4C42797E22A54AD0003AE42A /* common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C42797A22A54AD0003AE42A /* common.cpp */; };
+		4C42797E22A54AD0003AE42A /* engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C42797A22A54AD0003AE42A /* engine.cpp */; };
 		4C4279AD22A54C26003AE42A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C4279AC22A54C26003AE42A /* main.cpp */; };
 		4C5F3FD322ABF95C005B7CFD /* asset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C5F3FD222ABF95C005B7CFD /* asset.cpp */; };
 		4C73C0F322A8C0F9002A8AD0 /* eventmgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C73C0F222A8C0F9002A8AD0 /* eventmgr.cpp */; };
@@ -120,9 +120,9 @@
 		4C402D0422A51AF2008C89D4 /* ttfont.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = ttfont.vs; sourceTree = "<group>"; };
 		4C402D0522A51AF2008C89D4 /* pbr.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = pbr.vs; sourceTree = "<group>"; };
 		4C402D0622A51AF2008C89D4 /* light.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = light.fs; sourceTree = "<group>"; };
-		4C42797A22A54AD0003AE42A /* common.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = common.cpp; path = ../engine/common.cpp; sourceTree = "<group>"; };
+		4C42797A22A54AD0003AE42A /* engine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = engine.cpp; path = ../engine/engine.cpp; sourceTree = "<group>"; };
 		4C42797C22A54AD0003AE42A /* profile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = profile.h; path = ../engine/profile.h; sourceTree = "<group>"; };
-		4C42797D22A54AD0003AE42A /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = common.h; path = ../engine/common.h; sourceTree = "<group>"; };
+		4C42797D22A54AD0003AE42A /* engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = engine.h; path = ../engine/engine.h; sourceTree = "<group>"; };
 		4C4279AC22A54C26003AE42A /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = OpenGLEngine/main.cpp; sourceTree = SOURCE_ROOT; };
 		4C4279AE22A54C32003AE42A /* scene4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = scene4.h; path = OpenGLEngine/scene/scene4.h; sourceTree = SOURCE_ROOT; };
 		4C4279AF22A54C32003AE42A /* scenemgr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = scenemgr.h; path = OpenGLEngine/scene/scenemgr.h; sourceTree = SOURCE_ROOT; };
@@ -323,8 +323,8 @@
 				4C37751222A54FA20074744F /* gui */,
 				4C3774F622A54F6F0074744F /* std */,
 				4CE8605022A4F1EE000677DC /* scene */,
-				4C42797D22A54AD0003AE42A /* common.h */,
-				4C42797A22A54AD0003AE42A /* common.cpp */,
+				4C42797D22A54AD0003AE42A /* engine.h */,
+				4C42797A22A54AD0003AE42A /* engine.cpp */,
 				4C42797C22A54AD0003AE42A /* profile.h */,
 				4C4279AC22A54C26003AE42A /* main.cpp */,
 			);
@@ -410,7 +410,7 @@
 				4C37752122A54FA20074744F /* ttfont.cpp in Sources */,
 				4C37751F22A54FA20074744F /* glad.c in Sources */,
 				4C73C0F322A8C0F9002A8AD0 /* eventmgr.cpp in Sources */,
-				4C42797E22A54AD0003AE42A /* common.cpp in Sources */,
+				4C42797E22A54AD0003AE42A /* engine.cpp in Sources */,
 				4C5F3FD322ABF95C005B7CFD /* asset.cpp in Sources */,
 				4C37750C22A54F6F0074744F /* skybox.cpp in Sources */,
 				4C1B57B322A68D7900A7AFF1 /* util.cpp in Sources */,

@@ -43,7 +43,7 @@ namespace engine
     void Material::DrawMesh()
     {
         glBindVertexArray(vao);
-        glDrawElements(DRAW_MODE, (GLsizei)data->num_indice, GL_UNSIGNED_INT, 0);
+        glDrawElements(DRAW_MODE, (GLsizei)data->num_indice, GL_UNSIGNED_INT, nullptr);
         glBindVertexArray(0);
     }
 

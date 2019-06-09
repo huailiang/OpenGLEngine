@@ -9,7 +9,7 @@
 #ifndef EventMgr_h
 #define EventMgr_h
 
-#include "../common.h"
+#include "../engine.h"
 #include "uievent.h"
 
 

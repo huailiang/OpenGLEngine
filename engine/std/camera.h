@@ -9,7 +9,7 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include "../common.h"
+
 #include "shader.h"
 
 using namespace glm;

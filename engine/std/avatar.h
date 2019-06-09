@@ -9,7 +9,7 @@
 #ifndef avatar_h
 #define avatar_h
 
-#include "../common.h"
+
 #include "camera.h"
 #include "light.h"
 #include "material.h"
@@ -31,7 +31,7 @@ namespace engine
         
         mat4 GetModelMatrix(vec3 pos, vec3 scale, float angle);
         
-        void Draw(Shader* shader, Light* light, vec3 pos, vec3 scale, float angl);
+        void Draw(Shader* shader, Light* light, vec3 pos, vec3 scale, float angle);
         
         void DrawShadow(Shader* shader, Light* light, vec3 pos, vec3 scale, float angle);
         

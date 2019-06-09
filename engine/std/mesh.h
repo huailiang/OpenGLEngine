@@ -9,7 +9,7 @@
 #ifndef MeshData_h
 #define MeshData_h
 
-#include "../common.h"
+
 #include "texmgr.h"
 
 namespace engine
@@ -80,12 +80,12 @@ namespace engine
         ~MeshData()
         {
             delete []indices;
-            for(int i = 0; i < num_vert; i++)
+            for(unsigned int i = 0; i < num_vert; i++)
                 delete vertices[i];
             delete []vertices;
             
-            indices = NULL;
-            vertices = NULL;
+            indices = nullptr;
+            vertices = nullptr;
         }
         
         void ConfigAttribute( GLenum usage = GL_STATIC_DRAW)
@@ -140,7 +140,7 @@ namespace engine
             BaseVert2* ptr = new BaseVert2[num_vert];
             if(type == 0x0111)
             {
-                for(int i=0;i<num_vert;i++)
+                for(size_t i=0;i<num_vert;i++)
                 {
                     BaseVert2* v= (BaseVert2*)vertices[i];
                     *(ptr+i) = *v;
@@ -159,7 +159,7 @@ namespace engine
             BaseVert3* ptr = new BaseVert3[num_vert];
             if(type == 0x0111)
             {
-                for(int i=0;i<num_vert;i++)
+                for(size_t i=0;i<num_vert;i++)
                 {
                     BaseVert3* v= (BaseVert3*)vertices[i];
                     *(ptr+i) = *v;
@@ -178,7 +178,7 @@ namespace engine
             Vertex* ptr = new Vertex[num_vert];
             if(type == 0x0111)
             {
-                for(int i=0;i<num_vert;i++)
+                for(size_t i=0;i<num_vert;i++)
                 {
                     Vertex* v= (Vertex*)vertices[i];
                     *(ptr+i) = *v;
@@ -196,7 +196,7 @@ namespace engine
             ColorVertex* ptr = new ColorVertex[num_vert];
             if(type == 0x1011)
             {
-                for(int i=0;i<num_vert;i++)
+                for(size_t i=0;i<num_vert;i++)
                 {
                     ColorVertex* v= (ColorVertex*)vertices[i];
                     *(ptr+i) = *v;
@@ -214,7 +214,7 @@ namespace engine
             CompxVertex* ptr = new CompxVertex[num_vert];
             if(type == 0x1111)
             {
-                for(int i=0;i<num_vert;i++)
+                for(unsigned int i=0;i<num_vert;i++)
                 {
                     CompxVertex* v= (CompxVertex*)vertices[i];
                     *(ptr+i) = *v;

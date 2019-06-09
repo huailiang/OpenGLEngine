@@ -10,7 +10,7 @@
 #define Scene_hpp
 
 
-#include "common.h"
+
 #include "shader.h"
 #include "utils/esUtil.h"
 

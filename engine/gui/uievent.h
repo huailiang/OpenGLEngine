@@ -39,7 +39,7 @@ public:
     
     virtual ~UIEvent()
     {
-        callback = NULL;
+        callback = nullptr;
     }
     
     virtual bool IsHit(float x,float y) = 0;
@@ -56,7 +56,7 @@ protected:
     bool interact;
 
 private:
-    ClickCallback callback = NULL;
+    ClickCallback callback = nullptr;
     void* arg;
 
 };

@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		4C02E1CF22AB77A0002821B9 /* material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C02E1CC22AB77A0002821B9 /* material.cpp */; };
 		4C02E1D022AB77A0002821B9 /* avatar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C02E1CD22AB77A0002821B9 /* avatar.cpp */; };
-		4C42795522A54A0C003AE42A /* common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C42795222A54A0B003AE42A /* common.cpp */; };
 		4C443B8122A25D2D00866F29 /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C443B7F22A25D2D00866F29 /* Scene.cpp */; };
 		4C443B8522A25F8E00866F29 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C443B8422A25F8E00866F29 /* libc++.tbd */; };
+		4C492FF422AD5F9300FC531B /* engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C492FF222AD5F9300FC531B /* engine.cpp */; };
 		4C52BF1822ACCA9700D78ACB /* 1940975766 in Resources */ = {isa = PBXBuildFile; fileRef = 4C52BE9822ACCA9700D78ACB /* 1940975766 */; };
 		4C52BF1922ACCA9700D78ACB /* 2229672537 in Resources */ = {isa = PBXBuildFile; fileRef = 4C52BE9922ACCA9700D78ACB /* 2229672537 */; };
 		4C52BF1A22ACCA9700D78ACB /* 1234002128 in Resources */ = {isa = PBXBuildFile; fileRef = 4C52BE9A22ACCA9700D78ACB /* 1234002128 */; };
@@ -208,13 +208,13 @@
 		4C02E1CC22AB77A0002821B9 /* material.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = material.cpp; sourceTree = "<group>"; };
 		4C02E1CD22AB77A0002821B9 /* avatar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = avatar.cpp; sourceTree = "<group>"; };
 		4C02E1CE22AB77A0002821B9 /* material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = material.h; sourceTree = "<group>"; };
-		4C42795222A54A0B003AE42A /* common.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = common.cpp; path = ../../engine/common.cpp; sourceTree = "<group>"; };
-		4C42795322A54A0C003AE42A /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = common.h; path = ../../engine/common.h; sourceTree = "<group>"; };
 		4C42795422A54A0C003AE42A /* profile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = profile.h; path = ../../engine/profile.h; sourceTree = "<group>"; };
 		4C443B7F22A25D2D00866F29 /* Scene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Scene.cpp; sourceTree = "<group>"; };
 		4C443B8022A25D2D00866F29 /* Scene.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Scene.h; sourceTree = "<group>"; };
 		4C443B8222A25F7800866F29 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		4C443B8422A25F8E00866F29 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		4C492FF222AD5F9300FC531B /* engine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = engine.cpp; path = ../../engine/engine.cpp; sourceTree = "<group>"; };
+		4C492FF322AD5F9300FC531B /* engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = engine.h; path = ../../engine/engine.h; sourceTree = "<group>"; };
 		4C52BE9622ACCA5500D78ACB /* mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mesh.h; sourceTree = "<group>"; };
 		4C52BE9822ACCA9700D78ACB /* 1940975766 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1940975766; sourceTree = "<group>"; };
 		4C52BE9922ACCA9700D78ACB /* 2229672537 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 2229672537; sourceTree = "<group>"; };
@@ -670,9 +670,9 @@
 				4C8062C3229FC059005FD1F9 /* AppDelegate.m */,
 				4C8062C5229FC059005FD1F9 /* ViewController.h */,
 				4C8062C6229FC059005FD1F9 /* ViewController.mm */,
-				4C42795322A54A0C003AE42A /* common.h */,
-				4C42795222A54A0B003AE42A /* common.cpp */,
 				4C42795422A54A0C003AE42A /* profile.h */,
+				4C492FF222AD5F9300FC531B /* engine.cpp */,
+				4C492FF322AD5F9300FC531B /* engine.h */,
 				4C443B8022A25D2D00866F29 /* Scene.h */,
 				4C443B7F22A25D2D00866F29 /* Scene.cpp */,
 				4C8062C8229FC059005FD1F9 /* Main.storyboard */,
@@ -1018,7 +1018,6 @@
 				4CE2224B22A91F0B0095ECCA /* label.cpp in Sources */,
 				4C7AF66E22A54EA700B63173 /* light.cpp in Sources */,
 				4CE2224722A91F0B0095ECCA /* uibase.cpp in Sources */,
-				4C42795522A54A0C003AE42A /* common.cpp in Sources */,
 				4C8062C7229FC059005FD1F9 /* ViewController.mm in Sources */,
 				4C02E1CF22AB77A0002821B9 /* material.cpp in Sources */,
 				4C73C0EB22A8BAB3002A8AD0 /* texmgr.cpp in Sources */,
@@ -1028,6 +1027,7 @@
 				4CE2224822A91F0B0095ECCA /* ttfont.cpp in Sources */,
 				4C8062D2229FC059005FD1F9 /* main.mm in Sources */,
 				4C73C0EC22A8BAB3002A8AD0 /* util.cpp in Sources */,
+				4C492FF422AD5F9300FC531B /* engine.cpp in Sources */,
 				4C8062C4229FC059005FD1F9 /* AppDelegate.m in Sources */,
 				4C7AF66F22A54EA700B63173 /* texture.cpp in Sources */,
 				4C7AF67122A54EA700B63173 /* skybox.cpp in Sources */,
