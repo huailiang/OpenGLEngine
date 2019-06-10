@@ -57,16 +57,12 @@ namespace engine
     
     std::string getResPath(const std::string path)
     {
-#ifdef _QT_EDIT_
-        std::string xpath = std::string(WORKDIR) + "bundle/";
-        return xpath + std::to_string(Hash(path));
-#else
 #ifdef _GLES_
         return getPath(std::to_string(Hash(path)));
 #else
-        return "bundle/"+ std::to_string(Hash(path));
+        std::string xpath = std::string(WORKDIR) + "bundle/";
+        return xpath + std::to_string(Hash(path));
 #endif // _GLES_
-#endif // _QT_EDIT_
     }
     
     

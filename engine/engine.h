@@ -6,8 +6,8 @@
 //  Copyright © 2019 彭怀亮. All rights reserved.
 //
 
-#ifndef common_h
-#define common_h
+#ifndef engine_h
+#define engine_h
 
 #ifdef _QT_EDIT_
 #include <QtOpenGL>
@@ -61,11 +61,10 @@ namespace engine
 
     extern unsigned int DRAW_MODE;
 
+    #define WORKDIR "/Users/penghuailiang/Documents/projects/GL/OpenGLEngine/"
+    
     #ifdef _QT_EDIT_
-    #define WORKDIR "/Users/penghuailiang/Documents/projects/GL/OpenGLEngine/" // Qt env
     extern QTime q_time;
-    #else
-    #define WORKDIR ""  //xcode wroking directory can be setted in Scheme
     #endif
 
 
@@ -122,4 +121,4 @@ namespace engine
     
 }
 
-#endif /* common_h */
+#endif /* engine_h */
