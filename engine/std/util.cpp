@@ -391,4 +391,24 @@ namespace engine
         return nullptr;
     }
     
+    void caltangent(const Vertex* v1, const Vertex* v2, const Vertex* v3, glm::vec3* tan, glm::vec3* bit)
+    {
+        caltangent(v1->Position, v2->Position, v3->Position, v1->TexCoords, v2->TexCoords, v3->TexCoords, tan, bit);
+    }
+    
+    void caltangent(const BaseVert3* v1, const BaseVert3* v2, const BaseVert3* v3, glm::vec3* tan, glm::vec3* bit)
+    {
+        caltangent(v1->Position, v2->Position, v3->Position , v1->TexCoords, v2->TexCoords, v3->TexCoords, tan, bit);
+    }
+    
+    void caltangent(const ColorVertex* v1, const ColorVertex* v2, const ColorVertex* v3, glm::vec3* tan, glm::vec3* bit)
+    {
+        caltangent(v1->Position, v2->Position, v3->Position , v1->TexCoords, v2->TexCoords, v3->TexCoords, tan, bit);
+    }
+    
+    void caltangent(const CompxVertex* v1, const CompxVertex* v2, const CompxVertex* v3, glm::vec3* tan, glm::vec3* bit)
+    {
+        caltangent(v1->Position, v2->Position, v3->Position , v1->TexCoords, v2->TexCoords, v3->TexCoords, tan, bit);
+    }
+    
 }

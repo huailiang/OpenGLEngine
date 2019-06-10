@@ -168,5 +168,26 @@ namespace engine
         }
     }
     
+    void caltangent(const glm::vec3 pos1, const glm::vec3 pos2, const glm::vec3 pos3,
+                    const glm::vec2 uv1, const glm::vec2 uv2, const glm::vec2 uv3,
+                    glm::vec3* tan, glm::vec3* bit)
+    {
+        glm::vec3 edge1 = pos2 - pos1;
+        glm::vec3 edge2 = pos3 - pos1;
+        glm::vec2 deltaUV1 = uv2 - uv1;
+        glm::vec2 deltaUV2 = uv3 - uv1;
+        
+        GLfloat f = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV2.x * deltaUV1.y);
+        (*tan).x = f * (deltaUV2.y * edge1.x - deltaUV1.y * edge2.x);
+        (*tan).y = f * (deltaUV2.y * edge1.y - deltaUV1.y * edge2.y);
+        (*tan).z = f * (deltaUV2.y * edge1.z - deltaUV1.y * edge2.z);
+        (*tan) = normalize(*tan);
+        
+        (*bit).x = f * (-deltaUV2.x * edge1.x + deltaUV1.x * edge2.x);
+        (*bit).y = f * (-deltaUV2.x * edge1.y + deltaUV1.x * edge2.y);
+        (*bit).z = f * (-deltaUV2.x * edge1.z + deltaUV1.x * edge2.z);
+        (*bit) = glm::normalize(*bit);
+    }
+    
     
 }

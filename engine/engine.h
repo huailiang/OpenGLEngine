@@ -119,6 +119,10 @@ namespace engine
     
     void readstring(std::ifstream& f, std::string& str);
     
+    void caltangent(const glm::vec3 pos1, const glm::vec3 pos2, const glm::vec3 pos3,
+                    const glm::vec2 uv1, const glm::vec2 uv2, const glm::vec2 uv3,
+                    glm::vec3* tan, glm::vec3* bit);
+    
 }
 
 #endif /* engine_h */
