@@ -1,8 +1,7 @@
 #version 330 core
 
+#define VERT_TYPE  0x0111
 #include "lib/appdata.glsl"
-
-LayoutVertex()
 
 
 out vec3 worldPos;
@@ -19,7 +18,7 @@ void main()
 {
     worldPos = vec3(model * vec4(aPos, 1.0));
     normal = transpose(inverse(mat3(model))) * aNormal;
-    texCoords = aTexcoord;
+    texCoords = aTexCoords;
     fragPosLightSpace = lightSpaceMatrix * vec4(worldPos, 1.0);
     gl_Position = Engine_MVP(model) * vec4(aPos, 1.0);
 }

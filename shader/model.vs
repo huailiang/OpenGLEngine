@@ -1,7 +1,7 @@
 #version 330 core
 
+#define VERT_TYPE  0x0111
 #include "lib/appdata.glsl"
-LayoutVertex()
 
 
 out vec2 TexCoords;
@@ -14,7 +14,7 @@ uniform mat4 model;
 
 void main()
 {
-    TexCoords = aTexcoord;
+    TexCoords = aTexCoords;
     gl_Position = Engine_MVP(model) * vec4(aPos, 1.0);
     worldPos = (model * vec4(aPos, 1.0f)).xyz;
     normal = mat3(transpose(inverse(model))) * aNormal;

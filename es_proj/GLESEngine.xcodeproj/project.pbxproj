@@ -205,6 +205,7 @@
 		4CE2224A22A91F0B0095ECCA /* uievent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2224022A91F0B0095ECCA /* uievent.cpp */; };
 		4CE2224B22A91F0B0095ECCA /* label.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2224122A91F0B0095ECCA /* label.cpp */; };
 		4CE2224C22A91F0B0095ECCA /* uimgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2224222A91F0B0095ECCA /* uimgr.cpp */; };
+		4CE8DA6E22AEA7E60077C6AF /* appdata.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 4CE8DA6D22AEA7E60077C6AF /* appdata.glsl */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -436,6 +437,7 @@
 		4CE2224322A91F0B0095ECCA /* button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = button.h; sourceTree = "<group>"; };
 		4CE2224422A91F0B0095ECCA /* ttfont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ttfont.h; sourceTree = "<group>"; };
 		4CE2224522A91F0B0095ECCA /* eventmgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eventmgr.h; sourceTree = "<group>"; };
+		4CE8DA6D22AEA7E60077C6AF /* appdata.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = appdata.glsl; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -758,6 +760,7 @@
 		4C97AA9622A50D01005F6388 /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				4CE8DA6D22AEA7E60077C6AF /* appdata.glsl */,
 				4C97AA9722A50D01005F6388 /* struct.glsl */,
 				4C97AA9822A50D01005F6388 /* const.glsl */,
 				4C97AA9922A50D01005F6388 /* brdf.glsl */,
@@ -972,6 +975,7 @@
 				4C01AC3022AE316E001C5070 /* 2057310073 in Resources */,
 				4C97AAC122A50D01005F6388 /* shadow.vs in Resources */,
 				4C01AC5C22AE316E001C5070 /* 72664718 in Resources */,
+				4CE8DA6E22AEA7E60077C6AF /* appdata.glsl in Resources */,
 				4C97AAAD22A50D01005F6388 /* camera.vs in Resources */,
 				4C01AC7422AE316E001C5070 /* 2928852607 in Resources */,
 				4C97AAA722A50D01005F6388 /* instance.vs in Resources */,

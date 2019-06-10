@@ -18,6 +18,10 @@ namespace engine
     Shader::Shader(const char* vertexPath, const char* fragmentPath, const char* geometryPath, std::string macro)
     {
         // 1. retrieve the vertex/fragment source code from filePath
+#ifdef DEBUG
+        this->vertexPath = vertexPath;
+        this->fragmentPath = fragmentPath;
+#endif
         std::string vertexCode = openFile(vertexPath);
         std::string fragmentCode = openFile(fragmentPath);
         vertexCode = pre_process(vertexCode, macro);
@@ -269,7 +273,12 @@ namespace engine
             if(!success)
             {
                 glGetShaderInfoLog(shader, 1024, NULL, infoLog);
-                std::cout << "ERROR::SHADER_COMPILATION_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
+                const char* name = "";
+#ifdef DEBUG
+                if(type == "VERTEX") name = this->vertexPath;
+                if(type == "FRAGMENT") name = this->fragmentPath;
+#endif
+                std::cout << "ERROR::SHADER_COMPILATION_ERROR of type: " << type<<" "<<name << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
             }
         }
         else

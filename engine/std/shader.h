@@ -64,6 +64,12 @@ namespace engine
         
     private:
         std::vector<std::string> headers;
+        
+#ifdef DEBUG
+    protected:
+        const char* vertexPath, *fragmentPath;
+#endif
+
     };
 
 
