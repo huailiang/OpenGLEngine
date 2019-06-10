@@ -53,18 +53,7 @@ namespace engine
             vegetation.push_back(vec3(x,0.0f,z));
         }
         
-        glGenVertexArrays(1, &floor_vao);
-        glGenBuffers(1, &floor_vbo);
-        glBindVertexArray(floor_vao);
-        glBindBuffer(GL_ARRAY_BUFFER,floor_vbo);
-        glBufferData(GL_ARRAY_BUFFER,sizeof(planeVertices), planeVertices, GL_STATIC_DRAW);
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
-        glEnableVertexAttribArray(1);
-        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-        glEnableVertexAttribArray(2);
-        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-        glBindVertexArray(0);
+        InitPlane(floor_vao, floor_vbo);
         
         glGenVertexArrays(1, &grass_vao);
         glGenBuffers(1, &grass_vbo);
