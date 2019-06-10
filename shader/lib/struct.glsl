@@ -34,4 +34,4 @@ struct Light
 };
 
 
-#endif
+#endif // _STRUCT_

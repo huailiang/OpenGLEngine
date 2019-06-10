@@ -88,6 +88,7 @@
 		4C37751E22A54FA20074744F /* eventmgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eventmgr.h; sourceTree = "<group>"; };
 		4C3B7A162283164E003B212F /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		4C3B7A1822831668003B212F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		4C3CEA5222AE823F00252F84 /* appdata.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = appdata.glsl; sourceTree = "<group>"; };
 		4C402CE322A51AF2008C89D4 /* pbr.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = pbr.fs; sourceTree = "<group>"; };
 		4C402CE422A51AF2008C89D4 /* ttfrag.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = ttfrag.fs; sourceTree = "<group>"; };
 		4C402CE522A51AF2008C89D4 /* shadow.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shadow.fs; sourceTree = "<group>"; };
@@ -277,6 +278,7 @@
 		4C402CF922A51AF2008C89D4 /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				4C3CEA5222AE823F00252F84 /* appdata.glsl */,
 				4C402CFA22A51AF2008C89D4 /* struct.glsl */,
 				4C402CFB22A51AF2008C89D4 /* const.glsl */,
 				4C402CFC22A51AF2008C89D4 /* brdf.glsl */,

@@ -1,15 +1,16 @@
 #version 330 core
-layout (location = 0) in vec3 aPos;
-layout (location = 1) in vec2 aTexcoord;
-layout (location = 2) in vec3 aNormal;
+
+#include "lib/appdata.glsl"
+#include "lib/brdf.glsl"
+#include "lib/camera.glsl"
+
+LayoutVertex()
 
 out vec3 vertColor;
 out vec2 texCoord;
 out vec3 normal;
 out vec3 worldPos;
 
-#include "lib/brdf.glsl"
-#include "lib/camera.glsl"
 
 uniform mat4 model;
 

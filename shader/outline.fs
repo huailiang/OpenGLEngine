@@ -1,7 +1,6 @@
 #version 330 core
 out vec4 FragColor;
 
-//#include "shader/lib/brdf.glsl"
 
 void main()
 {    
