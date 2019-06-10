@@ -25,7 +25,7 @@ namespace engine
     
     void MeshData::ConfigAttribute(const GLenum usage)
     {
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, num_indice * sizeof(unsigned int), indices, usage);
+        if(num_indice > 0) glBufferData(GL_ELEMENT_ARRAY_BUFFER, num_indice * sizeof(unsigned int), indices, usage);
         if(type == 0x0111 || type == 0x1011)
         {
             glBufferData(GL_ARRAY_BUFFER, num_vert * sizeof(Vertex), GetVertex(), usage);
@@ -73,7 +73,7 @@ namespace engine
     BaseVert2* MeshData::GetBaseVertex2() const
     {
         BaseVert2* ptr = new BaseVert2[num_vert];
-        if(type == 0x0111)
+        if(type == 0x0012)
         {
             for(size_t i=0;i<num_vert;i++)
             {
@@ -92,7 +92,7 @@ namespace engine
     BaseVert3* MeshData::GetBaseVertex3() const
     {
         BaseVert3* ptr = new BaseVert3[num_vert];
-        if(type == 0x0111)
+        if(type == 0x0011)
         {
             for(size_t i=0;i<num_vert;i++)
             {
@@ -102,7 +102,7 @@ namespace engine
         }
         else
         {
-            std::cerr<<"vert type error, 0x"<<hex<<type<<std::endl;
+            std::cerr<<"BaseVert3 type error, 0x"<<hex<<type<<std::endl;
         }
         return ptr;
     }
@@ -121,7 +121,7 @@ namespace engine
         }
         else
         {
-            std::cerr<<"vert type error, 0x"<<hex<<type<<std::endl;
+            std::cerr<<"Vertex type error, 0x"<<hex<<type<<std::endl;
         }
         return ptr;
     }
@@ -139,7 +139,7 @@ namespace engine
         }
         else
         {
-            std::cerr<<"vert type error, 0x"<<hex<<type<<std::endl;
+            std::cerr<<"ColorVertex type error, 0x"<<hex<<type<<std::endl;
         }
         return ptr;
     }
@@ -157,7 +157,7 @@ namespace engine
         }
         else
         {
-            std::cerr<<"vert type error, 0x"<<hex<<type<<std::endl;
+            std::cerr<<"CompxVertex type error, 0x"<<hex<<type<<std::endl;
         }
         return ptr;
     }
@@ -165,6 +165,16 @@ namespace engine
     bool MeshData::hasPos() const
     {
         return (type & Vt_Pos3) > 0 || (type & Vt_Pos2) > 0;
+    }
+    
+    bool MeshData::hasPos2() const
+    {
+        return (type & Vt_Pos2) > 0;
+    }
+    
+    bool MeshData::hasPos3() const
+    {
+        return (type & Vt_Pos3) > 0;
     }
 
     bool MeshData::hasUV() const

@@ -26,7 +26,7 @@ namespace engine
         
         virtual ~Material();
         
-        void SetupMesh();
+        virtual void SetupMesh();
         
         virtual void Draw(const Shader* shader);
         
@@ -38,7 +38,7 @@ namespace engine
         
     protected:
         
-        GLuint ebo, vao, vbo;
+        GLuint vao, vbo;
         
     };
     
@@ -51,6 +51,8 @@ namespace engine
         
         virtual ~ObjMaterial();
         
+        virtual void SetupMesh();
+        
         virtual void Draw(const Shader* shader);
         
     public:
@@ -58,6 +60,9 @@ namespace engine
         GLuint normal_texure;
         GLuint ambient_texture;
         GLuint specul_texture;
+        
+    protected:
+        GLuint ebo;
         
     };
     

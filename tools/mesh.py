@@ -25,6 +25,12 @@ def writei(f,v):
 	p=struct.pack("I",v)
 	f.write(p)
 
+def writeh(f, indices, verts, atype):
+    writei(f, indices)
+    writei(f, verts)
+    writei(f, atype)
+
+
 def readi(f):
 	v=f.read(4)
 	return struct.unpack("I",v)[0]
@@ -111,10 +117,9 @@ if os.path.exists(target):
 os.makedirs(target)
 
 f = open(target+"quad.mesh","wb")
-writei(f,6)
-writei(f,0x0011)
+writeh(f, 0, 6, 0x0012)
 idx = 0
-for x in range(0,6):
+for x in range(0, 6):
 	writef(f,quad[idx])
 	idx=idx+1
 	writef(f,quad[idx])
@@ -127,8 +132,7 @@ f.close()
 
 
 f = open(target+"cube.mesh","wb")
-writei(f,36)
-writei(f,0x0111)
+writeh(f, 0, 36, 0x0111)
 idx = 0
 for x in range(0,36):
 	writef(f,cube[idx])
@@ -150,8 +154,7 @@ for x in range(0,36):
 f.close()
 
 f = open(target+"plane.mesh","wb")
-writei(f,6)
-writei(f,0x0111)
+writeh(f, 0, 6, 0x0111)
 idx = 0
 for x in range(0,6):
 	writef(f,plane[idx])
@@ -175,9 +178,10 @@ f.close()
 
 #  for test
 f = open(target+"plane.mesh", 'rb')
+inds=readi(f)
 num=readi(f)
 ty = readi(f)
-print("num:",num,"type:",ty)
+print("inds:",inds,"num:",num,"type:",ty)
 for x in range(0,num):
 	a1 = readf(f)
 	a2 = readf(f)

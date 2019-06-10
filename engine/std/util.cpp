@@ -304,12 +304,13 @@ namespace engine
         }
     }
     
-    MeshData* ReadMesh(const std::string name)
+    MeshData* ReadMesh(const std::string name, const std::string objdir)
     {
         std::ifstream ifs;
         ifs.exceptions (std::ifstream::failbit | std::ifstream::badbit);
         try
         {
+            if(!objdir.empty()) curr_obj = objdir;
             std::string path = getResPath("engine/"+curr_obj+"/"+name+".mesh");
             ifs.open(path, std::ifstream::binary | std::ios::in);
             unsigned int inds = 0,verts = 0, type = 0x0;
@@ -324,17 +325,61 @@ namespace engine
             mesh->num_vert = verts;
             mesh->vertices = new Vert*[verts];
             
-
             for (size_t i=0; i<inds; i++)
             {
                 ifs.read((char*)(&mesh->indices[i]), sizeof(unsigned int));
             }
-            for (size_t i=0; i<verts; i++) {
-                Vertex* vertex=new Vertex();
-                readv3(ifs, vertex->Position);
-                readv2(ifs, vertex->TexCoords);
-                readv3(ifs, vertex->Normal);
-                mesh->vertices[i] = vertex;
+            for (size_t i=0; i<verts; i++)
+            {
+                switch (type) {
+                    case 0x0111:
+                    {
+                        Vertex* vertex = new Vertex();
+                        readv3(ifs, vertex->Position);
+                        readv2(ifs, vertex->TexCoords);
+                        readv3(ifs, vertex->Normal);
+                        mesh->vertices[i] = vertex;
+                    }
+                        break;
+                    case 0x0012:
+                    {
+                        BaseVert2* vert  = new BaseVert2();
+                        readv2(ifs, vert->Position);
+                        readv2(ifs, vert->TexCoords);
+                        mesh->vertices[i] = vert;
+                    }
+                        break;
+                    case 0x0011:
+                    {
+                        BaseVert3* vert  = new BaseVert3();
+                        readv3(ifs, vert->Position);
+                        readv2(ifs, vert->TexCoords);
+                        mesh->vertices[i] = vert;
+                    }
+                        break;
+                    case 0x1011:
+                    {
+                        ColorVertex* vert = new ColorVertex();
+                        readv3(ifs, vert->Position);
+                        readv2(ifs, vert->TexCoords);
+                        readv3(ifs, vert->Color);
+                        mesh->vertices[i] = vert;
+                    }
+                        break;
+                    case 0x1111:
+                    {
+                        CompxVertex* vert = new CompxVertex();
+                        readv3(ifs, vert->Position);
+                        readv2(ifs, vert->TexCoords);
+                        readv3(ifs, vert->Normal);
+                        readv3(ifs, vert->Color);
+                        mesh->vertices[i] = vert;
+                    }
+                        break;
+                    default:
+                        std::cerr<<"vertex config not support format: 0x"<<hex<<type<<std::endl;
+                        break;
+                }
             }
             ifs.close();
             return mesh;
@@ -345,4 +390,5 @@ namespace engine
         }
         return nullptr;
     }
+    
 }

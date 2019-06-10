@@ -27,7 +27,7 @@ namespace engine
     
     bool LoadObj(const std::string name);
     
-    MeshData* ReadMesh(const std::string name);
+    MeshData* ReadMesh(const std::string name, const std::string objdir = "");
     
     void ReadObjMaterial(const std::string name, ObjMaterial* mat);
     

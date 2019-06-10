@@ -14,7 +14,6 @@ namespace engine
     Material::Material(MeshData* data)
     {
         this->data = data;
-        SetupMesh();
     }
 
 
@@ -22,7 +21,6 @@ namespace engine
     {
         delete data;
         glDeleteBuffers(1, &vbo);
-        glDeleteBuffers(1, &ebo);
         glDeleteVertexArrays(1, &vao);
     }
 
@@ -30,11 +28,9 @@ namespace engine
     {
         glGenVertexArrays(1, &vao);
         glGenBuffers(1, &vbo);
-        glGenBuffers(1, &ebo);
         
         glBindVertexArray(vao);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
         data->ConfigAttribute(GL_DYNAMIC_DRAW);
         glBindVertexArray(0);
     }
@@ -46,24 +42,45 @@ namespace engine
         glDrawElements(DRAW_MODE, (GLsizei)data->num_indice, GL_UNSIGNED_INT, nullptr);
         glBindVertexArray(0);
     }
+    
 
     void Material::Draw(const Shader* shader)
     {
+        shader->use();
         DrawMesh();
     }
 
+    
     ObjMaterial::ObjMaterial(MeshData* data) : Material(data) { }
+    
     
     ObjMaterial::~ObjMaterial()
     {
+        glDeleteBuffers(1, &ebo);
         TexMgr::getInstance()->RemvTexture(diffuse_texture);
         TexMgr::getInstance()->RemvTexture(normal_texure);
         TexMgr::getInstance()->RemvTexture(ambient_texture);
         TexMgr::getInstance()->RemvTexture(specul_texture);
     }
     
+    
+    void ObjMaterial::SetupMesh()
+    {
+        glGenVertexArrays(1, &vao);
+        glGenBuffers(1, &vbo);
+        glGenBuffers(1, &ebo);
+        
+        glBindVertexArray(vao);
+        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+        data->ConfigAttribute(GL_DYNAMIC_DRAW);
+        glBindVertexArray(0);
+    }
+    
+    
     void ObjMaterial::Draw(const Shader* shader)
     {
+        shader->use();
         int i  = 0;
         if(diffuse_texture > 0)
         {

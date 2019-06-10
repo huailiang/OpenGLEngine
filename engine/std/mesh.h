@@ -84,7 +84,11 @@ namespace engine
         CompxVertex* GetCompxVertex() const;
         
         bool hasPos() const;
-        
+
+        bool hasPos3() const;
+
+        bool hasPos2() const;
+
         bool hasUV() const;
         
         bool hasNormal() const;

@@ -19,6 +19,10 @@ namespace engine
     unsigned int RENDER_WIDTH = 1600;
     unsigned int RENDER_HEIGTH = 1200;
     unsigned int DRAW_MODE = GL_TRIANGLES;
+    
+    MeshData* plane = nullptr;
+    MeshData* cube = nullptr;
+    MeshData* quad = nullptr;
 
     #ifdef _QT_EDIT_
     QTime q_time;
@@ -46,50 +50,37 @@ namespace engine
     }
 
 
-    void InitPlane(GLuint &planeVAO, GLuint &planeVBO)
+    void InitPlane(GLuint &vao, GLuint &vbo)
     {
-        glGenVertexArrays(1, &planeVAO);
-        glGenBuffers(1, &planeVBO);
-        glBindVertexArray(planeVAO);
-        glBindBuffer(GL_ARRAY_BUFFER, planeVBO);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(planeVertices), planeVertices, GL_STATIC_DRAW);
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), nullptr);
-        glEnableVertexAttribArray(1);
-        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-        glEnableVertexAttribArray(2);
-        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+        if(plane==nullptr) plane = ReadMesh("plane","common");
+        glGenVertexArrays(1, &vao);
+        glGenBuffers(1, &vbo);
+        glBindVertexArray(vao);
+        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+        plane->ConfigAttribute();
         glBindVertexArray(0);
     }
 
-    void InitCube(GLuint &cubeVAO, GLuint &cubeVBO)
+    void InitCube(GLuint &vao, GLuint &vbo)
     {
-        glGenVertexArrays(1, &cubeVAO);
-        glGenBuffers(1, &cubeVBO);
-        glBindBuffer(GL_ARRAY_BUFFER, cubeVBO);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(cubeVertices), cubeVertices, GL_STATIC_DRAW);
-        glBindVertexArray(cubeVAO);
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), nullptr);
-        glEnableVertexAttribArray(1);
-        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-        glEnableVertexAttribArray(2);
-        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        if(cube == nullptr) cube = ReadMesh("cube","common");
+        glGenVertexArrays(1, &vao);
+        glGenBuffers(1, &vbo);
+        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+        glBindVertexArray(vao);
+        cube->ConfigAttribute();
         glBindVertexArray(0);
     }
 
-    void InitQuad(GLuint &quadVAO, GLuint &quadVBO)
+    void InitQuad(GLuint &vao, GLuint &vbo)
     {
-        glGenVertexArrays(1, &quadVAO);
-        glGenBuffers(1, &quadVBO);
-        glBindVertexArray(quadVAO);
-        glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), &quadVertices, GL_STATIC_DRAW);
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), nullptr);
-        glEnableVertexAttribArray(1);
-        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
+        if(quad == nullptr) quad = ReadMesh("quad","common");
+        glGenVertexArrays(1, &vao);
+        glGenBuffers(1, &vbo);
+        glBindVertexArray(vao);
+        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+        quad->ConfigAttribute();
+        glBindVertexArray(0);
     }
 
 
@@ -145,9 +136,7 @@ namespace engine
         unsigned int hash =0;
         int seed = 5;
         for (int i=0; i<str.size(); i++) {
-            
             hash = (hash << seed) + (short)str[i] + hash;
-//            std::cout<<str[i]<<" "<<(short)str[i]<<" "<<hash<<std::endl;
         }
         return hash;
     }

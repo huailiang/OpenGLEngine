@@ -20,6 +20,7 @@ namespace engine
         {
             ObjMaterial* mat = new ObjMaterial(ReadMesh(items[i]));
             ReadObjMaterial(items[i], mat);
+            mat->SetupMesh();
             materials.push_back(mat);
         }
     }
