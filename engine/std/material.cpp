@@ -47,7 +47,7 @@ namespace engine
         glBindVertexArray(0);
     }
 
-    void Material::Draw(Shader* shader)
+    void Material::Draw(const Shader* shader)
     {
         DrawMesh();
     }
@@ -62,7 +62,7 @@ namespace engine
         TexMgr::getInstance()->RemvTexture(specul_texture);
     }
     
-    void ObjMaterial::Draw(Shader* shader)
+    void ObjMaterial::Draw(const Shader* shader)
     {
         int i  = 0;
         if(diffuse_texture > 0)

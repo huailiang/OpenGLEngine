@@ -180,11 +180,11 @@ namespace engine
 
     std::string Macro(const char* k1, const void* v1, const char* k2, const void* v2, const char* k3, const char* v3);
 
-    void SetRenderMode(unsigned int mode);
+    void SetRenderMode(const unsigned int mode);
 
-    void SetWindowSize(int width, int height);
+    void SetWindowSize(const int width, const int height);
     
-    unsigned int Hash(std::string str);
+    unsigned int Hash(const std::string str);
     
     void readv2(std::ifstream& f, glm::vec2& v);
     

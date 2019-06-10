@@ -11,17 +11,17 @@
 namespace engine
 {
 
-    mat4 Camera::GetViewMatrix()
+    mat4 Camera::GetViewMatrix() const
     {
         return glm::lookAt(Position, Position + Front, Up);
     }
 
-    mat4 Camera::GetProjMatrix()
+    mat4 Camera::GetProjMatrix() const
     {
         return perspective(radians(FOV), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
     }
 
-    mat4 Camera::GetVP()
+    mat4 Camera::GetVP() const
     {
         mat4 view = GetViewMatrix();
         mat4 proj = GetProjMatrix();
@@ -67,7 +67,7 @@ namespace engine
     }
 
 
-    void Camera::Attach(Shader* shader)
+    void Camera::Attach(const Shader* shader)
     {
         //config
         unsigned int uniform = glGetUniformBlockIndex(shader->ID, "Block");

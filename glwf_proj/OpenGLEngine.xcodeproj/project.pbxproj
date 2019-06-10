@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C01AB8B22ADEE2C001C5070 /* mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C01AB8A22ADEE2C001C5070 /* mesh.cpp */; };
 		4C1B57B322A68D7900A7AFF1 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C1B57B222A68D7900A7AFF1 /* util.cpp */; };
 		4C1B57B922A6ADBF00A7AFF1 /* material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C1B57B722A6ADBF00A7AFF1 /* material.cpp */; };
 		4C1B57BC22A7BE3800A7AFF1 /* texmgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C1B57BA22A7BE3800A7AFF1 /* texmgr.cpp */; };
@@ -50,6 +51,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4C01AB8A22ADEE2C001C5070 /* mesh.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = mesh.cpp; sourceTree = "<group>"; };
 		4C1B57B122A68D7900A7AFF1 /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
 		4C1B57B222A68D7900A7AFF1 /* util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = util.cpp; sourceTree = "<group>"; };
 		4C1B57B722A6ADBF00A7AFF1 /* material.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = material.cpp; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 				4C37750622A54F6F0074744F /* texture.h */,
 				4C3774FE22A54F6F0074744F /* texture.cpp */,
 				4C52BE9522ACC2BE00D78ACB /* mesh.h */,
+				4C01AB8A22ADEE2C001C5070 /* mesh.cpp */,
 				4C1B57B822A6ADBF00A7AFF1 /* material.h */,
 				4C1B57B722A6ADBF00A7AFF1 /* material.cpp */,
 				4C1B57BE22A7E03700A7AFF1 /* avatar.h */,
@@ -409,6 +412,7 @@
 				4C1B57BC22A7BE3800A7AFF1 /* texmgr.cpp in Sources */,
 				4C37752122A54FA20074744F /* ttfont.cpp in Sources */,
 				4C37751F22A54FA20074744F /* glad.c in Sources */,
+				4C01AB8B22ADEE2C001C5070 /* mesh.cpp in Sources */,
 				4C73C0F322A8C0F9002A8AD0 /* eventmgr.cpp in Sources */,
 				4C42797E22A54AD0003AE42A /* engine.cpp in Sources */,
 				4C5F3FD322ABF95C005B7CFD /* asset.cpp in Sources */,

@@ -34,7 +34,7 @@ namespace engine
         }
     }
 
-    void DirectLight::Apply(Shader* shader)
+    void DirectLight::Apply(const Shader* shader)
     {
         shader->setVec3("light.color", color);
         shader->setVec3("light.direction", direction);
@@ -50,12 +50,12 @@ namespace engine
         return proj * view;
     }
 
-    LightType  DirectLight::getType()
+    LightType  DirectLight::getType() const
     {
         return LightDirect;
     }
 
-    std::string DirectLight::getMacro()
+    std::string DirectLight::getMacro() const
     {
         return "_DirectLight_";
     }
@@ -68,7 +68,7 @@ namespace engine
         return proj * view;
     }
 
-    void PointLight::Apply(Shader* shader)
+    void PointLight::Apply(const Shader* shader)
     {
         shader->setVec3("light.color", this->color);
         shader->setVec3("light.direction", this->direction);
@@ -76,29 +76,29 @@ namespace engine
         shader->setVec3("light.position", this->pos);
     }
 
-    LightType PointLight::getType()
+    LightType PointLight::getType() const
     {
         return LightPoint;
     }
 
-    std::string PointLight::getMacro()
+    std::string PointLight::getMacro() const
     {
         return "_PointLight_";
     }
 
-    void SpotLight::Apply(Shader* shader)
+    void SpotLight::Apply(const Shader* shader)
     {
         PointLight::Apply(shader);
         shader->setFloat("light.cutOff", this->cutOff);
         shader->setFloat("light.outerCutOff", this->outerCutOff);
     }
 
-    LightType SpotLight::getType()
+    LightType SpotLight::getType() const
     {
         return LightSpot;
     }
 
-    std::string SpotLight::getMacro()
+    std::string SpotLight::getMacro() const
     {
         return "_SpotLight_";
     }

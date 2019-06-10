@@ -29,11 +29,11 @@ namespace engine
         
         ~Avatar();
         
-        mat4 GetModelMatrix(vec3 pos, vec3 scale, float angle);
+        mat4 GetModelMatrix(const vec3 pos, const vec3 scale, float angle) const;
         
         void Draw(Shader* shader, Light* light, vec3 pos, vec3 scale, float angle);
         
-        void DrawShadow(Shader* shader, Light* light, vec3 pos, vec3 scale, float angle);
+        void DrawShadow(const Shader* shader, Light* light, vec3 pos, vec3 scale, float angle);
         
     private:
 

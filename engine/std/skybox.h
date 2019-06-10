@@ -16,8 +16,6 @@
 
 namespace engine
 {
-
-
     class Skybox
     {
     public:

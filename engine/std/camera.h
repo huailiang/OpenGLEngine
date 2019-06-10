@@ -64,11 +64,11 @@ namespace engine
             glDeleteBuffers(1, &ubo);
         }
         
-        mat4 GetViewMatrix();
+        mat4 GetViewMatrix() const;
         
-        mat4 GetProjMatrix();
+        mat4 GetProjMatrix() const;
         
-        mat4 GetVP();
+        mat4 GetVP() const;
         
         mat4 RotateAt(const vec3 pos, const vec3 target);
         
@@ -78,7 +78,7 @@ namespace engine
         
         void ProcessMouseScroll(float yoffset);
         
-        void Attach(Shader* shader);
+        void Attach(const Shader* shader);
         
     private:
         void InitUbo();

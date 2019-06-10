@@ -123,12 +123,12 @@ namespace engine
         return stream.str();
     }
 
-    void SetRenderMode(unsigned int mode)
+    void SetRenderMode(const unsigned int mode)
     {
         DRAW_MODE = mode;
     }
 
-    void SetWindowSize(int width, int height)
+    void SetWindowSize(const int width, const int height)
     {
         SCR_WIDTH = width;
         SCR_HEIGHT = height;
@@ -136,7 +136,7 @@ namespace engine
         RENDER_HEIGTH = height * 2;
     }
     
-    unsigned int Hash(std::string str)
+    unsigned int Hash(const std::string str)
     {
         if (str.empty()) {
             return 0;

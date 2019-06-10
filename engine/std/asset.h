@@ -40,15 +40,15 @@ namespace engine
     
     typedef unsigned int EXT;
     
-    bool isTexure(EXT ext);
+    bool isTexure(const EXT ext);
     
-    std::string getTextureExt(EXT ext);
+    std::string getTextureExt(const EXT ext);
     
     EXT getTextureFormat(const char* ext);
     
-    bool isEngineAsset(EXT ext);
+    bool isEngineAsset(const EXT ext);
      
-    std::string getResPath(std::string path);
+    std::string getResPath(const std::string path);
     
 }
 

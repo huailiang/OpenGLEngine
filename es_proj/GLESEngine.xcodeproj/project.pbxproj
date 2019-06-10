@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C01AB8D22ADF6B3001C5070 /* mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C01AB8C22ADF6B3001C5070 /* mesh.cpp */; };
 		4C02E1CF22AB77A0002821B9 /* material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C02E1CC22AB77A0002821B9 /* material.cpp */; };
 		4C02E1D022AB77A0002821B9 /* avatar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C02E1CD22AB77A0002821B9 /* avatar.cpp */; };
 		4C443B8122A25D2D00866F29 /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C443B7F22A25D2D00866F29 /* Scene.cpp */; };
@@ -204,6 +205,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C01AB8C22ADF6B3001C5070 /* mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mesh.cpp; sourceTree = "<group>"; };
 		4C02E1CB22AB77A0002821B9 /* avatar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avatar.h; sourceTree = "<group>"; };
 		4C02E1CC22AB77A0002821B9 /* material.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = material.cpp; sourceTree = "<group>"; };
 		4C02E1CD22AB77A0002821B9 /* avatar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = avatar.cpp; sourceTree = "<group>"; };
@@ -620,6 +622,7 @@
 				4C02E1CB22AB77A0002821B9 /* avatar.h */,
 				4C02E1CD22AB77A0002821B9 /* avatar.cpp */,
 				4C52BE9622ACCA5500D78ACB /* mesh.h */,
+				4C01AB8C22ADF6B3001C5070 /* mesh.cpp */,
 				4C02E1CE22AB77A0002821B9 /* material.h */,
 				4C02E1CC22AB77A0002821B9 /* material.cpp */,
 				4C73C0E822A8BAB3002A8AD0 /* texmgr.h */,
@@ -1024,6 +1027,7 @@
 				4CE2224622A91F0B0095ECCA /* eventmgr.cpp in Sources */,
 				4C7AF66D22A54EA700B63173 /* camera.cpp in Sources */,
 				4C5F3FE622ABFD6D005B7CFD /* asset.cpp in Sources */,
+				4C01AB8D22ADF6B3001C5070 /* mesh.cpp in Sources */,
 				4CE2224822A91F0B0095ECCA /* ttfont.cpp in Sources */,
 				4C8062D2229FC059005FD1F9 /* main.mm in Sources */,
 				4C73C0EC22A8BAB3002A8AD0 /* util.cpp in Sources */,

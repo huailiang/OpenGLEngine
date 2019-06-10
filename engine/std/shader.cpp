@@ -15,7 +15,6 @@
 namespace engine
 {
 
-
     Shader::Shader(const char* vertexPath, const char* fragmentPath, const char* geometryPath, std::string macro)
     {
         // 1. retrieve the vertex/fragment source code from filePath
@@ -78,7 +77,7 @@ namespace engine
         glDeleteProgram(ID);
     }
 
-    void Shader::use()
+    void Shader::use() const
     {
         glUseProgram(ID);
     }

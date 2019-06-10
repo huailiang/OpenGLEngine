@@ -38,11 +38,11 @@ namespace engine
         
         void UpdateY(float dy);
         
-        LightType virtual getType() = 0;
+        LightType virtual getType() const = 0;
         
-        std::string virtual getMacro() = 0;
+        std::string virtual getMacro() const = 0;
         
-        void virtual Apply(Shader* shader) = 0;
+        void virtual Apply(const Shader* shader) = 0;
     };
 
 
@@ -53,13 +53,13 @@ namespace engine
         
         virtual ~DirectLight() { }
         
-        void Apply(Shader* shader);
+        void Apply(const Shader* shader);
         
         mat4 GetLigthSpaceMatrix(vec3 target,float near, float far, float up = 8, float left = 8);
 
-        LightType  getType();
+        LightType  getType() const;
         
-        std::string getMacro();
+        std::string getMacro() const;
     };
 
     class PointLight : public Light
@@ -79,11 +79,11 @@ namespace engine
         
         mat4 GetLigthSpaceMatrix(float near, float far, float up = 8, float left = 8);
         
-        void Apply(Shader* shader);
+        void Apply(const Shader* shader);
         
-        LightType getType();
+        LightType getType() const;
         
-        std::string getMacro();
+        std::string getMacro() const;
     };
 
 
@@ -101,11 +101,11 @@ namespace engine
             this->outerCutOff = cos(glm::radians(outerCutOff));
         }
         
-        void Apply(Shader* shader);
+        void Apply(const Shader* shader);
         
-        LightType getType();
+        LightType getType() const;
         
-        std::string getMacro();
+        std::string getMacro() const;
 
     };
     

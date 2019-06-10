@@ -28,7 +28,7 @@ namespace engine
         
         void SetupMesh();
         
-        virtual void Draw(Shader* shader);
+        virtual void Draw(const Shader* shader);
         
         void DrawMesh();
         
@@ -51,7 +51,7 @@ namespace engine
         
         virtual ~ObjMaterial();
         
-        virtual void Draw(Shader* shader);
+        virtual void Draw(const Shader* shader);
         
     public:
         GLuint diffuse_texture;

@@ -18,7 +18,6 @@
 namespace engine
 {
 
-
     Skybox::Skybox(Camera* camera,std::string name)
     {
         this->camera=camera;

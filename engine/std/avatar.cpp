@@ -35,7 +35,7 @@ namespace engine
     }
 
 
-    mat4 Avatar::GetModelMatrix(vec3 pos, vec3 scale, float angle)
+    mat4 Avatar::GetModelMatrix(const vec3 pos, const vec3 scale, float angle) const
     {
         mat4 model(1);
         model = translate(model, pos);
@@ -58,7 +58,7 @@ namespace engine
     }
 
 
-    void Avatar::DrawShadow(Shader* shader, Light* light, vec3 pos, vec3 scale, float angle)
+    void Avatar::DrawShadow(const Shader* shader, Light* light, vec3 pos, vec3 scale, float angle)
     {
         shader->use();
         shader->setMat4("model", GetModelMatrix(pos, scale, angle));

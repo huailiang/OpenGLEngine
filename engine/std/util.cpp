@@ -119,7 +119,7 @@ namespace engine
     }
     
     
-    void WriteMaterial(string name,std::string texture[])
+    void WriteMaterial(const string name,const std::string texture[])
     {
         std::ofstream ofs;
         ofs.exceptions (std::ofstream::failbit | std::ofstream::badbit);
@@ -151,7 +151,7 @@ namespace engine
         }
     }
     
-    void writeV3(std::ofstream& ofs, VertType type, VertType t, float* ptr)
+    void writeV3(std::ofstream& ofs, const VertType type, const VertType t, float* ptr)
     {
         if((type & t) > 0)
         {
@@ -161,7 +161,7 @@ namespace engine
         }
     }
     
-    void WriteMesh(std::string name,vector<int>& indices, vector<Vertex>& vertices)
+    void WriteMesh(const std::string name,vector<int>& indices, vector<Vertex>& vertices)
     {
         std::ofstream ofs;
         ofs.exceptions (std::ofstream::failbit | std::ofstream::badbit);
@@ -281,7 +281,7 @@ namespace engine
         return ret;
     }
     
-    void ReadObjMaterial(std::string name, ObjMaterial* mat)
+    void ReadObjMaterial(const std::string name, ObjMaterial* mat)
     {
         std::ifstream ifs;
         ifs.exceptions (std::ifstream::failbit | std::ifstream::badbit);
@@ -304,7 +304,7 @@ namespace engine
         }
     }
     
-    MeshData* ReadMesh(std::string name)
+    MeshData* ReadMesh(const std::string name)
     {
         std::ifstream ifs;
         ifs.exceptions (std::ifstream::failbit | std::ifstream::badbit);

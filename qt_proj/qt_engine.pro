@@ -39,6 +39,7 @@ SOURCES += \
     ../engine/std/avatar.cpp \
     ../engine/std/material.cpp \
     ../engine/std/asset.cpp \
+    ../engine/std/mesh.cpp \
     ../engine/gui/eventmgr.cpp \
     ../engine/gui/button.cpp \
     ../engine/gui/label.cpp \

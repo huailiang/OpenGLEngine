@@ -25,11 +25,11 @@ namespace engine
     
     int CheckDir(const char* path);
     
-    bool LoadObj(std::string name);
+    bool LoadObj(const std::string name);
     
-    MeshData* ReadMesh(std::string name);
+    MeshData* ReadMesh(const std::string name);
     
-    void ReadObjMaterial(std::string name, ObjMaterial* mat);
+    void ReadObjMaterial(const std::string name, ObjMaterial* mat);
     
     void ReadSummary(const std::string name, vector<string>& items);
         

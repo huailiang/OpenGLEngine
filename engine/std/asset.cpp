@@ -16,16 +16,16 @@
 namespace engine
 {
     
-    std::string exts[] = {".png",".jpg",".tga",".bmp", ".hdr"};
+    const std::string exts[] = {".png",".jpg",".tga",".bmp", ".hdr"};
     
     
-    bool isTexure(EXT ext)
+    bool isTexure(const EXT ext)
     {
         return (ext & 0x00f0) > 0;
     }
     
     
-    std::string getTextureExt(EXT ext)
+    std::string getTextureExt(const EXT ext)
     {
         if(!isTexure(ext))
         {
@@ -49,13 +49,13 @@ namespace engine
     }
     
     
-    bool isEngineAsset(EXT ext)
+    bool isEngineAsset(const EXT ext)
     {
         return (ext & 0x0f00) > 0;
     }
     
     
-    std::string getResPath(std::string path)
+    std::string getResPath(const std::string path)
     {
 #ifdef _QT_EDIT_
         std::string xpath = std::string(WORKDIR) + "bundle/";
