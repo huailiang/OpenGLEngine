@@ -24,27 +24,15 @@ namespace engine
 
     Terrain::~Terrain()
     {
-        delete shader;
-        delete shader2;
-        shader = NULL;
-        shader2 = NULL;
+        SAFE_DELETE(shader);
+        SAFE_DELETE(shader2);
+        SAFE_DELETE(gdata);
         glDeleteBuffers(1, &floor_vbo);
         glDeleteVertexArrays(1,&floor_vbo);
     }
 
     void Terrain::initial()
-    {
-        
-        float grass_verts[] = {
-            0.0f,  0.5f,  0.0f,  0.0f,  0.0f,
-            0.0f, -0.5f,  0.0f,  0.0f,  1.0f,
-            1.0f, -0.5f,  0.0f,  1.0f,  1.0f,
-            
-            0.0f,  0.5f,  0.0f,  0.0f,  0.0f,
-            1.0f, -0.5f,  0.0f,  1.0f,  1.0f,
-            1.0f,  0.5f,  0.0f,  1.0f,  0.0f
-        };
-        
+    {        
         grass_num = 800;
         for(int i=0; i<grass_num; i++)
         {
@@ -55,17 +43,13 @@ namespace engine
         
         InitPlane(floor_vao, floor_vbo);
         
+        gdata=ReadMesh("grass","common");
         glGenVertexArrays(1, &grass_vao);
         glGenBuffers(1, &grass_vbo);
         glGenBuffers(1, &instVbo);
         glBindVertexArray(grass_vao);
         glBindBuffer(GL_ARRAY_BUFFER,grass_vbo);
-        glBufferData(GL_ARRAY_BUFFER,sizeof(grass_verts), grass_verts, GL_STATIC_DRAW);
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0,3, GL_FLOAT,GL_FALSE,5 * sizeof(float), (void*)0);
-        glEnableVertexAttribArray(1);
-        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
-        
+        gdata->ConfigAttribute();
     #ifdef _Instance_
         InitInstance();
     #endif

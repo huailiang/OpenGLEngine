@@ -13,7 +13,7 @@
 #include "texture.h"
 #include "camera.h"
 #include "light.h"
-
+#include "util.h"
 
 #define _Instance_
 
@@ -51,6 +51,7 @@ namespace engine
         unsigned int grass_num;
         Shader* shader;
         Shader* shader2;
+        MeshData* gdata;
     };
     
 }

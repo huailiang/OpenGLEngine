@@ -110,6 +110,15 @@ plane = [	\
         25.0, -0.5, -25.0,  25.0, 25.0,     0.0, 1.0, 0.0,	\
     ]
 
+grass = [ \
+        0.0,  0.5, 0.0, 0.0, 0.0,   \
+        0.0, -0.5, 0.0, 0.0, 1.0,   \
+        1.0, -0.5, 0.0, 1.0, 1.0,   \
+        0.0,  0.5, 0.0, 0.0, 0.0,   \
+        1.0, -0.5, 0.0, 1.0, 1.0,   \
+        1.0,  0.5, 0.0, 1.0, 0.0,   \
+    ]
+
 
 if os.path.exists(target):
     shutil.rmtree(target,True)
@@ -173,6 +182,22 @@ for x in range(0,6):
 	idx=idx+1
 	writef(f,plane[idx])
 	idx=idx+1
+f.close()
+
+f = open(target+"grass.mesh","wb")
+writeh(f, 0, 6, 0x0011)
+idx = 0
+for x in range(0,6):
+    writef(f,grass[idx])
+    idx=idx+1
+    writef(f,grass[idx])
+    idx=idx+1
+    writef(f,grass[idx])
+    idx=idx+1
+    writef(f,grass[idx])
+    idx=idx+1
+    writef(f,grass[idx])
+    idx=idx+1
 f.close()
 
 
