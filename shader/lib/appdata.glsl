@@ -32,17 +32,20 @@
 /*
  * 可以直接使用定义好的数据结构
  */
+// 0x0012
 #define LayoutBaseVert2() _Pos2 _Coord
-
+// 0x0011
 #define LayoutBaseVert3() _Pos3 _Coord
-
+// 0x0111
 #define LayoutVertex() _Pos3 _Coord _Normal
-
+// 0x1011
 #define LayoutColorVertex() _Pos3 _Coord _Color
-
+// 0x1111
 #define LayoutCompxVertex() _Pos3 _Coord _Normal _Color
-
-#define LayoutTangVertex() _Pos3 _Coord _Normal _Tan _Bitan
+// 0x0311
+#define LayoutTangVertex()  \
+    _Pos3 _Coord _Normal _Tan   \
+    #define ENABLE_TANG_SPACE
 
 
 /*
@@ -75,12 +78,43 @@
 
 #if VERT_TYPE & Vt_TAN
     _Tan
+    #define ENABLE_TANG_SPACE
 #endif
 
 #if VERT_TYPE & Vt_BIT
     _Bitan
+    #define ENABLE_TANG_SPACE
 #endif
 
+
+#ifdef ENABLE_TANG_SPACE
+
+/*
+ * 有法线和切线求副切线
+ */
+vec3 Bitan(mat4 model)
+{
+    mat3 normalMatrix = transpose(inverse(mat3(model)));
+    vec3 T = normalize(normalMatrix * aTangent);
+    vec3 N = normalize(normalMatrix * aNormal);
+    T = normalize(T - dot(T, N) * N);
+    return cross(N, T);
+}
+
+/*
+ * 世界空间到切线空间变换矩阵
+ */
+mat3 TBN(mat4 model)
+{
+    mat3 normalMatrix = transpose(inverse(mat3(model)));
+    vec3 T = normalize(normalMatrix * aTangent);
+    vec3 N = normalize(normalMatrix * aNormal);
+    T = normalize(T - dot(T, N) * N);
+    vec3 B = cross(N, T);
+    return transpose(mat3(T, B, N));
+}
+
+#endif
 
 
 #undef VERT_TYPE

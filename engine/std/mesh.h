@@ -68,14 +68,13 @@ namespace engine
         glm::vec3 Color;
     };
     
-    // type = 0x0711
+    // type = 0x0311
     struct TangVertex : Vert
     {
         glm::vec3 Position;
         glm::vec2 TexCoords;
         glm::vec3 Normal;
         glm::vec3 Tangent;
-        glm::vec3 Bitangent;
     };
 
     struct MeshData

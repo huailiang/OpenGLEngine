@@ -82,7 +82,7 @@ float DecodeFloatRGBA(vec4 enc)
 
 
 /*
- 灰度公式 区分线性空间和gammaf空间
+ * 灰度公式 区分线性空间和gammaf空间
  */
 float Luminance(vec3 rgb)
 {

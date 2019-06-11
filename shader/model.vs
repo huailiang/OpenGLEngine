@@ -12,6 +12,7 @@ out vec3 worldPos;
 
 uniform mat4 model;
 
+
 void main()
 {
     TexCoords = aTexCoords;

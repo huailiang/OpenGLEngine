@@ -245,9 +245,6 @@ namespace engine
             tv0->Tangent = *tan;
             tv1->Tangent = *tan;
             tv2->Tangent = *tan;
-            tv0->Bitangent = *bit;
-            tv1->Bitangent = *bit;
-            tv2->Bitangent = *bit;
         }
         return ptr;
     }
