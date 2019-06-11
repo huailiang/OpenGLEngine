@@ -18,27 +18,32 @@ namespace engine
     #define Vt_Pos3    0x0001
     #define Vt_Pos2    0x0002
     #define Vt_UV      0x0010
-    #define Vt_TAN     0x0020
-    #define Vt_BIT     0x0030
+    #define Vt_UV2     0x0020
+    #define Vt_UV3     0x0040
     #define Vt_Normal  0x0100
+    #define Vt_TAN     0x0200
+    #define Vt_BIT     0x0400
     #define Vt_Color   0x1000
     
     typedef unsigned int VertType;
     
     struct Vert { };
     
+    // type = 0x0012
     struct BaseVert2 : Vert
     {
         glm::vec2 Position;
         glm::vec2 TexCoords;
     };
     
+    // type = 0x0011
     struct BaseVert3 : Vert
     {
         glm::vec3 Position;
         glm::vec2 TexCoords;
     };
     
+    // type = 0x0111
     struct Vertex : Vert
     {
         glm::vec3 Position;
@@ -46,6 +51,7 @@ namespace engine
         glm::vec3 Normal;
     };
     
+    // type = 0x1011
     struct ColorVertex : Vert
     {
         glm::vec3 Position;
@@ -53,12 +59,23 @@ namespace engine
         glm::vec3 Color;
     };
     
+    // type = 0x1111
     struct CompxVertex : Vert
     {
         glm::vec3 Position;
         glm::vec2 TexCoords;
         glm::vec3 Normal;
         glm::vec3 Color;
+    };
+    
+    // type = 0x0711
+    struct TangVertex : Vert
+    {
+        glm::vec3 Position;
+        glm::vec2 TexCoords;
+        glm::vec3 Normal;
+        glm::vec3 Tangent;
+        glm::vec3 Bitangent;
     };
 
     struct MeshData
@@ -94,6 +111,12 @@ namespace engine
         bool hasNormal() const;
         
         bool hasColor() const;
+        
+        /*
+         * you need to delete[] after the function be called
+         */
+        TangVertex* RecalcuteTangent();
+        
     };
 
 }

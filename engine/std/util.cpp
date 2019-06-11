@@ -411,4 +411,18 @@ namespace engine
         caltangent(v1->Position, v2->Position, v3->Position , v1->TexCoords, v2->TexCoords, v3->TexCoords, tan, bit);
     }
     
+    void ConvertVertex(Vertex* vert, TangVertex* tanVert)
+    {
+        tanVert->Position = vert->Position;
+        tanVert->Normal = vert->Normal;
+        tanVert->TexCoords = vert->TexCoords;
+    }
+    
+    void ConvertVertex(CompxVertex* vert, TangVertex* tanVert)
+    {
+        tanVert->Position = vert->Position;
+        tanVert->Normal = vert->Normal;
+        tanVert->TexCoords = vert->TexCoords;
+    }
+    
 }

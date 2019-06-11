@@ -42,7 +42,10 @@ namespace engine
     
     void caltangent(const CompxVertex* v1, const CompxVertex* v2, const CompxVertex* v3, glm::vec3* tan, glm::vec3* bit);
     
+    // 顶点转换
+    void ConvertVertex(Vertex* vert, TangVertex* tanVert);
     
+    void ConvertVertex(CompxVertex* vert, TangVertex* tanVert);
 }
 
 #endif /* tool_h */
