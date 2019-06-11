@@ -17,14 +17,7 @@
 #define WORKDIR "/users/username/qt_engine"
 ```
 
-如果当前打开的是glfw， 你需要在xcode->product->scheme 设置working directory:
-
-
-<br><img src='image/dir.jpg'> <br>
-
-在es工程， 我们使用native的接口读取资源。
-
-
+在es工程(手机上)， 我们使用native的接口读取资源。
 
 
 ## Version
@@ -151,6 +144,11 @@ es浮点数默认是：precision mediump float;
 主要是qt是跨平台的， qt可以支持编写界面，用以扩展引擎编辑器，这里只是初步的实现。
 
 <br><img src='image/qt.jpg'> <br>
+
+## 6. 工具
+
+关于工具的使用， 参考:
+[tools references](/tools/readme.md)
 
 
 <br>

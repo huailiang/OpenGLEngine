@@ -2,8 +2,8 @@
 #define _APP_DATA_
 
 /*
-* 这里的定义和mesh.h对应
-* appdata的叫法是和unity里保持对应，好记吧
+ * 这里的定义和mesh.h对应
+ * appdata的叫法是和unity里保持对应，好记吧
  */
 
 

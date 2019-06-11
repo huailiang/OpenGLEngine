@@ -3,7 +3,7 @@
 
 
 /*
- light cast material
+ * light cast material
  */
 struct Material
 {
@@ -15,7 +15,7 @@ struct Material
 
 
 /*
- light inference config
+ * light inference config
  */
 struct Light
 {

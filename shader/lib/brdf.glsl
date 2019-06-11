@@ -2,14 +2,14 @@
 #define _BRDF_
 
 /*
- 几个BRDF 使用到的核心函数
+ * 几个BRDF 使用到的核心函数
  */
 
 #include "lib/const.glsl"
 
 
 /*
- 正太分布 NDF
+ * 正太分布 NDF
  */
 float DistributionGGX(vec3 N, vec3 H, float roughness)
 {
@@ -27,7 +27,7 @@ float DistributionGGX(vec3 N, vec3 H, float roughness)
 
 
 /*
- 微面元遮挡函数
+ * 微面元遮挡函数
  */
 float GeometrySchlickGGX(float NdotV, float roughness)
 {
@@ -54,7 +54,7 @@ float GeometrySmith(vec3 N, vec3 V, vec3 L, float roughness)
 
 
 /*
- 菲涅尔函数
+ * 菲涅尔函数
  */
 vec3 FresnelSchlick(float cosTheta, vec3 F0)
 {
@@ -63,8 +63,8 @@ vec3 FresnelSchlick(float cosTheta, vec3 F0)
 
 
 /*
-  Cook-Torrance BRDF
-*/
+ * Cook-Torrance BRDF
+ */
 vec3 BRDF(vec3 normal, vec3 view, vec3 light, float matel, float roughness, vec3 albedo)
 {
     vec3 N = normalize(normal);
@@ -84,10 +84,10 @@ vec3 BRDF(vec3 normal, vec3 view, vec3 light, float matel, float roughness, vec3
 }
 
 /*
-对应的公式参考
-  https://learnopengl.com/PBR/IBL/Diffuse-irradiance
- 
- 传进来的lightColor 需要算好随着距离衰减（平行光除外）
+ * 对应的公式参考
+ *  https://learnopengl.com/PBR/IBL/Diffuse-irradiance
+ *
+ * 传进来的lightColor 需要算好随着距离衰减（平行光除外）
  */
 vec3 PBR(vec3 normal, vec3 view, vec3 light, float matel, float roughness, vec3 albedo, vec3 lightColor)
 {
