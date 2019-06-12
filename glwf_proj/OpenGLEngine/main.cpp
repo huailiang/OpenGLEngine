@@ -41,7 +41,7 @@ int main(int argc, const char * argv[])
 {
     if (argc<=1)
     {
-        engine::LoadXmlObj("halo"); return 1;
+//        engine::LoadXmlObj("halo"); return 1;
         return run_engine();
     }
     else
