@@ -108,6 +108,7 @@ namespace engine
         XAnimation* animations;
         
     };
+    
 }
 
 #endif /* animation_h */

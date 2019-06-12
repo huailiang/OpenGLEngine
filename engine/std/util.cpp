@@ -205,8 +205,8 @@ namespace engine
     {
         Vertex* vertex = (Vertex*)vert;
         WriteVertex(ofs, vertex);
-        ofs.write((char*)&vert->count,sizeof(int));
-        for (int i=0; i<vert->count; i++) {
+        ofs.write((char*)&vert->bonecount,sizeof(int));
+        for (int i=0; i<vert->bonecount; i++) {
             ofs.write((char*)(vert->weight+i),sizeof(float));
             ofs.write((char*)(vert->boneindx+i),sizeof(int));
         }
@@ -237,7 +237,7 @@ namespace engine
     }
     
     
-    void WriteMesh(const std::string name,vector<int>& indices, Vert* vertices, int num_vert, VertType type, std::string dir)
+    void WriteSkinMesh(const std::string name,vector<int>& indices, vector<SkinVertex> vertices, std::string dir)
     {
         std::ofstream ofs;
         ofs.exceptions (std::ofstream::failbit | std::ofstream::badbit);
@@ -245,18 +245,18 @@ namespace engine
         {
             if(dir.empty()) dir = curr_obj;
             string basedir = "resources/engine/"+dir+"/";
+            CheckDir(basedir.c_str());
             ofs.open(basedir+name+".mesh",std::ofstream::binary | std::ios::out);
             unsigned int num = (unsigned int)indices.size();
             ofs.write((char*)&num,sizeof(unsigned int));
-            ofs.write((char*)&num_vert,sizeof(unsigned int));
-            ofs.write((char*)&type,sizeof(VertType));
-            loop0i(indices.size())  ofs.write((char*)&indices[i],sizeof(unsigned int));
-            for (size_t i=0; i<num_vert; i++)
-            {
-                if(type == 0x0111) WriteVertex(ofs, (Vertex*)(vertices + i));
-                if(type == 0x2111) WriteSkinVertex(ofs, (SkinVertex*)(vertices + i));
-            }
+            num=(unsigned int)vertices.size();
+            ofs.write((char*)&num,sizeof(unsigned int));
+            num=0x2111;
+            ofs.write((char*)&num,sizeof(VertType));
+            loop0i(indices.size())  ofs.write((char*)&indices[i],sizeof(int));
+            loop0i(vertices.size()) WriteSkinVertex(ofs, &vertices[i]);
             ofs.close();
+            std::cout<<"save skin mesh "<<name<<std::endl;
         }
         catch (std::ofstream::failure e)
         {
@@ -298,7 +298,7 @@ namespace engine
         std::vector<tinyobj::material_t> materials;
         std::string warn;
         std::string err;
-        std::string base_dir = "resources/objects/"+name+"/";
+        std::string base_dir =  std::string(WORKDIR)+"resources/objects/"+name+"/";
         bool ret = tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err, (base_dir + name +".obj").c_str(), base_dir.c_str());
         if (!warn.empty()) std::cout << "WARN: " << warn << std::endl;
         if (!err.empty()) std::cerr << err << std::endl;
@@ -450,8 +450,8 @@ namespace engine
                         readv3(ifs, vert->Position);
                         readv2(ifs, vert->TexCoords);
                         readv3(ifs, vert->Normal);
-                        ifs.read((char*)(&vert->count), sizeof(int));
-                        for (size_t i=0; i<vert->count; i++) {
+                        ifs.read((char*)(&vert->bonecount), sizeof(int));
+                        for (size_t i=0; i<vert->bonecount; i++) {
                             ifs.read((char*)(vert->weight+i), sizeof(float));
                             ifs.read((char*)(vert->boneindx+i), sizeof(int));
                         }
@@ -477,7 +477,8 @@ namespace engine
     void LoadXmlObj(const char* file)
     {
 #ifndef _GLES_
-        std::string path = "resources/xml/"+std::string(file)+".mesh.xml";
+        std::string fname = std::string(file);
+        std::string path = std::string(WORKDIR)+"resources/xml/"+fname+".mesh.xml";
         FILE* fn= std::fopen(path.c_str(), "rb");
         if(!fn) std::cerr<<"xml mesh not found: " <<path <<std::endl;
         char line[1000],name[1000];
@@ -505,18 +506,19 @@ namespace engine
             if(sscanf(line," <vertexboneassignment vertexindex=\"%d\" boneindex=\"%d\" weight=\"%f\" />",&x, &y, &f1) == 3)
             {
                 if(x>=vertices.size()) std::cerr<<"vertexboneassignment"<<x <<">="<<vertices.size()<<std::endl;
-                int i=vertices[x].count;
+                int i=vertices[x].bonecount;
                 if(i < 3)
                 {
                     vertices[x].weight[i] = f1;
                     vertices[x].boneindx[i] = y;
-                    vertices[x].count++;
+                    vertices[x].bonecount++;
                 }
             }
         }
-        fclose(fn);
         
-//        WriteMesh(fname, indices, vertices);
+        fclose(fn);
+        std::cout<<"load xml finish "<<fname<<std::endl;
+        WriteSkinMesh(fname, indices, vertices, fname);
 #endif
     }
     

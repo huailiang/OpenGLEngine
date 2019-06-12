@@ -4,7 +4,6 @@
 //  Copyright © 2019 彭怀亮. All rights reserved.
 //
 
-
 #include "engine.h"
 #include "camera.h"
 #include "shader.h"
@@ -42,7 +41,7 @@ int main(int argc, const char * argv[])
 {
     if (argc<=1)
     {
-//        engine::LoadObj("nanosuit"); return 1;
+        engine::LoadXmlObj("halo"); return 1;
         return run_engine();
     }
     else
@@ -51,6 +50,11 @@ int main(int argc, const char * argv[])
         {
             string name(argv[2]);
             engine::LoadObj(name);
+        }
+        else if(strcmp(argv[1], "xml") == 0)
+        {
+            string name(argv[2]);
+            engine::LoadXmlObj(name.c_str());
         }
         else if(strcmp(argv[1], "mesh") == 0)
         {

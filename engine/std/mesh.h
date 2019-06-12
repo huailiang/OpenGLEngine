@@ -56,7 +56,9 @@ namespace engine
     struct SkinVertex : Vertex
     {
         float weight[3];
-        int boneindx[3], count;
+        int boneindx[3], bonecount;
+        
+        SkinVertex() {  bonecount=0; }
     };
     
     // type = 0x1011
