@@ -27,11 +27,19 @@ namespace engine
     
     bool LoadObj(const std::string name);
     
+    void WriteMesh(const std::string name,vector<int>& indices, vector<Vertex>& vertices, VertType type, std::string dir="");
+    
     MeshData* ReadMesh(const std::string name, const std::string objdir = "");
     
     void ReadObjMaterial(const std::string name, ObjMaterial* mat);
     
     void ReadSummary(const std::string name, vector<string>& items);
+    
+    // 加载xml 模型
+    void LoadXmlObj(const char* file);
+    
+    // 加载骨骼动画
+    void LoadXmlSkeleton(const char* file);
     
     // 计算三角面所在的切线、副切线
     void caltangent(const Vertex* v1, const Vertex* v2, const Vertex* v3, glm::vec3* tan, glm::vec3* bit);

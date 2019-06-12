@@ -17,10 +17,14 @@
 
 #ifdef _GLES_
 #include "FilePath.h"
+#else
+#include <stdio.h>
+#include "../ext/xml/tinyxml.h"
 #endif
 
 #define TINYOBJLOADER_IMPLEMENTATION
 #include "../ext/tiny_obj_loader.h"
+#include "animation.h"
 
 namespace engine
 {
@@ -94,8 +98,32 @@ namespace engine
         f.write((char*)&len, sizeof(size_t));
         if(len > 0) f.write(str.c_str(), len);
     }
-
     
+    void writevec3(ofstream& f, vec3& v)
+    {
+        f.write((char*)&(v.x),sizeof(float));
+        f.write((char*)&(v.y),sizeof(float));
+        f.write((char*)&(v.z),sizeof(float));
+    }
+    
+    void writevec4(ofstream& f, vec4& v)
+    {
+        f.write((char*)&(v.x),sizeof(float));
+        f.write((char*)&(v.y),sizeof(float));
+        f.write((char*)&(v.z),sizeof(float));
+        f.write((char*)&(v.w),sizeof(float));
+    }
+    
+    void writearray(ofstream& f, float arr[], int num)
+    {
+        loop0i(num) f.write((char*)(arr+i),sizeof(float));
+    }
+    
+    void writemat4(ofstream& f, mat4 mat)
+    {
+        loop(4) loop0j(4) f.write((char*)&mat[i][(int)j],sizeof(float));
+    }
+
     void WriteSummary(std::vector<tinyobj::shape_t>& shapes)
     {
         std::ofstream ofs;
@@ -151,7 +179,7 @@ namespace engine
         }
     }
     
-    void writeV3(std::ofstream& ofs, const VertType type, const VertType t, float* ptr)
+    void writeVert3(std::ofstream& ofs, const VertType type, const VertType t, float* ptr)
     {
         if((type & t) > 0)
         {
@@ -161,32 +189,72 @@ namespace engine
         }
     }
     
-    void WriteMesh(const std::string name,vector<int>& indices, vector<Vertex>& vertices)
+    void WriteVertex(std::ofstream& ofs, Vertex* vert)
+    {
+        ofs.write((char*)&vert->Position.x,sizeof(float));
+        ofs.write((char*)&vert->Position.y,sizeof(float));
+        ofs.write((char*)&vert->Position.z,sizeof(float));
+        ofs.write((char*)&vert->TexCoords.x,sizeof(float));
+        ofs.write((char*)&vert->TexCoords.y,sizeof(float));
+        ofs.write((char*)&vert->Normal.x,sizeof(float));
+        ofs.write((char*)&vert->Normal.y,sizeof(float));
+        ofs.write((char*)&vert->Normal.z,sizeof(float));
+    }
+    
+    void WriteSkinVertex(std::ofstream& ofs, SkinVertex* vert)
+    {
+        Vertex* vertex = (Vertex*)vert;
+        WriteVertex(ofs, vertex);
+        ofs.write((char*)&vert->count,sizeof(int));
+        for (int i=0; i<vert->count; i++) {
+            ofs.write((char*)(vert->weight+i),sizeof(float));
+            ofs.write((char*)(vert->boneindx+i),sizeof(int));
+        }
+    }
+    
+    void WriteMesh(const std::string name,vector<int>& indices, vector<Vertex>& vertices, VertType type, std::string dir)
     {
         std::ofstream ofs;
         ofs.exceptions (std::ofstream::failbit | std::ofstream::badbit);
         try
         {
-            string basedir = "resources/engine/"+curr_obj+"/";
+            if(dir.empty()) dir = curr_obj;
+            string basedir = "resources/engine/"+dir+"/";
             ofs.open(basedir+name+".mesh",std::ofstream::binary | std::ios::out);
             unsigned int num = (unsigned int)indices.size();
             ofs.write((char*)&num,sizeof(unsigned int));
             num = (unsigned int)vertices.size();
             ofs.write((char*)&num,sizeof(unsigned int));
-            num = 0x0111; //mesh type
+            ofs.write((char*)&type,sizeof(VertType));
+            loop0i(indices.size()) ofs.write((char*)&indices[i],sizeof(unsigned int));
+            loop0i(vertices.size()) WriteVertex(ofs, &vertices[i]);
+            ofs.close();
+        }
+        catch (std::ofstream::failure e)
+        {
+            std::cout << "ERROR::MESH::SAVE, " <<name<< std::endl;
+        }
+    }
+    
+    
+    void WriteMesh(const std::string name,vector<int>& indices, Vert* vertices, int num_vert, VertType type, std::string dir)
+    {
+        std::ofstream ofs;
+        ofs.exceptions (std::ofstream::failbit | std::ofstream::badbit);
+        try
+        {
+            if(dir.empty()) dir = curr_obj;
+            string basedir = "resources/engine/"+dir+"/";
+            ofs.open(basedir+name+".mesh",std::ofstream::binary | std::ios::out);
+            unsigned int num = (unsigned int)indices.size();
             ofs.write((char*)&num,sizeof(unsigned int));
-            for(size_t i=0;i<indices.size();i++) {
-                 ofs.write((char*)&indices[i],sizeof(unsigned int));
-            }
-            for (size_t i=0; i<vertices.size(); i++) {
-                ofs.write((char*)&vertices[i].Position.x,sizeof(float));
-                ofs.write((char*)&vertices[i].Position.y,sizeof(float));
-                ofs.write((char*)&vertices[i].Position.z,sizeof(float));
-                ofs.write((char*)&vertices[i].TexCoords.x,sizeof(float));
-                ofs.write((char*)&vertices[i].TexCoords.y,sizeof(float));
-                ofs.write((char*)&vertices[i].Normal.x,sizeof(float));
-                ofs.write((char*)&vertices[i].Normal.y,sizeof(float));
-                ofs.write((char*)&vertices[i].Normal.z,sizeof(float));
+            ofs.write((char*)&num_vert,sizeof(unsigned int));
+            ofs.write((char*)&type,sizeof(VertType));
+            loop0i(indices.size())  ofs.write((char*)&indices[i],sizeof(unsigned int));
+            for (size_t i=0; i<num_vert; i++)
+            {
+                if(type == 0x0111) WriteVertex(ofs, (Vertex*)(vertices + i));
+                if(type == 0x2111) WriteSkinVertex(ofs, (SkinVertex*)(vertices + i));
             }
             ofs.close();
         }
@@ -273,7 +341,7 @@ namespace engine
             }
             std::string texture[TEXTURE_NUM];
             getTextures(mesh, materials,texture);
-            WriteMesh(shapes[s].name, indices, vertices);
+            WriteMesh(shapes[s].name, indices, vertices, 0x0111);
             WriteMaterial(shapes[s].name,texture);
             std::cout<<"export "<<shapes[s].name<<std::endl;
         }
@@ -340,7 +408,7 @@ namespace engine
                         readv3(ifs, vertex->Normal);
                         mesh->vertices[i] = vertex;
                     }
-                        break;
+                    break;
                     case 0x0012:
                     {
                         BaseVert2* vert  = new BaseVert2();
@@ -348,7 +416,7 @@ namespace engine
                         readv2(ifs, vert->TexCoords);
                         mesh->vertices[i] = vert;
                     }
-                        break;
+                    break;
                     case 0x0011:
                     {
                         BaseVert3* vert  = new BaseVert3();
@@ -356,7 +424,7 @@ namespace engine
                         readv2(ifs, vert->TexCoords);
                         mesh->vertices[i] = vert;
                     }
-                        break;
+                    break;
                     case 0x1011:
                     {
                         ColorVertex* vert = new ColorVertex();
@@ -365,7 +433,7 @@ namespace engine
                         readv3(ifs, vert->Color);
                         mesh->vertices[i] = vert;
                     }
-                        break;
+                    break;
                     case 0x1111:
                     {
                         CompxVertex* vert = new CompxVertex();
@@ -375,7 +443,21 @@ namespace engine
                         readv3(ifs, vert->Color);
                         mesh->vertices[i] = vert;
                     }
-                        break;
+                    break;
+                    case 0x2111:
+                    {
+                        SkinVertex* vert = new SkinVertex();
+                        readv3(ifs, vert->Position);
+                        readv2(ifs, vert->TexCoords);
+                        readv3(ifs, vert->Normal);
+                        ifs.read((char*)(&vert->count), sizeof(int));
+                        for (size_t i=0; i<vert->count; i++) {
+                            ifs.read((char*)(vert->weight+i), sizeof(float));
+                            ifs.read((char*)(vert->boneindx+i), sizeof(int));
+                        }
+                        mesh->vertices[i] = vert;
+                    }
+                    break;
                     default:
                         std::cerr<<"vertex config not support format: 0x"<<hex<<type<<std::endl;
                         break;
@@ -389,6 +471,274 @@ namespace engine
             std::cerr<<"read mesh error "<<name<<std::endl;
         }
         return nullptr;
+    }
+    
+    
+    void LoadXmlObj(const char* file)
+    {
+#ifndef _GLES_
+        std::string path = "resources/xml/"+std::string(file)+".mesh.xml";
+        FILE* fn= std::fopen(path.c_str(), "rb");
+        if(!fn) std::cerr<<"xml mesh not found: " <<path <<std::endl;
+        char line[1000],name[1000];
+        memset(line, 0, 100);
+        memset(name, 0, 100);
+        std::vector<int> indices;
+        std::vector<SkinVertex> vertices;
+        int x,y,z;
+        float f1,f2,f3;
+        unsigned int normal_id = 0, texcoord_id = 0;
+        while(fgets(line, 1000, fn ) != NULL)
+        {
+            if(sscanf(line," <face v1=\"%d\" v2=\"%d\" v3=\"%d\" />",&x,&y,&z) ==3)
+            {
+                indices.push_back(x); indices.push_back(y);indices.push_back(z);
+            }
+            if(sscanf(line," <position x=\"%f\" y=\"%f\" z=\"%f\" />",&f1,&f2,&f3) == 3)
+            {
+                SkinVertex a;
+                a.Position=glm::vec3(f1,f2,f3);
+                vertices.push_back(a);
+            }
+            if(sscanf(line," <normal x=\"%f\" y=\"%f\" z=\"%f\" />",&f1, &f2, &f3) == 3) vertices[normal_id++].Normal=vec3(f1,f2,f3);
+            if(sscanf(line," <texcoord u=\"%f\" v=\"%f\" />",&f1, &f2 ) == 2)  vertices[texcoord_id++].TexCoords=vec2(f1,f2);
+            if(sscanf(line," <vertexboneassignment vertexindex=\"%d\" boneindex=\"%d\" weight=\"%f\" />",&x, &y, &f1) == 3)
+            {
+                if(x>=vertices.size()) std::cerr<<"vertexboneassignment"<<x <<">="<<vertices.size()<<std::endl;
+                int i=vertices[x].count;
+                if(i < 3)
+                {
+                    vertices[x].weight[i] = f1;
+                    vertices[x].boneindx[i] = y;
+                    vertices[x].count++;
+                }
+            }
+        }
+        fclose(fn);
+        
+//        WriteMesh(fname, indices, vertices);
+#endif
+    }
+    
+    void LoadXmlSkeleton(const char* file)
+    {
+#ifndef _GLES_
+        std::vector<Animation> animations;
+        std::vector<Bone> bones;
+        std::string path = "resources/xml/"+std::string(file)+".skeleton.xml";
+        
+        TiXmlDocument doc(path.c_str());
+        if(!doc.LoadFile()) std::cerr<<path<< " load error "<<doc.ErrorDesc() <<std::endl;
+        
+        TiXmlNode* node = 0;
+        TiXmlElement* skeletonNode = 0;
+        TiXmlElement* animationsElement = 0;
+        TiXmlElement* animationElement = 0;
+        TiXmlElement* bonesElement = 0;
+        TiXmlElement* boneElement = 0;
+        TiXmlElement* boneHierarchyElement = 0;
+        TiXmlElement* boneParentElement = 0;
+        
+        node = doc.FirstChild("skeleton");
+        if(!node) std::cerr<<"node ptr 0"<<std::endl;
+        skeletonNode = node->ToElement();
+        if(!skeletonNode) std::cerr<<"skeletonNode ptr 0"<<std::endl;
+        
+        bonesElement = skeletonNode->FirstChildElement("bones"); assert(bonesElement);
+        for(boneElement = bonesElement->FirstChildElement("bone"); boneElement; boneElement = boneElement->NextSiblingElement("bone"))
+        {
+            int result=0;
+            const char* cBoneName;
+            double dBoneID = 0,dPosX = 0,dPosY = 0,dPosZ = 0;
+            double dAxisAngle = 0,dAxisX = 0,dAxisY = 0,dAxisZ = 0;
+            
+            result+= boneElement->QueryDoubleAttribute("id", &dBoneID);
+            cBoneName = boneElement->Attribute("name");
+            
+            TiXmlElement *positionElement = 0,*rotateElement = 0,*axisElement = 0;
+            positionElement = boneElement->FirstChildElement("position");assert( positionElement );
+            rotateElement = boneElement->FirstChildElement("rotation");assert( rotateElement );
+            axisElement = rotateElement->FirstChildElement("axis");assert( axisElement );
+            result+= positionElement->QueryDoubleAttribute("x", &dPosX );
+            result+= positionElement->QueryDoubleAttribute("y", &dPosY );
+            result+= positionElement->QueryDoubleAttribute("z", &dPosZ );
+            result+= rotateElement->QueryDoubleAttribute("angle", &dAxisAngle );
+            result+= axisElement->QueryDoubleAttribute("x", &dAxisX );
+            result+= axisElement->QueryDoubleAttribute("y", &dAxisY );
+            result+= axisElement->QueryDoubleAttribute("z", &dAxisZ );
+            assert( result == 0 );
+            
+            Bone bone;
+            std::cout<<bone.name <<" "<< cBoneName<<std::endl;
+            bone.nameLength = strnlen(bone.name,ANI_NAME_LEN);
+            bone.rot[0]    = dAxisAngle;
+            bone.rot[1]    = dAxisX;
+            bone.rot[2]    = dAxisY;
+            bone.rot[3]    = dAxisZ;
+            bone.pos[0]    = dPosX;
+            bone.pos[1]    = dPosY;
+            bone.pos[2]    = dPosZ;
+            bone.parent    = -1;
+            bones.push_back(bone);
+        }
+        
+        boneHierarchyElement = skeletonNode->FirstChildElement("bonehierarchy");
+        assert(boneHierarchyElement);
+        for(boneParentElement = boneHierarchyElement->FirstChildElement("boneparent");boneParentElement;
+            boneParentElement = boneParentElement->NextSiblingElement("boneparent"))
+        {
+            const char* cBoneName;
+            const char* cBoneParentName;
+            cBoneName = boneParentElement->Attribute("bone");
+            cBoneParentName = boneParentElement->Attribute("parent");
+            int cBoneIndex = 0 , cBoneParentIndex = 0;
+            for (int i=0; i<(int)bones.size(); i++)
+            {
+                if (bones[i].name == cBoneName) cBoneIndex = i;
+                if(bones[i].name == cBoneParentName) cBoneParentIndex=i;
+            }
+            bones[cBoneIndex].parent = cBoneParentIndex;
+        }
+        
+        for (int i = 0; i < bones.size(); i++)
+        {
+            int p=bones[i].parent;
+            if(p>=0) bones[p].childs.push_back(i);
+        }
+        
+        // build hierarchy out
+        animationsElement = skeletonNode->FirstChildElement("animations");assert( animationsElement );
+        for( animationElement = animationsElement->FirstChildElement("animation"); animationElement;
+            animationElement = animationElement->NextSiblingElement("animation"))
+        {
+            int result;
+            double dAnimationLength=0;
+            const char* cAnimationName;
+            cAnimationName = animationElement->Attribute("name");
+            result = animationElement->QueryDoubleAttribute("length", &dAnimationLength);
+            printf("Animation[%ld] Name:[%s] , Length: %3.03f sec \n" ,animations.size(), cAnimationName, (float) dAnimationLength);
+            
+            Animation animation;
+            animation.frameCount=0;
+            sprintf(animation.name ,"%s", cAnimationName);
+            animation.nameLength = strnlen(animation.name,ANI_NAME_LEN);
+            animation.time = dAnimationLength;
+            std::vector<Track> &tracks = animation.tracks;
+            tracks.resize(bones.size());
+            
+            TiXmlElement *tracksElement = 0,*trackElement = 0;
+            tracksElement = animationElement->FirstChildElement("tracks");
+            assert( tracksElement );
+            
+            for( trackElement = tracksElement->FirstChildElement("track"); trackElement;
+                trackElement = trackElement->NextSiblingElement("track"))
+            {
+                const char* cBoneName;
+                cBoneName = trackElement->Attribute("bone");
+                size_t trackIndex = 0;
+                for (size_t i=0; i<bones.size(); i++) {
+                    if(bones[i].name == cBoneName) { trackIndex = i; break;}
+                }
+                Track &track = tracks[trackIndex];
+                
+                TiXmlElement* keyframesElement = 0, *keyframeElement = 0;
+                keyframesElement = trackElement->FirstChildElement("keyframes");
+                assert( keyframesElement );
+                
+                for( keyframeElement = keyframesElement->FirstChildElement("keyframe"); keyframeElement;
+                    keyframeElement = keyframeElement->NextSiblingElement("keyframe"))
+                {
+                    int result;
+                    double dKeyTime;
+                    result = keyframeElement->QueryDoubleAttribute("time", &dKeyTime);
+                    
+                    double dTranslateX = 0, dTranslateY = 0,dTranslateZ = 0;
+                    double dAxisAngle = 0,dAxisX = 0,dAxisY = 0,dAxisZ = 0;
+                    TiXmlElement *translateElement = 0,*rotateElement = 0,*axisElement = 0;
+                    translateElement = keyframeElement->FirstChildElement( "translate" );assert( translateElement );
+                    rotateElement = keyframeElement->FirstChildElement( "rotate" );assert( rotateElement );
+                    axisElement = rotateElement->FirstChildElement( "axis" );assert( axisElement );
+                    result = translateElement->QueryDoubleAttribute( "x", &dTranslateX );
+                    result+= translateElement->QueryDoubleAttribute( "y", &dTranslateY );
+                    result+= translateElement->QueryDoubleAttribute( "z", &dTranslateZ );
+                    result+= rotateElement->QueryDoubleAttribute( "angle", &dAxisAngle );
+                    result+= axisElement->QueryDoubleAttribute( "x", &dAxisX );
+                    result+= axisElement->QueryDoubleAttribute( "y", &dAxisY );
+                    result+= axisElement->QueryDoubleAttribute( "z", &dAxisZ );
+                    assert( result == 0 );
+                    
+                    Key key;
+                    key.time = dKeyTime;
+                    key.rot  = glm::vec4(dAxisAngle, dAxisX, dAxisY, dAxisZ);
+                    key.pos = glm::vec3(dTranslateX, dTranslateY,dTranslateZ);
+                    track.keys.push_back(key);
+                }
+                animation.frameCount = max(animation.frameCount,(unsigned int)track.keys.size());
+            }
+            animations.push_back(animation);
+        }
+#endif
+    }
+    
+    
+    void WriteTrack(std::ofstream& ofs, vector<Track>& tracks)
+    {
+        size_t t= tracks.size();
+        ofs.write((char*)&t, sizeof(size_t));
+        foreach(track, tracks)
+        {
+            t= track->keys.size();
+            ofs.write((char*)&t,sizeof(size_t));
+            foreach(key, track->keys)
+            {
+                ofs.write((char*)&key->time,sizeof(float));
+                writevec4(ofs, key->rot);
+                writevec3(ofs, key->pos);
+            }
+        }
+    }
+    
+    void WriteAnimation(vector<Bone> bones, vector<Animation> animations,std::string name)
+    {
+        std::ofstream ofs;
+        ofs.exceptions (std::ofstream::failbit | std::ofstream::badbit);
+        try
+        {
+            string basedir = "resources/engine/"+name+"/";
+            ofs.open(basedir+name+".anim",std::ofstream::binary | std::ios::out);
+            unsigned int num = (unsigned int)bones.size();
+            ofs.write((char*)&num,sizeof(unsigned int));
+            num = (unsigned int)animations.size();
+            ofs.write((char*)&num,sizeof(unsigned int));
+            for (size_t i=0; i<bones.size(); i++) {
+                ofs.write((char*)&bones[i].nameLength,sizeof(char));
+                for (size_t i=0; i<ANI_NAME_LEN; i++) {
+                    ofs.write((char*)&bones[i].name[i],sizeof(char));
+                }
+                writearray(ofs, bones[i].rot, 4);
+                writearray(ofs, bones[i].pos, 3);
+                ofs.write((char*)&bones[i].parent,sizeof(int));
+                writemat4(ofs, bones[i].matrix);
+                writemat4(ofs, bones[i].invbindmatrix);
+                size_t sz=bones[i].childs.size();
+                ofs.write((char*)&sz,sizeof(size_t));
+                loop0j(sz) ofs.write((char*)&bones[i].childs[j],sizeof(int));
+            }
+            for (size_t i=0; i<animations.size(); i++) {
+                ofs.write((char*)&animations[i].nameLength,sizeof(char));
+                for (size_t i=0; i<ANI_NAME_LEN; i++) {
+                    ofs.write((char*)&animations[i].name[i],sizeof(char));
+                }
+                ofs.write((char*)&animations[i].time,sizeof(float));
+                WriteTrack(ofs, animations[i].tracks);
+                ofs.write((char*)&animations[i].frameCount,sizeof(int));
+            }
+            ofs.close();
+        }
+        catch (std::ofstream::failure e)
+        {
+            std::cout << "ERROR::ANIMATION::SAVE, " <<name<< std::endl;
+        }
     }
     
     void caltangent(const Vertex* v1, const Vertex* v2, const Vertex* v3, glm::vec3* tan, glm::vec3* bit)

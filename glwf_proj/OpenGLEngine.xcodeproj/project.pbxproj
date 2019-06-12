@@ -33,6 +33,11 @@
 		4C73C0F522A8C18C002A8AD0 /* uimgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C73C0F422A8C18C002A8AD0 /* uimgr.cpp */; };
 		4CD27D46228307050038AE21 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD27D3E2283022D0038AE21 /* OpenGL.framework */; };
 		4CD27D482283070B0038AE21 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD27D472283070B0038AE21 /* CoreVideo.framework */; };
+		4CD71DB022B0CF0500466683 /* tinystr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CD71DAC22B0CF0500466683 /* tinystr.cpp */; };
+		4CD71DB122B0CF0500466683 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CD71DAD22B0CF0500466683 /* tinyxmlparser.cpp */; };
+		4CD71DB222B0CF0500466683 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CD71DAE22B0CF0500466683 /* tinyxmlerror.cpp */; };
+		4CD71DB322B0CF0500466683 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CD71DAF22B0CF0500466683 /* tinyxml.cpp */; };
+		4CD71DB622B0E30100466683 /* animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CD71DB422B0E30100466683 /* animation.cpp */; };
 		4CE861ED22A4F86F000677DC /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE861EB22A4F86F000677DC /* libfreetype.a */; };
 		4CE861EE22A4F86F000677DC /* libglfw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE861EC22A4F86F000677DC /* libglfw3.a */; };
 		4CE861F222A4F87F000677DC /* libfreetype.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE861F022A4F87F000677DC /* libfreetype.6.dylib */; };
@@ -142,6 +147,14 @@
 		4CD27D2B2282F4E30038AE21 /* OpenGLEngine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OpenGLEngine; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CD27D3E2283022D0038AE21 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		4CD27D472283070B0038AE21 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		4CD71DAA22B0CF0500466683 /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
+		4CD71DAB22B0CF0500466683 /* tinystr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinystr.h; sourceTree = "<group>"; };
+		4CD71DAC22B0CF0500466683 /* tinystr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinystr.cpp; sourceTree = "<group>"; };
+		4CD71DAD22B0CF0500466683 /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
+		4CD71DAE22B0CF0500466683 /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
+		4CD71DAF22B0CF0500466683 /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
+		4CD71DB422B0E30100466683 /* animation.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = animation.cpp; sourceTree = "<group>"; };
+		4CD71DB522B0E30100466683 /* animation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = animation.h; sourceTree = "<group>"; };
 		4CE861EB22A4F86F000677DC /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = ../lib/libfreetype.a; sourceTree = "<group>"; };
 		4CE861EC22A4F86F000677DC /* libglfw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglfw3.a; path = ../lib/libglfw3.a; sourceTree = "<group>"; };
 		4CE861F022A4F87F000677DC /* libfreetype.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfreetype.6.dylib; path = ../lib/libfreetype.6.dylib; sourceTree = "<group>"; };
@@ -192,6 +205,8 @@
 				4C1B57B222A68D7900A7AFF1 /* util.cpp */,
 				4C1B57BB22A7BE3800A7AFF1 /* texmgr.h */,
 				4C1B57BA22A7BE3800A7AFF1 /* texmgr.cpp */,
+				4CD71DB522B0E30100466683 /* animation.h */,
+				4CD71DB422B0E30100466683 /* animation.cpp */,
 			);
 			name = std;
 			path = ../engine/std;
@@ -200,6 +215,7 @@
 		4C37750F22A54FA20074744F /* ext */ = {
 			isa = PBXGroup;
 			children = (
+				4CD71DA922B0CF0500466683 /* xml */,
 				4C5680D222A61B5600D313AC /* tiny_obj_loader.h */,
 				4C37751022A54FA20074744F /* stb_image.h */,
 				4C37751122A54FA20074744F /* glad.c */,
@@ -321,6 +337,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		4CD71DA922B0CF0500466683 /* xml */ = {
+			isa = PBXGroup;
+			children = (
+				4CD71DAA22B0CF0500466683 /* tinyxml.h */,
+				4CD71DAB22B0CF0500466683 /* tinystr.h */,
+				4CD71DAC22B0CF0500466683 /* tinystr.cpp */,
+				4CD71DAD22B0CF0500466683 /* tinyxmlparser.cpp */,
+				4CD71DAE22B0CF0500466683 /* tinyxmlerror.cpp */,
+				4CD71DAF22B0CF0500466683 /* tinyxml.cpp */,
+			);
+			path = xml;
+			sourceTree = "<group>";
+		};
 		4CE8602322A4F1EE000677DC /* code */ = {
 			isa = PBXGroup;
 			children = (
@@ -409,6 +438,10 @@
 				4C37752322A54FA20074744F /* uievent.cpp in Sources */,
 				4C37750E22A54F6F0074744F /* terrain.cpp in Sources */,
 				4C37750822A54F6F0074744F /* camera.cpp in Sources */,
+				4CD71DB222B0CF0500466683 /* tinyxmlerror.cpp in Sources */,
+				4CD71DB622B0E30100466683 /* animation.cpp in Sources */,
+				4CD71DB022B0CF0500466683 /* tinystr.cpp in Sources */,
+				4CD71DB122B0CF0500466683 /* tinyxmlparser.cpp in Sources */,
 				4C37752022A54FA20074744F /* uibase.cpp in Sources */,
 				4C1B57BF22A7E03700A7AFF1 /* avatar.cpp in Sources */,
 				4C1B57BC22A7BE3800A7AFF1 /* texmgr.cpp in Sources */,
@@ -422,6 +455,7 @@
 				4C1B57B322A68D7900A7AFF1 /* util.cpp in Sources */,
 				4C1B57B922A6ADBF00A7AFF1 /* material.cpp in Sources */,
 				4C37752422A54FA20074744F /* label.cpp in Sources */,
+				4CD71DB322B0CF0500466683 /* tinyxml.cpp in Sources */,
 				4C4279AD22A54C26003AE42A /* main.cpp in Sources */,
 				4C37750A22A54F6F0074744F /* texture.cpp in Sources */,
 				4C37750B22A54F6F0074744F /* shader.cpp in Sources */,

@@ -24,6 +24,7 @@ namespace engine
     #define Vt_TAN     0x0200
     #define Vt_BIT     0x0400
     #define Vt_Color   0x1000
+    #define Vt_Skin    0x2000
     
     typedef unsigned int VertType;
     
@@ -49,6 +50,13 @@ namespace engine
         glm::vec3 Position;
         glm::vec2 TexCoords;
         glm::vec3 Normal;
+    };
+    
+    //type = 0x2111
+    struct SkinVertex : Vertex
+    {
+        float weight[3];
+        int boneindx[3], count;
     };
     
     // type = 0x1011

@@ -77,7 +77,7 @@ vec4 EncodeFloatRGBA(float v)
 float DecodeFloatRGBA(vec4 enc)
 {
     vec4 kDecodeDot = vec4(1.0, 1.0/255.0, 1.0/65025.0, 1.0/16581375.0);
-    return dot( enc, kDecodeDot );
+    return dot(enc, kDecodeDot);
 }
 
 
