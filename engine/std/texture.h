@@ -32,7 +32,7 @@ namespace engine
         
         GLenum GetFormat();
         
-        unsigned int LoadTexture(bool flipY, EXT ext, int wrap);
+        GLuint LoadTexture(bool flipY, EXT ext, int wrap);
         
         
     private:

@@ -40,7 +40,7 @@ namespace engine
         // -Y (bottom)
         // +Z (front)
         // -Z (back)
-        unsigned int loadCubemap(std::vector<std::string> faces);
+        GLuint loadCubemap(std::vector<std::string> faces);
         
         
     private:

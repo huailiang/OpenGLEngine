@@ -15,7 +15,7 @@ namespace engine
     MeshData::~MeshData()
     {
         delete []indices;
-        for(unsigned int i = 0; i < num_vert; i++)
+        for(uint i = 0; i < num_vert; i++)
             delete vertices[i];
         delete []vertices;
         
@@ -25,7 +25,7 @@ namespace engine
     
     void MeshData::ConfigAttribute(const GLenum usage)
     {
-        if(num_indice > 0) glBufferData(GL_ELEMENT_ARRAY_BUFFER, num_indice * sizeof(unsigned int), indices, usage);
+        if(num_indice > 0) glBufferData(GL_ELEMENT_ARRAY_BUFFER, num_indice * sizeof(uint), indices, usage);
         if(type == 0x0111 || type == 0x1011)
         {
             Vertex* p = GetVertex();
@@ -162,7 +162,7 @@ namespace engine
         if(type == 0x1111)
         {
             ptr = new CompxVertex[num_vert];
-            for(unsigned int i=0;i<num_vert;i++)
+            for(uint i=0;i<num_vert;i++)
             {
                 CompxVertex* v= (CompxVertex*)vertices[i];
                 *(ptr+i) = *v;
@@ -213,9 +213,9 @@ namespace engine
         TangVertex* ptr = new TangVertex[num_vert];
         for (size_t i=0; i<num_indice; i+=3)
         {
-            unsigned int idx0 = indices[i+0];
-            unsigned int idx1 = indices[i+1];
-            unsigned int idx2 = indices[i+2];
+            uint idx0 = indices[i+0];
+            uint idx1 = indices[i+1];
+            uint idx2 = indices[i+2];
             Vert* v0 = vertices[idx0];
             Vert* v1 = vertices[idx1];
             Vert* v2 = vertices[idx2];

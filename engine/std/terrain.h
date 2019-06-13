@@ -44,11 +44,11 @@ namespace engine
         
     private:
         
-        unsigned int floor_vao, floor_vbo;
-        unsigned int grass_vao, grass_vbo, instVbo;
+        GLuint floor_vao, floor_vbo;
+        GLuint grass_vao, grass_vbo, instVbo;
         GLuint floorTexture, grassTexture;
         std::vector<vec3> vegetation;
-        unsigned int grass_num;
+        uint grass_num;
         Shader* shader;
         Shader* shader2;
         MeshData* gdata;

@@ -62,16 +62,16 @@ namespace engine
     // +Z (front)
     // -Z (back)
     // -------------------------------------------------------
-    unsigned int Skybox::loadCubemap(std::vector<std::string> faces)
+    GLuint Skybox::loadCubemap(std::vector<std::string> faces)
     {
-        unsigned int textureID;
+        GLuint textureID;
         glGenTextures(1, &textureID);
         glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
     #ifndef _GLES_
         stbi_set_flip_vertically_on_load(false);
     #endif
         int width, height, nrChannels;
-        for (unsigned int i = 0; i < faces.size(); i++)
+        for (uint i = 0; i < faces.size(); i++)
         {
     #ifndef _GLES_
             std::string path = getResPath(faces[i]);

@@ -51,15 +51,16 @@ namespace engine
 {
 
     const double PI = 3.14159265359;
+    typedef unsigned int uint;
 
-    extern unsigned int SCR_WIDTH;
-    extern unsigned int SCR_HEIGHT;
+    extern uint SCR_WIDTH;
+    extern uint SCR_HEIGHT;
 
     //initial with sreen*2
-    extern unsigned int RENDER_WIDTH;
-    extern unsigned int RENDER_HEIGTH;
+    extern uint RENDER_WIDTH;
+    extern uint RENDER_HEIGTH;
 
-    extern unsigned int DRAW_MODE;
+    extern uint DRAW_MODE;
 
     #define WORKDIR "/Users/penghuailiang/Documents/projects/GL/OpenGLEngine/"
     
@@ -96,6 +97,7 @@ namespace engine
     
     #define frac(a) (a-floor(a))
     
+    
     const float zeroVertices[] = {0.0f,  0.0f};
 
     void GlobalInit();
@@ -121,17 +123,35 @@ namespace engine
 
     std::string Macro(const char* k1, const void* v1, const char* k2, const void* v2, const char* k3, const char* v3);
 
-    void SetRenderMode(const unsigned int mode);
+    void SetRenderMode(const uint mode);
 
     void SetWindowSize(const int width, const int height);
     
-    unsigned int Hash(const std::string str);
+    uint Hash(const std::string str);
     
     void readv2(std::ifstream& f, glm::vec2& v);
     
     void readv3(std::ifstream& f, glm::vec3& v);
     
     void readstring(std::ifstream& f, std::string& str);
+    
+    void readarray(std::ifstream& f, float arr[], int num);
+    
+    void readmat4(std::ifstream& f, glm::mat4& mat);
+    
+    void readvec3(std::ifstream& f, glm::vec3& v);
+    
+    void readvec4(std::ifstream& f, glm::vec4& v);
+    
+    void writestring(std::ofstream& f, std::string str);
+    
+    void writevec3(std::ofstream& f, glm::vec3& v);
+    
+    void writevec4(std::ofstream& f, glm::vec4& v);
+    
+    void writearray(std::ofstream& f, float arr[], int num);
+    
+    void writemat4(std::ofstream& f, glm::mat4 mat);
     
     void caltangent(const glm::vec3 pos1, const glm::vec3 pos2, const glm::vec3 pos3,
                     const glm::vec2 uv1, const glm::vec2 uv2, const glm::vec2 uv3,

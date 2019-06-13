@@ -46,7 +46,7 @@ namespace engine
         ~TTFont();
         
     private:
-        unsigned int VBO,VAO;
+        GLuint VBO,VAO;
         Shader* shader;
         map<GLchar, Character> Characters;
     };

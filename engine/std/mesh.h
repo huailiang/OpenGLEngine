@@ -56,7 +56,8 @@ namespace engine
     struct SkinVertex : Vertex
     {
         float weight[3];
-        int boneindx[3], bonecount;
+        int boneindx[3];
+        int bonecount;
         
         SkinVertex() {  bonecount=0; }
     };
@@ -89,9 +90,9 @@ namespace engine
 
     struct MeshData
     {
-        unsigned int num_indice;
-        unsigned int *indices;
-        unsigned int num_vert;
+        uint num_indice;
+        uint *indices;
+        uint num_vert;
         Vert** vertices;
         VertType type;
         

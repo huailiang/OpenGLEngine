@@ -21,6 +21,7 @@ using namespace std;
 namespace engine
 {
 
+    
     class Avatar
     {
         
@@ -38,6 +39,8 @@ namespace engine
     private:
 
         vector<Material*> materials;
+        
+        MODEL_TYPE type; 
 
     };
     

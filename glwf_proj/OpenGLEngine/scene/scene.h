@@ -244,8 +244,8 @@ protected:
     Camera* camera;
     Light*  light;
     Skybox* skybox;
-    unsigned int SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
-    unsigned int depthMap;
+    uint SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
+    GLuint depthMap;
     float timeValue;
     mat4 lightMatrix;
     bool debug;

@@ -32,6 +32,7 @@ namespace engine
     map<string,GLuint> loaded_textures;
     
     void WriteSummary(std::vector<tinyobj::shape_t>& shapes);
+    void WriteSkeleton(vector<Bone>& bones, vector<Animation>& animations,const std::string name);
     
     int CheckDir(const char* path)
     {
@@ -92,38 +93,6 @@ namespace engine
     }
     
     
-    void writestring(ofstream& f, std::string& str)
-    {
-        size_t len = str.size();
-        f.write((char*)&len, sizeof(size_t));
-        if(len > 0) f.write(str.c_str(), len);
-    }
-    
-    void writevec3(ofstream& f, vec3& v)
-    {
-        f.write((char*)&(v.x),sizeof(float));
-        f.write((char*)&(v.y),sizeof(float));
-        f.write((char*)&(v.z),sizeof(float));
-    }
-    
-    void writevec4(ofstream& f, vec4& v)
-    {
-        f.write((char*)&(v.x),sizeof(float));
-        f.write((char*)&(v.y),sizeof(float));
-        f.write((char*)&(v.z),sizeof(float));
-        f.write((char*)&(v.w),sizeof(float));
-    }
-    
-    void writearray(ofstream& f, float arr[], int num)
-    {
-        loop0i(num) f.write((char*)(arr+i),sizeof(float));
-    }
-    
-    void writemat4(ofstream& f, mat4 mat)
-    {
-        loop(4) loop0j(4) f.write((char*)&mat[i][(int)j],sizeof(float));
-    }
-
     void WriteSummary(std::vector<tinyobj::shape_t>& shapes)
     {
         std::ofstream ofs;
@@ -133,17 +102,16 @@ namespace engine
             string basedir = "resources/engine/"+curr_obj+"/";
             CheckDir(basedir.c_str());
             ofs.open(basedir+"summary.sum",std::ofstream::binary | std::ios::out);
-            unsigned int num = (unsigned int)shapes.size();
-            ofs.write((char*)&num,sizeof(unsigned int));
+            uint num = (uint)shapes.size();
+            ofs.write((char*)&num,sizeof(uint));
+            MODEL_TYPE type = MODEL_OBJ;
+            ofs.write((char*)&type, sizeof(MODEL_TYPE));
             for (size_t i =0; i<shapes.size(); i++) writestring(ofs, shapes[i].name);
             ofs.close();
-        }
-        catch (std::ofstream::failure e)
+        }catch (std::ofstream::failure e)
         {
             std::cout << "ERROR::MESH SUMMARY "<< std::endl;
         }
-        vector<string> vec;
-        ReadSummary(curr_obj, vec);
     }
     
     
@@ -221,12 +189,12 @@ namespace engine
             if(dir.empty()) dir = curr_obj;
             string basedir = "resources/engine/"+dir+"/";
             ofs.open(basedir+name+".mesh",std::ofstream::binary | std::ios::out);
-            unsigned int num = (unsigned int)indices.size();
-            ofs.write((char*)&num,sizeof(unsigned int));
-            num = (unsigned int)vertices.size();
-            ofs.write((char*)&num,sizeof(unsigned int));
+            uint num = (uint)indices.size();
+            ofs.write((char*)&num,sizeof(uint));
+            num = (uint)vertices.size();
+            ofs.write((char*)&num,sizeof(uint));
             ofs.write((char*)&type,sizeof(VertType));
-            loop0i(indices.size()) ofs.write((char*)&indices[i],sizeof(unsigned int));
+            loop0i(indices.size()) ofs.write((char*)&indices[i],sizeof(uint));
             loop0i(vertices.size()) WriteVertex(ofs, &vertices[i]);
             ofs.close();
         }
@@ -244,13 +212,24 @@ namespace engine
         try
         {
             if(dir.empty()) dir = curr_obj;
-            string basedir = "resources/engine/"+dir+"/";
+            string basedir = std::string(WORKDIR) + "resources/engine/"+dir+"/";
             CheckDir(basedir.c_str());
+            
+            // summary
+            ofs.open(basedir+"summary.sum",std::ofstream::binary | std::ios::out);
+            uint num = 1;
+            ofs.write((char*)&num,sizeof(uint));
+            num= MODEL_XML;
+            ofs.write((char*)&num, sizeof(MODEL_TYPE));
+            writestring(ofs, name);
+            ofs.close();
+          
+            // mesh
             ofs.open(basedir+name+".mesh",std::ofstream::binary | std::ios::out);
-            unsigned int num = (unsigned int)indices.size();
-            ofs.write((char*)&num,sizeof(unsigned int));
-            num=(unsigned int)vertices.size();
-            ofs.write((char*)&num,sizeof(unsigned int));
+            num = (uint)indices.size();
+            ofs.write((char*)&num,sizeof(uint));
+            num=(uint)vertices.size();
+            ofs.write((char*)&num,sizeof(uint));
             num=0x2111;
             ofs.write((char*)&num,sizeof(VertType));
             loop0i(indices.size())  ofs.write((char*)&indices[i],sizeof(int));
@@ -265,8 +244,9 @@ namespace engine
     }
     
     
-    void ReadSummary(const std::string name, vector<string>& items)
+    MODEL_TYPE ReadSummary(const std::string name, vector<string>& items)
     {
+        MODEL_TYPE type= MODEL_OBJ;
         std::ifstream ifs;
         ifs.exceptions (std::ifstream::failbit | std::ifstream::badbit);
         try
@@ -274,10 +254,11 @@ namespace engine
             curr_obj = name;
             std::string path = getResPath("engine/"+name+"/summary.sum");
             ifs.open(path, std::ifstream::binary | std::ios::in);
-            unsigned int num = 0;
+            uint num = 0;
             items.clear();
             ifs.seekg(0, ios::beg);
-            ifs.read((char*)(&num), sizeof(unsigned int));
+            ifs.read((char*)(&num), sizeof(uint));
+            ifs.read((char*)&type, sizeof(MODEL_TYPE));
             string str;
             for (size_t i=0; i<num; i++) {
                 readstring(ifs, str);
@@ -288,6 +269,7 @@ namespace engine
         {
             std::cerr<<"read summary error "<<name<<std::endl;
         }
+        return type;
     }
 
     bool LoadObj(const std::string name)
@@ -381,21 +363,21 @@ namespace engine
             if(!objdir.empty()) curr_obj = objdir;
             std::string path = getResPath("engine/"+curr_obj+"/"+name+".mesh");
             ifs.open(path, std::ifstream::binary | std::ios::in);
-            unsigned int inds = 0,verts = 0, type = 0x0;
+            uint inds = 0,verts = 0, type = 0x0;
             ifs.seekg(0, ios::beg);
-            ifs.read((char*)(&inds), sizeof(unsigned int));
-            ifs.read((char*)(&verts), sizeof(unsigned int));
-            ifs.read((char*)(&type), sizeof(unsigned int));
+            ifs.read((char*)(&inds), sizeof(uint));
+            ifs.read((char*)(&verts), sizeof(uint));
+            ifs.read((char*)(&type), sizeof(uint));
             MeshData* mesh = new MeshData();
             mesh->type = type;
             mesh->num_indice = inds;
-            mesh->indices = new unsigned int[inds];
+            mesh->indices = new uint[inds];
             mesh->num_vert = verts;
             mesh->vertices = new Vert*[verts];
             
             for (size_t i=0; i<inds; i++)
             {
-                ifs.read((char*)(&mesh->indices[i]), sizeof(unsigned int));
+                ifs.read((char*)(&mesh->indices[i]), sizeof(uint));
             }
             for (size_t i=0; i<verts; i++)
             {
@@ -488,7 +470,7 @@ namespace engine
         std::vector<SkinVertex> vertices;
         int x,y,z;
         float f1,f2,f3;
-        unsigned int normal_id = 0, texcoord_id = 0;
+        uint normal_id = 0, texcoord_id = 0;
         while(fgets(line, 1000, fn ) != NULL)
         {
             if(sscanf(line," <face v1=\"%d\" v2=\"%d\" v3=\"%d\" />",&x,&y,&z) ==3)
@@ -519,6 +501,7 @@ namespace engine
         fclose(fn);
         std::cout<<"load xml finish "<<fname<<std::endl;
         WriteSkinMesh(fname, indices, vertices, fname);
+        LoadXmlSkeleton(file);
 #endif
     }
     
@@ -527,7 +510,7 @@ namespace engine
 #ifndef _GLES_
         std::vector<Animation> animations;
         std::vector<Bone> bones;
-        std::string path = "resources/xml/"+std::string(file)+".skeleton.xml";
+        std::string path = std::string(WORKDIR) + "resources/xml/"+std::string(file)+".skeleton.xml";
         
         TiXmlDocument doc(path.c_str());
         if(!doc.LoadFile()) std::cerr<<path<< " load error "<<doc.ErrorDesc() <<std::endl;
@@ -571,7 +554,6 @@ namespace engine
             assert( result == 0 );
             
             Bone bone;
-            std::cout<<bone.name <<" "<< cBoneName<<std::endl;
             bone.nameLength = strnlen(bone.name,ANI_NAME_LEN);
             bone.rot[0]    = dAxisAngle;
             bone.rot[1]    = dAxisX;
@@ -622,7 +604,6 @@ namespace engine
             
             Animation animation;
             animation.frameCount=0;
-            sprintf(animation.name ,"%s", cAnimationName);
             animation.nameLength = strnlen(animation.name,ANI_NAME_LEN);
             animation.time = dAnimationLength;
             std::vector<Track> &tracks = animation.tracks;
@@ -675,10 +656,11 @@ namespace engine
                     key.pos = glm::vec3(dTranslateX, dTranslateY,dTranslateZ);
                     track.keys.push_back(key);
                 }
-                animation.frameCount = max(animation.frameCount,(unsigned int)track.keys.size());
+                animation.frameCount = max(animation.frameCount,(uint)track.keys.size());
             }
             animations.push_back(animation);
         }
+        WriteSkeleton(bones, animations, file);
 #endif
     }
     
@@ -700,37 +682,50 @@ namespace engine
         }
     }
     
-    void WriteAnimation(vector<Bone> bones, vector<Animation> animations,std::string name)
+    void ReadTrack(std::ifstream& ifs, XAnimation* anim)
     {
+        ifs.read((char*)&anim->num_track,sizeof(size_t));
+        anim->tracks = new XTrack[anim->num_track];
+        for (uint i=0; i<anim->num_track; i++) {
+            ifs.read((char*)&anim->tracks[i].num_key,sizeof(size_t));
+            anim->tracks[i].keys=new Key[anim->tracks[i].num_key];
+            for (uint j=0; j<anim->tracks[i].num_key; j++) {
+                ifs.read((char*)&anim->tracks[i].keys[j].time,sizeof(float));
+                readvec4(ifs, anim->tracks[i].keys[j].rot);
+                readvec3(ifs, anim->tracks[i].keys[j].pos);
+            }
+        }
+    }
+    
+    void WriteSkeleton(vector<Bone>& bones, vector<Animation>& animations,const std::string name)
+    {
+#ifndef _GLES_
         std::ofstream ofs;
         ofs.exceptions (std::ofstream::failbit | std::ofstream::badbit);
         try
         {
-            string basedir = "resources/engine/"+name+"/";
+            string basedir = std::string(WORKDIR) + "resources/engine/"+name+"/";
             ofs.open(basedir+name+".anim",std::ofstream::binary | std::ios::out);
-            unsigned int num = (unsigned int)bones.size();
-            ofs.write((char*)&num,sizeof(unsigned int));
-            num = (unsigned int)animations.size();
-            ofs.write((char*)&num,sizeof(unsigned int));
+            uint num = (uint)bones.size();
+            ofs.write((char*)&num,sizeof(uint));
+            num = (uint)animations.size();
+            ofs.write((char*)&num,sizeof(uint));
             for (size_t i=0; i<bones.size(); i++) {
                 ofs.write((char*)&bones[i].nameLength,sizeof(char));
-                for (size_t i=0; i<ANI_NAME_LEN; i++) {
-                    ofs.write((char*)&bones[i].name[i],sizeof(char));
-                }
+                loop0j(ANI_NAME_LEN) ofs.write((char*)&bones[i].name[j],sizeof(char));
                 writearray(ofs, bones[i].rot, 4);
                 writearray(ofs, bones[i].pos, 3);
                 ofs.write((char*)&bones[i].parent,sizeof(int));
                 writemat4(ofs, bones[i].matrix);
                 writemat4(ofs, bones[i].invbindmatrix);
-                size_t sz=bones[i].childs.size();
-                ofs.write((char*)&sz,sizeof(size_t));
+                size_t sz= bones[i].childs.size();
+                ofs.write((char*)&sz,sizeof(int));
+                std::cout<<"write size:"<<sz<<std::endl;
                 loop0j(sz) ofs.write((char*)&bones[i].childs[j],sizeof(int));
             }
             for (size_t i=0; i<animations.size(); i++) {
                 ofs.write((char*)&animations[i].nameLength,sizeof(char));
-                for (size_t i=0; i<ANI_NAME_LEN; i++) {
-                    ofs.write((char*)&animations[i].name[i],sizeof(char));
-                }
+                loop0j(ANI_NAME_LEN)  ofs.write((char*)&animations[i].name[j],sizeof(char));
                 ofs.write((char*)&animations[i].time,sizeof(float));
                 WriteTrack(ofs, animations[i].tracks);
                 ofs.write((char*)&animations[i].frameCount,sizeof(int));
@@ -741,7 +736,48 @@ namespace engine
         {
             std::cout << "ERROR::ANIMATION::SAVE, " <<name<< std::endl;
         }
+#endif
     }
+    
+    void ReadSkeleton(Skeleton* skeleton, const std::string name, const std::string dir)
+    {
+        std::ifstream ifs;
+        ifs.exceptions (std::ifstream::failbit | std::ifstream::badbit);
+        try
+        {
+            if(!dir.empty()) curr_obj = dir;
+            std::string path = getResPath("engine/"+curr_obj+"/"+name+".anim");
+            ifs.open(path, std::ifstream::binary | std::ios::in);
+            ifs.seekg(0, ios::beg);
+            ifs.read((char*)(&skeleton->num_bone), sizeof(uint));
+            ifs.read((char*)(&skeleton->num_anim), sizeof(uint));
+            skeleton->bones = new XBone[skeleton->num_bone];
+            skeleton->animations = new XAnimation[skeleton->num_anim];
+            for (uint i=0; i<skeleton->num_bone; i++) {
+                ifs.read((char*)&skeleton->bones[i].nameLength,sizeof(char));
+                loop0j(ANI_NAME_LEN) ifs.read((char*)&skeleton->bones[i].name[j],sizeof(char));
+                readarray(ifs, skeleton->bones[i].rot, 4);
+                readarray(ifs, skeleton->bones[i].pos, 3);
+                ifs.read((char*)&skeleton->bones[i].parent,sizeof(int));
+                readmat4(ifs, skeleton->bones[i].matrix);
+                readmat4(ifs, skeleton->bones[i].invbindmatrix);
+                ifs.read((char*)&skeleton->bones[i].num_child,sizeof(size_t));
+                if(skeleton->bones[i].num_child) skeleton->bones[i].childs = new int[skeleton->bones[i].num_child];
+                loop0j(skeleton->bones[i].num_child) ifs.read((char*)(skeleton->bones[i].childs+j),sizeof(int));
+            }
+            for (uint i=0; i<skeleton->num_anim; i++) {
+                ifs.read((char*)&skeleton->animations[i].nameLength,sizeof(char));
+                loop0j(ANI_NAME_LEN)  ifs.read((char*)(skeleton->animations[i].name+j),sizeof(char));
+                ifs.read((char*)&skeleton->animations[i].time, sizeof(float));
+                
+            }
+        }
+        catch (std::ifstream::failure e)
+        {
+            std::cerr<<"read skeleton error "<<name<<std::endl;
+        }
+    }
+    
     
     void caltangent(const Vertex* v1, const Vertex* v2, const Vertex* v3, glm::vec3* tan, glm::vec3* bit)
     {

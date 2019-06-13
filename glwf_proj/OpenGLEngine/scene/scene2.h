@@ -80,7 +80,7 @@ public:
         glBindTexture(GL_TEXTURE_2D, texture2);
         
         glBindVertexArray(vao);
-        for (unsigned int i = 0; i < 2; i++)
+        for (uint i = 0; i < 2; i++)
         {
             glm::mat4 model = glm::mat4(1.0f);
             model = translate(model, cubePositions[i]);
@@ -122,8 +122,8 @@ private:
 private:
     UIButton* btn_direct, *btn_point, *btn_spot;
 
-    unsigned int vbo, vao;
-    unsigned int texture1, texture2;
+    GLuint vbo, vao;
+    GLuint texture1, texture2;
     LightShader* shader;
 };
 

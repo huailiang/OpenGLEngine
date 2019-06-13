@@ -39,7 +39,7 @@ namespace engine
         void InitBackground();
         
     protected:
-        unsigned int vbo, vao;
+        GLuint vbo, vao;
         Shader* shader;
         
     };

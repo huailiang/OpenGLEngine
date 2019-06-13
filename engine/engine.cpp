@@ -13,12 +13,12 @@
 namespace engine
 {
 
-    unsigned int SCR_WIDTH = 800;
-    unsigned int SCR_HEIGHT = 600;
+    uint SCR_WIDTH = 800;
+    uint SCR_HEIGHT = 600;
 
-    unsigned int RENDER_WIDTH = 1600;
-    unsigned int RENDER_HEIGTH = 1200;
-    unsigned int DRAW_MODE = GL_TRIANGLES;
+    uint RENDER_WIDTH = 1600;
+    uint RENDER_HEIGTH = 1200;
+    uint DRAW_MODE = GL_TRIANGLES;
     
     MeshData* plane = nullptr;
     MeshData* cube = nullptr;
@@ -115,7 +115,7 @@ namespace engine
         return stream.str();
     }
 
-    void SetRenderMode(const unsigned int mode)
+    void SetRenderMode(const uint mode)
     {
         DRAW_MODE = mode;
     }
@@ -128,12 +128,12 @@ namespace engine
         RENDER_HEIGTH = height * 2;
     }
     
-    unsigned int Hash(const std::string str)
+    uint Hash(const std::string str)
     {
         if (str.empty()) {
             return 0;
         }
-        unsigned int hash =0;
+        uint hash =0;
         int seed = 5;
         for (int i=0; i<str.size(); i++) {
             hash = (hash << seed) + (short)str[i] + hash;
@@ -168,6 +168,63 @@ namespace engine
         }
     }
     
+    void readarray(std::ifstream& f, float arr[], int num)
+    {
+        loop0i(num) f.read((char*)(arr+i),sizeof(float));
+    }
+    
+    void readmat4(std::ifstream& f, glm::mat4& mat)
+    {
+        loop(4) loop0j(4) f.read((char*)&mat[i][(int)j],sizeof(float));
+    }
+    
+    void readvec3(std::ifstream& f, glm::vec3& v)
+    {
+        f.read((char*)&(v.x),sizeof(float));
+        f.read((char*)&(v.y),sizeof(float));
+        f.read((char*)&(v.z),sizeof(float));
+    }
+    
+    void readvec4(std::ifstream& f, glm::vec4& v)
+    {
+        f.read((char*)&(v.x),sizeof(float));
+        f.read((char*)&(v.y),sizeof(float));
+        f.read((char*)&(v.z),sizeof(float));
+        f.read((char*)&(v.w),sizeof(float));
+    }
+
+    void writestring(ofstream& f, std::string str)
+    {
+        size_t len = str.size();
+        f.write((char*)&len, sizeof(size_t));
+        if(len > 0) f.write(str.c_str(), len);
+    }
+    
+    void writevec3(std::ofstream& f, vec3& v)
+    {
+        f.write((char*)&(v.x),sizeof(float));
+        f.write((char*)&(v.y),sizeof(float));
+        f.write((char*)&(v.z),sizeof(float));
+    }
+    
+    void writevec4(std::ofstream& f, vec4& v)
+    {
+        f.write((char*)&(v.x),sizeof(float));
+        f.write((char*)&(v.y),sizeof(float));
+        f.write((char*)&(v.z),sizeof(float));
+        f.write((char*)&(v.w),sizeof(float));
+    }
+    
+    void writearray(std::ofstream& f, float arr[], int num)
+    {
+        loop0i(num) f.write((char*)(arr+i),sizeof(float));
+    }
+    
+    void writemat4(std::ofstream& f, mat4 mat)
+    {
+        loop(4) loop0j(4) f.write((char*)&mat[i][(int)j],sizeof(float));
+    }
+
     void caltangent(const glm::vec3 pos1, const glm::vec3 pos2, const glm::vec3 pos3,
                     const glm::vec2 uv1, const glm::vec2 uv2, const glm::vec2 uv3,
                     glm::vec3* tan, glm::vec3* bit)

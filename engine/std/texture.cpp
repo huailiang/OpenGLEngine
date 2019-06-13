@@ -32,7 +32,7 @@ namespace engine
         TexMgr::getInstance()->RemvTexture(textureID);
     }
 
-    unsigned int Texture::LoadTexture(bool flipY, EXT ext,int wrap)
+    GLuint Texture::LoadTexture(bool flipY, EXT ext,int wrap)
     {
     #ifndef _GLES_
         stbi_set_flip_vertically_on_load(flipY);

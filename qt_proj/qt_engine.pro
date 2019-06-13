@@ -28,6 +28,10 @@ CONFIG += c++11
 SOURCES += \
     main.cpp \
     ../engine/ext/glad.c \
+    ../engine/ext/xml/tinyxml.cpp \
+    ../engine/ext/xml/tinystr.cpp \
+    ../engine/ext/xml/tinyxmlerror.cpp \
+    ../engine/ext/xml/tinyxmlparser.cpp \
     ../engine/engine.cpp \
     ../engine/std/camera.cpp \
     ../engine/std/light.cpp \
@@ -54,6 +58,8 @@ HEADERS += \
     ../engine/profile.h \
     ../engine/std/shader.h \
     ../engine/ext/stb_image.h \
+    ../engine/ext/xml/tinyxml.h \
+    ../engine/ext/xml/tinystr.h \
     ../engine/ext/tiny_obj_loader.h \
     ../engine/std/texture.h \
     ../engine/std/camera.h \

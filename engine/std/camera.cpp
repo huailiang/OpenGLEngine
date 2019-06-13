@@ -70,7 +70,7 @@ namespace engine
     void Camera::Attach(const Shader* shader)
     {
         //config
-        unsigned int uniform = glGetUniformBlockIndex(shader->ID, "Block");
+        GLuint uniform = glGetUniformBlockIndex(shader->ID, "Block");
         //link
         glUniformBlockBinding(shader->ID, uniform, 0);
         //bind to ubo

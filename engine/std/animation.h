@@ -33,7 +33,7 @@ namespace engine
     // for runtime
     struct XTrack
     {
-        unsigned int num_key;
+        uint num_key;
         Key* keys;
     };
     
@@ -44,7 +44,7 @@ namespace engine
         char name[ANI_NAME_LEN];
         float time;
         std::vector<Track> tracks;
-        unsigned int frameCount;
+        uint frameCount;
     };
     
     // for runtime
@@ -53,9 +53,9 @@ namespace engine
         char nameLength;
         char name[ANI_NAME_LEN];
         float time;
-        unsigned int num_track;
+        uint num_track;
         XTrack* tracks;
-        unsigned int frameCount;
+        uint frameCount;
     };
     
     // for tool
@@ -81,7 +81,7 @@ namespace engine
         int parent;
         glm::mat4 matrix;
         glm::mat4 invbindmatrix;
-        unsigned int num_child;
+        uint num_child;
         int* childs;
     };
     
@@ -99,7 +99,8 @@ namespace engine
         
         Key& GetInterpolatedKey(XTrack& track,int frame,float weight,bool normalize=false);
         
-    private:
+        
+    public:
         
         int num_bone, num_anim;
         

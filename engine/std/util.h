@@ -13,11 +13,19 @@
 #include "../engine.h"
 #include "material.h"
 #include "texmgr.h"
+#include "animation.h"
 
 namespace engine
 {
     
     using namespace std;
+    
+    #define MODEL_XML 0x01
+    #define MODEL_OBJ 0x02
+    #define MODEL_FBX 0x03
+    
+    typedef unsigned int MODEL_TYPE;
+
     
     extern map<string,GLuint> loaded_textures;
     
@@ -33,7 +41,9 @@ namespace engine
     
     void ReadObjMaterial(const std::string name, ObjMaterial* mat);
     
-    void ReadSummary(const std::string name, vector<string>& items);
+    MODEL_TYPE ReadSummary(const std::string name, vector<string>& items);
+    
+    void ReadSkeleton(Skeleton* skeleton, const std::string name, const std::string dir);
     
     // 加载xml 模型
     void LoadXmlObj(const char* file);
