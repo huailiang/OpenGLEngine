@@ -25,6 +25,7 @@ namespace engine
     #define TGA   0x0030  //.tga
     #define BMP   0x0040  //.bmp
     #define HDR   0x0050  //.hdr
+    #define TIF   0x0060  //.tif
 
     #define FBX   0x0001 //.fbx
     #define MTL   0x0002 //.mtl

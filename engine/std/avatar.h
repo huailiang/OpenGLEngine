@@ -21,26 +21,40 @@ using namespace std;
 namespace engine
 {
 
-    
     class Avatar
     {
         
     public:
-        Avatar(const char* name);
+        
+        Avatar(const char* name, glm::vec3 pos = glm::vec3(0), glm::vec3 scale = glm::vec3(1), float angle = 0);
         
         ~Avatar();
         
-        mat4 GetModelMatrix(const vec3 pos, const vec3 scale, float angle) const;
+        void RecalModelMatrix();
         
-        void Draw(Shader* shader, Light* light, vec3 pos, vec3 scale, float angle);
+        void Draw(Shader* shader, Light* light);
         
-        void DrawShadow(const Shader* shader, Light* light, vec3 pos, vec3 scale, float angle);
+        void DrawShadow(const Shader* shader, Light* light);
+        
+        void Rotate(float delta);
+        
+        void Move(const glm::vec3 move);
+        
+        void Scale(const float scale);
+        
+        void Scale(const glm::vec3 scale);
         
     private:
 
         vector<Material*> materials;
         
-        MODEL_TYPE type; 
+        MODEL_TYPE type;
+        
+        glm::mat4 matrix;
+        
+        glm::vec3 pos, scale;
+        
+        float angle;
 
     };
     

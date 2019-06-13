@@ -41,11 +41,6 @@ int main(int argc, const char * argv[])
 {
     if (argc<=1)
     {
-//        engine::LoadXmlObj("halo");
-//        engine::ReadMesh("halo","halo");
-//        Skeleton skeleton;
-//        engine::ReadSkeleton(&skeleton, "halo", "halo");
-//        return 1;
         return run_engine();
     }
     else

@@ -14,7 +14,6 @@ engineWidget::engineWidget(QWidget *parent) :
 
 engineWidget::~engineWidget()
 {
-    delete avatar;
     delete ui;
     delete camera;
     delete light;
@@ -43,7 +42,6 @@ void engineWidget::initializeGL()
     camera = new Camera(glm::vec3(0.0f,0.0f,3.0f));
     light = new DirectLight(vec3(1.0f), vec3(-1,0,-2));
     skybox = new Skybox(camera, "mp_5dim");
-    avatar = new Avatar("nanosuit");
     InitCube(vao, vbo);
     InitShader();
     Texture("textures/container", JPG, &texture1);
@@ -85,9 +83,6 @@ void engineWidget::paintGL()
         glDrawArrays(DRAW_MODE, 0, 36);
     }
     glBindVertexArray(0);
-
-    avatar->Draw(shader, light, vec3(-1.0f, -0.5f, -1.5f), vec3(0.12f), -16*GetRuntime());
-
     if(skybox) skybox->Draw();
 
     label->drawText("Hello, OpenGL");

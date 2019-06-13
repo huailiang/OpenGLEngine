@@ -16,7 +16,7 @@
 namespace engine
 {
     
-    const std::string exts[] = {".png",".jpg",".tga",".bmp", ".hdr"};
+    const std::string exts[] = {".png",".jpg",".tga",".bmp", ".hdr", ".tif"};
     
     
     bool isTexure(const EXT ext)
@@ -39,7 +39,7 @@ namespace engine
     
     EXT getTextureFormat(const char* ext)
     {
-        for (int i=0; i<5; i++) {
+        for (int i=0; i<6; i++) {
             if(strcmp(exts[i].c_str(),ext)==0)
             {
                 return (i+1)<<4;

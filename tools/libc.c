@@ -27,11 +27,17 @@ unsigned int hash(char* str,int num)
 }
 
 
-/*
-int main()
-{
-	char* str = "resource/obj/sui/export hello world.png";
-	printf("hash: %ud\n", hash(str, 39));
-	return 0;
-}
-*/
+
+// int main()
+// {
+// 	char* str = "engine/halo/summary.sum";
+// 	int i=0;
+// 	while(*(str+i)!='\0')
+// 	{
+// 		printf("%d %c\n", i, *(str+i));
+// 		if(i>100) break;
+// 		i++;
+// 	}
+// 	printf("hash: %d, %ud\n", i,hash(str, 23));
+// 	return 0;
+// }

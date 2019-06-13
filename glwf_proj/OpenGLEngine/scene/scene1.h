@@ -20,7 +20,8 @@ class Scene1 : public Scene
 public:
    ~Scene1()
     {
-        SAFE_DELETE(avatar);
+        SAFE_DELETE(nano);
+        SAFE_DELETE(halo);
         SAFE_DELETE(terrain);
         SAFE_DELETE(shader);
         SAFE_DELETE(btn_normal);
@@ -42,7 +43,8 @@ public:
         ApplyCamera(nmShader);
         terrain = new Terrain();
     
-        avatar = new Avatar("nanosuit");
+        nano = new Avatar("nanosuit",vec3(0.4f, -0.5f, -1.f), vec3(0.12f));
+        halo = new Avatar("halo", vec3(-1.0f, -0.5f, -1.5f), vec3(0.2f));
     }
     
     void DrawUI()
@@ -58,16 +60,20 @@ public:
     {
         Scene::DrawShadow(depthShader);
         terrain->DrawShadow(depthShader);
-        avatar->DrawShadow(depthShader, light, vec3(0.2f, -0.5f, -1.5f), vec3(0.12f), -16*timeValue);
+        nano->DrawShadow(depthShader, light);
+        halo->DrawShadow(depthShader, light);
     }
     
     void DrawScene()
     {
         terrain->Draw(camera, lightMatrix, light, depthMap);
-        avatar->Draw(shader, light, vec3(0.2f, -0.5f, -1.5f), vec3(0.12f), -16*timeValue);
+        nano->Rotate(0.1f);
+        halo->Rotate(-0.1f);
+        nano->Draw(shader, light);
+        halo->Draw(shader, light);
         if(shownormal)
         {
-            avatar->Draw(nmShader, light, vec3(0.2f, -0.5f, -1.5f), vec3(0.12f), -16*timeValue);
+            nano->Draw(nmShader, light);
         }
     }
     
@@ -90,7 +96,7 @@ private:
     LightShader* shader;
     Shader* nmShader;
     GLuint texture1, texture2;
-    Avatar *avatar;
+    Avatar *nano, *halo;
 public:
     bool shownormal;
 };

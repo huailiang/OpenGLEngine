@@ -62,7 +62,8 @@ void Draw(ESContext *esContext)
         glDrawArrays(DRAW_MODE, 0, 36);
     }
     glBindVertexArray(0);
-    avatar->Draw(shader, light, vec3(-2.0f, -0.5f, -1.5f), vec3(0.12f), -16*GetRuntime());
+    avatar->Rotate(0.01f);
+    avatar->Draw(shader, light);
     if(skybox) skybox->Draw();
     if(label) label->drawText("hello, opengl es");
 }
@@ -189,7 +190,7 @@ bool InitScene(ESContext* context)
     light = new DirectLight(vec3(1.0f), vec3(-1, 0, -2));
     TTFont::getInstance()->initial();
     label = new UILabel(vec2(30,560), vec3(1), 1);
-    avatar = new Avatar("nanosuit");
+    avatar = new Avatar("nanosuit",vec3(-2.0f, -0.5f, -1.5f), vec3(0.12f));
     InitCube(vao, vbo);
     shader = new LightShader("light.vs","light.fs", nullptr, Macro(light->getMacro().c_str()));
     shader->use();

@@ -11,9 +11,12 @@
 namespace engine
 {
 
-    Avatar::Avatar(const char* name)
+    Avatar::Avatar(const char* name, glm::vec3 pos, glm::vec3 scale, float angle)
     {
         vector<string> items;
+        this->pos = pos;
+        this->scale = scale;
+        this->angle= angle;
         ReadSummary(name, items);
         materials.clear();
         for (size_t i=0; i<items.size(); i++)
@@ -36,20 +39,22 @@ namespace engine
     }
 
 
-    mat4 Avatar::GetModelMatrix(const vec3 pos, const vec3 scale, float angle) const
+    void Avatar::RecalModelMatrix()
     {
         mat4 model(1);
         model = translate(model, pos);
         model = glm::scale(model, scale);
         model = rotate(model, radians(angle), vec3(0.0f,1.0f,0.0f));
-        return model;
+        matrix = model;
     }
+    
+    
 
-    void Avatar::Draw(Shader* shader, Light* light, vec3 pos, vec3 scale, float angle)
+    void Avatar::Draw(Shader* shader, Light* light)
     {
         shader->use();
         light->Apply(shader);
-        shader->setMat4("model", GetModelMatrix(pos, scale, angle));
+        shader->setMat4("model", matrix);
         LightShader* lshader =static_cast<LightShader*>(shader);
         if(lshader) lshader->ApplyLight();
         for (size_t i=0; i<materials.size(); i++)
@@ -59,15 +64,39 @@ namespace engine
     }
 
 
-    void Avatar::DrawShadow(const Shader* shader, Light* light, vec3 pos, vec3 scale, float angle)
+    void Avatar::DrawShadow(const Shader* shader, Light* light)
     {
         shader->use();
-        shader->setMat4("model", GetModelMatrix(pos, scale, angle));
+        shader->setMat4("model", matrix);
         for (size_t i=0; i<materials.size(); i++)
         {
             materials[i]->DrawMesh();
         }
     }
-
-
+    
+    
+    void Avatar::Rotate(float delta)
+    {
+        angle += delta;
+        RecalModelMatrix();
+    }
+    
+    void Avatar::Move(glm::vec3 move)
+    {
+        this->pos += move;
+        RecalModelMatrix();
+    }
+    
+    void Avatar::Scale(float scale)
+    {
+        this->scale *= scale;
+        RecalModelMatrix();
+    }
+    
+    void Avatar::Scale(glm::vec3 scale)
+    {
+        this->scale = scale;
+        RecalModelMatrix();
+    }
+    
 }

@@ -110,6 +110,8 @@ namespace engine
         
         CompxVertex* GetCompxVertex() const;
         
+        Vertex* GetSkinVertex() const;
+        
         bool hasPos() const;
 
         bool hasPos3() const;

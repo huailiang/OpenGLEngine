@@ -26,16 +26,18 @@ namespace engine
     void MeshData::ConfigAttribute(const GLenum usage)
     {
         if(num_indice > 0) glBufferData(GL_ELEMENT_ARRAY_BUFFER, num_indice * sizeof(uint), indices, usage);
+     
+        
         if(type == 0x0111 || type == 0x1011)
         {
-            Vertex* p = GetVertex();
+            Vert* p = GetVertex();
             glBufferData(GL_ARRAY_BUFFER, num_vert * sizeof(Vertex), p, usage);
             glEnableVertexAttribArray(0);
             glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), nullptr);
             glEnableVertexAttribArray(1);
-            glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, TexCoords));
+            glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(3*sizeof(float)));
             glEnableVertexAttribArray(2);
-            glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, Normal)); //normal is equal color
+            glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(2*sizeof(float))); //normal is equal color
             delete [] p;
         }
         else if(type == 0x1111)
@@ -72,12 +74,29 @@ namespace engine
             glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(BaseVert2), (void*)offsetof(BaseVert2, TexCoords));
             delete [] p;
         }
+        else if(type == 0x2111)
+        {
+            Vertex* p = GetSkinVertex();
+            glBufferData(GL_ARRAY_BUFFER, num_vert * sizeof(Vertex), p, usage);
+            glEnableVertexAttribArray(0);
+            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), nullptr);
+            glEnableVertexAttribArray(1);
+            glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3*sizeof(float)));
+            glEnableVertexAttribArray(2);
+            glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(5*sizeof(float)));
+//            glEnableVertexAttribArray(3);
+//            glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(SkinVertex), (void*)(8*sizeof(float)));
+//            glEnableVertexAttribArray(4);
+//            glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, sizeof(SkinVertex), (void*)(3*sizeof(float)));
+            delete [] p;
+
+        }
         else
         {
             std::cerr<<"not support vertex attribute: 0x"<<hex<<type<<std::endl;
         }
     }
-    
+        
     BaseVert2* MeshData::GetBaseVertex2() const
     {
         BaseVert2* ptr = nullptr;
@@ -171,6 +190,29 @@ namespace engine
         else
         {
             std::cerr<<"CompxVertex type error, 0x"<<hex<<type<<std::endl;
+        }
+        return ptr;
+    }
+    
+    Vertex* MeshData::GetSkinVertex() const
+    {
+        Vertex* ptr = nullptr;
+        if(type == 0x2111)
+        {
+            ptr = new SkinVertex[num_vert];
+            for(uint i=0;i<num_vert;i++)
+            {
+                SkinVertex* v= (SkinVertex*)vertices[i];
+                Vertex vv ;
+                vv.Position= v->Position;
+                vv.TexCoords = v->TexCoords;
+                vv.Normal = v->Normal;
+                *(ptr+i) = vv;
+            }
+        }
+        else
+        {
+            std::cerr<<"SkinVertex type error, 0x"<<hex<<type<<std::endl;
         }
         return ptr;
     }

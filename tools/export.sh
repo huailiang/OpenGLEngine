@@ -32,12 +32,11 @@ if [ -d "$MESH" ]; then
 fi
 
 
-# 使用c++导出mesh等资源
+# 使用c++导出obj的mesh等资源
 function _export() 
 {
 	echo "\nstart export ${1}"
 	./OpenGLEngine "tools" $1
-
 }
 
 cp ${TARGET}/OpenGLEngine ./
@@ -50,6 +49,9 @@ for i in $dir
 do
 	_export $i
 done
+
+# 导出xml资源
+./OpenGLEngine "xml" "halo"
 
 
 # 移除残留

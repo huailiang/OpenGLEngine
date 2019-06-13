@@ -69,7 +69,6 @@ public:
     void DrawScene()
     {
         Scene::ClearScene();
-        
         vec3 cubePositions[] = { glm::vec3( 0.0f,  0.0f,  -2.0f), glm::vec3(2.0f,  1.0f, -4.0f) };
         shader->use();
         shader->setFloat("scale", 1);

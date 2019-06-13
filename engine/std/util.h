@@ -39,6 +39,8 @@ namespace engine
     
     MeshData* ReadMesh(const std::string name, const std::string objdir = "");
     
+    void WriteMaterial(const string name,const std::string texture[],std::string dir="");
+    
     void ReadObjMaterial(const std::string name, ObjMaterial* mat);
     
     MODEL_TYPE ReadSummary(const std::string name, vector<string>& items);

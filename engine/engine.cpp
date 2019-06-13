@@ -136,7 +136,8 @@ namespace engine
         uint hash =0;
         int seed = 5;
         for (int i=0; i<str.size(); i++) {
-            hash = (hash << seed) + (short)str[i] + hash;
+            short sc = (short)str[i];
+            hash = (hash << seed) + str[i] + hash;
         }
         return hash;
     }

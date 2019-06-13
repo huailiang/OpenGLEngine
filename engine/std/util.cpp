@@ -6,9 +6,7 @@
 //  Copyright © 2019 彭怀亮. All rights reserved.
 //
 
-
 #include "util.h"
-
 
 #include <memory>
 #ifdef __APPLE__
@@ -115,13 +113,14 @@ namespace engine
     }
     
     
-    void WriteMaterial(const string name,const std::string texture[])
+    void WriteMaterial(const string name,const std::string texture[],std::string dir)
     {
         std::ofstream ofs;
         ofs.exceptions (std::ofstream::failbit | std::ofstream::badbit);
         try
         {
-            string basedir = "resources/engine/"+curr_obj+"/";
+            if(dir.empty()) dir = curr_obj;
+            string basedir = "resources/engine/"+dir+"/";
             ofs.open(basedir+name+".mat",std::ofstream::binary | std::ios::out);
             for(int i=0;i<TEXTURE_NUM;i++)
             {
@@ -223,6 +222,12 @@ namespace engine
             ofs.write((char*)&num, sizeof(MODEL_TYPE));
             writestring(ofs, name);
             ofs.close();
+            
+            //materail
+            std::string texture[4];
+            texture[0]="masterchief_base.jpg";
+            texture[1] = texture[2] = texture[3] = "";
+            WriteMaterial(name, texture, name);
           
             // mesh
             ofs.open(basedir+name+".mesh",std::ofstream::binary | std::ios::out);
@@ -466,21 +471,27 @@ namespace engine
         char line[1000],name[1000];
         memset(line, 0, 100);
         memset(name, 0, 100);
+        
         std::vector<int> indices;
         std::vector<SkinVertex> vertices;
         int x,y,z;
         float f1,f2,f3;
         uint normal_id = 0, texcoord_id = 0;
-        while(fgets(line, 1000, fn ) != NULL)
+        int lod = 0;
+        float mx1=0,mx2=0,mx3=0;
+        while(fgets(line, 1000, fn) != NULL)
         {
-            if(sscanf(line," <face v1=\"%d\" v2=\"%d\" v3=\"%d\" />",&x,&y,&z) ==3)
+            if(sscanf(line," <face v1=\"%d\" v2=\"%d\" v3=\"%d\" />",&x,&y,&z) == 3)
             {
-                indices.push_back(x); indices.push_back(y);indices.push_back(z);
+                if (lod==3) { indices.push_back(x); indices.push_back(y); indices.push_back(z); }
             }
             if(sscanf(line," <position x=\"%f\" y=\"%f\" z=\"%f\" />",&f1,&f2,&f3) == 3)
             {
                 SkinVertex a;
                 a.Position=glm::vec3(f1,f2,f3);
+                if (f1>mx1) mx1=f1;
+                if (f2>mx2) mx2=f2;
+                if (f3>mx3) mx3=f3;
                 vertices.push_back(a);
             }
             if(sscanf(line," <normal x=\"%f\" y=\"%f\" z=\"%f\" />",&f1, &f2, &f3) == 3) vertices[normal_id++].Normal=vec3(f1,f2,f3);
@@ -496,10 +507,15 @@ namespace engine
                     vertices[x].bonecount++;
                 }
             }
+            if(sscanf(line," <lodgenerated value=\"%f\">",&f1)==1)
+                lod++;
         }
         
         fclose(fn);
-        std::cout<<"load xml finish "<<fname<<std::endl;
+        for (int i=vertices.size()-10; i<vertices.size(); i++) {
+            std::cout<<i<<" pos: "<<vertices[i].Position.x<<" "<<vertices[i].Position.y<<" "<<vertices[i].Normal.x<<" "<<vertices[i].Normal.y<<" "<<vertices[i].TexCoords.x<<std::endl;
+        }
+        std::cout<<"load xml finish "<<fname<<"  face cnt:"<<indices.size()/3<<" vert cnt:"<<vertices.size()<<" mx:"<<mx1<<" my:"<<mx2<<" mz:"<<mx3<<std::endl;
         WriteSkinMesh(fname, indices, vertices, fname);
         LoadXmlSkeleton(file);
 #endif
@@ -720,7 +736,7 @@ namespace engine
                 writemat4(ofs, bones[i].invbindmatrix);
                 size_t sz= bones[i].childs.size();
                 ofs.write((char*)&sz,sizeof(int));
-                std::cout<<"write size:"<<sz<<std::endl;
+                std::cout<<"skeleton bone child size:"<<sz<<std::endl;
                 loop0j(sz) ofs.write((char*)&bones[i].childs[j],sizeof(int));
             }
             for (size_t i=0; i<animations.size(); i++) {
