@@ -109,6 +109,8 @@ namespace engine
     void InitCube(GLuint &cubeVAO, GLuint &cubeVBO);
 
     void InitQuad(GLuint &quadVAO, GLuint &quadVBO);
+    
+    void error_stop(bool condition, const char* mgr);
 
     #define MACRO(k1, v1) \
         stream << "#define " << k1; \
@@ -133,6 +135,8 @@ namespace engine
     
     void readv3(std::ifstream& f, glm::vec3& v);
     
+    void readv3(std::ifstream& f, glm::ivec3& v);
+    
     void readstring(std::ifstream& f, std::string& str);
     
     void readarray(std::ifstream& f, float arr[], int num);
@@ -145,7 +149,11 @@ namespace engine
     
     void writestring(std::ofstream& f, std::string str);
     
+    void writevec2(std::ofstream& f, glm::vec2& v);
+    
     void writevec3(std::ofstream& f, glm::vec3& v);
+    
+    void writevec3(std::ofstream& f, glm::ivec3& v);
     
     void writevec4(std::ofstream& f, glm::vec4& v);
     

@@ -85,9 +85,9 @@ namespace engine
             glEnableVertexAttribArray(2);
             glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(5*sizeof(float)));
 //            glEnableVertexAttribArray(3);
-//            glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(SkinVertex), (void*)(8*sizeof(float)));
+//            glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 14 * sizeof(float), (void*)(8*sizeof(float)));
 //            glEnableVertexAttribArray(4);
-//            glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, sizeof(SkinVertex), (void*)(3*sizeof(float)));
+//            glVertexAttribPointer(4, 3, GL_INT, GL_FALSE, 14 * sizeof(float), (void*)(11*sizeof(float)));
             delete [] p;
 
         }
@@ -199,12 +199,12 @@ namespace engine
         Vertex* ptr = nullptr;
         if(type == 0x2111)
         {
-            ptr = new SkinVertex[num_vert];
+            ptr = new Vertex[num_vert];
             for(uint i=0;i<num_vert;i++)
             {
-                SkinVertex* v= (SkinVertex*)vertices[i];
-                Vertex vv ;
-                vv.Position= v->Position;
+                SkeletonVertex* v= (SkeletonVertex*)vertices[i];
+                Vertex vv;
+                vv.Position = v->Position;
                 vv.TexCoords = v->TexCoords;
                 vv.Normal = v->Normal;
                 *(ptr+i) = vv;

@@ -1,13 +1,13 @@
 //
-//  MeshData.h
+//  mesh.h
 //  OpenGLEngine
 //
 //  Created by 彭怀亮 on 6/9/19.
 //  Copyright © 2019 彭怀亮. All rights reserved.
 //
 
-#ifndef MeshData_h
-#define MeshData_h
+#ifndef mesh_h
+#define mesh_h
 
 
 #include "texmgr.h"
@@ -20,6 +20,7 @@ namespace engine
     #define Vt_UV      0x0010
     #define Vt_UV2     0x0020
     #define Vt_UV3     0x0040
+    #define Vt_UV4     0x0040
     #define Vt_Normal  0x0100
     #define Vt_TAN     0x0200
     #define Vt_BIT     0x0400
@@ -52,15 +53,31 @@ namespace engine
         glm::vec3 Normal;
     };
     
-    //type = 0x2111
+    
     struct SkinVertex : Vertex
     {
         float weight[3];
         int boneindx[3];
         int bonecount;
         
-        SkinVertex() {  bonecount=0; }
+        SkinVertex()
+        {
+            bonecount=0;
+            loop(3) weight[i] = 0;
+            loop(3) boneindx[i] = 0;
+        }
     };
+    
+    //type = 0x2111
+    struct SkeletonVertex : Vertex
+    {
+        glm::vec3 Position;
+        glm::vec2 TexCoords;
+        glm::vec3 Normal;
+        glm::vec3 weight;
+        glm::ivec3 boneindx;
+    };
+    
     
     // type = 0x1011
     struct ColorVertex : Vert
@@ -133,4 +150,4 @@ namespace engine
 
 }
 
-#endif /* MeshData_h */
+#endif /* mesh_h */

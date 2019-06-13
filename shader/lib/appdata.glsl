@@ -12,10 +12,12 @@
 #define Vt_UV      0x0010
 #define Vt_UV2     0x0020
 #define Vt_UV3     0x0040
+#define Vt_UV4     0x0080
 #define Vt_Normal  0x0100
 #define Vt_TAN     0x0200
 #define Vt_BIT     0x0400
 #define Vt_Color   0x1000
+#define Vt_Skin    0x2000
 
 /*
  * 顶点layout是固定的，如果原始顶点不是此方式，请使用工具转换

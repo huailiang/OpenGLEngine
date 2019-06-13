@@ -82,6 +82,14 @@ namespace engine
         quad->ConfigAttribute();
         glBindVertexArray(0);
     }
+    
+    void error_stop(bool condition, const char* mgr)
+    {
+        if (!condition) {
+            std::cerr<<mgr<<std::endl;
+        }
+        assert(condition);
+    }
 
 
     std::string Macro(const char* k1)
@@ -130,15 +138,10 @@ namespace engine
     
     uint Hash(const std::string str)
     {
-        if (str.empty()) {
-            return 0;
-        }
-        uint hash =0;
+        if (str.empty()) return 0;
+        uint hash = 0;
         int seed = 5;
-        for (int i=0; i<str.size(); i++) {
-            short sc = (short)str[i];
-            hash = (hash << seed) + str[i] + hash;
-        }
+        loop(str.size()) hash = (hash << seed) + str[i] + hash;
         return hash;
     }
 
@@ -153,6 +156,13 @@ namespace engine
         f.read((char*)&(v.x),sizeof(float));
         f.read((char*)&(v.y),sizeof(float));
         f.read((char*)&(v.z),sizeof(float));
+    }
+    
+    void readv3(std::ifstream& f, glm::ivec3& v)
+    {
+        f.read((char*)&(v.x),sizeof(int));
+        f.read((char*)&(v.y),sizeof(int));
+        f.read((char*)&(v.z),sizeof(int));
     }
     
     void readstring(std::ifstream& f, std::string& str)
@@ -201,11 +211,24 @@ namespace engine
         if(len > 0) f.write(str.c_str(), len);
     }
     
+    void writevec2(std::ofstream& f, glm::vec2& v)
+    {
+        f.write((char*)&(v.x),sizeof(float));
+        f.write((char*)&(v.y),sizeof(float));
+    }
+    
     void writevec3(std::ofstream& f, vec3& v)
     {
         f.write((char*)&(v.x),sizeof(float));
         f.write((char*)&(v.y),sizeof(float));
         f.write((char*)&(v.z),sizeof(float));
+    }
+    
+    void writevec3(std::ofstream& f, ivec3& v)
+    {
+        f.write((char*)&(v.x),sizeof(int));
+        f.write((char*)&(v.y),sizeof(int));
+        f.write((char*)&(v.z),sizeof(int));
     }
     
     void writevec4(std::ofstream& f, vec4& v)

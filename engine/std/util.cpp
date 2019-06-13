@@ -158,25 +158,23 @@ namespace engine
     
     void WriteVertex(std::ofstream& ofs, Vertex* vert)
     {
-        ofs.write((char*)&vert->Position.x,sizeof(float));
-        ofs.write((char*)&vert->Position.y,sizeof(float));
-        ofs.write((char*)&vert->Position.z,sizeof(float));
-        ofs.write((char*)&vert->TexCoords.x,sizeof(float));
-        ofs.write((char*)&vert->TexCoords.y,sizeof(float));
-        ofs.write((char*)&vert->Normal.x,sizeof(float));
-        ofs.write((char*)&vert->Normal.y,sizeof(float));
-        ofs.write((char*)&vert->Normal.z,sizeof(float));
+        writevec3(ofs, vert->Position);
+        writevec2(ofs, vert->TexCoords);
+        writevec3(ofs, vert->Normal);
     }
     
     void WriteSkinVertex(std::ofstream& ofs, SkinVertex* vert)
     {
         Vertex* vertex = (Vertex*)vert;
         WriteVertex(ofs, vertex);
-        ofs.write((char*)&vert->bonecount,sizeof(int));
+        error_stop(vert->bonecount<=3, "skin vert inner error");
+        glm::vec3 weight(0); glm::ivec3 boneidx(0);
         for (int i=0; i<vert->bonecount; i++) {
-            ofs.write((char*)(vert->weight+i),sizeof(float));
-            ofs.write((char*)(vert->boneindx+i),sizeof(int));
+            weight[i] = vert->weight[i];
+            boneidx[i] = vert->boneindx[i];
         }
+        writevec3(ofs, weight);
+        writevec3(ofs, boneidx);
     }
     
     void WriteMesh(const std::string name,vector<int>& indices, vector<Vertex>& vertices, VertType type, std::string dir)
@@ -433,15 +431,12 @@ namespace engine
                     break;
                     case 0x2111:
                     {
-                        SkinVertex* vert = new SkinVertex();
+                        SkeletonVertex* vert = new SkeletonVertex();
                         readv3(ifs, vert->Position);
                         readv2(ifs, vert->TexCoords);
                         readv3(ifs, vert->Normal);
-                        ifs.read((char*)(&vert->bonecount), sizeof(int));
-                        for (size_t i=0; i<vert->bonecount; i++) {
-                            ifs.read((char*)(vert->weight+i), sizeof(float));
-                            ifs.read((char*)(vert->boneindx+i), sizeof(int));
-                        }
+                        readv3(ifs, vert->weight);
+                        readv3(ifs, vert->boneindx);
                         mesh->vertices[i] = vert;
                     }
                     break;
@@ -478,7 +473,6 @@ namespace engine
         float f1,f2,f3;
         uint normal_id = 0, texcoord_id = 0;
         int lod = 0;
-        float mx1=0,mx2=0,mx3=0;
         while(fgets(line, 1000, fn) != NULL)
         {
             if(sscanf(line," <face v1=\"%d\" v2=\"%d\" v3=\"%d\" />",&x,&y,&z) == 3)
@@ -489,9 +483,6 @@ namespace engine
             {
                 SkinVertex a;
                 a.Position=glm::vec3(f1,f2,f3);
-                if (f1>mx1) mx1=f1;
-                if (f2>mx2) mx2=f2;
-                if (f3>mx3) mx3=f3;
                 vertices.push_back(a);
             }
             if(sscanf(line," <normal x=\"%f\" y=\"%f\" z=\"%f\" />",&f1, &f2, &f3) == 3) vertices[normal_id++].Normal=vec3(f1,f2,f3);
@@ -507,15 +498,11 @@ namespace engine
                     vertices[x].bonecount++;
                 }
             }
-            if(sscanf(line," <lodgenerated value=\"%f\">",&f1)==1)
-                lod++;
+            if(sscanf(line," <lodgenerated value=\"%f\">",&f1)==1) lod++;
         }
         
         fclose(fn);
-        for (int i=vertices.size()-10; i<vertices.size(); i++) {
-            std::cout<<i<<" pos: "<<vertices[i].Position.x<<" "<<vertices[i].Position.y<<" "<<vertices[i].Normal.x<<" "<<vertices[i].Normal.y<<" "<<vertices[i].TexCoords.x<<std::endl;
-        }
-        std::cout<<"load xml finish "<<fname<<"  face cnt:"<<indices.size()/3<<" vert cnt:"<<vertices.size()<<" mx:"<<mx1<<" my:"<<mx2<<" mz:"<<mx3<<std::endl;
+        std::cout<<"load xml finish "<<fname<<"  face cnt:"<<indices.size()/3<<" vert cnt:"<<vertices.size()<<std::endl;
         WriteSkinMesh(fname, indices, vertices, fname);
         LoadXmlSkeleton(file);
 #endif
@@ -785,7 +772,6 @@ namespace engine
                 ifs.read((char*)&skeleton->animations[i].nameLength,sizeof(char));
                 loop0j(ANI_NAME_LEN)  ifs.read((char*)(skeleton->animations[i].name+j),sizeof(char));
                 ifs.read((char*)&skeleton->animations[i].time, sizeof(float));
-                
             }
         }
         catch (std::ifstream::failure e)
