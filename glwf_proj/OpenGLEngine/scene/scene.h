@@ -171,12 +171,12 @@ public:
                 light->UpdateX(deltatime);
                 OnLightChange(GLFW_KEY_RIGHT);
             }
-            if ( glfwGetKey(window, GLFW_KEY_UP)== GLFW_PRESS)
+            if (glfwGetKey(window, GLFW_KEY_UP)== GLFW_PRESS)
             {
                 light->UpdateY(deltatime);
                 OnLightChange(GLFW_KEY_UP);
             }
-            if ( glfwGetKey(window, GLFW_KEY_DOWN)== GLFW_PRESS)
+            if (glfwGetKey(window, GLFW_KEY_DOWN)== GLFW_PRESS)
             {
                 light->UpdateY(-deltatime);
                 OnLightChange(GLFW_KEY_DOWN);

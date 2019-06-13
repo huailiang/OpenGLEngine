@@ -2,8 +2,6 @@
 
 #define VERT_TYPE  0x0111
 #include "lib/appdata.glsl"
-layout (location = 3) in vec3 weight;
-layout (location = 4) in ivec3 bone;
 
 out vec2 TexCoords;
 out vec3 normal;

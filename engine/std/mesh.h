@@ -71,9 +71,6 @@ namespace engine
     //type = 0x2111
     struct SkeletonVertex : Vertex
     {
-        glm::vec3 Position;
-        glm::vec2 TexCoords;
-        glm::vec3 Normal;
         glm::vec3 weight;
         glm::ivec3 boneindx;
     };
@@ -127,7 +124,7 @@ namespace engine
         
         CompxVertex* GetCompxVertex() const;
         
-        Vertex* GetSkinVertex() const;
+        SkeletonVertex* GetSkinVertex() const;
         
         bool hasPos() const;
 

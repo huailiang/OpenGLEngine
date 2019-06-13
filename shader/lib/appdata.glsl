@@ -28,8 +28,9 @@
 #define _Normal layout (location = 2) in vec3 aNormal;
 #define _Color  layout (location = 2) in vec3 aColor;
 #define _Tan    layout (location = 3) in vec3 aTangent;
+#define _Weight layout (location = 3) in vec3 weight;
 #define _Bitan  layout (location = 4) in vec3 aBitangent;
-
+#define _BoneIx layout (location = 4) in ivec3 bone;
 
 /*
  * 可以直接使用定义好的数据结构
@@ -86,6 +87,11 @@
 #if VERT_TYPE & Vt_BIT
     _Bitan
     #define ENABLE_TANG_SPACE
+#endif
+
+#if VERT_TYPE & Vt_Skin
+    _Weight
+    _BoneIx
 #endif
 
 
