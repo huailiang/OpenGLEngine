@@ -25,7 +25,7 @@ using namespace glm;
 using namespace engine;
 
 
-float deltatime,lastTime;
+float lastTime;
 
 int run_engine();
 void framebuffer_size_callback(GLFWwindow* window, int width, int heigth);

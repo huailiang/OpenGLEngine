@@ -69,7 +69,7 @@ namespace engine
         }
         if(skeleton)
         {
-            skeleton->PlayAnim("idle");
+            skeleton->Draw(shader);
         }
     }
 
@@ -117,6 +117,7 @@ namespace engine
             skeleton = new Skeleton();
         }
         ReadSkeleton(skeleton, name, name);
+        skeleton->PlayAnim("idle");
     }
     
 }

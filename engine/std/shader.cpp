@@ -142,6 +142,11 @@ namespace engine
     {
         glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, &mat[0][0]);
     }
+    
+    void Shader::setMat4(const std::string &name, GLsizei count, const glm::mat4 &mat) const
+    {
+        glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), count, GL_FALSE, &mat[0][0]);
+    }
 
     std::string Shader::pre_process(const std::string& source,const std::string macro)
     {

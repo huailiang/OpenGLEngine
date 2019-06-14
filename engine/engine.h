@@ -61,6 +61,7 @@ namespace engine
     extern uint RENDER_HEIGTH;
 
     extern uint DRAW_MODE;
+    extern float deltatime;
 
     #define WORKDIR "/Users/penghuailiang/Documents/projects/GL/OpenGLEngine/"
 

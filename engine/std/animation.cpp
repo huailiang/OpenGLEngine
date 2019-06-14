@@ -22,6 +22,7 @@ namespace engine
         delete [] bones;
         num_anim = 0;
         num_bone = 0;
+        current = nullptr;
     }
     
     void Skeleton::EvalSubtree(int id,XAnimation &ani,int frame, float weight)
@@ -70,6 +71,8 @@ namespace engine
             
             loop0i(num_bone)  bones[i].matrix = glm::mat4(1);
             loop0i(num_bone)  if (bones[i].parent==-1) EvalSubtree((int)i,*current,int(frame),frac(frame));
+            
+            playtime+=deltatime;
         }
     }
     
@@ -77,9 +80,12 @@ namespace engine
     void Skeleton::Draw(Shader* shader)
     {
         this->shader = shader;
-        shader->setMat4("bones", bones->matrix);
+        glm::mat4 ibones[100];
+        loop(num_bone) ibones[i] = (bones+i)->matrix;
+        shader->setMat4("bones", num_bone, ibones[0]);
         InnerPlay();
     }
+    
     
     void Skeleton::SetBindPose()
     {
@@ -89,7 +95,7 @@ namespace engine
         loop0i(num_bone)  bones[i].invbindmatrix=bones[i].matrix;
         loop0i(num_bone)  glm::inverse(bones[i].invbindmatrix);
     }
-
+    
     
     Key& Skeleton::GetInterpolatedKey(XTrack& track,int frame,float weight,bool normalize)
     {
@@ -97,7 +103,7 @@ namespace engine
         Key &k1=track.keys[(frame+1) % track.num_key];
         
         static Key k;
-        float weight1=1.0-weight;
+        float weight1 = 1.0 - weight;
         loop(3) k.pos[i]=k0.pos[i]*weight1+k1.pos[i]*weight;
         loop(4) k.rot[i]=k0.rot[i]*weight1+k1.rot[i]*weight;
         

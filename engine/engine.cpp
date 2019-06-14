@@ -24,6 +24,7 @@ namespace engine
     MeshData* cube = nullptr;
     MeshData* quad = nullptr;
     time_t start_time;
+    float deltatime;
 
     float GetRuntime()
     {
@@ -32,7 +33,11 @@ namespace engine
         if (start_time == 0) start_time = t.time;
         return t.time - start_time + t.millitm * 0.001f;
     }
-
+    
+    float GetDeltaTime()
+    {
+        return deltatime;
+    }
 
     void InitPlane(GLuint &vao, GLuint &vbo)
     {
