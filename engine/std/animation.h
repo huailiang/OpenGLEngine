@@ -9,7 +9,7 @@
 #ifndef animation_h
 #define animation_h
 
-#include "../engine.h"
+#include "shader.h"
 
 
 namespace engine
@@ -24,45 +24,37 @@ namespace engine
         glm::vec3 pos;
     };
     
-    // for tool
     struct Track
     {
         std::vector<Key> keys;
     };
     
-    // for runtime
     struct XTrack
     {
         uint num_key;
         Key* keys;
     };
     
-    // for tool
     struct Animation
     {
-        char nameLength;
-        char name[ANI_NAME_LEN];
+        std::string name;
         float time;
         std::vector<Track> tracks;
         uint frameCount;
     };
     
-    // for runtime
     struct XAnimation
     {
-        char nameLength;
-        char name[ANI_NAME_LEN];
+        std::string name;
         float time;
         uint num_track;
         XTrack* tracks;
         uint frameCount;
     };
     
-    // for tool
     struct Bone
     {
-        char nameLength;
-        char name[ANI_NAME_LEN];
+        std::string name;
         float rot[4]; // angle, x, y, z
         float pos[3];
         int parent;
@@ -71,11 +63,9 @@ namespace engine
         std::vector<int> childs;
     };
     
-    // for runtime
     struct XBone
     {
-        char nameLength;
-        char name[ANI_NAME_LEN];
+        std::string name;
         float rot[4]; // angle, x, y, z
         float pos[3];
         int parent;
@@ -90,23 +80,41 @@ namespace engine
     {
     
     public:
-    
+        
+        Skeleton();
+        
+        ~Skeleton();
+        
         void EvalSubtree(int id,XAnimation &ani,int frame, float weight=0);
         
-        void SetPose(int animation_index,double time);
+        void SetPose(int animation_index);
+        
+        void PlayAnim(std::string anim);
         
         void SetBindPose();
         
         Key& GetInterpolatedKey(XTrack& track,int frame,float weight,bool normalize=false);
         
+        void PrintInfo();
+        
+        void getAnimations(std::string* names);
+        
+        void Draw(Shader* shader);
+        
+        
+    private:
+        
+        void InnerPlay();
         
     public:
-        
         int num_bone, num_anim;
-        
         XBone* bones;
-        
         XAnimation* animations;
+        
+    private:
+        XAnimation* current;
+        Shader* shader;
+        float playtime;
         
     };
     

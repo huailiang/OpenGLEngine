@@ -14,10 +14,11 @@ namespace engine
     Avatar::Avatar(const char* name, glm::vec3 pos, glm::vec3 scale, float angle)
     {
         vector<string> items;
+        this->name = name;
         this->pos = pos;
         this->scale = scale;
         this->angle= angle;
-        ReadSummary(name, items);
+        type = ReadSummary(name, items);
         materials.clear();
         for (size_t i=0; i<items.size(); i++)
         {
@@ -25,6 +26,10 @@ namespace engine
             ReadObjMaterial(items[i], mat);
             mat->SetupMesh();
             materials.push_back(mat);
+        }
+        if (type & MODEL_ANI)
+        {
+            LoadSkeleton();
         }
     }
 
@@ -36,6 +41,8 @@ namespace engine
             delete materials[i];
         }
         materials.clear();
+        
+        SAFE_DELETE(skeleton);
     }
 
 
@@ -48,7 +55,6 @@ namespace engine
         matrix = model;
     }
     
-    
 
     void Avatar::Draw(Shader* shader, Light* light)
     {
@@ -60,6 +66,10 @@ namespace engine
         for (size_t i=0; i<materials.size(); i++)
         {
             materials[i]->Draw(shader);
+        }
+        if(skeleton)
+        {
+            skeleton->PlayAnim("idle");
         }
     }
 
@@ -81,6 +91,7 @@ namespace engine
         RecalModelMatrix();
     }
     
+    
     void Avatar::Move(glm::vec3 move)
     {
         this->pos += move;
@@ -97,6 +108,15 @@ namespace engine
     {
         this->scale = scale;
         RecalModelMatrix();
+    }
+    
+    void Avatar::LoadSkeleton()
+    {
+        if(skeleton == nullptr)
+        {
+            skeleton = new Skeleton();
+        }
+        ReadSkeleton(skeleton, name, name);
     }
     
 }

@@ -22,7 +22,8 @@ namespace engine
     
     #define MODEL_XML 0x01
     #define MODEL_OBJ 0x02
-    #define MODEL_FBX 0x03
+    #define MODEL_FBX 0x04
+    #define MODEL_ANI 0x10 
     
     typedef unsigned int MODEL_TYPE;
 

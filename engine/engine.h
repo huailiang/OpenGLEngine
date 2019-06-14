@@ -110,7 +110,7 @@ namespace engine
 
     void InitQuad(GLuint &quadVAO, GLuint &quadVBO);
     
-    void error_stop(bool condition, const char* mgr);
+    void error_stop(bool condition, const char* msg);
 
     #define MACRO(k1, v1) \
         stream << "#define " << k1; \

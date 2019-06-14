@@ -83,10 +83,10 @@ namespace engine
         glBindVertexArray(0);
     }
     
-    void error_stop(bool condition, const char* mgr)
+    void error_stop(bool condition, const char* msg)
     {
         if (!condition) {
-            std::cerr<<mgr<<std::endl;
+            std::cerr<<msg<<std::endl;
         }
         assert(condition);
     }

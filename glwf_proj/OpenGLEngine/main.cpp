@@ -41,6 +41,10 @@ int main(int argc, const char * argv[])
 {
     if (argc<=1)
     {
+//        engine::LoadXmlObj("halo");
+//        Skeleton ske;
+//        engine::ReadSkeleton(&ske, "halo", "halo");
+//        return 1;
         return run_engine();
     }
     else

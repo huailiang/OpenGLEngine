@@ -15,6 +15,7 @@
 #include "material.h"
 #include "shader.h"
 #include "util.h"
+#include "animation.h"
 
 using namespace std;
 
@@ -45,7 +46,13 @@ namespace engine
         void Scale(const glm::vec3 scale);
         
     private:
-
+        
+        void LoadSkeleton();
+        
+    private:
+        
+        Skeleton* skeleton;
+        
         vector<Material*> materials;
         
         MODEL_TYPE type;
@@ -55,6 +62,8 @@ namespace engine
         glm::vec3 pos, scale;
         
         float angle;
+        
+        const char* name;
 
     };
     
