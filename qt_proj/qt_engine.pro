@@ -40,6 +40,7 @@ SOURCES += \
     ../engine/std/skybox.cpp \
     ../engine/std/texture.cpp \
     ../engine/std/shader.cpp \
+    ../engine/std/animation.cpp \
     ../engine/std/avatar.cpp \
     ../engine/std/material.cpp \
     ../engine/std/asset.cpp \
@@ -71,6 +72,7 @@ HEADERS += \
     ../engine/engine.h \
     ../engine/std/avatar.h \
     ../engine/std/mesh.h \
+    ../engine/std/animation.h \
     ../engine/std/material.h \
     ../engine/gui/eventmgr.h \
     ../engine/gui/button.h \

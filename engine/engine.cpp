@@ -23,30 +23,14 @@ namespace engine
     MeshData* plane = nullptr;
     MeshData* cube = nullptr;
     MeshData* quad = nullptr;
-
-    #ifdef _QT_EDIT_
-    QTime q_time;
-    #else
     time_t start_time;
-    #endif
-
-    void GlobalInit()
-    {
-    #ifdef _QT_EDIT_
-        q_time.start();
-    #endif
-    }
 
     float GetRuntime()
     {
-    #ifdef _QT_EDIT_
-        return q_time.elapsed()*0.001f;
-    #else
         timeb t;
         ftime(&t);
         if (start_time == 0) start_time = t.time;
         return t.time - start_time + t.millitm * 0.001f;
-    #endif
     }
 
 

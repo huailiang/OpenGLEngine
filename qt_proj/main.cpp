@@ -91,8 +91,6 @@ int main(int argc, char *argv[])
         std::cout<<"Sorry but it seems that your graphics card does not support openGL "<<GL_MAJOR<<GL_MINOR;
     }
 
-    GlobalInit();
-
     MainWindow window;
     window.show();
 

@@ -146,6 +146,7 @@
 		4C492FF422AD5F9300FC531B /* engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C492FF222AD5F9300FC531B /* engine.cpp */; };
 		4C5F3FE622ABFD6D005B7CFD /* asset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C5F3FE422ABFD6D005B7CFD /* asset.cpp */; };
 		4C66674A22A2A3A3002BA996 /* FilePath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C66674822A2A3A3002BA996 /* FilePath.cpp */; };
+		4C6D757322B37AD00098F22C /* animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C6D757222B37AD00098F22C /* animation.cpp */; };
 		4C73C0EB22A8BAB3002A8AD0 /* texmgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C73C0E722A8BAB3002A8AD0 /* texmgr.cpp */; };
 		4C73C0EC22A8BAB3002A8AD0 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C73C0E922A8BAB3002A8AD0 /* util.cpp */; };
 		4C7AF66D22A54EA700B63173 /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C7AF66022A54EA700B63173 /* camera.cpp */; };
@@ -358,6 +359,8 @@
 		4C66666F22A29D85002BA996 /* Helpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Helpers.h; sourceTree = "<group>"; };
 		4C66674822A2A3A3002BA996 /* FilePath.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FilePath.cpp; sourceTree = "<group>"; };
 		4C66674922A2A3A3002BA996 /* FilePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilePath.h; sourceTree = "<group>"; };
+		4C6D757122B37ACF0098F22C /* animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = animation.h; sourceTree = "<group>"; };
+		4C6D757222B37AD00098F22C /* animation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = animation.cpp; sourceTree = "<group>"; };
 		4C73C0E722A8BAB3002A8AD0 /* texmgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = texmgr.cpp; sourceTree = "<group>"; };
 		4C73C0E822A8BAB3002A8AD0 /* texmgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = texmgr.h; sourceTree = "<group>"; };
 		4C73C0E922A8BAB3002A8AD0 /* util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = util.cpp; sourceTree = "<group>"; };
@@ -628,6 +631,8 @@
 		4C7AF65B22A54EA700B63173 /* std */ = {
 			isa = PBXGroup;
 			children = (
+				4C6D757122B37ACF0098F22C /* animation.h */,
+				4C6D757222B37AD00098F22C /* animation.cpp */,
 				4C5F3FE522ABFD6D005B7CFD /* asset.h */,
 				4C5F3FE422ABFD6D005B7CFD /* asset.cpp */,
 				4C02E1CB22AB77A0002821B9 /* avatar.h */,
@@ -1050,6 +1055,7 @@
 				4C492FF422AD5F9300FC531B /* engine.cpp in Sources */,
 				4C8062C4229FC059005FD1F9 /* AppDelegate.m in Sources */,
 				4C7AF66F22A54EA700B63173 /* texture.cpp in Sources */,
+				4C6D757322B37AD00098F22C /* animation.cpp in Sources */,
 				4C7AF67122A54EA700B63173 /* skybox.cpp in Sources */,
 				4CE2224C22A91F0B0095ECCA /* uimgr.cpp in Sources */,
 				4CE2224922A91F0B0095ECCA /* button.cpp in Sources */,

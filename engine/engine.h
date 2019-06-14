@@ -63,10 +63,6 @@ namespace engine
     extern uint DRAW_MODE;
 
     #define WORKDIR "/Users/penghuailiang/Documents/projects/GL/OpenGLEngine/"
-    
-    #ifdef _QT_EDIT_
-    extern QTime q_time;
-    #endif
 
 
     #define DeclareSington(TYPE)  \
@@ -87,6 +83,7 @@ namespace engine
     
     #define min(a,b) ((a)<(b)?(a):(b))
     
+    #undef foreach
     #define foreach(var, container) for( auto var = (container).begin(); var != (container).end(); ++var)
 
     #define loop(end_l) for (int i=0;i<end_l;++i)
@@ -96,11 +93,9 @@ namespace engine
     #define loop0j(end_l) for (size_t j=0;j<end_l;++j)
     
     #define frac(a) (a-floor(a))
-    
-    
-    const float zeroVertices[] = {0.0f,  0.0f};
 
-    void GlobalInit();
+
+    const float zeroVertices[] = {0.0f,  0.0f};
 
     float GetRuntime();
 
