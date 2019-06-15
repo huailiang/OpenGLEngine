@@ -18,6 +18,7 @@ namespace engine
         this->pos = pos;
         this->scale = scale;
         this->angle= angle;
+        RecalModelMatrix();
         type = ReadSummary(name, items);
         materials.clear();
         for (size_t i=0; i<items.size(); i++)
@@ -117,7 +118,7 @@ namespace engine
             skeleton = new Skeleton();
         }
         ReadSkeleton(skeleton, name, name);
-        skeleton->PlayAnim("idle");
+        skeleton->PlayAnim("something");
     }
     
 }

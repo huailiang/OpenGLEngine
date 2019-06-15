@@ -106,6 +106,8 @@ namespace engine
         
         void InnerPlay();
         
+        void ResampleAnimationTracks(double frames_per_second);
+        
     public:
         int num_bone, num_anim;
         XBone* bones;
@@ -115,7 +117,8 @@ namespace engine
         XAnimation* current;
         Shader* shader;
         float playtime;
-        
+        bool resample;
+
     };
     
 }

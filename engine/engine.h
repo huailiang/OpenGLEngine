@@ -93,6 +93,8 @@ namespace engine
     
     #define loop0j(end_l) for (size_t j=0;j<end_l;++j)
     
+    #define clamp(a_,b_,c_) min(max(a_,b_),c_)
+    
     #define frac(a) (a-floor(a))
 
 
@@ -113,6 +115,8 @@ namespace engine
         if(v1) stream << "  "<<v1;  \
         stream << std::endl;
 
+    void Print(int i, glm::mat4 m);
+    
     std::string Macro(const char* k1);
 
     std::string Macro(const char* k1, const char* v1);

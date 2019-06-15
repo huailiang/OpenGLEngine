@@ -1,6 +1,10 @@
 #version 330 core
 
+
+#ifndef VERT_TYPE
 #define VERT_TYPE  0x0111
+#endif
+
 #include "lib/appdata.glsl"
 #include "lib/camera.glsl"
 

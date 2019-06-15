@@ -155,8 +155,6 @@
 		4CD71DAF22B0CF0500466683 /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
 		4CD71DB422B0E30100466683 /* animation.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = animation.cpp; sourceTree = "<group>"; };
 		4CD71DB522B0E30100466683 /* animation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = animation.h; sourceTree = "<group>"; };
-		4CE7348D22B26D82004FC7B7 /* skin.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = skin.fs; sourceTree = "<group>"; };
-		4CE7348E22B26D83004FC7B7 /* skin.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = skin.vs; sourceTree = "<group>"; };
 		4CE861EB22A4F86F000677DC /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = ../lib/libfreetype.a; sourceTree = "<group>"; };
 		4CE861EC22A4F86F000677DC /* libglfw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglfw3.a; path = ../lib/libglfw3.a; sourceTree = "<group>"; };
 		4CE861F022A4F87F000677DC /* libfreetype.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfreetype.6.dylib; path = ../lib/libfreetype.6.dylib; sourceTree = "<group>"; };
@@ -183,32 +181,32 @@
 		4C3774F622A54F6F0074744F /* std */ = {
 			isa = PBXGroup;
 			children = (
+				4CD71DB522B0E30100466683 /* animation.h */,
+				4CD71DB422B0E30100466683 /* animation.cpp */,
 				4C5F3FD122ABF95C005B7CFD /* asset.h */,
 				4C5F3FD222ABF95C005B7CFD /* asset.cpp */,
+				4C1B57BE22A7E03700A7AFF1 /* avatar.h */,
+				4C1B57BD22A7E03700A7AFF1 /* avatar.cpp */,
 				4C3774FC22A54F6F0074744F /* camera.h */,
 				4C3774FB22A54F6F0074744F /* camera.cpp */,
 				4C3774FA22A54F6F0074744F /* light.h */,
 				4C3774FD22A54F6F0074744F /* light.cpp */,
-				4C37750022A54F6F0074744F /* terrain.h */,
-				4C37750522A54F6F0074744F /* terrain.cpp */,
+				4C1B57B822A6ADBF00A7AFF1 /* material.h */,
+				4C1B57B722A6ADBF00A7AFF1 /* material.cpp */,
+				4C52BE9522ACC2BE00D78ACB /* mesh.h */,
+				4C01AB8A22ADEE2C001C5070 /* mesh.cpp */,
 				4C3774F822A54F6F0074744F /* shader.h */,
 				4C37750122A54F6F0074744F /* shader.cpp */,
 				4C3774F922A54F6F0074744F /* skybox.h */,
 				4C37750222A54F6F0074744F /* skybox.cpp */,
+				4C37750022A54F6F0074744F /* terrain.h */,
+				4C37750522A54F6F0074744F /* terrain.cpp */,
 				4C37750622A54F6F0074744F /* texture.h */,
 				4C3774FE22A54F6F0074744F /* texture.cpp */,
-				4C52BE9522ACC2BE00D78ACB /* mesh.h */,
-				4C01AB8A22ADEE2C001C5070 /* mesh.cpp */,
-				4C1B57B822A6ADBF00A7AFF1 /* material.h */,
-				4C1B57B722A6ADBF00A7AFF1 /* material.cpp */,
-				4C1B57BE22A7E03700A7AFF1 /* avatar.h */,
-				4C1B57BD22A7E03700A7AFF1 /* avatar.cpp */,
-				4C1B57B122A68D7900A7AFF1 /* util.h */,
-				4C1B57B222A68D7900A7AFF1 /* util.cpp */,
 				4C1B57BB22A7BE3800A7AFF1 /* texmgr.h */,
 				4C1B57BA22A7BE3800A7AFF1 /* texmgr.cpp */,
-				4CD71DB522B0E30100466683 /* animation.h */,
-				4CD71DB422B0E30100466683 /* animation.cpp */,
+				4C1B57B122A68D7900A7AFF1 /* util.h */,
+				4C1B57B222A68D7900A7AFF1 /* util.cpp */,
 			);
 			name = std;
 			path = ../engine/std;
@@ -268,8 +266,6 @@
 				4C402CE822A51AF2008C89D4 /* model.fs */,
 				4C402CF822A51AF2008C89D4 /* depth.vs */,
 				4C402CF322A51AF2008C89D4 /* depth.fs */,
-				4CE7348E22B26D83004FC7B7 /* skin.vs */,
-				4CE7348D22B26D82004FC7B7 /* skin.fs */,
 				4C402CE622A51AF2008C89D4 /* instance.vs */,
 				4C402D0322A51AF2008C89D4 /* instance.fs */,
 				4C402D0422A51AF2008C89D4 /* ttfont.vs */,
