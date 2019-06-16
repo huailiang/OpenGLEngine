@@ -69,10 +69,13 @@ namespace engine
     };
     
     //type = 0x2111
-    struct SkeletonVertex : Vertex
+    struct SkeletonVertex : Vert
     {
+        glm::vec3 Position;
+        glm::vec2 TexCoords;
+        glm::vec3 Normal;
         glm::vec3 weight;
-        glm::ivec3 boneindx;
+        glm::vec3 boneindx;
     };
     
     

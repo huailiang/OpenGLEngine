@@ -14,6 +14,7 @@
 #include "scene2.h"
 #include "scene3.h"
 #include "scene4.h"
+#include "scene5.h"
 #include "texmgr.h"
 
 class SceneMgr
@@ -28,7 +29,9 @@ private:
         SAFE_DELETE(lb_scene2);
         SAFE_DELETE(lb_scene3);
         SAFE_DELETE(lb_scene4);
+        SAFE_DELETE(lb_scene5);
         SAFE_DELETE(lb_fps);
+        SAFE_DELETE(lb_copy);
     }
     
     static void ClickScene(UIEvent* contex, void* arg)
@@ -44,17 +47,19 @@ public:
     
     void Init()
     {
-        ChangeTo(TY_Scene1);
+        ChangeTo(TY_Scene5);
         lb_scene1 = new UILabel(vec2(60,380), vec3(1), 1, "Scene1", TY_Scene1);
         lb_scene2 = new UILabel(vec2(60,330), vec3(1), 1, "Scene2", TY_Scene2);
         lb_scene3 = new UILabel(vec2(60,280), vec3(1), 1, "Scene3", TY_Scene3);
         lb_scene4 = new UILabel(vec2(60,230), vec3(1), 1, "Scene4", TY_Scene4);
+        lb_scene5 = new UILabel(vec2(60,170), vec3(1), 1, "Scene5", TY_Scene5);
         lb_fps = new UILabel(vec2(740,580), vec3(1,0,0), 0.5f);
         lb_copy = new UILabel(vec2(20), vec3(1), 0.4f);
         lb_scene1->RegistCallback(ClickScene, this);
         lb_scene2->RegistCallback(ClickScene, this);
         lb_scene3->RegistCallback(ClickScene, this);
         lb_scene4->RegistCallback(ClickScene, this);
+        lb_scene5->RegistCallback(ClickScene, this);
     }
     
     void LeaveScene()
@@ -87,8 +92,12 @@ public:
         {
             current->DrawScenes();
         }
-        lb_fps->setText("FPS: "+to_string_with_precision(1/delta,4));
-        lb_copy->setText("@copyright (c) penghuailiang");
+        delay++;
+        if(delay%4==0)
+        {
+            lb_fps->setText("FPS: "+to_string_with_precision(1/delta,4));
+            lb_copy->setText("@copyright (c) penghuailiang");
+        }
     }
     
     void ChangeTo(int type)
@@ -98,6 +107,7 @@ public:
         if(type == TY_Scene2)   scene = new Scene2();
         if(type == TY_Scene3)   scene =new Scene3();
         if(type == TY_Scene4)   scene =new Scene4();
+        if(type == TY_Scene5)   scene =new Scene5();
         if(scene)
         {
             scene->Initial();
@@ -131,8 +141,9 @@ public:
     
 private:
     Scene *current;
-    UILabel *lb_scene1, *lb_scene2, *lb_scene3, *lb_scene4;
+    UILabel *lb_scene1, *lb_scene2, *lb_scene3, *lb_scene4, *lb_scene5;
     UILabel *lb_fps, *lb_copy;
+    uint delay;
 };
 
 #endif /* scenemgr_h */

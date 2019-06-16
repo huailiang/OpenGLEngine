@@ -21,10 +21,8 @@ public:
    ~Scene1()
     {
         SAFE_DELETE(nano);
-        SAFE_DELETE(halo);
         SAFE_DELETE(terrain);
         SAFE_DELETE(shader);
-        SAFE_DELETE(shader2);
         SAFE_DELETE(btn_normal);
         SAFE_DELETE(btn_debug);
     }
@@ -39,14 +37,11 @@ public:
     void InitScene()
     {
         shader = new LightShader("model.vs", "model.fs",nullptr, Macro("VERT_TYPE","0x0111"));
-        shader2 = new LightShader("model.vs", "model.fs",nullptr,Macro("VERT_TYPE","0x0111"));
         ApplyCamera(shader);
         nmShader = new Shader("gizmos/normal.vs","gizmos/pixel.fs","gizmos/normal.gs");
         ApplyCamera(nmShader);
         terrain = new Terrain();
-    
         nano = new Avatar("nanosuit",vec3(0.4f, -0.5f, -1.f), vec3(0.12f));
-        halo = new Avatar("halo", vec3(-1.0f, -0.5f, -1.5f), vec3(0.2f), -60);
     }
     
     void DrawUI()
@@ -63,7 +58,6 @@ public:
         Scene::DrawShadow(depthShader);
         terrain->DrawShadow(depthShader);
         nano->DrawShadow(depthShader, light);
-        halo->DrawShadow(depthShader, light);
     }
     
     void DrawScene()
@@ -71,7 +65,6 @@ public:
         terrain->Draw(camera, lightMatrix, light, depthMap);
         nano->Rotate(0.2f);
         nano->Draw(shader, light);
-        halo->Draw(shader2, light);
         if(shownormal)
         {
             nano->Draw(nmShader, light);
@@ -94,10 +87,10 @@ public:
 private:
     UIButton* btn_normal, *btn_debug;
     Terrain* terrain;
-    LightShader* shader,*shader2;
+    LightShader* shader;
     Shader* nmShader;
     GLuint texture1, texture2;
-    Avatar *nano, *halo;
+    Avatar *nano;
 public:
     bool shownormal;
 };

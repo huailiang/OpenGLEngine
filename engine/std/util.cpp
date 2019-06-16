@@ -34,8 +34,7 @@ namespace engine
     
     int CheckDir(const char* path)
     {
-#ifdef __APPLE__
-#ifndef _GLES_
+#if defined(__APPLE__) && !defined(_GLES_)
         if(opendir(path)==NULL)
         {
             char temp[200];
@@ -49,7 +48,6 @@ namespace engine
         {
             return -1;//can not make a dir;
         }
-#endif
 #endif
         return 0;
     }
@@ -139,7 +137,7 @@ namespace engine
                     writestring(ofs, name);
                 }
             }
-        }catch (std::ofstream::failure e)
+        } catch (std::ofstream::failure e)
         {
             std::cout << "ERROR::MATERIAL::SAVE, " <<name<< std::endl;
         }
@@ -193,8 +191,7 @@ namespace engine
             loop0i(indices.size()) ofs.write((char*)&indices[i],sizeof(uint));
             loop0i(vertices.size()) WriteVertex(ofs, &vertices[i]);
             ofs.close();
-        }
-        catch (std::ofstream::failure e)
+        } catch (std::ofstream::failure e)
         {
             std::cout << "ERROR::MESH::SAVE, " <<name<< std::endl;
         }
@@ -237,8 +234,7 @@ namespace engine
             loop0i(vertices.size()) WriteSkinVertex(ofs, &vertices[i]);
             ofs.close();
             std::cout<<"save skin mesh "<<name<<std::endl;
-        }
-        catch (std::ofstream::failure e)
+        } catch (std::ofstream::failure e)
         {
             std::cout << "ERROR::MESH::SAVE, " <<name<< std::endl;
         }
@@ -264,8 +260,7 @@ namespace engine
                 readstring(ifs, str);
                 items.push_back(str);
             }
-        }
-        catch (std::ifstream::failure e)
+        } catch (std::ifstream::failure e)
         {
             std::cerr<<"read summary error "<<name<<std::endl;
         }
@@ -347,8 +342,7 @@ namespace engine
             {
                 mat->data = ReadMesh(name);
             }
-        }
-        catch (std::ifstream::failure e)
+        } catch (std::ifstream::failure e)
         {
             std::cerr<<"read material error "<<name<<std::endl;
         }
@@ -389,24 +383,21 @@ namespace engine
                         readv2(ifs, vertex->TexCoords);
                         readv3(ifs, vertex->Normal);
                         mesh->vertices[i] = vertex;
-                    }
-                    break;
+                    } break;
                     case 0x0012:
                     {
                         BaseVert2* vert  = new BaseVert2();
                         readv2(ifs, vert->Position);
                         readv2(ifs, vert->TexCoords);
                         mesh->vertices[i] = vert;
-                    }
-                    break;
+                    } break;
                     case 0x0011:
                     {
                         BaseVert3* vert  = new BaseVert3();
                         readv3(ifs, vert->Position);
                         readv2(ifs, vert->TexCoords);
                         mesh->vertices[i] = vert;
-                    }
-                    break;
+                    } break;
                     case 0x1011:
                     {
                         ColorVertex* vert = new ColorVertex();
@@ -414,8 +405,7 @@ namespace engine
                         readv2(ifs, vert->TexCoords);
                         readv3(ifs, vert->Color);
                         mesh->vertices[i] = vert;
-                    }
-                    break;
+                    } break;
                     case 0x1111:
                     {
                         CompxVertex* vert = new CompxVertex();
@@ -424,8 +414,7 @@ namespace engine
                         readv3(ifs, vert->Normal);
                         readv3(ifs, vert->Color);
                         mesh->vertices[i] = vert;
-                    }
-                    break;
+                    } break;
                     case 0x2111:
                     {
                         SkeletonVertex* vert = new SkeletonVertex();
@@ -433,10 +422,14 @@ namespace engine
                         readv2(ifs, vert->TexCoords);
                         readv3(ifs, vert->Normal);
                         readv3(ifs, vert->weight);
-                        readv3(ifs, vert->boneindx);
+                        ivec3 v3(1);
+                        readv3(ifs, v3);
+                        vert->boneindx.x = (float)v3.x+1e-4;
+                        vert->boneindx.y = (float)v3.y+1e-4;
+                        vert->boneindx.z = (float)v3.z+1e-4;
+//                        readv3(ifs, vert->boneindx);
                         mesh->vertices[i] = vert;
-                    }
-                    break;
+                    } break;
                     default:
                         std::cerr<<"vertex config not support format: 0x"<<hex<<type<<std::endl;
                         break;
@@ -444,8 +437,7 @@ namespace engine
             }
             ifs.close();
             return mesh;
-        }
-        catch (std::ifstream::failure e)
+        } catch (std::ifstream::failure e)
         {
             std::cerr<<"read mesh error "<<name<<std::endl;
         }
@@ -717,7 +709,6 @@ namespace engine
                 size_t sz= bones[i].childs.size();
                 ofs.write((char*)&sz,sizeof(int));
                 loop0j(sz) ofs.write((char*)&(bones[i].childs[j]),sizeof(int));
-                
             }
             for (size_t i=0; i<animations.size(); i++) {
                 writestring(ofs, animations[i].name);
@@ -726,8 +717,7 @@ namespace engine
                 ofs.write((char*)&animations[i].frameCount,sizeof(uint));
             }
             ofs.close();
-        }
-        catch (std::ofstream::failure e)
+        } catch (std::ofstream::failure e)
         {
             std::cout << "ERROR::ANIMATION::SAVE, " <<name<< std::endl;
         }
@@ -748,7 +738,6 @@ namespace engine
             ifs.read((char*)(&skeleton->num_anim), sizeof(uint));
             skeleton->bones = new XBone[skeleton->num_bone];
             skeleton->animations = new XAnimation[skeleton->num_anim];
-            std::cout<<" read bones:"<<skeleton->num_bone<<" anim:"<<skeleton->num_anim<<std::endl;
             for (uint i=0; i<skeleton->num_bone; i++) {
                 readstring(ifs, skeleton->bones[i].name);
                 readarray(ifs, skeleton->bones[i].rot, 4);
@@ -767,8 +756,7 @@ namespace engine
                 ifs.read((char*)&skeleton->animations[i].frameCount,sizeof(uint));
             }
             ifs.close();
-        }
-        catch (std::ifstream::failure e)
+        }  catch (std::ifstream::failure e)
         {
             std::cerr<<"read skeleton error "<<name<<std::endl;
         }

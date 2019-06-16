@@ -13,8 +13,8 @@ namespace engine
     
     Skeleton::Skeleton()
     {
-        playtime=0;
-        resample=false;
+        playtime = 0;
+        resample = false;
     }
     
     Skeleton::~Skeleton()
@@ -43,7 +43,7 @@ namespace engine
                 m = m * a;
             }
         m = glm::translate(m, pos);
-        b.matrix=b.parent>=0 ? bones[b.parent].matrix * m : m;
+        b.matrix = b.parent>=0 ? bones[b.parent].matrix * m : m;
         loop0i(b.num_child) EvalSubtree(b.childs[i],ani,frame,weight);
     }
     
@@ -64,15 +64,14 @@ namespace engine
     {
         if(current)
         {
-            playtime = 1;
-            double time01=playtime/double(current->time);
-            time01=time01-floor(time01);
-            float frame=(current->frameCount-2)*time01+1;
+            double time01 = playtime/double(current->time);
+            time01 = time01-floor(time01);
+            float frame = (current->frameCount-2)*time01+1;
             
             loop0i(num_bone)  bones[i].matrix = glm::mat4(1);
             loop0i(num_bone)  if (bones[i].parent==-1) EvalSubtree((int)i,*current,int(frame),frac(frame));
             
-            playtime+=deltatime;
+            playtime += deltatime;
         }
     }
     
@@ -83,6 +82,8 @@ namespace engine
         glm::mat4 ibones[100];
         InnerPlay();
         loop(num_bone) ibones[i] = (bones+i)->matrix *  (bones+i)->invbindmatrix;
+//        std::cout<<std::endl<<" ***************** "<<std::endl; loop(num_bone) Print(i, ibones[i]);
+        shader->setMat4("bones", 100, ibones[0]);
     }
     
     void Skeleton::SetBindPose()

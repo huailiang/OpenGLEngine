@@ -37,12 +37,8 @@ namespace engine
 
     Avatar::~Avatar()
     {
-        for (size_t i=0;i<materials.size(); i++)
-        {
-            delete materials[i];
-        }
+        loop(materials.size())  delete materials[i];
         materials.clear();
-        
         SAFE_DELETE(skeleton);
     }
 
@@ -99,17 +95,20 @@ namespace engine
         RecalModelMatrix();
     }
     
+    
     void Avatar::Scale(float scale)
     {
         this->scale *= scale;
         RecalModelMatrix();
     }
     
+    
     void Avatar::Scale(glm::vec3 scale)
     {
         this->scale = scale;
         RecalModelMatrix();
     }
+    
     
     void Avatar::LoadSkeleton()
     {
