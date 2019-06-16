@@ -183,11 +183,13 @@ namespace engine
             if(dir.empty()) dir = curr_obj;
             string basedir = "resources/engine/"+dir+"/";
             ofs.open(basedir+name+".mesh",std::ofstream::binary | std::ios::out);
-            uint num = (uint)indices.size();
-            ofs.write((char*)&num,sizeof(uint));
-            num = (uint)vertices.size();
+            short lod = 1;
+            ofs.write((char*)&lod,sizeof(short));
+            uint num = (uint)vertices.size();
             ofs.write((char*)&num,sizeof(uint));
             ofs.write((char*)&type,sizeof(VertType));
+            num = (uint)indices.size();
+            ofs.write((char*)&num,sizeof(uint));
             loop0i(indices.size()) ofs.write((char*)&indices[i],sizeof(uint));
             loop0i(vertices.size()) WriteVertex(ofs, &vertices[i]);
             ofs.close();
@@ -197,7 +199,7 @@ namespace engine
         }
     }
     
-    void WriteSkinMesh(const std::string name,vector<int>& indices, vector<SkinVertex> vertices, std::string dir)
+    void WriteSkinMesh(const std::string name,vector<vector<int>>& indices, vector<SkinVertex> vertices, std::string dir)
     {
         std::ofstream ofs;
         ofs.exceptions (std::ofstream::failbit | std::ofstream::badbit);
@@ -224,13 +226,18 @@ namespace engine
           
             // mesh
             ofs.open(basedir+name+".mesh",std::ofstream::binary | std::ios::out);
-            num = (uint)indices.size();
-            ofs.write((char*)&num,sizeof(uint));
+            short lod = (short)indices.size();
+            ofs.write((char*)&lod, sizeof(short));
             num=(uint)vertices.size();
             ofs.write((char*)&num,sizeof(uint));
             num=0x2111;
             ofs.write((char*)&num,sizeof(VertType));
-            loop0i(indices.size())  ofs.write((char*)&indices[i],sizeof(int));
+            loop0i(indices.size())
+            {
+                num = (uint)indices[i].size();
+                ofs.write((char*)&num,sizeof(uint));
+                loop0j(num) ofs.write((char*)&(indices[i][j]),sizeof(int));
+            }
             loop0i(vertices.size()) WriteSkinVertex(ofs, &vertices[i]);
             ofs.close();
             std::cout<<"save skin mesh "<<name<<std::endl;
@@ -348,7 +355,7 @@ namespace engine
         }
     }
     
-    MeshData* ReadMesh(const std::string name, const std::string objdir)
+    void RecalcuteLod(MeshData* data, const std::string name, const std::string objdir,const short ilod)
     {
         std::ifstream ifs;
         ifs.exceptions (std::ifstream::failbit | std::ifstream::badbit);
@@ -359,20 +366,66 @@ namespace engine
             ifs.open(path, std::ifstream::binary | std::ios::in);
             uint inds = 0,verts = 0, type = 0x0;
             ifs.seekg(0, ios::beg);
-            ifs.read((char*)(&inds), sizeof(uint));
+            short lod = 1;
+            ifs.read((char*)&lod, sizeof(lod));
             ifs.read((char*)(&verts), sizeof(uint));
             ifs.read((char*)(&type), sizeof(uint));
+            error_stop(ilod<lod, "read lod error");
+            short curr=0;
+            while (curr < ilod) {
+                ifs.read((char*)&inds,sizeof(uint));
+                ifs.seekg(inds*4, std::ios_base::cur);
+                curr++;
+            }
+            ifs.read((char*)(&inds), sizeof(uint));
+            delete [] data->indices;
+            data->num_indice = inds;
+            data->indices = new uint[inds];
+            loop0i(inds) ifs.read((char*)(&(data->indices[i])), sizeof(uint));
+            ifs.close();
+        }catch (std::ifstream::failure e)
+        {
+            std::cerr<<"read mesh error "<<name<<std::endl;
+        }
+    }
+    
+    MeshData* ReadMesh(const std::string name, const std::string objdir, const short ilod)
+    {
+        std::ifstream ifs;
+        ifs.exceptions (std::ifstream::failbit | std::ifstream::badbit);
+        try
+        {
+            if(!objdir.empty()) curr_obj = objdir;
+            std::string path = getResPath("engine/"+curr_obj+"/"+name+".mesh");
+            ifs.open(path, std::ifstream::binary | std::ios::in);
+            uint inds = 0,verts = 0, type = 0x0;
+            ifs.seekg(0, ios::beg);
+            short lod = 1;
+            ifs.read((char*)&lod, sizeof(lod));
+            ifs.read((char*)(&verts), sizeof(uint));
+            ifs.read((char*)(&type), sizeof(uint));
+            error_stop(ilod<lod, "read lod error");
+            short curr=0;
+            while (curr < ilod) {
+                ifs.read((char*)&inds,sizeof(uint));
+                ifs.seekg(inds, std::ios_base::cur);
+                curr++;
+            }
+            ifs.read((char*)(&inds), sizeof(uint));
             MeshData* mesh = new MeshData();
             mesh->type = type;
             mesh->num_indice = inds;
             mesh->indices = new uint[inds];
             mesh->num_vert = verts;
             mesh->vertices = new Vert*[verts];
-            
-            for (size_t i=0; i<inds; i++)
-            {
-                ifs.read((char*)(&mesh->indices[i]), sizeof(uint));
+            loop0i(inds) ifs.read((char*)(&(mesh->indices[i])), sizeof(uint));
+            for (short i=ilod+1; i<lod; i++) {
+                uint num =0;
+                ifs.read((char*)&num,sizeof(uint));
+                std::cout<<i<<" "<<name<<" "<<num/3<<std::endl;
+                ifs.seekg(num*4, std::ios_base::cur);
             }
+           
             for (size_t i=0; i<verts; i++)
             {
                 switch (type) {
@@ -451,17 +504,18 @@ namespace engine
         memset(line, 0, 100);
         memset(name, 0, 100);
         
-        std::vector<int> indices;
+        vector<vector<int>> indices;
         std::vector<SkinVertex> vertices;
         int x,y,z;
         float f1,f2,f3;
         uint normal_id = 0, texcoord_id = 0;
         int lod = 0;
+        vector<int> v; indices.push_back(v);
         while(fgets(line, 1000, fn) != NULL)
         {
             if(sscanf(line," <face v1=\"%d\" v2=\"%d\" v3=\"%d\" />",&x,&y,&z) == 3)
             {
-                if (lod==0) { indices.push_back(x); indices.push_back(y); indices.push_back(z); }
+                 indices[lod].push_back(x); indices[lod].push_back(y); indices[lod].push_back(z);
             }
             if(sscanf(line," <position x=\"%f\" y=\"%f\" z=\"%f\" />",&f1,&f2,&f3) == 3)
             {
@@ -482,7 +536,11 @@ namespace engine
                     vertices[x].bonecount++;
                 }
             }
-            if(sscanf(line," <lodgenerated value=\"%f\">",&f1)==1) lod++;
+            if(sscanf(line," <lodgenerated value=\"%f\">",&f1)==1)
+            {
+                vector<int> v; indices.push_back(v);
+                lod++;
+            }
         }
         
         fclose(fn);

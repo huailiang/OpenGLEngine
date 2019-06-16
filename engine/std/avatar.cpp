@@ -146,4 +146,13 @@ namespace engine
         }
     }
     
+    void Avatar::ChangeLOD(short ilod)
+    {
+        for (size_t i=0; i<materials.size(); i++) {
+            MeshData* data = materials[i]->data;
+            RecalcuteLod(data, "halo", "halo", ilod);
+            materials[i]->SetupMesh();
+        }
+    }
+    
 }

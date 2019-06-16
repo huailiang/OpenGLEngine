@@ -51,6 +51,8 @@ namespace engine
         
         void ResumeAnim();
         
+        void ChangeLOD(short ilod);
+        
     private:
         
         void LoadSkeleton();

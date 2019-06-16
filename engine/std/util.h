@@ -38,7 +38,9 @@ namespace engine
     
     void WriteMesh(const std::string name,vector<int>& indices, vector<Vertex>& vertices, VertType type, std::string dir="");
     
-    MeshData* ReadMesh(const std::string name, const std::string objdir = "");
+    MeshData* ReadMesh(const std::string name, const std::string objdir = "", const short ilod = 0);
+    
+    void RecalcuteLod(MeshData* data, const std::string name, const std::string objdir, const short ilod);
     
     void WriteMaterial(const string name,const std::string texture[],std::string dir="");
     

@@ -25,11 +25,18 @@ def writei(f,v):
 	p=struct.pack("I",v)
 	f.write(p)
 
+
+
 def writeh(f, indices, verts, atype):
-    writei(f, indices)
+    f.write(struct.pack('h', 1))
     writei(f, verts)
     writei(f, atype)
+    writei(f, indices)
 
+
+def readh(f):
+    v=f.read(2)
+    return struct.unpack("h",v)[0]
 
 def readi(f):
 	v=f.read(4)
@@ -203,10 +210,11 @@ f.close()
 
 #  for test
 f = open(target+"plane.mesh", 'rb')
-inds=readi(f)
+lod = readh(f)
 num=readi(f)
 ty = readi(f)
-print("inds:",inds,"num:",num,"type:",ty)
+inds=readi(f)
+print("lod",lod,"inds:",inds,"num:",num,"type:",ty)
 for x in range(0,num):
 	a1 = readf(f)
 	a2 = readf(f)
