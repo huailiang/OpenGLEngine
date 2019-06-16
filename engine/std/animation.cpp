@@ -52,8 +52,7 @@ namespace engine
     void Skeleton::SetPose(int animation_index)
     {
         if(animation_index>=num_anim) std::cerr<<"animation index out of range "<<animation_index<<std::endl;
-        if(!resample) { ResampleAnimationTracks(3
-                                                0); SetBindPose(); resample=true; }
+        if(!resample) { ResampleAnimationTracks(30); SetBindPose(); resample=true; }
         current = &animations[animation_index];
         playtime = 0;
     }
