@@ -63,6 +63,23 @@ vec3 UnpackNormalmap(vec4 packednormal)
 }
 
 
+vec3 EncodeFloatRGB(float v)
+{
+    vec3 kEncodeMul = vec3(1.0, 255.0, 65025.0);
+    float kEncodeBit = 1.0/255.0;
+    vec3 enc = kEncodeMul * v;
+    enc = frac(enc);
+    enc -= enc.yzww * kEncodeBit;
+    return enc;
+}
+
+
+float DecodeFloatRGB(vec3 enc)
+{
+    vec3 kDecodeDot = vec3(1.0, 1.0/255.0, 1.0/65025.0);
+    return dot(enc, kDecodeDot);
+}
+
 vec4 EncodeFloatRGBA(float v)
 {
     vec4 kEncodeMul = vec4(1.0, 255.0, 65025.0, 16581375.0);

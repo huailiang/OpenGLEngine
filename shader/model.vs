@@ -19,16 +19,17 @@ mat4 MODEL;
 #ifdef ENABLE_SKELETON
 
 
-uniform mat4 bones[100];
+uniform mat4 bones[64];
 
 void CalculateSkele()
 {
+    int boneid = int(aBone.w);
     int high = boneid / 65025;
     int x = boneid % 65025;
     
-    mat4 mskin = bones[high] * weights.x +
-                 bones[x/256] * weights.y +
-                 bones[x%256] * weights.z;
+    mat4 mskin = bones[high]  * aBone.x +
+                 bones[x/255] * aBone.y +
+                 bones[x%255] * aBone.z;
     
     MODEL = model * mskin;
 }

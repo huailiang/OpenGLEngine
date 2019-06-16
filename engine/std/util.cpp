@@ -421,10 +421,9 @@ namespace engine
                         readv3(ifs, vert->Position);
                         readv2(ifs, vert->TexCoords);
                         readv3(ifs, vert->Normal);
-                        readv3(ifs, vert->weight);
-                        glm::ivec3 v;
-                        readv3(ifs, v);
-                        vert->boneindx = 65025 * v.x+ 256 * v.y + v.z;
+                        glm::vec3 w; readv3(ifs, w);
+                        glm::ivec3 v; readv3(ifs, v);
+                        vert->Bone = glm::vec4(w, 65025 * v.x+ 255 * v.y + v.z);
                         mesh->vertices[i] = vert;
                     } break;
                     default:

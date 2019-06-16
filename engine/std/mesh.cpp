@@ -85,9 +85,7 @@ namespace engine
             glEnableVertexAttribArray(2);
             glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(SkeletonVertex), (void*)(5*sizeof(float)));
             glEnableVertexAttribArray(3);
-            glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(SkeletonVertex), (void*)(8*sizeof(float)));
-            glEnableVertexAttribArray(4);
-            glVertexAttribIPointer(4, 1, GL_INT, sizeof(SkeletonVertex), (void*)(11*sizeof(float)));
+            glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, sizeof(SkeletonVertex), (void*)(8*sizeof(float)));
             delete [] p;
         }
         else
