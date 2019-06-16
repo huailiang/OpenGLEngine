@@ -30,7 +30,7 @@
 #define _Tan    layout (location = 3) in vec3 aTangent;
 #define _Weight layout (location = 3) in vec3 weights;
 #define _Bitan  layout (location = 4) in vec3 aBitangent;
-#define _BoneIx layout (location = 4) in ivec3 boneid;
+#define _BoneIx layout (location = 4) in int boneid;
 
 /*
  * 可以直接使用定义好的数据结构

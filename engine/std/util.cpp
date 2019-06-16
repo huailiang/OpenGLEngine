@@ -422,7 +422,9 @@ namespace engine
                         readv2(ifs, vert->TexCoords);
                         readv3(ifs, vert->Normal);
                         readv3(ifs, vert->weight);
-                        readv3(ifs, vert->boneindx);
+                        glm::ivec3 v;
+                        readv3(ifs, v);
+                        vert->boneindx = 65025 * v.x+ 256 * v.y + v.z;
                         mesh->vertices[i] = vert;
                     } break;
                     default:

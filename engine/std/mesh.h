@@ -75,7 +75,7 @@ namespace engine
         glm::vec2 TexCoords;
         glm::vec3 Normal;
         glm::vec3 weight;
-        glm::ivec3 boneindx;
+        int boneindx;
     };
     
     

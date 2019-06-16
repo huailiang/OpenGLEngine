@@ -23,9 +23,12 @@ uniform mat4 bones[100];
 
 void CalculateSkele()
 {
-    mat4 mskin = bones[boneid.x] * weights.x +
-                 bones[boneid.y] * weights.y +
-                 bones[boneid.z] * weights.z;
+    int high = boneid / 65025;
+    int x = boneid % 65025;
+    
+    mat4 mskin = bones[high] * weights.x +
+                 bones[x/256] * weights.y +
+                 bones[x%256] * weights.z;
     
     MODEL = model * mskin;
 }
