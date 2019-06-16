@@ -422,12 +422,7 @@ namespace engine
                         readv2(ifs, vert->TexCoords);
                         readv3(ifs, vert->Normal);
                         readv3(ifs, vert->weight);
-                        ivec3 v3(1);
-                        readv3(ifs, v3);
-                        vert->boneindx.x = (float)v3.x+1e-4;
-                        vert->boneindx.y = (float)v3.y+1e-4;
-                        vert->boneindx.z = (float)v3.z+1e-4;
-//                        readv3(ifs, vert->boneindx);
+                        readv3(ifs, vert->boneindx);
                         mesh->vertices[i] = vert;
                     } break;
                     default:
