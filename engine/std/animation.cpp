@@ -14,9 +14,9 @@ namespace engine
     Skeleton::Skeleton()
     {
         playtime = 0;
+        pause = false;
         resample = false;
         current = nullptr;
-        backup = nullptr;
     }
     
     Skeleton::~Skeleton()
@@ -26,7 +26,6 @@ namespace engine
         num_anim = 0;
         num_bone = 0;
         current = nullptr;
-        backup = nullptr;
     }
     
     void Skeleton::EvalSubtree(int id, XAnimation &ani,int frame, float weight)
@@ -64,19 +63,12 @@ namespace engine
     
     void Skeleton::Pause()
     {
-        if(current)
-        {
-            backup = current;
-            current = nullptr;
-        }
+        pause = true;
     }
     
     void Skeleton::Resume()
     {
-        if(backup)
-        {
-            current = backup;
-        }
+        pause = false;
     }
     
     
@@ -91,14 +83,14 @@ namespace engine
             loop0i(num_bone)  bones[i].matrix = glm::mat4(1);
             loop0i(num_bone)  if (bones[i].parent==-1) EvalSubtree((int)i,*current,int(frame),frac(frame));
             
-            playtime += deltatime;
+            if (!pause) playtime += deltatime;
         }
     }
     
     void Skeleton::Draw(Shader* shader)
     {
         this->shader = shader;
-        glm::mat4 ibones[100];
+        
         InnerPlay();
         loop(num_bone) ibones[i] = current ? (bones+i)->matrix *  (bones+i)->invbindmatrix : glm::mat4(1);
         shader->setMat4("bones", 64, ibones[0]);

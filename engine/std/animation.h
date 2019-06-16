@@ -119,11 +119,12 @@ namespace engine
         XAnimation* animations;
         
     private:
-        XAnimation* current,*backup;
+        XAnimation* current;
         Shader* shader;
         float playtime;
         bool resample;
-
+        bool pause;
+        glm::mat4 ibones[64];
     };
     
 }
