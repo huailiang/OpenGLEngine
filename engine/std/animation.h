@@ -50,6 +50,7 @@ namespace engine
         uint num_track;
         XTrack* tracks;
         uint frameCount;
+        
     };
     
     struct Bone
@@ -91,6 +92,10 @@ namespace engine
         
         void PlayAnim(std::string anim);
         
+        void Pause();
+        
+        void Resume();
+        
         void SetBindPose();
         
         Key& GetInterpolatedKey(XTrack& track,int frame,float weight,bool normalize=false);
@@ -114,7 +119,7 @@ namespace engine
         XAnimation* animations;
         
     private:
-        XAnimation* current;
+        XAnimation* current,*backup;
         Shader* shader;
         float playtime;
         bool resample;

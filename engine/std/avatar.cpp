@@ -117,7 +117,33 @@ namespace engine
             skeleton = new Skeleton();
         }
         ReadSkeleton(skeleton, name, name);
-        skeleton->PlayAnim("something");
+//        skeleton->PlayAnim("something");
+    }
+    
+    
+    void Avatar::PlayAnim(std::string anim)
+    {
+        if(skeleton)
+        {
+            skeleton->PlayAnim(anim);
+        }
+    }
+    
+    
+    void Avatar::PauseAnim()
+    {
+        if(skeleton)
+        {
+            skeleton->Pause();
+        }
+    }
+    
+    void Avatar::ResumeAnim()
+    {
+        if(skeleton)
+        {
+            skeleton->Resume();
+        }
     }
     
 }

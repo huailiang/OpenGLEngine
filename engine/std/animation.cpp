@@ -10,11 +10,13 @@
 
 namespace engine
 {
-    
+        
     Skeleton::Skeleton()
     {
         playtime = 0;
         resample = false;
+        current = nullptr;
+        backup = nullptr;
     }
     
     Skeleton::~Skeleton()
@@ -24,6 +26,7 @@ namespace engine
         num_anim = 0;
         num_bone = 0;
         current = nullptr;
+        backup = nullptr;
     }
     
     void Skeleton::EvalSubtree(int id, XAnimation &ani,int frame, float weight)
@@ -33,7 +36,6 @@ namespace engine
         
         glm::vec3 pos(b.pos[0],b.pos[1],b.pos[2]);
         m = glm::rotate(m, b.rot[0], glm::vec3(b.rot[1], b.rot[2], b.rot[3]));
-//        std::cout<<id<<"\t"<< ani.tracks[id].num_key<<"\tframe:"<<frame<<std::endl;
         if(ani.tracks[id].num_key > frame) // add animated pose if track available
             if(frame>=0)
             {
@@ -50,7 +52,8 @@ namespace engine
     void Skeleton::SetPose(int animation_index)
     {
         if(animation_index>=num_anim) std::cerr<<"animation index out of range "<<animation_index<<std::endl;
-        if(!resample) { ResampleAnimationTracks(20); SetBindPose(); resample=true; }
+        if(!resample) { ResampleAnimationTracks(3
+                                                0); SetBindPose(); resample=true; }
         current = &animations[animation_index];
         playtime = 0;
     }
@@ -59,6 +62,24 @@ namespace engine
     {
         loop(num_anim) if((animations+i)->name == anim) { SetPose(i); break; }
     }
+    
+    void Skeleton::Pause()
+    {
+        if(current)
+        {
+            backup = current;
+            current = nullptr;
+        }
+    }
+    
+    void Skeleton::Resume()
+    {
+        if(backup)
+        {
+            current = backup;
+        }
+    }
+    
     
     void Skeleton::InnerPlay()
     {
@@ -75,15 +96,13 @@ namespace engine
         }
     }
     
-    
     void Skeleton::Draw(Shader* shader)
     {
         this->shader = shader;
         glm::mat4 ibones[100];
         InnerPlay();
-        loop(num_bone) ibones[i] = (bones+i)->matrix *  (bones+i)->invbindmatrix;
-//        std::cout<<std::endl<<" ***************** "<<std::endl; loop(num_bone) Print(i, ibones[i]);
-        shader->setMat4("bones", 100, ibones[0]);
+        loop(num_bone) ibones[i] = current ? (bones+i)->matrix *  (bones+i)->invbindmatrix : glm::mat4(1);
+        shader->setMat4("bones", 64, ibones[0]);
     }
     
     void Skeleton::SetBindPose()

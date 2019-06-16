@@ -45,6 +45,12 @@ namespace engine
         
         void Scale(const glm::vec3 scale);
         
+        void PlayAnim(std::string anim);
+        
+        void PauseAnim();
+        
+        void ResumeAnim();
+        
     private:
         
         void LoadSkeleton();
