@@ -29,30 +29,28 @@ namespace engine
     
     typedef unsigned int VertType;
     
+    #define VIRTUAL_FUNC_CNT 1
+    
     struct Vert { };
     
-    // type = 0x0012
     struct BaseVert2 : Vert
     {
         glm::vec2 Position;
         glm::vec2 TexCoords;
     };
     
-    // type = 0x0011
     struct BaseVert3 : Vert
     {
         glm::vec3 Position;
         glm::vec2 TexCoords;
     };
     
-    // type = 0x0111
     struct Vertex : Vert
     {
         glm::vec3 Position;
         glm::vec2 TexCoords;
         glm::vec3 Normal;
     };
-    
     
     struct SkinVertex : Vertex
     {
@@ -68,14 +66,12 @@ namespace engine
         }
     };
     
-    //type = 0x2111
     struct SkeletonVertex : Vertex
     {
         glm::vec4 Bone;
     };
     
     
-    // type = 0x1011
     struct ColorVertex : Vert
     {
         glm::vec3 Position;
@@ -83,24 +79,17 @@ namespace engine
         glm::vec3 Color;
     };
     
-    // type = 0x1111
-    struct CompxVertex : Vert
+    struct CompxVertex : Vertex
     {
-        glm::vec3 Position;
-        glm::vec2 TexCoords;
-        glm::vec3 Normal;
         glm::vec3 Color;
     };
     
-    // type = 0x0311
-    struct TangVertex : Vert
+    struct TangVertex : Vertex
     {
-        glm::vec3 Position;
-        glm::vec2 TexCoords;
-        glm::vec3 Normal;
         glm::vec3 Tangent;
     };
-
+    
+    
     struct MeshData
     {
         uint num_indice;
@@ -112,18 +101,6 @@ namespace engine
         ~MeshData();
         
         void ConfigAttribute(const GLenum usage = GL_STATIC_DRAW);
-        
-        BaseVert2* GetBaseVertex2() const;
-        
-        BaseVert3* GetBaseVertex3() const;
-        
-        Vertex* GetVertex() const;
-        
-        ColorVertex* GetColorVertex() const;
-        
-        CompxVertex* GetCompxVertex() const;
-        
-        SkeletonVertex* GetSkinVertex() const;
         
         bool hasPos() const;
 

@@ -77,8 +77,14 @@ ui可以画Label, Button
 
 右下角即灯光空间的depth-buffer
 
+## 5. 蒙皮动画 & LOD
 
-## 5. 更多就不枚举了
+<br><img src='image/lod.jpg'> <br>
+
+
+支持蒙皮动画，和高模低模LOD
+
+## 6. 更多就不枚举了
 
 比如使用GPU Instance 批量画草， geomotry Shader显示法线，变换帧缓存后处理， PBR、BRDF、 IBL 更多的功能等你去探索
 
