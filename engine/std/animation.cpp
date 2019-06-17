@@ -29,30 +29,30 @@ namespace engine
         current = nullptr;
     }
     
-    void Skeleton::EvalSubtree(int id, XAnimation &ani,int frame, float weight)
+    void Skeleton::EvalSubtree(int id, XAnimation &ani, int frame, float weight)
     {
         XBone &b=bones[id];
-        glm::mat4 a(1),m(1);
-        
-        glm::vec3 pos(b.pos[0],b.pos[1],b.pos[2]);
+        glm::mat4 a(1.0f),m(1.0f);
+        glm::vec3 pos(b.pos[0], b.pos[1], b.pos[2]);
         m = glm::rotate(m, b.rot[0], glm::vec3(b.rot[1], b.rot[2], b.rot[3]));
         if(ani.tracks[id].num_key > frame) // add animated pose if track available
-            if(frame>=0)
+            if(frame >= 0)
             {
-                Key &k = GetInterpolatedKey(ani.tracks[id],frame,weight);
-                a = glm::rotate(a, k.rot[0], glm::vec3(k.rot[1],k.rot[2],k.rot[3]));
-                pos = pos + glm::vec3(k.pos[0],k.pos[1],k.pos[2]);
+                Key &k = GetInterpolatedKey(ani.tracks[id], frame, weight);
+                a = glm::rotate(a, k.rot[0], glm::vec3(k.rot[1], k.rot[2], k.rot[3]));
+                pos = pos + glm::vec3(k.pos[0], k.pos[1], k.pos[2]);
                 m = m * a;
             }
-        m = glm::translate(m, pos);
-        b.matrix = b.parent>=0 ? bones[b.parent].matrix * m : m;
-        loop0i(b.num_child) EvalSubtree(b.childs[i],ani,frame,weight);
+         SetPosition(m, pos);
+        b.matrix = b.parent >= 0 ? bones[b.parent].matrix * m : m;
+        
+        loop0i(b.num_child) EvalSubtree(b.childs[i], ani, frame, weight);
     }
     
     void Skeleton::SetPose(int animation_index)
     {
-        if(animation_index>=num_anim) std::cerr<<"animation index out of range "<<animation_index<<std::endl;
-        if(!resample) { ResampleAnimationTracks(30); SetBindPose(); resample=true; }
+        if(animation_index >= num_anim) std::cerr<<"animation index out of range "<<animation_index<<std::endl;
+        if(!resample) { ResampleAnimationTracks(20); SetBindPose(); resample = true; }
         current = &animations[animation_index];
         playtime = 0;
     }
@@ -82,12 +82,11 @@ namespace engine
     {
         if(current)
         {
-            playtime = 1;
             double time01 = playtime/double(current->time);
             time01 = time01-floor(time01);
             float frame = (current->frameCount-2)*time01+1;
             
-            loop0i(num_bone)  bones[i].matrix = glm::mat4(1);
+            loop0i(num_bone)  bones[i].matrix = glm::mat4(1.0f);
             loop0i(num_bone)  if (bones[i].parent==-1) EvalSubtree((int)i,*current,int(frame),frac(frame));
             
             if (!pause) playtime += deltatime;
@@ -100,14 +99,6 @@ namespace engine
         
         InnerPlay();
         loop(num_bone) ibones[i] = current ? (bones+i)->matrix * (bones+i)->invbindmatrix : glm::mat4(1);
-        
-//        loop(num_bone)
-//        {
-//            glm::mat4 m = ibones[i];
-//            printf("%2u %.3f %.3f %.3f %.3f %.3f %.3f %.3f %.3f %.3f %.3f\n", i,
-//                              m[0][0], m[0][1], m[0][2], m[0][3], m[1][0], m[1][1], m[1][2], m[1][3], m[2][2], m[3][3]);
-//        }
-        
         shader->setMat4("bones", 64, ibones[0]);
     }
     
@@ -158,13 +149,13 @@ namespace engine
         
         static Key k;
         float weight1 = 1.0 - weight;
-        loop(3) k.pos[i]=k0.pos[i]*weight1+k1.pos[i]*weight;
-        loop(4) k.rot[i]=k0.rot[i]*weight1+k1.rot[i]*weight;
+        loop(3) k.pos[i] = k0.pos[i] * weight1 + k1.pos[i] * weight;
+        loop(4) k.rot[i] = k0.rot[i] * weight1 + k1.rot[i] * weight;
         
         if(normalize)
         {
             glm::vec3 axis(k.rot[1],k.rot[2],k.rot[3]);
-            glm::normalize(axis);
+            axis = glm::normalize(axis);
             k.rot[1]=axis.x;
             k.rot[2]=axis.y;
             k.rot[3]=axis.z;

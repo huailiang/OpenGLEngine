@@ -273,7 +273,8 @@ namespace engine
         }
         return type;
     }
-
+    
+    
     bool LoadObj(const std::string name)
     {
         curr_obj = name;
@@ -383,7 +384,7 @@ namespace engine
             data->indices = new uint[inds];
             loop0i(inds) ifs.read((char*)(&(data->indices[i])), sizeof(uint));
             ifs.close();
-        }catch (std::ifstream::failure e)
+        } catch (std::ifstream::failure e)
         {
             std::cerr<<"read mesh error "<<name<<std::endl;
         }

@@ -127,6 +127,7 @@ namespace engine
         bool resample;
         bool pause;
         glm::mat4 ibones[64];
+        glm::mat4 xbones[64];
     };
     
 }

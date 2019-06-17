@@ -25,7 +25,14 @@ namespace engine
     MeshData* quad = nullptr;
     time_t start_time;
     float deltatime;
-
+    
+    void SetPosition(glm::mat4& mat, glm::vec3& pos)
+    {
+        mat[3][0] = pos.x;
+        mat[3][1] = pos.y;
+        mat[3][2] = pos.z;
+    }
+    
     float GetRuntime()
     {
         timeb t;
@@ -79,13 +86,6 @@ namespace engine
         }
         assert(condition);
     }
-
-    void Print(int i, glm::mat4 m)
-    {
-        printf("%d %2.2f %2.2f %2.2f %2.2f %2.2f  %2.2f  %2.2f  %2.2f %2.2f %2.2f\n", i,
-               m[0][0], m[0][1], m[0][2], m[0][3], m[1][0], m[1][1], m[1][2], m[1][3],m[2][2],m[3][3]);
-    }
-
 
     std::string Macro(const char* k1)
     {

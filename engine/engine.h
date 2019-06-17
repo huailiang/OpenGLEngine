@@ -96,8 +96,8 @@ namespace engine
     #define clamp(a_,b_,c_) min(max(a_,b_),c_)
     
     #define frac(a) (a-floor(a))
-
-
+    
+    
     const float zeroVertices[] = {0.0f,  0.0f};
 
     float GetRuntime();
@@ -108,14 +108,14 @@ namespace engine
 
     void InitQuad(GLuint &quadVAO, GLuint &quadVBO);
     
+    void SetPosition(glm::mat4& mat, glm::vec3& pos);
+    
     void error_stop(bool condition, const char* msg);
 
     #define MACRO(k1, v1) \
         stream << "#define " << k1; \
         if(v1) stream << "  "<<v1;  \
         stream << std::endl;
-
-    void Print(int i, glm::mat4 m);
     
     std::string Macro(const char* k1);
 

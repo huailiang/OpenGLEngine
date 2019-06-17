@@ -117,6 +117,7 @@ namespace engine
             skeleton = new Skeleton();
         }
         ReadSkeleton(skeleton, name, name);
+        skeleton->PlayAnim("something");
     }
     
     
