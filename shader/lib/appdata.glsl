@@ -28,7 +28,7 @@
 #define _Normal layout (location = 2) in vec3 aNormal;
 #define _Color  layout (location = 2) in vec3 aColor;
 #define _Tan    layout (location = 3) in vec3 aTangent;
-#define _Weight layout (location = 3) in vec4 aBone;
+#define _Weight layout (location = 3) in vec4 aBones;
 #define _Bitan  layout (location = 4) in vec3 aBitangent;
 
 /*

@@ -7,6 +7,7 @@
 //
 
 #include "animation.h"
+#include "util.h"
 
 namespace engine
 {
@@ -40,7 +41,7 @@ namespace engine
             {
                 Key &k = GetInterpolatedKey(ani.tracks[id],frame,weight);
                 a = glm::rotate(a, k.rot[0], glm::vec3(k.rot[1],k.rot[2],k.rot[3]));
-                pos=pos + glm::vec3(k.pos[0],k.pos[1],k.pos[2]);
+                pos = pos + glm::vec3(k.pos[0],k.pos[1],k.pos[2]);
                 m = m * a;
             }
         m = glm::translate(m, pos);
@@ -61,6 +62,11 @@ namespace engine
         loop(num_anim) if((animations+i)->name == anim) { SetPose(i); break; }
     }
     
+    void Skeleton::SetTPose()
+    {
+        current = nullptr;
+    }
+    
     void Skeleton::Pause()
     {
         pause = true;
@@ -76,6 +82,7 @@ namespace engine
     {
         if(current)
         {
+            playtime = 1;
             double time01 = playtime/double(current->time);
             time01 = time01-floor(time01);
             float frame = (current->frameCount-2)*time01+1;
@@ -92,7 +99,15 @@ namespace engine
         this->shader = shader;
         
         InnerPlay();
-        loop(num_bone) ibones[i] = current ? (bones+i)->matrix *  (bones+i)->invbindmatrix : glm::mat4(1);
+        loop(num_bone) ibones[i] = current ? (bones+i)->matrix * (bones+i)->invbindmatrix : glm::mat4(1);
+        
+//        loop(num_bone)
+//        {
+//            glm::mat4 m = ibones[i];
+//            printf("%2u %.3f %.3f %.3f %.3f %.3f %.3f %.3f %.3f %.3f %.3f\n", i,
+//                              m[0][0], m[0][1], m[0][2], m[0][3], m[1][0], m[1][1], m[1][2], m[1][3], m[2][2], m[3][3]);
+//        }
+        
         shader->setMat4("bones", 64, ibones[0]);
     }
     
@@ -134,7 +149,6 @@ namespace engine
             animations[i].frameCount = newframecount;
         }
     }
-    
     
     
     Key& Skeleton::GetInterpolatedKey(XTrack& track,int frame,float weight,bool normalize)

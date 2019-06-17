@@ -92,6 +92,8 @@ namespace engine
         
         void PlayAnim(std::string anim);
         
+        void SetTPose();
+        
         void Pause();
         
         void Resume();

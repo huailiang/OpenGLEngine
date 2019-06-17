@@ -51,6 +51,8 @@ namespace engine
         
         void ResumeAnim();
         
+        void SetTPose();
+        
         void ChangeLOD(short ilod);
         
     private:

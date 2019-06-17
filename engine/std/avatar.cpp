@@ -117,7 +117,6 @@ namespace engine
             skeleton = new Skeleton();
         }
         ReadSkeleton(skeleton, name, name);
-//        skeleton->PlayAnim("something");
     }
     
     
@@ -143,6 +142,14 @@ namespace engine
         if(skeleton)
         {
             skeleton->Resume();
+        }
+    }
+    
+    void Avatar::SetTPose()
+    {
+        if(skeleton)
+        {
+            skeleton->SetTPose();
         }
     }
     
