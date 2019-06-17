@@ -53,31 +53,31 @@ namespace engine
         if(type == 0x0111 || type == 0x1011)
         {
             GET_VERTEX(Vertex);
-            int config[] = { 3, 2, 3 };
+            int config[] = { LEN_Pos3, LEN_UV, LEN_Normal };
             MESH_VERT_CONFIG(config, 3, Vertex);
         }
         else if(type == 0x1111)
         {
             GET_VERTEX(CompxVertex);
-            int config[] = { 3, 2, 3, 4 };
+            int config[] = { LEN_Pos3, LEN_UV, LEN_Normal, LEN_Color };
             MESH_VERT_CONFIG(config, 4, CompxVertex);
         }
         else if (type == 0x0011)
         {
             GET_VERTEX(BaseVert3);
-            int config[] = { 3, 2 };
+            int config[] = { LEN_Pos3, LEN_UV };
             MESH_VERT_CONFIG(config, 2, BaseVert3);
         }
         else if (type == 0x0012)
         {
             GET_VERTEX(BaseVert2);
-            int config[] = { 2, 2 };
+            int config[] = { LEN_Pos2, LEN_UV };
             MESH_VERT_CONFIG(config, 2, BaseVert2);
         }
         else if(type == 0x2111)
         {
             GET_VERTEX(SkeletonVertex);
-            int config[] = { 3, 2, 3, 4 };
+            int config[] = { LEN_Pos3, LEN_UV, LEN_Normal, LEN_Skin };
             MESH_VERT_CONFIG(config, 4, SkeletonVertex);
         }
         else

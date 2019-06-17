@@ -44,7 +44,7 @@ namespace engine
     }
     
 
-    void Material::Draw(const Shader* shader)
+    void Material::Draw(Shader* shader)
     {
         shader->use();
         DrawMesh();
@@ -78,7 +78,7 @@ namespace engine
     }
     
     
-    void ObjMaterial::Draw(const Shader* shader)
+    void ObjMaterial::Draw(Shader* shader)
     {
         shader->use();
         int i  = 0;

@@ -27,6 +27,19 @@ namespace engine
     #define Vt_Color   0x1000
     #define Vt_Skin    0x2000
     
+    #define LEN_Pos3    3
+    #define LEN_Pos2    2
+    #define LEN_UV      2
+    #define LEN_UV2     2
+    #define LEN_UV3     2
+    #define LEN_UV4     2
+    #define LEN_Normal  3
+    #define LEN_TAN     3
+    #define LEN_BIT     3
+    #define LEN_Color   3
+    #define LEN_Skin    4
+
+    
     typedef unsigned int VertType;
     
     #define VIRTUAL_FUNC_CNT 1

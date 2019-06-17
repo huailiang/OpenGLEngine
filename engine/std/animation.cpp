@@ -22,8 +22,8 @@ namespace engine
     
     Skeleton::~Skeleton()
     {
-        delete [] animations;
-        delete [] bones;
+        if(animations!=nullptr) delete [] animations;
+        if(bones!=nullptr) delete [] bones;
         num_anim = 0;
         num_bone = 0;
         current = nullptr;

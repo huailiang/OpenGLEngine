@@ -35,7 +35,7 @@ namespace engine
         
         void Draw(Shader* shader, Light* light);
         
-        void DrawShadow(const Shader* shader, Light* light);
+        void DrawShadow(Shader* shader, Light* light);
         
         void Rotate(float delta);
         
@@ -61,7 +61,7 @@ namespace engine
         
     private:
         
-        Skeleton* skeleton;
+        Skeleton* skeleton = nullptr;
         
         vector<Material*> materials;
         

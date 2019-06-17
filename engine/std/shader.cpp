@@ -21,13 +21,39 @@ namespace engine
 #ifdef DEBUG
         this->vertexPath = vertexPath;
         this->fragmentPath = fragmentPath;
+        this->geometryPath = geometryPath;
 #endif
-        std::string vertexCode = openFile(vertexPath);
-        std::string fragmentCode = openFile(fragmentPath);
+        vertexCode = openFile(vertexPath);
+        fragmentCode = openFile(fragmentPath);
+        if(geometryPath != nullptr)  geometryCode = openFile(geometryPath);
+        else geometryCode = "";
+        
+        this->macro = macro;
+        this->compiled = false;
+    }
+
+    Shader::~Shader()
+    {
+        glDeleteProgram(ID);
+    }
+    
+    void Shader::attach(const char* k1)
+    {
+        attach(k1,"");
+    }
+    
+    void Shader::attach(const char* k1, const char* v1)
+    {
+        std::stringstream stream(this->macro);
+        MACRO(k1, v1);
+        macro = stream.str();
+    }
+    
+    void Shader::compile()
+    {
         vertexCode = pre_process(vertexCode, macro);
         fragmentCode = pre_process(fragmentCode, macro);
-        std::string geometryCode;
-        if(geometryPath != nullptr)  geometryCode = openFile(geometryPath);
+        
         const char* vShaderCode = vertexCode.c_str();
         const char* fShaderCode = fragmentCode.c_str();
         // 2. compile shaders
@@ -44,46 +70,45 @@ namespace engine
         checkCompileErrors(fragment, "FRAGMENT");
         // if geometry shader is given, compile geometry shader
         GLuint geometry = 0;
-        if(geometryPath != nullptr)
+        if(!geometryCode.empty())
         {
-    #ifndef _GLES_
+#ifndef _GLES_
             const char * gShaderCode = geometryCode.c_str();
             geometry = glCreateShader(GL_GEOMETRY_SHADER);
             glShaderSource(geometry, 1, &gShaderCode, NULL);
             glCompileShader(geometry);
             checkCompileErrors(geometry, "GEOMETRY");
-    #endif
+#endif
         }
         
         ID = glCreateProgram();
         glAttachShader(ID, vertex);
         glAttachShader(ID, fragment);
-        if(geometryPath != nullptr)
-            glAttachShader(ID, geometry);
+        if(!geometryCode.empty()) glAttachShader(ID, geometry);
         glLinkProgram(ID);
         checkCompileErrors(ID, "PROGRAM");
         // delete the shaders as they're linked into our program now and no longer necessery
-        glDeleteShader(vertex);
-        glDeleteShader(fragment);
-        if(geometryPath != nullptr)
-            glDeleteShader(geometry);
+        glDeleteShader(vertex); vertexCode = "";
+        glDeleteShader(fragment); fragmentCode = "";
+        if(!geometryCode.empty()){ glDeleteShader(geometry); geometryCode=""; }
         
-    #ifdef DEBUG
+#ifdef DEBUG
         save(vertexCode, vertexPath);
         save(fragmentCode, fragmentPath);
-        if(geometryPath!=nullptr) save(geometryCode, geometryPath);
-    #endif
+        if(!geometryCode.empty()) save(geometryCode, geometryPath);
+#endif
     }
 
-
-    Shader::~Shader()
+    bool Shader::use() 
     {
-        glDeleteProgram(ID);
-    }
-
-    void Shader::use() const
-    {
+        bool resut = compiled;
+        if(!compiled)
+        {
+            compile();
+            compiled = true;
+        }
         glUseProgram(ID);
+        return resut;
     }
 
     void Shader::Shader::setBool(const std::string &name, bool value) const

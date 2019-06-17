@@ -24,7 +24,11 @@ namespace engine
         
         ~Shader();
         
-        void use() const;
+        void attach(const char* k1);
+        
+        void attach(const char* k1, const char* v1);
+        
+        virtual bool use();
         
         void setBool(const std::string &name, bool value) const;
         
@@ -55,6 +59,8 @@ namespace engine
         
     private:
         
+        void compile();
+        
         std::string pre_process(const std::string& source,const std::string macro);
         
         std::string preprocess(const std::string& source,const std::string macro, int level);
@@ -67,10 +73,15 @@ namespace engine
         
     private:
         std::vector<std::string> headers;
+        std::string vertexCode, fragmentCode, geometryCode;
+        std::string macro;
+        
+    protected:
+        bool compiled;
         
 #ifdef DEBUG
     protected:
-        const char* vertexPath, *fragmentPath;
+        const char* vertexPath, *fragmentPath,*geometryPath;
 #endif
 
     };
@@ -87,19 +98,27 @@ namespace engine
                     glm::vec3 diffuse = glm::vec3(1.0f, 1.0f, 1.0f),
                     glm::vec3 specular = glm::vec3(1.0f, 1.0f, 1.0f),
                     float shiness=32.0f)
-            :Shader(vertexPath,fragmentPath,geometryPath, macro)
+            :Shader(vertexPath, fragmentPath, geometryPath, macro)
         {
             this->ambinent = ambinent;
             this->diffuse = diffuse;
             this->specular = specular;
             this->shininess = shiness;
             
-            ApplyLight();
+//            ApplyLight();
+        }
+        
+        virtual bool use()
+        {
+            if(!Shader::use())
+            {
+                ApplyLight();
+            }
+            return compiled;
         }
         
         void ApplyLight()
         {
-            use();
             setVec3("material.ambient", ambinent);
             setVec3("material.diffuse", diffuse);
             setVec3("material.specular", specular);

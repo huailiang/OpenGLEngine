@@ -20,6 +20,7 @@ namespace engine
 
     class Material
     {
+        
     public:
         
         Material(MeshData* data);
@@ -28,7 +29,7 @@ namespace engine
         
         virtual void SetupMesh();
         
-        virtual void Draw(const Shader* shader);
+        virtual void Draw(Shader* shader);
         
         void DrawMesh();
         
@@ -53,7 +54,7 @@ namespace engine
         
         virtual void SetupMesh();
         
-        virtual void Draw(const Shader* shader);
+        virtual void Draw(Shader* shader);
         
     public:
         GLuint diffuse_texture;

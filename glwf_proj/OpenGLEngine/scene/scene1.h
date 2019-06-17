@@ -31,7 +31,7 @@ public:
     
     void InitLight()
     {
-        light = new DirectLight(vec3(1.0f), vec3(-1.0f));
+        light = new DirectLight(vec3(1.0f), vec3(-3.0f));
     }
     
     void InitScene()

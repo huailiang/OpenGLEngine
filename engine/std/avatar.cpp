@@ -71,7 +71,7 @@ namespace engine
     }
 
 
-    void Avatar::DrawShadow(const Shader* shader, Light* light)
+    void Avatar::DrawShadow(Shader* shader, Light* light)
     {
         shader->use();
         shader->setMat4("model", matrix);

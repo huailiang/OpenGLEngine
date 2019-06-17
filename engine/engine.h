@@ -77,8 +77,8 @@ namespace engine
 
 
     #define SAFE_DELETE(ptr) \
-    if(ptr != NULL) \
-    {delete ptr; ptr = NULL;}
+    if(ptr != nullptr) \
+    {delete ptr; ptr = nullptr;}
     
     #define max(a,b) ((a)>(b)?(a):(b))
     
