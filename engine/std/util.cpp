@@ -422,7 +422,6 @@ namespace engine
             for (short i=ilod+1; i<lod; i++) {
                 uint num =0;
                 ifs.read((char*)&num,sizeof(uint));
-                std::cout<<i<<" "<<name<<" "<<num/3<<std::endl;
                 ifs.seekg(num*4, std::ios_base::cur);
             }
            

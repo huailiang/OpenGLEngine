@@ -11,7 +11,7 @@
 
 ## Tip
 
-如果当前是打开的是qt/glfw工程，你需要在*common.h*设置资源工作路径：
+如果当前是打开的是qt/glfw工程，你需要在*engine.h*设置资源工作路径：
 
 ```c++
 #define WORKDIR "/users/username/qt_engine"

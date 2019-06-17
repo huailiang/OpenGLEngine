@@ -52,7 +52,7 @@ vec3 Blinn_Specular()
 
 vec3 LightColor()
 {
-    vec3 ambient = vec3(0.08f) * material.ambient;
+    vec3 ambient = vec3(0.1f) * material.ambient;
     vec3 diffuse = Diffuse();
     vec3 specular = Specular();
 
@@ -73,7 +73,7 @@ vec3 LightColor()
 #endif
 
 #ifdef _DirectLight_
-    diffuse *= 2.0;
+    diffuse *= 1.6;
 #endif
 
     

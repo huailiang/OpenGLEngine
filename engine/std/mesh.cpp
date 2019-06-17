@@ -30,14 +30,14 @@ namespace engine
         
         if(type == 0x0111 || type == 0x1011)
         {
-            Vert* p = GetVertex();
+            Vertex* p = GetVertex();
             glBufferData(GL_ARRAY_BUFFER, num_vert * sizeof(Vertex), p, usage);
             glEnableVertexAttribArray(0);
             glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), nullptr);
             glEnableVertexAttribArray(1);
             glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(3*sizeof(float)));
             glEnableVertexAttribArray(2);
-            glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(2*sizeof(float))); //normal is equal color
+            glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(5*sizeof(float))); //normal is equal color
             delete [] p;
         }
         else if(type == 0x1111)

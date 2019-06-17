@@ -33,7 +33,7 @@ public:
     
     void InitLight()
     {
-        light = new DirectLight(vec3(1.0f), vec3(-1,0,-2));
+        light = new DirectLight(vec3(1.0f), vec3(-1,0,-7));
     }
     
     void InitScene()
@@ -105,7 +105,7 @@ public:
         delete light;
         if(evtid == 0) light = new DirectLight(vec3(1), vec3(-1,0,-2));
         if(evtid == 1) light = new PointLight(vec3(1), vec3(0,0,-1), vec3(0,0,2), vec3(0.1,0.2,0.01));
-        if(evtid == 2) light = new SpotLight(vec3(1), vec3(0,0,-1), vec3(0,0,2), vec3(1,0.1,0), 6, 8);
+        if(evtid == 2) light = new SpotLight(vec3(1), vec3(0,0,-1), vec3(0,0,2), vec3(1,0.1,0), 6, 9);
         InitShader();
     }
     
