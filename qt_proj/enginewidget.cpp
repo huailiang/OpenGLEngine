@@ -17,15 +17,15 @@ engineWidget::~engineWidget()
     SAFE_DELETE(ui);
     SAFE_DELETE(camera);
     SAFE_DELETE(light);
-    delete shader;
+    SAFE_DELETE(shader);
     glDeleteVertexArrays(1, &vao);
     glDeleteBuffers(1,&vbo);
 }
 
 void engineWidget::HandleClick(int evtid)
 {
-    delete shader;
-    delete light;
+    SAFE_DELETE(shader);
+    SAFE_DELETE(light);
     if(evtid == 0)
         light = new DirectLight(vec3(1), vec3(-1,0,-2));
     if(evtid == 1)
