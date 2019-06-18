@@ -6,6 +6,8 @@ qt_proj/build/*.o
 qt_proj/build/*.cpp
 qt_proj/build/qt_engine*
 qt_proj/build/Makefile
+resources/texture2/
+resources/pvr/
 **/build/project/
 **/build/CMakeCache*
 **/build/cmake_install.cmake

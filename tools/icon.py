@@ -4,7 +4,7 @@
 """
 此工具用来自动生成ios 不同分辨率的icon以及相关的json配置
 用法：
-python exportAppIcon.py /path/xxx.png
+python icon.py /path/xxx.png
 """
 
 import sys
@@ -28,7 +28,7 @@ if not os.path.exists(outPutPath):
     os.mkdir(outPutPath)
 
 if len(sys.argv) <= 1:
-    print ('\033[31m' + '请输入图片路径,eg: python autoExportAppIcon.py /path/xxx.png' + '\033[0m')
+    print ('\033[31m' + '请输入图片路径,eg: python icon.py /path/xxx.png' + '\033[0m')
     quit()
 
 ImageName = sys.argv[1]
