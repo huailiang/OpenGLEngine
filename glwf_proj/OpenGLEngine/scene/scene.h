@@ -74,7 +74,7 @@ public:
             depthShader  = new Shader("depth.vs","depth.fs");
             debugShader = new Shader("debug.vs", "debug.fs");
             InitDepthBuffer();
-            InitQuad(quadVAO, quadVBO);
+            InitQuad(quadVAO, quadVBO, debugShader);
         }
         DrawUI();
     }
@@ -203,6 +203,15 @@ public:
     
     
 protected:
+    
+    void ApplyCamera(Material* mat)
+    {
+        if(mat && mat->shader)
+        {
+            camera->Attach(mat->shader);
+        }
+    }
+    
     void ApplyCamera(Shader* shader)
     {
         camera->Attach(shader);

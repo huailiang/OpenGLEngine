@@ -11,6 +11,7 @@
 
 
 #include "texmgr.h"
+#include "shader.h"
 
 namespace engine
 {
@@ -126,6 +127,8 @@ namespace engine
         bool hasNormal() const;
         
         bool hasColor() const;
+        
+        bool Bind(Shader* shader);
         
         /*
          * you need to delete[] after the function be called

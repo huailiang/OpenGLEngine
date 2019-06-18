@@ -65,6 +65,8 @@ namespace engine
         
         vector<Material*> materials;
         
+        vector<MeshData*> meshs;
+        
         MODEL_TYPE type;
         
         glm::mat4 matrix;

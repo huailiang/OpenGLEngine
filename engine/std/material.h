@@ -23,32 +23,56 @@ namespace engine
         
     public:
         
-        Material(MeshData* data);
+        Material(MeshData* data, Shader* shader = nullptr);
         
         virtual ~Material();
         
         virtual void SetupMesh();
         
-        virtual void Draw(Shader* shader);
+        virtual void Draw(Shader* shader = nullptr);
+        
+        void AttachShader(Shader* shader);
         
         void DrawMesh();
         
-    public:
+        void SetTexture(const char* name,const char* path, EXT ext);
         
-        MeshData* data;
+        void SetInt(const char* name, int value);
+        
+        void SetFloat(const char* name, float value);
+        
+        void SetVec2(const char* name, glm::vec2 v2);
+        
+        void SetVec3(const char* name, glm::vec3 v3);
+        
+        void SetVec4(const char* name, glm::vec4 v4);
+        
+        void SetMat3(const char* name, glm::mat3 m3);
+        
+        void SetMat4(const char* name, glm::mat4 m4);
+        
+    private:
+        
+        void DrawTexture();
+        
+    public:
+        MeshData* mesh;
+        Shader* shader;
         
     protected:
-        
         GLuint vao, vbo;
+        vector<const char*> texpaths;
+        map<const char*, GLuint> textures;
         
     };
     
-    
+    //.obj model material
     class ObjMaterial : public Material
     {
+        
     public:
         
-        ObjMaterial(MeshData* data);
+        ObjMaterial(MeshData* data, Shader* shader = nullptr);
         
         virtual ~ObjMaterial();
         
@@ -66,6 +90,7 @@ namespace engine
         GLuint ebo;
         
     };
+    
     
 }
 

@@ -18,13 +18,13 @@ class Scene1 : public Scene
 {
     
 public:
+    
    ~Scene1()
     {
         SAFE_DELETE(nano);
         SAFE_DELETE(terrain);
         SAFE_DELETE(shader);
         SAFE_DELETE(btn_normal);
-        SAFE_DELETE(btn_debug);
     }
     
     int getType() { return TY_Scene1; }
@@ -36,7 +36,7 @@ public:
     
     void InitScene()
     {
-        shader = new LightShader("model.vs", "model.fs",nullptr, Macro("VERT_TYPE","0x0111"));
+        shader = new LightShader("model.vs", "model.fs");
         ApplyCamera(shader);
         nmShader = new Shader("gizmos/normal.vs","gizmos/pixel.fs","gizmos/normal.gs");
         ApplyCamera(nmShader);
@@ -49,16 +49,8 @@ public:
         Scene::DrawUI();
         btn_normal = new UIButton(vec2(720, 360), vec3(1,1,0), 0.6f, "normal");
         btn_normal->RegistCallback(OnNormalClick, this);
-        btn_debug = new UIButton(vec2(720, 330), vec3(1,1,0), 0.6f, "debug");
-        btn_debug->RegistCallback(OnDebugClick, this);
     }
     
-    void DrawShadow(Shader *depthShader)
-    {
-        Scene::DrawShadow(depthShader);
-        terrain->DrawShadow(depthShader);
-        nano->DrawShadow(depthShader, light);
-    }
     
     void DrawScene()
     {
@@ -85,12 +77,13 @@ public:
 
     
 private:
-    UIButton* btn_normal, *btn_debug;
+    UIButton* btn_normal;
     Terrain* terrain;
     LightShader* shader;
     Shader* nmShader;
     GLuint texture1, texture2;
     Avatar *nano;
+    
 public:
     bool shownormal;
 };

@@ -15,14 +15,14 @@ class Scene2 : public Scene
 {
     
 public:
+    
     ~Scene2()
     {
+        SAFE_DELETE(mat);
         SAFE_DELETE(shader);
         glDeleteVertexArrays(1, &vao);
         glDeleteBuffers(1, &vbo);
-        SAFE_DELETE(btn_direct);
-        SAFE_DELETE(btn_point);
-        SAFE_DELETE(btn_spot);
+        SAFE_DELETE3(btn_direct, btn_point, btn_spot);
     }
     
     std::string getSkybox() { return "mp_5dim"; }
@@ -38,30 +38,31 @@ public:
     
     void InitScene()
     {
-        InitCube(vao, vbo);
+        MeshData* cube =(MeshData*)InitCube(vao, vbo);
+        mat= new Material(cube);
         InitShader();
-        Texture("textures/container", JPG, &texture1);
-        Texture("textures/awesomeface",PNG, &texture2);
     }
     
     void InitShader()
     {
-        shader = new LightShader("light.vs","light.fs", nullptr, Macro(light->getMacro().c_str()));
-        shader->use();
-        shader->setInt("texture1", 0);
-        shader->setInt("texture2", 1);
-        ApplyCamera(shader);
+        shader = new LightShader("light.vs","light.fs");
+        shader->attach(light->getMacro().c_str());
+        mat->AttachShader(shader);
+        mat->SetFloat("scale", 1);
+        mat->SetTexture("texture1", "textures/container", JPG);
+        mat->SetTexture("texture2", "textures/awesomeface", PNG);
+        ApplyCamera(mat);
     }
 
     
     void DrawUI()
     {
         Scene::DrawUI();
-        btn_direct = new UIButton(vec2(720, 360), vec3(1,1,0), 0.6f, "dirc-light", 0);
+        btn_direct = new UIButton(vec2(720, 360), vec3(1,1,0), 0.6f, " dirct-light", 0);
         btn_direct->RegistCallback(OnLightClick, this);
         btn_point = new UIButton(vec2(720, 330), vec3(1,1,0), 0.6f, "point-light", 1);
         btn_point->RegistCallback(OnLightClick, this);
-        btn_spot = new UIButton(vec2(720, 300), vec3(1,1,0), 0.6f, "spot-light", 2);
+        btn_spot = new UIButton(vec2(720, 300), vec3(1,1,0), 0.6f, " spot-light", 2);
         btn_spot->RegistCallback(OnLightClick, this);
     }
     
@@ -70,14 +71,8 @@ public:
     {
         Scene::ClearScene();
         vec3 cubePositions[] = { glm::vec3( 0.0f,  0.0f,  -2.0f), glm::vec3(2.0f,  1.0f, -4.0f) };
-        shader->use();
-        shader->setFloat("scale", 1);
-        light->Apply(shader);
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, texture1);
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, texture2);
-        
+        mat->Draw();
+        light->Apply(mat);
         glBindVertexArray(vao);
         for (uint i = 0; i < 2; i++)
         {
@@ -86,16 +81,16 @@ public:
             float angle = 64 * i * timeValue;
             model = glm::rotate(model, glm::radians(angle), vec3(1.0f, 0.3f, 0.5f));
             model = glm::scale(model, vec3(0.5f));
-            shader->setMat4("model", model);
+            mat->SetMat4("model", model);
             glDrawArrays(DRAW_MODE, 0, 36);
         }
     }
     
     void OnLightChange(int key)
     {
-        if(light && shader)
+        if(light && mat)
         {
-            light->Apply(shader);
+            light->Apply(mat);
         }
     }
     
@@ -120,9 +115,8 @@ private:
     
 private:
     UIButton* btn_direct, *btn_point, *btn_spot;
-
+    Material* mat;
     GLuint vbo, vao;
-    GLuint texture1, texture2;
     LightShader* shader;
 };
 

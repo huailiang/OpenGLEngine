@@ -44,9 +44,11 @@ namespace engine
     
     void Shader::attach(const char* k1, const char* v1)
     {
-        std::stringstream stream(this->macro);
+        std::stringstream stream;
+        stream<< macro;
         MACRO(k1, v1);
         macro = stream.str();
+        stream.clear();
     }
     
     void Shader::compile()
@@ -87,16 +89,16 @@ namespace engine
         if(!geometryCode.empty()) glAttachShader(ID, geometry);
         glLinkProgram(ID);
         checkCompileErrors(ID, "PROGRAM");
-        // delete the shaders as they're linked into our program now and no longer necessery
-        glDeleteShader(vertex); vertexCode = "";
-        glDeleteShader(fragment); fragmentCode = "";
-        if(!geometryCode.empty()){ glDeleteShader(geometry); geometryCode=""; }
         
 #ifdef DEBUG
         save(vertexCode, vertexPath);
         save(fragmentCode, fragmentPath);
         if(!geometryCode.empty()) save(geometryCode, geometryPath);
 #endif
+        // delete the shaders as they're linked into our program now and no longer necessery
+        glDeleteShader(vertex); vertexCode = "";
+        glDeleteShader(fragment); fragmentCode = "";
+        if(!geometryCode.empty()){ glDeleteShader(geometry); geometryCode=""; }
     }
 
     bool Shader::use() 
@@ -321,6 +323,41 @@ namespace engine
             }
         }
     }
+    
+    
+    LightShader::LightShader(const char* vertexPath,
+                const char* fragmentPath,
+                const char* geometryPath,
+                std::string macro,
+                glm::vec3 ambinent,
+                glm::vec3 diffuse,
+                glm::vec3 specular,
+                float shiness)
+    :Shader(vertexPath, fragmentPath, geometryPath, macro)
+    {
+        this->ambinent = ambinent;
+        this->diffuse = diffuse;
+        this->specular = specular;
+        this->shininess = shiness;
+    }
+    
+    bool LightShader::use()
+    {
+        if(!Shader::use())
+        {
+            ApplyLight();
+        }
+        return compiled;
 
+    }
+    
+    
+    void LightShader::ApplyLight()
+    {
+        setVec3("material.ambient", ambinent);
+        setVec3("material.diffuse", diffuse);
+        setVec3("material.specular", specular);
+        setFloat("material.shininess", shininess);
+    }
 
 }

@@ -34,6 +34,11 @@ namespace engine
         }
     }
 
+    void DirectLight::Apply(const Material* mat)
+    {
+        if(mat && mat->shader) Apply(mat->shader);
+    }
+    
     void DirectLight::Apply(const Shader* shader)
     {
         shader->setVec3("light.color", color);
@@ -59,13 +64,25 @@ namespace engine
     {
         return "_DirectLight_";
     }
-
+    
+    PointLight::PointLight(vec3 color, vec3 direction, vec3 pos, vec3 constant)
+    :Light(color, direction)
+    {
+        this->pos=pos;
+        this->constant=constant;
+    }
+    
     mat4 PointLight::GetLigthSpaceMatrix(float near, float far, float up, float left)
     {
         vec3 center = pos + direction;
         mat4 view = lookAt(pos, center, vec3(0,1,0));
         mat4 proj = glm::ortho(-left, left, -up, up, near, far);
         return proj * view;
+    }
+    
+    void PointLight::Apply(const Material* mat)
+    {
+        if(mat && mat->shader) Apply(mat->shader);
     }
 
     void PointLight::Apply(const Shader* shader)
@@ -84,6 +101,18 @@ namespace engine
     std::string PointLight::getMacro() const
     {
         return "_PointLight_";
+    }
+    
+    SpotLight::SpotLight(vec3 color, vec3 direction, vec3 pos, vec3 constant,float cutOff,float outerCutOff)
+    :PointLight(color, direction, pos,constant)
+    {
+        this->cutOff= cos(glm::radians(cutOff));
+        this->outerCutOff = cos(glm::radians(outerCutOff));
+    }
+    
+    void SpotLight::Apply(const Material* mat)
+    {
+        if(mat && mat->shader) Apply(mat->shader);
     }
 
     void SpotLight::Apply(const Shader* shader)

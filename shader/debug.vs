@@ -1,6 +1,6 @@
 #version 330 core
 
-#define VERT_TYPE  0x0012
+
 #include "lib/appdata.glsl"
 
 

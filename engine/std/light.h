@@ -10,7 +10,7 @@
 #define light_h
 
 #include <glm/glm.hpp>
-#include "shader.h"
+#include "material.h"
 
 using namespace glm;
 
@@ -26,9 +26,8 @@ namespace engine
 
     class Light
     {
+
     public:
-        vec3 color;
-        vec3 direction;
 
         Light(vec3 color,vec3 direction);
         
@@ -43,17 +42,27 @@ namespace engine
         std::string virtual getMacro() const = 0;
         
         void virtual Apply(const Shader* shader) = 0;
+        
+        void virtual Apply(const Material* mat) = 0;
+        
+    public:
+        vec3 color;
+        vec3 direction;
     };
 
 
     class DirectLight: public Light
     {
+        
     public:
+        
         DirectLight(vec3 color,vec3 direction): Light(color, direction) {}
         
         virtual ~DirectLight() { }
         
         void Apply(const Shader* shader);
+        
+        void Apply(const Material* mat);
         
         mat4 GetLigthSpaceMatrix(vec3 target,float near, float far, float up = 8, float left = 8);
 
@@ -64,16 +73,10 @@ namespace engine
 
     class PointLight : public Light
     {
-    public:
-        vec3 pos;
-        vec3 constant; //衰减系数
         
-        PointLight(vec3 color, vec3 direction, vec3 pos, vec3 constant)
-                :Light(color, direction)
-        {
-            this->pos=pos;
-            this->constant=constant;
-        }
+    public:
+        
+        PointLight(vec3 color, vec3 direction, vec3 pos, vec3 constant);
         
         virtual ~PointLight() { }
         
@@ -81,32 +84,37 @@ namespace engine
         
         void Apply(const Shader* shader);
         
+        void Apply(const Material* mat);
+        
         LightType getType() const;
         
         std::string getMacro() const;
+        
+    public:
+        vec3 pos;
+        vec3 constant; //衰减系数
     };
 
 
     class SpotLight : public PointLight
     {
-    public:
-        float cutOff;
-        float outerCutOff;
-        vec3 direction;
         
-        SpotLight(vec3 color, vec3 direction, vec3 pos, vec3 constant,float cutOff,float outerCutOff)
-                        :PointLight(color, direction, pos,constant)
-        {
-            this->cutOff= cos(glm::radians(cutOff));
-            this->outerCutOff = cos(glm::radians(outerCutOff));
-        }
+    public:
+        
+        SpotLight(vec3 color, vec3 direction, vec3 pos, vec3 constant,float cutOff,float outerCutOff);
         
         void Apply(const Shader* shader);
+        
+        void Apply(const Material* mat);
         
         LightType getType() const;
         
         std::string getMacro() const;
-
+        
+    public:
+        float cutOff;
+        float outerCutOff;
+        vec3 direction;
     };
     
 }

@@ -20,19 +20,15 @@ public:
     {
         SAFE_DELETE(halo);
         SAFE_DELETE(shader);
-        SAFE_DELETE(btn1);
-        SAFE_DELETE(btn2);
-        SAFE_DELETE(btn3);
-        SAFE_DELETE(btn4);
-        SAFE_DELETE(btn5);
-        SAFE_DELETE(lod1);
-        SAFE_DELETE(lod2);
-        SAFE_DELETE(lod3);
-        SAFE_DELETE(lod4);
-        SAFE_DELETE(lod5);
+        SAFE_DELETE2(btn1, btn2);
+        SAFE_DELETE3(btn3, btn4, btn5);
+        SAFE_DELETE2(lod1, lod2);
+        SAFE_DELETE3(lod3, lod4, lod5);
     }
     
     int getType() { return TY_Scene5; }
+    
+    std::string getSkybox() { return "mp_5dim"; }
     
     glm::vec3 getCameraPos() { return glm::vec3(0.0f,0.0f,16.0f); }
     
@@ -82,7 +78,7 @@ public:
     
     void InitScene()
     {
-        shader = new LightShader("model.vs", "model.fs", nullptr, Macro("VERT_TYPE","0x2111"));
+        shader = new LightShader("model.vs", "model.fs");
         ApplyCamera(shader);
         halo = new Avatar("halo", vec3(-1.0f, -4.0f, -1.5f), vec3(1.0f), -60);
     }

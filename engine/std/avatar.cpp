@@ -21,12 +21,15 @@ namespace engine
         RecalModelMatrix();
         type = ReadSummary(name, items);
         materials.clear();
+        meshs.clear();
         for (size_t i=0; i<items.size(); i++)
         {
-            ObjMaterial* mat = new ObjMaterial(ReadMesh(items[i]));
+            MeshData* mesh = ReadMesh(items[i]);
+            ObjMaterial* mat = new ObjMaterial(mesh);
             ReadObjMaterial(items[i], mat);
             mat->SetupMesh();
             materials.push_back(mat);
+            meshs.push_back(mesh);
         }
         if (type & MODEL_ANI)
         {
@@ -38,6 +41,7 @@ namespace engine
     Avatar::~Avatar()
     {
         loop(materials.size())  delete materials[i];
+        loop(meshs.size()) delete meshs[i];
         materials.clear();
         SAFE_DELETE(skeleton);
     }
@@ -55,30 +59,21 @@ namespace engine
 
     void Avatar::Draw(Shader* shader, Light* light)
     {
+        loop(materials.size())  materials[i]->Draw(shader);//must put at first to bind mesh
         shader->use();
         light->Apply(shader);
         shader->setMat4("model", matrix);
         LightShader* lshader =static_cast<LightShader*>(shader);
         if(lshader) lshader->ApplyLight();
-        for (size_t i=0; i<materials.size(); i++)
-        {
-            materials[i]->Draw(shader);
-        }
-        if(skeleton)
-        {
-            skeleton->Draw(shader);
-        }
+        if(skeleton) skeleton->Draw(shader);
     }
 
 
     void Avatar::DrawShadow(Shader* shader, Light* light)
     {
+        loop(materials.size()) materials[i]->DrawMesh();
         shader->use();
         shader->setMat4("model", matrix);
-        for (size_t i=0; i<materials.size(); i++)
-        {
-            materials[i]->DrawMesh();
-        }
     }
     
     
@@ -157,7 +152,7 @@ namespace engine
     void Avatar::ChangeLOD(short ilod)
     {
         for (size_t i=0; i<materials.size(); i++) {
-            MeshData* data = materials[i]->data;
+            MeshData* data = materials[i]->mesh;
             RecalcuteLod(data, "halo", "halo", ilod);
             materials[i]->SetupMesh();
         }

@@ -1,7 +1,6 @@
 #version 330 core
 
-#define VERT_TYPE  0x0001
-#include "lib/appdata.glsl"
+layout (location = 0) in vec3 aPos;
 
 
 uniform mat4 lightSpaceMatrix;

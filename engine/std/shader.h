@@ -14,11 +14,10 @@
 namespace engine
 {
 
-
     class Shader
     {
+        
     public:
-        GLuint ID;
         
         Shader(const char* vertexPath, const char* fragmentPath, const char* geometryPath = nullptr, std::string macro= "");
         
@@ -76,8 +75,9 @@ namespace engine
         std::string vertexCode, fragmentCode, geometryCode;
         std::string macro;
         
-    protected:
+    public:
         bool compiled;
+        GLuint ID;
         
 #ifdef DEBUG
     protected:
@@ -89,7 +89,9 @@ namespace engine
 
     class LightShader : public Shader
     {
-    public:    
+        
+    public:
+        
         LightShader(const char* vertexPath,
                     const char* fragmentPath,
                     const char* geometryPath = nullptr,
@@ -97,33 +99,11 @@ namespace engine
                     glm::vec3 ambinent = glm::vec3(1.0f, 1.0f, 1.0f),
                     glm::vec3 diffuse = glm::vec3(1.0f, 1.0f, 1.0f),
                     glm::vec3 specular = glm::vec3(1.0f, 1.0f, 1.0f),
-                    float shiness=32.0f)
-            :Shader(vertexPath, fragmentPath, geometryPath, macro)
-        {
-            this->ambinent = ambinent;
-            this->diffuse = diffuse;
-            this->specular = specular;
-            this->shininess = shiness;
-            
-//            ApplyLight();
-        }
+                    float shiness = 32.0f);
         
-        virtual bool use()
-        {
-            if(!Shader::use())
-            {
-                ApplyLight();
-            }
-            return compiled;
-        }
+        virtual bool use();
         
-        void ApplyLight()
-        {
-            setVec3("material.ambient", ambinent);
-            setVec3("material.diffuse", diffuse);
-            setVec3("material.specular", specular);
-            setFloat("material.shininess", shininess);
-        }
+        void ApplyLight();
         
     private:
         glm::vec3 ambinent, diffuse, specular;

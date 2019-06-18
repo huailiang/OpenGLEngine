@@ -118,6 +118,21 @@ namespace engine
         return (type & Vt_Color) > 0;
     }
     
+    bool MeshData::Bind(Shader* shader)
+    {
+        if(shader && !shader->compiled)
+        {
+            std::stringstream stream;
+            stream.width(4);
+            stream.fill('0');
+            stream<<std::hex<<type;
+            std::string macro = "0x"+stream.str();
+            shader->attach("VERT_TYPE", macro.c_str());
+            return true;
+        }
+        return false;
+    }
+    
     /*
      * you need to delete[] after the function be called
      */

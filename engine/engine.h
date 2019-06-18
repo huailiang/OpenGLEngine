@@ -17,6 +17,7 @@
 #include <iostream>
 #include <string>
 #include <map>
+#include <unordered_map>
 #include <vector>
 #include <stdio.h>
 #include <regex>
@@ -62,6 +63,8 @@ namespace engine
 
     extern uint DRAW_MODE;
     extern float deltatime;
+    
+    class Shader;
 
     #define WORKDIR "/Users/penghuailiang/Documents/projects/GL/OpenGLEngine/"
 
@@ -79,6 +82,18 @@ namespace engine
     #define SAFE_DELETE(ptr) \
     if(ptr != nullptr) \
     {delete ptr; ptr = nullptr;}
+    
+    #define SAFE_DELETE2(ptr1, ptr2) \
+    SAFE_DELETE(ptr1)   \
+    SAFE_DELETE(ptr2)
+    
+    #define SAFE_DELETE3(ptr1, ptr2, ptr3) \
+    SAFE_DELETE2(ptr1, ptr2)   \
+    SAFE_DELETE(ptr3)
+    
+    #define SAFE_DELETE4(ptr1, ptr2, ptr3, ptr4) \
+    SAFE_DELETE2(ptr1, ptr2)   \
+    SAFE_DELETE2(ptr3, ptr4)
     
     #define max(a,b) ((a)>(b)?(a):(b))
     
@@ -102,11 +117,11 @@ namespace engine
 
     float GetRuntime();
 
-    void InitPlane(GLuint &planeVAO, GLuint &planeVBO);
+    void* InitPlane(GLuint &planeVAO, GLuint &planeVBO, Shader* shader = nullptr);
 
-    void InitCube(GLuint &cubeVAO, GLuint &cubeVBO);
+    void* InitCube(GLuint &cubeVAO, GLuint &cubeVBO);
 
-    void InitQuad(GLuint &quadVAO, GLuint &quadVBO);
+    void* InitQuad(GLuint &quadVAO, GLuint &quadVBO, Shader* shader = nullptr);
     
     void SetPosition(glm::mat4& mat, glm::vec3& pos);
     

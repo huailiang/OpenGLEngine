@@ -346,9 +346,9 @@ namespace engine
             readtex(ifs, mat->normal_texure);
             readtex(ifs, mat->specul_texture);
             readtex(ifs, mat->ambient_texture);
-            if(mat->data==nullptr)
+            if(mat->mesh==nullptr)
             {
-                mat->data = ReadMesh(name);
+                mat->mesh = ReadMesh(name);
             }
         } catch (std::ifstream::failure e)
         {

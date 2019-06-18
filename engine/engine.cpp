@@ -46,7 +46,7 @@ namespace engine
         return deltatime;
     }
 
-    void InitPlane(GLuint &vao, GLuint &vbo)
+    void* InitPlane(GLuint &vao, GLuint &vbo, Shader* shader)
     {
         if(plane==nullptr) plane = ReadMesh("plane","common");
         glGenVertexArrays(1, &vao);
@@ -55,9 +55,11 @@ namespace engine
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
         plane->ConfigAttribute();
         glBindVertexArray(0);
+        if(shader) plane->Bind(shader);
+        return plane;
     }
 
-    void InitCube(GLuint &vao, GLuint &vbo)
+    void* InitCube(GLuint &vao, GLuint &vbo)
     {
         if(cube == nullptr) cube = ReadMesh("cube","common");
         glGenVertexArrays(1, &vao);
@@ -66,9 +68,10 @@ namespace engine
         glBindVertexArray(vao);
         cube->ConfigAttribute();
         glBindVertexArray(0);
+        return cube;
     }
 
-    void InitQuad(GLuint &vao, GLuint &vbo)
+    void* InitQuad(GLuint &vao, GLuint &vbo, Shader* shader)
     {
         if(quad == nullptr) quad = ReadMesh("quad","common");
         glGenVertexArrays(1, &vao);
@@ -77,6 +80,8 @@ namespace engine
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
         quad->ConfigAttribute();
         glBindVertexArray(0);
+        if(shader) quad->Bind(shader);
+        return quad;
     }
     
     void error_stop(bool condition, const char* msg)
