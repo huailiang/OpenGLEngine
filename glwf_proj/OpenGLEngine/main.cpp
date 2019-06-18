@@ -72,6 +72,7 @@ int main(int argc, const char * argv[])
 
 int run_engine()
 {
+    
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -99,7 +100,7 @@ int run_engine()
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
-    
+    SystemInfo();
     TTFont::getInstance()->initial();
     SceneMgr::getInstance()->Init();
     

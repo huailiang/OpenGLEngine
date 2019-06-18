@@ -21,7 +21,7 @@ namespace engine
         
         Shader(const char* vertexPath, const char* fragmentPath, const char* geometryPath = nullptr, std::string macro= "");
         
-        ~Shader();
+        virtual ~Shader();
         
         void attach(const char* k1);
         

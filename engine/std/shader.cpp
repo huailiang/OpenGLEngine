@@ -340,6 +340,7 @@ namespace engine
         this->specular = specular;
         this->shininess = shiness;
     }
+
     
     bool LightShader::use()
     {

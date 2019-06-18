@@ -39,7 +39,7 @@ private:
 private:
     unsigned int vbo, vao;
     LightShader* shader;
-    Shader* shader2;
+    MeshData* cube;
     Camera* camera;
     Light* light;
     unsigned int texture1, texture2;

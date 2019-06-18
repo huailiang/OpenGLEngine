@@ -41,7 +41,7 @@ except:
 
 _dir,_file=os.path.split(ImageName)
 _par,_ = os.path.split(_dir)
-_dir = os.path.join(_par,"texture2")
+_dir = os.path.join(_par,"temp")
 targetName=os.path.join(_dir,_file)
 print(_file)
 

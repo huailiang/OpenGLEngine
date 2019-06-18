@@ -25,7 +25,6 @@ Camera* camera;
 Light* light;
 Skybox* skybox;
 UILabel* label;
-Avatar*  avatar;
 
 
 void Clean()
@@ -62,8 +61,6 @@ void Draw(ESContext *esContext)
         glDrawArrays(DRAW_MODE, 0, 36);
     }
     glBindVertexArray(0);
-    avatar->Rotate(0.01f);
-    avatar->Draw(shader, light);
     if(skybox) skybox->Draw();
     if(label) label->drawText("hello, opengl es");
 }
@@ -184,15 +181,17 @@ bool InitScene(ESContext* context)
 {
     esContext = context;
     initWindow();
+    SystemInfo();
     
     camera = new Camera(glm::vec3(0.0f,0.0f,3.0f));
     skybox = new Skybox(camera, "mp_5dim");
     light = new DirectLight(vec3(1.0f), vec3(-1, 0, -2));
     TTFont::getInstance()->initial();
     label = new UILabel(vec2(30,560), vec3(1), 1);
-    avatar = new Avatar("nanosuit",vec3(-2.0f, -0.5f, -1.5f), vec3(0.12f));
-    InitCube(vao, vbo);
-    shader = new LightShader("light.vs","light.fs", nullptr, Macro(light->getMacro().c_str()));
+    
+    shader = new LightShader("light.vs","light.fs");
+    shader->attach(light->getMacro().c_str());
+    InitCube(vao, vbo, shader);
     shader->use();
     shader->setInt("texture1", 0);
     shader->setInt("texture2", 1);

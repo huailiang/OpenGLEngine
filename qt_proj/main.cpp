@@ -26,24 +26,10 @@ bool checkOpenGL()
     QGLWidget *glWidget = new QGLWidget;
     QGLContext* glContext = (QGLContext *) glWidget->context();
     glContext->makeCurrent();
-
     int glMajorVersion, glMinorVersion;
     glMajorVersion = glContext->format().majorVersion();
     glMinorVersion = glContext->format().minorVersion();
-
-    qDebug() << "Checking OpenGL version...";
-    qDebug() << "Widget OpenGL:" << QString("%1.%2").arg(glMajorVersion).arg(glMinorVersion);
-    qDebug() << "Context valid:" << glContext->isValid() ;
-    qDebug() << "OpenGL information:" ;
-    qDebug() << "VENDOR:"       << (const char*)glGetString(GL_VENDOR) ;
-    qDebug() << "RENDERER:"     << (const char*)glGetString(GL_RENDERER) ;
-    qDebug() << "VERSION:"      << (const char*)glGetString(GL_VERSION) ;
-    qDebug() << "GLSL VERSION:" << (const char*)glGetString(GL_SHADING_LANGUAGE_VERSION) ;
-
     delete glWidget;
-
-    qDebug() << QString("Version: %1.%2").arg(glMajorVersion).arg(glMinorVersion);
-
     // check openGL version
     if( glMajorVersion < GL_MAJOR || (glMajorVersion == GL_MAJOR && glMinorVersion < GL_MINOR))
     {

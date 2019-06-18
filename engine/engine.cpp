@@ -26,11 +26,22 @@ namespace engine
     time_t start_time;
     float deltatime;
     
-    void SetPosition(glm::mat4& mat, glm::vec3& pos)
+    
+    void SystemInfo(int level)
     {
-        mat[3][0] = pos.x;
-        mat[3][1] = pos.y;
-        mat[3][2] = pos.z;
+#ifdef DEBUG
+        std::cout<<"OpenGL information"<<std::endl;
+        std::cout<<"VENDOR:    "<< glGetString(GL_VENDOR)<<std::endl;
+        std::cout<<"RENDERER:  "<< glGetString(GL_RENDERER)<<std::endl;
+        std::cout<<"VERSION:   "<< glGetString(GL_VERSION)<<std::endl;
+        std::cout<<"GLSL VER:  "<< glGetString(GL_SHADING_LANGUAGE_VERSION)<<std::endl;
+        if(level>0)
+        {
+            int ext=0; glGetIntegerv(GL_NUM_EXTENSIONS,&ext);
+            std::cout<<"EXTENSIONS "<< ext<<std::endl;
+            loop(ext) std::cout<<i<<" "<<glGetStringi(GL_EXTENSIONS,i)<<std::endl;
+        }
+#endif
     }
     
     float GetRuntime()
@@ -59,7 +70,7 @@ namespace engine
         return plane;
     }
 
-    void* InitCube(GLuint &vao, GLuint &vbo)
+    void* InitCube(GLuint &vao, GLuint &vbo, Shader* shader)
     {
         if(cube == nullptr) cube = ReadMesh("cube","common");
         glGenVertexArrays(1, &vao);
@@ -68,6 +79,7 @@ namespace engine
         glBindVertexArray(vao);
         cube->ConfigAttribute();
         glBindVertexArray(0);
+        if(shader) cube->Bind(shader);
         return cube;
     }
 
@@ -82,6 +94,13 @@ namespace engine
         glBindVertexArray(0);
         if(shader) quad->Bind(shader);
         return quad;
+    }
+    
+    void SetPosition(glm::mat4& mat, glm::vec3& pos)
+    {
+        mat[3][0] = pos.x;
+        mat[3][1] = pos.y;
+        mat[3][2] = pos.z;
     }
     
     void error_stop(bool condition, const char* msg)

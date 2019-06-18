@@ -17,14 +17,19 @@ ITEXTURE=$ISDK/usr/bin/texturetool
 
 TEXS=resources/textures
 
-TEXS2=resources/texture2
+TEMP=resources/temp
 
-PVR=resources/pvr
+FORMAT=pvr # format支持：pvr, raw, ktx
+
+ENCODER=PVRTC # PVRTC, ASTC
+
+OPTION=bits-per-pixel-2 # bits-per-pixel-2, bits-per-pixel-4, block-width-4, block-width-5, block-height-4...
+
+TARGET=resources/${FORMAT}
 
 cd `dirname $0`
 
 cd ../
-
 
 
 # 检查纹理目录 
@@ -45,24 +50,25 @@ function _clean()
 }
 
 
-_clean $PVR
-_clean $TEXS2
+_clean $TARGET
+_clean $TEMP
 
 
-mkdir $PVR
+mkdir $TARGET
 
 ${ITEXTURE} -l
 
 # 利用xcode 自带的texturetool做格式转换
 function _export() 
 {
-	echo ${1%%.*}."pvr" 
-	${ITEXTURE}  -m -f PVR -e PVRTC --bits-per-pixel-4 ${1} -o ${1%%.*}."pvr" 
+	echo ${1%%.*}"."${FORMAT} 
+	${ITEXTURE}  -m -f ${FORMAT} -e ${ENCODER} --${OPTION} ${1} -o ${1%%.*}"."${FORMAT} -p ${1%%.*}"_prev."${FORMAT}
 }
 
 
 function _preprocess()
 {
+    echo "开始预处理图片"
     for element in `ls $1`
     do  
         dir_or_file=$1"/"$element
@@ -79,6 +85,7 @@ function _preprocess()
 
 function _procesdir()
 {
+    echo "正在生成目标图片"
     for element in `ls $1`
     do  
         dir_or_file=$1"/"$element
@@ -94,9 +101,11 @@ function _procesdir()
 
 _preprocess $TEXS
 
-_procesdir $TEXS2
+_procesdir $TEMP
 
 
-mv ${TEXS2}/*.pvr ${PVR}/
+mv ${TEMP}/*.${FORMAT} ${TARGET}/
+
+_clean ${TEMP}
 
 echo "job done, good luck"

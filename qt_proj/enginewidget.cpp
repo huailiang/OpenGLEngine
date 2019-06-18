@@ -14,9 +14,9 @@ engineWidget::engineWidget(QWidget *parent) :
 
 engineWidget::~engineWidget()
 {
-    delete ui;
-    delete camera;
-    delete light;
+    SAFE_DELETE(ui);
+    SAFE_DELETE(camera);
+    SAFE_DELETE(light);
     delete shader;
     glDeleteVertexArrays(1, &vao);
     glDeleteBuffers(1,&vbo);
@@ -42,7 +42,7 @@ void engineWidget::initializeGL()
     camera = new Camera(glm::vec3(0.0f,0.0f,3.0f));
     light = new DirectLight(vec3(1.0f), vec3(-1,0,-2));
     skybox = new Skybox(camera, "mp_5dim");
-    InitCube(vao, vbo);
+    cube = (MeshData*)InitCube(vao, vbo);
     InitShader();
     Texture("textures/container", JPG, &texture1);
     Texture("textures/awesomeface",PNG, &texture2);
@@ -96,14 +96,12 @@ void engineWidget::timerEvent(QTimerEvent *)
 
 void engineWidget::InitShader()
 {
-    shader = new LightShader("light.vs","light.fs",nullptr,Macro(light->getMacro().c_str()));
+    shader = new LightShader("light.vs","light.fs");
+    shader->attach(light->getMacro().c_str());
+    cube->Bind(shader);
     shader->use();
     shader->setInt("texture1", 0);
     shader->setInt("texture2", 1);
     camera->Attach(shader);
-
-    shader2 = new LightShader("model.vs", "model.fs");
-    shader2->use();
-    camera->Attach(shader2);
 }
 

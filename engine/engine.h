@@ -114,12 +114,14 @@ namespace engine
     
     
     const float zeroVertices[] = {0.0f,  0.0f};
+    
+    void SystemInfo(int level = 0);
 
     float GetRuntime();
 
     void* InitPlane(GLuint &planeVAO, GLuint &planeVBO, Shader* shader = nullptr);
 
-    void* InitCube(GLuint &cubeVAO, GLuint &cubeVBO);
+    void* InitCube(GLuint &cubeVAO, GLuint &cubeVBO, Shader* shader = nullptr);
 
     void* InitQuad(GLuint &quadVAO, GLuint &quadVBO, Shader* shader = nullptr);
     
