@@ -25,7 +25,8 @@ namespace engine
     #define TGA   0x0030  //.tga
     #define BMP   0x0040  //.bmp
     #define HDR   0x0050  //.hdr
-    #define TIF   0x0060  //.tif
+    #define PVR2  0x0060  //.pvr2
+    #define PVR4  0x0070  //.pvr4
 
     #define FBX   0x0001 //.fbx
     #define MTL   0x0002 //.mtl
@@ -37,9 +38,30 @@ namespace engine
     #define MESH  0x0200 //.mesh
     #define MAT   0x0300 //.mat
     
+    
+    #define EX_PNG   ".png"
+    #define EX_JPG   ".jpg"
+    #define EX_TGA   ".tga"
+    #define EX_BMP   ".bmp"
+    #define EX_HDR   ".hdr"
+    #define EX_PVR2  ".pvr2"
+    #define EX_PVR4  ".pvr4"
+        
+    #define EX_FBX   ".fbx"
+    #define EX_MTL   ".mtl"
+    #define EX_OBJ   ".obj"
+    #define EX_ANIM  ".anim"
+    #define EX_TTF   ".ttf"
+        
+    #define EX_SUM   ".sum"
+    #define EX_MESH  ".mesh"
+    #define EX_MAT   ".mat"
+    
     #define NONE  0x0000
     
     typedef unsigned int EXT;
+
+    
     
     bool isTexure(const EXT ext);
     

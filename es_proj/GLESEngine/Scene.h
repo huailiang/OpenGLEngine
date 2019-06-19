@@ -12,7 +12,7 @@
 
 
 #include "shader.h"
-#include "utils/esUtil.h"
+#include "utils/Context.h"
 
 bool InitScene(ESContext* context);
 

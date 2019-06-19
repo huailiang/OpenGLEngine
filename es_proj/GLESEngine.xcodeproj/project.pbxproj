@@ -163,7 +163,6 @@
 		4C8062DA229FC072005FD1F9 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8062D9229FC072005FD1F9 /* OpenGLES.framework */; };
 		4C8062DC229FC078005FD1F9 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8062DB229FC078005FD1F9 /* GLKit.framework */; };
 		4C8AC06622A3A44300036684 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8AC06522A3A44300036684 /* CoreGraphics.framework */; };
-		4C8AC06822A3A45500036684 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8AC06722A3A45500036684 /* Foundation.framework */; };
 		4C97AAA422A50D01005F6388 /* pbr.fs in Resources */ = {isa = PBXBuildFile; fileRef = 4C97AA8022A50D01005F6388 /* pbr.fs */; };
 		4C97AAA522A50D01005F6388 /* ttfrag.fs in Resources */ = {isa = PBXBuildFile; fileRef = 4C97AA8122A50D01005F6388 /* ttfrag.fs */; };
 		4C97AAA622A50D01005F6388 /* shadow.fs in Resources */ = {isa = PBXBuildFile; fileRef = 4C97AA8222A50D01005F6388 /* shadow.fs */; };
@@ -198,6 +197,8 @@
 		4C97AAC322A50D01005F6388 /* ttfont.vs in Resources */ = {isa = PBXBuildFile; fileRef = 4C97AAA122A50D01005F6388 /* ttfont.vs */; };
 		4C97AAC422A50D01005F6388 /* pbr.vs in Resources */ = {isa = PBXBuildFile; fileRef = 4C97AAA222A50D01005F6388 /* pbr.vs */; };
 		4C97AAC522A50D01005F6388 /* light.fs in Resources */ = {isa = PBXBuildFile; fileRef = 4C97AAA322A50D01005F6388 /* light.fs */; };
+		4CC91DFC22B9E9F400AB6C03 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8AC06722A3A45500036684 /* Foundation.framework */; };
+		4CC91E0122BA19FF00AB6C03 /* ResourcesManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4CC91E0022BA19FF00AB6C03 /* ResourcesManager.mm */; };
 		4CE2223322A91EE00095ECCA /* libFreetype2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE2223222A91EE00095ECCA /* libFreetype2.a */; };
 		4CE2224622A91F0B0095ECCA /* eventmgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2223922A91F0B0095ECCA /* eventmgr.cpp */; };
 		4CE2224722A91F0B0095ECCA /* uibase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2223A22A91F0B0095ECCA /* uibase.cpp */; };
@@ -390,7 +391,7 @@
 		4C8062DB229FC078005FD1F9 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		4C8AC06522A3A44300036684 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		4C8AC06722A3A45500036684 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		4C8AC06922A3AE3D00036684 /* esUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = esUtil.h; sourceTree = "<group>"; };
+		4C8AC06922A3AE3D00036684 /* Context.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Context.h; sourceTree = "<group>"; };
 		4C97AA8022A50D01005F6388 /* pbr.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = pbr.fs; sourceTree = "<group>"; };
 		4C97AA8122A50D01005F6388 /* ttfrag.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ttfrag.fs; sourceTree = "<group>"; };
 		4C97AA8222A50D01005F6388 /* shadow.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shadow.fs; sourceTree = "<group>"; };
@@ -425,6 +426,10 @@
 		4C97AAA122A50D01005F6388 /* ttfont.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ttfont.vs; sourceTree = "<group>"; };
 		4C97AAA222A50D01005F6388 /* pbr.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = pbr.vs; sourceTree = "<group>"; };
 		4C97AAA322A50D01005F6388 /* light.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = light.fs; sourceTree = "<group>"; };
+		4CC91DFF22BA19C200AB6C03 /* Interfaces.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Interfaces.h; sourceTree = "<group>"; };
+		4CC91E0022BA19FF00AB6C03 /* ResourcesManager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcesManager.mm; sourceTree = "<group>"; };
+		4CC91E0322BA1B9000AB6C03 /* PVRTGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVRTGlobal.h; sourceTree = "<group>"; };
+		4CC91E0422BA1B9000AB6C03 /* PVRTTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVRTTexture.h; sourceTree = "<group>"; };
 		4CE2223222A91EE00095ECCA /* libFreetype2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFreetype2.a; sourceTree = "<group>"; };
 		4CE2223822A91F0B0095ECCA /* uimgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uimgr.h; sourceTree = "<group>"; };
 		4CE2223922A91F0B0095ECCA /* eventmgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = eventmgr.cpp; sourceTree = "<group>"; };
@@ -448,8 +453,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CC91DFC22B9E9F400AB6C03 /* Foundation.framework in Frameworks */,
 				4CE2223322A91EE00095ECCA /* libFreetype2.a in Frameworks */,
-				4C8AC06822A3A45500036684 /* Foundation.framework in Frameworks */,
 				4C8AC06622A3A44300036684 /* CoreGraphics.framework in Frameworks */,
 				4C443B8522A25F8E00866F29 /* libc++.tbd in Frameworks */,
 				4C8062DC229FC078005FD1F9 /* GLKit.framework in Frameworks */,
@@ -611,10 +616,13 @@
 		4C66666B22A29C19002BA996 /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				4CC91E0222BA1B9000AB6C03 /* PowerVR */,
 				4C66666F22A29D85002BA996 /* Helpers.h */,
 				4C66674822A2A3A3002BA996 /* FilePath.cpp */,
 				4C66674922A2A3A3002BA996 /* FilePath.h */,
-				4C8AC06922A3AE3D00036684 /* esUtil.h */,
+				4C8AC06922A3AE3D00036684 /* Context.h */,
+				4CC91DFF22BA19C200AB6C03 /* Interfaces.h */,
+				4CC91E0022BA19FF00AB6C03 /* ResourcesManager.mm */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -774,6 +782,15 @@
 				4C97AA9C22A50D01005F6388 /* util.glsl */,
 			);
 			path = lib;
+			sourceTree = "<group>";
+		};
+		4CC91E0222BA1B9000AB6C03 /* PowerVR */ = {
+			isa = PBXGroup;
+			children = (
+				4CC91E0322BA1B9000AB6C03 /* PVRTGlobal.h */,
+				4CC91E0422BA1B9000AB6C03 /* PVRTTexture.h */,
+			);
+			path = PowerVR;
 			sourceTree = "<group>";
 		};
 		4CE2223722A91F0B0095ECCA /* gui */ = {
@@ -1043,6 +1060,7 @@
 				4C7AF66E22A54EA700B63173 /* light.cpp in Sources */,
 				4CE2224722A91F0B0095ECCA /* uibase.cpp in Sources */,
 				4C8062C7229FC059005FD1F9 /* ViewController.mm in Sources */,
+				4CC91E0122BA19FF00AB6C03 /* ResourcesManager.mm in Sources */,
 				4C02E1CF22AB77A0002821B9 /* material.cpp in Sources */,
 				4C73C0EB22A8BAB3002A8AD0 /* texmgr.cpp in Sources */,
 				4CE2224622A91F0B0095ECCA /* eventmgr.cpp in Sources */,

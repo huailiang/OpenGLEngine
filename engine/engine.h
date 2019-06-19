@@ -30,6 +30,7 @@
 #else
 #ifdef __APPLE__
 #include <OpenGLES/ES3/gl.h>
+#include <OpenGLES/ES3/glext.h>
 #else
 #include <GLES3/gl3.h>
 #include <EGL/egl.h>

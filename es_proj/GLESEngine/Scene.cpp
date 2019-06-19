@@ -181,7 +181,7 @@ bool InitScene(ESContext* context)
 {
     esContext = context;
     initWindow();
-    SystemInfo();
+    SystemInfo(1);
     
     camera = new Camera(glm::vec3(0.0f,0.0f,3.0f));
     skybox = new Skybox(camera, "mp_5dim");

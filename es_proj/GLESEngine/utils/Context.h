@@ -1,13 +1,13 @@
 //
-//  esUtil.h
+//  context.h
 //  GLESEngine
 //
 //  Created by 彭怀亮 on 6/2/19.
 //  Copyright © 2019 彭怀亮. All rights reserved.
 //
 
-#ifndef esUtil_h
-#define esUtil_h
+#ifndef context_h
+#define context_h
 
 #include <stdlib.h>
 #ifdef __APPLE__
@@ -64,4 +64,4 @@ struct ESContext
 };
 
 
-#endif /* esUtil_h */
+#endif /* context.h */

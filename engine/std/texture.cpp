@@ -55,7 +55,14 @@ namespace engine
     #else
             GLenum glformat = GL_RGBA;
     #endif
-            glTexImage2D(GL_TEXTURE_2D, 0, glformat, width, height, 0, glformat, GL_UNSIGNED_BYTE, data);
+            
+            if(ext == PVR2)
+                glCompressedTexImage2D(GL_TEXTURE_2D, 0, GL_COMPRESSED_RGB_PVRTC_2BPPV1_IMG, width, height, 0, (width*height) * 0.25, data);
+            else if(ext == PVR4)
+                glCompressedTexImage2D(GL_TEXTURE_2D, 0, GL_COMPRESSED_RGB_PVRTC_4BPPV1_IMG, width, height, 0, (width*height) * 0.5, data);
+            else
+                glTexImage2D(GL_TEXTURE_2D, 0, glformat, width, height, 0, glformat, GL_UNSIGNED_BYTE, data);
+            
             glGenerateMipmap(GL_TEXTURE_2D);
         }
         else

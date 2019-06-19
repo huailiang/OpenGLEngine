@@ -20,6 +20,7 @@ using namespace std;
 class StringManipulator
 {
 public:
+    
     static void SplitFileName(const string& str, string &folder, string &file)
     {
         size_t found;
@@ -39,25 +40,28 @@ public:
         extension = str.substr(found+1);
         
     }
+    
     static void GetBaseName(const string& str, string &base)
     {
         size_t found=str.find_last_of(".");
         base = str.substr(0, found);
-        
     }
     
     static void ToLowerCase(string& str)
     {
         std::transform(str.begin(),str.end(),str.begin(),::tolower);
     }
+    
     static void ToUpperCase(string& str)
     {
         std::transform(str.begin(),str.end(),str.begin(),::toupper);
     }
+    
     static int IsEqual(const string &str1, const string &str2)
     {
         return str1.compare(str2);
     }
+    
     static void AddCharArrayToString(string &str,const char* array)
     {
         int i=0;

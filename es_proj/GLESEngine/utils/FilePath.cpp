@@ -16,20 +16,33 @@ typedef struct
 __attribute__ ( ( packed ) )
 #endif
 {
-    unsigned char  IdSize,
-    MapType,
-    ImageType;
-    unsigned short PaletteStart,
-    PaletteSize;
+    unsigned char IdSize, MapType, ImageType;
+    unsigned short PaletteStart, PaletteSize;
     unsigned char  PaletteEntryDepth;
-    unsigned short X,
-    Y,
-    Width,
-    Height;
-    unsigned char  ColorDepth,
-    Descriptor;
-    
-} TGA_HEADER;
+    unsigned short X, Y, Width, Height;
+    unsigned char  ColorDepth, Descriptor;
+} TGA_HEADER; // 18 byte
+
+
+typedef struct
+#ifdef __APPLE__
+__attribute__ ( ( packed ) )
+#endif
+{
+    unsigned int HeaderSize;
+    unsigned int Height;
+    unsigned int Width;
+    unsigned int MipMapCount;
+    unsigned int Flags;
+    unsigned int TextureDataSize;
+    unsigned int BitCount;
+    unsigned int RBitMask;
+    unsigned int GBitMask;
+    unsigned int BBitMask;
+    unsigned int AlphaBitMask;
+    unsigned int PVR;
+    unsigned int NumSurfs;
+} PVR_HEADER; // 52 byte
 
 
 char* getsPath(const char *filename)
@@ -59,7 +72,6 @@ char* getsPath(const char *filename)
         ptr = new char[fnm.length()+1];
         strcpy(ptr, fnm.c_str());
     }
-    
     return ptr;
 }
 
@@ -148,7 +160,7 @@ char* LoadImage(const char* filename, string extension, int *width, int *height)
     const char *filepath = getsPath(filename);
     CGDataProviderRef texturefiledata = CGDataProviderCreateWithFilename(filepath);
     
-    if(!texturefiledata)   return NULL;
+    if(!texturefiledata)  return NULL;
     
     bool Ispng = StringManipulator::IsEqual(extension,".png") == 0;
     bool IsJpg = StringManipulator::IsEqual(extension,".jpg") == 0;
@@ -171,7 +183,7 @@ char* LoadImage(const char* filename, string extension, int *width, int *height)
     *height = (int)CGImageGetHeight(textureImage);
     void *imageData = malloc(*height * *width * 4);
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    CGContextRef textureContext = CGBitmapContextCreate(imageData,*width, *height, 8, 4 * *width, colorSpace,
+    CGContextRef textureContext = CGBitmapContextCreate(imageData, *width, *height, 8, 4 * *width, colorSpace,
                                                         kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big );
     
     CGContextDrawImage(textureContext, CGRectMake(0, 0, *width, *height), textureImage);
@@ -179,31 +191,34 @@ char* LoadImage(const char* filename, string extension, int *width, int *height)
     CGImageRelease(textureImage);
     return (char*)imageData;
 }
+
 char* LoadImage(const string& filename, string extension, int *width, int *height)
 {
     return LoadImage(filename.c_str(), extension, width, height);
 }
 
-size_t ReadFile(esFile *pFile, int bytesToRead, void *buffer)
+char* LoadImageDirect(const char* filename)
+{
+    return nullptr;
+}
+
+size_t ReadFile(File *pFile, int bytesToRead, void *buffer)
 {
     size_t bytesRead = 0;
     
-    if ( pFile == NULL )
-    {
-        return bytesRead;
-    }
+    if(pFile == NULL) return bytesRead;
     
 #ifdef ANDROID
-    bytesRead = AAsset_read ( pFile, buffer, bytesToRead );
+    bytesRead = AAsset_read(pFile, buffer, bytesToRead);
 #else
-    bytesRead = fread ( buffer, bytesToRead, 1, pFile );
+    bytesRead = fread(buffer, bytesToRead, 1, pFile);
 #endif
     
     return bytesRead;
 }
 
 
-void FileClose(esFile *pFile)
+void FileClose(File *pFile)
 {
     if(pFile != NULL)
     {
@@ -217,58 +232,57 @@ void FileClose(esFile *pFile)
 }
 
 
-esFile* FileOpen (void *ioContext, const char *fileName)
+File* FileOpen(void *ioContext, const char *fileName)
 {
-    esFile *pFile = NULL;
+    File *pFile = NULL;
     
 #ifdef ANDROID
-    if ( ioContext != NULL )
+    if (ioContext != NULL)
     {
-        AAssetManager *assetManager = ( AAssetManager * ) ioContext;
-        pFile = AAssetManager_open ( assetManager, fileName, AASSET_MODE_BUFFER );
+        AAssetManager *assetManager = (AAssetManager*)ioContext;
+        pFile = AAssetManager_open(assetManager, fileName, AASSET_MODE_BUFFER);
     }
     
-#else
-#ifdef __APPLE__
+#else // __APPLE__
     fileName = getPath(fileName).c_str();
-#endif
-    
     pFile = fopen(fileName, "rb");
 #endif
-    
+
     return pFile;
 }
 
 char* LoadTGA(void *ioContext, const char *fileName, int *width, int *height)
 {
     char *buffer;
-    esFile *fp;
-    TGA_HEADER  Header;
+    File *fp;
+    TGA_HEADER Header;
     size_t bytesRead;
     
     fp = FileOpen(ioContext, fileName);
     if (fp == NULL)
     {
-        std::cout<< "esLoadTGA FAILED to load : "<< fileName <<std::endl;
+        std::cout<< "esLoad FAILED to load: "<< fileName <<std::endl;
         return NULL;
     }
     
-    bytesRead = ReadFile(fp, sizeof ( TGA_HEADER ), &Header);
+    bytesRead = ReadFile(fp, sizeof(TGA_HEADER), &Header);
     *width = Header.Width;
     *height = Header.Height;
     
     if (Header.ColorDepth == 8 || Header.ColorDepth == 24 || Header.ColorDepth == 32)
     {
-        int bytesToRead = sizeof ( char ) * ( *width ) * ( *height ) * Header.ColorDepth / 8;
-        buffer = ( char * ) malloc ( bytesToRead );
+        int bytesToRead = sizeof(char) * (*width) * (*height) * Header.ColorDepth / 8;
+        buffer = (char*)malloc(bytesToRead);
         if (buffer)
         {
-            bytesRead = ReadFile ( fp, bytesToRead, buffer );
+            bytesRead = ReadFile(fp, bytesToRead, buffer);
             FileClose(fp);
             return (buffer);
         }
     }
     return NULL;
 }
+
+
 
 

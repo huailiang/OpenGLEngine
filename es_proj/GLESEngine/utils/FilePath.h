@@ -7,9 +7,9 @@
 
 #include <string>
 #ifdef ANDROID
-typedef AAsset esFile;
+typedef AAsset File;
 #else
-typedef FILE esFile;
+typedef FILE File;
 #endif
 
 using namespace std;
@@ -37,8 +37,9 @@ string getContentFromPath(const string& filepath);
  */
 char* LoadImage(const char* filename, string extension, int *width, int *height);
 char* LoadImage(const string& filename, string extension, int *width, int *height);
+char* LoadImageDirect(const char* filename);
 
-size_t ReadFile(esFile *pFile, int bytesToRead, void *buffer);
+size_t ReadFile(File *pFile, int bytesToRead, void *buffer);
 
 char* LoadTGA(void *ioContext, const char *fileName, int *width, int *height);
 

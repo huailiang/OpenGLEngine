@@ -16,7 +16,14 @@
 namespace engine
 {
     
-    const std::string exts[] = {".png",".jpg",".tga",".bmp", ".hdr", ".tif"};
+    
+    const std::string exts[] = { EX_PNG,
+                                 EX_JPG,
+                                 EX_TGA,
+                                 EX_BMP,
+                                 EX_HDR,
+                                 EX_PVR2,
+                                 EX_PVR4, };
     
     
     bool isTexure(const EXT ext)
