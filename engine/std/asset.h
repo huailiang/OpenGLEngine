@@ -25,8 +25,7 @@ namespace engine
     #define TGA   0x0030  //.tga
     #define BMP   0x0040  //.bmp
     #define HDR   0x0050  //.hdr
-    #define PVR2  0x0060  //.pvr2
-    #define PVR4  0x0070  //.pvr4
+    #define PVR  0x0060  //.pvr
 
     #define FBX   0x0001 //.fbx
     #define MTL   0x0002 //.mtl
@@ -44,15 +43,14 @@ namespace engine
     #define EX_TGA   ".tga"
     #define EX_BMP   ".bmp"
     #define EX_HDR   ".hdr"
-    #define EX_PVR2  ".pvr2"
-    #define EX_PVR4  ".pvr4"
-        
+    #define EX_PVR   ".pvr"
+    
     #define EX_FBX   ".fbx"
     #define EX_MTL   ".mtl"
     #define EX_OBJ   ".obj"
     #define EX_ANIM  ".anim"
     #define EX_TTF   ".ttf"
-        
+    
     #define EX_SUM   ".sum"
     #define EX_MESH  ".mesh"
     #define EX_MAT   ".mat"

@@ -48,5 +48,7 @@ struct IResourceManager {
     virtual ~IResourceManager() {}
 };
 
+IResourceManager* CreateResourceManager();
+
 
 #endif /* Interfaces_h */

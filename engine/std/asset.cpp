@@ -22,8 +22,7 @@ namespace engine
                                  EX_TGA,
                                  EX_BMP,
                                  EX_HDR,
-                                 EX_PVR2,
-                                 EX_PVR4, };
+                                 EX_PVR, };
     
     
     bool isTexure(const EXT ext)

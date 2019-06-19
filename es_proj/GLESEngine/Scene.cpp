@@ -181,7 +181,7 @@ bool InitScene(ESContext* context)
 {
     esContext = context;
     initWindow();
-    SystemInfo(1);
+    SystemInfo();
     
     camera = new Camera(glm::vec3(0.0f,0.0f,3.0f));
     skybox = new Skybox(camera, "mp_5dim");
@@ -197,7 +197,7 @@ bool InitScene(ESContext* context)
     shader->setInt("texture2", 1);
     camera->Attach(shader);
     Texture("textures/container", JPG, &texture1);
-    Texture("textures/awesomeface", PNG, &texture2);
+//    Texture("textures/awesomeface", PVR, &texture2);
     context->drawFunc = Draw;
     context->shutdownFunc = ShutDown;
     context->updateWindow = SetWindowSize;

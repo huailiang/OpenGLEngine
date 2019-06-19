@@ -10,7 +10,10 @@
 typedef AAsset File;
 #else
 typedef FILE File;
+#include "Interfaces.h"
 #endif
+
+#include "Context.h"
 
 using namespace std;
 
@@ -35,12 +38,15 @@ string getContentFromPath(const string& filepath);
  * @param width height the image width and height
  * @return the data pointer to the image. dont forget to free memory by calling free.
  */
-char* LoadImage(const char* filename, string extension, int *width, int *height);
-char* LoadImage(const string& filename, string extension, int *width, int *height);
-char* LoadImageDirect(const char* filename);
+unsigned char* LoadImage(const char* filename, string extension, int *width, int *height);
+unsigned char* LoadImage(const string& filename, string extension, int *width, int *height);
 
 size_t ReadFile(File *pFile, int bytesToRead, void *buffer);
 
-char* LoadTGA(void *ioContext, const char *fileName, int *width, int *height);
+unsigned char* LoadTGA(void *ioContext, const char *fileName, int *width, int *height,GLenum& format);
+
+unsigned char* LoadPvr(const char* name, string ext,int* width, int* height, GLenum* format, GLint* level, int* bitsPerPixel);
+
+void UnloadPvr();
 
 #endif

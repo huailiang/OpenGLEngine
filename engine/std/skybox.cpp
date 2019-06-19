@@ -83,12 +83,12 @@ namespace engine
             }
             else
             {
-                std::cout << "Cubemap texture failed to load at path: " << faces[i] << std::endl;
+                std::cout << "Cubemap texture failed to load at path: " << faces[i] <<" channel:"<<nrChannels<< std::endl;
                 stbi_image_free(data);
             }
     #else
             std::string path = getResPath(faces[i]);
-            char* data = LoadImage(path,".jpg", &width, &height);
+            unsigned char* data = LoadImage(path, EX_JPG, &width, &height);
             glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
             free(data);
     #endif

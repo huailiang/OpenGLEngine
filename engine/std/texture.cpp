@@ -43,27 +43,40 @@ namespace engine
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrap);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        
+        GLenum glformat = GL_RGBA;
+        unsigned char* data = nullptr;
+        GLint level = 0;
+        int bitsPerPixel =0;
     #ifndef _GLES_
-        unsigned char *data = stbi_load(path, &width, &height, &format, 0);
+        data = stbi_load(path, &width, &height, &format, 0);
     #else
-        char *data = LoadImage(std::string(path), getTextureExt(ext), &width, &height);
+        if (ext == PVR)
+            data = LoadPvr(path, getTextureExt(ext),&width, &height, &glformat, &level, &bitsPerPixel);
+        else if(ext == TGA)
+            data = LoadTGA(NULL, path, &width, &height, glformat);
+        else
+            data = LoadImage(std::string(path), getTextureExt(ext), &width,  &height);
     #endif
         if (data)
         {
     #ifndef _GLES_
             GLenum glformat = GetFormat();
-    #else
-            GLenum glformat = GL_RGBA;
     #endif
             
-            if(ext == PVR2)
-                glCompressedTexImage2D(GL_TEXTURE_2D, 0, GL_COMPRESSED_RGB_PVRTC_2BPPV1_IMG, width, height, 0, (width*height) * 0.25, data);
-            else if(ext == PVR4)
-                glCompressedTexImage2D(GL_TEXTURE_2D, 0, GL_COMPRESSED_RGB_PVRTC_4BPPV1_IMG, width, height, 0, (width*height) * 0.5, data);
+            if(ext == PVR)
+            {
+                for (int i=0; i<level; i++) {
+                    GLsizei size = max(32, width * height * bitsPerPixel / 8);
+                    glCompressedTexImage2D(GL_TEXTURE_2D, i, glformat, width, height, 0, size, data);
+                    data += size; width >>= 1; height >>= 1;
+                }
+            }
             else
+            {
                 glTexImage2D(GL_TEXTURE_2D, 0, glformat, width, height, 0, glformat, GL_UNSIGNED_BYTE, data);
-            
-            glGenerateMipmap(GL_TEXTURE_2D);
+                glGenerateMipmap(GL_TEXTURE_2D);
+            }
         }
         else
         {
@@ -72,7 +85,10 @@ namespace engine
     #ifndef _GLES_
         stbi_image_free(data);
     #else
-        free(data);
+        if (ext == PVR)
+            UnloadPvr();
+        else
+            free(data);
     #endif
         return textureID;
     }

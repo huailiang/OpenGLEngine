@@ -24,27 +24,6 @@ __attribute__ ( ( packed ) )
 } TGA_HEADER; // 18 byte
 
 
-typedef struct
-#ifdef __APPLE__
-__attribute__ ( ( packed ) )
-#endif
-{
-    unsigned int HeaderSize;
-    unsigned int Height;
-    unsigned int Width;
-    unsigned int MipMapCount;
-    unsigned int Flags;
-    unsigned int TextureDataSize;
-    unsigned int BitCount;
-    unsigned int RBitMask;
-    unsigned int GBitMask;
-    unsigned int BBitMask;
-    unsigned int AlphaBitMask;
-    unsigned int PVR;
-    unsigned int NumSurfs;
-} PVR_HEADER; // 52 byte
-
-
 char* getsPath(const char *filename)
 {
     char *ptr;
@@ -155,26 +134,22 @@ string getContentFromPath(const string& filepath)
     return getContentFromPath(filepath.c_str());
 }
 
-char* LoadImage(const char* filename, string extension, int *width, int *height)
+unsigned char* LoadImage(const char* filename, string extension, int *width, int *height)
 {
     const char *filepath = getsPath(filename);
     CGDataProviderRef texturefiledata = CGDataProviderCreateWithFilename(filepath);
-    
     if(!texturefiledata)  return NULL;
     
     bool Ispng = StringManipulator::IsEqual(extension,".png") == 0;
     bool IsJpg = StringManipulator::IsEqual(extension,".jpg") == 0;
-    bool IsTga = StringManipulator::IsEqual(extension,".tga") == 0;
     
     CGImageRef textureImage;
     if(IsJpg)
         textureImage = CGImageCreateWithJPEGDataProvider(texturefiledata, NULL, true, kCGRenderingIntentDefault);
     else if (Ispng)
         textureImage = CGImageCreateWithPNGDataProvider(texturefiledata, NULL, true, kCGRenderingIntentDefault);
-    else if(IsTga)
-        return LoadTGA(NULL, filename, width, height);
     else {
-        cerr<<"LoadPng: unsupported image type:"<<extension<<"\n";
+        cerr<<"LoadImage: unsupported image type:"<<extension<<"\n";
         return NULL;
     }
     
@@ -189,17 +164,12 @@ char* LoadImage(const char* filename, string extension, int *width, int *height)
     CGContextDrawImage(textureContext, CGRectMake(0, 0, *width, *height), textureImage);
     CFRelease(textureContext);
     CGImageRelease(textureImage);
-    return (char*)imageData;
+    return (unsigned char*)imageData;
 }
 
-char* LoadImage(const string& filename, string extension, int *width, int *height)
+unsigned char* LoadImage(const string& filename, string extension, int *width, int *height)
 {
     return LoadImage(filename.c_str(), extension, width, height);
-}
-
-char* LoadImageDirect(const char* filename)
-{
-    return nullptr;
 }
 
 size_t ReadFile(File *pFile, int bytesToRead, void *buffer)
@@ -251,9 +221,9 @@ File* FileOpen(void *ioContext, const char *fileName)
     return pFile;
 }
 
-char* LoadTGA(void *ioContext, const char *fileName, int *width, int *height)
+unsigned char* LoadTGA(void *ioContext, const char *fileName, int *width, int *height,GLenum& format)
 {
-    char *buffer;
+    unsigned char *buffer;
     File *fp;
     TGA_HEADER Header;
     size_t bytesRead;
@@ -272,17 +242,67 @@ char* LoadTGA(void *ioContext, const char *fileName, int *width, int *height)
     if (Header.ColorDepth == 8 || Header.ColorDepth == 24 || Header.ColorDepth == 32)
     {
         int bytesToRead = sizeof(char) * (*width) * (*height) * Header.ColorDepth / 8;
-        buffer = (char*)malloc(bytesToRead);
+        buffer = (unsigned char*)malloc(bytesToRead);
         if (buffer)
         {
             bytesRead = ReadFile(fp, bytesToRead, buffer);
             FileClose(fp);
             return (buffer);
         }
+        if(Header.ColorDepth == 8) format = GL_RED;
+        else if(Header.ColorDepth == 24) format = GL_RGB;
+        else format = GL_RGBA;
     }
     return NULL;
 }
 
+bool GetFormat(TextureDescription description,GLenum* format,int* bitsPerPixel)
+{
+    bool compressed = true;
+    switch (description.Format)
+    {
+        case TextureFormatPvrtcRgba2:
+            *bitsPerPixel = 2;
+            *format = GL_COMPRESSED_RGBA_PVRTC_2BPPV1_IMG;
+            break;
+        case TextureFormatPvrtcRgb2:
+            *bitsPerPixel = 2;
+            *format = GL_COMPRESSED_RGB_PVRTC_2BPPV1_IMG;
+            break;
+        case TextureFormatPvrtcRgba4:
+            *bitsPerPixel = 4;
+            *format = GL_COMPRESSED_RGBA_PVRTC_4BPPV1_IMG;
+            break;
+        case TextureFormatPvrtcRgb4:
+            *bitsPerPixel = 4;
+            *format = GL_COMPRESSED_RGB_PVRTC_4BPPV1_IMG;
+            break;
+        default:
+            compressed = false;
+            break;
+    }
+    return compressed;
+}
 
 
+IResourceManager* m_resourceManager;
+unsigned char* LoadPvr(const char* filename, string ext, int* width, int* height, GLenum* format, GLint* level, int* bitsPerPixel)
+{
+    if (m_resourceManager==NULL) {
+        m_resourceManager = CreateResourceManager();
+    }
+    TextureDescription description = m_resourceManager->LoadPvrImage(filename);
+    *width = description.Width;
+    *height = description.Height;
+    *level = description.MipCount;
+    GetFormat(description, format, bitsPerPixel);
+    std::cout<<"format:"<<description.Format<<" w:"<<*width<<" h:"<<*height<<" format:"<<*format<<std::endl;
+    return (unsigned char*)m_resourceManager->GetImageData();
+}
+
+
+void UnloadPvr()
+{
+    m_resourceManager->UnloadImage();
+}
 

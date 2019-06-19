@@ -18,6 +18,8 @@ using namespace std;
 class ResourcesManager :public IResourceManager
 {
     
+public:
+    
     ResourcesManager()
     {
         m_imageData = 0;
@@ -139,9 +141,11 @@ class ResourcesManager :public IResourceManager
 
     TextureDescription LoadPvrImage(const string& file)
     {
-        NSString* basePath = [NSString stringWithUTF8String:file.c_str()];
-        NSString* resourcePath = [[NSBundle mainBundle] resourcePath];
-        NSString* fullPath = [resourcePath stringByAppendingPathComponent:basePath];
+//        NSString* basePath = [NSString stringWithUTF8String:file.c_str()];
+//        NSString* resourcePath = [[NSBundle mainBundle] resourcePath];
+//        NSString* fullPath = [resourcePath stringByAppendingPathComponent:basePath];
+        
+        NSString* fullPath = [NSString stringWithUTF8String:file.c_str()];
         
         m_imageData = [NSData dataWithContentsOfFile:fullPath];
         m_hasPvrHeader = true;
@@ -200,3 +204,9 @@ private:
     bool m_hasPvrHeader;
 
 };
+
+
+IResourceManager* CreateResourceManager()
+{
+    return new ResourcesManager();
+}
