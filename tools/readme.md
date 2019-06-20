@@ -36,7 +36,18 @@ iOS生成不同分辨率的icon和json配置
 引擎会引用这些网格，而不用需要在代码里声明一个个很大的数组。
 
 
+## texture.sh
+
+用来生成mac和iOS平台支持的压缩纹理，这里调用了xcode内置的texturetool工具，根据自己需求转换不同格式的纹理
+
+此脚本还会调用solution.py，来转换图片的分辨率， 因为诸如PVRTC压缩格式的Texture必须是2的次幂才可以转换成功。
+
+关于更多纹理压缩的相关的介绍，点击[查看][i1]
+
 
 <br><br>
 penghuailiang<br>
 2019-05-10
+
+
+[i1]: https://huailiang.github.io/blog/2019/texture/
