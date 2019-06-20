@@ -197,7 +197,7 @@ bool InitScene(ESContext* context)
     shader->setInt("texture2", 1);
     camera->Attach(shader);
     Texture("textures/container", JPG, &texture1);
-//    Texture("textures/awesomeface", PVR, &texture2);
+    Texture("textures/awesomeface", PNG, &texture2);
     context->drawFunc = Draw;
     context->shutdownFunc = ShutDown;
     context->updateWindow = SetWindowSize;

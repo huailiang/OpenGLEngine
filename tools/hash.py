@@ -58,6 +58,8 @@ def process(dir):
       if x == ".DS_Store":
         continue
       pp = os.path.join(root[idx2:], x)
+      if pp.startswith("pvr"):
+        continue
       print(pp, xhash(pp))
       src = os.path.join(root, x)
       par = os.path.split(root)[0]

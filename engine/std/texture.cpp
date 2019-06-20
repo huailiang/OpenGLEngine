@@ -66,12 +66,14 @@ namespace engine
             
             if(ext == PVR)
             {
-                for (int i=0; i<level; i++) {
+                for (int mip = 0; mip < level; ++mip) {
                     GLsizei size = max(32, width * height * bitsPerPixel / 8);
-                    glCompressedTexImage2D(GL_TEXTURE_2D, i, glformat, width, height, 0, size, data);
-                    data += size; width >>= 1; height >>= 1;
-                }
-            }
+                    
+                        std::cout<<width<<"\t"<<data[0]<<" size:"<<size<<" level:"<<mip<<" format:"<<glformat<<std::endl;
+                    glCompressedTexImage2D(GL_TEXTURE_2D, mip, format, width, height, 0, size, data);
+                    data += size;
+                    width >>= 1; height >>= 1;
+                }            }
             else
             {
                 glTexImage2D(GL_TEXTURE_2D, 0, glformat, width, height, 0, glformat, GL_UNSIGNED_BYTE, data);
