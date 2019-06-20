@@ -14,6 +14,7 @@
 #else
 #include "../ext/stb_image.h"
 #endif
+#include "profile.h"
 
 namespace engine
 {
@@ -37,12 +38,20 @@ namespace engine
     #ifndef _GLES_
         stbi_set_flip_vertically_on_load(flipY);
     #endif
+        
+        glCheckError();
         glGenTextures(1, &textureID);
         glBindTexture(GL_TEXTURE_2D, textureID);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrap);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrap);
+#ifdef _GLES_
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+#else
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+#endif
+        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
         
         GLenum glformat = GL_RGBA;
         unsigned char* data = nullptr;
@@ -52,7 +61,7 @@ namespace engine
         data = stbi_load(path, &width, &height, &format, 0);
     #else
         if (ext == PVR)
-            data = LoadPvr(path, getTextureExt(ext),&width, &height, &glformat, &level, &bitsPerPixel);
+            data = LoadPvr(path, &width, &height, &glformat, &level, &bitsPerPixel);
         else if(ext == TGA)
             data = LoadTGA(NULL, path, &width, &height, glformat);
         else
@@ -64,16 +73,17 @@ namespace engine
             GLenum glformat = GetFormat();
     #endif
             
+            glCheckError();
             if(ext == PVR)
             {
                 for (int mip = 0; mip < level; ++mip) {
                     GLsizei size = max(32, width * height * bitsPerPixel / 8);
-                    
-                        std::cout<<width<<"\t"<<data[0]<<" size:"<<size<<" level:"<<mip<<" format:"<<glformat<<std::endl;
-                    glCompressedTexImage2D(GL_TEXTURE_2D, mip, format, width, height, 0, size, data);
+                    glCompressedTexImage2D(GL_TEXTURE_2D, mip, glformat, width, height, 0, size, data);
+                    glCheckError();
                     data += size;
                     width >>= 1; height >>= 1;
-                }            }
+                }
+            }
             else
             {
                 glTexImage2D(GL_TEXTURE_2D, 0, glformat, width, height, 0, glformat, GL_UNSIGNED_BYTE, data);

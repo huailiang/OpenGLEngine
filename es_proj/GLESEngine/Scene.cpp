@@ -38,7 +38,7 @@ void Clean()
 void Draw(ESContext *esContext)
 {
     Clean();
-
+    
     vec3 cubePositions[] = { glm::vec3( 0.0f,  0.0f,  -2.0f), glm::vec3(2.0f,  1.0f, -4.0f) };
     shader->use();
     shader->setFloat("scale", 1);
@@ -48,7 +48,6 @@ void Draw(ESContext *esContext)
     glBindTexture(GL_TEXTURE_2D, texture1);
     glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, texture2);
-    
     glBindVertexArray(vao);
     for (unsigned int i = 0; i < 2; i++)
     {
@@ -188,7 +187,6 @@ bool InitScene(ESContext* context)
     light = new DirectLight(vec3(1.0f), vec3(-1, 0, -2));
     TTFont::getInstance()->initial();
     label = new UILabel(vec2(30,560), vec3(1), 1);
-    
     shader = new LightShader("light.vs","light.fs");
     shader->attach(light->getMacro().c_str());
     InitCube(vao, vbo, shader);
@@ -196,7 +194,7 @@ bool InitScene(ESContext* context)
     shader->setInt("texture1", 0);
     shader->setInt("texture2", 1);
     camera->Attach(shader);
-    Texture("textures/container", JPG, &texture1);
+    Texture("textures/container", PVR, &texture1);
     Texture("textures/awesomeface", PNG, &texture2);
     context->drawFunc = Draw;
     context->shutdownFunc = ShutDown;

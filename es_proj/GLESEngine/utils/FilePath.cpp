@@ -286,7 +286,7 @@ bool GetFormat(TextureDescription description,GLenum* format,int* bitsPerPixel)
 
 
 IResourceManager* m_resourceManager;
-unsigned char* LoadPvr(const char* filename, string ext, int* width, int* height, GLenum* format, GLint* level, int* bitsPerPixel)
+unsigned char* LoadPvr(const char* filename, int* width, int* height, GLenum* format, GLint* level, int* bitsPerPixel)
 {
     if (m_resourceManager==NULL) {
         m_resourceManager = CreateResourceManager();
@@ -296,7 +296,6 @@ unsigned char* LoadPvr(const char* filename, string ext, int* width, int* height
     *height = description.Height;
     *level = description.MipCount;
     GetFormat(description, format, bitsPerPixel);
-    std::cout<<"format:"<<description.Format<<" w:"<<*width<<" h:"<<*height<<" format:"<<*format<<std::endl;
     return (unsigned char*)m_resourceManager->GetImageData();
 }
 

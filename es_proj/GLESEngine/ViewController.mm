@@ -35,7 +35,17 @@
     GLKView *view = (GLKView *)self.view;
     view.context = self.context;
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
+    view.drawableStencilFormat = GLKViewDrawableStencilFormat8;
+    view.drawableColorFormat = GLKViewDrawableColorFormatRGBA8888;
     [self setupGL];
+    if(_esContext.width != (GLint)view.drawableWidth || _esContext.height != (GLint)view.drawableHeight)
+    {
+        _esContext.width = (GLint)view.drawableWidth;
+        _esContext.height = (GLint)view.drawableHeight;
+        if (_esContext.updateWindow) {
+            _esContext.updateWindow(&_esContext);
+        }
+    }
 }
 
 - (void)dealloc
@@ -72,7 +82,10 @@
 
 - (void)setupGL
 {
-    [EAGLContext setCurrentContext:self.context];
+    if(![EAGLContext setCurrentContext:self.context])
+    {
+        std::cout<<"  setCurrentContext error"<<std::endl;
+    }
     memset(&_esContext, 0, sizeof(_esContext));
     InitScene(&_esContext);
 }

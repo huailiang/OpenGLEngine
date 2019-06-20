@@ -26,7 +26,6 @@ namespace engine
     time_t start_time;
     float deltatime;
     
-    
     void SystemInfo(int level)
     {
 #ifdef DEBUG
@@ -35,11 +34,20 @@ namespace engine
         std::cout<<"RENDERER:  "<< glGetString(GL_RENDERER)<<std::endl;
         std::cout<<"VERSION:   "<< glGetString(GL_VERSION)<<std::endl;
         std::cout<<"GLSL VER:  "<< glGetString(GL_SHADING_LANGUAGE_VERSION)<<std::endl;
-        if(level>0)
+        if(level > 0)
         {
             int ext=0; glGetIntegerv(GL_NUM_EXTENSIONS,&ext);
             std::cout<<"EXTENSIONS "<< ext<<std::endl;
             loop(ext) std::cout<<i<<" "<<glGetStringi(GL_EXTENSIONS,i)<<std::endl;
+            if(level > 2)
+            {
+                int num_formats;
+                glGetIntegerv(GL_NUM_COMPRESSED_TEXTURE_FORMATS, &num_formats);
+                std::cout<<"Texture extensions: "<<num_formats<<std::endl;
+                int *formats = (int*)alloca(num_formats * sizeof(int));
+                glGetIntegerv(GL_COMPRESSED_TEXTURE_FORMATS, formats);
+                loop(num_formats) std::cout<<i<<" 0x"<<hex<<formats[i]<<dec<<std::endl;
+            }
         }
 #endif
     }

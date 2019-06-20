@@ -45,7 +45,7 @@ size_t ReadFile(File *pFile, int bytesToRead, void *buffer);
 
 unsigned char* LoadTGA(void *ioContext, const char *fileName, int *width, int *height,GLenum& format);
 
-unsigned char* LoadPvr(const char* name, string ext,int* width, int* height, GLenum* format, GLint* level, int* bitsPerPixel);
+unsigned char* LoadPvr(const char* name, int* width, int* height, GLenum* format, GLint* level, int* bitsPerPixel);
 
 void UnloadPvr();
 

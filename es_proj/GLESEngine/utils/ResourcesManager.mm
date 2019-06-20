@@ -103,11 +103,7 @@ public:
     
     TextureDescription LoadPngImage(const string& file)
     {
-        NSString* basePath = [NSString stringWithUTF8String:file.c_str()];
-        NSString* resourcePath = [[NSBundle mainBundle] resourcePath];
-        NSString* fullPath = [resourcePath stringByAppendingPathComponent:basePath];
-        
-        NSLog(@"Loading PNG image %@...", fullPath);
+        NSString* fullPath = [NSString stringWithUTF8String:file.c_str()];
         
         UIImage* uiImage = [UIImage imageWithContentsOfFile:fullPath];
         CGImageRef cgImage = uiImage.CGImage;
@@ -141,10 +137,6 @@ public:
 
     TextureDescription LoadPvrImage(const string& file)
     {
-//        NSString* basePath = [NSString stringWithUTF8String:file.c_str()];
-//        NSString* resourcePath = [[NSBundle mainBundle] resourcePath];
-//        NSString* fullPath = [resourcePath stringByAppendingPathComponent:basePath];
-        
         NSString* fullPath = [NSString stringWithUTF8String:file.c_str()];
         
         m_imageData = [NSData dataWithContentsOfFile:fullPath];
