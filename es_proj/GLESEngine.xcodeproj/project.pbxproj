@@ -10,6 +10,7 @@
 		4C01AB8D22ADF6B3001C5070 /* mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C01AB8C22ADF6B3001C5070 /* mesh.cpp */; };
 		4C02E1CF22AB77A0002821B9 /* material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C02E1CC22AB77A0002821B9 /* material.cpp */; };
 		4C02E1D022AB77A0002821B9 /* avatar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C02E1CD22AB77A0002821B9 /* avatar.cpp */; };
+		4C2406B722BBD8EF005AA6C1 /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C2406B622BBD8EF005AA6C1 /* splash.png */; };
 		4C443B8122A25D2D00866F29 /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C443B7F22A25D2D00866F29 /* Scene.cpp */; };
 		4C443B8522A25F8E00866F29 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C443B8422A25F8E00866F29 /* libc++.tbd */; };
 		4C492FF422AD5F9300FC531B /* engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C492FF222AD5F9300FC531B /* engine.cpp */; };
@@ -227,6 +228,7 @@
 		4C02E1CC22AB77A0002821B9 /* material.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = material.cpp; sourceTree = "<group>"; };
 		4C02E1CD22AB77A0002821B9 /* avatar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = avatar.cpp; sourceTree = "<group>"; };
 		4C02E1CE22AB77A0002821B9 /* material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = material.h; sourceTree = "<group>"; };
+		4C2406B622BBD8EF005AA6C1 /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
 		4C42795422A54A0C003AE42A /* profile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = profile.h; path = ../../engine/profile.h; sourceTree = "<group>"; };
 		4C443B7F22A25D2D00866F29 /* Scene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Scene.cpp; sourceTree = "<group>"; };
 		4C443B8022A25D2D00866F29 /* Scene.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Scene.h; sourceTree = "<group>"; };
@@ -490,6 +492,7 @@
 		4C443B7722A24F3000866F29 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4CADD82C22BBCEBB0045D2A8 /* icons */,
 				4CA2144622BB64AB00256027 /* bundle */,
 				4C97AA7F22A50D01005F6388 /* shader */,
 			);
@@ -817,6 +820,14 @@
 			path = ../../bundle;
 			sourceTree = "<group>";
 		};
+		4CADD82C22BBCEBB0045D2A8 /* icons */ = {
+			isa = PBXGroup;
+			children = (
+				4C2406B622BBD8EF005AA6C1 /* splash.png */,
+			);
+			name = icons;
+			sourceTree = "<group>";
+		};
 		4CC91E0222BA1B9000AB6C03 /* PowerVR */ = {
 			isa = PBXGroup;
 			children = (
@@ -947,6 +958,7 @@
 				4CA214DC22BB64AB00256027 /* 1027360838 in Resources */,
 				4CA214EC22BB64AC00256027 /* 678966525 in Resources */,
 				4CA214E722BB64AB00256027 /* 1210810272 in Resources */,
+				4C2406B722BBD8EF005AA6C1 /* splash.png in Resources */,
 				4CA214EA22BB64AC00256027 /* 3660175645 in Resources */,
 				4CA2153F22BB64AC00256027 /* 2928852607 in Resources */,
 				4CA2151A22BB64AC00256027 /* 3227787744 in Resources */,
@@ -1262,7 +1274,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
@@ -1294,7 +1305,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
