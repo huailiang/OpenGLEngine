@@ -33,6 +33,7 @@ SOURCES += \
     ../engine/ext/xml/tinyxmlerror.cpp \
     ../engine/ext/xml/tinyxmlparser.cpp \
     ../engine/engine.cpp \
+    ../engine/profile.cpp \
     ../engine/std/camera.cpp \
     ../engine/std/light.cpp \
     ../engine/std/util.cpp \
@@ -52,6 +53,7 @@ SOURCES += \
     ../engine/gui/uibase.cpp \
     ../engine/gui/uimgr.cpp \
     ../engine/gui/uievent.cpp \
+    scene.cpp \
     mainwindow.cpp \
     enginewidget.cpp \
 
@@ -81,6 +83,7 @@ HEADERS += \
     ../engine/gui/uibase.h \
     ../engine/gui/uimgr.h \
     ../engine/gui/uievent.h \
+    scene.h \
     mainwindow.h \
     enginewidget.h \
 
