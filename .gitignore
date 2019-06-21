@@ -1,6 +1,7 @@
 **/temp/
 **/.vs/
 **/.vscode/
+qt_proj/qt_engine.app/
 qt_proj/build/*.h
 qt_proj/build/*.o
 qt_proj/build/*.cpp
