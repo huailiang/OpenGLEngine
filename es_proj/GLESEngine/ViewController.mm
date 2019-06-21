@@ -99,6 +99,19 @@
     }
 }
 
+-(void)OnApplicationPause:(bool) pause
+{
+    if(_esContext.pauseFunc)
+    {
+        _esContext.pauseFunc(&_esContext, pause);
+    }
+}
+
+-(void)OnApplicationQuit
+{
+    [self tearDownGL];
+}
+
 //在接收到内存警告时会调用，且系统会自动处理内存释放 拟器simulator-菜单栏-hardware-simulate memory warning
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -119,6 +119,12 @@ namespace engine
     void SystemInfo(int level = 0);
 
     float GetRuntime();
+    
+    // will be auto called while application is quitting
+    void OnApplicationQuit();
+    
+    // will be auto called while application is becoming active/inactive
+    void OnApplicationPause(bool pause);
 
     void* InitPlane(GLuint &planeVAO, GLuint &planeVBO, Shader* shader = nullptr);
 

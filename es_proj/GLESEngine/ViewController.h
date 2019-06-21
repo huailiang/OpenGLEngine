@@ -12,9 +12,10 @@
 @interface ViewController : GLKViewController
 {
     NSInteger _animationFrameInterval;
-    
 }
 
+-(void)OnApplicationPause:(bool) pause;
+-(void)OnApplicationQuit;
 
 @end
 

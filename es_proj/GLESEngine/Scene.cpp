@@ -25,7 +25,7 @@ Camera* camera;
 Light* light;
 Skybox* skybox;
 UILabel* label;
-
+float lastTime;
 
 void Clean()
 {
@@ -37,6 +37,10 @@ void Clean()
 
 void Draw(ESContext *esContext)
 {
+    float timeValue = GetRuntime();
+    deltatime  = timeValue-lastTime;
+    lastTime= timeValue;
+    
     Clean();
     
     vec3 cubePositions[] = { glm::vec3( 0.0f,  0.0f,  -2.0f), glm::vec3(2.0f,  1.0f, -4.0f) };
@@ -72,6 +76,12 @@ void ShutDown(ESContext* context)
     SAFE_DELETE(camera);
     SAFE_DELETE(light);
     SAFE_DELETE(skybox);
+    OnApplicationQuit();
+}
+
+void OnPause(ESContext *esContext,bool pause)
+{
+    OnApplicationPause(pause);
 }
 
 void SetWindowSize(ESContext *esContext)
@@ -198,6 +208,7 @@ bool InitScene(ESContext* context)
     Texture("textures/awesomeface", PNG, &texture2);
     context->drawFunc = Draw;
     context->shutdownFunc = ShutDown;
+    context->pauseFunc =  OnPause;
     context->updateWindow = SetWindowSize;
     return true;
 }

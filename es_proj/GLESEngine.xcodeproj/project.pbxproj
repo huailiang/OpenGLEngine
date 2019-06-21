@@ -210,7 +210,7 @@
 		4CA2156122BB64AC00256027 /* 3393665027 in Resources */ = {isa = PBXBuildFile; fileRef = 4CA214D322BB64AB00256027 /* 3393665027 */; };
 		4CA2156222BB64AC00256027 /* 867196451 in Resources */ = {isa = PBXBuildFile; fileRef = 4CA214D422BB64AB00256027 /* 867196451 */; };
 		4CC91DFC22B9E9F400AB6C03 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8AC06722A3A45500036684 /* Foundation.framework */; };
-		4CC91E0122BA19FF00AB6C03 /* ResourcesManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4CC91E0022BA19FF00AB6C03 /* ResourcesManager.mm */; };
+		4CC91E0122BA19FF00AB6C03 /* iOSAsset.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4CC91E0022BA19FF00AB6C03 /* iOSAsset.mm */; };
 		4CE2223322A91EE00095ECCA /* libFreetype2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE2223222A91EE00095ECCA /* libFreetype2.a */; };
 		4CE2224622A91F0B0095ECCA /* eventmgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2223922A91F0B0095ECCA /* eventmgr.cpp */; };
 		4CE2224722A91F0B0095ECCA /* uibase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2223A22A91F0B0095ECCA /* uibase.cpp */; };
@@ -451,7 +451,7 @@
 		4CA214D322BB64AB00256027 /* 3393665027 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 3393665027; sourceTree = "<group>"; };
 		4CA214D422BB64AB00256027 /* 867196451 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 867196451; sourceTree = "<group>"; };
 		4CC91DFF22BA19C200AB6C03 /* Interfaces.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Interfaces.h; sourceTree = "<group>"; };
-		4CC91E0022BA19FF00AB6C03 /* ResourcesManager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcesManager.mm; sourceTree = "<group>"; };
+		4CC91E0022BA19FF00AB6C03 /* iOSAsset.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = iOSAsset.mm; sourceTree = "<group>"; };
 		4CC91E0322BA1B9000AB6C03 /* PVRTGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVRTGlobal.h; sourceTree = "<group>"; };
 		4CC91E0422BA1B9000AB6C03 /* PVRTTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVRTTexture.h; sourceTree = "<group>"; };
 		4CE2223222A91EE00095ECCA /* libFreetype2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFreetype2.a; sourceTree = "<group>"; };
@@ -508,7 +508,7 @@
 				4C66674922A2A3A3002BA996 /* FilePath.h */,
 				4C8AC06922A3AE3D00036684 /* Context.h */,
 				4CC91DFF22BA19C200AB6C03 /* Interfaces.h */,
-				4CC91E0022BA19FF00AB6C03 /* ResourcesManager.mm */,
+				4CC91E0022BA19FF00AB6C03 /* iOSAsset.mm */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -1116,7 +1116,7 @@
 				4C7AF66E22A54EA700B63173 /* light.cpp in Sources */,
 				4CE2224722A91F0B0095ECCA /* uibase.cpp in Sources */,
 				4C8062C7229FC059005FD1F9 /* ViewController.mm in Sources */,
-				4CC91E0122BA19FF00AB6C03 /* ResourcesManager.mm in Sources */,
+				4CC91E0122BA19FF00AB6C03 /* iOSAsset.mm in Sources */,
 				4C02E1CF22AB77A0002821B9 /* material.cpp in Sources */,
 				4C73C0EB22A8BAB3002A8AD0 /* texmgr.cpp in Sources */,
 				4CE2224622A91F0B0095ECCA /* eventmgr.cpp in Sources */,

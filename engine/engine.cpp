@@ -60,9 +60,20 @@ namespace engine
         return t.time - start_time + t.millitm * 0.001f;
     }
     
+
     float GetDeltaTime()
     {
         return deltatime;
+    }
+    
+    void OnApplicationQuit()
+    {
+        std::cout<<"engine will be quit"<<std::endl;
+    }
+    
+    void OnApplicationPause(bool pause)
+    {
+        std::cout<<"engine pause "<<pause<<std::endl;
     }
 
     void* InitPlane(GLuint &vao, GLuint &vbo, Shader* shader)

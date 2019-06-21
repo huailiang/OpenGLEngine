@@ -14,13 +14,12 @@
 
 using namespace std;
 
-
-class ResourcesManager :public IResourceManager
+class iOSAssets :public IResourceManager
 {
     
 public:
     
-    ResourcesManager()
+    iOSAssets()
     {
         m_imageData = 0;
     }
@@ -62,39 +61,6 @@ public:
         CGColorSpaceRelease(colorSpace);
         CGRect rect = CGRectMake(0, 0, description.Width, description.Height);
         CGContextDrawImage(context, rect, uiImage.CGImage);
-        CGContextRelease(context);
-        
-        m_imageData = [NSData dataWithBytesNoCopy:data length:byteCount freeWhenDone:YES];
-        return description;
-    }
-    
-    TextureDescription GenerateCircle()
-    {
-        TextureDescription description;
-        description.Width = 256;
-        description.Height = 256;
-        description.BitsPerComponent = 8;
-        description.Format = TextureFormatRgba;
-        
-        int bpp = description.BitsPerComponent / 2;
-        int byteCount = description.Width * description.Height * bpp;
-        unsigned char* data = (unsigned char*) calloc(byteCount, 1);
-        
-        CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-        CGBitmapInfo bitmapInfo = kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big;
-        CGContextRef context = CGBitmapContextCreate(data,
-                                                     description.Width,
-                                                     description.Height,
-                                                     description.BitsPerComponent,
-                                                     bpp * description.Width,
-                                                     colorSpace,
-                                                     bitmapInfo);
-        CGColorSpaceRelease(colorSpace);
-        
-        CGRect rect = CGRectMake(5, 5, 246, 246);
-        CGContextSetRGBFillColor(context, 0, 0, 1, 1);
-        CGContextFillEllipseInRect(context, rect);
-        
         CGContextRelease(context);
         
         m_imageData = [NSData dataWithBytesNoCopy:data length:byteCount freeWhenDone:YES];
@@ -198,7 +164,7 @@ private:
 };
 
 
-IResourceManager* CreateResourceManager()
+IResourceManager* CreateiOSAsset()
 {
-    return new ResourcesManager();
+    return new iOSAssets();
 }

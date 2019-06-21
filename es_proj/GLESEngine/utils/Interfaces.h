@@ -42,13 +42,14 @@ struct IResourceManager {
     virtual TextureDescription LoadPngImage(const string& filename) = 0;
     virtual TextureDescription LoadPvrImage(const string& filename) = 0;
     virtual TextureDescription LoadImage(const string& filename) = 0;
-    virtual TextureDescription GenerateCircle() = 0;
     virtual void* GetImageData() = 0;
     virtual void UnloadImage() = 0;
     virtual ~IResourceManager() {}
 };
 
-IResourceManager* CreateResourceManager();
 
+#ifdef __APPLE__
+IResourceManager* CreateiOSAsset();
+#endif
 
 #endif /* Interfaces_h */

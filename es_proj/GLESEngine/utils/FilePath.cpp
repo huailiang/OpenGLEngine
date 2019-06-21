@@ -286,10 +286,11 @@ bool GetFormat(TextureDescription description,GLenum* format,int* bitsPerPixel)
 
 
 IResourceManager* m_resourceManager;
+
 unsigned char* LoadPvr(const char* filename, int* width, int* height, GLenum* format, GLint* level, int* bitsPerPixel)
 {
     if (m_resourceManager==NULL) {
-        m_resourceManager = CreateResourceManager();
+        m_resourceManager = CreateiOSAsset();
     }
     TextureDescription description = m_resourceManager->LoadPvrImage(filename);
     *width = description.Width;
