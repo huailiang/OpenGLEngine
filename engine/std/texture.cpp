@@ -14,7 +14,7 @@
 #else
 #include "../ext/stb_image.h"
 #endif
-#include "profile.h"
+
 
 namespace engine
 {
@@ -39,7 +39,6 @@ namespace engine
         stbi_set_flip_vertically_on_load(flipY);
     #endif
         
-        glCheckError();
         glGenTextures(1, &textureID);
         glBindTexture(GL_TEXTURE_2D, textureID);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrap);
@@ -70,16 +69,14 @@ namespace engine
         if (data)
         {
     #ifndef _GLES_
-            GLenum glformat = GetFormat();
+            glformat = GetFormat();
     #endif
             
-            glCheckError();
             if(ext == PVR)
             {
                 for (int mip = 0; mip < level; ++mip) {
                     GLsizei size = max(32, width * height * bitsPerPixel / 8);
                     glCompressedTexImage2D(GL_TEXTURE_2D, mip, glformat, width, height, 0, size, data);
-                    glCheckError();
                     data += size;
                     width >>= 1; height >>= 1;
                 }
