@@ -14,6 +14,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "../ext/stb_image.h"
 #endif
+#include "texture.h"
 
 namespace engine
 {
@@ -62,58 +63,18 @@ namespace engine
     // +Z (front)
     // -Z (back)
     // -------------------------------------------------------
-    GLuint Skybox::loadCubemap(std::vector<std::string> faces)
+    GLuint Skybox::loadCubemap(std::string path)
     {
-        GLuint textureID;
-        glGenTextures(1, &textureID);
-        glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
-    #ifndef _GLES_
-        stbi_set_flip_vertically_on_load(false);
-    #endif
-        int width, height, nrChannels;
-        for (uint i = 0; i < faces.size(); i++)
-        {
-    #ifndef _GLES_
-            std::string path = getResPath(faces[i]);
-            unsigned char *data = stbi_load(path.c_str(), &width, &height, &nrChannels, 0);
-            if (data)
-            {
-                glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-                stbi_image_free(data);
-            }
-            else
-            {
-                std::cout << "Cubemap texture failed to load at path: " << faces[i] <<" channel:"<<nrChannels<< std::endl;
-                stbi_image_free(data);
-            }
-    #else
-            std::string path = getResPath(faces[i]);
-            unsigned char* data = LoadImage(path, EX_JPG, &width, &height);
-            glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-            free(data);
-    #endif
-        }
-
-        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
-        
-        return textureID;
+        GLuint texID;
+        Texture(path, &texID);
+        return texID;
     }
 
 
     void Skybox::init_tex()
     {
         std::string path = "textures/skybox/"+name+"/";
-        faces.push_back(path + "right.jpg");
-        faces.push_back(path + "left.jpg");
-        faces.push_back(path + "top.jpg");
-        faces.push_back(path + "bottom.jpg");
-        faces.push_back(path + "front.jpg");
-        faces.push_back(path + "back.jpg");
-        cubemapTexture = loadCubemap(faces);
+        cubemapTexture = loadCubemap(path);
     }
 
     void Skybox::init_buff()
@@ -171,6 +132,5 @@ namespace engine
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     }
-
 
 }

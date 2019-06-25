@@ -22,7 +22,9 @@ public:
         SAFE_DELETE(shader);
         glDeleteVertexArrays(1, &vao);
         glDeleteBuffers(1, &vbo);
-        SAFE_DELETE3(btn_direct, btn_point, btn_spot);
+        SAFE_DELETE(btn_direct);
+        SAFE_DELETE(btn_point);
+        SAFE_DELETE(btn_spot);
     }
     
     std::string getSkybox() { return "mp_5dim"; }

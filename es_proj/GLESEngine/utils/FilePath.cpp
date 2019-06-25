@@ -134,44 +134,6 @@ string getContentFromPath(const string& filepath)
     return getContentFromPath(filepath.c_str());
 }
 
-unsigned char* LoadImage(const char* filename, string extension, int *width, int *height)
-{
-    const char *filepath = getsPath(filename);
-    CGDataProviderRef texturefiledata = CGDataProviderCreateWithFilename(filepath);
-    if(!texturefiledata)  return NULL;
-    
-    bool Ispng = StringManipulator::IsEqual(extension,".png") == 0;
-    bool IsJpg = StringManipulator::IsEqual(extension,".jpg") == 0;
-    
-    CGImageRef textureImage;
-    if(IsJpg)
-        textureImage = CGImageCreateWithJPEGDataProvider(texturefiledata, NULL, true, kCGRenderingIntentDefault);
-    else if (Ispng)
-        textureImage = CGImageCreateWithPNGDataProvider(texturefiledata, NULL, true, kCGRenderingIntentDefault);
-    else {
-        cerr<<"LoadImage: unsupported image type:"<<extension<<"\n";
-        return NULL;
-    }
-    
-    CGDataProviderRelease(texturefiledata);
-    *width = (int)CGImageGetWidth(textureImage);
-    *height = (int)CGImageGetHeight(textureImage);
-    void *imageData = malloc(*height * *width * 4);
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    CGContextRef textureContext = CGBitmapContextCreate(imageData, *width, *height, 8, 4 * *width, colorSpace,
-                                                        kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big );
-    
-    CGContextDrawImage(textureContext, CGRectMake(0, 0, *width, *height), textureImage);
-    CFRelease(textureContext);
-    CGImageRelease(textureImage);
-    return (unsigned char*)imageData;
-}
-
-unsigned char* LoadImage(const string& filename, string extension, int *width, int *height)
-{
-    return LoadImage(filename.c_str(), extension, width, height);
-}
-
 size_t ReadFile(File *pFile, int bytesToRead, void *buffer)
 {
     size_t bytesRead = 0;
@@ -221,7 +183,7 @@ File* FileOpen(void *ioContext, const char *fileName)
     return pFile;
 }
 
-unsigned char* LoadTGA(void *ioContext, const char *fileName, int *width, int *height,GLenum& format)
+unsigned char* LoadTGA(void *ioContext, const char *fileName, int *width, int *height,GLenum* format)
 {
     unsigned char *buffer;
     File *fp;
@@ -249,9 +211,9 @@ unsigned char* LoadTGA(void *ioContext, const char *fileName, int *width, int *h
             FileClose(fp);
             return (buffer);
         }
-        if(Header.ColorDepth == 8) format = GL_RED;
-        else if(Header.ColorDepth == 24) format = GL_RGB;
-        else format = GL_RGBA;
+        if(Header.ColorDepth == 8) *format = GL_RED;
+        else if(Header.ColorDepth == 24) *format = GL_RGB;
+        else *format = GL_RGBA;
     }
     return NULL;
 }

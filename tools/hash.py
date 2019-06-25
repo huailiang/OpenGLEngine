@@ -58,7 +58,8 @@ def process(dir):
       if x == ".DS_Store":
         continue
       pp = os.path.join(root[idx2:], x)
-      if pp.startswith("pvr"):
+      arr = pp.split('/')
+      if arr[0].endswith("_tmp") or arr[0].endswith(" copy"):
         continue
       print(pp, xhash(pp))
       src = os.path.join(root, x)

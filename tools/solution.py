@@ -38,19 +38,12 @@ except:
     quit()
 
 
-
 _dir,_file=os.path.split(ImageName)
-_par,_ = os.path.split(_dir)
-_dir = os.path.join(_par,"temp")
-targetName=os.path.join(_dir,_file)
 print(_file)
-
-if not os.path.exists(_dir):
-      os.makedirs(_dir)
 
 def resize(target):
   img = originImg.resize((target, target), Image.ANTIALIAS)
-  img.save(targetName)
+  img.save(ImageName)
 
 
 # 这里是支持转换的分辨率
@@ -62,7 +55,6 @@ width = originImg.width
 
 for x in solutions:
   if x == width:
-    shutil.copyfile(ImageName, targetName)
     break
   if x < width and width < solutions[i+1]:
     print("invalid image resolution: "+ ImageName)

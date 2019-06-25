@@ -5,6 +5,7 @@
 # ----------------------------------------------
 # Author: Huailiang.Peng
 # Data:   2019.06.18
+# Useage:
 # ==============================================
 #!/bin/sh
 
@@ -17,6 +18,8 @@ ITEXTURE=$ISDK/usr/bin/texturetool
 
 TEXS=resources/textures
 
+OBJS=resources/objects
+
 TEMP=resources/temp
 
 FORMAT=pvr # format支持：pvr, raw, ktx
@@ -25,24 +28,49 @@ ENCODER=PVRTC # PVRTC, ASTC
 
 OPTION=bits-per-pixel-2 # bits-per-pixel-2, bits-per-pixel-4, block-width-4, block-width-5, block-height-4...
 
-TARGET=resources/${FORMAT}
-
-cd `dirname $0`
-
-cd ../
 
 
-# 检查纹理目录 
-if [ ! -d "$TEXS" ]; then  
-	echo "error, not found textures folfer"
-	exit 1
-fi
+function _checkdir()
+{
+    # 检查目录 
+    if [ ! -d "${1}" ]; then  
+        echo "error, not found folfer"${1}
+        exit 1
+    fi
+}
 
+function _checkenv()
+{
+    if [ -d "${TEXS}_tmp" ]; then  
+        echo "\033[31m exit, error: there is already texs_tmp \033[0m \n"
+        exit 10
+    fi
+    if [ -d "${OBJS}_tmp" ]; then  
+        echo "\033[31mexit, error: there is already texs_tmp \033[0m \n"
+        exit 11
+    fi
+}
 
-$ITEXTURE -l
+function _extern()
+{
+    # echo ${1:0-3}  # 后缀
+    if [[ ${1:0-3} = "jpg" ]]; then
+        return 1
+    fi
+    if [[ ${1:0-3} = "png" ]]; then
+        return 2
+    fi
+    if [[ ${1:0-3} = "jpeg" ]]; then
+        return 3
+    fi
+    if [[ ${1:0-3} = "tga" ]]; then
+        return 4
+    fi
+    return 0
+}
 
 # 清空生成目录
-function _clean()
+function _cleandir()
 {
     if [ -d "${1}" ]; then  
     rm -rf ${1}
@@ -50,34 +78,31 @@ function _clean()
 }
 
 
-_clean $TARGET
-_clean $TEMP
-
-
-mkdir $TARGET
-
-${ITEXTURE} -l
-
 # 利用xcode 自带的texturetool做格式转换
 function _export() 
 {
 	echo ${1%%.*}"."${FORMAT} 
-	${ITEXTURE}  -m -f ${FORMAT} -e ${ENCODER} --${OPTION} ${1} -o ${1%%.*}"."${FORMAT} -p ${1%%.*}"_prev."${FORMAT}
+    ${ITEXTURE}  -m -f ${FORMAT} -e ${ENCODER} --${OPTION} ${1} -o ${1%%.*}"."${FORMAT} #-p ${1%%.*}"_prev."${FORMAT}
+    if [[ $? = 0 ]]; then  # 生成成功的话 删除原文件
+        rm -rf ${1}
+    fi
 }
 
 
 function _preprocess()
 {
-    echo "开始预处理图片"
+    echo "预处理"${1}
     for element in `ls $1`
     do  
         dir_or_file=$1"/"$element
         if [ -d $dir_or_file ]
         then 
-            # _preprocess $dir_or_file
-            echo $dir_or_file
+            _preprocess $dir_or_file
         else
-            python tools/solution.py $dir_or_file
+            _extern $dir_or_file
+            if [[ $? > 0 ]]; then
+                python tools/solution.py $dir_or_file
+            fi
         fi  
     done
 }
@@ -85,27 +110,42 @@ function _preprocess()
 
 function _procesdir()
 {
-    echo "正在生成目标图片"
+    echo "正在处理目录:"${1}
     for element in `ls $1`
     do  
         dir_or_file=$1"/"$element
         if [ -d $dir_or_file ]
         then 
-            # _procesdir $dir_or_file
-            echo $dir_or_file
+            _procesdir $dir_or_file
         else
-            _export $dir_or_file
+            _extern $dir_or_file
+            if [[ $? > 0 ]]; then
+                _export $dir_or_file
+            fi
         fi  
     done
 }
 
-_preprocess $TEXS
 
-_procesdir $TEMP
+function _process()
+{
+    _checkdir ${1}
+    _cleandir ${TEMP}
+    cp -R ${1} ${TEMP}
+    _preprocess ${TEMP}
+    _procesdir ${TEMP}
+    mv -f ${1} ${1}_tmp
+    mv -f ${TEMP} ${1}
+}
 
 
-mv ${TEMP}/*.${FORMAT} ${TARGET}/
+cd `dirname $0`
+cd ../
+_checkenv 
+$ITEXTURE -l
+echo "************ start ************"
+_process ${TEXS}
+_process ${OBJS}
 
-_clean ${TEMP}
 
 echo "job done, good luck"

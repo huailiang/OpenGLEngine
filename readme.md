@@ -20,12 +20,23 @@
 在es工程(手机上)， 我们使用native的接口读取资源。
 
 
+ios工程引用的资源全部是PVRTC压缩格式的纹理， 需要手动转换, 运行下面脚本即可生成对应的texture
+
+``` sh
+cd tools
+sh texture.sh
+sh ios_hash.sh
+```
+
+注意生成时间会比较长， 耐心等待
+
+
 ## Version
 
 * qt 5.11
 * opengl 330
 * opengles 300
-* freetype.6
+* freetype
 
 # 特征
 
@@ -134,6 +145,10 @@ es浮点数默认是：precision mediump float;
 * version声明
 
 引擎实现移动版本会自动转化为 #version 300 es
+
+* 压缩纹理支持
+
+支持PVRTC 压缩纹理， 包含pvrtc4 & pcrtv2
 
 <br><img src='image/es.jpg'> <br>
 

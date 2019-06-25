@@ -84,18 +84,6 @@ namespace engine
     if(ptr != nullptr) \
     {delete ptr; ptr = nullptr;}
     
-    #define SAFE_DELETE2(ptr1, ptr2) \
-    SAFE_DELETE(ptr1)   \
-    SAFE_DELETE(ptr2)
-    
-    #define SAFE_DELETE3(ptr1, ptr2, ptr3) \
-    SAFE_DELETE2(ptr1, ptr2)   \
-    SAFE_DELETE(ptr3)
-    
-    #define SAFE_DELETE4(ptr1, ptr2, ptr3, ptr4) \
-    SAFE_DELETE2(ptr1, ptr2)   \
-    SAFE_DELETE2(ptr3, ptr4)
-    
     #define max(a,b) ((a)>(b)?(a):(b))
     
     #define min(a,b) ((a)<(b)?(a):(b))

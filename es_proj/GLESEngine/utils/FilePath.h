@@ -32,18 +32,10 @@ string getPath(const string& filename);
 string getContentFromPath(const char *filepath);
 string getContentFromPath(const string& filepath);
 
-/**
- * load a png/jpg/tga image
- * @param filename the image file name, this function calls getPath implicitly ..
- * @param width height the image width and height
- * @return the data pointer to the image. dont forget to free memory by calling free.
- */
-unsigned char* LoadImage(const char* filename, string extension, int *width, int *height);
-unsigned char* LoadImage(const string& filename, string extension, int *width, int *height);
 
 size_t ReadFile(File *pFile, int bytesToRead, void *buffer);
 
-unsigned char* LoadTGA(void *ioContext, const char *fileName, int *width, int *height,GLenum& format);
+unsigned char* LoadTGA(void *ioContext, const char *fileName, int *width, int *height,GLenum* format);
 
 unsigned char* LoadPvr(const char* name, int* width, int* height, GLenum* format, GLint* level, int* bitsPerPixel);
 

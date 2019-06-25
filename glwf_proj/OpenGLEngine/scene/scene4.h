@@ -26,7 +26,7 @@ public:
     
     int getType() { return TY_Scene4; }
     
-    glm::vec3 getCameraPos() { return glm::vec3(0.0f,0.0f,8.0f); }
+    glm::vec3 getCameraPos() { return glm::vec3(0.0f,0.0f,12.0f); }
     
     void InitLight()
     {
@@ -63,8 +63,8 @@ public:
         std::vector<glm::vec2> uv;
         std::vector<glm::vec3> normals;
         std::vector<uint> indices;
-        const uint X_SEGMENTS = 64;
-        const uint Y_SEGMENTS = 64;
+        const uint X_SEGMENTS = 32;
+        const uint Y_SEGMENTS = 32;
         const float PI = 3.14159265359;
         for (uint y = 0; y <= Y_SEGMENTS; ++y)
         {
@@ -176,8 +176,8 @@ private:
     Shader *shader;
     GLuint vao, vbo, ebo;
     GLuint albedo, normal, metallic, roughness, ao;
-    int nGrid = 6;
-    float spacing = 2.5;
+    int nGrid = 3;
+    float spacing = 3;
     size_t indexCount;
 };
 

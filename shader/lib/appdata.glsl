@@ -124,9 +124,6 @@ mat3 TBN(mat4 model)
 #endif
 
 
-
-
-
 #undef VERT_TYPE
 
 
