@@ -49,7 +49,7 @@ namespace engine
         
     private:
         
-        GLuint LoadCubemap(std::string cubepath);
+        GLuint LoadCubemap(std::string cubepath, Texture* tex);
         
         GLuint LoadTexture(const char* path,bool flipY, Texture* tex);
         
@@ -62,7 +62,6 @@ namespace engine
         GLenum GetFormat(int format);
         
     private:
-        vector<string> _textures;
         vector<Texture> _texids;
         vector<size_t> _references;
         size_t _num_tex;

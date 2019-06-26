@@ -37,7 +37,7 @@ namespace engine
     {
         for (size_t i=0; i<_num_tex; i++)
         {
-            if (_textures[i] == texture)
+            if (_texids[i].path == texture)
             {
                 texid = _texids[i].textureID;
                 idx = i;
@@ -55,10 +55,9 @@ namespace engine
         if (!FindTexture(texture, tex->textureID, idx))
         {
             if (CUBEMAP == tex->type)
-                tex->textureID = LoadCubemap(path);
+                tex->textureID = LoadCubemap(path,tex);
             else
                 tex->textureID = LoadTexture(path, flipY, tex);
-            _textures.push_back(texture);
             _texids.push_back(*tex);
             _references.push_back(1);
             _num_tex++;
@@ -80,7 +79,6 @@ namespace engine
         else if(ref == 1)
         {
             _texids.erase(_texids.begin() + idx);
-            _textures.erase(_textures.begin() + idx);
             _references.erase(_references.begin() + idx);
             _num_tex--;
         }
@@ -120,7 +118,6 @@ namespace engine
             GLuint texid = _texids[i].textureID;
             glDeleteTextures(1, &texid);
         }
-        _textures.clear();
         _texids.clear();
         _references.clear();
         _num_tex=0;
@@ -154,6 +151,7 @@ namespace engine
         GLint level = 0;
         int bitsPerPixel =0;
         unsigned char* data = RealLoad(path, &tex->width, &tex->height, tex->ext, &glformat, &level, &bitsPerPixel);
+        tex->data = data;
         if (data)
         {
             int width = tex->width, height = tex->height;
@@ -181,7 +179,7 @@ namespace engine
         return textureID;
     }
     
-    GLuint TexMgr::LoadCubemap(std::string cubepath)
+    GLuint TexMgr::LoadCubemap(std::string cubepath,Texture* tex)
     {
         unsigned int textureID;
         int width,height;
@@ -207,6 +205,7 @@ namespace engine
             std::string face = getResPath(cubepath+str[i]+post);
             path = face.c_str();
             unsigned char *data = RealLoad(path, &width, &height, ext, &glformat, &level, &bitsPerPixel);
+            tex->data = data;
             if(ext==PVR)
             {
                 GLsizei size = max(32, width * height * bitsPerPixel / 8);

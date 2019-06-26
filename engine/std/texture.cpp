@@ -30,11 +30,12 @@ namespace engine
         *texID = this->textureID;
     }
     
-    Texture::Texture(std::string path, GLuint* texID)
+    
+    Texture::Texture(const char* path, GLuint* texID)
     {
         this->type = CUBEMAP;
-        this->path  = path.c_str();
-        TexMgr::getInstance()->LoadTex(this->path,true,this);
+        this->path  = path;
+        TexMgr::getInstance()->LoadTex(path,true,this);
         *texID = this->textureID;
     }
 

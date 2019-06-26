@@ -39,6 +39,7 @@ namespace engine
         glDeleteBuffers(1,&vbo);
         glDeleteVertexArrays(1,&vao);
         DELETE_TEXTURE(cubemapTexture);
+        DELETE_TEXTURE(hdrTexture);
     }
 
 
@@ -61,26 +62,8 @@ namespace engine
     void Skybox::init_tex(bool hdr)
     {
         if (hdr) { //hdr 即envmap 只有一张图EquirectangularMap 需要转换为cubemap
-            std::string path = getResPath("textures/hdr/"+name);
-            int w = 0, h =0, nrComponents=0;
-            float *data = stbi_loadf(path.c_str(), &w, &h, &nrComponents, 0);
-            if (data)
-            {
-                glGenTextures(1, &hdrTexture);
-                glBindTexture(GL_TEXTURE_2D, hdrTexture);
-                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, w, h, 0, GL_RGB, GL_FLOAT, data); // note how we specify the texture's data value to be float
-                
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-                
-                stbi_image_free(data);
-            }
-            else
-            {
-                std::cout << "Failed to load HDR image." << std::endl;
-            }
+            std::string path ="textures/hdr/"+name;
+            Texture(path.c_str(), HDR, &hdrTexture);
         }
         else
         {
