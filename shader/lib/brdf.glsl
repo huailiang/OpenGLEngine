@@ -128,6 +128,17 @@ vec3 BRDF(vec3 normal, vec3 view, vec3 light, float matel, float roughness, vec3
     return nominator / max(denominator, 0.001);
 }
 
+
+void pbrK(vec3 normal, vec3 view, float matel, vec3 albedo, out vec3 kS, out vec3 kD)
+{
+    vec3 N = normalize(normal);
+    vec3 V = normalize(view);
+    vec3 F0 = vec3(0.04);
+    F0 = mix(F0, albedo, matel);
+    kS  = FresnelSchlick(clamp(dot(N, V), 0.0, 1.0), F0);
+    kD = vec3(1.0) - kS;
+}
+
 /*
  * 对应的公式参考
  *  https://learnopengl.com/PBR/IBL/Diffuse-irradiance

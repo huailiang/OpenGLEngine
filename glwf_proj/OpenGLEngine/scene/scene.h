@@ -226,11 +226,9 @@ protected:
         debugShader->use();
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, map);
-        glBindVertexArray(quadVAO);
-        glDrawArrays(DRAW_MODE, 0, 6);
-        glBindVertexArray(0);
+        DrawQuad();
     }
-    
+        
 private:
     void InitDepthBuffer()
     {
@@ -258,7 +256,13 @@ private:
         RenderQuad(depthMap);
     }
     
-    
+    void DrawQuad()
+    {
+        glBindVertexArray(quadVAO);
+        glDrawArrays(DRAW_MODE, 0, 6);
+        glBindVertexArray(0);
+    }
+
     
 protected:
     Camera* camera;

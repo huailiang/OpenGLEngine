@@ -44,7 +44,7 @@ namespace engine
         
     public:
         GLuint irradianceMap;
-        GLuint cubemapTexture,hdrTexture;
+        GLuint cubemapTexture,hdrTexture,envCubemap;
         
     private:
         GLuint vao, vbo;

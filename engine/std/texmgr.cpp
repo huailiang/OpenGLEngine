@@ -129,7 +129,7 @@ namespace engine
         filter = GL_LINEAR; // es such as pvrtc is not support mipmap
 #endif
         glTexParameteri(target, GL_TEXTURE_MIN_FILTER, filter);
-        glTexParameteri(target, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(target, GL_TEXTURE_MAG_FILTER, filter);
         glTexParameteri(target, GL_TEXTURE_WRAP_S, wrap);
         glTexParameteri(target, GL_TEXTURE_WRAP_T, wrap);
         glTexParameteri(target, GL_TEXTURE_WRAP_R, wrap);

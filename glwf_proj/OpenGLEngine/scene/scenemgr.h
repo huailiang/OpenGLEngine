@@ -50,12 +50,12 @@ public:
     void Init()
     {
         ChangeTo(TY_Scene6);
-        lb_scene1 = new UILabel(vec2(60,380), vec3(1), 1, "Scene1", TY_Scene1);
-        lb_scene2 = new UILabel(vec2(60,330), vec3(1), 1, "Scene2", TY_Scene2);
-        lb_scene3 = new UILabel(vec2(60,280), vec3(1), 1, "Scene3", TY_Scene3);
-        lb_scene4 = new UILabel(vec2(60,230), vec3(1), 1, "Scene4", TY_Scene4);
-        lb_scene5 = new UILabel(vec2(60,170), vec3(1), 1, "Scene5", TY_Scene5);
-        lb_scene6 = new UILabel(vec2(60,120), vec3(1), 1, "Scene6", TY_Scene6);
+        lb_scene1 = new UILabel(vec2(60,440), vec3(1), 1, "Scene1", TY_Scene1);
+        lb_scene2 = new UILabel(vec2(60,400), vec3(1), 1, "Scene2", TY_Scene2);
+        lb_scene3 = new UILabel(vec2(60,360), vec3(1), 1, "Scene3", TY_Scene3);
+        lb_scene4 = new UILabel(vec2(60,320), vec3(1), 1, "Scene4", TY_Scene4);
+        lb_scene5 = new UILabel(vec2(60,280), vec3(1), 1, "Scene5", TY_Scene5);
+        lb_scene6 = new UILabel(vec2(60,240), vec3(1), 1, "Scene6", TY_Scene6);
         lb_fps = new UILabel(vec2(740,580), vec3(1,0,0), 0.5f);
         lb_copy = new UILabel(vec2(20), vec3(1), 0.4f);
         lb_scene1->RegistCallback(ClickScene, this);

@@ -37,7 +37,7 @@ public:
     
     virtual bool drawShadow() { return false; }
     
-    glm::vec3 getCameraPos() { return glm::vec3(0.0f,0.0f,6.0f); }
+    glm::vec3 getCameraPos() { return glm::vec3(0.0f,0.0f,10.0f); }
     
     void InitLight()
     {
@@ -168,11 +168,12 @@ public:
         if(isEquirectangularMap())
         {
             glActiveTexture(GL_TEXTURE5);
-            glBindTexture(GL_TEXTURE_2D, skybox->irradianceMap);
+            glBindTexture(GL_TEXTURE_CUBE_MAP, skybox->irradianceMap);
         }
         
         mat4 model(1);
         model = translate(model, vec3(0));
+        model = scale(model, vec3(1.6f));
         shader->setMat4("model", model);
         shader->setVec3("lightPositions[0]", vec3(0,0,4));
         shader->setVec3("lightColors[0]", vec3(40));

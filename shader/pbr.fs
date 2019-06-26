@@ -14,7 +14,6 @@ uniform sampler2D metallicMap;
 uniform sampler2D roughnessMap;
 uniform sampler2D aoMap;
 
-
 #ifdef IRRADIANCE
 uniform samplerCube irradianceMap;
 #endif
@@ -64,8 +63,10 @@ void main()
 #ifndef IRRADIANCE
     vec3 ambient = vec3(0.03) * albedo * ao;
 #else
+    vec3 kS, kD;
+    pbrK(N, V, metallic, albedo, kS, kD);
     vec3 irradiance = texture(irradianceMap, N).rgb;
-    vec3 ambient = irradiance * albedo * ao;
+    vec3 ambient = kD * irradiance * albedo * ao;
 #endif
     vec3 color = ambient + Lo;
 
@@ -75,5 +76,4 @@ void main()
     color = pow(color, vec3(1.0/2.2));
 
     FragColor = vec4(color, 1.0);
-
 }

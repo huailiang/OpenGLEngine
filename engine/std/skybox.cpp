@@ -41,6 +41,8 @@ namespace engine
         glDeleteVertexArrays(1,&vao);
         DELETE_TEXTURE(cubemapTexture);
         DELETE_TEXTURE(hdrTexture);
+        DELETE_TEXTURE(envCubemap);
+        DELETE_TEXTURE(irradianceMap);
     }
 
 
@@ -113,8 +115,7 @@ namespace engine
                 glm::lookAt(glm::vec3(0), glm::vec3(0.0f,  0.0f,  1.0f), glm::vec3(0.0f, -1.0f,  0.0f)),
                 glm::lookAt(glm::vec3(0), glm::vec3(0.0f,  0.0f, -1.0f), glm::vec3(0.0f, -1.0f,  0.0f))
             };
-            
-            unsigned int envCubemap;
+                        
             MakeCube(&envCubemap, 512);
             equirectangularToCubemapShader->use();
             equirectangularToCubemapShader->setInt("equirectangularMap", 0);
@@ -122,7 +123,7 @@ namespace engine
             glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, hdrTexture);
             
-            glViewport(0, 0, 512, 512); // don't forget to configure the viewport to the capture dimensions.
+            glViewport(0, 0, 512, 512);
             glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
             for (unsigned int i = 0; i < 6; ++i)
             {

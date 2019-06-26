@@ -18,6 +18,5 @@ void main()
     TexCoords = aTexCoords;
     WorldPos = vec3(model * vec4(aPos, 1.0));
     Normal = mat3(model) * aNormal;
-    
     gl_Position =  Engine_MVP(model) * vec4(aPos, 1.0);
 }

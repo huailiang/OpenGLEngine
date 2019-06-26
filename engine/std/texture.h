@@ -28,7 +28,7 @@ namespace engine
     {
     public:
         
-        Texture(const char* path, EXT ext, GLuint* texID= nullptr, bool flipY= true, int wrap = GL_REPEAT, bool mipmap = true);
+        Texture(const char* path, EXT ext, GLuint* texID= nullptr, bool flipY= true, int wrap = GL_REPEAT, bool mipmap = false);
         
         Texture(const char* path, GLuint* texID);
         
