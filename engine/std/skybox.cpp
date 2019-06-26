@@ -26,7 +26,8 @@ namespace engine
         shader = new Shader("cube.vs","cube.fs");
         if (hdr)
         {
-            equirectangularToCubemapShader =new Shader("cube.vs","equirectangular_to_cubemap.fs");
+            equirectangularToCubemapShader =new Shader("cube.vs","equirect2cube.fs");
+            irradianceShader = new Shader("cube.vs", "irradiance_convolution.fs");
         }
         init_tex(hdr);
         init_buff();
@@ -63,7 +64,8 @@ namespace engine
     {
         if (hdr) { //hdr 即envmap 只有一张图EquirectangularMap 需要转换为cubemap
             std::string path ="textures/hdr/"+name;
-            Texture(path.c_str(), HDR, &hdrTexture);
+            Texture(path.c_str(), HDR, &hdrTexture,true, GL_REPEAT,false);
+            Equirect2Cube();
         }
         else
         {
@@ -72,40 +74,92 @@ namespace engine
         }
     }
     
+    void Skybox::MakeCube(unsigned int* envCubemap, int size)
+    {
+        glGenTextures(1, envCubemap);
+        glBindTexture(GL_TEXTURE_CUBE_MAP, *envCubemap);
+        for (unsigned int i = 0; i < 6; ++i)
+        {
+            glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB16F, size, size, 0, GL_RGB, GL_FLOAT, nullptr);
+        }
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    }
     
     void Skybox::Equirect2Cube()
     {
-        if(cubemapTexture)
+        if(hdrTexture)
         {
-            unsigned int envCubemap;
-            glGenTextures(1, &envCubemap);
-            glBindTexture(GL_TEXTURE_CUBE_MAP, envCubemap);
-            for (unsigned int i = 0; i < 6; ++i)
+            unsigned int captureFBO;
+            unsigned int captureRBO;
+            glGenFramebuffers(1, &captureFBO);
+            glGenRenderbuffers(1, &captureRBO);
+            
+            glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
+            glBindRenderbuffer(GL_RENDERBUFFER, captureRBO);
+            glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, 512, 512);
+            glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, captureRBO);
+
+            glm::mat4 captureProjection = glm::perspective(glm::radians(90.0f), 1.0f, 0.1f, 10.0f);
+            glm::mat4 captureViews[] =
             {
-                glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB16F, 512, 512, 0, GL_RGB, GL_FLOAT, nullptr);
-            }
-            glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-            glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-            glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
-            glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-            glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+                glm::lookAt(glm::vec3(0), glm::vec3(1.0f,  0.0f,  0.0f), glm::vec3(0.0f, -1.0f,  0.0f)),
+                glm::lookAt(glm::vec3(0), glm::vec3(-1.0f, 0.0f,  0.0f), glm::vec3(0.0f, -1.0f,  0.0f)),
+                glm::lookAt(glm::vec3(0), glm::vec3(0.0f,  1.0f,  0.0f), glm::vec3(0.0f,  0.0f,  1.0f)),
+                glm::lookAt(glm::vec3(0), glm::vec3(0.0f, -1.0f,  0.0f), glm::vec3(0.0f,  0.0f, -1.0f)),
+                glm::lookAt(glm::vec3(0), glm::vec3(0.0f,  0.0f,  1.0f), glm::vec3(0.0f, -1.0f,  0.0f)),
+                glm::lookAt(glm::vec3(0), glm::vec3(0.0f,  0.0f, -1.0f), glm::vec3(0.0f, -1.0f,  0.0f))
+            };
             
-            
+            unsigned int envCubemap;
+            MakeCube(&envCubemap, 512);
             equirectangularToCubemapShader->use();
             equirectangularToCubemapShader->setInt("equirectangularMap", 0);
-//            equirectangularToCubemapShader->setMat4("projection", captureProjection);
+            equirectangularToCubemapShader->setMat4("projection", captureProjection);
             glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, hdrTexture);
             
             glViewport(0, 0, 512, 512); // don't forget to configure the viewport to the capture dimensions.
-//            glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
+            glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
             for (unsigned int i = 0; i < 6; ++i)
             {
-//                equirectangularToCubemapShader->setMat4("view", captureViews[i]);
+                equirectangularToCubemapShader->setMat4("view", captureViews[i]);
                 glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, envCubemap, 0);
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-//                renderCube();
+                RenderCube();
             }
+            glBindFramebuffer(GL_FRAMEBUFFER, 0);
+            
+            MakeCube(&irradianceMap, 32);
+            glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
+            glBindRenderbuffer(GL_RENDERBUFFER, captureRBO);
+            glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, 32, 32);
+            irradianceShader->use();
+            irradianceShader->setInt("environmentMap", 0);
+            irradianceShader->setMat4("projection", captureProjection);
+            glActiveTexture(GL_TEXTURE0);
+            glBindTexture(GL_TEXTURE_CUBE_MAP, envCubemap);
+            glViewport(0,0,32,32);
+            glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
+            for (unsigned int i = 0; i < 6; ++i)
+            {
+                irradianceShader->setMat4("view", captureViews[i]);
+                glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, irradianceMap, 0);
+                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+                RenderCube();
+            }
+            glBindFramebuffer(GL_FRAMEBUFFER, 0);
+            
+            cubemapTexture = envCubemap;
+            glViewport(0, 0, RENDER_WIDTH, RENDER_HEIGTH);
+            
+        }
+        else
+        {
+            std::cerr<<"hdrTexture failed"<<std::endl;
         }
     }
 
@@ -115,9 +169,9 @@ namespace engine
             // positions
             -1.0f,  1.0f, -1.0f,
             -1.0f, -1.0f, -1.0f,
-            1.0f, -1.0f, -1.0f,
-            1.0f, -1.0f, -1.0f,
-            1.0f,  1.0f, -1.0f,
+            1.0f,  -1.0f, -1.0f,
+            1.0f,  -1.0f, -1.0f,
+            1.0f,   1.0f, -1.0f,
             -1.0f,  1.0f, -1.0f,
             
             -1.0f, -1.0f,  1.0f,
@@ -136,24 +190,24 @@ namespace engine
             
             -1.0f, -1.0f,  1.0f,
             -1.0f,  1.0f,  1.0f,
-            1.0f,  1.0f,  1.0f,
-            1.0f,  1.0f,  1.0f,
-            1.0f, -1.0f,  1.0f,
+            1.0f,   1.0f,  1.0f,
+            1.0f,   1.0f,  1.0f,
+            1.0f,  -1.0f,  1.0f,
             -1.0f, -1.0f,  1.0f,
             
             -1.0f,  1.0f, -1.0f,
-            1.0f,  1.0f, -1.0f,
-            1.0f,  1.0f,  1.0f,
-            1.0f,  1.0f,  1.0f,
+            1.0f,   1.0f, -1.0f,
+            1.0f,   1.0f,  1.0f,
+            1.0f,   1.0f,  1.0f,
             -1.0f,  1.0f,  1.0f,
             -1.0f,  1.0f, -1.0f,
             
             -1.0f, -1.0f, -1.0f,
             -1.0f, -1.0f,  1.0f,
-            1.0f, -1.0f, -1.0f,
-            1.0f, -1.0f, -1.0f,
+            1.0f,  -1.0f, -1.0f,
+            1.0f,  -1.0f, -1.0f,
             -1.0f, -1.0f,  1.0f,
-            1.0f, -1.0f,  1.0f
+            1.0f,  -1.0f,  1.0f
         };
         
         glGenVertexArrays(1, &vao);
@@ -163,6 +217,16 @@ namespace engine
         glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), &vertices, GL_STATIC_DRAW);
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    }
+    
+    
+    void Skybox::RenderCube()
+    {
+        GLuint cubeVAO, cubeVBO;
+        InitCube(cubeVAO, cubeVBO);
+        glBindVertexArray(cubeVAO);
+        glDrawArrays(DRAW_MODE, 0, 36);
+        glBindVertexArray(0);
     }
 
 }

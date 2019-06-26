@@ -22,6 +22,12 @@ public:
         glDeleteBuffers(1, &vbo);
         glDeleteBuffers(1, &ebo);
         glDeleteVertexArrays(1, &vao);
+        DELETE_TEXTURE(albedo);
+        DELETE_TEXTURE(normal);
+        DELETE_TEXTURE(metallic);
+        DELETE_TEXTURE(roughness);
+        DELETE_TEXTURE(ao);
+
     }
     
     int getType() { return TY_Scene4; }

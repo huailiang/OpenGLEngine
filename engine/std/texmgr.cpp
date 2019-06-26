@@ -17,7 +17,7 @@ namespace engine
 {
     
     TexMgr TexMgr::instance;
-    
+
     
     bool TexMgr::FindTexture(GLuint& texid, size_t& idx)
     {
@@ -150,7 +150,7 @@ namespace engine
         GLenum glformat = GL_RED;
         GLint level = 0;
         int bitsPerPixel =0;
-        unsigned char* data = RealLoad(path, &tex->width, &tex->height, tex->ext, &glformat, &level, &bitsPerPixel);
+        unsigned char* data = (unsigned char*)RealLoad(path, &tex->width, &tex->height, tex->ext, &glformat, &level, &bitsPerPixel);
         tex->data = data;
         if (data)
         {
@@ -167,7 +167,10 @@ namespace engine
             }
             else
             {
-                glTexImage2D(GL_TEXTURE_2D, 0, glformat, width, height, 0, glformat, GL_UNSIGNED_BYTE, data);
+                if(tex->ext == HDR)
+                    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, width, height, 0, glformat, GL_FLOAT, data);
+                else
+                    glTexImage2D(GL_TEXTURE_2D, 0, glformat, width, height, 0, glformat, GL_UNSIGNED_BYTE, data);
                 if(tex->mipmap) glGenerateMipmap(GL_TEXTURE_2D);
             }
         }
@@ -204,7 +207,7 @@ namespace engine
             
             std::string face = getResPath(cubepath+str[i]+post);
             path = face.c_str();
-            unsigned char *data = RealLoad(path, &width, &height, ext, &glformat, &level, &bitsPerPixel);
+            void *data = RealLoad(path, &width, &height, ext, &glformat, &level, &bitsPerPixel);
             tex->data = data;
             if(ext==PVR)
             {
@@ -222,7 +225,7 @@ namespace engine
     }
     
     
-    void TexMgr::Free(unsigned char* data,EXT ext)
+    void TexMgr::Free(void* data,EXT ext)
     {
 #ifndef _GLES_
         stbi_image_free(data);
@@ -235,14 +238,14 @@ namespace engine
     }
     
     
-    unsigned char* TexMgr::RealLoad(const char* path, int *width, int *height,EXT ext, GLenum* glformat, int* level, int* bitsPerPixel)
+    void* TexMgr::RealLoad(const char* path, int *width, int *height,EXT ext, GLenum* glformat, int* level, int* bitsPerPixel)
     {
-        unsigned char* data  = nullptr;
+        void* data  = nullptr;
         
 #ifndef _GLES_
         int fmt = 0;
         if(ext == HDR)
-            data = (unsigned char*)stbi_loadf(path, width, height, &fmt,0);
+            data = stbi_loadf(path, width, height, &fmt,0);
         else
             data = stbi_load(path, width, height, &fmt, 0);
         GLenum format = GetFormat(fmt);

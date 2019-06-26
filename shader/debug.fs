@@ -1,7 +1,5 @@
 #version 330 core
 
-#define _DEBUG_DEPTH_
-
 out vec4 FragColor;
 
 in vec2 TexCoords;

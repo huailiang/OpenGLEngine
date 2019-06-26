@@ -14,6 +14,11 @@ uniform sampler2D metallicMap;
 uniform sampler2D roughnessMap;
 uniform sampler2D aoMap;
 
+
+#ifdef IRRADIANCE
+uniform samplerCube irradianceMap;
+#endif
+
 // lights
 uniform vec3 lightPositions[4];
 uniform vec3 lightColors[4];
@@ -37,7 +42,7 @@ vec3 getNormalFromMap()
 
 void main()
 {
-    vec3 albedo     = pow(texture(albedoMap, TexCoords).rgb, vec3(2.2));
+    vec3  albedo    = pow(texture(albedoMap, TexCoords).rgb, vec3(2.2));
     float metallic  = texture(metallicMap, TexCoords).r;
     float roughness = texture(roughnessMap, TexCoords).r;
     float ao        = texture(aoMap, TexCoords).r;
@@ -56,9 +61,12 @@ void main()
         vec3 radiance = lightColors[i] * attenuation;
         Lo += PBR(N, V, L, metallic, roughness, albedo, radiance);
    }
-
+#ifndef IRRADIANCE
     vec3 ambient = vec3(0.03) * albedo * ao;
-
+#else
+    vec3 irradiance = texture(irradianceMap, N).rgb;
+    vec3 ambient = irradiance * albedo * ao;
+#endif
     vec3 color = ambient + Lo;
 
     // HDR tonemapping
@@ -67,7 +75,5 @@ void main()
     color = pow(color, vec3(1.0/2.2));
 
     FragColor = vec4(color, 1.0);
-    
-//    FragColor = vec4(1.0, 0.0, 0.0, 1.0);
 
 }

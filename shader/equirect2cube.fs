@@ -1,6 +1,6 @@
 #version 330 core
 out vec4 FragColor;
-in vec3 WorldPos;
+in vec3 TexCoords;
 
 uniform sampler2D equirectangularMap;
 
@@ -15,7 +15,7 @@ vec2 SampleSphericalMap(vec3 v)
 
 void main()
 {		
-    vec2 uv = SampleSphericalMap(normalize(WorldPos));
+    vec2 uv = SampleSphericalMap(normalize(TexCoords));
     vec3 color = texture(equirectangularMap, uv).rgb;
     
     FragColor = vec4(color, 1.0);

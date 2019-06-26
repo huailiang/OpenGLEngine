@@ -46,7 +46,6 @@ namespace engine
         
         void SetTextureFormat(GLenum target, GLint filter, GLint wrap, GLint align=1);
         
-        
     private:
         
         GLuint LoadCubemap(std::string cubepath, Texture* tex);
@@ -55,9 +54,9 @@ namespace engine
         
         void RealRemove(size_t idx);
         
-        void Free(unsigned char* data,EXT ext);
+        void Free(void* data,EXT ext);
         
-        unsigned char* RealLoad(const char* path,int *width, int *height,EXT ext, GLenum* format, int* level, int* bitsPerPixel);
+        void* RealLoad(const char* path,int *width, int *height,EXT ext, GLenum* format, int* level, int* bitsPerPixel);
         
         GLenum GetFormat(int format);
         

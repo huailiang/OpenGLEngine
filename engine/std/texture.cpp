@@ -14,7 +14,7 @@
 namespace engine
 {
 
-    Texture::Texture(const char* path, EXT ext, GLuint* texID, bool flipY, int wrap)
+    Texture::Texture(const char* path, EXT ext, GLuint* texID, bool flipY, int wrap,bool mipmap)
     {
 #ifdef _GLES_
         ext = PVR;
@@ -23,7 +23,7 @@ namespace engine
         this->path = path;
         this->ext = ext;
         this->wrap = wrap;
-        this->mipmap = true;
+        this->mipmap = mipmap;
         std::string spath(path);
         spath = getResPath(spath + getTextureExt(ext));
         TexMgr::getInstance()->LoadTex(spath.c_str(), flipY, this);

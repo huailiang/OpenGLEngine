@@ -16,31 +16,42 @@
 
 namespace engine
 {
+    
     class Skybox
     {
+        
     public:
         
         Skybox(Camera* camera,std::string name,bool hdr=false);
         
         ~Skybox();
         
+        void MakeCube(unsigned int* envCubemap, int size);
+        
         void Draw();
+        
+        
+    private:
         
         void Equirect2Cube();
         
-    private:
+        void RenderCube();
         
         void init_tex(bool hdr);
         
         void init_buff();
-
-    private:
         
+        
+    public:
+        GLuint irradianceMap;
+        GLuint cubemapTexture,hdrTexture;
+        
+    private:
         GLuint vao, vbo;
         std::vector<std::string> faces;
-        GLuint cubemapTexture,hdrTexture;
         Shader* shader=nullptr;
         Shader* equirectangularToCubemapShader=nullptr;
+        Shader* irradianceShader=nullptr;
         Camera* camera=nullptr;
         std::string name;
     };

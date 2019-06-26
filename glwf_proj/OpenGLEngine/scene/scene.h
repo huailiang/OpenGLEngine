@@ -76,6 +76,7 @@ public:
         {
             depthShader  = new Shader("depth.vs","depth.fs");
             debugShader = new Shader("debug.vs", "debug.fs");
+            debugShader->attach("_DEBUG_DEPTH_");
             InitDepthBuffer();
             InitQuad(quadVAO, quadVBO, debugShader);
         }
@@ -220,6 +221,15 @@ protected:
         camera->Attach(shader);
     }
 
+    void RenderQuad(GLuint map)
+    {
+        debugShader->use();
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, map);
+        glBindVertexArray(quadVAO);
+        glDrawArrays(DRAW_MODE, 0, 6);
+        glBindVertexArray(0);
+    }
     
 private:
     void InitDepthBuffer()
@@ -245,12 +255,9 @@ private:
         debugShader->use();
         debugShader->setFloat("near_plane", 1.0f);
         debugShader->setFloat("far_plane", 7.5f);
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, depthMap);
-        glBindVertexArray(quadVAO);
-        glDrawArrays(DRAW_MODE, 0, 6);
-        glBindVertexArray(0);
+        RenderQuad(depthMap);
     }
+    
     
     
 protected:
@@ -262,11 +269,10 @@ protected:
     float timeValue;
     mat4 lightMatrix;
     bool debug;
-    
-private:
+    GLuint quadVAO, quadVBO;
     Shader* depthShader, *debugShader;
     GLuint depthMapFBO;
-    GLuint quadVAO, quadVBO;
+    
 };
 
 
