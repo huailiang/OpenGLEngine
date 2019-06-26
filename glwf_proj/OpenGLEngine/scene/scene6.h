@@ -20,13 +20,13 @@ public:
     {
         SAFE_DELETE(halo);
         SAFE_DELETE(shader);
-        SAFE_DELETE(btn1);
-        SAFE_DELETE(btn2);
-        SAFE_DELETE(btn3);
     }
     
     int getType() { return TY_Scene6; }
     
+    std::string getSkybox() { return "newport_loft"; }
+    
+    virtual bool isEquirectangularMap() { return true; }
     
     glm::vec3 getCameraPos() { return glm::vec3(0.0f,0.0f,16.0f); }
     
@@ -40,18 +40,6 @@ public:
     void InitLight()
     {
         light = new DirectLight(vec3(1.0f), vec3(0.0f,0.0f,-2.0f));
-    }
-    
-    void DrawUI()
-    {
-        Scene::DrawUI();
-        btn1 = new UIButton(vec2(660, 360), vec3(1,1,0), 0.6f, "  pose  ",0);
-        btn1->RegistCallback(OnClick, this);
-        btn2 = new UIButton(vec2(660, 330), vec3(1,1,0), 0.6f, "   idle   ",1);
-        btn2->RegistCallback(OnClick, this);
-        btn3 = new UIButton(vec2(660, 300), vec3(1,1,0), 0.6f, " pause ",2);
-        btn3->RegistCallback(OnClick, this);
-    
     }
     
     void InitScene()
@@ -93,7 +81,6 @@ public:
 private:
     LightShader* shader;
     Avatar *halo;
-    UIButton *btn1,*btn2,*btn3;
 };
 
 

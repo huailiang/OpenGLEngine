@@ -49,7 +49,7 @@ public:
     
     void Init()
     {
-        ChangeTo(TY_Scene4);
+        ChangeTo(TY_Scene1);
         lb_scene1 = new UILabel(vec2(60,380), vec3(1), 1, "Scene1", TY_Scene1);
         lb_scene2 = new UILabel(vec2(60,330), vec3(1), 1, "Scene2", TY_Scene2);
         lb_scene3 = new UILabel(vec2(60,280), vec3(1), 1, "Scene3", TY_Scene3);
@@ -68,26 +68,7 @@ public:
     
     void LeaveScene()
     {
-        if(current)
-        {
-            delete current;
-            current = NULL;
-        }
-    }
-    
-    bool ChangeTo(Scene* scene)
-    {
-        if(current &&current->getType() == scene->getType())
-        {
-            std::cout<<"You are already enter scene "<<current->getType()<<std::endl;
-            return false;
-        }
-        LeaveScene();
-        if(scene)
-        {
-            current = scene;
-        }
-        return true;
+        SAFE_DELETE(current);
     }
     
     void Draw(float delta)
@@ -104,19 +85,24 @@ public:
         }
     }
     
-    void ChangeTo(int type)
+    bool ChangeTo(int type)
     {
-        Scene* scene = NULL;
-        if(type == TY_Scene1)   scene = new Scene1();
-        if(type == TY_Scene2)   scene = new Scene2();
-        if(type == TY_Scene3)   scene =new Scene3();
-        if(type == TY_Scene4)   scene =new Scene4();
-        if(type == TY_Scene5)   scene =new Scene5();
-        if(type == TY_Scene6)   scene =new Scene6();
-        if(scene)
+        if(current && type == current->getType())
         {
-            scene->Initial();
-            ChangeTo(scene);
+            std::cout<<"You are already enter scene "<<current->getType()<<std::endl;
+            return false;
+        }
+        else
+        {
+            LeaveScene();
+            if(type == TY_Scene1)   current = new Scene1();
+            if(type == TY_Scene2)   current = new Scene2();
+            if(type == TY_Scene3)   current =new Scene3();
+            if(type == TY_Scene4)   current =new Scene4();
+            if(type == TY_Scene5)   current =new Scene5();
+            if(type == TY_Scene6)   current =new Scene6();
+            if(current) current->Initial();
+            return true;
         }
     }
     

@@ -25,7 +25,7 @@ namespace engine
     #define TGA   0x0030  //.tga
     #define BMP   0x0040  //.bmp
     #define HDR   0x0050  //.hdr
-    #define PVR  0x0060  //.pvr
+    #define PVR   0x0060  //.pvr
 
     #define FBX   0x0001 //.fbx
     #define MTL   0x0002 //.mtl
@@ -37,6 +37,8 @@ namespace engine
     #define MESH  0x0200 //.mesh
     #define MAT   0x0300 //.mat
     
+    #define NONE  0x0000
+    #define CUBE  0xf000
     
     #define EX_PNG   ".png"
     #define EX_JPG   ".jpg"
@@ -55,7 +57,7 @@ namespace engine
     #define EX_MESH  ".mesh"
     #define EX_MAT   ".mat"
     
-    #define NONE  0x0000
+    
     
     typedef unsigned int EXT;
 

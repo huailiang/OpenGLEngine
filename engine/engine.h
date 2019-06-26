@@ -84,6 +84,11 @@ namespace engine
     if(ptr != nullptr) \
     {delete ptr; ptr = nullptr;}
     
+    
+    #define DELETE_TEXTURE(texID)   \
+    TexMgr::getInstance()->RemvTexture(texID); \
+    glDeleteTextures(1, &texID);   \
+    
     #define max(a,b) ((a)>(b)?(a):(b))
     
     #define min(a,b) ((a)<(b)?(a):(b))

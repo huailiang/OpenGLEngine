@@ -86,7 +86,7 @@ namespace engine
         if(!empty && std::find(texpaths.begin(), texpaths.end(), path) ==  texpaths.end())
         {
             GLuint id;
-            Texture text(path,ext,&id);
+            Texture(path,ext,&id);
             texpaths.push_back(path);
             textures.insert(std::pair<const char*, GLuint>(name,  id));
         }

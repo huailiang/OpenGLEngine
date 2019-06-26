@@ -20,36 +20,28 @@ namespace engine
     {
     public:
         
-        Skybox(Camera* camera,std::string name);
+        Skybox(Camera* camera,std::string name,bool hdr=false);
         
         ~Skybox();
         
         void Draw();
         
+        void Equirect2Cube();
+        
     private:
         
-        void init_tex();
+        void init_tex(bool hdr);
         
         void init_buff();
-        
-        // loads a cubemap texture from 6 individual texture faces
-        // order:
-        // +X (right)
-        // -X (left)
-        // +Y (top)
-        // -Y (bottom)
-        // +Z (front)
-        // -Z (back)
-        GLuint loadCubemap(std::string path);
-        
-        
+
     private:
         
         GLuint vao, vbo;
         std::vector<std::string> faces;
-        GLuint cubemapTexture;
-        Shader* shader;
-        Camera* camera;
+        GLuint cubemapTexture,hdrTexture;
+        Shader* shader=nullptr;
+        Shader* equirectangularToCubemapShader=nullptr;
+        Camera* camera=nullptr;
         std::string name;
     };
     

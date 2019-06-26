@@ -60,13 +60,15 @@ public:
         return "lake";
     }
     
+    virtual bool isEquirectangularMap() { return false; }
+    
     /*
      init: camera-> skybox-> light-> scene-> ui
      */
     void Initial()
     {
         camera = new Camera(getCameraPos());
-        skybox = new Skybox(camera, getSkybox());
+        skybox = new Skybox(camera, getSkybox(), isEquirectangularMap());
         lightMatrix = glm::mat4(1);
         InitLight();
         InitScene();

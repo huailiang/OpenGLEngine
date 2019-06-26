@@ -19,12 +19,10 @@ using namespace std;
 namespace engine
 {
 
-/*
- texture manager
- store all texture loaded, to avoid load repeat
- */
-    
-    
+    /*
+     * texture manager
+     * store all texture loaded, to avoid load repeat
+     */
     
     class TexMgr
     {
@@ -38,7 +36,7 @@ namespace engine
         
         bool FindTexture(string& texture, GLuint& texid, size_t& idx);
         
-        void RealRemove(size_t idx);
+        
         
         void LoadTex(std::string& texture, EXT ext, GLuint& texid);
         
@@ -47,6 +45,23 @@ namespace engine
         bool RemvTexture(std::string& texture);
         
         void UnloadAllTexture();
+        
+        void SetTextureFormat(GLenum target, GLint filter, GLint wrap, GLint align=1);
+        
+        GLuint LoadTexture(const char* path,bool flipY, EXT ext,int* width, int* height, int wrap, bool gen_mipmap = true);
+        
+        GLuint LoadCubemap(std::string cubepath);
+        
+        
+    private:
+        
+        void RealRemove(size_t idx);
+        
+        void Free(unsigned char* data,EXT ext);
+        
+        unsigned char* RealLoad(const char* path,int *width, int *height,EXT ext, GLenum* format, int* level, int* bitsPerPixel);
+        
+        GLenum GetFormat(int format);
         
     private:
         vector<string> _textures;
