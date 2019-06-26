@@ -85,7 +85,7 @@ namespace engine
         else
         {
             std::string path = "textures/skybox/"+name+"/";
-            cubemapTexture = TexMgr::getInstance()->LoadCubemap(path);
+            Texture(path.c_str(), &cubemapTexture);
         }
     }
     

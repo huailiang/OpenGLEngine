@@ -71,7 +71,6 @@ namespace engine
         return len;
     }
     
-    
     void readtex(ifstream& f, GLuint& id)
     {
         string str = "";
@@ -84,7 +83,7 @@ namespace engine
         if(!str.empty())
         {
             str = "objects/" + curr_obj +"/" + str;
-            TexMgr::getInstance()->LoadTex(str,(EXT)ext, id);
+            Texture(str.c_str(), (EXT)ext, &id);
         }
     }
     

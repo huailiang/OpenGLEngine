@@ -19,21 +19,23 @@ namespace engine
 #ifdef _GLES_
         ext = PVR;
 #endif
+        this->type = TEXTURE;
+        this->path = path;
+        this->ext = ext;
+        this->wrap = wrap;
+        this->mipmap = true;
         std::string spath(path);
         spath = getResPath(spath + getTextureExt(ext));
-        this->path=spath.c_str();
-        *texID = TexMgr::getInstance()->LoadTexture(this->path, flipY, ext, &width, &height, wrap);
+        TexMgr::getInstance()->LoadTex(spath.c_str(), flipY, this);
+        *texID = this->textureID;
     }
     
     Texture::Texture(std::string path, GLuint* texID)
     {
-       *texID = TexMgr::getInstance()->LoadCubemap(path);
-    }
-
-    
-    ivec2 Texture::GetShape()
-    {
-        return ivec2(width,height);
+        this->type = CUBEMAP;
+        this->path  = path.c_str();
+        TexMgr::getInstance()->LoadTex(this->path,true,this);
+        *texID = this->textureID;
     }
 
 }

@@ -23,7 +23,7 @@ namespace engine
     {
         for (size_t i=0; i<_num_tex; i++)
         {
-            if (_texids[i] == texid)
+            if (_texids[i].textureID == texid)
             {
                 idx = i;
                 return true;
@@ -39,7 +39,7 @@ namespace engine
         {
             if (_textures[i] == texture)
             {
-                texid = _texids[i];
+                texid = _texids[i].textureID;
                 idx = i;
                 return true;
             }
@@ -48,22 +48,18 @@ namespace engine
     }
 
     
-    void TexMgr::LoadTex(std::string& texture, EXT ext, GLuint& texid)
+    void TexMgr::LoadTex(const char* path, bool flipY, Texture* tex)
     {
         size_t idx = 0;
-        int width, height;
-        if(texture.empty() || ext== NONE) return;
-        if (!FindTexture(texture, texid, idx))
+        std::string texture= std::string(path);
+        if (!FindTexture(texture, tex->textureID, idx))
         {
-            if (CUBE == ext)
-                texid = LoadCubemap(texture.c_str());
+            if (CUBEMAP == tex->type)
+                tex->textureID = LoadCubemap(path);
             else
-            {
-                std::string spath = getResPath(texture + getTextureExt(ext));
-                texid = LoadTexture(spath.c_str(), true, ext, &width, &height, GL_REPEAT);
-            }
+                tex->textureID = LoadTexture(path, flipY, tex);
             _textures.push_back(texture);
-            _texids.push_back(texid);
+            _texids.push_back(*tex);
             _references.push_back(1);
             _num_tex++;
         }
@@ -83,7 +79,6 @@ namespace engine
         }
         else if(ref == 1)
         {
-            glDeleteTextures(1, &_texids[idx]);
             _texids.erase(_texids.begin() + idx);
             _textures.erase(_textures.begin() + idx);
             _references.erase(_references.begin() + idx);
@@ -118,12 +113,11 @@ namespace engine
         return  false;
     }
     
-    
     void TexMgr::UnloadAllTexture()
     {
         for (size_t i=0; i<_num_tex; i++)
         {
-            GLuint texid = _texids[i];
+            GLuint texid = _texids[i].textureID;
             glDeleteTextures(1, &texid);
         }
         _textures.clear();
@@ -146,7 +140,7 @@ namespace engine
     }
     
     
-    GLuint TexMgr::LoadTexture(const char* path, bool flipY, EXT ext, int* width, int* height, int wrap, bool gen_mipmap)
+    GLuint TexMgr::LoadTexture(const char* path, bool flipY, Texture* tex)
     {
 #ifndef _GLES_
         stbi_set_flip_vertically_on_load(flipY);
@@ -154,35 +148,36 @@ namespace engine
         GLuint textureID;
         glGenTextures(1, &textureID);
         glBindTexture(GL_TEXTURE_2D, textureID);
-        SetTextureFormat(GL_TEXTURE_2D, gen_mipmap ? GL_LINEAR_MIPMAP_LINEAR: GL_LINEAR, wrap);
+        SetTextureFormat(GL_TEXTURE_2D, tex->mipmap ? GL_LINEAR_MIPMAP_LINEAR: GL_LINEAR, tex->wrap);
         
         GLenum glformat = GL_RED;
         GLint level = 0;
         int bitsPerPixel =0;
-        unsigned char* data = RealLoad(path, width, height,ext, &glformat, &level, &bitsPerPixel);
+        unsigned char* data = RealLoad(path, &tex->width, &tex->height, tex->ext, &glformat, &level, &bitsPerPixel);
         if (data)
         {
-            if(ext == PVR)
+            int width = tex->width, height = tex->height;
+            if(tex->ext == PVR)
             {
-                if(!gen_mipmap) level = 1;
+                if(!tex->mipmap) level = 1;
                 for (int mip = 0; mip < level; ++mip) {
-                    GLsizei size = max(32, *width * *height * bitsPerPixel / 8);
-                    glCompressedTexImage2D(GL_TEXTURE_2D, mip, glformat, *width, *height, 0, size, data);
+                    GLsizei size = max(32, width * height * bitsPerPixel / 8);
+                    glCompressedTexImage2D(GL_TEXTURE_2D, mip, glformat, width, height, 0, size, data);
                     data += size;
-                    *width >>= 1; *height >>= 1;
+                    width >>= 1; height >>= 1;
                 }
             }
             else
             {
-                glTexImage2D(GL_TEXTURE_2D, 0, glformat, *width, *height, 0, glformat, GL_UNSIGNED_BYTE, data);
-                if(gen_mipmap) glGenerateMipmap(GL_TEXTURE_2D);
+                glTexImage2D(GL_TEXTURE_2D, 0, glformat, width, height, 0, glformat, GL_UNSIGNED_BYTE, data);
+                if(tex->mipmap) glGenerateMipmap(GL_TEXTURE_2D);
             }
         }
         else
         {
             std::cout << "Texture failed: " << path << std::endl;
         }
-        Free(data,ext);
+        Free(data,tex->ext);
         return textureID;
     }
     

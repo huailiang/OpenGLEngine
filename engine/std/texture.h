@@ -18,24 +18,28 @@ using namespace glm;
 namespace engine
 {
 
+    enum TEX_TYPE
+    {
+        TEXTURE,
+        CUBEMAP,
+    };
+    
     class Texture
     {
     public:
-        
-        GLuint textureID;
         
         Texture(const char* path, EXT ext, GLuint* texID= nullptr, bool flipY= true, int wrap = GL_REPEAT);
         
         Texture(std::string path, GLuint* texID);
         
-        ivec2 GetShape();
-        
-    private:
-        
+    public:
+        GLuint textureID;
         int width, height;
-        
         const char* path;
-        
+        bool mipmap;
+        GLint wrap;
+        TEX_TYPE type;
+        EXT ext;
     };
     
 }

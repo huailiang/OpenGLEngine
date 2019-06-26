@@ -36,9 +36,7 @@ namespace engine
         
         bool FindTexture(string& texture, GLuint& texid, size_t& idx);
         
-        
-        
-        void LoadTex(std::string& texture, EXT ext, GLuint& texid);
+        void LoadTex(const char* path, bool flipY, Texture* tex);
         
         bool RemvTexture(GLuint texid);
         
@@ -48,12 +46,12 @@ namespace engine
         
         void SetTextureFormat(GLenum target, GLint filter, GLint wrap, GLint align=1);
         
-        GLuint LoadTexture(const char* path,bool flipY, EXT ext,int* width, int* height, int wrap, bool gen_mipmap = true);
+        
+    private:
         
         GLuint LoadCubemap(std::string cubepath);
         
-        
-    private:
+        GLuint LoadTexture(const char* path,bool flipY, Texture* tex);
         
         void RealRemove(size_t idx);
         
@@ -65,7 +63,7 @@ namespace engine
         
     private:
         vector<string> _textures;
-        vector<GLuint> _texids;
+        vector<Texture> _texids;
         vector<size_t> _references;
         size_t _num_tex;
         

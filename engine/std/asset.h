@@ -38,7 +38,6 @@ namespace engine
     #define MAT   0x0300 //.mat
     
     #define NONE  0x0000
-    #define CUBE  0xf000
     
     #define EX_PNG   ".png"
     #define EX_JPG   ".jpg"
@@ -58,11 +57,8 @@ namespace engine
     #define EX_MAT   ".mat"
     
     
-    
     typedef unsigned int EXT;
 
-    
-    
     bool isTexure(const EXT ext);
     
     std::string getTextureExt(const EXT ext);
