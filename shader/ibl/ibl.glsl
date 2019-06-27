@@ -5,6 +5,7 @@
  * IBL 使用到的核心函数
  */
 
+const float PI = 3.14159265359;
 
 // http://holger.dammertz.org/stuff/notes_HammersleyOnHemisphere.html
 // efficient VanDerCorpus calculation.
@@ -97,7 +98,7 @@ float DistributionGGX(vec3 N, vec3 H, float roughness)
  * 微面元遮挡函数 indirect-light IBL
  * use a different k for IBL
  */
-float GeometrySchlickGGXIBL(float NdotV, float roughness)
+float GeometrySchlickGGX(float NdotV, float roughness)
 {
     float a = roughness;
     float k = (a * a) / 2.0;

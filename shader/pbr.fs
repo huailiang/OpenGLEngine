@@ -17,6 +17,9 @@ uniform sampler2D aoMap;
 #ifdef IRRADIANCE
 // 环境光从irradianceMap中读取
 uniform samplerCube irradianceMap;
+// used in IBL diffuse
+uniform samplerCube prefilterMap;
+uniform sampler2D brdfLUT;
 #endif
 
 // lights

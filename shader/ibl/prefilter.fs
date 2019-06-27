@@ -1,19 +1,16 @@
 #version 330 core
-out vec4 FragColor;
-in vec3 WorldPos;
-
 
 #include "ibl/ibl.glsl"
+
+out vec4 FragColor;
+in vec3 TexCoords;
 
 uniform samplerCube environmentMap;
 uniform float roughness;
 
-const float PI = 3.14159265359;
-
-
 void main()
 {		
-    vec3 N = normalize(WorldPos);
+    vec3 N = normalize(TexCoords);
     
     // make the simplyfying assumption that V equals R equals the normal 
     vec3 R = N;

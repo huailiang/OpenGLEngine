@@ -26,7 +26,7 @@ namespace engine
         
         ~Skybox();
         
-        void MakeCube(unsigned int* envCubemap, int size);
+        void MakeCube(unsigned int* map, int size, bool mipmap);
         
         void Draw();
         
@@ -35,7 +35,17 @@ namespace engine
         
         void Equirect2Cube();
         
+        void GenerateEnvmap(glm::mat4 captureViews[], glm::mat4 captureProjection);
+        
+        void GenerateIrradiance(glm::mat4 captureViews[], glm::mat4 captureProjection);
+        
+        void GeneratePrefilter(glm::mat4 captureViews[], glm::mat4 captureProjection);
+        
+        void GenerateLut();
+        
         void RenderCube();
+        
+        void RenderQuad();
         
         void init_tex(bool hdr);
         
@@ -43,18 +53,21 @@ namespace engine
         
         
     public:
-        GLuint irradianceMap;
-        GLuint cubemapTexture,hdrTexture,envCubemap;
+        GLuint irradianceMap,envCubemap,prefilterMap,brdfLUTTexture;
+        GLuint cubemapTexture,hdrTexture;
         
     private:
         GLuint vao, vbo;
+        GLuint captureFBO, captureRBO;
         std::vector<std::string> faces;
         Shader* shader=nullptr;
         Shader* equirectangularToCubemapShader=nullptr;
         Shader* irradianceShader=nullptr;
         Shader* prefilterShader=nullptr;
+        Shader* brdfShader=nullptr;
         Camera* camera=nullptr;
         std::string name;
+        
     };
     
 }

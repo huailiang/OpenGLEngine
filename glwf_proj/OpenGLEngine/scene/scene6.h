@@ -56,6 +56,8 @@ public:
         shader->setInt("roughnessMap", 3);
         shader->setInt("aoMap", 4);
         shader->setInt("irradianceMap", 5);
+        shader->setInt("prefilterMap", 6);
+        shader->setInt("brdfLUT", 7);
         
         Texture("textures/pbr/rusted_iron/albedo", PNG, &albedo);
         Texture("textures/pbr/rusted_iron/normal", PNG, &normal);
@@ -169,6 +171,10 @@ public:
         {
             glActiveTexture(GL_TEXTURE5);
             glBindTexture(GL_TEXTURE_CUBE_MAP, skybox->irradianceMap);
+            glActiveTexture(GL_TEXTURE6);
+            glBindTexture(GL_TEXTURE_CUBE_MAP, skybox->prefilterMap);
+            glActiveTexture(GL_TEXTURE7);
+            glBindTexture(GL_TEXTURE_CUBE_MAP, skybox->brdfLUTTexture);
         }
         
         mat4 model(1);

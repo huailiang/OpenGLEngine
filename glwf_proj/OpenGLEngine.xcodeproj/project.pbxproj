@@ -144,6 +144,8 @@
 		4C46A61822C4E00F0055058C /* irradiance_convolution.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = irradiance_convolution.fs; sourceTree = "<group>"; };
 		4C46A61922C4E00F0055058C /* prefilter.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = prefilter.fs; sourceTree = "<group>"; };
 		4C46A61A22C4E1880055058C /* ibl.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = ibl.glsl; sourceTree = "<group>"; };
+		4C46A61B22C4EBF30055058C /* brdf.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = brdf.vs; sourceTree = "<group>"; };
+		4C46A61C22C4EBF30055058C /* brdf.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = brdf.fs; sourceTree = "<group>"; };
 		4C52BE9522ACC2BE00D78ACB /* mesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mesh.h; sourceTree = "<group>"; };
 		4C5680D222A61B5600D313AC /* tiny_obj_loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tiny_obj_loader.h; sourceTree = "<group>"; };
 		4C5F3FD122ABF95C005B7CFD /* asset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asset.h; sourceTree = "<group>"; };
@@ -318,6 +320,8 @@
 			isa = PBXGroup;
 			children = (
 				4C46A61A22C4E1880055058C /* ibl.glsl */,
+				4C46A61C22C4EBF30055058C /* brdf.fs */,
+				4C46A61B22C4EBF30055058C /* brdf.vs */,
 				4C46A61722C4E00F0055058C /* equirect2cube.fs */,
 				4C46A61822C4E00F0055058C /* irradiance_convolution.fs */,
 				4C46A61922C4E00F0055058C /* prefilter.fs */,
