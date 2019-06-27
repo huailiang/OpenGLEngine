@@ -15,6 +15,7 @@ uniform sampler2D roughnessMap;
 uniform sampler2D aoMap;
 
 #ifdef IRRADIANCE
+// 环境光从irradianceMap中读取
 uniform samplerCube irradianceMap;
 #endif
 

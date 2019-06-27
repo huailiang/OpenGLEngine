@@ -140,14 +140,16 @@
 		4C4279B122A54C32003AE42A /* scene3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = scene3.h; path = OpenGLEngine/scene/scene3.h; sourceTree = SOURCE_ROOT; };
 		4C4279B222A54C32003AE42A /* scene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = scene.h; path = OpenGLEngine/scene/scene.h; sourceTree = SOURCE_ROOT; };
 		4C4279B322A54C32003AE42A /* scene1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = scene1.h; path = OpenGLEngine/scene/scene1.h; sourceTree = SOURCE_ROOT; };
+		4C46A61722C4E00F0055058C /* equirect2cube.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = equirect2cube.fs; sourceTree = "<group>"; };
+		4C46A61822C4E00F0055058C /* irradiance_convolution.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = irradiance_convolution.fs; sourceTree = "<group>"; };
+		4C46A61922C4E00F0055058C /* prefilter.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = prefilter.fs; sourceTree = "<group>"; };
+		4C46A61A22C4E1880055058C /* ibl.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = ibl.glsl; sourceTree = "<group>"; };
 		4C52BE9522ACC2BE00D78ACB /* mesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mesh.h; sourceTree = "<group>"; };
 		4C5680D222A61B5600D313AC /* tiny_obj_loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tiny_obj_loader.h; sourceTree = "<group>"; };
 		4C5F3FD122ABF95C005B7CFD /* asset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asset.h; sourceTree = "<group>"; };
 		4C5F3FD222ABF95C005B7CFD /* asset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = asset.cpp; sourceTree = "<group>"; };
 		4C73C0F222A8C0F9002A8AD0 /* eventmgr.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = eventmgr.cpp; sourceTree = "<group>"; };
 		4C73C0F422A8C18C002A8AD0 /* uimgr.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = uimgr.cpp; sourceTree = "<group>"; };
-		4C82DDBC22C350FE00C9DF33 /* equirect2cube.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = equirect2cube.fs; sourceTree = "<group>"; };
-		4C82DDBD22C3681200C9DF33 /* irradiance_convolution.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = irradiance_convolution.fs; sourceTree = "<group>"; };
 		4C9450F722C0EB30005E5065 /* scene6.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = scene6.h; path = OpenGLEngine/scene/scene6.h; sourceTree = SOURCE_ROOT; };
 		4CB544CC22B5F4F8007BAE5F /* scene5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = scene5.h; path = OpenGLEngine/scene/scene5.h; sourceTree = SOURCE_ROOT; };
 		4CD27D2B2282F4E30038AE21 /* OpenGLEngine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OpenGLEngine; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -256,6 +258,7 @@
 			isa = PBXGroup;
 			children = (
 				4C402CF922A51AF2008C89D4 /* lib */,
+				4C46A61622C4E00F0055058C /* ibl */,
 				4C402CE922A51AF2008C89D4 /* gizmos */,
 				4C402D0022A51AF2008C89D4 /* cube.vs */,
 				4C402CF422A51AF2008C89D4 /* cube.fs */,
@@ -266,8 +269,6 @@
 				4C402CE622A51AF2008C89D4 /* instance.vs */,
 				4C402D0322A51AF2008C89D4 /* instance.fs */,
 				4C402CF122A51AF2008C89D4 /* outline.fs */,
-				4C82DDBC22C350FE00C9DF33 /* equirect2cube.fs */,
-				4C82DDBD22C3681200C9DF33 /* irradiance_convolution.fs */,
 				4C402CF622A51AF2008C89D4 /* model.vs */,
 				4C402CE822A51AF2008C89D4 /* model.fs */,
 				4C402CE722A51AF2008C89D4 /* light.vs */,
@@ -311,6 +312,17 @@
 				4C402CFF22A51AF2008C89D4 /* util.glsl */,
 			);
 			path = lib;
+			sourceTree = "<group>";
+		};
+		4C46A61622C4E00F0055058C /* ibl */ = {
+			isa = PBXGroup;
+			children = (
+				4C46A61A22C4E1880055058C /* ibl.glsl */,
+				4C46A61722C4E00F0055058C /* equirect2cube.fs */,
+				4C46A61822C4E00F0055058C /* irradiance_convolution.fs */,
+				4C46A61922C4E00F0055058C /* prefilter.fs */,
+			);
+			path = ibl;
 			sourceTree = "<group>";
 		};
 		4CD27D222282F4E30038AE21 = {

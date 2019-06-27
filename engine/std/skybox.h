@@ -52,6 +52,7 @@ namespace engine
         Shader* shader=nullptr;
         Shader* equirectangularToCubemapShader=nullptr;
         Shader* irradianceShader=nullptr;
+        Shader* prefilterShader=nullptr;
         Camera* camera=nullptr;
         std::string name;
     };

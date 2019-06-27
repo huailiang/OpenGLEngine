@@ -26,8 +26,9 @@ namespace engine
         shader = new Shader("cube.vs","cube.fs");
         if (hdr)
         {
-            equirectangularToCubemapShader =new Shader("cube.vs","equirect2cube.fs");
-            irradianceShader = new Shader("cube.vs", "irradiance_convolution.fs");
+            equirectangularToCubemapShader =new Shader("cube.vs","ibl/equirect2cube.fs");
+            irradianceShader = new Shader("cube.vs", "ibl/irradiance_convolution.fs");
+            prefilterShader = new Shader("cube.vs","ibl/prefilter.fs");
         }
         init_tex(hdr);
         init_buff();
@@ -37,6 +38,8 @@ namespace engine
     {
         SAFE_DELETE(shader);
         SAFE_DELETE(equirectangularToCubemapShader);
+        SAFE_DELETE(prefilterShader);
+        SAFE_DELETE(irradianceShader);
         glDeleteBuffers(1,&vbo);
         glDeleteVertexArrays(1,&vao);
         DELETE_TEXTURE(cubemapTexture);
