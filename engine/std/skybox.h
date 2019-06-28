@@ -35,11 +35,11 @@ namespace engine
         
         void Equirect2Cube();
         
-        void GenerateEnvmap(glm::mat4 captureViews[], glm::mat4 captureProjection);
+        void GenerateEnvmap(glm::mat4 captureViews[], const glm::mat4 captureProjection);
         
-        void GenerateIrradiance(glm::mat4 captureViews[], glm::mat4 captureProjection);
+        void GenerateIrradiance(glm::mat4 captureViews[], const glm::mat4 captureProjection);
         
-        void GeneratePrefilter(glm::mat4 captureViews[], glm::mat4 captureProjection);
+        void GeneratePrefilter(glm::mat4 captureViews[], const glm::mat4 captureProjection);
         
         void GenerateLut();
         
@@ -50,6 +50,8 @@ namespace engine
         void init_tex(bool hdr);
         
         void init_buff();
+        
+        void renderQuad();
         
         
     public:
@@ -66,8 +68,7 @@ namespace engine
         Shader* prefilterShader=nullptr;
         Shader* brdfShader=nullptr;
         Camera* camera=nullptr;
-        std::string name;
-        
+        std::string name;  
     };
     
 }

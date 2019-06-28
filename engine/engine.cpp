@@ -23,6 +23,7 @@ namespace engine
     MeshData* plane = nullptr;
     MeshData* cube = nullptr;
     MeshData* quad = nullptr;
+     MeshData* quad2 = nullptr;
     time_t start_time;
     float deltatime;
     
@@ -102,6 +103,7 @@ namespace engine
         return cube;
     }
 
+    // ndc position -> right_btm corner
     void* InitQuad(GLuint &vao, GLuint &vbo, Shader* shader)
     {
         if(quad == nullptr) quad = ReadMesh("quad","common");
@@ -114,6 +116,21 @@ namespace engine
         if(shader) quad->Bind(shader);
         return quad;
     }
+    
+    // ndc position->[-1,1]
+    void* InitFullQuad(GLuint &vao, GLuint &vbo, Shader* shader)
+    {
+        if(quad2 == nullptr) quad2 = ReadMesh("quad2","common");
+        glGenVertexArrays(1, &vao);
+        glGenBuffers(1, &vbo);
+        glBindVertexArray(vao);
+        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+        quad2->ConfigAttribute();
+        glBindVertexArray(0);
+        if(shader) quad2->Bind(shader);
+        return quad2;
+    }
+    
     
     void SetPosition(glm::mat4& mat, glm::vec3& pos)
     {

@@ -49,13 +49,24 @@ def readf(f):
 
 quad = [	\
         # positions    # texCoords	\
-        0.6,  -0.6,  0.0, 1.0,	\
+        0.6, -0.6, 0.0, 1.0,	\
         0.6, -1.0, 0.0, 0.0,	\
         1.0, -1.0, 1.0, 0.0,	\
         	
         0.6, -0.6, 0.0, 1.0,	\
         1.0, -1.0, 1.0, 0.0,	\
         1.0, -0.6, 1.0, 1.0,	\
+    ]
+
+quad2 = [    \
+        # positions    # texCoords  \
+        -1.0, 1.0, 0.0, 1.0,    \
+        -1.0,-1.0, 0.0, 0.0,    \
+        1.0, -1.0, 1.0, 0.0,    \
+            
+        -1.0, 1.0, 0.0, 1.0,    \
+        1.0, -1.0, 1.0, 0.0,    \
+        1.0,  1.0, 1.0, 1.0,    \
     ]
 
 
@@ -108,13 +119,13 @@ cube = [	\
 
 plane = [	\
         # // positions       // texCoords  // normals          \
-        25.0, -0.5,  25.0,    25.0,  0.0,	0.0, 1.0, 0.0,  \
-        -25.0, -0.5,  25.0,    0.0,  0.0,	0.0, 1.0, 0.0,  \
-        -25.0, -0.5, -25.0,    0.0, 25.0,   0.0, 1.0, 0.0,	\
+        25.0, -0.5,   25.0,   25.0,  0.0,	0.0, 1.0, 0.0,  \
+        -25.0, -0.5,  25.0,   0.0,  0.0,	0.0, 1.0, 0.0,  \
+        -25.0, -0.5, -25.0,   0.0, 25.0,    0.0, 1.0, 0.0,	\
         	\
         25.0, -0.5,  25.0,   25.0,  0.0,    0.0, 1.0, 0.0,	\
-        -25.0, -0.5, -25.0,  0.0, 25.0,	    0.0, 1.0, 0.0,  \
-        25.0, -0.5, -25.0,  25.0, 25.0,     0.0, 1.0, 0.0,	\
+        -25.0, -0.5, -25.0,  0.0,  25.0,	0.0, 1.0, 0.0,  \
+        25.0, -0.5, -25.0,   25.0, 25.0,    0.0, 1.0, 0.0,	\
     ]
 
 grass = [ \
@@ -132,19 +143,25 @@ if os.path.exists(target):
     
 os.makedirs(target)
 
-f = open(target+"quad.mesh","wb")
-writeh(f, 0, 6, 0x0012)
-idx = 0
-for x in range(0, 6):
-	writef(f,quad[idx])
-	idx=idx+1
-	writef(f,quad[idx])
-	idx=idx+1
-	writef(f,quad[idx])
-	idx=idx+1
-	writef(f,quad[idx])
-	idx=idx+1
-f.close()
+
+def writequad(name, quad):
+    f = open(target+name,"wb")
+    writeh(f, 0, 6, 0x0012)
+    idx = 0
+    for x in range(0, 6):
+        writef(f,quad[idx])
+        idx=idx+1
+        writef(f,quad[idx])
+        idx=idx+1
+        writef(f,quad[idx])
+        idx=idx+1
+        writef(f,quad[idx])
+        idx=idx+1
+    f.close()
+
+writequad("quad.mesh", quad)
+writequad("quad2.mesh", quad2)
+
 
 
 f = open(target+"cube.mesh","wb")

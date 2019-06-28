@@ -174,7 +174,7 @@ public:
             glActiveTexture(GL_TEXTURE6);
             glBindTexture(GL_TEXTURE_CUBE_MAP, skybox->prefilterMap);
             glActiveTexture(GL_TEXTURE7);
-            glBindTexture(GL_TEXTURE_CUBE_MAP, skybox->brdfLUTTexture);
+            glBindTexture(GL_TEXTURE_2D, skybox->brdfLUTTexture);
         }
         
         mat4 model(1);
@@ -188,7 +188,7 @@ public:
         glDrawElements(GL_TRIANGLE_STRIP, (GLsizei)indexCount, GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
         
-        RenderQuad(skybox->hdrTexture);
+        RenderQuad(skybox->brdfLUTTexture);
     }
  
     

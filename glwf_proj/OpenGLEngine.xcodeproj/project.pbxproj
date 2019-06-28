@@ -320,8 +320,8 @@
 			isa = PBXGroup;
 			children = (
 				4C46A61A22C4E1880055058C /* ibl.glsl */,
-				4C46A61C22C4EBF30055058C /* brdf.fs */,
 				4C46A61B22C4EBF30055058C /* brdf.vs */,
+				4C46A61C22C4EBF30055058C /* brdf.fs */,
 				4C46A61722C4E00F0055058C /* equirect2cube.fs */,
 				4C46A61822C4E00F0055058C /* irradiance_convolution.fs */,
 				4C46A61922C4E00F0055058C /* prefilter.fs */,

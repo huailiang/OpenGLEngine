@@ -1,5 +1,5 @@
-#ifndef _BRDF_
-#define _BRDF_
+#ifndef _IBL_
+#define _IBL_
 
 /*
  * IBL 使用到的核心函数
@@ -7,7 +7,7 @@
 
 const float PI = 3.14159265359;
 
-// http://holger.dammertz.org/stuff/notes_HammersleyOnHemisphere.html
+// https://huailiang.github.io/blog/2019/ibl2/
 // efficient VanDerCorpus calculation.
 float RadicalInverse_VdC(uint bits)
 {
@@ -40,7 +40,7 @@ float VanDerCorpus(uint n, uint base)
 
 // 构建Hammersley序列
 // i 是序列 n是采样数量
-// 参考： https://blog.csdn.net/i_dovelemon/article/details/76599923
+// 参考： https://huailiang.github.io/blog/2019/ibl2/
 vec2 Hammersley(uint i, uint N)
 {
     return vec2(float(i)/float(N), RadicalInverse_VdC(i));
@@ -79,7 +79,7 @@ vec3 ImportanceSampleGGX(vec2 Xi, vec3 N, float roughness)
 /*
  * 正太分布 NDF
  */
-float DistributionGGX(vec3 N, vec3 H, float roughness)
+float DistributionGGXIBL(vec3 N, vec3 H, float roughness)
 {
     float a = roughness*roughness;
     float a2 = a*a;
@@ -98,7 +98,7 @@ float DistributionGGX(vec3 N, vec3 H, float roughness)
  * 微面元遮挡函数 indirect-light IBL
  * use a different k for IBL
  */
-float GeometrySchlickGGX(float NdotV, float roughness)
+float GeometrySchlickGGXIBL(float NdotV, float roughness)
 {
     float a = roughness;
     float k = (a * a) / 2.0;
@@ -110,12 +110,12 @@ float GeometrySchlickGGX(float NdotV, float roughness)
 }
 
 
-float GeometrySmith(vec3 N, vec3 V, vec3 L, float roughness)
+float GeometrySmithIBL(vec3 N, vec3 V, vec3 L, float roughness)
 {
     float NdotV = max(dot(N, V), 0.0);
     float NdotL = max(dot(N, L), 0.0);
-    float ggx2 = GeometrySchlickGGX(NdotV, roughness);
-    float ggx1 = GeometrySchlickGGX(NdotL, roughness);
+    float ggx2 = GeometrySchlickGGXIBL(NdotV, roughness);
+    float ggx1 = GeometrySchlickGGXIBL(NdotL, roughness);
     
     return ggx1 * ggx2;
 }
@@ -124,24 +124,28 @@ float GeometrySmith(vec3 N, vec3 V, vec3 L, float roughness)
 /*
  * 菲涅尔函数
  */
-vec3 FresnelSchlick(float cosTheta, vec3 F0)
+vec3 FresnelSchlickIBL(float cosTheta, vec3 F0)
 {
     return F0 + (1.0 - F0) * pow(1.0 - cosTheta, 5.0);
 }
 
+vec3 FresnelSchlickRoughnessIBL(float cosTheta, vec3 F0, float roughness)
+{
+    return F0 + (max(vec3(1.0 - roughness), F0) - F0) * pow(1.0 - cosTheta, 5.0);
+}
 
 /*
  * IBL 近似求解ambient的diffuse和specular的多项式参数
  */
-void pbrK(vec3 normal, vec3 view, float matel, vec3 albedo, out vec3 kS, out vec3 kD)
+void IndirectK(vec3 normal, vec3 view, float matel, vec3 albedo, out vec3 kS, out vec3 kD, out vec3 F0)
 {
     vec3 N = normalize(normal);
     vec3 V = normalize(view);
-    vec3 F0 = vec3(0.04);
+    F0 = vec3(0.04);
     F0 = mix(F0, albedo, matel);
-    kS  = FresnelSchlick(clamp(dot(N, V), 0.0, 1.0), F0);
+    kS  = FresnelSchlickIBL(clamp(dot(N, V), 0.0, 1.0), F0);
     kD = vec3(1.0) - kS;
 }
 
 
-#endif
+#endif  // _IBL_
