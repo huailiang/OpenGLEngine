@@ -33,7 +33,7 @@ void Scene::initialize()
     camera = new Camera(glm::vec3(0.0f,0.0f,3.0f));
     light = new DirectLight(vec3(1.0f), vec3(-1,0,-2));
     skybox = new Skybox(camera, "mp_5dim");
-    cube = (MeshData*)InitCube(vao, vbo);
+    cube = (MeshData*)InitCube(&vao, &vbo);
     InitShader();
     Texture("textures/container", JPG, &texture1);
     Texture("textures/awesomeface",PNG, &texture2);

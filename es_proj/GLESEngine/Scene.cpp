@@ -199,7 +199,7 @@ bool InitScene(ESContext* context)
     label = new UILabel(vec2(30,560), vec3(1), 1);
     shader = new LightShader("light.vs","light.fs");
     shader->attach(light->getMacro().c_str());
-    InitCube(vao, vbo, shader);
+    InitCube(&vao, &vbo, shader);
     shader->use();
     shader->setInt("texture1", 0);
     shader->setInt("texture2", 1);

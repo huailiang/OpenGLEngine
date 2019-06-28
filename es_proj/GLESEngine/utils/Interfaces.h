@@ -15,6 +15,12 @@
 
 using std::string;
 
+
+/*
+ * 关于贴图压缩和工具的使用参考：
+ *      https://huailiang.github.io/blog/2019/texture/
+ */
+
 enum TextureFormat {
     TextureFormatGray,
     TextureFormatGrayAlpha,

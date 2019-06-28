@@ -109,7 +109,7 @@ public:
         glDrawElements(GL_TRIANGLE_STRIP, (GLsizei)indexCount, GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
         
-        RenderQuad(skybox->hdrTexture);
+        RenderQuad(skybox->brdfLUTTexture);
     }
  
     
