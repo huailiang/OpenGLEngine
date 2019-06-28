@@ -40,7 +40,7 @@ public:
     
     void InitScene()
     {
-        MeshData* cube =(MeshData*)InitCube(vao, vbo);
+        MeshData* cube =(MeshData*)InitCube(&vao, &vbo);
         mat= new Material(cube);
         InitShader();
     }

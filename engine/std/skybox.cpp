@@ -23,53 +23,59 @@ namespace engine
     {
         this->camera=camera;
         this->name = name;
-        shader = new Shader("cube.vs","cube.fs");
+        this->hdr = hdr;
+        skyShader = new Shader("cube.vs","cube.fs");
         if (hdr)
         {
-            equirectangularToCubemapShader =new Shader("cube.vs","ibl/equirect2cube.fs");
+            equirectangularToCubemapShader = new Shader("cube.vs","ibl/equirect2cube.fs");
             irradianceShader = new Shader("cube.vs", "ibl/irradiance_convolution.fs");
             prefilterShader = new Shader("cube.vs","ibl/prefilter.fs");
             brdfShader = new  Shader("ibl/brdf.vs", "ibl/brdf.fs");
         }
-        init_tex(hdr);
         init_buff();
+        init_tex();
     }
 
     Skybox::~Skybox()
     {
-        SAFE_DELETE(shader);
-        SAFE_DELETE(equirectangularToCubemapShader);
-        SAFE_DELETE(prefilterShader);
-        SAFE_DELETE(irradianceShader);
-        SAFE_DELETE(brdfShader);
+        SAFE_DELETE(skyShader);
+        DELETE_TEXTURE(skyTexture);
         glDeleteBuffers(1,&vbo);
         glDeleteVertexArrays(1,&vao);
-        DELETE_TEXTURE(cubemapTexture);
-        DELETE_TEXTURE(hdrTexture);
-        DELETE_TEXTURE(envCubemap);
-        DELETE_TEXTURE(irradianceMap);
-        DELETE_TEXTURE(brdfLUTTexture);
-        DELETE_TEXTURE(prefilterMap);
+        if(hdr)
+        {
+            SAFE_DELETE(brdfShader);
+            DELETE_TEXTURE(hdrTexture);
+            DELETE_TEXTURE(envCubemap);
+            DELETE_TEXTURE(irradianceMap);
+            DELETE_TEXTURE(brdfLUTTexture);
+            DELETE_TEXTURE(prefilterMap);
+            SAFE_DELETE(equirectangularToCubemapShader);
+            SAFE_DELETE(prefilterShader);
+            SAFE_DELETE(irradianceShader);
+            glDeleteFramebuffers(1, &captureFBO);
+            glDeleteRenderbuffers(1, &captureRBO);
+        }
     }
 
     
     void Skybox::Draw()
     {
         glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
-        shader->use();
+        
+        skyShader->use();
         glm::mat4 view = glm::mat4(glm::mat3(camera->GetViewMatrix())); // remove translation from the view matrix
-        shader->setMat4("view", view);
-        shader->setMat4("projection", camera->GetProjMatrix());
-        // skybox cube
-        glBindVertexArray(vao);
+        skyShader->setMat4("view", view);
+        skyShader->setMat4("projection", camera->GetProjMatrix());
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
+        glBindTexture(GL_TEXTURE_CUBE_MAP, skyTexture);
+        glBindVertexArray(vao);
         glDrawArrays(DRAW_MODE, 0, 36);
         glBindVertexArray(0);
         glDepthFunc(GL_LESS); // set depth function back to default        
     }
 
-    void Skybox::init_tex(bool hdr)
+    void Skybox::init_tex()
     {
         if (hdr) { //hdr 即envmap 只有一张图EquirectangularMap 需要转换为cubemap
             std::string path ="textures/hdr/"+name;
@@ -79,7 +85,7 @@ namespace engine
         else
         {
             std::string path = "textures/skybox/"+name+"/";
-            Texture(path.c_str(), &cubemapTexture);
+            Texture(path.c_str(), &skyTexture);
         }
     }
     
@@ -157,7 +163,7 @@ namespace engine
     
     void Skybox::Equirect2Cube()
     {
-        if(hdrTexture)
+        if(hdr)
         {
             glGenFramebuffers(1, &captureFBO);
             glGenRenderbuffers(1, &captureRBO);
@@ -182,7 +188,7 @@ namespace engine
             GeneratePrefilter(captureViews, captureProjection);
             GenerateLut();
             
-            cubemapTexture = envCubemap;
+            skyTexture = envCubemap;
             glViewport(0, 0, RENDER_WIDTH, RENDER_HEIGTH);
         }
         else
@@ -292,7 +298,7 @@ namespace engine
     void Skybox::RenderCube()
     {
         GLuint cubeVAO, cubeVBO;
-        InitCube(cubeVAO, cubeVBO);
+        InitCube(&cubeVAO, &cubeVBO);
         glBindVertexArray(cubeVAO);
         glDrawArrays(DRAW_MODE, 0, 36);
         glBindVertexArray(0);
@@ -301,7 +307,7 @@ namespace engine
     void Skybox::RenderQuad()
     {
         GLuint quadVAO, quadVBO;
-        InitFullQuad(quadVAO, quadVBO, brdfShader);
+        InitFullQuad(&quadVAO, &quadVBO, brdfShader);
         brdfShader->use();
         glBindVertexArray(quadVAO);
         glDrawArrays(DRAW_MODE, 0, 6);

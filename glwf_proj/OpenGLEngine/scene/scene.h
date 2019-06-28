@@ -78,7 +78,7 @@ public:
             debugShader = new Shader("debug.vs", "debug.fs");
             debugShader->attach("_DEBUG_DEPTH_");
             InitDepthBuffer();
-            InitQuad(quadVAO, quadVBO, debugShader);
+            InitQuad(&quadVAO, &quadVBO, debugShader);
         }
         DrawUI();
     }
@@ -163,6 +163,8 @@ public:
                 npos.z = (pos.z - center.z) * cos(ang) + (pos.x - center.x) * sin(ang) + center.z;
                 camera->RotateAt(npos, center);
             }
+            if (glfwGetKey(window, GLFW_KEY_K)== GLFW_PRESS)
+                skybox->Equirect2Cube();
         }
         if(light)
         {
@@ -276,7 +278,6 @@ protected:
     GLuint quadVAO, quadVBO;
     Shader* depthShader, *debugShader;
     GLuint depthMapFBO;
-    
 };
 
 

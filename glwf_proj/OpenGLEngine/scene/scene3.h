@@ -38,8 +38,8 @@ public:
         debug = true;
         shadowShader  = new LightShader("shadow.vs","shadow.fs");
         ApplyCamera(shadowShader);
-        InitPlane(planeVAO, planeVBO, shadowShader);
-        InitCube(cubeVAO, cubeVBO);
+        InitPlane(&planeVAO, &planeVBO, shadowShader);
+        InitCube(&cubeVAO, &cubeVBO);
         
         Texture("textures/wood",PNG, &woodTexture);
         shadowShader->use();

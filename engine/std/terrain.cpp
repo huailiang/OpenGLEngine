@@ -41,7 +41,7 @@ namespace engine
             vegetation.push_back(vec3(x,0.0f,z));
         }
         
-        InitPlane(floor_vao, floor_vbo, shader);
+        InitPlane(&floor_vao, &floor_vbo, shader);
         
         gdata=ReadMesh("grass","common");
         glGenVertexArrays(1, &grass_vao);

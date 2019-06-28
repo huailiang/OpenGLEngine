@@ -119,15 +119,17 @@ namespace engine
     // will be auto called while application is becoming active/inactive
     void OnApplicationPause(bool pause);
 
-    void* InitPlane(GLuint &planeVAO, GLuint &planeVBO, Shader* shader = nullptr);
+    void* InitPlane(GLuint *planeVAO, GLuint *planeVBO, Shader* shader = nullptr);
 
-    void* InitCube(GLuint &cubeVAO, GLuint &cubeVBO, Shader* shader = nullptr);
+    void* InitCube(GLuint *cubeVAO, GLuint *cubeVBO, Shader* shader = nullptr);
 
     // 屏幕右下角 position
-    void* InitQuad(GLuint &quadVAO, GLuint &quadVBO, Shader* shader = nullptr);
+    void* InitQuad(GLuint *quadVAO, GLuint *quadVBO, Shader* shader = nullptr);
     
     // 全屏 position
-    void* InitFullQuad(GLuint &quadVAO, GLuint &quadVBO, Shader* shader = nullptr);
+    void* InitFullQuad(GLuint *quadVAO, GLuint *quadVBO, Shader* shader = nullptr);
+    
+    uint InitSpere(GLuint *vao, GLuint *vbo, GLuint *ebo, Shader* shader=nullptr);
     
     void SetPosition(glm::mat4& mat, glm::vec3& pos);
     

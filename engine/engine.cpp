@@ -23,7 +23,9 @@ namespace engine
     MeshData* plane = nullptr;
     MeshData* cube = nullptr;
     MeshData* quad = nullptr;
-     MeshData* quad2 = nullptr;
+    MeshData* quad2 = nullptr;
+    uint *spere_indices = nullptr;
+    float *spere_vertices = nullptr;
     time_t start_time;
     float deltatime;
     
@@ -60,7 +62,6 @@ namespace engine
         if (start_time == 0) start_time = t.time;
         return t.time - start_time + t.millitm * 0.001f;
     }
-    
 
     float GetDeltaTime()
     {
@@ -77,26 +78,26 @@ namespace engine
         std::cout<<"engine pause "<<pause<<std::endl;
     }
 
-    void* InitPlane(GLuint &vao, GLuint &vbo, Shader* shader)
+    void* InitPlane(GLuint *vao, GLuint *vbo, Shader* shader)
     {
         if(plane==nullptr) plane = ReadMesh("plane","common");
-        glGenVertexArrays(1, &vao);
-        glGenBuffers(1, &vbo);
-        glBindVertexArray(vao);
-        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+        glGenVertexArrays(1, vao);
+        glGenBuffers(1, vbo);
+        glBindVertexArray(*vao);
+        glBindBuffer(GL_ARRAY_BUFFER, *vbo);
         plane->ConfigAttribute();
         glBindVertexArray(0);
         if(shader) plane->Bind(shader);
         return plane;
     }
 
-    void* InitCube(GLuint &vao, GLuint &vbo, Shader* shader)
+    void* InitCube(GLuint *vao, GLuint *vbo, Shader* shader)
     {
         if(cube == nullptr) cube = ReadMesh("cube","common");
-        glGenVertexArrays(1, &vao);
-        glGenBuffers(1, &vbo);
-        glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        glBindVertexArray(vao);
+        glGenVertexArrays(1, vao);
+        glGenBuffers(1, vbo);
+        glBindBuffer(GL_ARRAY_BUFFER, *vbo);
+        glBindVertexArray(*vao);
         cube->ConfigAttribute();
         glBindVertexArray(0);
         if(shader) cube->Bind(shader);
@@ -104,13 +105,13 @@ namespace engine
     }
 
     // ndc position -> right_btm corner
-    void* InitQuad(GLuint &vao, GLuint &vbo, Shader* shader)
+    void* InitQuad(GLuint *vao, GLuint *vbo, Shader* shader)
     {
         if(quad == nullptr) quad = ReadMesh("quad","common");
-        glGenVertexArrays(1, &vao);
-        glGenBuffers(1, &vbo);
-        glBindVertexArray(vao);
-        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+        glGenVertexArrays(1, vao);
+        glGenBuffers(1, vbo);
+        glBindVertexArray(*vao);
+        glBindBuffer(GL_ARRAY_BUFFER, *vbo);
         quad->ConfigAttribute();
         glBindVertexArray(0);
         if(shader) quad->Bind(shader);
@@ -118,17 +119,98 @@ namespace engine
     }
     
     // ndc position->[-1,1]
-    void* InitFullQuad(GLuint &vao, GLuint &vbo, Shader* shader)
+    void* InitFullQuad(GLuint *vao, GLuint *vbo, Shader* shader)
     {
         if(quad2 == nullptr) quad2 = ReadMesh("quad2","common");
-        glGenVertexArrays(1, &vao);
-        glGenBuffers(1, &vbo);
-        glBindVertexArray(vao);
-        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+        glGenVertexArrays(1, vao);
+        glGenBuffers(1, vbo);
+        glBindVertexArray(*vao);
+        glBindBuffer(GL_ARRAY_BUFFER, *vbo);
         quad2->ConfigAttribute();
         glBindVertexArray(0);
         if(shader) quad2->Bind(shader);
         return quad2;
+    }
+    
+    uint InitSpere(GLuint *vao, GLuint *vbo, GLuint *ebo, Shader* shader)
+    {
+        const uint X_SEGMENTS = 32;
+        const uint Y_SEGMENTS = 32;
+        uint size = (X_SEGMENTS + 1) * Y_SEGMENTS * 2;
+        if(spere_indices == nullptr || spere_vertices == nullptr)
+        {
+            std::vector<glm::vec3> positions;
+            std::vector<glm::vec2> uv;
+            std::vector<glm::vec3> normals;
+            bool oddRow = false;
+            for (uint y = 0; y <= Y_SEGMENTS; ++y)
+            {
+                for (uint x = 0; x <= X_SEGMENTS; ++x)
+                {
+                    float xSegment = (float)x / (float)X_SEGMENTS;
+                    float ySegment = (float)y / (float)Y_SEGMENTS;
+                    float xPos = std::cos(xSegment * 2.0f * PI) * std::sin(ySegment * PI);
+                    float yPos = std::cos(ySegment * PI);
+                    float zPos = std::sin(xSegment * 2.0f * PI) * std::sin(ySegment * PI);
+                    
+                    positions.push_back(glm::vec3(xPos, yPos, zPos));
+                    uv.push_back(glm::vec2(xSegment, ySegment));
+                    normals.push_back(glm::vec3(xPos, yPos, zPos));
+                }
+            }
+            spere_indices=new uint[size];
+            int idx = 0;
+            for (int y = 0; y < Y_SEGMENTS; ++y)
+            {
+                if (!oddRow) // even rows: y == 0, y == 2; and so on
+                {
+                    for (int x = 0; x <= X_SEGMENTS; ++x)
+                    {
+                        *(spere_indices + idx++) = y * (X_SEGMENTS + 1) + x;
+                        *(spere_indices + idx++) = (y + 1) * (X_SEGMENTS + 1) + x;
+                    }
+                }
+                else
+                {
+                    for (int x = X_SEGMENTS; x >= 0; --x)
+                    {
+                        *(spere_indices + idx++) = (y + 1) * (X_SEGMENTS + 1) + x;
+                        *(spere_indices + idx++) = y * (X_SEGMENTS + 1) + x;
+                    }
+                }
+                oddRow = !oddRow;
+            }
+
+            idx = 0;
+            spere_vertices = new float[positions.size() * 8];
+            for (int i = 0; i < positions.size(); ++i)
+            {
+                *(spere_vertices + idx++) = positions[i].x;
+                *(spere_vertices + idx++) = positions[i].y;
+                *(spere_vertices + idx++) = positions[i].z;
+                *(spere_vertices + idx++) = uv[i].x;
+                *(spere_vertices + idx++) = uv[i].y;
+                *(spere_vertices + idx++) = normals[i].x;
+                *(spere_vertices + idx++) = normals[i].y;
+                *(spere_vertices + idx++) = normals[i].z;
+            }
+        }
+        float stride = (3 + 2 + 3) * sizeof(float);
+        glGenVertexArrays(1, vao);
+        glGenBuffers(1, vbo);
+        glGenBuffers(1, ebo);
+        glBindVertexArray(*vao);
+        glBindBuffer(GL_ARRAY_BUFFER, *vbo);
+        glBufferData(GL_ARRAY_BUFFER, (X_SEGMENTS+1) *(Y_SEGMENTS+1) *stride, spere_vertices, GL_STATIC_DRAW);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *ebo);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, size * sizeof(uint), spere_indices, GL_STATIC_DRAW);
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, stride, (void*)0);
+        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, stride, (void*)(3 * sizeof(float)));
+        glEnableVertexAttribArray(2);
+        glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, stride, (void*)(5 * sizeof(float)));
+        return size;
     }
     
     

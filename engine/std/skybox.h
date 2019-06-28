@@ -30,10 +30,9 @@ namespace engine
         
         void Draw();
         
+        void Equirect2Cube();
         
     private:
-        
-        void Equirect2Cube();
         
         void GenerateEnvmap(glm::mat4 captureViews[], const glm::mat4 captureProjection);
         
@@ -47,7 +46,7 @@ namespace engine
         
         void RenderQuad();
         
-        void init_tex(bool hdr);
+        void init_tex();
         
         void init_buff();
         
@@ -55,20 +54,21 @@ namespace engine
         
         
     public:
-        GLuint irradianceMap,envCubemap,prefilterMap,brdfLUTTexture;
-        GLuint cubemapTexture,hdrTexture;
+        GLuint irradianceMap,envCubemap,prefilterMap;
+        GLuint skyTexture,hdrTexture,brdfLUTTexture;
         
     private:
         GLuint vao, vbo;
         GLuint captureFBO, captureRBO;
         std::vector<std::string> faces;
-        Shader* shader=nullptr;
+        Shader* skyShader=nullptr;
         Shader* equirectangularToCubemapShader=nullptr;
         Shader* irradianceShader=nullptr;
         Shader* prefilterShader=nullptr;
         Shader* brdfShader=nullptr;
         Camera* camera=nullptr;
-        std::string name;  
+        std::string name;
+        bool hdr;
     };
     
 }
