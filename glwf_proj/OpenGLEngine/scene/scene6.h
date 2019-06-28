@@ -22,6 +22,8 @@ public:
         glDeleteBuffers(1, &vbo);
         glDeleteBuffers(1, &ebo);
         glDeleteVertexArrays(1, &vao);
+        glDeleteVertexArrays(1, &quadVAO);
+        glDeleteBuffers(1, &quadVBO);
         DELETE_TEXTURE(albedo);
         DELETE_TEXTURE(normal);
         DELETE_TEXTURE(metallic);

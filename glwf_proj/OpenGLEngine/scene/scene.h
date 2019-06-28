@@ -43,6 +43,7 @@ public:
         SAFE_DELETE(depthShader);
         glDeleteVertexArrays(1, &quadVAO);
         glDeleteBuffers(1, &quadVBO);
+        glDeleteFramebuffers(1, &depthMapFBO);
     }
     
     virtual bool drawShadow()

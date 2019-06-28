@@ -302,6 +302,8 @@ namespace engine
         glBindVertexArray(cubeVAO);
         glDrawArrays(DRAW_MODE, 0, 36);
         glBindVertexArray(0);
+        glDeleteBuffers(1, &cubeVBO);
+        glDeleteVertexArrays(1, &cubeVAO);
     }
     
     void Skybox::RenderQuad()
@@ -312,6 +314,8 @@ namespace engine
         glBindVertexArray(quadVAO);
         glDrawArrays(DRAW_MODE, 0, 6);
         glBindVertexArray(0);
+        glDeleteBuffers(1, &quadVBO);
+        glDeleteVertexArrays(1, &quadVAO);
     }
 
 }
