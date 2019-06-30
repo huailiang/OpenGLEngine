@@ -13,7 +13,6 @@
 #include "uimgr.h"
 #include "eventmgr.h"
 #include "label.h"
-#include "profile.h"
 #include "scene/scenemgr.h"
 #include "util.h"
 #include "asset.h"

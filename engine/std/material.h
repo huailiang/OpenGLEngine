@@ -56,8 +56,8 @@ namespace engine
         void DrawTexture();
         
     public:
-        MeshData* mesh;
-        Shader* shader;
+        MeshData* mesh = nullptr;
+        Shader* shader = nullptr;
         
     protected:
         GLuint vao, vbo;

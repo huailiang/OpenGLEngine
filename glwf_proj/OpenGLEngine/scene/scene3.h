@@ -37,12 +37,12 @@ public:
     {
         debug = true;
         shadowShader  = new LightShader("shadow.vs","shadow.fs");
-        ApplyCamera(shadowShader);
+        
         InitPlane(&planeVAO, &planeVBO, shadowShader);
         InitCube(&cubeVAO, &cubeVBO);
-        
         Texture("textures/wood",PNG, &woodTexture);
         shadowShader->use();
+        ApplyCamera(shadowShader);
         shadowShader->setInt("diffuseTexture", 0);
         shadowShader->setInt("shadowMap", 1);
     }
@@ -98,7 +98,7 @@ public:
 
     
 private:
-    LightShader *shadowShader;
+    LightShader *shadowShader = nullptr;
     GLuint woodTexture ;
     GLuint planeVBO, planeVAO;
     GLuint cubeVAO, cubeVBO;

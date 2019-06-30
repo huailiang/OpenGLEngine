@@ -69,6 +69,8 @@ namespace engine
 
     void Camera::Attach(const Shader* shader)
     {
+        if(shader->ID == 0 || shader->ID>10000)
+            std::cout<<"camera shader error: "<<shader->vertexPath<<" "<<shader->ID<<std::endl;
         //config
         GLuint uniform = glGetUniformBlockIndex(shader->ID, "Block");
         //link

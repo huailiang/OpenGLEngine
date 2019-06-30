@@ -128,7 +128,13 @@ namespace engine
     }
 
     
-    ObjMaterial::ObjMaterial(MeshData* data, Shader* shader) : Material(data,shader) { }
+    ObjMaterial::ObjMaterial(MeshData* data, Shader* shader) : Material(data,shader)
+    {
+        diffuse_texture = 0;
+        specul_texture = 0;
+        ambient_texture = 0;
+        normal_texure = 0;
+    }
     
     
     ObjMaterial::~ObjMaterial()

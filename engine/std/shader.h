@@ -80,7 +80,7 @@ namespace engine
         GLuint ID;
         
 #ifdef DEBUG
-    protected:
+    public:
         const char* vertexPath, *fragmentPath,*geometryPath;
 #endif
 

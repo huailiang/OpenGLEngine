@@ -16,9 +16,9 @@ namespace engine
     {
         shader = new Shader("sample.vs","sample.fs");
         shader2 = new Shader("instance.vs","instance.fs");
+        
         Texture("textures/metal", PNG, &floorTexture);
         Texture("textures/grass",PNG, &grassTexture,false,GL_CLAMP_TO_EDGE);
-        
         initial();
     }
 
@@ -42,7 +42,6 @@ namespace engine
         }
         
         InitPlane(&floor_vao, &floor_vbo, shader);
-        
         gdata=ReadMesh("grass","common");
         glGenVertexArrays(1, &grass_vao);
         glGenBuffers(1, &grass_vbo);
@@ -75,17 +74,15 @@ namespace engine
         glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(2 * sizeof(glm::vec4)));
         glEnableVertexAttribArray(5);
         glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(3 * sizeof(glm::vec4)));
-        
         glVertexAttribDivisor(2, 1);
         glVertexAttribDivisor(3, 1);
         glVertexAttribDivisor(4, 1);
         glVertexAttribDivisor(5, 1);
-        
         shader->use();
         shader->setInt("texture1",  0);
         shader->setInt("shadow", 1);
         shader2->use();
-        shader->setInt("texture1", 0);
+        shader2->setInt("texture1", 0);
     }
 
 

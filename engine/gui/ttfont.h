@@ -47,7 +47,7 @@ namespace engine
         
     private:
         GLuint VBO,VAO;
-        Shader* shader;
+        Shader* shader = nullptr;
         map<GLchar, Character> Characters;
     };
 

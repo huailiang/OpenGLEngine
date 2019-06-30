@@ -57,7 +57,7 @@ namespace engine
     }
     
 
-    void Avatar::Draw(Shader* shader, Light* light)
+    void Avatar::Draw(Shader* shader, Light* light, Camera* camera)
     {
         loop(materials.size())  materials[i]->Draw(shader);//must put at first to bind mesh
         shader->use();
@@ -66,14 +66,16 @@ namespace engine
         LightShader* lshader =static_cast<LightShader*>(shader);
         if(lshader) lshader->ApplyLight();
         if(skeleton) skeleton->Draw(shader);
+        if(camera) camera->Attach(shader);
     }
 
 
-    void Avatar::DrawShadow(Shader* shader, Light* light)
+    void Avatar::DrawShadow(Shader* shader, Light* light, Camera* camera)
     {
         loop(materials.size()) materials[i]->DrawMesh();
         shader->use();
         shader->setMat4("model", matrix);
+        if(camera) camera->Attach(shader);
     }
     
     

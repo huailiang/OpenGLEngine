@@ -39,11 +39,12 @@ public:
         SAFE_DELETE(camera);
         SAFE_DELETE(skybox);
         SAFE_DELETE(light);
-        SAFE_DELETE(debugShader);
         SAFE_DELETE(depthShader);
+        SAFE_DELETE(debugShader);
         glDeleteVertexArrays(1, &quadVAO);
         glDeleteBuffers(1, &quadVBO);
         glDeleteFramebuffers(1, &depthMapFBO);
+        glCheckError();
     }
     
     virtual bool drawShadow()
@@ -268,16 +269,17 @@ private:
 
     
 protected:
-    Camera* camera;
-    Light*  light;
-    Skybox* skybox;
+    Camera* camera = nullptr;
+    Light*  light = nullptr;
+    Skybox* skybox = nullptr;
     uint SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
     GLuint depthMap;
     float timeValue;
     mat4 lightMatrix;
     bool debug;
     GLuint quadVAO, quadVBO;
-    Shader* depthShader, *debugShader;
+    Shader* depthShader = nullptr;
+    Shader* debugShader = nullptr;
     GLuint depthMapFBO;
 };
 

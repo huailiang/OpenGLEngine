@@ -50,6 +50,7 @@ public:
         shader = new LightShader("light.vs","light.fs");
         shader->attach(light->getMacro().c_str());
         mat->AttachShader(shader);
+        shader->use();
         mat->SetFloat("scale", 1);
         mat->SetTexture("texture1", "textures/container", JPG);
         mat->SetTexture("texture2", "textures/awesomeface", PNG);
@@ -117,7 +118,7 @@ private:
     
 private:
     UIButton* btn_direct, *btn_point, *btn_spot;
-    Material* mat;
+    Material* mat = nullptr;
     GLuint vbo, vao;
     LightShader* shader;
 };

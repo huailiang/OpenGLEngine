@@ -117,12 +117,12 @@ namespace engine
         
     public:
         int num_bone, num_anim;
-        XBone* bones;
-        XAnimation* animations;
+        XBone* bones = nullptr;
+        XAnimation* animations = nullptr;
         
     private:
-        XAnimation* current;
-        Shader* shader;
+        XAnimation* current = nullptr;
+        Shader* shader = nullptr;
         float playtime;
         bool resample;
         bool pause;

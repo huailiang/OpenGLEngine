@@ -28,13 +28,18 @@ namespace engine
         if(geometryPath != nullptr)  geometryCode = openFile(geometryPath);
         else geometryCode = "";
         
+        this->ID = 0;
         this->macro = macro;
         this->compiled = false;
     }
 
     Shader::~Shader()
     {
-        glDeleteProgram(ID);
+        if(ID > 0)
+        {
+            glDeleteProgram(ID);
+            ID = 0;
+        }
     }
     
     void Shader::attach(const char* k1)

@@ -49,9 +49,9 @@ namespace engine
         GLuint floorTexture, grassTexture;
         std::vector<vec3> vegetation;
         uint grass_num;
-        Shader* shader;
-        Shader* shader2;
-        MeshData* gdata;
+        Shader* shader = nullptr;
+        Shader* shader2 = nullptr;
+        MeshData* gdata = nullptr;
     };
     
 }

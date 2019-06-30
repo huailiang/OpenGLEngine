@@ -33,9 +33,9 @@ namespace engine
         
         void RecalModelMatrix();
         
-        void Draw(Shader* shader, Light* light);
+        void Draw(Shader* shader, Light* light, Camera* camera);
         
-        void DrawShadow(Shader* shader, Light* light);
+        void DrawShadow(Shader* shader, Light* light, Camera* camera);
         
         void Rotate(float delta);
         

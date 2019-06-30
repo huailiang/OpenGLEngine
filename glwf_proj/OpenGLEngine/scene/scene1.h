@@ -37,9 +37,7 @@ public:
     void InitScene()
     {
         shader = new LightShader("model.vs", "model.fs");
-        ApplyCamera(shader);
         nmShader = new Shader("gizmos/normal.vs","gizmos/pixel.fs","gizmos/normal.gs");
-        ApplyCamera(nmShader);
         terrain = new Terrain();
         nano = new Avatar("nanosuit",vec3(0.4f, -0.5f, -1.f), vec3(0.12f));
     }
@@ -56,10 +54,10 @@ public:
     {
         terrain->Draw(camera, lightMatrix, light, depthMap);
         nano->Rotate(0.2f);
-        nano->Draw(shader, light);
+        nano->Draw(shader, light, camera);
         if(shownormal)
         {
-            nano->Draw(nmShader, light);
+            nano->Draw(nmShader, light, camera);
         }
     }
     
@@ -77,12 +75,12 @@ public:
 
     
 private:
-    UIButton* btn_normal;
-    Terrain* terrain;
-    LightShader* shader;
-    Shader* nmShader;
+    UIButton* btn_normal = nullptr;
+    Terrain* terrain = nullptr;
+    LightShader* shader= nullptr;
+    Shader* nmShader = nullptr;
     GLuint texture1, texture2;
-    Avatar *nano;
+    Avatar *nano = nullptr;
     
 public:
     bool shownormal;

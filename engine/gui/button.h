@@ -40,7 +40,7 @@ namespace engine
         
     protected:
         GLuint vbo, vao;
-        Shader* shader;
+        Shader* shader = nullptr;
         
     };
 

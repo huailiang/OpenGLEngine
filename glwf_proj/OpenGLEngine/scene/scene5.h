@@ -85,14 +85,13 @@ public:
     void InitScene()
     {
         shader = new LightShader("model.vs", "model.fs");
-        ApplyCamera(shader);
         halo = new Avatar("halo", vec3(-1.0f, -4.0f, -1.5f), vec3(1.0f), -60);
     }
 
     void DrawScene()
     {
         halo->Rotate(0.2f);
-        halo->Draw(shader, light);
+        halo->Draw(shader, light, camera);
     }
     
     void Click(int anim)

@@ -107,9 +107,9 @@ namespace engine
     struct MeshData
     {
         uint num_indice;
-        uint *indices;
+        uint *indices= nullptr;
         uint num_vert;
-        Vert** vertices;
+        Vert** vertices = nullptr;
         VertType type;
         
         ~MeshData();

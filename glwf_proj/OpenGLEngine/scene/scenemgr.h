@@ -38,8 +38,6 @@ private:
     
     static void ClickScene(UIEvent* contex, void* arg)
     {
-        UILabel* label = dynamic_cast<UILabel*>(contex);
-        cout<<"change to scene: "<<label->getText()<<endl;
         int evtid = contex->evtid;
         instance.ChangeTo(TY_Scene1 + evtid);
     }
@@ -50,6 +48,7 @@ public:
     void Init()
     {
         ChangeTo(TY_Scene6);
+        glCheckError();
         lb_scene1 = new UILabel(vec2(60,450), vec3(1), 1, "Scene1", TY_Scene1);
         lb_scene2 = new UILabel(vec2(60,405), vec3(1), 1, "Scene2", TY_Scene2);
         lb_scene3 = new UILabel(vec2(60,360), vec3(1), 1, "Scene3", TY_Scene3);
@@ -95,6 +94,7 @@ public:
         else
         {
             LeaveScene();
+            glCheckError();
             if(type == TY_Scene1)   current = new Scene1();
             if(type == TY_Scene2)   current = new Scene2();
             if(type == TY_Scene3)   current =new Scene3();
@@ -131,7 +131,7 @@ public:
     }
     
 private:
-    Scene *current;
+    Scene *current = nullptr;
     UILabel *lb_scene1, *lb_scene2, *lb_scene3, *lb_scene4, *lb_scene5, *lb_scene6;
     UILabel *lb_fps, *lb_copy;
     uint delay;

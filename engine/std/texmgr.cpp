@@ -19,6 +19,18 @@ namespace engine
     TexMgr TexMgr::instance;
 
     
+    Texture* TexMgr::FindTexture(GLuint& texid)
+    {
+        for (size_t i=0; i<_num_tex; i++)
+        {
+            if (_texids[i].textureID == texid)
+            {
+                return &_texids[i];
+            }
+        }
+        return nullptr;
+    }
+    
     bool TexMgr::FindTexture(GLuint& texid, size_t& idx)
     {
         for (size_t i=0; i<_num_tex; i++)

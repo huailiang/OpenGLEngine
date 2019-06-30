@@ -10,7 +10,6 @@
 #define scene4_h
 
 #include "scene.h"
-#include "profile.h"
 
 class Scene4 : public Scene
 {
@@ -94,7 +93,7 @@ public:
     
     
 private:
-    Shader *shader;
+    Shader *shader = nullptr;
     GLuint vao, vbo, ebo;
     GLuint albedo, normal, metallic, roughness, ao;
     int nGrid = 3;

@@ -49,9 +49,9 @@ public:
     void InitScene()
     {
         shader  = new Shader("pbr.vs","pbr.fs");
-        ApplyCamera(shader);
         shader->attach("IRRADIANCE");
         shader->use();
+        ApplyCamera(shader);
         shader->setInt("albedoMap", 0);
         shader->setInt("normalMap", 1);
         shader->setInt("metallicMap", 2);

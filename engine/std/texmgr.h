@@ -31,6 +31,8 @@ namespace engine
         
                 
     public:
+        
+        Texture* FindTexture(GLuint& texid);
     
         bool FindTexture(GLuint& texid, size_t& idx);
         
