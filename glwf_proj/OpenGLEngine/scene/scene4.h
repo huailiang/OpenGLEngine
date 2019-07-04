@@ -40,7 +40,6 @@ public:
     void InitScene()
     {
         shader  = new Shader("pbr.vs","pbr.fs");
-        ApplyCamera(shader);
         
         shader->use();
         shader->setInt("albedoMap", 0);
@@ -48,6 +47,7 @@ public:
         shader->setInt("metallicMap", 2);
         shader->setInt("roughnessMap", 3);
         shader->setInt("aoMap", 4);
+        ApplyCamera(shader);
         
         Texture("textures/pbr/rusted_iron/albedo", PNG, &albedo);
         Texture("textures/pbr/rusted_iron/normal", PNG, &normal);

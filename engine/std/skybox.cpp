@@ -39,29 +39,33 @@ namespace engine
     Skybox::~Skybox()
     {
         SAFE_DELETE(skyShader);
-        DELETE_TEXTURE(skyTexture);
         glDeleteBuffers(1,&vbo);
         glDeleteVertexArrays(1,&vao);
         if(hdr)
         {
             SAFE_DELETE(brdfShader);
-            DELETE_TEXTURE(hdrTexture);
-            DELETE_TEXTURE(envCubemap);
-            DELETE_TEXTURE(irradianceMap);
-            DELETE_TEXTURE(brdfLUTTexture);
-            DELETE_TEXTURE(prefilterMap);
             SAFE_DELETE(equirectangularToCubemapShader);
             SAFE_DELETE(prefilterShader);
             SAFE_DELETE(irradianceShader);
+            DELETE_TEXTURE(hdrTexture);
+            glDeleteTextures(1, &envCubemap);
+            glDeleteTextures(1, &irradianceMap);
+            glDeleteTextures(1, &brdfLUTTexture);
+            glDeleteTextures(1, &prefilterMap);
+            glCheckError();
             glDeleteFramebuffers(1, &captureFBO);
             glDeleteRenderbuffers(1, &captureRBO);
+        }
+        else
+        {
+            DELETE_TEXTURE(skyTexture);
         }
     }
 
     
     void Skybox::Draw()
     {
-        glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
+        glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth  buffer's content
         
         skyShader->use();
         glm::mat4 view = glm::mat4(glm::mat3(camera->GetViewMatrix())); // remove translation from the view matrix
@@ -79,7 +83,7 @@ namespace engine
     {
         if (hdr) { //hdr 即envmap 只有一张图EquirectangularMap 需要转换为cubemap
             std::string path ="textures/hdr/"+name;
-            Texture(path.c_str(), HDR, &hdrTexture,true, GL_REPEAT,false);
+            Texture(path.c_str(), HDR, &hdrTexture, true, GL_REPEAT, false);
             Equirect2Cube();
         }
         else
@@ -232,7 +236,6 @@ namespace engine
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_CUBE_MAP, envCubemap);
         glViewport(0,0,32,32);
-        glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
         for (unsigned int i = 0; i < 6; ++i)
         {
             irradianceShader->setMat4("view", captureViews[i]);

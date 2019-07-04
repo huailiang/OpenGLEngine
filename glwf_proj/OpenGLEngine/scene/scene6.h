@@ -75,7 +75,6 @@ public:
 
     void DrawScene()
     {
-        Scene::ClearScene();
         glBindVertexArray(vao);
         shader->use();
         glActiveTexture(GL_TEXTURE0);
@@ -109,7 +108,7 @@ public:
         glDrawElements(GL_TRIANGLE_STRIP, (GLsizei)indexCount, GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
         
-        RenderQuad(skybox->brdfLUTTexture);
+        RenderQuad(skybox->hdrTexture);
     }
  
     

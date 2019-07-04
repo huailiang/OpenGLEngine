@@ -32,7 +32,6 @@ namespace engine
     void SystemInfo(int level)
     {
 #ifdef DEBUG
-        std::cout<<"OpenGL information"<<std::endl;
         std::cout<<"VENDOR:    "<< glGetString(GL_VENDOR)<<std::endl;
         std::cout<<"RENDERER:  "<< glGetString(GL_RENDERER)<<std::endl;
         std::cout<<"VERSION:   "<< glGetString(GL_VERSION)<<std::endl;

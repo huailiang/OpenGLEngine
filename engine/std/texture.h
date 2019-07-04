@@ -35,7 +35,7 @@ namespace engine
     public:
         
         // genTexture 生成的id
-        GLuint textureID;
+        GLuint textureID = 0;
         
         //从文件头里读的长和宽
         int width, height;
@@ -54,7 +54,7 @@ namespace engine
         
         EXT ext;
         
-        void* data;
+        void* data = nullptr;
     };
     
 }
