@@ -47,6 +47,7 @@
 		4CEFDBFA22CE281A00E5B6DD /* libopencv_imgcodecs.4.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEFDBF622CE281A00E5B6DD /* libopencv_imgcodecs.4.1.1.dylib */; };
 		4CEFDBFB22CE281A00E5B6DD /* libopencv_imgproc.4.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEFDBF722CE281A00E5B6DD /* libopencv_imgproc.4.1.1.dylib */; };
 		4CEFDBFF22CE2C5100E5B6DD /* cvtool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CEFDBFE22CE2C5100E5B6DD /* cvtool.cpp */; };
+		4CEFDC0222CE407C00E5B6DD /* cubemap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CEFDC0022CE407C00E5B6DD /* cubemap.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -180,6 +181,8 @@
 		4CEFDBF722CE281A00E5B6DD /* libopencv_imgproc.4.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_imgproc.4.1.1.dylib; path = ../../../../../../../usr/local/lib/libopencv_imgproc.4.1.1.dylib; sourceTree = "<group>"; };
 		4CEFDBFD22CE2C5100E5B6DD /* cvtool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cvtool.h; sourceTree = "<group>"; };
 		4CEFDBFE22CE2C5100E5B6DD /* cvtool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cvtool.cpp; sourceTree = "<group>"; };
+		4CEFDC0022CE407C00E5B6DD /* cubemap.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = cubemap.cpp; sourceTree = "<group>"; };
+		4CEFDC0122CE407C00E5B6DD /* cubemap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cubemap.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -433,6 +436,8 @@
 			children = (
 				4CEFDBFD22CE2C5100E5B6DD /* cvtool.h */,
 				4CEFDBFE22CE2C5100E5B6DD /* cvtool.cpp */,
+				4CEFDC0122CE407C00E5B6DD /* cubemap.h */,
+				4CEFDC0022CE407C00E5B6DD /* cubemap.cpp */,
 			);
 			name = cv;
 			path = ../engine/cv;
@@ -505,6 +510,7 @@
 				4C37752022A54FA20074744F /* uibase.cpp in Sources */,
 				4C1B57BF22A7E03700A7AFF1 /* avatar.cpp in Sources */,
 				4C40A86322BC789800F910AE /* profile.cpp in Sources */,
+				4CEFDC0222CE407C00E5B6DD /* cubemap.cpp in Sources */,
 				4C1B57BC22A7BE3800A7AFF1 /* texmgr.cpp in Sources */,
 				4C37752122A54FA20074744F /* ttfont.cpp in Sources */,
 				4C37751F22A54FA20074744F /* glad.c in Sources */,

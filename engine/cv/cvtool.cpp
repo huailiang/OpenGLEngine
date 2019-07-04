@@ -9,7 +9,7 @@
 #include "cvtool.h"
 
 
-namespace engine
+namespace tool
 {
 
     void cvGray()

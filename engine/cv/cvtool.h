@@ -16,12 +16,9 @@ using namespace cv;
 using namespace std;
 
 
-namespace engine
+namespace tool
 {
-
     void cvGray();
-
-
 }
 
 #endif /* cvtool_h */
