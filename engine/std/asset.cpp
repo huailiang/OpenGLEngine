@@ -51,7 +51,7 @@ namespace engine
                 return (i+1)<<4;
             }
         }
-        return NONE;
+        return 0x0;
     }
     
     

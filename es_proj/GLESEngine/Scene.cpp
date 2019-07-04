@@ -204,8 +204,8 @@ bool InitScene(ESContext* context)
     shader->setInt("texture1", 0);
     shader->setInt("texture2", 1);
     camera->Attach(shader);
-    Texture("textures/container", PVR, &texture1);
-    Texture("textures/awesomeface", PVR, &texture2);
+    Texture("textures/container", _PVR, &texture1);
+    Texture("textures/awesomeface", _PVR, &texture2);
     context->drawFunc = Draw;
     context->shutdownFunc = ShutDown;
     context->pauseFunc =  OnPause;

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4C01AB8D22ADF6B3001C5070 /* mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C01AB8C22ADF6B3001C5070 /* mesh.cpp */; };
+		4C01BED222CE1F0E00FCA643 /* profile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C01BED122CE1F0E00FCA643 /* profile.cpp */; };
 		4C02E1CF22AB77A0002821B9 /* material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C02E1CC22AB77A0002821B9 /* material.cpp */; };
 		4C02E1D022AB77A0002821B9 /* avatar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C02E1CD22AB77A0002821B9 /* avatar.cpp */; };
 		4C2406B722BBD8EF005AA6C1 /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C2406B622BBD8EF005AA6C1 /* splash.png */; };
@@ -217,6 +218,7 @@
 
 /* Begin PBXFileReference section */
 		4C01AB8C22ADF6B3001C5070 /* mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mesh.cpp; sourceTree = "<group>"; };
+		4C01BED122CE1F0E00FCA643 /* profile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = profile.cpp; path = ../../engine/profile.cpp; sourceTree = "<group>"; };
 		4C02E1CB22AB77A0002821B9 /* avatar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avatar.h; sourceTree = "<group>"; };
 		4C02E1CC22AB77A0002821B9 /* material.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = material.cpp; sourceTree = "<group>"; };
 		4C02E1CD22AB77A0002821B9 /* avatar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = avatar.cpp; sourceTree = "<group>"; };
@@ -713,6 +715,7 @@
 				4C8062C5229FC059005FD1F9 /* ViewController.h */,
 				4C8062C6229FC059005FD1F9 /* ViewController.mm */,
 				4C42795422A54A0C003AE42A /* profile.h */,
+				4C01BED122CE1F0E00FCA643 /* profile.cpp */,
 				4C492FF322AD5F9300FC531B /* engine.h */,
 				4C492FF222AD5F9300FC531B /* engine.cpp */,
 				4C443B8022A25D2D00866F29 /* Scene.h */,
@@ -1083,6 +1086,7 @@
 				4C443B8122A25D2D00866F29 /* Scene.cpp in Sources */,
 				4C02E1D022AB77A0002821B9 /* avatar.cpp in Sources */,
 				4C7AF67022A54EA700B63173 /* shader.cpp in Sources */,
+				4C01BED222CE1F0E00FCA643 /* profile.cpp in Sources */,
 				4C66674A22A2A3A3002BA996 /* FilePath.cpp in Sources */,
 				4CE2224B22A91F0B0095ECCA /* label.cpp in Sources */,
 				4C7AF66E22A54EA700B63173 /* light.cpp in Sources */,

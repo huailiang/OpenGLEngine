@@ -17,7 +17,7 @@ namespace engine
     Texture::Texture(const char* path, EXT ext, GLuint* texID, bool flipY, int wrap,bool mipmap)
     {
 #ifdef _GLES_
-        ext = PVR;
+        ext = _PVR;
 #endif
         this->type = TEXTURE;
         this->path = path;

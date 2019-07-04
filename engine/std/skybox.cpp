@@ -83,7 +83,7 @@ namespace engine
     {
         if (hdr) { //hdr 即envmap 只有一张图EquirectangularMap 需要转换为cubemap
             std::string path ="textures/hdr/"+name;
-            Texture(path.c_str(), HDR, &hdrTexture, true, GL_REPEAT, false);
+            Texture(path.c_str(), _HDR, &hdrTexture, true, GL_REPEAT, false);
             Equirect2Cube();
         }
         else

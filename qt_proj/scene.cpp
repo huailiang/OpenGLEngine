@@ -35,8 +35,8 @@ void Scene::initialize()
     skybox = new Skybox(camera, "mp_5dim");
     cube = (MeshData*)InitCube(&vao, &vbo);
     InitShader();
-    Texture("textures/container", JPG, &texture1);
-    Texture("textures/awesomeface",PNG, &texture2);
+    Texture("textures/container", _JPG, &texture1);
+    Texture("textures/awesomeface",_PNG, &texture2);
     TTFont::getInstance()->initial();
     label = new UILabel(vec2(30,560), vec3(1), 1);
 }

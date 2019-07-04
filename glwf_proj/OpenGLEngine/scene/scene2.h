@@ -52,8 +52,8 @@ public:
         mat->AttachShader(shader);
         shader->use();
         mat->SetFloat("scale", 1);
-        mat->SetTexture("texture1", "textures/container", JPG);
-        mat->SetTexture("texture2", "textures/awesomeface", PNG);
+        mat->SetTexture("texture1", "textures/container", _JPG);
+        mat->SetTexture("texture2", "textures/awesomeface", _PNG);
         ApplyCamera(mat);
     }
 

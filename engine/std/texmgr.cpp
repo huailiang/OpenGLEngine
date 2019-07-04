@@ -167,7 +167,7 @@ namespace engine
         if (data)
         {
             int width = tex->width, height = tex->height;
-            if(tex->ext == PVR)
+            if(tex->ext == _PVR)
             {
                 if(!tex->mipmap) level = 1;
                 for (int mip = 0; mip < level; ++mip) {
@@ -179,7 +179,7 @@ namespace engine
             }
             else
             {
-                if(tex->ext == HDR)
+                if(tex->ext == _HDR)
                     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, width, height, 0, glformat, GL_FLOAT, data);
                 else
                     glTexImage2D(GL_TEXTURE_2D, 0, glformat, width, height, 0, glformat, GL_UNSIGNED_BYTE, data);
@@ -210,10 +210,10 @@ namespace engine
         int bitsPerPixel =0;
         for (uint i = 0; i < 6; i++)
         {
-            EXT ext = JPG;
+            EXT ext = _JPG;
             std::string post = EX_JPG;
 #ifdef _GLES_
-            ext = PVR;
+            ext = _PVR;
             post = EX_PVR;
 #endif
             
@@ -221,7 +221,7 @@ namespace engine
             path = face.c_str();
             void *data = RealLoad(path, &width, &height, ext, &glformat, &level, &bitsPerPixel);
             tex->data = data;
-            if(ext==PVR)
+            if(ext==_PVR)
             {
                 GLsizei size = max(32, width * height * bitsPerPixel / 8);
                 glCompressedTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, glformat, width, height, 0, size, data);
@@ -242,7 +242,7 @@ namespace engine
 #ifndef _GLES_
         stbi_image_free(data);
 #else
-        if (ext == PVR)
+        if (ext == _PVR)
             UnloadPvr();
         else
             free(data);
@@ -256,16 +256,16 @@ namespace engine
         
 #ifndef _GLES_
         int fmt = 0;
-        if(ext == HDR)
+        if(ext == _HDR)
             data = stbi_loadf(path, width, height, &fmt,0);
         else
             data = stbi_load(path, width, height, &fmt, 0);
         GLenum format = GetFormat(fmt);
         *glformat = format;
 #else
-        if (ext == PVR)
+        if (ext == _PVR)
             data = LoadPvr(path, width, height, glformat, level, bitsPerPixel);
-        else if(ext == TGA)
+        else if(ext == _TGA)
             data = LoadTGA(NULL, path, width, height, glformat);
 #endif
         return data;

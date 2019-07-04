@@ -49,11 +49,11 @@ public:
         shader->setInt("aoMap", 4);
         ApplyCamera(shader);
         
-        Texture("textures/pbr/rusted_iron/albedo", PNG, &albedo);
-        Texture("textures/pbr/rusted_iron/normal", PNG, &normal);
-        Texture("textures/pbr/rusted_iron/metallic",PNG, &metallic);
-        Texture("textures/pbr/rusted_iron/roughness",PNG, &roughness);
-        Texture("textures/pbr/rusted_iron/ao", PNG, &ao);
+        Texture("textures/pbr/rusted_iron/albedo", _PNG, &albedo);
+        Texture("textures/pbr/rusted_iron/normal", _PNG, &normal);
+        Texture("textures/pbr/rusted_iron/metallic",_PNG, &metallic);
+        Texture("textures/pbr/rusted_iron/roughness",_PNG, &roughness);
+        Texture("textures/pbr/rusted_iron/ao", _PNG, &ao);
         indexCount = InitSpere(&vao, &vbo, &ebo);
     }
     

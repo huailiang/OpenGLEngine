@@ -40,7 +40,7 @@ public:
         
         InitPlane(&planeVAO, &planeVBO, shadowShader);
         InitCube(&cubeVAO, &cubeVBO);
-        Texture("textures/wood",PNG, &woodTexture);
+        Texture("textures/wood",_PNG, &woodTexture);
         shadowShader->use();
         ApplyCamera(shadowShader);
         shadowShader->setInt("diffuseTexture", 0);

@@ -20,24 +20,23 @@
 namespace engine
 {
     
-    #define PNG   0x0010  //.png
-    #define JPG   0x0020  //.jpg
-    #define TGA   0x0030  //.tga
-    #define BMP   0x0040  //.bmp
-    #define HDR   0x0050  //.hdr
-    #define PVR   0x0060  //.pvr
+    #define _PNG   0x0010  //.png
+    #define _JPG   0x0020  //.jpg
+    #define _TGA   0x0030  //.tga
+    #define _BMP   0x0040  //.bmp
+    #define _HDR   0x0050  //.hdr
+    #define _PVR   0x0060  //.pvr
 
-    #define FBX   0x0001 //.fbx
-    #define MTL   0x0002 //.mtl
-    #define OBJ   0x0003 //.obj
-    #define ANIM  0x0004 //.anim
-    #define TTF   0x0005 //.ttf
+    #define _FBX   0x0001 //.fbx
+    #define _MTL   0x0002 //.mtl
+    #define _OBJ   0x0003 //.obj
+    #define _ANIM  0x0004 //.anim
+    #define _TTF   0x0005 //.ttf
     
-    #define SUM   0x0100 //.sum
-    #define MESH  0x0200 //.mesh
-    #define MAT   0x0300 //.mat
+    #define _SUM   0x0100 //.sum
+    #define _MESH  0x0200 //.mesh
+    #define _MAT  0x0300 //.mat
     
-    #define NONE  0x0000
     
     #define EX_PNG   ".png"
     #define EX_JPG   ".jpg"
