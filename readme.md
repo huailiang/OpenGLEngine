@@ -4,10 +4,11 @@
 
 # 依赖的库
 
-*  openGL
-*  freetype
-*  glm
-*  glad -(not used on iOS)
+*  [openGL][i4]
+*  [openCV][i1]
+*  [freetype][i2]
+*  [glm][i3]
+*  [glad][i5] -(not used on iOS)
 
 ## Tip
 
@@ -175,3 +176,10 @@ es浮点数默认是：precision mediump float;
 <br>
 penghuailiang<br>
 2019-05-10
+
+
+[i1]: https://opencv.org
+[i2]: https://www.freetype.org
+[i3]: http://glm.g-truc.net
+[i4]: http://www.opengl.org
+[i5]: https://glad.dav1d.de

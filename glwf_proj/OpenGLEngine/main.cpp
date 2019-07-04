@@ -17,12 +17,12 @@
 #include "util.h"
 #include "asset.h"
 #include <stdlib.h>
-//#include <opencv2/opencv.hpp>
-
+#ifdef _CV_
+#include "cvtool.h"
+#endif
 using namespace std;
 using namespace glm;
 using namespace engine;
-
 
 float lastTime;
 
@@ -34,6 +34,7 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow* window);
 
 SceneMgr SceneMgr::instance;
+
 
 
 int main(int argc, const char * argv[])

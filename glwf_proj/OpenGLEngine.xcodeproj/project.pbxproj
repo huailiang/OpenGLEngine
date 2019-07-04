@@ -42,6 +42,11 @@
 		4CE861ED22A4F86F000677DC /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE861EB22A4F86F000677DC /* libfreetype.a */; };
 		4CE861EE22A4F86F000677DC /* libglfw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE861EC22A4F86F000677DC /* libglfw3.a */; };
 		4CE861F222A4F87F000677DC /* libfreetype.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE861F022A4F87F000677DC /* libfreetype.6.dylib */; };
+		4CEFDBF822CE281A00E5B6DD /* libopencv_highgui.4.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEFDBF422CE281A00E5B6DD /* libopencv_highgui.4.1.1.dylib */; };
+		4CEFDBF922CE281A00E5B6DD /* libopencv_core.4.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEFDBF522CE281A00E5B6DD /* libopencv_core.4.1.1.dylib */; };
+		4CEFDBFA22CE281A00E5B6DD /* libopencv_imgcodecs.4.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEFDBF622CE281A00E5B6DD /* libopencv_imgcodecs.4.1.1.dylib */; };
+		4CEFDBFB22CE281A00E5B6DD /* libopencv_imgproc.4.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEFDBF722CE281A00E5B6DD /* libopencv_imgproc.4.1.1.dylib */; };
+		4CEFDBFF22CE2C5100E5B6DD /* cvtool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CEFDBFE22CE2C5100E5B6DD /* cvtool.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -169,6 +174,12 @@
 		4CE861EB22A4F86F000677DC /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = ../lib/libfreetype.a; sourceTree = "<group>"; };
 		4CE861EC22A4F86F000677DC /* libglfw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglfw3.a; path = ../lib/libglfw3.a; sourceTree = "<group>"; };
 		4CE861F022A4F87F000677DC /* libfreetype.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfreetype.6.dylib; path = ../lib/libfreetype.6.dylib; sourceTree = "<group>"; };
+		4CEFDBF422CE281A00E5B6DD /* libopencv_highgui.4.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_highgui.4.1.1.dylib; path = ../../../../../../../usr/local/lib/libopencv_highgui.4.1.1.dylib; sourceTree = "<group>"; };
+		4CEFDBF522CE281A00E5B6DD /* libopencv_core.4.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_core.4.1.1.dylib; path = ../../../../../../../usr/local/lib/libopencv_core.4.1.1.dylib; sourceTree = "<group>"; };
+		4CEFDBF622CE281A00E5B6DD /* libopencv_imgcodecs.4.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_imgcodecs.4.1.1.dylib; path = ../../../../../../../usr/local/lib/libopencv_imgcodecs.4.1.1.dylib; sourceTree = "<group>"; };
+		4CEFDBF722CE281A00E5B6DD /* libopencv_imgproc.4.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_imgproc.4.1.1.dylib; path = ../../../../../../../usr/local/lib/libopencv_imgproc.4.1.1.dylib; sourceTree = "<group>"; };
+		4CEFDBFD22CE2C5100E5B6DD /* cvtool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cvtool.h; sourceTree = "<group>"; };
+		4CEFDBFE22CE2C5100E5B6DD /* cvtool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cvtool.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +187,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CEFDBF822CE281A00E5B6DD /* libopencv_highgui.4.1.1.dylib in Frameworks */,
+				4CEFDBF922CE281A00E5B6DD /* libopencv_core.4.1.1.dylib in Frameworks */,
+				4CEFDBFA22CE281A00E5B6DD /* libopencv_imgcodecs.4.1.1.dylib in Frameworks */,
+				4CEFDBFB22CE281A00E5B6DD /* libopencv_imgproc.4.1.1.dylib in Frameworks */,
 				4C3B7A1922831668003B212F /* Cocoa.framework in Frameworks */,
 				4C3B7A172283164E003B212F /* IOKit.framework in Frameworks */,
 				4CD27D482283070B0038AE21 /* CoreVideo.framework in Frameworks */,
@@ -352,6 +367,10 @@
 		4CD27D352282F5320038AE21 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4CEFDBF522CE281A00E5B6DD /* libopencv_core.4.1.1.dylib */,
+				4CEFDBF422CE281A00E5B6DD /* libopencv_highgui.4.1.1.dylib */,
+				4CEFDBF622CE281A00E5B6DD /* libopencv_imgcodecs.4.1.1.dylib */,
+				4CEFDBF722CE281A00E5B6DD /* libopencv_imgproc.4.1.1.dylib */,
 				4CE861F022A4F87F000677DC /* libfreetype.6.dylib */,
 				4CE861EB22A4F86F000677DC /* libfreetype.a */,
 				4CE861EC22A4F86F000677DC /* libglfw3.a */,
@@ -379,6 +398,7 @@
 		4CE8602322A4F1EE000677DC /* code */ = {
 			isa = PBXGroup;
 			children = (
+				4CEFDBFC22CE2C5100E5B6DD /* cv */,
 				4C37750F22A54FA20074744F /* ext */,
 				4C37751222A54FA20074744F /* gui */,
 				4C3774F622A54F6F0074744F /* std */,
@@ -406,6 +426,16 @@
 				4C4279AF22A54C32003AE42A /* scenemgr.h */,
 			);
 			path = scene;
+			sourceTree = "<group>";
+		};
+		4CEFDBFC22CE2C5100E5B6DD /* cv */ = {
+			isa = PBXGroup;
+			children = (
+				4CEFDBFD22CE2C5100E5B6DD /* cvtool.h */,
+				4CEFDBFE22CE2C5100E5B6DD /* cvtool.cpp */,
+			);
+			name = cv;
+			path = ../engine/cv;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -465,6 +495,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C37752322A54FA20074744F /* uievent.cpp in Sources */,
+				4CEFDBFF22CE2C5100E5B6DD /* cvtool.cpp in Sources */,
 				4C37750E22A54F6F0074744F /* terrain.cpp in Sources */,
 				4C37750822A54F6F0074744F /* camera.cpp in Sources */,
 				4CD71DB222B0CF0500466683 /* tinyxmlerror.cpp in Sources */,
@@ -617,10 +648,15 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 238UB5UD4H;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					_CV_,
+				);
 				HEADER_SEARCH_PATHS = $root_header;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(root_lib)/\"",
+					/usr/local/lib,
 				);
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				OTHER_LDFLAGS = "";
@@ -638,10 +674,11 @@
 				DEVELOPMENT_TEAM = 238UB5UD4H;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
+				GCC_PREPROCESSOR_DEFINITIONS = _CV_;
 				HEADER_SEARCH_PATHS = $root_header;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(root_lib)/\"",
+					/usr/local/lib,
 				);
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				OTHER_LDFLAGS = "";
