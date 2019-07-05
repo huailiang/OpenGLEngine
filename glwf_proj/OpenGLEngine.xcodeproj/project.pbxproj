@@ -39,6 +39,7 @@
 		4CD71DB222B0CF0500466683 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CD71DAE22B0CF0500466683 /* tinyxmlerror.cpp */; };
 		4CD71DB322B0CF0500466683 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CD71DAF22B0CF0500466683 /* tinyxml.cpp */; };
 		4CD71DB622B0E30100466683 /* animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CD71DB422B0E30100466683 /* animation.cpp */; };
+		4CDFB1EB22CEE3FA0010E697 /* harmonics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CDFB1E922CEE3FA0010E697 /* harmonics.cpp */; };
 		4CE861ED22A4F86F000677DC /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE861EB22A4F86F000677DC /* libfreetype.a */; };
 		4CE861EE22A4F86F000677DC /* libglfw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE861EC22A4F86F000677DC /* libglfw3.a */; };
 		4CE861F222A4F87F000677DC /* libfreetype.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE861F022A4F87F000677DC /* libfreetype.6.dylib */; };
@@ -172,6 +173,9 @@
 		4CD71DAF22B0CF0500466683 /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
 		4CD71DB422B0E30100466683 /* animation.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = animation.cpp; sourceTree = "<group>"; };
 		4CD71DB522B0E30100466683 /* animation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = animation.h; sourceTree = "<group>"; };
+		4CDFB1E822CEE0F70010E697 /* util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
+		4CDFB1E922CEE3FA0010E697 /* harmonics.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = harmonics.cpp; sourceTree = "<group>"; };
+		4CDFB1EA22CEE3FA0010E697 /* harmonics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = harmonics.h; sourceTree = "<group>"; };
 		4CE861EB22A4F86F000677DC /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = ../lib/libfreetype.a; sourceTree = "<group>"; };
 		4CE861EC22A4F86F000677DC /* libglfw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglfw3.a; path = ../lib/libglfw3.a; sourceTree = "<group>"; };
 		4CE861F022A4F87F000677DC /* libfreetype.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfreetype.6.dylib; path = ../lib/libfreetype.6.dylib; sourceTree = "<group>"; };
@@ -438,6 +442,9 @@
 				4CEFDBFE22CE2C5100E5B6DD /* cvtool.cpp */,
 				4CEFDC0122CE407C00E5B6DD /* cubemap.h */,
 				4CEFDC0022CE407C00E5B6DD /* cubemap.cpp */,
+				4CDFB1EA22CEE3FA0010E697 /* harmonics.h */,
+				4CDFB1E922CEE3FA0010E697 /* harmonics.cpp */,
+				4CDFB1E822CEE0F70010E697 /* util.h */,
 			);
 			name = cv;
 			path = ../engine/cv;
@@ -529,6 +536,7 @@
 				4C37750922A54F6F0074744F /* light.cpp in Sources */,
 				4C73C0F522A8C18C002A8AD0 /* uimgr.cpp in Sources */,
 				4C37752222A54FA20074744F /* button.cpp in Sources */,
+				4CDFB1EB22CEE3FA0010E697 /* harmonics.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -35,6 +35,7 @@ iOS生成不同分辨率的icon和json配置
 
 引擎会引用这些网格，而不用需要在代码里声明一个个很大的数组。
 
+<br>
 
 ## texture.sh
 
@@ -43,6 +44,18 @@ iOS生成不同分辨率的icon和json配置
 此脚本还会调用solution.py，来转换图片的分辨率， 因为诸如PVRTC压缩格式的Texture必须是2的次幂才可以转换成功。
 
 关于更多纹理压缩的相关的介绍，点击[查看][i1]
+
+<br>
+
+## solution.py
+
+PIL转换图片分辨率
+
+<br>
+
+## sample.sh
+
+使用cubemap采样env, 生成球谐参数
 
 
 <br><br>

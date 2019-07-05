@@ -10,6 +10,9 @@
 #define cvtool_h
 
 #include <opencv2/opencv.hpp>
+#include <string>
+#include "util.h"
+#include "cubemap.h"
 
 
 using namespace cv;
@@ -18,7 +21,12 @@ using namespace std;
 
 namespace tool
 {
-    void cvGray();
+    void CvGray();
+    
+    string CoefficientsString(const vector<Vec3>& coefs);
+    
+    int CvGenerate(int argc, const char* argv[]);
+    
 }
 
 #endif /* cvtool_h */

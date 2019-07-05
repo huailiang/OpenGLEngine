@@ -64,7 +64,11 @@ int main(int argc, const char * argv[])
         }
         else
         {
+#ifdef _CV_
+            return tool::CvGenerate(argc, argv);
+#else
             return run_engine();
+#endif
         }
     }
     return 1;
