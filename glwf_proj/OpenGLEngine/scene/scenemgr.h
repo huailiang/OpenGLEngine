@@ -16,6 +16,7 @@
 #include "scene4.h"
 #include "scene5.h"
 #include "scene6.h"
+#include "scene7.h"
 #include "texmgr.h"
 
 class SceneMgr
@@ -32,6 +33,7 @@ private:
         SAFE_DELETE(lb_scene4);
         SAFE_DELETE(lb_scene5);
         SAFE_DELETE(lb_scene6);
+        SAFE_DELETE(lb_scene7);
         SAFE_DELETE(lb_fps);
         SAFE_DELETE(lb_copy);
     }
@@ -47,7 +49,7 @@ public:
     
     void Init()
     {
-        ChangeTo(TY_Scene6);
+        ChangeTo(TY_Scene7);
         glCheckError();
         lb_scene1 = new UILabel(vec2(60,450), vec3(1), 1, "Scene1", TY_Scene1);
         lb_scene2 = new UILabel(vec2(60,405), vec3(1), 1, "Scene2", TY_Scene2);
@@ -55,6 +57,7 @@ public:
         lb_scene4 = new UILabel(vec2(60,315), vec3(1), 1, "Scene4", TY_Scene4);
         lb_scene5 = new UILabel(vec2(60,270), vec3(1), 1, "Scene5", TY_Scene5);
         lb_scene6 = new UILabel(vec2(60,225), vec3(1), 1, "Scene6", TY_Scene6);
+        lb_scene7 = new UILabel(vec2(60,180), vec3(1), 1, "Scene7", TY_Scene7);
         lb_fps = new UILabel(vec2(740,580), vec3(1,0,0), 0.5f);
         lb_copy = new UILabel(vec2(20), vec3(1), 0.4f);
         lb_scene1->RegistCallback(ClickScene, this);
@@ -63,6 +66,7 @@ public:
         lb_scene4->RegistCallback(ClickScene, this);
         lb_scene5->RegistCallback(ClickScene, this);
         lb_scene6->RegistCallback(ClickScene, this);
+        lb_scene7->RegistCallback(ClickScene, this);
     }
     
     void LeaveScene()
@@ -97,10 +101,11 @@ public:
             glCheckError();
             if(type == TY_Scene1)   current = new Scene1();
             if(type == TY_Scene2)   current = new Scene2();
-            if(type == TY_Scene3)   current =new Scene3();
-            if(type == TY_Scene4)   current =new Scene4();
-            if(type == TY_Scene5)   current =new Scene5();
-            if(type == TY_Scene6)   current =new Scene6();
+            if(type == TY_Scene3)   current = new Scene3();
+            if(type == TY_Scene4)   current = new Scene4();
+            if(type == TY_Scene5)   current = new Scene5();
+            if(type == TY_Scene6)   current = new Scene6();
+            if(type == TY_Scene7)   current = new Scene7();
             if(current) current->Initial();
             return true;
         }
@@ -132,7 +137,7 @@ public:
     
 private:
     Scene *current = nullptr;
-    UILabel *lb_scene1, *lb_scene2, *lb_scene3, *lb_scene4, *lb_scene5, *lb_scene6;
+    UILabel *lb_scene1, *lb_scene2, *lb_scene3, *lb_scene4, *lb_scene5, *lb_scene6,*lb_scene7;
     UILabel *lb_fps, *lb_copy;
     uint delay;
 };

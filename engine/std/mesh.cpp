@@ -56,6 +56,12 @@ namespace engine
             int config[] = { LEN_Pos3, LEN_UV, LEN_Normal };
             MESH_VERT_CONFIG(config, 3, Vertex);
         }
+        if(type == 0x0101)
+        {
+            GET_VERTEX(NormalVert);
+            int config[] = { LEN_Pos3, LEN_Normal };
+            MESH_VERT_CONFIG(config, 2, NormalVert);
+        }
         else if(type == 0x1111)
         {
             GET_VERTEX(CompxVertex);

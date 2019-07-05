@@ -176,6 +176,8 @@
 		4CDFB1E822CEE0F70010E697 /* util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
 		4CDFB1E922CEE3FA0010E697 /* harmonics.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = harmonics.cpp; sourceTree = "<group>"; };
 		4CDFB1EA22CEE3FA0010E697 /* harmonics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = harmonics.h; sourceTree = "<group>"; };
+		4CDFB1EC22CF48900010E697 /* scene7.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = scene7.h; path = OpenGLEngine/scene/scene7.h; sourceTree = SOURCE_ROOT; };
+		4CDFB1ED22CF4EDF0010E697 /* harmonics.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = harmonics.vs; sourceTree = "<group>"; };
 		4CE861EB22A4F86F000677DC /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = ../lib/libfreetype.a; sourceTree = "<group>"; };
 		4CE861EC22A4F86F000677DC /* libglfw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglfw3.a; path = ../lib/libglfw3.a; sourceTree = "<group>"; };
 		4CE861F022A4F87F000677DC /* libfreetype.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfreetype.6.dylib; path = ../lib/libfreetype.6.dylib; sourceTree = "<group>"; };
@@ -347,6 +349,7 @@
 				4C46A61C22C4EBF30055058C /* brdf.fs */,
 				4C46A61722C4E00F0055058C /* equirect2cube.fs */,
 				4C46A61822C4E00F0055058C /* irradiance_convolution.fs */,
+				4CDFB1ED22CF4EDF0010E697 /* harmonics.vs */,
 				4C7D4A2922CDDFF000A8A77B /* harmonics.fs */,
 				4C46A61922C4E00F0055058C /* prefilter.fs */,
 			);
@@ -430,6 +433,7 @@
 				4C4279AE22A54C32003AE42A /* scene4.h */,
 				4CB544CC22B5F4F8007BAE5F /* scene5.h */,
 				4C9450F722C0EB30005E5065 /* scene6.h */,
+				4CDFB1EC22CF48900010E697 /* scene7.h */,
 				4C4279AF22A54C32003AE42A /* scenemgr.h */,
 			);
 			path = scene;

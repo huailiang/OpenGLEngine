@@ -55,11 +55,14 @@ namespace engine
     void getTextures(tinyobj::mesh_t& mesh, std::vector<tinyobj::material_t>& materials,std::string* vec)
     {
         int id = mesh.material_ids[0];
-        tinyobj::material_t mat = materials[id];
-        vec[0] = mat.diffuse_texname;
-        vec[1] = mat.normal_texname;
-        vec[2] = mat.specular_texname;
-        vec[3] = mat.ambient_texname;
+        if(id>0)
+        {
+            tinyobj::material_t mat = materials[id];
+            vec[0] = mat.diffuse_texname;
+            vec[1] = mat.normal_texname;
+            vec[2] = mat.specular_texname;
+            vec[3] = mat.ambient_texname;
+        }
     }
     
     size_t findVector(std::vector<int>& vect, int& key)
@@ -101,7 +104,12 @@ namespace engine
             ofs.write((char*)&num,sizeof(uint));
             MODEL_TYPE type = MODEL_OBJ;
             ofs.write((char*)&type, sizeof(MODEL_TYPE));
-            for (size_t i =0; i<shapes.size(); i++) writestring(ofs, shapes[i].name);
+            for (size_t i =0; i<shapes.size(); i++)
+            {
+                string name = shapes[i].name;
+                if (name.empty()) name = curr_obj;
+                writestring(ofs, name);
+            }
             ofs.close();
         }catch (std::ofstream::failure e)
         {
@@ -152,17 +160,20 @@ namespace engine
         }
     }
     
-    void WriteVertex(std::ofstream& ofs, Vertex* vert)
+    void WriteVertex(std::ofstream& ofs, Vertex* vert, VertType type)
     {
-        writevec3(ofs, vert->Position);
-        writevec2(ofs, vert->TexCoords);
-        writevec3(ofs, vert->Normal);
+        if(type & Vt_Pos3)
+            writevec3(ofs, vert->Position);
+        if(type & Vt_UV)
+            writevec2(ofs, vert->TexCoords);
+        if(type & Vt_Normal)
+            writevec3(ofs, vert->Normal);
     }
     
     void WriteSkinVertex(std::ofstream& ofs, SkinVertex* vert)
     {
         Vertex* vertex = (Vertex*)vert;
-        WriteVertex(ofs, vertex);
+        WriteVertex(ofs, vertex, 0x0111);
         error_stop(vert->bonecount<=3, "skin vert inner error");
         glm::vec3 weight(0); glm::ivec3 boneidx(0);
         for (int i=0; i<vert->bonecount; i++) {
@@ -190,7 +201,7 @@ namespace engine
             num = (uint)indices.size();
             ofs.write((char*)&num,sizeof(uint));
             loop0i(indices.size()) ofs.write((char*)&indices[i],sizeof(uint));
-            loop0i(vertices.size()) WriteVertex(ofs, &vertices[i]);
+            loop0i(vertices.size()) WriteVertex(ofs, &vertices[i], type);
             ofs.close();
         } catch (std::ofstream::failure e)
         {
@@ -285,7 +296,7 @@ namespace engine
         std::string base_dir =  std::string(WORKDIR)+"resources/objects/"+name+"/";
         bool ret = tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err, (base_dir + name +".obj").c_str(), base_dir.c_str());
         if (!warn.empty()) std::cout << "WARN: " << warn << std::endl;
-        if (!err.empty()) std::cerr << err << std::endl;
+        if (!err.empty()) { std::cerr << err << std::endl; return false; }
         WriteSummary(shapes);
         for (size_t s=0; s<shapes.size(); s++)
         {
@@ -295,6 +306,7 @@ namespace engine
             vector<Vertex> vertices;
             size_t index_offset = 0;
             int indx_new = 0;
+            bool has_texcoord = attrib.texcoords.size() > 0;
             for(size_t i = 0; i < mesh.num_face_vertices.size(); i++) {
                 size_t num = mesh.num_face_vertices[i];
                 Vertex vertex;
@@ -310,8 +322,8 @@ namespace engine
                         vertex.Position.x = attrib.vertices[idx.vertex_index * 3 + 0];
                         vertex.Position.y = attrib.vertices[idx.vertex_index * 3 + 1];
                         vertex.Position.z = attrib.vertices[idx.vertex_index * 3 + 2];
-                        vertex.TexCoords.x = attrib.texcoords[idx.texcoord_index * 2 + 0];
-                        vertex.TexCoords.y = attrib.texcoords[idx.texcoord_index * 2 + 1];
+                        vertex.TexCoords.x = has_texcoord ? attrib.texcoords[idx.texcoord_index * 2 + 0] : 0;
+                        vertex.TexCoords.y = has_texcoord ? attrib.texcoords[idx.texcoord_index * 2 + 1] : 0;
                         vertex.Normal.x = attrib.normals[idx.normal_index * 3 + 0];
                         vertex.Normal.y = attrib.normals[idx.normal_index * 3 + 1];
                         vertex.Normal.z = attrib.normals[idx.normal_index * 3 + 2];
@@ -325,8 +337,10 @@ namespace engine
             }
             std::string texture[TEXTURE_NUM];
             getTextures(mesh, materials,texture);
-            WriteMesh(shapes[s].name, indices, vertices, 0x0111);
-            WriteMaterial(shapes[s].name,texture);
+            string name = shapes[s].name;
+            if(name.empty()) name = curr_obj;
+            WriteMesh(name, indices, vertices, has_texcoord?(Vt_Pos3|Vt_UV|Vt_Normal):(Vt_Pos3|Vt_Normal));
+            WriteMaterial(name,texture);
             std::cout<<"export "<<shapes[s].name<<std::endl;
         }
         std::cout<<name<<" export finish "<<std::endl;
@@ -436,6 +450,13 @@ namespace engine
                         readv3(ifs, vertex->Normal);
                         mesh->vertices[i] = vertex;
                     } break;
+                    case 0x0101:
+                    {
+                        NormalVert* vert = new NormalVert();
+                        readv3(ifs, vert->Position);
+                        readv3(ifs, vert->Normal);
+                        mesh->vertices[i] = vert;
+                    }break;
                     case 0x0012:
                     {
                         BaseVert2* vert  = new BaseVert2();

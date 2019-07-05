@@ -81,7 +81,8 @@ namespace tool
     }
     
     /*
-     * doc: https://huailiang.github.io/blog/2019/harmonics/
+     * reference doc:
+     *  https://huailiang.github.io/blog/2019/harmonics/
      */
     vector<float> Harmonics::Basis(const Vec3& pos)
     {

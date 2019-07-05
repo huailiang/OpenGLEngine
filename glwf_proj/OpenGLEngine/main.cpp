@@ -41,6 +41,9 @@ int main(int argc, const char * argv[])
 {
     if (argc<=1)
     {
+//        string name("dragon");
+//        engine::LoadObj(name);
+//        return 0;
         return run_engine();
     }
     else

@@ -26,6 +26,7 @@
 #define TY_Scene4 3
 #define TY_Scene5 4
 #define TY_Scene6 5
+#define TY_Scene7 6
 
 using namespace engine;
 

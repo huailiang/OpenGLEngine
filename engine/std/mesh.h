@@ -59,6 +59,12 @@ namespace engine
         glm::vec2 TexCoords;
     };
     
+    struct NormalVert:Vert
+    {
+        glm::vec3 Position;
+        glm::vec3 Normal;
+    };
+    
     struct Vertex : Vert
     {
         glm::vec3 Position;
