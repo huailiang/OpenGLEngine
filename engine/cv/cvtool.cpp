@@ -75,7 +75,6 @@ namespace tool
         if (write_rendered)
         {
             string mkdircmd = "mkdir " + outdir;
-            replace(mkdircmd.begin(), mkdircmd.end(), '/', '\\');
             system(mkdircmd.c_str());
         }
         

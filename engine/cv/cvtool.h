@@ -21,6 +21,7 @@ using namespace std;
 
 namespace tool
 {
+    
     void CvGray();
     
     string CoefficientsString(const vector<Vec3>& coefs);

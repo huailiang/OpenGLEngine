@@ -8,10 +8,11 @@
 
 #include "harmonics.h"
 
+using namespace std;
+
 
 namespace tool
 {
-    using namespace std;
     
     Harmonics::Harmonics(int degree)
     :degree_(degree)
@@ -79,7 +80,9 @@ namespace tool
         return imgs;
     }
     
-    
+    /*
+     * doc: https://huailiang.github.io/blog/2019/harmonics/
+     */
     vector<float> Harmonics::Basis(const Vec3& pos)
     {
         int n = (degree_ + 1)*(degree_ + 1);

@@ -19,20 +19,29 @@ namespace tool
     
     class Harmonics
     {
+        
     public:
+        
         Harmonics(int degree);
+        
         void Evaluate(const std::vector<Vertex>& vertices);
-        std::vector<Vec3> getCoefficients()const
-        {
-            return coefs;
-        }
+        
         Vec3 Render(const Vec3& pos);
+        
         std::array<cv::Mat, 6> RenderCubemap(int width, int height);
+        
+        
+    public:
+        
+        std::vector<Vec3> getCoefficients()const { return coefs; }
+        
+    private:
+        
+        std::vector<float> Basis(const Vec3& pos);
+        
     private:
         int degree_;
         std::vector<Vec3> coefs;
-        
-        std::vector<float> Basis(const Vec3& pos);
         std::vector<float> factorial;
     };
 

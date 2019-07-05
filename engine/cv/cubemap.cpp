@@ -14,6 +14,8 @@
 
 
 using namespace std;
+
+
 namespace tool
 {
 
@@ -62,14 +64,12 @@ namespace tool
     {
         int w = Width();
         int h = Height();
-        if (w > maxsize)
-            w = maxsize;
-        if (h > maxsize)
-            h = maxsize;
+        if (w > maxsize) w = maxsize;
+        if (h > maxsize) h = maxsize;
         
         int xarr[6] = {2*w, 0, w, w, w, 3*w};
         int yarr[6] = {h, h, 0, 2*h, h, h};
-        cv::Mat expandimg(3 * h, 4 * w, CV_32FC3);
+        cv::Mat expandimg(3 * h, 4 * w, CV_32FC3, cv::Scalar(0,0,0));
         
         for (int i = 0; i < 6; i++)
         {
@@ -87,7 +87,8 @@ namespace tool
         for (int i = 0; i < n; i++)
         {
             float x, y, z;
-            do{
+            do
+            {
                 x = NormalRandom();
                 y = NormalRandom();
                 z = NormalRandom();

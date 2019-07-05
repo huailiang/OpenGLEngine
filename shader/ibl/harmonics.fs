@@ -1,5 +1,12 @@
 #version 330
 
+
+/*
+ * harmonics for realtime rendering:
+ *  https://huailiang.github.io/blog/2019/harmonics/
+ */
+
+
 uniform int SH_NUM;
 
 const float PI = 3.1415926535897932384626433832795;
@@ -10,7 +17,8 @@ in VS_OUT{
     vec3 normal;
 }vs;
 
-out vec4 color;
+out vec4 FragColor;
+
 
 void main(void) {
     float basis[16];
@@ -42,5 +50,5 @@ void main(void) {
     vec3 c = vec3(0,0,0);
     for (int i = 0; i < SH_NUM; i++)
         c += coef[i] * basis[i];
-    color = vec4(c, 1);
+    FragColor = vec4(c, 1);
 }
