@@ -27,6 +27,8 @@ namespace engine
         
         void attach(const char* k1, const char* v1);
         
+        void compile();
+        
         virtual bool use();
         
         void setBool(const std::string &name, bool value) const;
@@ -59,8 +61,6 @@ namespace engine
 
         
     private:
-        
-        void compile();
         
         std::string pre_process(const std::string& source,const std::string macro);
         

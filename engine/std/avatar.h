@@ -27,9 +27,13 @@ namespace engine
         
     public:
         
-        Avatar(const char* name, glm::vec3 pos = glm::vec3(0), glm::vec3 scale = glm::vec3(1), float angle = 0);
+        Avatar(const char* name, glm::vec3 pos = glm::vec3(0), glm::vec3 scale = glm::vec3(1), float angle = 0, Shader* shader = nullptr);
         
         ~Avatar();
+        
+        void BindVert(Shader* shader);
+        
+        void Compile(Shader* shader = nullptr);
         
         void RecalModelMatrix();
         

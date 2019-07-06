@@ -134,7 +134,7 @@ namespace engine
         
         bool hasColor() const;
         
-        bool Bind(Shader* shader);
+        bool BindVert(Shader* shader);
         
         /*
          * you need to delete[] after the function be called

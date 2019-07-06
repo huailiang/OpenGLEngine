@@ -86,7 +86,7 @@ namespace engine
         glBindBuffer(GL_ARRAY_BUFFER, *vbo);
         plane->ConfigAttribute();
         glBindVertexArray(0);
-        if(shader) plane->Bind(shader);
+        if(shader) plane->BindVert(shader);
         return plane;
     }
 
@@ -99,7 +99,7 @@ namespace engine
         glBindVertexArray(*vao);
         cube->ConfigAttribute();
         glBindVertexArray(0);
-        if(shader) cube->Bind(shader);
+        if(shader) cube->BindVert(shader);
         return cube;
     }
 
@@ -113,7 +113,7 @@ namespace engine
         glBindBuffer(GL_ARRAY_BUFFER, *vbo);
         quad->ConfigAttribute();
         glBindVertexArray(0);
-        if(shader) quad->Bind(shader);
+        if(shader) quad->BindVert(shader);
         return quad;
     }
     
@@ -127,7 +127,7 @@ namespace engine
         glBindBuffer(GL_ARRAY_BUFFER, *vbo);
         quad2->ConfigAttribute();
         glBindVertexArray(0);
-        if(shader) quad2->Bind(shader);
+        if(shader) quad2->BindVert(shader);
         return quad2;
     }
     

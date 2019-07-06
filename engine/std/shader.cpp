@@ -104,6 +104,7 @@ namespace engine
         glDeleteShader(vertex); vertexCode = "";
         glDeleteShader(fragment); fragmentCode = "";
         if(!geometryCode.empty()){ glDeleteShader(geometry); geometryCode=""; }
+        compiled = true;
     }
 
     bool Shader::use() 
@@ -112,7 +113,6 @@ namespace engine
         if(!compiled)
         {
             compile();
-            compiled = true;
         }
         glUseProgram(ID);
         return resut;
@@ -153,7 +153,7 @@ namespace engine
     
     void Shader::setVec3(const std::string &name, GLsizei count, const glm::vec3 &value) const
     {
-        glUniform3fv(glGetUniformLocation(ID, name.c_str()), count, &value[0]);
+        glUniform3fv(glGetUniformLocation(ID, name.c_str()), count, glm::value_ptr(value));
     }
 
     void Shader::setVec4(const std::string &name, const glm::vec4 &value) const

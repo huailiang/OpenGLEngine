@@ -31,7 +31,9 @@ namespace engine
         
         virtual void Draw(Shader* shader = nullptr);
         
-        void AttachShader(Shader* shader);
+        void BindVert(Shader* shader);
+        
+        void Compile(Shader* shader = nullptr);
         
         void DrawMesh();
         
@@ -50,6 +52,7 @@ namespace engine
         void SetMat3(const char* name, glm::mat3 m3);
         
         void SetMat4(const char* name, glm::mat4 m4);
+
         
     private:
         
@@ -78,7 +81,7 @@ namespace engine
         
         virtual void SetupMesh();
         
-        virtual void Draw(Shader* shader);
+        virtual void Draw(Shader* shader = nullptr);
         
     public:
         GLuint diffuse_texture;

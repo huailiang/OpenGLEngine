@@ -452,6 +452,7 @@ namespace engine
                         NormalVert* vert = new NormalVert();
                         readv3(ifs, vert->Position);
                         readv3(ifs, vert->Normal);
+                        std::cout<<"normal:"<<vert->Normal.x<<" "<<vert->Normal.y<<" "<<vert->Normal.z<<std::endl;
                         mesh->vertices[i] = vert;
                     }break;
                     case 0x0012:

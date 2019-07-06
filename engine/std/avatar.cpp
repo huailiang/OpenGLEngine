@@ -11,7 +11,7 @@
 namespace engine
 {
 
-    Avatar::Avatar(const char* name, glm::vec3 pos, glm::vec3 scale, float angle)
+    Avatar::Avatar(const char* name, glm::vec3 pos, glm::vec3 scale, float angle, Shader* shader)
     {
         vector<string> items;
         this->name = name;
@@ -25,7 +25,7 @@ namespace engine
         for (size_t i=0; i<items.size(); i++)
         {
             MeshData* mesh = ReadMesh(items[i]);
-            ObjMaterial* mat = new ObjMaterial(mesh);
+            ObjMaterial* mat = new ObjMaterial(mesh, shader);
             ReadObjMaterial(items[i], mat);
             mat->SetupMesh();
             materials.push_back(mat);
@@ -45,7 +45,16 @@ namespace engine
         materials.clear();
         SAFE_DELETE(skeleton);
     }
+    
+    void Avatar::BindVert(Shader* shader)
+    {
+        loop(materials.size()) materials[i]->BindVert(shader);
+    }
 
+    void Avatar::Compile(Shader* shader)
+    {
+        loop(materials.size()) materials[i]->Compile(shader);
+    }
 
     void Avatar::RecalModelMatrix()
     {
@@ -59,7 +68,7 @@ namespace engine
 
     void Avatar::Draw(Shader* shader, Light* light, Camera* camera)
     {
-        loop(materials.size())  materials[i]->Draw(shader);//must put at first to bind mesh
+        loop(materials.size())  materials[i]->Draw(shader);
         shader->use();
         light->Apply(shader);
         shader->setMat4("model", matrix);

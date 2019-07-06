@@ -14,13 +14,11 @@ uniform mat4 view_proj;
 uniform mat4 model;
 
 
-out VS_OUT{
-    vec3 normal;
-}vs;
+out vec3 normal;
 
 void main(void)
 {
     gl_Position = Engine_MVP(model) * vec4(aPos,1);
     vec3 world_normal = mat3(transpose(inverse(model))) * aNormal;
-    vs.normal = normalize(world_normal);
+    normal = normalize(world_normal);
 }

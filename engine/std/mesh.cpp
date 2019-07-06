@@ -124,7 +124,7 @@ namespace engine
         return (type & Vt_Color) > 0;
     }
     
-    bool MeshData::Bind(Shader* shader)
+    bool MeshData::BindVert(Shader* shader)
     {
         if(shader && !shader->compiled)
         {

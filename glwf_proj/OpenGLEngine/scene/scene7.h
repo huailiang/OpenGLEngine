@@ -36,12 +36,13 @@ public:
     void InitScene()
     {
         shader = new LightShader("ibl/harmonics.vs", "ibl/harmonics.fs");
-        dragon = new Avatar("dragon",vec3(0), vec3(0.6f));
+        dragon = new Avatar("halo",vec3(0,-1,0), vec3(0.2f), -90);
+        dragon->BindVert(shader);
+        dragon->Compile();
         
         string sh_coef_file = WORKDIR + string("tools/data/CNTower/coefficients.txt");
         ifstream ifs(sh_coef_file);
-        if (!ifs)
-        throw runtime_error("open " + sh_coef_file + " failed");
+        if (!ifs) throw runtime_error("open " + sh_coef_file + " failed");
         int i = 0;
         float r, g, b;
         while (ifs >> r >> g >> b)
@@ -49,13 +50,13 @@ public:
             coefs[i] = glm::vec3(r, g, b);
             i++;
         }
+        shader->use();
+        shader->setVec3("coef", 16, coefs[0]);
     }
     
     void DrawScene()
     {
         dragon->Draw(shader, light, camera);
-        shader->use();
-        shader->setVec3("coef", 16, coefs[0]);
     }
     
 private:

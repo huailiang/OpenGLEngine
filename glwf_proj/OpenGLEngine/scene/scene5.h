@@ -85,7 +85,7 @@ public:
     void InitScene()
     {
         shader = new LightShader("model.vs", "model.fs");
-        halo = new Avatar("halo", vec3(-1.0f, -4.0f, -1.5f), vec3(1.0f), -60);
+        halo = new Avatar("halo", vec3(-1.0f, -4.0f, -1.5f), vec3(1.0f), -60, shader);
     }
 
     void DrawScene()

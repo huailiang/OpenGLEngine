@@ -16,7 +16,7 @@ namespace engine
         this->mesh = data;
         vao = 0;
         vbo = 0;
-        AttachShader(shader);
+        BindVert(shader);
     }
 
     Material::~Material()
@@ -28,12 +28,24 @@ namespace engine
         textures.clear();
     }
     
-    void Material::AttachShader(Shader* shader)
+    void Material::BindVert(Shader* sh)
     {
-        if(shader)
+        if(sh)
         {
-            this->shader = shader;
-            mesh->Bind(shader);
+            shader = sh;
+            mesh->BindVert(shader);
+        }
+    }
+    
+    void Material::Compile(Shader* sh)
+    {
+        if(sh)
+        {
+            sh->compile();
+        }
+        else
+        {
+            shader->compile();
         }
     }
 
@@ -70,12 +82,12 @@ namespace engine
         }
     }
 
-    void Material::Draw(Shader* shader)
+    void Material::Draw(Shader* sh)
     {
-        if(shader!=nullptr)
-            this->shader = shader;
+        if(sh) shader=sh;
+        error_stop(shader, "material shader can's be null");
         
-        this->shader->use();
+        shader->use();
         DrawMesh();
         DrawTexture();
     }
@@ -161,36 +173,36 @@ namespace engine
     }
     
     
-    void ObjMaterial::Draw(Shader* shader)
+    void ObjMaterial::Draw(Shader* sh)
     {
-        if (shader != nullptr)
-            this->shader = shader;
+        if(sh) this->shader= sh;
+        error_stop(shader, "object material can't be null");
         
-        mesh->Bind(this->shader);
-        this->shader->use();
+        mesh->BindVert(shader);
+        shader->use();
         int i  = 0;
         if(diffuse_texture > 0)
         {
             glActiveTexture(GL_TEXTURE0 + i);
-            this->shader->setInt("texture_diffuse", i++);
+            shader->setInt("texture_diffuse", i++);
             glBindTexture(GL_TEXTURE_2D, diffuse_texture);
         }
         if(normal_texure > 0)
         {
             glActiveTexture(GL_TEXTURE0 + i);
-            this->shader->setInt("texture_normal", i++);
+            shader->setInt("texture_normal", i++);
             glBindTexture(GL_TEXTURE_2D, normal_texure);
         }
         if(specul_texture > 0)
         {
             glActiveTexture(GL_TEXTURE0 + i);
-            this->shader->setInt("texture_specular", i++);
+            shader->setInt("texture_specular", i++);
             glBindTexture(GL_TEXTURE_2D, specul_texture);
         }
         if(specul_texture > 0)
         {
             glActiveTexture(GL_TEXTURE0 + i);
-            this->shader->setInt("texture_ambient", i++);
+            shader->setInt("texture_ambient", i++);
             glBindTexture(GL_TEXTURE_2D, ambient_texture);
         }
         DrawMesh();

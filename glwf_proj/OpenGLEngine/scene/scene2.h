@@ -49,7 +49,7 @@ public:
     {
         shader = new LightShader("light.vs","light.fs");
         shader->attach(light->getMacro().c_str());
-        mat->AttachShader(shader);
+        mat->BindVert(shader);
         shader->use();
         mat->SetFloat("scale", 1);
         mat->SetTexture("texture1", "textures/container", _JPG);

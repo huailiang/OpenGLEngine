@@ -40,6 +40,8 @@ public:
         nmShader = new Shader("gizmos/normal.vs","gizmos/pixel.fs","gizmos/normal.gs");
         terrain = new Terrain();
         nano = new Avatar("nanosuit",vec3(0.4f, -0.5f, -1.f), vec3(0.12f));
+        nano->BindVert(shader);
+        nano->BindVert(nmShader);
     }
     
     void DrawUI()
