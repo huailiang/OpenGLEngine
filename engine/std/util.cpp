@@ -55,7 +55,7 @@ namespace engine
     void getTextures(tinyobj::mesh_t& mesh, std::vector<tinyobj::material_t>& materials,std::string* vec)
     {
         int id = mesh.material_ids[0];
-        if(id>0)
+        if(id>=0)
         {
             tinyobj::material_t mat = materials[id];
             vec[0] = mat.diffuse_texname;
@@ -142,7 +142,6 @@ namespace engine
                     ofs.write((char*)&ext,sizeof(int));
                     std::string name = texture[i].substr(0,idx);
                     writestring(ofs, name);
-                    std::cout<<"material: "<<name<<" "<<ext<<std::endl;
                 }
             }
         } catch (std::ofstream::failure e)
@@ -161,20 +160,17 @@ namespace engine
         }
     }
     
-    void WriteVertex(std::ofstream& ofs, Vertex* vert, VertType type)
+    void WriteVertex(std::ofstream& ofs, Vertex* vert,VertType type)
     {
-        if(type & Vt_Pos3)
-            writevec3(ofs, vert->Position);
-        if(type & Vt_UV)
-            writevec2(ofs, vert->TexCoords);
-        if(type & Vt_Normal)
-            writevec3(ofs, vert->Normal);
+       if(type & Vt_Pos3) writevec3(ofs, vert->Position);
+       if(type & Vt_UV) writevec2(ofs, vert->TexCoords);
+       if(type & Vt_Normal) writevec3(ofs, vert->Normal);
     }
     
     void WriteSkinVertex(std::ofstream& ofs, SkinVertex* vert)
     {
         Vertex* vertex = (Vertex*)vert;
-        WriteVertex(ofs, vertex, 0x0111);
+        WriteVertex(ofs, vertex, Vt_Pos3 | Vt_UV | Vt_Normal);
         error_stop(vert->bonecount<=3, "skin vert inner error");
         glm::vec3 weight(0); glm::ivec3 boneidx(0);
         for (int i=0; i<vert->bonecount; i++) {
@@ -203,7 +199,6 @@ namespace engine
             ofs.write((char*)&num,sizeof(uint));
             loop0i(indices.size()) ofs.write((char*)&indices[i],sizeof(uint));
             loop0i(vertices.size()) WriteVertex(ofs, &vertices[i], type);
-            std::cout<<name<< "  inds num:"<<num<<" type:"<<type<<std::endl;
             ofs.close();
         } catch (std::ofstream::failure e)
         {
@@ -235,7 +230,7 @@ namespace engine
             texture[0]="masterchief_base.jpg";
             texture[1] = texture[2] = texture[3] = "";
             WriteMaterial(name, texture, name);
-          
+            
             // mesh
             ofs.open(basedir+name+".mesh",std::ofstream::binary | std::ios::out);
             short lod = (short)indices.size();
@@ -324,8 +319,8 @@ namespace engine
                         vertex.Position.x = attrib.vertices[idx.vertex_index * 3 + 0];
                         vertex.Position.y = attrib.vertices[idx.vertex_index * 3 + 1];
                         vertex.Position.z = attrib.vertices[idx.vertex_index * 3 + 2];
-                        vertex.TexCoords.x = has_texcoord ? attrib.texcoords[idx.texcoord_index * 2 + 0] : 0;
-                        vertex.TexCoords.y = has_texcoord ? attrib.texcoords[idx.texcoord_index * 2 + 1] : 0;
+                        vertex.TexCoords.x =has_texcoord ? attrib.texcoords[idx.texcoord_index * 2 + 0] : 0;
+                        vertex.TexCoords.y = has_texcoord ?attrib.texcoords[idx.texcoord_index * 2 + 1] : 0;
                         vertex.Normal.x = attrib.normals[idx.normal_index * 3 + 0];
                         vertex.Normal.y = attrib.normals[idx.normal_index * 3 + 1];
                         vertex.Normal.z = attrib.normals[idx.normal_index * 3 + 2];
@@ -440,7 +435,7 @@ namespace engine
                 ifs.read((char*)&num,sizeof(uint));
                 ifs.seekg(num*4, std::ios_base::cur);
             }
-           
+            
             for (size_t i=0; i<verts; i++)
             {
                 switch (type) {
@@ -502,8 +497,8 @@ namespace engine
                         mesh->vertices[i] = vert;
                     } break;
                     default:
-                        std::cerr<<"vertex config not support format: 0x"<<hex<<type<<std::endl;
-                        break;
+                    std::cerr<<"vertex config not support format: 0x"<<hex<<type<<std::endl;
+                    break;
                 }
             }
             ifs.close();
@@ -537,7 +532,7 @@ namespace engine
         {
             if(sscanf(line," <face v1=\"%d\" v2=\"%d\" v3=\"%d\" />",&x,&y,&z) == 3)
             {
-                 indices[lod].push_back(x); indices[lod].push_back(y); indices[lod].push_back(z);
+                indices[lod].push_back(x); indices[lod].push_back(y); indices[lod].push_back(z);
             }
             if(sscanf(line," <position x=\"%f\" y=\"%f\" z=\"%f\" />",&f1,&f2,&f3) == 3)
             {
