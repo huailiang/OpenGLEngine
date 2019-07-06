@@ -35,19 +35,33 @@ public:
     
     void InitScene()
     {
-//        shader = new LightShader("model.vs", "model.fs");
         shader = new LightShader("ibl/harmonics.vs", "ibl/harmonics.fs");
         dragon = new Avatar("dragon",vec3(0), vec3(0.6f));
+        
+        string sh_coef_file = WORKDIR + string("tools/data/CNTower/coefficients.txt");
+        ifstream ifs(sh_coef_file);
+        if (!ifs)
+        throw runtime_error("open " + sh_coef_file + " failed");
+        int i = 0;
+        float r, g, b;
+        while (ifs >> r >> g >> b)
+        {
+            coefs[i] = glm::vec3(r, g, b);
+            i++;
+        }
     }
     
     void DrawScene()
     {
         dragon->Draw(shader, light, camera);
+        shader->use();
+        shader->setVec3("coef", 16, coefs[0]);
     }
     
 private:
     Shader *shader = nullptr;
     Avatar *dragon = nullptr;
+    glm::vec3 coefs[16];
 
 };
 

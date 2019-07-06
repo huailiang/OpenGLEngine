@@ -142,6 +142,7 @@ namespace engine
                     ofs.write((char*)&ext,sizeof(int));
                     std::string name = texture[i].substr(0,idx);
                     writestring(ofs, name);
+                    std::cout<<"material: "<<name<<" "<<ext<<std::endl;
                 }
             }
         } catch (std::ofstream::failure e)
@@ -202,6 +203,7 @@ namespace engine
             ofs.write((char*)&num,sizeof(uint));
             loop0i(indices.size()) ofs.write((char*)&indices[i],sizeof(uint));
             loop0i(vertices.size()) WriteVertex(ofs, &vertices[i], type);
+            std::cout<<name<< "  inds num:"<<num<<" type:"<<type<<std::endl;
             ofs.close();
         } catch (std::ofstream::failure e)
         {

@@ -150,6 +150,11 @@ namespace engine
     {
         glUniform3f(glGetUniformLocation(ID, name.c_str()), x, y, z);
     }
+    
+    void Shader::setVec3(const std::string &name, GLsizei count, const glm::vec3 &value) const
+    {
+        glUniform3fv(glGetUniformLocation(ID, name.c_str()), count, &value[0]);
+    }
 
     void Shader::setVec4(const std::string &name, const glm::vec4 &value) const
     {

@@ -43,6 +43,8 @@ namespace engine
 
         void setVec3(const std::string &name, float x, float y, float z) const;
         
+        void setVec3(const std::string &name, GLsizei count, const glm::vec3 &value) const;
+        
         void setVec4(const std::string &name, const glm::vec4 &value) const;
         
         void setVec4(const std::string &name, float x, float y, float z, float w);
