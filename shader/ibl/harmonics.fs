@@ -7,8 +7,6 @@
  */
 
 
-uniform int SH_NUM;
-
 const float PI = 3.1415926535897932384626433832795;
 
 uniform vec3 coef[16];
@@ -47,7 +45,7 @@ void main(void)
     basis[15] = 1.f / 4.f * sqrt(35.f / (2 * PI))*(x2 - 3 * z2)*x;
     
     vec3 c = vec3(0,0,0);
-    for (int i = 0; i < SH_NUM; i++)
+    for (int i = 0; i < 16; i++)
     {
         c += coef[i] * basis[i];
     }
