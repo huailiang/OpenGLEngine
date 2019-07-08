@@ -32,6 +32,7 @@
 		4C5F3FD322ABF95C005B7CFD /* asset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C5F3FD222ABF95C005B7CFD /* asset.cpp */; };
 		4C73C0F322A8C0F9002A8AD0 /* eventmgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C73C0F222A8C0F9002A8AD0 /* eventmgr.cpp */; };
 		4C73C0F522A8C18C002A8AD0 /* uimgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C73C0F422A8C18C002A8AD0 /* uimgr.cpp */; };
+		4CCACC2722D35ABD008ACBD0 /* engineio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CCACC2522D35ABD008ACBD0 /* engineio.cpp */; };
 		4CD27D46228307050038AE21 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD27D3E2283022D0038AE21 /* OpenGL.framework */; };
 		4CD27D482283070B0038AE21 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD27D472283070B0038AE21 /* CoreVideo.framework */; };
 		4CD71DB022B0CF0500466683 /* tinystr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CD71DAC22B0CF0500466683 /* tinystr.cpp */; };
@@ -162,6 +163,8 @@
 		4C7D4A2922CDDFF000A8A77B /* harmonics.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = harmonics.fs; sourceTree = "<group>"; };
 		4C9450F722C0EB30005E5065 /* scene6.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = scene6.h; path = OpenGLEngine/scene/scene6.h; sourceTree = SOURCE_ROOT; };
 		4CB544CC22B5F4F8007BAE5F /* scene5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = scene5.h; path = OpenGLEngine/scene/scene5.h; sourceTree = SOURCE_ROOT; };
+		4CCACC2522D35ABD008ACBD0 /* engineio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = engineio.cpp; path = ../engine/engineio.cpp; sourceTree = "<group>"; };
+		4CCACC2622D35ABD008ACBD0 /* engineio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = engineio.h; path = ../engine/engineio.h; sourceTree = "<group>"; };
 		4CD27D2B2282F4E30038AE21 /* OpenGLEngine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OpenGLEngine; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CD27D3E2283022D0038AE21 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		4CD27D472283070B0038AE21 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
@@ -415,6 +418,8 @@
 				4CE8605022A4F1EE000677DC /* scene */,
 				4C42797D22A54AD0003AE42A /* engine.h */,
 				4C42797A22A54AD0003AE42A /* engine.cpp */,
+				4CCACC2522D35ABD008ACBD0 /* engineio.cpp */,
+				4CCACC2622D35ABD008ACBD0 /* engineio.h */,
 				4C42797C22A54AD0003AE42A /* profile.h */,
 				4C40A86222BC789800F910AE /* profile.cpp */,
 				4C4279AC22A54C26003AE42A /* main.cpp */,
@@ -521,6 +526,7 @@
 				4C37752022A54FA20074744F /* uibase.cpp in Sources */,
 				4C1B57BF22A7E03700A7AFF1 /* avatar.cpp in Sources */,
 				4C40A86322BC789800F910AE /* profile.cpp in Sources */,
+				4CCACC2722D35ABD008ACBD0 /* engineio.cpp in Sources */,
 				4CEFDC0222CE407C00E5B6DD /* cubemap.cpp in Sources */,
 				4C1B57BC22A7BE3800A7AFF1 /* texmgr.cpp in Sources */,
 				4C37752122A54FA20074744F /* ttfont.cpp in Sources */,

@@ -23,6 +23,7 @@
 #define TINYOBJLOADER_IMPLEMENTATION
 #include "../ext/tiny_obj_loader.h"
 #include "animation.h"
+#include "../engineio.h"
 
 namespace engine
 {

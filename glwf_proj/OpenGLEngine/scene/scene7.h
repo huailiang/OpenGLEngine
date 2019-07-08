@@ -17,14 +17,31 @@ class Scene7 : public Scene
 {
 
 public:
+    
+    Scene7():Scene()
+    {
+        envs[0] = "LancellottiChapel";
+        envs[1] = "hornstullsstrand";
+        envs[2] = "Footballfield2";
+        envs[3] = "SanFrancisco";
+        envs[4] = "GoldenGateBridge3";
+        env = envs[0];
+    }
 
     ~Scene7()
     {
         SAFE_DELETE(shader);
         SAFE_DELETE(dragon);
+        SAFE_DELETE(btn1);
+        SAFE_DELETE(btn2);
+        SAFE_DELETE(btn3);
+        SAFE_DELETE(btn4);
+        SAFE_DELETE(btn5);
     }
 
     int getType() { return TY_Scene7; }
+    
+    std::string getSkybox() { return env; }
 
     virtual bool drawShadow() { return false; }
 
@@ -39,8 +56,12 @@ public:
         dragon = new Avatar("halo",vec3(0,-1,0), vec3(0.2f), -90);
         dragon->BindVert(shader);
         dragon->Compile();
-        
-        string sh_coef_file = WORKDIR + string("tools/data/CNTower/coefficients.txt");
+        LoadCoef();
+    }
+    
+    void LoadCoef()
+    {
+        string sh_coef_file = WORKDIR + string("tools/data/"+env+"/coefficients.txt");
         ifstream ifs(sh_coef_file);
         if (!ifs) throw runtime_error("open " + sh_coef_file + " failed");
         int i = 0;
@@ -57,13 +78,45 @@ public:
     void DrawScene()
     {
         dragon->Draw(shader, light, camera);
+        dragon->Rotate(deltatime*30);
+    }
+    
+    void DrawUI()
+    {
+        Scene::DrawUI();
+        btn1 = new UIButton(vec2(660, 360), vec3(1,1,0), 0.6f, envs[0],0);
+        btn1->RegistCallback(OnClick, this);
+        btn2 = new UIButton(vec2(660, 330), vec3(1,1,0), 0.6f, envs[1],1);
+        btn2->RegistCallback(OnClick, this);
+        btn3 = new UIButton(vec2(660, 300), vec3(1,1,0), 0.6f, envs[2],2);
+        btn3->RegistCallback(OnClick, this);
+        btn4 = new UIButton(vec2(660, 270), vec3(1,1,0), 0.6f, envs[3],3);
+        btn4->RegistCallback(OnClick, this);
+        btn5 = new UIButton(vec2(660, 240), vec3(1,1,0), 0.6f, envs[4],4);
+        btn5->RegistCallback(OnClick, this);
+    }
+    
+    static void OnClick(UIEvent* e, void* arg)
+    {
+        Scene7* scene = (Scene7*)(arg);
+        int evtid = e->evtid;
+        scene->Click(evtid);
+    }
+
+    void Click(int eid)
+    {
+        env= envs[eid];
+        LoadCoef();
+        RebuildSky();
     }
     
 private:
     Shader *shader = nullptr;
     Avatar *dragon = nullptr;
     glm::vec3 coefs[16];
-
+    std::string envs[5];
+    std::string env;
+    UIButton *btn1,*btn2,*btn3,*btn4,*btn5;
 };
 
 #endif /* scene7_h */

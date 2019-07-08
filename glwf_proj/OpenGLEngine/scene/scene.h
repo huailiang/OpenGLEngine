@@ -143,6 +143,12 @@ public:
         if(skybox) skybox->Draw();
     }
     
+    void RebuildSky()
+    {
+        delete skybox;
+        skybox = new Skybox(camera, getSkybox(), isEquirectangularMap());
+    }
+    
     void ProcessKeyboard(GLFWwindow *window, float deltatime)
     {
         if(camera)

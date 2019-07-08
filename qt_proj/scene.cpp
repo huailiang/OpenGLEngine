@@ -78,7 +78,7 @@ void Scene::InitShader()
 {
     shader = new LightShader("light.vs","light.fs");
     shader->attach(light->getMacro().c_str());
-    cube->Bind(shader);
+    cube->BindVert(shader);
     shader->use();
     shader->setInt("texture1", 0);
     shader->setInt("texture2", 1);

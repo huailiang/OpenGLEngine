@@ -5,6 +5,10 @@
 //  Created by 彭怀亮 on 5/13/19.
 //  Copyright © 2019 彭怀亮. All rights reserved.
 //
+//  skybox支持两种格式：
+//      1. cubemap 需要提供六张贴图
+//      2. hdr 球形贴图 代码自动转化为cubemap
+//
 
 #ifndef skybox_h
 #define skybox_h

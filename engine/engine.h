@@ -160,36 +160,6 @@ namespace engine
     
     uint Hash(const std::string str);
     
-    void readv2(std::ifstream& f, glm::vec2& v);
-    
-    void readv3(std::ifstream& f, glm::vec3& v);
-    
-    void readv3(std::ifstream& f, glm::ivec3& v);
-    
-    void readstring(std::ifstream& f, std::string& str);
-    
-    void readarray(std::ifstream& f, float arr[], int num);
-    
-    void readmat4(std::ifstream& f, glm::mat4& mat);
-    
-    void readvec3(std::ifstream& f, glm::vec3& v);
-    
-    void readvec4(std::ifstream& f, glm::vec4& v);
-    
-    void writestring(std::ofstream& f, std::string str);
-    
-    void writevec2(std::ofstream& f, glm::vec2& v);
-    
-    void writevec3(std::ofstream& f, glm::vec3& v);
-    
-    void writevec3(std::ofstream& f, glm::ivec3& v);
-    
-    void writevec4(std::ofstream& f, glm::vec4& v);
-    
-    void writearray(std::ofstream& f, float arr[], int num);
-    
-    void writemat4(std::ofstream& f, glm::mat4 mat);
-    
     void caltangent(const glm::vec3 pos1, const glm::vec3 pos2, const glm::vec3 pos3,
                     const glm::vec2 uv1, const glm::vec2 uv2, const glm::vec2 uv3,
                     glm::vec3* tan, glm::vec3* bit);

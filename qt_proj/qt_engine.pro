@@ -33,6 +33,7 @@ SOURCES += \
     ../engine/ext/xml/tinyxmlerror.cpp \
     ../engine/ext/xml/tinyxmlparser.cpp \
     ../engine/engine.cpp \
+    ../engine/engineio.cpp \
     ../engine/profile.cpp \
     ../engine/std/camera.cpp \
     ../engine/std/light.cpp \
@@ -72,6 +73,7 @@ HEADERS += \
     ../engine/std/skybox.h \
     ../engine/std/asset.h \
     ../engine/engine.h \
+    ../engine/engineio.h \
     ../engine/std/avatar.h \
     ../engine/std/mesh.h \
     ../engine/std/animation.h \

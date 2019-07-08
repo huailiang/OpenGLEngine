@@ -205,6 +205,7 @@
 		4C97AAC522A50D01005F6388 /* light.fs in Resources */ = {isa = PBXBuildFile; fileRef = 4C97AAA322A50D01005F6388 /* light.fs */; };
 		4CC91DFC22B9E9F400AB6C03 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8AC06722A3A45500036684 /* Foundation.framework */; };
 		4CC91E0122BA19FF00AB6C03 /* iOSAsset.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4CC91E0022BA19FF00AB6C03 /* iOSAsset.mm */; };
+		4CCACC2A22D35D5B008ACBD0 /* engineio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CCACC2922D35D5B008ACBD0 /* engineio.cpp */; };
 		4CE2223322A91EE00095ECCA /* libFreetype2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE2223222A91EE00095ECCA /* libFreetype2.a */; };
 		4CE2224622A91F0B0095ECCA /* eventmgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2223922A91F0B0095ECCA /* eventmgr.cpp */; };
 		4CE2224722A91F0B0095ECCA /* uibase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2223A22A91F0B0095ECCA /* uibase.cpp */; };
@@ -442,6 +443,8 @@
 		4CC91E0022BA19FF00AB6C03 /* iOSAsset.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = iOSAsset.mm; sourceTree = "<group>"; };
 		4CC91E0322BA1B9000AB6C03 /* PVRTGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVRTGlobal.h; sourceTree = "<group>"; };
 		4CC91E0422BA1B9000AB6C03 /* PVRTTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVRTTexture.h; sourceTree = "<group>"; };
+		4CCACC2822D35D5B008ACBD0 /* engineio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = engineio.h; path = ../../engine/engineio.h; sourceTree = "<group>"; };
+		4CCACC2922D35D5B008ACBD0 /* engineio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = engineio.cpp; path = ../../engine/engineio.cpp; sourceTree = "<group>"; };
 		4CE2223222A91EE00095ECCA /* libFreetype2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFreetype2.a; sourceTree = "<group>"; };
 		4CE2223822A91F0B0095ECCA /* uimgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uimgr.h; sourceTree = "<group>"; };
 		4CE2223922A91F0B0095ECCA /* eventmgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = eventmgr.cpp; sourceTree = "<group>"; };
@@ -718,6 +721,8 @@
 				4C01BED122CE1F0E00FCA643 /* profile.cpp */,
 				4C492FF322AD5F9300FC531B /* engine.h */,
 				4C492FF222AD5F9300FC531B /* engine.cpp */,
+				4CCACC2822D35D5B008ACBD0 /* engineio.h */,
+				4CCACC2922D35D5B008ACBD0 /* engineio.cpp */,
 				4C443B8022A25D2D00866F29 /* Scene.h */,
 				4C443B7F22A25D2D00866F29 /* Scene.cpp */,
 				4C8062C8229FC059005FD1F9 /* Main.storyboard */,
@@ -1109,6 +1114,7 @@
 				4C7AF67122A54EA700B63173 /* skybox.cpp in Sources */,
 				4CE2224C22A91F0B0095ECCA /* uimgr.cpp in Sources */,
 				4CE2224922A91F0B0095ECCA /* button.cpp in Sources */,
+				4CCACC2A22D35D5B008ACBD0 /* engineio.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
