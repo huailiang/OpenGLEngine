@@ -14,7 +14,7 @@ uniform sampler2D normalMap;
 uniform sampler2D metallicMap;
 uniform sampler2D roughnessMap;
 uniform sampler2D aoMap;
-
+uniform int debug;
 #ifdef IRRADIANCE
 // 环境光从irradianceMap中读取
 uniform samplerCube irradianceMap;
@@ -84,7 +84,17 @@ void main()
 #endif
     
     vec3 color = ambient + Lo;
-
+    
+#ifdef DEBUG
+    if(debug == 0)
+        color = irradiance;
+    else if (debug == 1)
+        color = specular;
+    else if( debug == 2)
+        color = vec3(brdf,0);
+    else if (debug == 3)
+        color = F;
+#endif
     // HDR tonemapping
     color = color / (color + vec3(1.0));
     // gamma correct

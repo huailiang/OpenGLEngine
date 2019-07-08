@@ -29,6 +29,11 @@ public:
         DELETE_TEXTURE(metallic);
         DELETE_TEXTURE(roughness);
         DELETE_TEXTURE(ao);
+        SAFE_DELETE(btn1);
+        SAFE_DELETE(btn2);
+        SAFE_DELETE(btn3);
+        SAFE_DELETE(btn4);
+        SAFE_DELETE(btn5);
     }
     
     int getType() { return TY_Scene6; }
@@ -50,6 +55,7 @@ public:
     {
         shader  = new Shader("pbr.vs","pbr.fs");
         shader->attach("IRRADIANCE");
+        shader->attach("DEBUG");
         shader->use();
         ApplyCamera(shader);
         shader->setInt("albedoMap", 0);
@@ -60,6 +66,7 @@ public:
         shader->setInt("irradianceMap", 5);
         shader->setInt("prefilterMap", 6);
         shader->setInt("brdfLUT", 7);
+        shader->setInt("debug", 32);
         
         Texture("textures/pbr/rusted_iron/albedo", _PNG, &albedo);
         Texture("textures/pbr/rusted_iron/normal", _PNG, &normal);
@@ -72,7 +79,21 @@ public:
         InitQuad(&quadVAO, &quadVBO, debugShader);
     }
     
-
+    void DrawUI()
+    {
+        Scene::DrawUI();
+        btn1 = new UIButton(vec2(660, 360), vec3(1,1,0), 0.6f, "  diffuse ", 0);
+        btn1->RegistCallback(OnClick, this);
+        btn2 = new UIButton(vec2(660, 330), vec3(1,1,0), 0.6f, " specular",1);
+        btn2->RegistCallback(OnClick, this);
+        btn3 = new UIButton(vec2(660, 300), vec3(1,1,0), 0.6f, "   brdf   ",2);
+        btn3->RegistCallback(OnClick, this);
+        btn3 = new UIButton(vec2(660, 270), vec3(1,1,0), 0.6f, "  fresnel ",3);
+        btn3->RegistCallback(OnClick, this);
+        btn3 = new UIButton(vec2(660, 240), vec3(1,1,0), 0.6f, "rendering",4);
+        btn3->RegistCallback(OnClick, this);
+    }
+    
     void DrawScene()
     {
         glBindVertexArray(vao);
@@ -110,6 +131,19 @@ public:
         
         RenderQuad(skybox->hdrTexture);
     }
+    
+    static void OnClick(UIEvent* e, void* arg)
+    {
+        Scene6* scene = (Scene6*)(arg);
+        int evtid = e->evtid;
+        scene->Click(evtid);
+    }
+    
+    void Click(int eid)
+    {
+        shader->use();
+        shader->setInt("debug", eid);
+    }
  
     
 private:
@@ -117,6 +151,7 @@ private:
     GLuint albedo, normal, metallic, roughness, ao;
     GLuint vao, vbo, ebo;
     size_t indexCount;
+    UIButton *btn1,*btn2,*btn3,*btn4,*btn5;
 
 };
 

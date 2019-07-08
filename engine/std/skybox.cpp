@@ -212,6 +212,7 @@ namespace engine
         
         glViewport(0, 0, 512, 512);
         glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
+        glBindRenderbuffer(GL_RENDERBUFFER, captureRBO);
         for (unsigned int i = 0; i < 6; ++i)
         {
             equirectangularToCubemapShader->setMat4("view", captureViews[i]);
