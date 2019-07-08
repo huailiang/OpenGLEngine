@@ -64,8 +64,7 @@ namespace engine
         
     protected:
         GLuint vao, vbo;
-        vector<const char*> texpaths;
-        map<const char*, GLuint> textures;
+        map<const char*, Texture> textures;
         
     };
     

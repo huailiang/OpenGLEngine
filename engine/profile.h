@@ -29,20 +29,26 @@ namespace engine
         out << std::setprecision(n) << a_value;
         return out.str();
     }
+    
+    std::ostream& operator<<(std::ostream& stream, glm::ivec2 vec);
+    
+    std::ostream& operator<<(std::ostream& stream, glm::ivec3 vec);
+    
+    std::ostream& operator<<(std::ostream& stream, glm::ivec4 vec);
 
-    void print_mat4(const mat4& mat);
-
-    void print_mat4(const mat4& mat, const char* tag);
+    std::ostream& operator<<(std::ostream& stream, glm::vec2 vec);
     
-    void print_vec3(const vec3& vec);
+    std::ostream& operator<<(std::ostream& stream, glm::vec3 vec);
     
-    void print_vec4(const vec4& vec);
+    std::ostream& operator<<(std::ostream& stream, glm::vec4 vec);
     
-    void print_vec3(const vec3& vec, const char* tag);
+    std::ostream& operator<<(std::ostream& stream, glm::mat2 mat);
     
-    void print_vec4(const vec4& vec,const char* tag);
+    std::ostream& operator<<(std::ostream& stream, glm::mat3 mat);
     
-    void profile_test();
+    std::ostream& operator<<(std::ostream& stream, glm::mat4 mat);
+    
+    
 }
 
 

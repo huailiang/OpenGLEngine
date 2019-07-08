@@ -164,6 +164,7 @@ namespace engine
                     const glm::vec2 uv1, const glm::vec2 uv2, const glm::vec2 uv3,
                     glm::vec3* tan, glm::vec3* bit);
     
+    
 }
 
 #endif /* engine_h */

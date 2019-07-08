@@ -301,6 +301,5 @@ namespace engine
         (*bit).z = f * (-deltaUV2.x * edge1.z + deltaUV1.x * edge2.z);
         (*bit) = glm::normalize(*bit);
     }
-    
-    
+        
 }

@@ -52,7 +52,6 @@ public:
         Scene::DrawShadow(depthShader);
         RenderScene(depthShader);
     }
-
     
     void DrawScene()
     {

@@ -23,8 +23,7 @@ namespace engine
     {
         glDeleteBuffers(1, &vbo);
         glDeleteVertexArrays(1, &vao);
-        foreach(it, textures) TexMgr::getInstance()->RemvTexture(it->second);
-        texpaths.clear();
+        foreach(it, textures) TexMgr::getInstance()->RemvTexture(it->second.textureID);
         textures.clear();
     }
     
@@ -77,7 +76,7 @@ namespace engine
         {
             glActiveTexture(GL_TEXTURE0+i);
             shader->setInt(it->first, i);
-            glBindTexture(GL_TEXTURE_2D, it->second);
+            glBindTexture(GL_TEXTURE_2D, it->second.textureID);
             i++;
         }
     }
@@ -94,13 +93,14 @@ namespace engine
     
     void Material::SetTexture(const char* name, const char* path, EXT ext)
     {
-        bool empty = strcmp(path, "") == 0;
-        if(!empty && std::find(texpaths.begin(), texpaths.end(), path) ==  texpaths.end())
+        if(strcmp(path, ""))
         {
-            GLuint id;
-            Texture(path,ext,&id);
-            texpaths.push_back(path);
-            textures.insert(std::pair<const char*, GLuint>(name,  id));
+            foreach(item, textures)
+            {
+                GLuint id;
+                Texture tex(path,ext,&id);
+                textures.insert(std::pair<const char*, Texture>(name,  tex));
+            }
         }
     }
     

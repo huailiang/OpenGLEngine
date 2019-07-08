@@ -35,15 +35,10 @@ void processInput(GLFWwindow* window);
 
 SceneMgr SceneMgr::instance;
 
-
-
 int main(int argc, const char * argv[])
 {
     if (argc<=1)
     {
-//        string name("laurana");
-//        engine::LoadObj(name);
-//        return 0;
         return run_engine();
     }
     else
