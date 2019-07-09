@@ -28,7 +28,7 @@ namespace engine
         UIButton(const glm::vec2 pos,const glm::vec3 color = glm::vec3(1), const float scale = 1.0f,
                const std::string text="", const int evtid = 0,const bool interact=true);
         
-        ~UIButton();
+        virtual ~UIButton();
         
         void Draw();
         

@@ -22,8 +22,7 @@ namespace engine
     {
         glDeleteVertexArrays(1, &vao);
         glDeleteBuffers(1, &vbo);
-        delete shader;
-        shader = NULL;
+        SAFE_DELETE(shader);
     }
 
 

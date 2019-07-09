@@ -84,15 +84,15 @@ public:
     void DrawUI()
     {
         Scene::DrawUI();
-        btn1 = new UIButton(vec2(660, 360), vec3(1,1,0), 0.6f, envs[0],0);
+        btn1 = new UIButton(vec2(690, 360), vec3(1,1,0), 0.6f, envs[0],0);
         btn1->RegistCallback(OnClick, this);
-        btn2 = new UIButton(vec2(660, 330), vec3(1,1,0), 0.6f, envs[1],1);
+        btn2 = new UIButton(vec2(690, 330), vec3(1,1,0), 0.6f, envs[1],1);
         btn2->RegistCallback(OnClick, this);
-        btn3 = new UIButton(vec2(660, 300), vec3(1,1,0), 0.6f, envs[2],2);
+        btn3 = new UIButton(vec2(690, 300), vec3(1,1,0), 0.6f, envs[2],2);
         btn3->RegistCallback(OnClick, this);
-        btn4 = new UIButton(vec2(660, 270), vec3(1,1,0), 0.6f, envs[3],3);
+        btn4 = new UIButton(vec2(690, 270), vec3(1,1,0), 0.6f, envs[3],3);
         btn4->RegistCallback(OnClick, this);
-        btn5 = new UIButton(vec2(660, 240), vec3(1,1,0), 0.6f, envs[4],4);
+        btn5 = new UIButton(vec2(690, 240), vec3(1,1,0), 0.6f, envs[4],4);
         btn5->RegistCallback(OnClick, this);
     }
     

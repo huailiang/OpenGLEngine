@@ -88,10 +88,10 @@ public:
         btn2->RegistCallback(OnClick, this);
         btn3 = new UIButton(vec2(660, 300), vec3(1,1,0), 0.6f, "   brdf   ",2);
         btn3->RegistCallback(OnClick, this);
-        btn3 = new UIButton(vec2(660, 270), vec3(1,1,0), 0.6f, "  fresnel ",3);
-        btn3->RegistCallback(OnClick, this);
-        btn3 = new UIButton(vec2(660, 240), vec3(1,1,0), 0.6f, "rendering",4);
-        btn3->RegistCallback(OnClick, this);
+        btn4 = new UIButton(vec2(660, 270), vec3(1,1,0), 0.6f, "  fresnel ",3);
+        btn4->RegistCallback(OnClick, this);
+        btn5 = new UIButton(vec2(660, 240), vec3(1,1,0), 0.6f, "rendering",4);
+        btn5->RegistCallback(OnClick, this);
     }
     
     void DrawScene()

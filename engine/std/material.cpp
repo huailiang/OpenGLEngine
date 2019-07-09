@@ -95,7 +95,7 @@ namespace engine
     {
         if(strcmp(path, ""))
         {
-            foreach(item, textures)
+            if(textures.find(name) == textures.end())
             {
                 GLuint id;
                 Texture tex(path,ext,&id);
