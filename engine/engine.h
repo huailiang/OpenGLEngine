@@ -50,9 +50,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-
-//#include <OpenGL/glext.h>
-
 #include "profile.h"
 
 namespace engine

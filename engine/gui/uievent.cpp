@@ -16,7 +16,6 @@ namespace engine
         RegistCallback(cb, NULL);
     }
 
-
     void UIEvent::RegistCallback(ClickCallback cb, void* arg)
     {
         this->callback = cb;

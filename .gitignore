@@ -10,6 +10,7 @@ qt_proj/build/qt_engine*
 qt_proj/build/Makefile
 resources/texture2/
 resources/pvr/
+es_proj/opencv2.framework/
 tools/data/
 **/build/project/
 **/build/CMakeCache*

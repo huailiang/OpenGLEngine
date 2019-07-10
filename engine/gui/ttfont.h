@@ -20,7 +20,6 @@ using namespace glm;
 
 namespace engine
 {
-
     
     struct Character
     {

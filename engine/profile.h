@@ -21,13 +21,20 @@ namespace engine
     GLenum glCheckError_(const char *file, int line);
     #define glCheckError() glCheckError_(__FILE__, __LINE__)
 
-
     template <typename T>
     std::string to_string_with_precision(const T a_value, const int n = 6)
     {
         std::ostringstream out;
         out << std::setprecision(n) << a_value;
         return out.str();
+    }
+    
+    template <typename T>
+    std::string ToString(const T& value)
+    {
+        std::ostringstream stream;
+        stream << value;
+        return stream.str();
     }
     
     std::ostream& operator<<(std::ostream& stream, glm::ivec2 vec);

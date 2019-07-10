@@ -150,6 +150,7 @@
 		4C443B8122A25D2D00866F29 /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C443B7F22A25D2D00866F29 /* Scene.cpp */; };
 		4C443B8522A25F8E00866F29 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C443B8422A25F8E00866F29 /* libc++.tbd */; };
 		4C492FF422AD5F9300FC531B /* engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C492FF222AD5F9300FC531B /* engine.cpp */; };
+		4C4E4D1122D6015300AA34E9 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C4E4D1022D6015300AA34E9 /* opencv2.framework */; };
 		4C5F3FE622ABFD6D005B7CFD /* asset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C5F3FE422ABFD6D005B7CFD /* asset.cpp */; };
 		4C66674A22A2A3A3002BA996 /* FilePath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C66674822A2A3A3002BA996 /* FilePath.cpp */; };
 		4C6D757322B37AD00098F22C /* animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C6D757222B37AD00098F22C /* animation.cpp */; };
@@ -367,6 +368,7 @@
 		4C443B8422A25F8E00866F29 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		4C492FF222AD5F9300FC531B /* engine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = engine.cpp; path = ../../engine/engine.cpp; sourceTree = "<group>"; };
 		4C492FF322AD5F9300FC531B /* engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = engine.h; path = ../../engine/engine.h; sourceTree = "<group>"; };
+		4C4E4D1022D6015300AA34E9 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		4C52BE9622ACCA5500D78ACB /* mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mesh.h; sourceTree = "<group>"; };
 		4C5F3FE422ABFD6D005B7CFD /* asset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = asset.cpp; sourceTree = "<group>"; };
 		4C5F3FE522ABFD6D005B7CFD /* asset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asset.h; sourceTree = "<group>"; };
@@ -468,6 +470,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C4E4D1122D6015300AA34E9 /* opencv2.framework in Frameworks */,
 				4CC91DFC22B9E9F400AB6C03 /* Foundation.framework in Frameworks */,
 				4CE2223322A91EE00095ECCA /* libFreetype2.a in Frameworks */,
 				4C8AC06622A3A44300036684 /* CoreGraphics.framework in Frameworks */,
@@ -737,6 +740,7 @@
 		4C8062D8229FC072005FD1F9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4C4E4D1022D6015300AA34E9 /* opencv2.framework */,
 				4CE2223222A91EE00095ECCA /* libFreetype2.a */,
 				4C8AC06722A3A45500036684 /* Foundation.framework */,
 				4C8AC06522A3A44300036684 /* CoreGraphics.framework */,
@@ -1260,6 +1264,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 238UB5UD4H;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1291,6 +1299,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 238UB5UD4H;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_GLES_,
 					GLFW_INCLUDE_ES31,
