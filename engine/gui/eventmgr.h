@@ -32,6 +32,7 @@ namespace engine
         
         void Triger(float x, float y, int action);
         
+        void DoTriger(float x, float y);
         
     private:
         std::vector<UIEvent*> ui_events;

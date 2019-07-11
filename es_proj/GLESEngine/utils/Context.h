@@ -63,6 +63,7 @@ struct ESContext
     void (*updateFunc) (ESContext *, float deltaTime);
     void (*updateWindow) (ESContext*);
     void (*pauseFunc)(ESContext*, bool);
+    void (*tapFunc)(ESContext*, float, float);
 };
 
 

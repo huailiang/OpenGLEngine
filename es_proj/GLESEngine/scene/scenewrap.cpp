@@ -58,6 +58,13 @@ void SetWindowSize(ESContext *esContext)
 }
 
 
+void OnClickTriger(ESContext *esContext, float x, float y)
+{
+    float xx = RENDER_WIDTH * x;
+    float yy = RENDER_HEIGTH * y;
+    EventMgr::getInstance()->DoTriger(xx, yy);
+}
+
 bool InitScene(ESContext* context)
 {
     esContext = context;
@@ -67,6 +74,7 @@ bool InitScene(ESContext* context)
     context->shutdownFunc = ShutDown;
     context->pauseFunc =  OnPause;
     context->updateWindow = SetWindowSize;
+    context->tapFunc = OnClickTriger;
     return true;
 }
 

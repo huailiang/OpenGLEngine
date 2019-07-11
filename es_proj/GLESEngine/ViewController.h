@@ -17,10 +17,5 @@
 -(void)OnApplicationPause:(bool) pause;
 -(void)OnApplicationQuit;
 
-#pragma mark - UIGestureRecognizer delegate
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch;
-
-
-
 @end
 

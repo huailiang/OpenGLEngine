@@ -84,19 +84,18 @@
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    NSLog(@"%f, %f", self.view.center.x, self.view.center.y);
-    NSLog(@"%f, %f", self.view.bounds.size.width, self.view.bounds.size.height);
-    NSSet *allTouches = [event allTouches];    //返回与当前接收者有关的所有的触摸对象
-    UITouch *touch = [allTouches anyObject];   //视图中的所有对象
-    CGPoint point = [touch locationInView:[touch view]]; //返回触摸点在视图中的当前坐标
+    CGSize size = self.view.bounds.size;
+    NSLog(@"%f, %f, %f, %f", self.view.center.x, self.view.center.y, size.width, size.height);
+    NSSet *allTouches = [event allTouches];
+    UITouch *touch = [allTouches anyObject];  
+    CGPoint point = [touch locationInView:[touch view]];
     int x = point.x;
     int y = point.y;
-    CGFloat scale = [UIScreen mainScreen].scale;
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGSize screenSize = screenRect.size;
-    double xsc = screenSize.width * scale / self.view.bounds.size.width;
-    double ysc = screenSize.height* scale/ self.view.bounds.size.height;
-    NSLog(@"touch pos: (%d, %d)", (int)(x * xsc), (int)(y * ysc));
+    NSLog(@"touch pos: (%f, %f)", (float)(x / size.width), (float)(y /size.height));
+    if(_esContext.tapFunc)
+    {
+        _esContext.tapFunc(&_esContext, (float)(x / size.width), (float)(y /size.height));
+    }
 }
 
 - (void)setupGL

@@ -39,16 +39,21 @@ namespace engine
         float xx = x / scale;
         scale = RENDER_HEIGTH / (SCR_HEIGHT * 2.0f);
         float yy = y / scale;
+        if(action == GLFW_RELEASE) DoTriger(xx, yy, action);
+#endif
+    }
+    
+    void EventMgr::DoTriger(float x, float y)
+    {
         for (size_t i=0; i<ui_events.size(); i++)
         {
             UIEvent* et = ui_events[i];
-            if(action == GLFW_RELEASE && et->IsHit(xx, yy))
+            if(et->IsHit(x, y))
             {
                 et->OnTriger();
                 et->Dispacher();
             }
         }
-#endif
     }
     
 
