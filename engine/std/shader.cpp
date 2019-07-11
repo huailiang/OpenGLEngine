@@ -75,7 +75,6 @@ namespace engine
         glShaderSource(fragment, 1, &fShaderCode, NULL);
         glCompileShader(fragment);
         checkCompileErrors(fragment, "FRAGMENT");
-        // if geometry shader is given, compile geometry shader
         GLuint geometry = 0;
         if(!geometryCode.empty())
         {

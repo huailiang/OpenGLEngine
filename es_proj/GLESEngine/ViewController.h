@@ -7,7 +7,7 @@
 //
 
 #import <GLKit/GLKit.h>
-
+#import <UIKit/UIGestureRecognizer.h>
 
 @interface ViewController : GLKViewController
 {
@@ -16,6 +16,11 @@
 
 -(void)OnApplicationPause:(bool) pause;
 -(void)OnApplicationQuit;
+
+#pragma mark - UIGestureRecognizer delegate
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch;
+
+
 
 @end
 

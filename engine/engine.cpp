@@ -268,8 +268,13 @@ namespace engine
     {
         SCR_WIDTH = width;
         SCR_HEIGHT = height;
+#ifdef _GLES_
+        RENDER_WIDTH = width;
+        RENDER_HEIGTH = height;
+#else
         RENDER_WIDTH = width * 2;
         RENDER_HEIGTH = height * 2;
+#endif
     }
     
     uint Hash(const std::string str)

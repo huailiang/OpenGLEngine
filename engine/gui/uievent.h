@@ -14,52 +14,52 @@
 namespace engine
 {
 
-enum UIEventType
-{
-    Press,
-    Pop,
-    Click
-};
-
-class UIEvent;
-
-typedef void (*ClickCallback)(UIEvent*,void*);
-
-class UIEvent
-{
-public:
-    int evtid;
-    
-    UIEvent() { }
-    
-    UIEvent(const UIEvent& other)
+    enum UIEventType
     {
-        std::cout<<"copy constructor called"<<std::endl;
-    }
-    
-    virtual ~UIEvent()
+        Press,
+        Pop,
+        Click
+    };
+
+    class UIEvent;
+
+    typedef void (*ClickCallback)(UIEvent*,void*);
+
+    class UIEvent
     {
-        callback = nullptr;
-    }
-    
-    virtual bool IsHit(float x,float y) = 0;
-    
-    virtual void OnTriger() { } 
-    
-    void RegistCallback(ClickCallback cb);
-    
-    void RegistCallback(ClickCallback cb, void* arg);
-    
-    void Dispacher();
-    
-protected:
-    bool interact;
+    public:
+        int evtid;
+        
+        UIEvent() { }
+        
+        UIEvent(const UIEvent& other)
+        {
+            std::cout<<"copy constructor called"<<std::endl;
+        }
+        
+        virtual ~UIEvent()
+        {
+            callback = nullptr;
+        }
+        
+        virtual bool IsHit(float x,float y) = 0;
+        
+        virtual void OnTriger() { }
+        
+        void RegistCallback(ClickCallback cb);
+        
+        void RegistCallback(ClickCallback cb, void* arg);
+        
+        void Dispacher();
+        
+    protected:
+        bool interact;
 
-private:
-    ClickCallback callback = nullptr;
-    void* arg;
+    private:
+        ClickCallback callback = nullptr;
+        void* arg;
 
-};
+    };
 
 }
 #endif /* uievent_h */

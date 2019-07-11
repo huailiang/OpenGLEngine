@@ -20,9 +20,9 @@
 namespace engine
 {
 
-
     class UIButton : public UILabel
     {
+        
     public:
             
         UIButton(const glm::vec2 pos,const glm::vec3 color = glm::vec3(1), const float scale = 1.0f,

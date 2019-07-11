@@ -32,6 +32,13 @@
 		4C5F3FD322ABF95C005B7CFD /* asset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C5F3FD222ABF95C005B7CFD /* asset.cpp */; };
 		4C73C0F322A8C0F9002A8AD0 /* eventmgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C73C0F222A8C0F9002A8AD0 /* eventmgr.cpp */; };
 		4C73C0F522A8C18C002A8AD0 /* uimgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C73C0F422A8C18C002A8AD0 /* uimgr.cpp */; };
+		4C9EE54822D764530010EED9 /* libopencv_core.4.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEFDBF522CE281A00E5B6DD /* libopencv_core.4.1.1.dylib */; };
+		4C9EE54922D764790010EED9 /* libopencv_imgcodecs.4.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEFDBF622CE281A00E5B6DD /* libopencv_imgcodecs.4.1.1.dylib */; };
+		4C9EE54A22D764860010EED9 /* libopencv_imgproc.4.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEFDBF722CE281A00E5B6DD /* libopencv_imgproc.4.1.1.dylib */; };
+		4C9EE55422D764E40010EED9 /* cubemap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C9EE54E22D764E30010EED9 /* cubemap.cpp */; };
+		4C9EE55522D764E40010EED9 /* harmonics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C9EE54F22D764E30010EED9 /* harmonics.cpp */; };
+		4C9EE55622D764E40010EED9 /* cvtool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C9EE55022D764E30010EED9 /* cvtool.cpp */; };
+		4C9EE55722D7651D0010EED9 /* libopencv_highgui.4.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEFDBF422CE281A00E5B6DD /* libopencv_highgui.4.1.1.dylib */; };
 		4CCACC2722D35ABD008ACBD0 /* engineio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CCACC2522D35ABD008ACBD0 /* engineio.cpp */; };
 		4CD27D46228307050038AE21 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD27D3E2283022D0038AE21 /* OpenGL.framework */; };
 		4CD27D482283070B0038AE21 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD27D472283070B0038AE21 /* CoreVideo.framework */; };
@@ -40,16 +47,9 @@
 		4CD71DB222B0CF0500466683 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CD71DAE22B0CF0500466683 /* tinyxmlerror.cpp */; };
 		4CD71DB322B0CF0500466683 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CD71DAF22B0CF0500466683 /* tinyxml.cpp */; };
 		4CD71DB622B0E30100466683 /* animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CD71DB422B0E30100466683 /* animation.cpp */; };
-		4CDFB1EB22CEE3FA0010E697 /* harmonics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CDFB1E922CEE3FA0010E697 /* harmonics.cpp */; };
 		4CE861ED22A4F86F000677DC /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE861EB22A4F86F000677DC /* libfreetype.a */; };
 		4CE861EE22A4F86F000677DC /* libglfw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE861EC22A4F86F000677DC /* libglfw3.a */; };
 		4CE861F222A4F87F000677DC /* libfreetype.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE861F022A4F87F000677DC /* libfreetype.6.dylib */; };
-		4CEFDBF822CE281A00E5B6DD /* libopencv_highgui.4.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEFDBF422CE281A00E5B6DD /* libopencv_highgui.4.1.1.dylib */; };
-		4CEFDBF922CE281A00E5B6DD /* libopencv_core.4.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEFDBF522CE281A00E5B6DD /* libopencv_core.4.1.1.dylib */; };
-		4CEFDBFA22CE281A00E5B6DD /* libopencv_imgcodecs.4.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEFDBF622CE281A00E5B6DD /* libopencv_imgcodecs.4.1.1.dylib */; };
-		4CEFDBFB22CE281A00E5B6DD /* libopencv_imgproc.4.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEFDBF722CE281A00E5B6DD /* libopencv_imgproc.4.1.1.dylib */; };
-		4CEFDBFF22CE2C5100E5B6DD /* cvtool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CEFDBFE22CE2C5100E5B6DD /* cvtool.cpp */; };
-		4CEFDC0222CE407C00E5B6DD /* cubemap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CEFDC0022CE407C00E5B6DD /* cubemap.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -162,6 +162,13 @@
 		4C73C0F422A8C18C002A8AD0 /* uimgr.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = uimgr.cpp; sourceTree = "<group>"; };
 		4C7D4A2922CDDFF000A8A77B /* harmonics.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = harmonics.fs; sourceTree = "<group>"; };
 		4C9450F722C0EB30005E5065 /* scene6.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = scene6.h; path = OpenGLEngine/scene/scene6.h; sourceTree = SOURCE_ROOT; };
+		4C9EE54D22D764E30010EED9 /* cvtool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cvtool.h; sourceTree = "<group>"; };
+		4C9EE54E22D764E30010EED9 /* cubemap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cubemap.cpp; sourceTree = "<group>"; };
+		4C9EE54F22D764E30010EED9 /* harmonics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = harmonics.cpp; sourceTree = "<group>"; };
+		4C9EE55022D764E30010EED9 /* cvtool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cvtool.cpp; sourceTree = "<group>"; };
+		4C9EE55122D764E30010EED9 /* harmonics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = harmonics.h; sourceTree = "<group>"; };
+		4C9EE55222D764E30010EED9 /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
+		4C9EE55322D764E30010EED9 /* cubemap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cubemap.h; sourceTree = "<group>"; };
 		4CB544CC22B5F4F8007BAE5F /* scene5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = scene5.h; path = OpenGLEngine/scene/scene5.h; sourceTree = SOURCE_ROOT; };
 		4CCACC2522D35ABD008ACBD0 /* engineio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = engineio.cpp; path = ../engine/engineio.cpp; sourceTree = "<group>"; };
 		4CCACC2622D35ABD008ACBD0 /* engineio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = engineio.h; path = ../engine/engineio.h; sourceTree = "<group>"; };
@@ -176,9 +183,6 @@
 		4CD71DAF22B0CF0500466683 /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
 		4CD71DB422B0E30100466683 /* animation.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = animation.cpp; sourceTree = "<group>"; };
 		4CD71DB522B0E30100466683 /* animation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = animation.h; sourceTree = "<group>"; };
-		4CDFB1E822CEE0F70010E697 /* util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
-		4CDFB1E922CEE3FA0010E697 /* harmonics.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = harmonics.cpp; sourceTree = "<group>"; };
-		4CDFB1EA22CEE3FA0010E697 /* harmonics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = harmonics.h; sourceTree = "<group>"; };
 		4CDFB1EC22CF48900010E697 /* scene7.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = scene7.h; path = OpenGLEngine/scene/scene7.h; sourceTree = SOURCE_ROOT; };
 		4CDFB1ED22CF4EDF0010E697 /* harmonics.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = harmonics.vs; sourceTree = "<group>"; };
 		4CE861EB22A4F86F000677DC /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = ../lib/libfreetype.a; sourceTree = "<group>"; };
@@ -188,10 +192,6 @@
 		4CEFDBF522CE281A00E5B6DD /* libopencv_core.4.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_core.4.1.1.dylib; path = ../../../../../../../usr/local/lib/libopencv_core.4.1.1.dylib; sourceTree = "<group>"; };
 		4CEFDBF622CE281A00E5B6DD /* libopencv_imgcodecs.4.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_imgcodecs.4.1.1.dylib; path = ../../../../../../../usr/local/lib/libopencv_imgcodecs.4.1.1.dylib; sourceTree = "<group>"; };
 		4CEFDBF722CE281A00E5B6DD /* libopencv_imgproc.4.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_imgproc.4.1.1.dylib; path = ../../../../../../../usr/local/lib/libopencv_imgproc.4.1.1.dylib; sourceTree = "<group>"; };
-		4CEFDBFD22CE2C5100E5B6DD /* cvtool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cvtool.h; sourceTree = "<group>"; };
-		4CEFDBFE22CE2C5100E5B6DD /* cvtool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cvtool.cpp; sourceTree = "<group>"; };
-		4CEFDC0022CE407C00E5B6DD /* cubemap.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = cubemap.cpp; sourceTree = "<group>"; };
-		4CEFDC0122CE407C00E5B6DD /* cubemap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cubemap.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,13 +199,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4CEFDBF822CE281A00E5B6DD /* libopencv_highgui.4.1.1.dylib in Frameworks */,
-				4CEFDBF922CE281A00E5B6DD /* libopencv_core.4.1.1.dylib in Frameworks */,
-				4CEFDBFA22CE281A00E5B6DD /* libopencv_imgcodecs.4.1.1.dylib in Frameworks */,
-				4CEFDBFB22CE281A00E5B6DD /* libopencv_imgproc.4.1.1.dylib in Frameworks */,
 				4C3B7A1922831668003B212F /* Cocoa.framework in Frameworks */,
 				4C3B7A172283164E003B212F /* IOKit.framework in Frameworks */,
 				4CD27D482283070B0038AE21 /* CoreVideo.framework in Frameworks */,
+				4C9EE55722D7651D0010EED9 /* libopencv_highgui.4.1.1.dylib in Frameworks */,
+				4C9EE54922D764790010EED9 /* libopencv_imgcodecs.4.1.1.dylib in Frameworks */,
+				4C9EE54A22D764860010EED9 /* libopencv_imgproc.4.1.1.dylib in Frameworks */,
+				4C9EE54822D764530010EED9 /* libopencv_core.4.1.1.dylib in Frameworks */,
 				4CE861ED22A4F86F000677DC /* libfreetype.a in Frameworks */,
 				4CE861F222A4F87F000677DC /* libfreetype.6.dylib in Frameworks */,
 				4CE861EE22A4F86F000677DC /* libglfw3.a in Frameworks */,
@@ -359,6 +359,21 @@
 			path = ibl;
 			sourceTree = "<group>";
 		};
+		4C9EE54C22D764E30010EED9 /* cv */ = {
+			isa = PBXGroup;
+			children = (
+				4C9EE54D22D764E30010EED9 /* cvtool.h */,
+				4C9EE54E22D764E30010EED9 /* cubemap.cpp */,
+				4C9EE54F22D764E30010EED9 /* harmonics.cpp */,
+				4C9EE55022D764E30010EED9 /* cvtool.cpp */,
+				4C9EE55122D764E30010EED9 /* harmonics.h */,
+				4C9EE55222D764E30010EED9 /* util.h */,
+				4C9EE55322D764E30010EED9 /* cubemap.h */,
+			);
+			name = cv;
+			path = ../engine/cv;
+			sourceTree = "<group>";
+		};
 		4CD27D222282F4E30038AE21 = {
 			isa = PBXGroup;
 			children = (
@@ -411,7 +426,7 @@
 		4CE8602322A4F1EE000677DC /* code */ = {
 			isa = PBXGroup;
 			children = (
-				4CEFDBFC22CE2C5100E5B6DD /* cv */,
+				4C9EE54C22D764E30010EED9 /* cv */,
 				4C37750F22A54FA20074744F /* ext */,
 				4C37751222A54FA20074744F /* gui */,
 				4C3774F622A54F6F0074744F /* std */,
@@ -442,21 +457,6 @@
 				4C4279AF22A54C32003AE42A /* scenemgr.h */,
 			);
 			path = scene;
-			sourceTree = "<group>";
-		};
-		4CEFDBFC22CE2C5100E5B6DD /* cv */ = {
-			isa = PBXGroup;
-			children = (
-				4CEFDBFD22CE2C5100E5B6DD /* cvtool.h */,
-				4CEFDBFE22CE2C5100E5B6DD /* cvtool.cpp */,
-				4CEFDC0122CE407C00E5B6DD /* cubemap.h */,
-				4CEFDC0022CE407C00E5B6DD /* cubemap.cpp */,
-				4CDFB1EA22CEE3FA0010E697 /* harmonics.h */,
-				4CDFB1E922CEE3FA0010E697 /* harmonics.cpp */,
-				4CDFB1E822CEE0F70010E697 /* util.h */,
-			);
-			name = cv;
-			path = ../engine/cv;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -516,7 +516,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C37752322A54FA20074744F /* uievent.cpp in Sources */,
-				4CEFDBFF22CE2C5100E5B6DD /* cvtool.cpp in Sources */,
 				4C37750E22A54F6F0074744F /* terrain.cpp in Sources */,
 				4C37750822A54F6F0074744F /* camera.cpp in Sources */,
 				4CD71DB222B0CF0500466683 /* tinyxmlerror.cpp in Sources */,
@@ -527,13 +526,14 @@
 				4C1B57BF22A7E03700A7AFF1 /* avatar.cpp in Sources */,
 				4C40A86322BC789800F910AE /* profile.cpp in Sources */,
 				4CCACC2722D35ABD008ACBD0 /* engineio.cpp in Sources */,
-				4CEFDC0222CE407C00E5B6DD /* cubemap.cpp in Sources */,
+				4C9EE55422D764E40010EED9 /* cubemap.cpp in Sources */,
 				4C1B57BC22A7BE3800A7AFF1 /* texmgr.cpp in Sources */,
 				4C37752122A54FA20074744F /* ttfont.cpp in Sources */,
 				4C37751F22A54FA20074744F /* glad.c in Sources */,
 				4C01AB8B22ADEE2C001C5070 /* mesh.cpp in Sources */,
 				4C73C0F322A8C0F9002A8AD0 /* eventmgr.cpp in Sources */,
 				4C42797E22A54AD0003AE42A /* engine.cpp in Sources */,
+				4C9EE55622D764E40010EED9 /* cvtool.cpp in Sources */,
 				4C5F3FD322ABF95C005B7CFD /* asset.cpp in Sources */,
 				4C37750C22A54F6F0074744F /* skybox.cpp in Sources */,
 				4C1B57B322A68D7900A7AFF1 /* util.cpp in Sources */,
@@ -546,7 +546,7 @@
 				4C37750922A54F6F0074744F /* light.cpp in Sources */,
 				4C73C0F522A8C18C002A8AD0 /* uimgr.cpp in Sources */,
 				4C37752222A54FA20074744F /* button.cpp in Sources */,
-				4CDFB1EB22CEE3FA0010E697 /* harmonics.cpp in Sources */,
+				4C9EE55522D764E40010EED9 /* harmonics.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -686,6 +686,7 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				VALID_ARCHS = x86_64;
 			};
 			name = Debug;
 		};
@@ -708,6 +709,7 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				VALID_ARCHS = x86_64;
 			};
 			name = Release;
 		};

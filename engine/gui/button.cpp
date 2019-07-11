@@ -6,7 +6,15 @@
 //  Copyright © 2019 彭怀亮. All rights reserved.
 //
 
+
+/*
+ *  We draw button background used geometry shader
+ *  There are no geometry shaders in OpenGL ES, neither in 3.0 nor in 3.1.
+ *      https://stackoverflow.com/questions/30293288/gl-geometry-shader-missing-on-ios-opengl-es-3-0
+ */
+
 #include "button.h"
+
 
 namespace engine
 {
@@ -34,6 +42,7 @@ namespace engine
 
     void UIButton::DrawBackground()
     {
+#ifndef _GLES_
         float x = getCenterX()/SCR_WIDTH;
         float y = posy / SCR_HEIGHT;
         float w = 2.5 * len / (float)SCR_WIDTH;
@@ -43,10 +52,12 @@ namespace engine
         glBindVertexArray(vao);
         glDrawArrays(GL_POINTS, 0, 1);
         glBindVertexArray(0);
+#endif
     }
 
     void UIButton::InitBackground()
     {
+#ifndef _GLES_
         shader = new Shader("gizmos/button.vs","gizmos/pixel.fs","gizmos/button.gs");
         glGenVertexArrays(1, &vao);
         glGenBuffers(1, &vbo);
@@ -56,6 +67,7 @@ namespace engine
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
         glBindVertexArray(0);
+#endif
     }
 
 }

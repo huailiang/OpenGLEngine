@@ -75,7 +75,6 @@ int main(int argc, const char * argv[])
 
 int run_engine()
 {
-    
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);

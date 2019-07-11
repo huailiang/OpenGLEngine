@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #include "Context.h"
-#include "Scene.h"
+#include "scene/scenewrap.h"
 
 @interface ViewController ()
 {
@@ -32,6 +32,7 @@
     {
         NSLog(@"Failed to create ES context");
     }
+    
     GLKView *view = (GLKView *)self.view;
     view.context = self.context;
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
@@ -80,11 +81,29 @@
     }
 }
 
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    NSLog(@"%f, %f", self.view.center.x, self.view.center.y);
+    NSLog(@"%f, %f", self.view.bounds.size.width, self.view.bounds.size.height);
+    NSSet *allTouches = [event allTouches];    //返回与当前接收者有关的所有的触摸对象
+    UITouch *touch = [allTouches anyObject];   //视图中的所有对象
+    CGPoint point = [touch locationInView:[touch view]]; //返回触摸点在视图中的当前坐标
+    int x = point.x;
+    int y = point.y;
+    CGFloat scale = [UIScreen mainScreen].scale;
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGSize screenSize = screenRect.size;
+    double xsc = screenSize.width * scale / self.view.bounds.size.width;
+    double ysc = screenSize.height* scale/ self.view.bounds.size.height;
+    NSLog(@"touch pos: (%d, %d)", (int)(x * xsc), (int)(y * ysc));
+}
+
 - (void)setupGL
 {
     if(![EAGLContext setCurrentContext:self.context])
     {
-        std::cout<<"  setCurrentContext error"<<std::endl;
+        NSLog(@"  setCurrentContext error");
     }
     memset(&_esContext, 0, sizeof(_esContext));
     InitScene(&_esContext);
@@ -111,6 +130,8 @@
 {
     [self tearDownGL];
 }
+
+
 
 //在接收到内存警告时会调用，且系统会自动处理内存释放 拟器simulator-菜单栏-hardware-simulate memory warning
 - (void)didReceiveMemoryWarning {

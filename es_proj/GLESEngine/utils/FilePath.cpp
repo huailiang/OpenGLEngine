@@ -57,12 +57,17 @@ char* getsPath(const char *filename)
 string getPath(const char *filename)
 {
     std::string fnm(filename);
+    if (fnm.find("/") != fnm.npos)
+    {
+        fnm = fnm.substr(fnm.rfind("/")+1, fnm.length());
+    }
     return getPath(fnm);
 }
 
 string getPath(const string& filename)
 {
     char *ptr;
+    
     if(filename.find("/") == filename.npos)
     {
         CFBundleRef mainBundle = CFBundleGetMainBundle();
