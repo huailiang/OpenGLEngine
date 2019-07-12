@@ -39,7 +39,7 @@ namespace engine
         float xx = x / scale;
         scale = RENDER_HEIGTH / (SCR_HEIGHT * 2.0f);
         float yy = y / scale;
-        if(action == GLFW_RELEASE) DoTriger(xx, yy, action);
+        if(action == GLFW_RELEASE) DoTriger(xx, yy);
 #endif
     }
     

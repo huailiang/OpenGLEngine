@@ -18,6 +18,12 @@ MainWindow::~MainWindow()
 }
 
 
+void MainWindow::keyPressEvent(QKeyEvent *ev)
+{
+    this->ui->widget->KeyboardEvent(ev->key());
+}
+
+
 void MainWindow::keyReleaseEvent(QKeyEvent *ev)
 {
     if(ev->key() == Qt::Key_Q || ev->key() == Qt::Key_Escape)
@@ -29,15 +35,15 @@ void MainWindow::keyReleaseEvent(QKeyEvent *ev)
 
 void MainWindow::ToggleRadio1()
 {
-    this->ui->widget->HandleClick(0);
+    this->ui->widget->ExterHandleClick(0);
 }
 
 void MainWindow::ToggleRadio2()
 {
-     this->ui->widget->HandleClick(1);
+     this->ui->widget->ExterHandleClick(1);
 }
 
 void MainWindow::ToggleRadio3()
 {
-     this->ui->widget->HandleClick(2);
+     this->ui->widget->ExterHandleClick(2);
 }

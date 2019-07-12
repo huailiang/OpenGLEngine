@@ -10,9 +10,6 @@
 
 namespace engine
 {
-
-    extern uint SCR_WIDTH;
-    extern uint SCR_HEIGHT;
     
     mat4 Camera::GetViewMatrix() const
     {

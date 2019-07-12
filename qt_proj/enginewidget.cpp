@@ -5,27 +5,51 @@ engineWidget::engineWidget(QWidget *parent) :
     QOpenGLWidget(parent),
     ui(new Ui::engineWidget)
 {
+    connect(this, SIGNAL(clicked()), this, SLOT(InnerHandleClick()));
     ui->setupUi(this);
     m_timerId = startTimer(30);
-    scene = new Scene();
+    wrap = new SceneWrap();
 }
 
 engineWidget::~engineWidget()
 {
     SAFE_DELETE(ui);
-    delete scene;
+    delete wrap;
 }
 
-void engineWidget::HandleClick(int evtid)
+void engineWidget::ExterHandleClick(int evtid)
 {
-    scene->HandleClick(evtid);
+    wrap->HandleClick(evtid);
     update();
 }
+
+void engineWidget::InnerHandleClick()
+{
+    update();
+    wrap->OnClickGL(mousePos.x(), mousePos.y());
+}
+
+void engineWidget::mousePressEvent(QMouseEvent *ev)
+{
+    mousePos = QPoint(ev->x(), ev->y());
+}
+
+void engineWidget::mouseReleaseEvent(QMouseEvent *ev)
+{
+    if(mousePos == QPoint(ev->x(), ev->y()))
+        emit clicked();
+}
+
+void engineWidget::KeyboardEvent(int key)
+{
+    wrap->KeyBoard(key);
+}
+
 
 void engineWidget::initializeGL()
 {
     initializeOpenGLFunctions();
-    scene->initialize();
+    wrap->initialize();
 }
 
 void engineWidget::resizeGL(int w, int h)
@@ -36,9 +60,8 @@ void engineWidget::resizeGL(int w, int h)
 
 void engineWidget::paintGL()
 {
-   scene->Draw();
+   wrap->Draw();
 }
-
 
 void engineWidget::timerEvent(QTimerEvent *)
 {

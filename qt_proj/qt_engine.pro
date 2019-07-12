@@ -40,6 +40,7 @@ SOURCES += \
     ../engine/std/util.cpp \
     ../engine/std/texmgr.cpp \
     ../engine/std/skybox.cpp \
+    ../engine/std/terrain.cpp \
     ../engine/std/texture.cpp \
     ../engine/std/shader.cpp \
     ../engine/std/animation.cpp \
@@ -54,9 +55,9 @@ SOURCES += \
     ../engine/gui/uibase.cpp \
     ../engine/gui/uimgr.cpp \
     ../engine/gui/uievent.cpp \
-    scene.cpp \
     mainwindow.cpp \
     enginewidget.cpp \
+    scene/scenewrap.cpp
 
 HEADERS += \
     ../engine/profile.h \
@@ -71,6 +72,7 @@ HEADERS += \
     ../engine/std/util.h \
     ../engine/std/texmgr.h \
     ../engine/std/skybox.h \
+    ../engine/std/terrain.h \
     ../engine/std/asset.h \
     ../engine/engine.h \
     ../engine/engineio.h \
@@ -85,9 +87,16 @@ HEADERS += \
     ../engine/gui/uibase.h \
     ../engine/gui/uimgr.h \
     ../engine/gui/uievent.h \
-    scene.h \
     mainwindow.h \
     enginewidget.h \
+    scene/scenewrap.h \
+    scene/scenemgr.h \
+    scene/scene.h \
+    scene/scene1.h \
+    scene/scene2.h \
+    scene/scene3.h \
+    scene/scene4.h \
+    scene/scene5.h
 
 FORMS += \
     mainwindow.ui \

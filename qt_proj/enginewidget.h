@@ -6,7 +6,7 @@
 #include <QOpenGLFunctions_3_3_Core>
 #include <qtimer.h>
 #include <iostream>
-#include "scene.h"
+#include "scene/scenewrap.h"
 
 using namespace engine;
 
@@ -21,7 +21,14 @@ class engineWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
 public:
     explicit engineWidget(QWidget *parent = nullptr);
     ~engineWidget();
-    void HandleClick(int evtid);
+    void ExterHandleClick(int evtid);
+    void KeyboardEvent(int key);
+
+signals:
+    void clicked();
+
+public slots:
+    void InnerHandleClick();
 
 protected:
     virtual void initializeGL();
@@ -29,10 +36,18 @@ protected:
     virtual void paintGL();
     virtual void timerEvent(QTimerEvent *);
 
+
+
+protected:
+    void mousePressEvent(QMouseEvent *ev);
+    void mouseReleaseEvent(QMouseEvent *ev);
+
 private:
     int m_timerId;
     Ui::engineWidget *ui;
-    Scene* scene;
+    SceneWrap* wrap;
+
+    QPoint mousePos;
 };
 
 #endif // ENGINEWIDGET_H
