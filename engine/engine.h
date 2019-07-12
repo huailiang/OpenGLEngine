@@ -60,6 +60,9 @@ namespace engine
 
     extern uint SCR_WIDTH;
     extern uint SCR_HEIGHT;
+    
+    extern uint UI_WIDTH;
+    extern uint UI_HEIGHT;
 
     //initial with sreen*2
     extern uint RENDER_WIDTH;

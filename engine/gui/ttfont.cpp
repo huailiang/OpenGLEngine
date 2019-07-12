@@ -60,7 +60,6 @@ namespace engine
             {
                 glDrawArrays(DRAW_MODE, 0, 6);
             }
-            // Now advance cursors for next glyph (note that advance is number of 1/64 pixels)
             x += (ch.Advance >> 6) * scale; // Bitshift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))
         }
         glBindVertexArray(0);
@@ -71,7 +70,7 @@ namespace engine
     int TTFont::initial()
     {
         shader =new Shader("ttfont.vs","ttfrag.fs");
-        mat4 proj = ortho(0.0f, 800.0f, 0.0f, 600.0f);
+        mat4 proj = ortho(0.0f, (float)UI_WIDTH, 0.0f, (float)UI_HEIGHT);
         shader->use();
         shader->setMat4("projection", proj);
         shader->setInt("text", 0);

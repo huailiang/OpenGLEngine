@@ -15,6 +15,9 @@ namespace engine
 
     uint SCR_WIDTH = 800;
     uint SCR_HEIGHT = 600;
+    
+    uint UI_WIDTH = 800;
+    uint UI_HEIGHT = 600;
 
     uint RENDER_WIDTH = 1600;
     uint RENDER_HEIGTH = 1200;

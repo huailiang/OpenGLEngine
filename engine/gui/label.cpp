@@ -10,8 +10,7 @@
 
 namespace engine
 {
-
-
+    
     UILabel::UILabel(const glm::vec2 pos) :UIBase(pos)
     {
         std::cout<<"warn: called default constructor of label"<<std::endl;
@@ -53,7 +52,7 @@ namespace engine
     {
         float xr = len * 0.5f;
         float yr = FONT_SIZE * 0.5f;
-        bool hit = abs(x-getCenterX()) < xr && abs(SCR_HEIGHT - y - posy) < yr;
+        bool hit = abs(x-getCenterX()) < xr && abs(UI_HEIGHT - y - posy) < yr;
         return hit;
     }
 

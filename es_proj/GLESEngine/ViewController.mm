@@ -85,13 +85,11 @@
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     CGSize size = self.view.bounds.size;
-    NSLog(@"%f, %f, %f, %f", self.view.center.x, self.view.center.y, size.width, size.height);
     NSSet *allTouches = [event allTouches];
     UITouch *touch = [allTouches anyObject];  
     CGPoint point = [touch locationInView:[touch view]];
     int x = point.x;
     int y = point.y;
-    NSLog(@"touch pos: (%f, %f)", (float)(x / size.width), (float)(y /size.height));
     if(_esContext.tapFunc)
     {
         _esContext.tapFunc(&_esContext, (float)(x / size.width), (float)(y /size.height));

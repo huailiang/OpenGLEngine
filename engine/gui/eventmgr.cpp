@@ -10,7 +10,7 @@
 
 namespace engine
 {
-
+    
     EventMgr EventMgr::instance;
     
     void EventMgr::RegistEvt(UIEvent* evt)

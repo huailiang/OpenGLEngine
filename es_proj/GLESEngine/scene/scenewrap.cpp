@@ -60,8 +60,8 @@ void SetWindowSize(ESContext *esContext)
 
 void OnClickTriger(ESContext *esContext, float x, float y)
 {
-    float xx = RENDER_WIDTH * x;
-    float yy = RENDER_HEIGTH * y;
+    float xx = UI_WIDTH  * x;
+    float yy = UI_HEIGHT * y;
     EventMgr::getInstance()->DoTriger(xx, yy);
 }
 
