@@ -97,7 +97,6 @@ public:
                 break;
         }
         description.BitsPerComponent = (int)CGImageGetBitsPerComponent(cgImage);
-        
         return description;
     }
 

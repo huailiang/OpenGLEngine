@@ -2,6 +2,9 @@
 # 利用xcode-texturetool 将jpg，png等格式的图片转换成gpu直接可读的压缩图片
 # 1. 调用solution.py  进行分辨率转换
 # 2. 根据新的分辨率生成gpu直读文件
+#
+# 如果传入参数， 则参数只能是文件路径
+# 此时只对文件路径生成对应的pvr, 而不是所有的文件
 # ----------------------------------------------
 # Author: Huailiang.Peng
 # Data:   2019.06.18
@@ -60,7 +63,7 @@ function _extern()
     if [[ ${1:0-3} = "png" ]]; then
         return 2
     fi
-    if [[ ${1:0-3} = "jpeg" ]]; then
+    if [[ ${1:0-4} = "jpeg" ]]; then
         return 3
     fi
     if [[ ${1:0-3} = "tga" ]]; then
@@ -141,11 +144,22 @@ function _process()
 
 cd `dirname $0`
 cd ../
-_checkenv 
-$ITEXTURE -l
-echo "************ start ************"
-_process ${TEXS}
-_process ${OBJS}
 
+if [ $# == 1 ] ; then 
+    echo "process: "${1} 
+    _extern ${1}
+    if [[ $? > 0 ]]; then
+        _export ${1}
+    else
+        echo ${1}" is not valid"
+        exit 1
+    fi
+else
+    _checkenv 
+    $ITEXTURE -l
+    echo "************ start ************"
+    _process ${TEXS}
+    _process ${OBJS}
+fi
 
 echo "job done, good luck"

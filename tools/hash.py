@@ -63,7 +63,6 @@ def process(dir):
         continue
       print(pp, xhash(pp))
       src = os.path.join(root, x)
-      par = os.path.split(root)[0]
       newp = os.path.join(root[:idx], "bundle")
       dst = os.path.join(newp, str(xhash(pp)))
       copy_res(src, dst)

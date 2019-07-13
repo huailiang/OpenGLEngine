@@ -209,6 +209,7 @@
 		4CC91DFC22B9E9F400AB6C03 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8AC06722A3A45500036684 /* Foundation.framework */; };
 		4CC91E0122BA19FF00AB6C03 /* iOSAsset.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4CC91E0022BA19FF00AB6C03 /* iOSAsset.mm */; };
 		4CCACC2A22D35D5B008ACBD0 /* engineio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CCACC2922D35D5B008ACBD0 /* engineio.cpp */; };
+		4CE03F4522D99A4D00DB9A28 /* 1027361113 in Resources */ = {isa = PBXBuildFile; fileRef = 4CE03F4422D99A4D00DB9A28 /* 1027361113 */; };
 		4CE2223322A91EE00095ECCA /* libFreetype2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE2223222A91EE00095ECCA /* libFreetype2.a */; };
 		4CE2224622A91F0B0095ECCA /* eventmgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2223922A91F0B0095ECCA /* eventmgr.cpp */; };
 		4CE2224722A91F0B0095ECCA /* uibase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2223A22A91F0B0095ECCA /* uibase.cpp */; };
@@ -458,6 +459,7 @@
 		4CC91E0422BA1B9000AB6C03 /* PVRTTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVRTTexture.h; sourceTree = "<group>"; };
 		4CCACC2822D35D5B008ACBD0 /* engineio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = engineio.h; path = ../../engine/engineio.h; sourceTree = "<group>"; };
 		4CCACC2922D35D5B008ACBD0 /* engineio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = engineio.cpp; path = ../../engine/engineio.cpp; sourceTree = "<group>"; };
+		4CE03F4422D99A4D00DB9A28 /* 1027361113 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1027361113; sourceTree = "<group>"; };
 		4CE2223222A91EE00095ECCA /* libFreetype2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFreetype2.a; sourceTree = "<group>"; };
 		4CE2223822A91F0B0095ECCA /* uimgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uimgr.h; sourceTree = "<group>"; };
 		4CE2223922A91F0B0095ECCA /* eventmgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = eventmgr.cpp; sourceTree = "<group>"; };
@@ -498,6 +500,7 @@
 			isa = PBXGroup;
 			children = (
 				4C2DFF3422C21FE7002B2DD1 /* 618130492 */,
+				4CE03F4422D99A4D00DB9A28 /* 1027361113 */,
 				4C2DFF3522C21FE7002B2DD1 /* 4158299440 */,
 				4C2DFF3622C21FE7002B2DD1 /* 2296844524 */,
 				4C2DFF3722C21FE7002B2DD1 /* 1940975766 */,
@@ -962,6 +965,7 @@
 				4C2D002922C21FE7002B2DD1 /* 2928852882 in Resources */,
 				4C97AABD22A50D01005F6388 /* phong.glsl in Resources */,
 				4C2DFFFB22C21FE7002B2DD1 /* 2501529299 in Resources */,
+				4CE03F4522D99A4D00DB9A28 /* 1027361113 in Resources */,
 				4C2D002522C21FE7002B2DD1 /* 3227794487 in Resources */,
 				4C2DFFC022C21FE7002B2DD1 /* 3755938457 in Resources */,
 				4C2DFFE522C21FE7002B2DD1 /* 3885325001 in Resources */,
