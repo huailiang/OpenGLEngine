@@ -11,7 +11,6 @@
 
 #ifdef _QT_EDIT_
 #include <QtOpenGL>
-#endif
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -21,6 +20,7 @@
 #include <vector>
 #include <stdio.h>
 #include <regex>
+#endif
 
 
 #ifndef _GLES_

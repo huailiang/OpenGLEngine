@@ -150,7 +150,6 @@
 		4C443B8122A25D2D00866F29 /* scenewrap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C443B7F22A25D2D00866F29 /* scenewrap.cpp */; };
 		4C443B8522A25F8E00866F29 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C443B8422A25F8E00866F29 /* libc++.tbd */; };
 		4C492FF422AD5F9300FC531B /* engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C492FF222AD5F9300FC531B /* engine.cpp */; };
-		4C4E4D1122D6015300AA34E9 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C4E4D1022D6015300AA34E9 /* opencv2.framework */; };
 		4C5F3FE622ABFD6D005B7CFD /* asset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C5F3FE422ABFD6D005B7CFD /* asset.cpp */; };
 		4C66674A22A2A3A3002BA996 /* FilePath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C66674822A2A3A3002BA996 /* FilePath.cpp */; };
 		4C6D757322B37AD00098F22C /* animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C6D757222B37AD00098F22C /* animation.cpp */; };
@@ -211,6 +210,15 @@
 		4CE03F5A22DB138F00DB9A28 /* brdf.fs in Resources */ = {isa = PBXBuildFile; fileRef = 4CE03F5222DB138F00DB9A28 /* brdf.fs */; };
 		4CE03F5B22DB138F00DB9A28 /* prefilter.fs in Resources */ = {isa = PBXBuildFile; fileRef = 4CE03F5322DB138F00DB9A28 /* prefilter.fs */; };
 		4CE03F5C22DB138F00DB9A28 /* harmonics.vs in Resources */ = {isa = PBXBuildFile; fileRef = 4CE03F5422DB138F00DB9A28 /* harmonics.vs */; };
+		4CE03F7D22DB163600DB9A28 /* GeometryTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE03F7522DB163600DB9A28 /* GeometryTypes.cpp */; };
+		4CE03F7E22DB163600DB9A28 /* Marker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE03F7722DB163600DB9A28 /* Marker.cpp */; };
+		4CE03F7F22DB163600DB9A28 /* MarkerDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE03F7A22DB163600DB9A28 /* MarkerDetector.cpp */; };
+		4CE03F8022DB163600DB9A28 /* VideoSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4CE03F7B22DB163600DB9A28 /* VideoSource.mm */; };
+		4CE03F8122DB163600DB9A28 /* CameraCalibration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE03F7C22DB163600DB9A28 /* CameraCalibration.cpp */; };
+		4CE03F8422DB1B5C00DB9A28 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C4E4D1022D6015300AA34E9 /* opencv2.framework */; };
+		4CE03F8622DB1FE800DB9A28 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE03F8522DB1FE700DB9A28 /* AVFoundation.framework */; };
+		4CE03F8822DB1FFB00DB9A28 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE03F8722DB1FFB00DB9A28 /* CoreVideo.framework */; };
+		4CE03F8A22DB201400DB9A28 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE03F8922DB201400DB9A28 /* CoreMedia.framework */; };
 		4CE2223322A91EE00095ECCA /* libFreetype2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE2223222A91EE00095ECCA /* libFreetype2.a */; };
 		4CE2224622A91F0B0095ECCA /* eventmgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2223922A91F0B0095ECCA /* eventmgr.cpp */; };
 		4CE2224722A91F0B0095ECCA /* uibase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2223A22A91F0B0095ECCA /* uibase.cpp */; };
@@ -462,6 +470,23 @@
 		4CE03F5222DB138F00DB9A28 /* brdf.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = brdf.fs; sourceTree = "<group>"; };
 		4CE03F5322DB138F00DB9A28 /* prefilter.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = prefilter.fs; sourceTree = "<group>"; };
 		4CE03F5422DB138F00DB9A28 /* harmonics.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = harmonics.vs; sourceTree = "<group>"; };
+		4CE03F7122DB163600DB9A28 /* GeometryTypes.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GeometryTypes.hpp; sourceTree = "<group>"; };
+		4CE03F7222DB163600DB9A28 /* MarkerDetector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MarkerDetector.hpp; sourceTree = "<group>"; };
+		4CE03F7322DB163600DB9A28 /* VideoSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoSource.h; sourceTree = "<group>"; };
+		4CE03F7422DB163600DB9A28 /* DebugHelpers.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DebugHelpers.hpp; sourceTree = "<group>"; };
+		4CE03F7522DB163600DB9A28 /* GeometryTypes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GeometryTypes.cpp; sourceTree = "<group>"; };
+		4CE03F7622DB163600DB9A28 /* BGRAVideoFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGRAVideoFrame.h; sourceTree = "<group>"; };
+		4CE03F7722DB163600DB9A28 /* Marker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Marker.cpp; sourceTree = "<group>"; };
+		4CE03F7822DB163600DB9A28 /* CameraCalibration.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CameraCalibration.hpp; sourceTree = "<group>"; };
+		4CE03F7922DB163600DB9A28 /* Marker.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Marker.hpp; sourceTree = "<group>"; };
+		4CE03F7A22DB163600DB9A28 /* MarkerDetector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MarkerDetector.cpp; sourceTree = "<group>"; };
+		4CE03F7B22DB163600DB9A28 /* VideoSource.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VideoSource.mm; sourceTree = "<group>"; };
+		4CE03F7C22DB163600DB9A28 /* CameraCalibration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CameraCalibration.cpp; sourceTree = "<group>"; };
+		4CE03F8522DB1FE700DB9A28 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		4CE03F8722DB1FFB00DB9A28 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		4CE03F8922DB201400DB9A28 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		4CE03F8B22DB208E00DB9A28 /* scene6.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scene6.h; sourceTree = "<group>"; };
+		4CE03F8C22DB22CF00DB9A28 /* prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = prefix.pch; path = ../../engine/prefix.pch; sourceTree = "<group>"; };
 		4CE2223222A91EE00095ECCA /* libFreetype2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFreetype2.a; sourceTree = "<group>"; };
 		4CE2223822A91F0B0095ECCA /* uimgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uimgr.h; sourceTree = "<group>"; };
 		4CE2223922A91F0B0095ECCA /* eventmgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = eventmgr.cpp; sourceTree = "<group>"; };
@@ -485,7 +510,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C4E4D1122D6015300AA34E9 /* opencv2.framework in Frameworks */,
+				4CE03F8A22DB201400DB9A28 /* CoreMedia.framework in Frameworks */,
+				4CE03F8822DB1FFB00DB9A28 /* CoreVideo.framework in Frameworks */,
+				4CE03F8622DB1FE800DB9A28 /* AVFoundation.framework in Frameworks */,
+				4CE03F8422DB1B5C00DB9A28 /* opencv2.framework in Frameworks */,
 				4CC91DFC22B9E9F400AB6C03 /* Foundation.framework in Frameworks */,
 				4CE2223322A91EE00095ECCA /* libFreetype2.a in Frameworks */,
 				4C8AC06622A3A44300036684 /* CoreGraphics.framework in Frameworks */,
@@ -730,6 +758,7 @@
 		4C8062C1229FC059005FD1F9 /* GLESEngine */ = {
 			isa = PBXGroup;
 			children = (
+				4CE03F5D22DB15AB00DB9A28 /* ar */,
 				4C73C0ED22A8BADC002A8AD0 /* ext */,
 				4CE2223722A91F0B0095ECCA /* gui */,
 				4C7AF65B22A54EA700B63173 /* std */,
@@ -745,6 +774,7 @@
 				4C492FF222AD5F9300FC531B /* engine.cpp */,
 				4CCACC2822D35D5B008ACBD0 /* engineio.h */,
 				4CCACC2922D35D5B008ACBD0 /* engineio.cpp */,
+				4CE03F8C22DB22CF00DB9A28 /* prefix.pch */,
 				4C8062C8229FC059005FD1F9 /* Main.storyboard */,
 				4C8062CB229FC059005FD1F9 /* Assets.xcassets */,
 				4C8062CD229FC059005FD1F9 /* LaunchScreen.storyboard */,
@@ -757,6 +787,9 @@
 		4C8062D8229FC072005FD1F9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4CE03F8922DB201400DB9A28 /* CoreMedia.framework */,
+				4CE03F8722DB1FFB00DB9A28 /* CoreVideo.framework */,
+				4CE03F8522DB1FE700DB9A28 /* AVFoundation.framework */,
 				4C4E4D1022D6015300AA34E9 /* opencv2.framework */,
 				4CE2223222A91EE00095ECCA /* libFreetype2.a */,
 				4C8AC06722A3A45500036684 /* Foundation.framework */,
@@ -824,6 +857,7 @@
 				4C9EE54022D715660010EED9 /* scene3.h */,
 				4C9EE53B22D715660010EED9 /* scene4.h */,
 				4C9EE53D22D715660010EED9 /* scene5.h */,
+				4CE03F8B22DB208E00DB9A28 /* scene6.h */,
 				4C443B8022A25D2D00866F29 /* scenewrap.h */,
 				4C443B7F22A25D2D00866F29 /* scenewrap.cpp */,
 			);
@@ -860,6 +894,26 @@
 				4CE03F5422DB138F00DB9A28 /* harmonics.vs */,
 			);
 			path = ibl;
+			sourceTree = "<group>";
+		};
+		4CE03F5D22DB15AB00DB9A28 /* ar */ = {
+			isa = PBXGroup;
+			children = (
+				4CE03F7622DB163600DB9A28 /* BGRAVideoFrame.h */,
+				4CE03F7C22DB163600DB9A28 /* CameraCalibration.cpp */,
+				4CE03F7822DB163600DB9A28 /* CameraCalibration.hpp */,
+				4CE03F7422DB163600DB9A28 /* DebugHelpers.hpp */,
+				4CE03F7522DB163600DB9A28 /* GeometryTypes.cpp */,
+				4CE03F7122DB163600DB9A28 /* GeometryTypes.hpp */,
+				4CE03F7722DB163600DB9A28 /* Marker.cpp */,
+				4CE03F7922DB163600DB9A28 /* Marker.hpp */,
+				4CE03F7A22DB163600DB9A28 /* MarkerDetector.cpp */,
+				4CE03F7222DB163600DB9A28 /* MarkerDetector.hpp */,
+				4CE03F7322DB163600DB9A28 /* VideoSource.h */,
+				4CE03F7B22DB163600DB9A28 /* VideoSource.mm */,
+			);
+			name = ar;
+			path = ../../engine/ar;
 			sourceTree = "<group>";
 		};
 		4CE2223722A91F0B0095ECCA /* gui */ = {
@@ -1145,16 +1199,21 @@
 				4C7AF66D22A54EA700B63173 /* camera.cpp in Sources */,
 				4C5F3FE622ABFD6D005B7CFD /* asset.cpp in Sources */,
 				4C01AB8D22ADF6B3001C5070 /* mesh.cpp in Sources */,
+				4CE03F8122DB163600DB9A28 /* CameraCalibration.cpp in Sources */,
 				4CE2224822A91F0B0095ECCA /* ttfont.cpp in Sources */,
+				4CE03F7D22DB163600DB9A28 /* GeometryTypes.cpp in Sources */,
 				4C8062D2229FC059005FD1F9 /* main.mm in Sources */,
 				4C73C0EC22A8BAB3002A8AD0 /* util.cpp in Sources */,
 				4C492FF422AD5F9300FC531B /* engine.cpp in Sources */,
 				4C9EE53622D714F30010EED9 /* scenewrap.h in Sources */,
 				4C8062C4229FC059005FD1F9 /* AppDelegate.m in Sources */,
+				4CE03F7F22DB163600DB9A28 /* MarkerDetector.cpp in Sources */,
 				4C7AF66F22A54EA700B63173 /* texture.cpp in Sources */,
 				4C6D757322B37AD00098F22C /* animation.cpp in Sources */,
+				4CE03F8022DB163600DB9A28 /* VideoSource.mm in Sources */,
 				4C7AF67122A54EA700B63173 /* skybox.cpp in Sources */,
 				4CE2224C22A91F0B0095ECCA /* uimgr.cpp in Sources */,
+				4CE03F7E22DB163600DB9A28 /* Marker.cpp in Sources */,
 				4CE2224922A91F0B0095ECCA /* button.cpp in Sources */,
 				4CCACC2A22D35D5B008ACBD0 /* engineio.cpp in Sources */,
 			);
@@ -1306,13 +1365,19 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_INPUT_FILETYPE = automatic;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "${SRCROOT}/../engine/prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 					_GLES_,
 					GLFW_INCLUDE_ES31,
 				);
-				HEADER_SEARCH_PATHS = /usr/local/include/;
+				HEADER_SEARCH_PATHS = (
+					"${SRCROOT}/../engine",
+					/usr/local/Cellar/freetype/2.10.1/include/freetype2,
+				);
 				INFOPLIST_FILE = GLESEngine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1341,11 +1406,17 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_INPUT_FILETYPE = automatic;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "${SRCROOT}/../engine/prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_GLES_,
 					GLFW_INCLUDE_ES31,
 				);
-				HEADER_SEARCH_PATHS = /usr/local/include/;
+				HEADER_SEARCH_PATHS = (
+					"${SRCROOT}/../engine",
+					/usr/local/Cellar/freetype/2.10.1/include/freetype2,
+				);
 				INFOPLIST_FILE = GLESEngine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -25,6 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG += c++11
 
+
 SOURCES += \
     main.cpp \
     ../engine/ext/glad.c \
@@ -106,7 +107,6 @@ DEFINES += _QT_EDIT_
 
 INCLUDEPATH += /usr/local/include/
 LIBS+="$$PWD/../lib/libfreetype.6.dylib"
-
 debug: DBG = -dgb
 GL = -gl4
 release_gl330: GL = -gl3

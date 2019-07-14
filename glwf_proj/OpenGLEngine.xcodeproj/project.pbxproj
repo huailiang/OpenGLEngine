@@ -185,6 +185,7 @@
 		4CD71DB522B0E30100466683 /* animation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = animation.h; sourceTree = "<group>"; };
 		4CDFB1EC22CF48900010E697 /* scene7.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = scene7.h; path = OpenGLEngine/scene/scene7.h; sourceTree = SOURCE_ROOT; };
 		4CDFB1ED22CF4EDF0010E697 /* harmonics.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = harmonics.vs; sourceTree = "<group>"; };
+		4CE03F8E22DB238700DB9A28 /* prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = prefix.pch; path = ../engine/prefix.pch; sourceTree = "<group>"; };
 		4CE861EB22A4F86F000677DC /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = ../lib/libfreetype.a; sourceTree = "<group>"; };
 		4CE861EC22A4F86F000677DC /* libglfw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglfw3.a; path = ../lib/libglfw3.a; sourceTree = "<group>"; };
 		4CE861F022A4F87F000677DC /* libfreetype.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfreetype.6.dylib; path = ../lib/libfreetype.6.dylib; sourceTree = "<group>"; };
@@ -435,6 +436,7 @@
 				4C42797A22A54AD0003AE42A /* engine.cpp */,
 				4CCACC2522D35ABD008ACBD0 /* engineio.cpp */,
 				4CCACC2622D35ABD008ACBD0 /* engineio.h */,
+				4CE03F8E22DB238700DB9A28 /* prefix.pch */,
 				4C42797C22A54AD0003AE42A /* profile.h */,
 				4C40A86222BC789800F910AE /* profile.cpp */,
 				4C4279AC22A54C26003AE42A /* main.cpp */,
@@ -671,7 +673,8 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 238UB5UD4H;
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "${SRCROOT}/../engine/prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -697,8 +700,8 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 238UB5UD4H;
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				GCC_PREFIX_HEADER = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "${SRCROOT}/../engine/prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = _CV_;
 				HEADER_SEARCH_PATHS = $root_header;
 				LIBRARY_SEARCH_PATHS = (

@@ -1,0 +1,28 @@
+//
+// Prefix header for all source files in the 'OpenGLEngine' project
+//
+
+
+#ifdef __OBJC__
+#import <Availability.h>
+#endif
+
+#ifdef __cplusplus
+#ifdef __OBJC__
+    #include <opencv2/opencv.hpp>
+#endif
+    #include <fstream>
+    #include <sstream>
+    #include <iostream>
+    #include <string>
+    #include <map>
+    #include <unordered_map>
+    #include <vector>
+    #include <stdio.h>
+    #include <regex>
+#endif
+
+#ifdef __OBJC__
+  #import <UIKit/UIKit.h>
+  #import <Foundation/Foundation.h>
+#endif
