@@ -94,7 +94,7 @@
 	dispatch_queue_t queue;
 	queue = dispatch_queue_create("com.Example_MarkerBasedAR.cameraQueue", NULL);
 	[captureOutput setSampleBufferDelegate:self queue:queue];
-//    dispatch_release(queue);
+    dispatch_release(queue);
     
 	// Set the video output to store frame in BGRA (It is supposed to be faster)
 	NSString* key = (NSString*)kCVPixelBufferPixelFormatTypeKey;

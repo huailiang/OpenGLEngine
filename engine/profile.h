@@ -55,7 +55,6 @@ namespace engine
     
     std::ostream& operator<<(std::ostream& stream, glm::mat4 mat);
     
-    
 }
 
 
