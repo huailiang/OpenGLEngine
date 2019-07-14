@@ -113,7 +113,7 @@ namespace engine
     struct MeshData
     {
         uint num_indice;
-        uint *indices= nullptr;
+        unsigned short *indices= nullptr;
         uint num_vert;
         Vert** vertices = nullptr;
         VertType type;

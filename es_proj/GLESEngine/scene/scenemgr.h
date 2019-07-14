@@ -47,7 +47,7 @@ public:
     
     void Init()
     {
-        ChangeTo(TY_Scene2);
+        ChangeTo(TY_Scene1);
         lb_scene1 = new engine::UILabel(vec2(60,450), vec3(1), 1, "Scene1", TY_Scene1);
         lb_scene2 = new engine::UILabel(vec2(60,405), vec3(1), 1, "Scene2", TY_Scene2);
         lb_scene3 = new engine::UILabel(vec2(60,360), vec3(1), 1, "Scene3", TY_Scene3);

@@ -64,7 +64,7 @@ namespace engine
         if(vao > 0)
         {
             glBindVertexArray(vao);
-            glDrawElements(DRAW_MODE, (GLsizei)mesh->num_indice, GL_UNSIGNED_INT, nullptr);
+            glDrawElements(DRAW_MODE, (GLsizei)mesh->num_indice, GL_UNSIGNED_SHORT, nullptr);
             glBindVertexArray(0);
         }
     }
@@ -168,8 +168,9 @@ namespace engine
         glBindVertexArray(vao);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-        mesh->ConfigAttribute(GL_DYNAMIC_DRAW);
+        mesh->ConfigAttribute(GL_STATIC_DRAW);
         glBindVertexArray(0);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     }
     
     

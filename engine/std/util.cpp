@@ -392,7 +392,7 @@ namespace engine
             ifs.read((char*)(&inds), sizeof(uint));
             delete [] data->indices;
             data->num_indice = inds;
-            data->indices = new uint[inds];
+            data->indices = new unsigned short[inds];
             loop0i(inds) ifs.read((char*)(&(data->indices[i])), sizeof(uint));
             ifs.close();
         } catch (std::ifstream::failure e)
@@ -427,7 +427,7 @@ namespace engine
             MeshData* mesh = new MeshData();
             mesh->type = type;
             mesh->num_indice = inds;
-            mesh->indices = new uint[inds];
+            mesh->indices = new unsigned short[inds];
             mesh->num_vert = verts;
             mesh->vertices = new Vert*[verts];
             loop0i(inds) ifs.read((char*)(&(mesh->indices[i])), sizeof(uint));
