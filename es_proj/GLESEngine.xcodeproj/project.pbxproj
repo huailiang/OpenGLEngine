@@ -176,13 +176,6 @@
 		4C97AAA722A50D01005F6388 /* instance.vs in Resources */ = {isa = PBXBuildFile; fileRef = 4C97AA8322A50D01005F6388 /* instance.vs */; };
 		4C97AAA822A50D01005F6388 /* light.vs in Resources */ = {isa = PBXBuildFile; fileRef = 4C97AA8422A50D01005F6388 /* light.vs */; };
 		4C97AAA922A50D01005F6388 /* model.fs in Resources */ = {isa = PBXBuildFile; fileRef = 4C97AA8522A50D01005F6388 /* model.fs */; };
-		4C97AAAA22A50D01005F6388 /* pixel.fs in Resources */ = {isa = PBXBuildFile; fileRef = 4C97AA8722A50D01005F6388 /* pixel.fs */; };
-		4C97AAAB22A50D01005F6388 /* normal.vs in Resources */ = {isa = PBXBuildFile; fileRef = 4C97AA8822A50D01005F6388 /* normal.vs */; };
-		4C97AAAC22A50D01005F6388 /* normal.gs in Resources */ = {isa = PBXBuildFile; fileRef = 4C97AA8922A50D01005F6388 /* normal.gs */; };
-		4C97AAAD22A50D01005F6388 /* camera.vs in Resources */ = {isa = PBXBuildFile; fileRef = 4C97AA8A22A50D01005F6388 /* camera.vs */; };
-		4C97AAAE22A50D01005F6388 /* button.vs in Resources */ = {isa = PBXBuildFile; fileRef = 4C97AA8B22A50D01005F6388 /* button.vs */; };
-		4C97AAAF22A50D01005F6388 /* camera.gs in Resources */ = {isa = PBXBuildFile; fileRef = 4C97AA8C22A50D01005F6388 /* camera.gs */; };
-		4C97AAB022A50D01005F6388 /* button.gs in Resources */ = {isa = PBXBuildFile; fileRef = 4C97AA8D22A50D01005F6388 /* button.gs */; };
 		4C97AAB122A50D01005F6388 /* outline.fs in Resources */ = {isa = PBXBuildFile; fileRef = 4C97AA8E22A50D01005F6388 /* outline.fs */; };
 		4C97AAB222A50D01005F6388 /* debug.fs in Resources */ = {isa = PBXBuildFile; fileRef = 4C97AA8F22A50D01005F6388 /* debug.fs */; };
 		4C97AAB322A50D01005F6388 /* depth.fs in Resources */ = {isa = PBXBuildFile; fileRef = 4C97AA9022A50D01005F6388 /* depth.fs */; };
@@ -210,6 +203,14 @@
 		4CC91E0122BA19FF00AB6C03 /* iOSAsset.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4CC91E0022BA19FF00AB6C03 /* iOSAsset.mm */; };
 		4CCACC2A22D35D5B008ACBD0 /* engineio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CCACC2922D35D5B008ACBD0 /* engineio.cpp */; };
 		4CE03F4522D99A4D00DB9A28 /* 1027361113 in Resources */ = {isa = PBXBuildFile; fileRef = 4CE03F4422D99A4D00DB9A28 /* 1027361113 */; };
+		4CE03F5522DB138F00DB9A28 /* harmonics.fs in Resources */ = {isa = PBXBuildFile; fileRef = 4CE03F4D22DB138F00DB9A28 /* harmonics.fs */; };
+		4CE03F5622DB138F00DB9A28 /* equirect2cube.fs in Resources */ = {isa = PBXBuildFile; fileRef = 4CE03F4E22DB138F00DB9A28 /* equirect2cube.fs */; };
+		4CE03F5722DB138F00DB9A28 /* irradiance_convolution.fs in Resources */ = {isa = PBXBuildFile; fileRef = 4CE03F4F22DB138F00DB9A28 /* irradiance_convolution.fs */; };
+		4CE03F5822DB138F00DB9A28 /* brdf.vs in Resources */ = {isa = PBXBuildFile; fileRef = 4CE03F5022DB138F00DB9A28 /* brdf.vs */; };
+		4CE03F5922DB138F00DB9A28 /* ibl.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 4CE03F5122DB138F00DB9A28 /* ibl.glsl */; };
+		4CE03F5A22DB138F00DB9A28 /* brdf.fs in Resources */ = {isa = PBXBuildFile; fileRef = 4CE03F5222DB138F00DB9A28 /* brdf.fs */; };
+		4CE03F5B22DB138F00DB9A28 /* prefilter.fs in Resources */ = {isa = PBXBuildFile; fileRef = 4CE03F5322DB138F00DB9A28 /* prefilter.fs */; };
+		4CE03F5C22DB138F00DB9A28 /* harmonics.vs in Resources */ = {isa = PBXBuildFile; fileRef = 4CE03F5422DB138F00DB9A28 /* harmonics.vs */; };
 		4CE2223322A91EE00095ECCA /* libFreetype2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE2223222A91EE00095ECCA /* libFreetype2.a */; };
 		4CE2224622A91F0B0095ECCA /* eventmgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2223922A91F0B0095ECCA /* eventmgr.cpp */; };
 		4CE2224722A91F0B0095ECCA /* uibase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2223A22A91F0B0095ECCA /* uibase.cpp */; };
@@ -416,13 +417,6 @@
 		4C97AA8322A50D01005F6388 /* instance.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = instance.vs; sourceTree = "<group>"; };
 		4C97AA8422A50D01005F6388 /* light.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = light.vs; sourceTree = "<group>"; };
 		4C97AA8522A50D01005F6388 /* model.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = model.fs; sourceTree = "<group>"; };
-		4C97AA8722A50D01005F6388 /* pixel.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = pixel.fs; sourceTree = "<group>"; };
-		4C97AA8822A50D01005F6388 /* normal.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = normal.vs; sourceTree = "<group>"; };
-		4C97AA8922A50D01005F6388 /* normal.gs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = normal.gs; sourceTree = "<group>"; };
-		4C97AA8A22A50D01005F6388 /* camera.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = camera.vs; sourceTree = "<group>"; };
-		4C97AA8B22A50D01005F6388 /* button.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = button.vs; sourceTree = "<group>"; };
-		4C97AA8C22A50D01005F6388 /* camera.gs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = camera.gs; sourceTree = "<group>"; };
-		4C97AA8D22A50D01005F6388 /* button.gs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = button.gs; sourceTree = "<group>"; };
 		4C97AA8E22A50D01005F6388 /* outline.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = outline.fs; sourceTree = "<group>"; };
 		4C97AA8F22A50D01005F6388 /* debug.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = debug.fs; sourceTree = "<group>"; };
 		4C97AA9022A50D01005F6388 /* depth.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = depth.fs; sourceTree = "<group>"; };
@@ -460,6 +454,14 @@
 		4CCACC2822D35D5B008ACBD0 /* engineio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = engineio.h; path = ../../engine/engineio.h; sourceTree = "<group>"; };
 		4CCACC2922D35D5B008ACBD0 /* engineio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = engineio.cpp; path = ../../engine/engineio.cpp; sourceTree = "<group>"; };
 		4CE03F4422D99A4D00DB9A28 /* 1027361113 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1027361113; sourceTree = "<group>"; };
+		4CE03F4D22DB138F00DB9A28 /* harmonics.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = harmonics.fs; sourceTree = "<group>"; };
+		4CE03F4E22DB138F00DB9A28 /* equirect2cube.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = equirect2cube.fs; sourceTree = "<group>"; };
+		4CE03F4F22DB138F00DB9A28 /* irradiance_convolution.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = irradiance_convolution.fs; sourceTree = "<group>"; };
+		4CE03F5022DB138F00DB9A28 /* brdf.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = brdf.vs; sourceTree = "<group>"; };
+		4CE03F5122DB138F00DB9A28 /* ibl.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ibl.glsl; sourceTree = "<group>"; };
+		4CE03F5222DB138F00DB9A28 /* brdf.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = brdf.fs; sourceTree = "<group>"; };
+		4CE03F5322DB138F00DB9A28 /* prefilter.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = prefilter.fs; sourceTree = "<group>"; };
+		4CE03F5422DB138F00DB9A28 /* harmonics.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = harmonics.vs; sourceTree = "<group>"; };
 		4CE2223222A91EE00095ECCA /* libFreetype2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFreetype2.a; sourceTree = "<group>"; };
 		4CE2223822A91F0B0095ECCA /* uimgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uimgr.h; sourceTree = "<group>"; };
 		4CE2223922A91F0B0095ECCA /* eventmgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = eventmgr.cpp; sourceTree = "<group>"; };
@@ -770,46 +772,32 @@
 		4C97AA7F22A50D01005F6388 /* shader */ = {
 			isa = PBXGroup;
 			children = (
-				4C97AA8022A50D01005F6388 /* pbr.fs */,
-				4C97AA8122A50D01005F6388 /* ttfrag.fs */,
-				4C97AA8222A50D01005F6388 /* shadow.fs */,
-				4C97AA8322A50D01005F6388 /* instance.vs */,
+				4CE03F4C22DB138F00DB9A28 /* ibl */,
+				4C97AA9622A50D01005F6388 /* lib */,
 				4C97AA8422A50D01005F6388 /* light.vs */,
-				4C97AA8522A50D01005F6388 /* model.fs */,
-				4C97AA8622A50D01005F6388 /* gizmos */,
+				4C97AAA322A50D01005F6388 /* light.fs */,
 				4C97AA8E22A50D01005F6388 /* outline.fs */,
 				4C97AA8F22A50D01005F6388 /* debug.fs */,
 				4C97AA9022A50D01005F6388 /* depth.fs */,
-				4C97AA9122A50D01005F6388 /* cube.fs */,
-				4C97AA9222A50D01005F6388 /* sample.fs */,
-				4C97AA9322A50D01005F6388 /* model.vs */,
-				4C97AA9422A50D01005F6388 /* sample.vs */,
-				4C97AA9522A50D01005F6388 /* depth.vs */,
-				4C97AA9622A50D01005F6388 /* lib */,
 				4C97AA9D22A50D01005F6388 /* cube.vs */,
+				4C97AA9122A50D01005F6388 /* cube.fs */,
+				4C97AA9322A50D01005F6388 /* model.vs */,
+				4C97AA8522A50D01005F6388 /* model.fs */,
+				4C97AA9422A50D01005F6388 /* sample.vs */,
+				4C97AA9222A50D01005F6388 /* sample.fs */,
+				4C97AA9522A50D01005F6388 /* depth.vs */,
 				4C97AA9E22A50D01005F6388 /* debug.vs */,
 				4C97AA9F22A50D01005F6388 /* shadow.vs */,
+				4C97AA8222A50D01005F6388 /* shadow.fs */,
+				4C97AA8322A50D01005F6388 /* instance.vs */,
 				4C97AAA022A50D01005F6388 /* instance.fs */,
 				4C97AAA122A50D01005F6388 /* ttfont.vs */,
+				4C97AA8122A50D01005F6388 /* ttfrag.fs */,
 				4C97AAA222A50D01005F6388 /* pbr.vs */,
-				4C97AAA322A50D01005F6388 /* light.fs */,
+				4C97AA8022A50D01005F6388 /* pbr.fs */,
 			);
 			name = shader;
 			path = ../../shader;
-			sourceTree = "<group>";
-		};
-		4C97AA8622A50D01005F6388 /* gizmos */ = {
-			isa = PBXGroup;
-			children = (
-				4C97AA8722A50D01005F6388 /* pixel.fs */,
-				4C97AA8822A50D01005F6388 /* normal.vs */,
-				4C97AA8922A50D01005F6388 /* normal.gs */,
-				4C97AA8A22A50D01005F6388 /* camera.vs */,
-				4C97AA8B22A50D01005F6388 /* button.vs */,
-				4C97AA8C22A50D01005F6388 /* camera.gs */,
-				4C97AA8D22A50D01005F6388 /* button.gs */,
-			);
-			path = gizmos;
 			sourceTree = "<group>";
 		};
 		4C97AA9622A50D01005F6388 /* lib */ = {
@@ -857,6 +845,21 @@
 				4CC91E0422BA1B9000AB6C03 /* PVRTTexture.h */,
 			);
 			path = PowerVR;
+			sourceTree = "<group>";
+		};
+		4CE03F4C22DB138F00DB9A28 /* ibl */ = {
+			isa = PBXGroup;
+			children = (
+				4CE03F4D22DB138F00DB9A28 /* harmonics.fs */,
+				4CE03F4E22DB138F00DB9A28 /* equirect2cube.fs */,
+				4CE03F4F22DB138F00DB9A28 /* irradiance_convolution.fs */,
+				4CE03F5022DB138F00DB9A28 /* brdf.vs */,
+				4CE03F5122DB138F00DB9A28 /* ibl.glsl */,
+				4CE03F5222DB138F00DB9A28 /* brdf.fs */,
+				4CE03F5322DB138F00DB9A28 /* prefilter.fs */,
+				4CE03F5422DB138F00DB9A28 /* harmonics.vs */,
+			);
+			path = ibl;
 			sourceTree = "<group>";
 		};
 		4CE2223722A91F0B0095ECCA /* gui */ = {
@@ -941,6 +944,7 @@
 				4C2D001322C21FE7002B2DD1 /* 1103615122 in Resources */,
 				4C2DFFFA22C21FE7002B2DD1 /* 115616696 in Resources */,
 				4C2D000722C21FE7002B2DD1 /* 257971432 in Resources */,
+				4CE03F5722DB138F00DB9A28 /* irradiance_convolution.fs in Resources */,
 				4C2DFFED22C21FE7002B2DD1 /* 4144192841 in Resources */,
 				4C2D002822C21FE7002B2DD1 /* 3877680642 in Resources */,
 				4C97AAB822A50D01005F6388 /* depth.vs in Resources */,
@@ -950,6 +954,7 @@
 				4C97AAA922A50D01005F6388 /* model.fs in Resources */,
 				4C2D001B22C21FE7002B2DD1 /* 3354219020 in Resources */,
 				4C2DFFEC22C21FE7002B2DD1 /* 1018158185 in Resources */,
+				4CE03F5A22DB138F00DB9A28 /* brdf.fs in Resources */,
 				4C2DFFDB22C21FE7002B2DD1 /* 2887971895 in Resources */,
 				4C2DFFC522C21FE7002B2DD1 /* 3733891185 in Resources */,
 				4C2DFFDD22C21FE7002B2DD1 /* 3348332572 in Resources */,
@@ -980,7 +985,6 @@
 				4C97AAA622A50D01005F6388 /* shadow.fs in Resources */,
 				4C2D001422C21FE7002B2DD1 /* 4249815307 in Resources */,
 				4C97AAB222A50D01005F6388 /* debug.fs in Resources */,
-				4C97AAAB22A50D01005F6388 /* normal.vs in Resources */,
 				4C2DFFBE22C21FE7002B2DD1 /* 1940975766 in Resources */,
 				4C2DFFD222C21FE7002B2DD1 /* 599488779 in Resources */,
 				4C2D002222C21FE7002B2DD1 /* 2386298884 in Resources */,
@@ -988,6 +992,7 @@
 				4C2DFFE422C21FE7002B2DD1 /* 2633268758 in Resources */,
 				4C2D002322C21FE7002B2DD1 /* 1359287064 in Resources */,
 				4C2D003622C21FE7002B2DD1 /* 1065382144 in Resources */,
+				4CE03F5922DB138F00DB9A28 /* ibl.glsl in Resources */,
 				4C2DFFBF22C21FE7002B2DD1 /* 73443364 in Resources */,
 				4C2DFFE222C21FE7002B2DD1 /* 113752441 in Resources */,
 				4C2D003722C21FE7002B2DD1 /* 1343000607 in Resources */,
@@ -999,7 +1004,6 @@
 				4C2DFFD322C21FE7002B2DD1 /* 2229672812 in Resources */,
 				4C2DFFF622C21FE7002B2DD1 /* 3177387468 in Resources */,
 				4C2D000F22C21FE7002B2DD1 /* 1070613107 in Resources */,
-				4C97AAAC22A50D01005F6388 /* normal.gs in Resources */,
 				4C2DFFD722C21FE7002B2DD1 /* 2466773854 in Resources */,
 				4C97AAA822A50D01005F6388 /* light.vs in Resources */,
 				4C2D003922C21FE7002B2DD1 /* 248631892 in Resources */,
@@ -1026,7 +1030,6 @@
 				4C2DFFDE22C21FE7002B2DD1 /* 4241664372 in Resources */,
 				4C2DFFEE22C21FE7002B2DD1 /* 3428416318 in Resources */,
 				4C2D001522C21FE7002B2DD1 /* 1346395918 in Resources */,
-				4C97AAB022A50D01005F6388 /* button.gs in Resources */,
 				4C8062CC229FC059005FD1F9 /* Assets.xcassets in Resources */,
 				4C97AABB22A50D01005F6388 /* brdf.glsl in Resources */,
 				4C2D000122C21FE7002B2DD1 /* 2216536254 in Resources */,
@@ -1054,6 +1057,7 @@
 				4C2D003D22C21FE7002B2DD1 /* 2953812989 in Resources */,
 				4C2D002422C21FE7002B2DD1 /* 1827477420 in Resources */,
 				4C2DFFF122C21FE7002B2DD1 /* 75803784 in Resources */,
+				4CE03F5622DB138F00DB9A28 /* equirect2cube.fs in Resources */,
 				4C2DFFCE22C21FE7002B2DD1 /* 2238504529 in Resources */,
 				4C97AAC222A50D01005F6388 /* instance.fs in Resources */,
 				4C97AAC122A50D01005F6388 /* shadow.vs in Resources */,
@@ -1067,7 +1071,6 @@
 				4C2D004022C21FE7002B2DD1 /* 1478078450 in Resources */,
 				4C2DFFCC22C21FE7002B2DD1 /* 2076628402 in Resources */,
 				4CE8DA6E22AEA7E60077C6AF /* appdata.glsl in Resources */,
-				4C97AAAD22A50D01005F6388 /* camera.vs in Resources */,
 				4C2D001122C21FE7002B2DD1 /* 1824701153 in Resources */,
 				4C2DFFBD22C21FE7002B2DD1 /* 2296844524 in Resources */,
 				4C2D000622C21FE7002B2DD1 /* 597232929 in Resources */,
@@ -1087,7 +1090,6 @@
 				4C2D000D22C21FE7002B2DD1 /* 1234002403 in Resources */,
 				4C2DFFBC22C21FE7002B2DD1 /* 4158299440 in Resources */,
 				4C97AAA522A50D01005F6388 /* ttfrag.fs in Resources */,
-				4C97AAAF22A50D01005F6388 /* camera.gs in Resources */,
 				4C2DFFF922C21FE7002B2DD1 /* 3615745442 in Resources */,
 				4C2DFFF322C21FE7002B2DD1 /* 3016835508 in Resources */,
 				4C97AAB622A50D01005F6388 /* model.vs in Resources */,
@@ -1102,16 +1104,18 @@
 				4C2DFFF222C21FE7002B2DD1 /* 3899477350 in Resources */,
 				4C2DFFEB22C21FE7002B2DD1 /* 2893864536 in Resources */,
 				4C2DFFE122C21FE7002B2DD1 /* 797876811 in Resources */,
-				4C97AAAA22A50D01005F6388 /* pixel.fs in Resources */,
 				4C2D000822C21FE7002B2DD1 /* 886970174 in Resources */,
 				4C2DFFDA22C21FE7002B2DD1 /* 2850087843 in Resources */,
+				4CE03F5522DB138F00DB9A28 /* harmonics.fs in Resources */,
 				4C2DFFC422C21FE7002B2DD1 /* 2248359052 in Resources */,
 				4C97AABA22A50D01005F6388 /* const.glsl in Resources */,
+				4CE03F5B22DB138F00DB9A28 /* prefilter.fs in Resources */,
 				4C97AABF22A50D01005F6388 /* cube.vs in Resources */,
 				4C2D003E22C21FE7002B2DD1 /* 3133697879 in Resources */,
 				4C2D003222C21FE7002B2DD1 /* 1632667220 in Resources */,
+				4CE03F5822DB138F00DB9A28 /* brdf.vs in Resources */,
+				4CE03F5C22DB138F00DB9A28 /* harmonics.vs in Resources */,
 				4C2D001722C21FE7002B2DD1 /* 110943313 in Resources */,
-				4C97AAAE22A50D01005F6388 /* button.vs in Resources */,
 				4C2D003522C21FE7002B2DD1 /* 2286425136 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
