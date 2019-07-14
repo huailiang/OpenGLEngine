@@ -134,7 +134,7 @@ namespace engine
         return quad2;
     }
     
-    uint InitSpere(GLuint *vao, GLuint *vbo, GLuint *ebo, Shader* shader)
+    uint InitSpere(GLuint *vao, GLuint *vbo, GLuint *ebo)
     {
         const uint X_SEGMENTS = 32;
         const uint Y_SEGMENTS = 32;
@@ -207,7 +207,7 @@ namespace engine
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *ebo);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, size * sizeof(uint), spere_indices, GL_STATIC_DRAW);
         glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, stride, (void*)0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, stride, nullptr);
         glEnableVertexAttribArray(1);
         glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, stride, (void*)(3 * sizeof(float)));
         glEnableVertexAttribArray(2);

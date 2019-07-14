@@ -173,13 +173,21 @@ namespace engine
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     }
     
+    void ObjMaterial::DrawMesh()
+    {
+        if(vao > 0 && ebo >0 )
+        {
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+            Material::DrawMesh();
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+        }
+    }
     
     void ObjMaterial::Draw(Shader* sh)
     {
         if(sh) this->shader= sh;
         error_stop(shader, "object material can't be null");
         
-        mesh->BindVert(shader);
         shader->use();
         int i  = 0;
         if(diffuse_texture > 0)

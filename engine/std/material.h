@@ -35,7 +35,7 @@ namespace engine
         
         void Compile(Shader* shader = nullptr);
         
-        void DrawMesh();
+        virtual void DrawMesh();
         
         void SetTexture(const char* name,const char* path, EXT ext);
         
@@ -79,6 +79,8 @@ namespace engine
         virtual ~ObjMaterial();
         
         virtual void SetupMesh();
+        
+        virtual void DrawMesh();
         
         virtual void Draw(Shader* shader = nullptr);
         

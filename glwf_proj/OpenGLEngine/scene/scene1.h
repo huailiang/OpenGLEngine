@@ -42,6 +42,10 @@ public:
         nano = new Avatar("nanosuit",vec3(0.4f, -0.5f, -1.f), vec3(0.12f));
         nano->BindVert(shader);
         nano->BindVert(nmShader);
+        shader->compile();
+        nmShader->compile();
+        ApplyCamera(shader);
+        ApplyCamera(nmShader);
     }
     
     void DrawUI()

@@ -135,7 +135,7 @@ namespace engine
     // 全屏 position
     void* InitFullQuad(GLuint *quadVAO, GLuint *quadVBO, Shader* shader = nullptr);
     
-    uint InitSpere(GLuint *vao, GLuint *vbo, GLuint *ebo, Shader* shader=nullptr);
+    uint InitSpere(GLuint *vao, GLuint *vbo, GLuint *ebo);
     
     void SetPosition(glm::mat4& mat, glm::vec3& pos);
     
