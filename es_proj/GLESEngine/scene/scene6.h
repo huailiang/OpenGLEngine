@@ -49,9 +49,9 @@ public:
     
     void InitScene()
     {
-        shader = new LightShader("model.vs", "model.fs");
-        shader->compile();
-        ApplyCamera(shader);
+//        shader = new LightShader("model.vs", "model.fs");
+//        shader->compile();
+//        ApplyCamera(shader);
     }
 
     void DrawScene()

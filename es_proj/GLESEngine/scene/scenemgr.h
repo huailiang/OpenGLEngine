@@ -106,9 +106,11 @@ public:
         }
     }
 
+
+public:
+    Scene *current = nullptr;
     
 private:
-    Scene *current = nullptr;
     engine::UILabel *lb_scene1, *lb_scene2, *lb_scene3, *lb_scene4, *lb_scene5, *lb_scene6;
     engine::UILabel *lb_fps, *lb_copy;
     uint delay;

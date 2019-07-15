@@ -8,6 +8,8 @@
 
 #include "scenewrap.h"
 #include "scenemgr.h"
+#include "BGRAVideoFrame.h"
+#include "GeometryTypes.hpp"
 
 using namespace engine;
 
@@ -30,6 +32,13 @@ void init_engine()
     TTFont::getInstance()->initial();
     SceneMgr::getInstance()->Init();
 }
+
+bool OpenCamera()
+{
+    auto scene = SceneMgr::getInstance()->current;
+    return scene!= nullptr && scene->getType()== TY_Scene6;
+}
+
 
 void Draw(ESContext *esContext)
 {
@@ -65,6 +74,23 @@ void OnClickTriger(ESContext *esContext, float x, float y)
     EventMgr::getInstance()->DoTriger(xx, yy);
 }
 
+// ready for background, ansy
+void OnFrameReady(ESContext *esContext,const BGRAVideoFrame& frame)
+{
+    std::cout<<"frame ready"<<std::endl;
+}
+
+// ready for draw vr
+void OnFrameDetect(ESContext *esContext,const std::vector<Transformation>& transforms)
+{
+    std::cout<<"frame detect"<< transforms.size()<<std::endl;
+}
+
+void OnFrameInit(ESContext *esContext, int width, int height,const Matrix33& intrinsic)
+{
+    std::cout<<"frame initial"<<std::endl;
+}
+
 bool InitScene(ESContext* context)
 {
     esContext = context;
@@ -75,6 +101,9 @@ bool InitScene(ESContext* context)
     context->pauseFunc =  OnPause;
     context->updateWindow = SetWindowSize;
     context->tapFunc = OnClickTriger;
+    context->frameReadyFunc = OnFrameReady;
+    context->frameDetectFunc = OnFrameDetect;
+    context->frameInitFunc = OnFrameInit;
     return true;
 }
 

@@ -84,7 +84,8 @@ public:
             InitQuad(&quadVAO, &quadVBO, debugShader);
         }
         camera = new Camera(getCameraPos());
-        skybox = new Skybox(camera, getSkybox(), isEquirectangularMap());
+        std::string sky = getSkybox();
+        if(!sky.empty()) skybox = new Skybox(camera, sky, isEquirectangularMap());
         lightMatrix = glm::mat4(1);
         InitLight();
         InitScene();

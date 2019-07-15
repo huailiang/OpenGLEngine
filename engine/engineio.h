@@ -9,9 +9,6 @@
 #ifndef engineio_h
 #define engineio_h
 
-#ifdef _QT_EDIT_
-#include <QtOpenGL>
-#endif
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -26,8 +23,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-
-//#include <OpenGL/glext.h>
 
 #include "profile.h"
 

@@ -17,7 +17,7 @@
     ESContext _esContext;
 }
 
-@property  (strong,nonatomic)EAGLContext *context;
+@property (strong, nonatomic)EAGLContext *context;
 @property (strong, nonatomic) GLKBaseEffect *effect;
 @property (strong, nonatomic) VideoSource * videoSource;
 @property (nonatomic) MarkerDetector * markerDetector;
@@ -57,7 +57,7 @@
     self.videoSource.delegate = self;
     
     self.markerDetector = new MarkerDetector([self.videoSource getCalibration]);
-    [self.videoSource startWithDevicePosition:AVCaptureDevicePositionBack];
+    [self.videoSource startWithDevicePosition:AVCaptureDevicePositionBack]; //默认启动后置摄像头
 }
 
 - (void)dealloc
@@ -112,7 +112,7 @@
 {
     if(![EAGLContext setCurrentContext:self.context])
     {
-        NSLog(@"  setCurrentContext error");
+        NSLog(@" setCurrentContext error");
     }
     memset(&_esContext, 0, sizeof(_esContext));
     InitScene(&_esContext);
@@ -145,6 +145,10 @@
     CGSize frameSize = [self.videoSource getFrameSize];
     CameraCalibration camCalib = [self.videoSource getCalibration];
     Matrix33 intrinsic = camCalib.getIntrinsic();
+    if(_esContext.frameInitFunc)
+    {
+        _esContext.frameInitFunc(&_esContext, (int)frameSize.width, (int)frameSize.height, intrinsic);
+    }
     [super viewWillAppear:animated];
 }
 
@@ -160,28 +164,26 @@
     }
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return interfaceOrientation == UIInterfaceOrientationLandscapeRight;
-}
-
-
 #pragma mark - VideoSourceDelegate
 -(void)frameReady:(BGRAVideoFrame) frame
 {
-    // Start upload new frame to video memory in main thread
-//    dispatch_sync( dispatch_get_main_queue(), ^{
-//        [self.visualizationController updateBackground:frame];
-//    });
-    
-    // And perform processing in current thread
-    self.markerDetector->processFrame(frame);
-    
-    // When it's done we query rendering from main thread
-//    dispatch_async( dispatch_get_main_queue(), ^{
-//        [self.visualizationController setTransformationList:(self.markerDetector->getTransformations)()];
-//        [self.visualizationController drawFrame];
-//    });
+    if(OpenCamera())
+    {
+        dispatch_sync( dispatch_get_main_queue(), ^{
+            if (_esContext.frameReadyFunc) {
+                _esContext.frameReadyFunc(&_esContext, frame);
+            }
+        });
+        
+        self.markerDetector->processFrame(frame);
+        
+        dispatch_async( dispatch_get_main_queue(), ^{
+            if(_esContext.frameDetectFunc)
+            {
+                _esContext.frameDetectFunc(&_esContext, self.markerDetector->getTransformations());
+            }
+        });
+    }
 }
 
 

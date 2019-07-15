@@ -14,4 +14,7 @@
 
 bool InitScene(ESContext* context);
 
+bool OpenCamera();
+
+
 #endif /* Scenewrap_hpp */
