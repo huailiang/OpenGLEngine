@@ -48,7 +48,7 @@ namespace engine
     
     void MeshData::ConfigAttribute(const GLenum usage)
     {
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, num_indice * sizeof(unsigned short), indices, usage);
+        if(num_indice) glBufferData(GL_ELEMENT_ARRAY_BUFFER, num_indice * sizeof(unsigned short), indices, usage);
         Vert* p = nullptr;
         if(type == 0x0111 || type == 0x1011)
         {

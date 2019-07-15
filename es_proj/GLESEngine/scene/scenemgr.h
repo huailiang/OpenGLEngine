@@ -49,7 +49,7 @@ public:
     
     void Init()
     {
-        ChangeTo(TY_Scene1);
+        ChangeTo(TY_Scene2);
         lb_scene1 = new engine::UILabel(vec2(60,450), vec3(1), 1, "Scene1", TY_Scene1);
         lb_scene2 = new engine::UILabel(vec2(60,405), vec3(1), 1, "Scene2", TY_Scene2);
         lb_scene3 = new engine::UILabel(vec2(60,360), vec3(1), 1, "Scene3", TY_Scene3);
@@ -73,14 +73,11 @@ public:
     
     void Draw(float delta)
     {
-        if(current)
-        {
-            current->DrawScenes();
-        }
+        if(current) current->DrawScenes();
         delay++;
-        if(delay%4==0)
+        if(delay % 4 == 0)
         {
-            lb_fps->setText("FPS: "+to_string_with_precision(1/delta,4));
+            lb_fps->setText("FPS: " + to_string_with_precision(1/delta, 4));
             lb_copy->setText("@copyright (c) penghuailiang");
         }
     }

@@ -36,7 +36,7 @@ void init_engine()
 bool OpenCamera()
 {
     auto scene = SceneMgr::getInstance()->current;
-    return scene!= nullptr && scene->getType()== TY_Scene6;
+    return scene!= nullptr && scene->ignoreDraw();
 }
 
 
@@ -77,13 +77,18 @@ void OnClickTriger(ESContext *esContext, float x, float y)
 // ready for background, ansy
 void OnFrameReady(ESContext *esContext,const BGRAVideoFrame& frame)
 {
-    std::cout<<"frame ready"<<std::endl;
+    auto scene = SceneMgr::getInstance()->current;
+    if(scene->ignoreDraw())
+    {
+        Scene6* sc = static_cast<Scene6*>(scene);
+        sc->DrawBackground(frame);
+    }
 }
 
 // ready for draw vr
 void OnFrameDetect(ESContext *esContext,const std::vector<Transformation>& transforms)
 {
-    std::cout<<"frame detect"<< transforms.size()<<std::endl;
+//    std::cout<<"frame detect"<< transforms.size()<<std::endl;
 }
 
 void OnFrameInit(ESContext *esContext, int width, int height,const Matrix33& intrinsic)

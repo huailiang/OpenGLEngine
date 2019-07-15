@@ -74,7 +74,8 @@ public:
     void Initial()
     {
         glCheckError();
-        if(drawShadow())
+         bool draw = !ignoreDraw();
+        if(drawShadow() && draw)
         {
             depthShader  = new Shader("depth.vs","depth.fs");
             debugShader = new Shader("debug.vs", "debug.fs");
@@ -84,8 +85,7 @@ public:
             InitQuad(&quadVAO, &quadVBO, debugShader);
         }
         camera = new Camera(getCameraPos());
-        std::string sky = getSkybox();
-        if(!sky.empty()) skybox = new Skybox(camera, sky, isEquirectangularMap());
+        if(draw) skybox = new Skybox(camera, getSkybox(), isEquirectangularMap());
         lightMatrix = glm::mat4(1);
         InitLight();
         InitScene();
@@ -99,6 +99,8 @@ public:
     virtual void InitScene() { }
     
     virtual void DrawUI() { }
+    
+    virtual bool ignoreDraw() { return false; }
     
     virtual void DrawShadow(Shader *depthShader)
     {
@@ -135,18 +137,22 @@ public:
     void DrawScenes()
     {
         timeValue = GetRuntime();
-        if(drawShadow())
+        bool draw = !ignoreDraw();
+        if(draw)
         {
-            glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
+            if(drawShadow())
+            {
+                glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
+                ClearScene();
+                DrawShadow(depthShader);
+                glBindFramebuffer(GL_FRAMEBUFFER, 0);
+            }
             ClearScene();
-            DrawShadow(depthShader);
-            glBindFramebuffer(GL_FRAMEBUFFER, 0);
+            glViewport(0, 0, RENDER_WIDTH, RENDER_HEIGTH);
+            DrawScene();
+            if(drawShadow() && debug) RenderQuad();
+            if(skybox) skybox->Draw();
         }
-        ClearScene();
-        glViewport(0, 0, RENDER_WIDTH, RENDER_HEIGTH);
-        DrawScene();
-        if(drawShadow() && debug) RenderQuad();
-        if(skybox) skybox->Draw();
     }
     
     void RebuildSky()

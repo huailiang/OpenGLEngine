@@ -9,5 +9,4 @@ uniform vec3 textColor;
 void main()
 {
     color = vec4(textColor, texture(text, texCoord).r);
-//    color = vec4(texture(text, texCoord).w,0,0,1);
 }

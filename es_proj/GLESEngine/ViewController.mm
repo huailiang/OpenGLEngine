@@ -52,12 +52,6 @@
         }
     }
     
-    
-    self.videoSource = [[VideoSource alloc] init];
-    self.videoSource.delegate = self;
-    
-    self.markerDetector = new MarkerDetector([self.videoSource getCalibration]);
-    [self.videoSource startWithDevicePosition:AVCaptureDevicePositionBack]; //默认启动后置摄像头
 }
 
 - (void)dealloc
@@ -69,8 +63,30 @@
     [super dealloc];
 }
 
+- (void) checkCamera
+{
+    if(OpenCamera() )
+    {
+        if(self.videoSource == nil)
+        {
+            self.videoSource = [[VideoSource alloc] init];
+            self.markerDetector = new MarkerDetector([self.videoSource getCalibration]);
+            [self.videoSource startWithDevicePosition:AVCaptureDevicePositionBack]; //默认启动后置摄像头
+        }
+        self.videoSource.delegate = self;
+    }
+    else
+    {
+        if(self.videoSource != nil)
+        {
+            self.videoSource.delegate = nil;
+        }
+    }
+}
+
 - (void)update
 {
+    [self checkCamera];
     if (_esContext.updateFunc)
     {
         _esContext.updateFunc(&_esContext, self.timeSinceLastUpdate);

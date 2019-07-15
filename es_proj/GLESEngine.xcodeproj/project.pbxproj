@@ -198,6 +198,7 @@
 		4C97AAC522A50D01005F6388 /* light.fs in Resources */ = {isa = PBXBuildFile; fileRef = 4C97AAA322A50D01005F6388 /* light.fs */; };
 		4C9EE53622D714F30010EED9 /* scenewrap.h in Sources */ = {isa = PBXBuildFile; fileRef = 4C443B8022A25D2D00866F29 /* scenewrap.h */; };
 		4C9EE54422D717570010EED9 /* terrain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C9EE54222D717570010EED9 /* terrain.cpp */; };
+		4CB330DF22DC2503000ED0A0 /* 403897461 in Resources */ = {isa = PBXBuildFile; fileRef = 4CB330DE22DC2503000ED0A0 /* 403897461 */; };
 		4CC91DFC22B9E9F400AB6C03 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8AC06722A3A45500036684 /* Foundation.framework */; };
 		4CC91E0122BA19FF00AB6C03 /* iOSAsset.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4CC91E0022BA19FF00AB6C03 /* iOSAsset.mm */; };
 		4CCACC2A22D35D5B008ACBD0 /* engineio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CCACC2922D35D5B008ACBD0 /* engineio.cpp */; };
@@ -455,6 +456,7 @@
 		4C9EE54122D715AB0010EED9 /* scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scene.h; sourceTree = "<group>"; };
 		4C9EE54222D717570010EED9 /* terrain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = terrain.cpp; sourceTree = "<group>"; };
 		4C9EE54322D717570010EED9 /* terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = terrain.h; sourceTree = "<group>"; };
+		4CB330DE22DC2503000ED0A0 /* 403897461 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 403897461; sourceTree = "<group>"; };
 		4CC91DFF22BA19C200AB6C03 /* Interfaces.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Interfaces.h; sourceTree = "<group>"; };
 		4CC91E0022BA19FF00AB6C03 /* iOSAsset.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = iOSAsset.mm; sourceTree = "<group>"; };
 		4CC91E0322BA1B9000AB6C03 /* PVRTGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVRTGlobal.h; sourceTree = "<group>"; };
@@ -590,6 +592,7 @@
 				4C2DFF6D22C21FE7002B2DD1 /* 2201827 */,
 				4C2DFF6E22C21FE7002B2DD1 /* 3548702575 */,
 				4C2DFF6F22C21FE7002B2DD1 /* 3177387468 */,
+				4CB330DE22DC2503000ED0A0 /* 403897461 */,
 				4C2DFF7022C21FE7002B2DD1 /* 3685405191 */,
 				4C2DFF7122C21FE7002B2DD1 /* 1633873889 */,
 				4C2DFF7222C21FE7002B2DD1 /* 3615745442 */,
@@ -807,27 +810,27 @@
 			children = (
 				4CE03F4C22DB138F00DB9A28 /* ibl */,
 				4C97AA9622A50D01005F6388 /* lib */,
-				4C97AA8422A50D01005F6388 /* light.vs */,
-				4C97AAA322A50D01005F6388 /* light.fs */,
-				4C97AA8E22A50D01005F6388 /* outline.fs */,
-				4C97AA8F22A50D01005F6388 /* debug.fs */,
-				4C97AA9022A50D01005F6388 /* depth.fs */,
 				4C97AA9D22A50D01005F6388 /* cube.vs */,
 				4C97AA9122A50D01005F6388 /* cube.fs */,
-				4C97AA9322A50D01005F6388 /* model.vs */,
-				4C97AA8522A50D01005F6388 /* model.fs */,
-				4C97AA9422A50D01005F6388 /* sample.vs */,
-				4C97AA9222A50D01005F6388 /* sample.fs */,
-				4C97AA9522A50D01005F6388 /* depth.vs */,
 				4C97AA9E22A50D01005F6388 /* debug.vs */,
-				4C97AA9F22A50D01005F6388 /* shadow.vs */,
-				4C97AA8222A50D01005F6388 /* shadow.fs */,
+				4C97AA8F22A50D01005F6388 /* debug.fs */,
+				4C97AA9522A50D01005F6388 /* depth.vs */,
+				4C97AA9022A50D01005F6388 /* depth.fs */,
 				4C97AA8322A50D01005F6388 /* instance.vs */,
 				4C97AAA022A50D01005F6388 /* instance.fs */,
-				4C97AAA122A50D01005F6388 /* ttfont.vs */,
-				4C97AA8122A50D01005F6388 /* ttfrag.fs */,
+				4C97AA8422A50D01005F6388 /* light.vs */,
+				4C97AAA322A50D01005F6388 /* light.fs */,
+				4C97AA9322A50D01005F6388 /* model.vs */,
+				4C97AA8522A50D01005F6388 /* model.fs */,
+				4C97AA8E22A50D01005F6388 /* outline.fs */,
 				4C97AAA222A50D01005F6388 /* pbr.vs */,
 				4C97AA8022A50D01005F6388 /* pbr.fs */,
+				4C97AA9422A50D01005F6388 /* sample.vs */,
+				4C97AA9222A50D01005F6388 /* sample.fs */,
+				4C97AA9F22A50D01005F6388 /* shadow.vs */,
+				4C97AA8222A50D01005F6388 /* shadow.fs */,
+				4C97AAA122A50D01005F6388 /* ttfont.vs */,
+				4C97AA8122A50D01005F6388 /* ttfrag.fs */,
 			);
 			name = shader;
 			path = ../../shader;
@@ -888,8 +891,8 @@
 				4CE03F4E22DB138F00DB9A28 /* equirect2cube.fs */,
 				4CE03F4F22DB138F00DB9A28 /* irradiance_convolution.fs */,
 				4CE03F5022DB138F00DB9A28 /* brdf.vs */,
-				4CE03F5122DB138F00DB9A28 /* ibl.glsl */,
 				4CE03F5222DB138F00DB9A28 /* brdf.fs */,
+				4CE03F5122DB138F00DB9A28 /* ibl.glsl */,
 				4CE03F5322DB138F00DB9A28 /* prefilter.fs */,
 				4CE03F5422DB138F00DB9A28 /* harmonics.vs */,
 			);
@@ -1082,6 +1085,7 @@
 				4C2D001E22C21FE7002B2DD1 /* 1767937314 in Resources */,
 				4C2DFFE622C21FE7002B2DD1 /* 1938978175 in Resources */,
 				4C2DFFDE22C21FE7002B2DD1 /* 4241664372 in Resources */,
+				4CB330DF22DC2503000ED0A0 /* 403897461 in Resources */,
 				4C2DFFEE22C21FE7002B2DD1 /* 3428416318 in Resources */,
 				4C2D001522C21FE7002B2DD1 /* 1346395918 in Resources */,
 				4C8062CC229FC059005FD1F9 /* Assets.xcassets in Resources */,

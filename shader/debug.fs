@@ -27,5 +27,8 @@ void main()
     FragColor = vec4(depth, depth, depth, 1);
 #else
     FragColor = color;
+    if (color.r < 0.01f && color.g <0.01f) {
+        FragColor = vec4(TexCoords,0,1);
+    }
 #endif
 }
