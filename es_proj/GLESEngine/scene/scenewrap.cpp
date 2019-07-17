@@ -89,11 +89,23 @@ void OnFrameReady(ESContext *esContext,const BGRAVideoFrame& frame)
 void OnFrameDetect(ESContext *esContext,const std::vector<Transformation>& transforms)
 {
 //    std::cout<<"frame detect"<< transforms.size()<<std::endl;
+    auto scene = SceneMgr::getInstance()->current;
+    if(scene->ignoreDraw())
+    {
+        Scene6* sc = static_cast<Scene6*>(scene);
+        sc->DrawAR(transforms);
+    }
 }
 
 void OnFrameInit(ESContext *esContext, int width, int height,const Matrix33& intrinsic)
 {
     std::cout<<"frame initial"<<std::endl;
+    auto scene = SceneMgr::getInstance()->current;
+    if(scene->ignoreDraw())
+    {
+        Scene6* sc = static_cast<Scene6*>(scene);
+        sc->InitialVR(width, height, intrinsic);
+    }
 }
 
 bool InitScene(ESContext* context)

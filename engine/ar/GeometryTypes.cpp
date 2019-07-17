@@ -1,4 +1,5 @@
 #include "GeometryTypes.hpp"
+#include <glm/glm.hpp>
 
 Matrix44 Matrix44::getTransposed() const
 {
@@ -108,20 +109,20 @@ const Vector3&  Transformation::t() const
   return  m_translation;
 }
 
-Matrix44 Transformation::getMat44() const
+glm::mat4 Transformation::getMat44() const
 {
-  Matrix44 res = Matrix44::identity();
+  glm::mat4 res(1);
   
   for (int col=0;col<3;col++)
   {
     for (int row=0;row<3;row++)
     {
       // Copy rotation component
-      res.mat[row][col] = m_rotation.mat[row][col];
+      res[row][col] = m_rotation.mat[row][col];
     }
     
     // Copy translation component
-    res.mat[3][col] = m_translation.data[col];
+    res[3][col] = m_translation.data[col];
   }
   
   return res;

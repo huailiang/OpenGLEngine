@@ -1,6 +1,7 @@
 #ifndef Example_MarkerBasedAR_GeometryTypes_hpp
 #define Example_MarkerBasedAR_GeometryTypes_hpp
 
+#include <glm/glm.hpp>
 #include <iostream>
 
 struct Matrix44
@@ -52,7 +53,7 @@ struct Transformation
   const Matrix33& r() const;
   const Vector3&  t() const;
   
-  Matrix44 getMat44() const;
+    glm::mat4 getMat44() const;
   
   Transformation getInverted() const;
 private:
