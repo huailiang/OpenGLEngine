@@ -20,6 +20,15 @@ public:
     {
         SAFE_DELETE(shader);
         DELETE_TEXTURE(m_backgroundTextureId);
+        SAFE_DELETE(lshader);
+        SAFE_DELETE(vrShader);
+        SAFE_DELETE(mat);
+        glDeleteVertexArrays(1, &vao);
+        glDeleteBuffers(1, &vbo);
+        glDeleteVertexArrays(1, &quadVao);
+        glDeleteBuffers(1, &quadVbo);
+        glDeleteVertexArrays(1, &vrVao);
+        glDeleteBuffers(1, &vrVBo);
     }
     
     virtual bool isVRScene() { return true; }
@@ -122,7 +131,6 @@ public:
         DrawBackground();
         if(transforms.size())
         {
-            DrawCube();
             glm::mat4 projectionMatrix;
             BuildProjection(projectionMatrix);
 
@@ -136,6 +144,15 @@ public:
                 glBindVertexArray(vrVao);
                 glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
                 glBindVertexArray(0);
+                
+                mat->Draw();
+                light->Apply(mat);
+                glBindVertexArray(vao);
+                model = glm::scale(model, vec3(0.5));
+                mat->SetMat4("model", model);
+                glDrawArrays(DRAW_MODE, 0, 36);
+                glBindVertexArray(0);
+
             }
         }
     }
