@@ -72,6 +72,14 @@
             self.videoSource = [[VideoSource alloc] init];
             self.markerDetector = new MarkerDetector([self.videoSource getCalibration]);
             [self.videoSource startWithDevicePosition:AVCaptureDevicePositionBack]; //默认启动后置摄像头
+            
+            CGSize frameSize = [self.videoSource getFrameSize];
+            CameraCalibration camCalib = [self.videoSource getCalibration];
+            Matrix33 intrinsic = camCalib.getIntrinsic();
+            if(_esContext.frameInitFunc)
+            {
+                _esContext.frameInitFunc(&_esContext, (int)frameSize.width, (int)frameSize.height, intrinsic);
+            }
         }
         self.videoSource.delegate = self;
     }
@@ -154,18 +162,6 @@
 -(void)OnApplicationQuit
 {
     [self tearDownGL];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    CGSize frameSize = [self.videoSource getFrameSize];
-    CameraCalibration camCalib = [self.videoSource getCalibration];
-    Matrix33 intrinsic = camCalib.getIntrinsic();
-    if(_esContext.frameInitFunc)
-    {
-        _esContext.frameInitFunc(&_esContext, (int)frameSize.width, (int)frameSize.height, intrinsic);
-    }
-    [super viewWillAppear:animated];
 }
 
 //在接收到内存警告时会调用，且系统会自动处理内存释放 拟器simulator-菜单栏-hardware-simulate memory warning

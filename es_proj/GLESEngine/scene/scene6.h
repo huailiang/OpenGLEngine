@@ -22,13 +22,13 @@ public:
         DELETE_TEXTURE(m_backgroundTextureId);
     }
     
-    virtual bool ignoreDraw() { return true; }
+    virtual bool isVRScene() { return true; }
     
     int getType() { return TY_Scene6; }
     
     std::string getSkybox() { return ""; }
     
-    glm::vec3 getCameraPos() { return glm::vec3(0.0f,0.0f,16.0f); }
+    glm::vec3 getCameraPos() { return glm::vec3(0.0f); }
     
     void InitLight()
     {
@@ -67,6 +67,27 @@ public:
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), nullptr);
         glBindVertexArray(0);
+        
+        MeshData* cube =(MeshData*)InitCube(&vao, &vbo);
+        mat= new Material(cube);
+        lshader = new LightShader("light.vs","light.fs");
+        lshader->attach(light->getMacro().c_str());
+        mat->BindVert(lshader);
+        lshader->use();
+        mat->SetFloat("scale", 1);
+        mat->SetTexture("texture1", "textures/container", _JPG);
+        mat->SetTexture("texture2", "textures/awesomeface", _PNG);
+        ApplyCamera(mat);
+    }
+    
+    void Clean()
+    {
+        glDepthMask(true);
+        glEnable(GL_DEPTH_TEST);
+        glDisable(GL_BLEND);
+        glDisable(GL_CULL_FACE);
+        glClearColor(0.2f,0.2f,0.2f,1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
     
     void InitialVR(int width, int height,const Matrix33& intrinsic)
@@ -76,20 +97,20 @@ public:
         this->cameraMatrix = intrinsic;
     }
     
-    void DrawBackground(const BGRAVideoFrame& frame)
+    void SetCameraFrame(const BGRAVideoFrame& frame)
     {
-        glDisable(GL_BLEND);
-        glDisable(GL_CULL_FACE);
-        glClearColor(0.2f,0.2f,0.2f,1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        
+        this->camFrame = frame;
+    }
+    
+    void DrawBackground()
+    {
         shader->use();
-        GLsizei width = (GLsizei)frame.width;
-        GLsizei height = (GLsizei)frame.height;
+        GLsizei width = (GLsizei)camFrame.width;
+        GLsizei height = (GLsizei)camFrame.height;
         glActiveTexture(GL_TEXTURE0);
         glPixelStorei(GL_PACK_ALIGNMENT, 1);
         glBindTexture(GL_TEXTURE_2D, m_backgroundTextureId);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_BGRA, GL_UNSIGNED_BYTE, frame.data);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_BGRA, GL_UNSIGNED_BYTE, camFrame.data);
         glBindVertexArray(quadVao);
         glDrawArrays(DRAW_MODE, 0, 6);
         glBindVertexArray(0);
@@ -97,20 +118,41 @@ public:
     
     void DrawAR(const std::vector<Transformation>& transforms)
     {
-        glm::mat4 projectionMatrix;
-        BuildProjection(projectionMatrix);
-        
-        loop(transforms.size())
+        Clean();
+        DrawBackground();
+        if(transforms.size())
         {
-            std::cout<<"pos:"<<transforms[i].t()<<std::endl;
-            glm::mat4 model = transforms[i].getMat44(); //position & rotation
-            vrShader->use();
-            vrShader->setMat4("model", model);
-            vrShader->setMat4("proj", projectionMatrix);
-            glBindVertexArray(vrVao);
-            glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-            glBindVertexArray(0);
+            DrawCube();
+            glm::mat4 projectionMatrix;
+            BuildProjection(projectionMatrix);
+
+            loop(transforms.size())
+            {
+                std::cout<<"pos:"<<transforms[i].t()<<std::endl;
+                glm::mat4 model = transforms[i].getMat44(); //position & rotation
+                vrShader->use();
+                vrShader->setMat4("model", model);
+                vrShader->setMat4("proj", projectionMatrix);
+                glBindVertexArray(vrVao);
+                glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+                glBindVertexArray(0);
+            }
         }
+    }
+    
+    void DrawCube()
+    {
+        glm::mat4 model = glm::mat4(1.0f);
+        model = translate(model, vec3(0,0,-3));
+        model = glm::rotate(model, glm::radians(GetRuntime()), vec3(1.0f, 0.3f, 0.5f));
+        model = glm::scale(model, vec3(0.2f));
+        mat->Draw();
+        light->Apply(mat);
+        glBindVertexArray(vao);
+        mat->SetMat4("model", model);
+        glDrawArrays(DRAW_MODE, 0, 36);
+        glBindVertexArray(0);
+
     }
     
     void BuildProjection(glm::mat4& projectionMatrix)
@@ -118,7 +160,6 @@ public:
         float near = 0.01;  // Near clipping distance
         float far  = 100;  // Far clipping distance
         
-        // Camera parameters
         float f_x = cameraMatrix.data[0]; // Focal length in x axis
         float f_y = cameraMatrix.data[4]; // Focal length in y axis (usually the same?)
         
@@ -144,8 +185,6 @@ public:
     }
 
 
-    
-    
 private:
     Shader* shader;
     Shader* vrShader;
@@ -154,6 +193,12 @@ private:
     GLuint m_backgroundTextureId;
     GLuint quadVao, quadVbo;
     GLuint vrVao, vrVBo;
+    
+    Material* mat = nullptr;
+    GLuint vbo, vao;
+    LightShader* lshader;
+    
+    BGRAVideoFrame camFrame;
 };
 
 

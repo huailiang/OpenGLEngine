@@ -74,7 +74,7 @@ public:
     void Initial()
     {
         glCheckError();
-         bool draw = !ignoreDraw();
+         bool draw = !isVRScene();
         if(drawShadow() && draw)
         {
             depthShader  = new Shader("depth.vs","depth.fs");
@@ -100,7 +100,7 @@ public:
     
     virtual void DrawUI() { }
     
-    virtual bool ignoreDraw() { return false; }
+    virtual bool isVRScene() { return false; }
     
     virtual void DrawShadow(Shader *depthShader)
     {
@@ -137,7 +137,7 @@ public:
     void DrawScenes()
     {
         timeValue = GetRuntime();
-        bool draw = !ignoreDraw();
+        bool draw = !isVRScene();
         if(draw)
         {
             if(drawShadow())
