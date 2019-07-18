@@ -77,6 +77,7 @@ public:
         mat->Draw();
         light->Apply(mat);
         glBindVertexArray(vao);
+        
         for (uint i = 0; i < 2; i++)
         {
             glm::mat4 model = glm::mat4(1.0f);
@@ -85,6 +86,13 @@ public:
             model = glm::rotate(model, glm::radians(angle), vec3(1.0f, 0.3f, 0.5f));
             model = glm::scale(model, vec3(0.5f));
             mat->SetMat4("model", model);
+            
+            if(i==0)
+            {
+                vec4 cpos = vec4(0.0f,  0.0f,  -2.0f, 1.0f);
+                vec4 vpos = camera->GetViewMatrix() * model * cpos;
+                std::cout<<"vpos:"<<vpos<<std::endl;
+            }
             glDrawArrays(DRAW_MODE, 0, 36);
         }
     }

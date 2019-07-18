@@ -74,11 +74,10 @@ void OnClickTriger(ESContext *esContext, float x, float y)
     EventMgr::getInstance()->DoTriger(xx, yy);
 }
 
-// ready for background, ansy
 void OnFrameReady(ESContext *esContext,const BGRAVideoFrame& frame)
 {
     auto scene = SceneMgr::getInstance()->current;
-    if(scene->isVRScene())
+    if(scene->isVRScene() && !ENG_PAUSE)
     {
         Scene6* sc = static_cast<Scene6*>(scene);
         sc->SetCameraFrame(frame);
@@ -88,18 +87,16 @@ void OnFrameReady(ESContext *esContext,const BGRAVideoFrame& frame)
 // ready for draw vr
 void OnFrameDetect(ESContext *esContext,const std::vector<Transformation>& transforms)
 {
-//    std::cout<<"frame detect"<< transforms.size()<<std::endl;
     auto scene = SceneMgr::getInstance()->current;
-    if(scene->isVRScene())
+    if(scene->isVRScene() && !ENG_PAUSE)
     {
         Scene6* sc = static_cast<Scene6*>(scene);
         sc->DrawAR(transforms);
     }
 }
 
-void OnFrameInit(ESContext *esContext, int width, int height,const Matrix33& intrinsic)
+void OnFrameInit(ESContext *esContext, float width, float height,const Matrix33& intrinsic)
 {
-    std::cout<<"frame initial"<<std::endl;
     auto scene = SceneMgr::getInstance()->current;
     if(scene->isVRScene())
     {

@@ -22,6 +22,7 @@ namespace engine
     uint RENDER_WIDTH = 1600;
     uint RENDER_HEIGTH = 1200;
     uint DRAW_MODE = GL_TRIANGLES;
+    bool ENG_PAUSE = false;
     
     MeshData* plane = nullptr;
     MeshData* cube = nullptr;
@@ -78,6 +79,7 @@ namespace engine
     void OnApplicationPause(bool pause)
     {
         std::cout<<"engine pause "<<pause<<std::endl;
+        ENG_PAUSE = pause;
     }
 
     void* InitPlane(GLuint *vao, GLuint *vbo, Shader* shader)

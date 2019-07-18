@@ -903,15 +903,15 @@
 			isa = PBXGroup;
 			children = (
 				4CE03F7622DB163600DB9A28 /* BGRAVideoFrame.h */,
-				4CE03F7C22DB163600DB9A28 /* CameraCalibration.cpp */,
 				4CE03F7822DB163600DB9A28 /* CameraCalibration.hpp */,
+				4CE03F7C22DB163600DB9A28 /* CameraCalibration.cpp */,
 				4CE03F7422DB163600DB9A28 /* DebugHelpers.hpp */,
-				4CE03F7522DB163600DB9A28 /* GeometryTypes.cpp */,
 				4CE03F7122DB163600DB9A28 /* GeometryTypes.hpp */,
+				4CE03F7522DB163600DB9A28 /* GeometryTypes.cpp */,
 				4CE03F7722DB163600DB9A28 /* Marker.cpp */,
 				4CE03F7922DB163600DB9A28 /* Marker.hpp */,
-				4CE03F7A22DB163600DB9A28 /* MarkerDetector.cpp */,
 				4CE03F7222DB163600DB9A28 /* MarkerDetector.hpp */,
+				4CE03F7A22DB163600DB9A28 /* MarkerDetector.cpp */,
 				4CE03F7322DB163600DB9A28 /* VideoSource.h */,
 				4CE03F7B22DB163600DB9A28 /* VideoSource.mm */,
 			);

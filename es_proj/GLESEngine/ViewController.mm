@@ -51,7 +51,7 @@
             _esContext.updateWindow(&_esContext);
         }
     }
-    
+
 }
 
 - (void)dealloc
@@ -78,7 +78,7 @@
             Matrix33 intrinsic = camCalib.getIntrinsic();
             if(_esContext.frameInitFunc)
             {
-                _esContext.frameInitFunc(&_esContext, (int)frameSize.width, (int)frameSize.height, intrinsic);
+                _esContext.frameInitFunc(&_esContext, (float)frameSize.width, (float)frameSize.height, intrinsic);
             }
         }
         self.videoSource.delegate = self;

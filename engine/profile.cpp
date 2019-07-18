@@ -66,6 +66,7 @@ namespace engine
     
     std::ostream& operator<<(std::ostream& stream, glm::mat2 mat)
     {
+        stream<<setiosflags(ios::fixed)<<setprecision(2);
         return stream<<endl<< \
         mat[0][0]<<"\t"<<mat[0][1]<<endl<< \
         mat[1][0]<<"\t"<<mat[1][1]<<endl;
@@ -73,6 +74,7 @@ namespace engine
     
     std::ostream& operator<<(std::ostream& stream, glm::mat3 mat)
     {
+        stream<<setiosflags(ios::fixed)<<setprecision(2);
         return stream<<endl<< \
             mat[0][0]<<"\t"<<mat[0][1]<<"\t"<<mat[0][2]<<endl<< \
             mat[1][0]<<"\t"<<mat[1][1]<<"\t"<<mat[1][2]<<endl<< \
@@ -81,6 +83,7 @@ namespace engine
     
     std::ostream& operator<<(std::ostream& stream, glm::mat4 mat)
     {
+        stream<<setiosflags(ios::fixed)<<setprecision(2);
         return stream<<endl<< \
         mat[0][0]<<"\t"<<mat[0][1]<<"\t"<<mat[0][2]<<"\t"<<mat[0][3]<<endl<< \
         mat[1][0]<<"\t"<<mat[1][1]<<"\t"<<mat[1][2]<<"\t"<<mat[1][3]<<endl<< \

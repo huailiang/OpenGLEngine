@@ -58,7 +58,7 @@ struct ESContext
     void (*tapFunc)(ESContext*, float, float);
     void (*frameReadyFunc)(ESContext*, const BGRAVideoFrame&);
     void (*frameDetectFunc)(ESContext*, const std::vector<Transformation>&);
-    void (*frameInitFunc)(ESContext*, int width, int height, const Matrix33&);
+    void (*frameInitFunc)(ESContext*, float width, float height, const Matrix33&);
 };
 
 

@@ -71,6 +71,8 @@ namespace engine
     extern uint DRAW_MODE;
     extern float deltatime;
     
+    extern bool ENG_PAUSE;
+    
     class Shader;
 
     #define WORKDIR "/Users/penghuailiang/Documents/projects/GL/OpenGLEngine/"

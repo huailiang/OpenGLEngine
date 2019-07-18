@@ -1,9 +1,9 @@
 #version 330 core
 
 out vec4 FragColor;
+in vec2 TexCoords;
 
 #ifndef _VR_
-in vec2 TexCoords;
 uniform sampler2D texture1;
 #endif
 
@@ -21,7 +21,7 @@ float LinearizeDepth(float depth)
 void main()
 {
 #ifdef _VR_
-    FragColor = vec4(1,0,0,0.4);
+    FragColor = vec4(TexCoords,0,1);
 #else
 #ifdef _FLIP_Y_
     vec4 color = texture(texture1, vec2(TexCoords.x, 1.0 - TexCoords.y));

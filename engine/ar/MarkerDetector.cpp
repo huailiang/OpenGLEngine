@@ -113,7 +113,7 @@ void MarkerDetector::findContours(cv::Mat& thresholdImg, ContoursVector& contour
     contours.clear();
     for (size_t i=0; i<allContours.size(); i++)
     {
-        int contourSize = allContours[i].size();
+        int contourSize = (int)allContours[i].size();
         if (contourSize > minContourPointsAllowed)
         {
             contours.push_back(allContours[i]);
@@ -358,7 +358,7 @@ void MarkerDetector::estimatePosition(std::vector<Marker>& detectedMarkers)
         }
 
         // Since solvePnP finds camera location, w.r.t to marker pose, to get marker pose w.r.t to the camera we invert it.
-        m.transformation = m.transformation.getInverted();
+        m.transformation = m.transformation;
     }
 }
 

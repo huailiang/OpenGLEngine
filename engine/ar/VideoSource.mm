@@ -37,9 +37,7 @@
 
 - (CameraCalibration) getCalibration
 {
-
-//    return CameraCalibration(6.24860291e+02 * (640./352.), 6.24860291e+02 * (480./288.), 640 * 0.5f, 480 * 0.5f);
-    return CameraCalibration(624.4343, 647.064, 640 * 0.5f, 480 * 0.5f);
+    return CameraCalibration(640.4343, 647.064, 640 * 0.5f, 480 * 0.5f);
 }
 
 - (CGSize) getFrameSize
@@ -58,6 +56,7 @@
 {
     [self.captureSession stopRunning];
     self.captureSession = nil;
+    [super dealloc];
 }
 
 #pragma mark Capture Session Configuration
@@ -92,7 +91,7 @@
     
 	/*We create a serial queue to handle the processing of our frames*/
 	dispatch_queue_t queue;
-	queue = dispatch_queue_create("com.Example_MarkerBasedAR.cameraQueue", NULL);
+	queue = dispatch_queue_create("com.yunstudio.-glfw.GLESEngine", NULL);
 	[captureOutput setSampleBufferDelegate:self queue:queue];
     dispatch_release(queue);
     
