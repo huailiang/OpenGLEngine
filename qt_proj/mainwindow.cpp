@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "ui/prev_mesh.h"
+#include "ui/prev_mat.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -7,9 +9,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowTitle("OpenGL Engine");
-    connect(ui->radioButton, SIGNAL(clicked()), this, SLOT(ToggleRadio1()));
-    connect(ui->radioButton_2, SIGNAL(clicked()), this, SLOT(ToggleRadio2()));
-    connect(ui->radioButton_3, SIGNAL(clicked()), this, SLOT(ToggleRadio3()));
+    project = new Ui_Project();
+    project->setupTree(this, ui->treeWidget);
+    QObject::connect(ui->treeWidget,SIGNAL(itemClicked(QTreeWidgetItem*,int)), this, SLOT(checkself(QTreeWidgetItem* ,int)));
 }
 
 MainWindow::~MainWindow()
@@ -32,18 +34,32 @@ void MainWindow::keyReleaseEvent(QKeyEvent *ev)
     }
 }
 
-
-void MainWindow::ToggleRadio1()
+void MainWindow::checkself(QTreeWidgetItem* item,int idx)
 {
-    this->ui->widget->ExterHandleClick(0);
-}
-
-void MainWindow::ToggleRadio2()
-{
-     this->ui->widget->ExterHandleClick(1);
-}
-
-void MainWindow::ToggleRadio3()
-{
-     this->ui->widget->ExterHandleClick(2);
+    string path = item->text(0).toStdString();
+    size_t indx = path.rfind(".");
+    string post = "";
+    if(indx>0) post = path.substr(indx+1);
+    while(item->parent())
+    {
+        item=item->parent();
+        path = item->text(0).toStdString() +"/"+path;
+    }
+    std::cout<<path<<" "<<idx<<std::endl;
+    ui->path->setAutoFillBackground(true);
+    ui->path->setText(QString(path.c_str()));
+    ui->textEdit->setText(QString(path.c_str()));
+    if(indx>0)
+    {
+        if(post == "mesh")
+        {
+            string txt = UI_UtilMesh(path);
+            ui->textEdit->setText(QString(txt.c_str()));
+        }
+        else if(post == "mat")
+        {
+            string txt = UI_UtilMat(path);
+            ui->textEdit->setText(QString(txt.c_str()));
+        }
+    }
 }

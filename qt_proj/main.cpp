@@ -8,7 +8,6 @@
 #include "glwidget.h"
 #include "mainwindow.h"
 
-
 using namespace std;
 using namespace engine;
 
@@ -52,11 +51,6 @@ int main(int argc, char *argv[])
     QGLFormat glFormat(QGL::SampleBuffers);
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_MAC)
-     /*
-     * Commenting out the next line because it causes rendering to fail.  QGLFormat::CoreProfile
-     * disables all OpenGL functions that are depreciated as of OpenGL 3.0.  This fix is a workaround.
-     * The full solution is to replace all depreciated OpenGL functions with their current implements.
-    */
 # if defined(Q_OS_MAC)
     glFormat.setProfile( QGLFormat::CoreProfile );
 # endif
@@ -76,7 +70,6 @@ int main(int argc, char *argv[])
     {
         std::cout<<"Sorry but it seems that your graphics card does not support openGL "<<GL_MAJOR<<GL_MINOR;
     }
-
     MainWindow window;
     window.show();
 

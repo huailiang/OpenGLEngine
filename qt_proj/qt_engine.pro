@@ -56,6 +56,9 @@ SOURCES += \
     ../engine/gui/uibase.cpp \
     ../engine/gui/uimgr.cpp \
     ../engine/gui/uievent.cpp \
+    ui/ui_project.cpp \
+    ui/prev_mat.cpp \
+    ui/prev_mesh.cpp \
     mainwindow.cpp \
     enginewidget.cpp \
     scene/scenewrap.cpp
@@ -88,6 +91,9 @@ HEADERS += \
     ../engine/gui/uibase.h \
     ../engine/gui/uimgr.h \
     ../engine/gui/uievent.h \
+    ui/ui_project.h \
+    ui/prev_mat.h \
+    ui/prev_mesh.h \
     mainwindow.h \
     enginewidget.h \
     scene/scenewrap.h \

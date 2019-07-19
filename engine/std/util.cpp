@@ -361,6 +361,7 @@ namespace engine
             {
                 mat->mesh = ReadMesh(name);
             }
+            ifs.close();
         } catch (std::ifstream::failure e)
         {
             std::cerr<<"read material error "<<name<<std::endl;

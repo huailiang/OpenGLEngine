@@ -33,7 +33,7 @@ namespace engine
     extern string curr_obj;
     
     int CheckDir(const char* path);
-    
+        
     bool LoadObj(const std::string name);
     
     void WriteMesh(const std::string name,vector<int>& indices, vector<Vertex>& vertices, VertType type, std::string dir="");
