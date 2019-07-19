@@ -13,6 +13,8 @@
 using namespace std;
 using namespace engine;
 
+string UI_UtilSummary(string name);
+
 string UI_UtilMat(string name);
 
 

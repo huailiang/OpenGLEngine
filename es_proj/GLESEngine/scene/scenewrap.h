@@ -12,7 +12,7 @@
 
 #include "../utils/Context.h"
 
-bool InitScene(ESContext* context);
+bool InitScene(ESContext* context, int width, int height);
 
 bool OpenCamera();
 

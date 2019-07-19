@@ -21,9 +21,9 @@ string UI_UtilMesh(string name)
         ifs.read((char*)(&inds), sizeof(uint));
 
 
-        str+=" lod:"+std::to_string(lod)+"\n";
-        str+= " vert:"+std::to_string(verts)+"\n";
-        str+= " inds:"+std::to_string(inds)+"\n";
+        str+=" lod:  "+std::to_string(lod)+"\n";
+        str+= " vert: "+std::to_string(verts)+"\n";
+        str+= " inds: "+std::to_string(inds)+"\n";
 
         string types = " types: ";
         if(type & Vt_Pos3)

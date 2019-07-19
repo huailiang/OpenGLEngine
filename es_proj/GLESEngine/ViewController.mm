@@ -22,7 +22,7 @@
 @property (strong, nonatomic) VideoSource * videoSource;
 @property (nonatomic) MarkerDetector * markerDetector;
 
-- (void)setupGL;
+- (void)setupGL:(int)w with:(int)h;
 - (void)tearDownGL;
 @end
 
@@ -42,7 +42,13 @@
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
     view.drawableStencilFormat = GLKViewDrawableStencilFormat8;
     view.drawableColorFormat = GLKViewDrawableColorFormatRGBA8888;
-    [self setupGL];
+    
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    GLKView *view = (GLKView *)self.view;
+    [self setupGL:(int)view.drawableWidth  with:(int)view.drawableHeight];
     if(_esContext.width != (GLint)view.drawableWidth || _esContext.height != (GLint)view.drawableHeight)
     {
         _esContext.width = (GLint)view.drawableWidth;
@@ -51,7 +57,7 @@
             _esContext.updateWindow(&_esContext);
         }
     }
-
+    [super viewDidAppear:animated];
 }
 
 - (void)dealloc
@@ -132,14 +138,14 @@
     }
 }
 
-- (void)setupGL
+- (void)setupGL:(int)w with:(int)h
 {
     if(![EAGLContext setCurrentContext:self.context])
     {
         NSLog(@" setCurrentContext error");
     }
     memset(&_esContext, 0, sizeof(_esContext));
-    InitScene(&_esContext);
+    InitScene(&_esContext,w,h);
 }
 
 - (void)tearDownGL

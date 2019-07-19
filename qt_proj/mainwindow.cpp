@@ -61,5 +61,10 @@ void MainWindow::checkself(QTreeWidgetItem* item,int idx)
             string txt = UI_UtilMat(path);
             ui->textEdit->setText(QString(txt.c_str()));
         }
+        else if(post == "sum")
+        {
+            string txt = UI_UtilSummary(path);
+            ui->textEdit->setText(QString(txt.c_str()));
+        }
     }
 }

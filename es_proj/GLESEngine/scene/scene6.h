@@ -51,7 +51,7 @@ public:
         InitFullQuad(&quadVao, &quadVbo, shader);
         
         vrShader = new Shader("debug.vs","debug.fs");
-        vrShader->attach("_VR_");
+        vrShader->attach("_AR_");
         InitCube(&vrVao, &vrVBo, vrShader);
         vrShader->compile();
     }

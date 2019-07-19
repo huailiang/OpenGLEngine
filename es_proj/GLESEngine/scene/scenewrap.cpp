@@ -105,8 +105,10 @@ void OnFrameInit(ESContext *esContext, float width, float height,const Matrix33&
     }
 }
 
-bool InitScene(ESContext* context)
+bool InitScene(ESContext* context, int width, int height)
 {
+    SCR_WIDTH = width;
+    SCR_HEIGHT = height;
     esContext = context;
     init_engine();
     

@@ -2,7 +2,7 @@
 
 #include "lib/appdata.glsl"
 
-#ifdef _VR_
+#ifdef _AR_
 uniform mat4 view;
 uniform mat4 proj;
 #endif
@@ -12,7 +12,7 @@ out vec2 TexCoords;
 void main()
 {
     TexCoords = aTexCoords;
-#ifdef _VR_
+#ifdef _AR_
     vec3 pos = vec3(aPos.x * 0.4, aPos.y * 0.4, aPos.z * 0.4);
     gl_Position = proj * view *  vec4(pos, 1.0);
 #else
