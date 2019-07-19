@@ -5,6 +5,8 @@
 # Author: Huailiang.Peng
 # Data:   2019.07.05
 # Useage:
+#   sh sample.sh --write-rendered 
+# 	sh sample.sh
 # ==============================================
 #!/bin/sh
 
@@ -16,13 +18,24 @@ cd ../
 TARGET=glwf_proj/Build/Debug/
 DEGREE=3
 SAMPLE_NUM=1000000
-WRITE_RENDERED=
+
 # WRITE_RENDERED="--write-rendered"
 
 # 如果没有生成版本 报错退出
 if [ ! -d "$TARGET" ]; then  
 	echo "error, not found build folfer"
 	exit 1
+fi
+
+
+echo "arg count: "$#
+if [ $# == 1 ] ; then 
+    echo "process: "${1} 
+    if [[ ${1} == "--write-rendered" ]]; then
+    	WRITE_RENDERED="--write-rendered"
+    else
+    	WRITE_RENDERED=
+    fi
 fi
 
 cp ${TARGET}/OpenGLEngine ./

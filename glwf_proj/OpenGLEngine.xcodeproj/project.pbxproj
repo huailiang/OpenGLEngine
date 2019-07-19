@@ -364,12 +364,12 @@
 			isa = PBXGroup;
 			children = (
 				4C9EE54D22D764E30010EED9 /* cvtool.h */,
-				4C9EE54E22D764E30010EED9 /* cubemap.cpp */,
-				4C9EE54F22D764E30010EED9 /* harmonics.cpp */,
 				4C9EE55022D764E30010EED9 /* cvtool.cpp */,
-				4C9EE55122D764E30010EED9 /* harmonics.h */,
-				4C9EE55222D764E30010EED9 /* util.h */,
 				4C9EE55322D764E30010EED9 /* cubemap.h */,
+				4C9EE54E22D764E30010EED9 /* cubemap.cpp */,
+				4C9EE55122D764E30010EED9 /* harmonics.h */,
+				4C9EE54F22D764E30010EED9 /* harmonics.cpp */,
+				4C9EE55222D764E30010EED9 /* util.h */,
 			);
 			name = cv;
 			path = ../engine/cv;
