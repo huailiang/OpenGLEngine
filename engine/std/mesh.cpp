@@ -24,7 +24,6 @@ namespace engine
         VERT_ATTRIB_PTR(i, *(config+i), T, offset);    \
         offset+= *(config+i);   \
     }
-
     
     MeshData::~MeshData()
     {

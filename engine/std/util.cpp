@@ -30,6 +30,11 @@ namespace engine
     string curr_obj;
     map<string,GLuint> loaded_textures;
     
+    #define FETCH_VERT(T) \
+    if(mesh->vertices == nullptr) mesh->vertices = new T[verts]; \
+    T* vert = (T*)mesh->vertices + i;
+    
+    
     void WriteSummary(std::vector<tinyobj::shape_t>& shapes);
     void WriteSkeleton(vector<Bone>& bones, vector<Animation>& animations,const std::string name);
     
@@ -444,45 +449,39 @@ namespace engine
                 switch (type) {
                     case 0x0111:
                     {
-                        if(mesh->vertices == nullptr) mesh->vertices = new Vertex[verts];
-                        Vertex* vert = (Vertex*)mesh->vertices + i;
+                        FETCH_VERT(Vertex)
                         readv3(ifs, vert->Position);
                         readv2(ifs, vert->TexCoords);
                         readv3(ifs, vert->Normal);
                     } break;
                     case 0x0101:
                     {
-                        if(mesh->vertices == nullptr) mesh->vertices = new NormalVert[verts];
-                        NormalVert* vert = (NormalVert*)mesh->vertices + i;
+                        FETCH_VERT(NormalVert)
                         readv3(ifs, vert->Position);
                         readv3(ifs, vert->Normal);
                     }break;
                     case 0x0012:
                     {
-                        if(mesh->vertices == nullptr) mesh->vertices = new BaseVert2[verts];
-                        BaseVert2* vert  = (BaseVert2*)mesh->vertices + i;
+                        FETCH_VERT(BaseVert2)
                         readv2(ifs, vert->Position);
                         readv2(ifs, vert->TexCoords);
                     } break;
                     case 0x0011:
                     {
-                        if(mesh->vertices == nullptr) mesh->vertices = new BaseVert3[verts];
-                        BaseVert3* vert  = (BaseVert3*)mesh->vertices + i;
+                        FETCH_VERT(BaseVert3)
                         readv3(ifs, vert->Position);
                         readv2(ifs, vert->TexCoords);
                     } break;
                     case 0x1011:
                     {
-                        if(mesh->vertices == nullptr) mesh->vertices = new ColorVertex[verts];
-                        ColorVertex* vert = (ColorVertex*)mesh->vertices + i;
+                        FETCH_VERT(ColorVertex)
                         readv3(ifs, vert->Position);
                         readv2(ifs, vert->TexCoords);
                         readv3(ifs, vert->Color);
                     } break;
                     case 0x1111:
                     {
-                        if(mesh->vertices == nullptr) mesh->vertices = new CompxVertex[verts];
-                        CompxVertex* vert = (CompxVertex*)mesh->vertices + i;
+                        FETCH_VERT(CompxVertex)
                         readv3(ifs, vert->Position);
                         readv2(ifs, vert->TexCoords);
                         readv3(ifs, vert->Normal);
@@ -490,15 +489,13 @@ namespace engine
                     } break;
                     case 0x2111:
                     {
-                        if(mesh->vertices == nullptr) mesh->vertices = new SkeletonVertex[verts];
-                        SkeletonVertex* vert = (SkeletonVertex*)mesh->vertices + i;
+                        FETCH_VERT(SkeletonVertex)
                         readv3(ifs, vert->Position);
                         readv2(ifs, vert->TexCoords);
                         readv3(ifs, vert->Normal);
                         glm::vec3 w; readv3(ifs, w);
                         glm::ivec3 v; readv3(ifs, v);
                         vert->Bone = glm::vec4(w, 65025 * v.x+ 255 * v.y + v.z);
-                        mesh->vertices[i] = *vert;
                     } break;
                     default:
                     std::cerr<<"vertex config not support format: 0x"<<hex<<type<<std::endl;

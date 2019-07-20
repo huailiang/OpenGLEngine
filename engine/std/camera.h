@@ -25,9 +25,9 @@ namespace engine
         RIGHT
     };
 
-    const float SPEED       =  1.0f;
-    const float SENSITIVITY =  0.002f;
-    const float ZOOM        =  45.0f;
+    const float SPEED = 1.0f;
+    const float SENSITIVITY = 0.002f;
+    const float ZOOM = 45.0f;
 
     class Camera
     {
@@ -41,7 +41,6 @@ namespace engine
         float MouseSensitivity;
         float FOV;
 
-        // Constructor with vectors
         Camera(const vec3 position = vec3(0.0f, 0.0f, 0.0f), const vec3 up = vec3(0.0f, 1.0f, 0.0f)) : Front(vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), FOV(ZOOM)
         {
             Position = position;
@@ -50,7 +49,6 @@ namespace engine
             updateCameraVectors();
         }
         
-        // Constructor with scalar values
         Camera(float posX, float posY, float posZ, float upX, float upY, float upZ) : Front(vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), FOV(ZOOM)
         {
             Position = vec3(posX, posY, posZ);

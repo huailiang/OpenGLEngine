@@ -104,7 +104,7 @@ namespace engine
     void Camera::updateCameraVectors()
     {
         Right = normalize(glm::cross(Front, WorldUp));
-        Up    = normalize(glm::cross(Right, Front));
+        Up = normalize(glm::cross(Right, Front));
         updateUbo();
     }
 
