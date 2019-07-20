@@ -1,12 +1,9 @@
-#ifndef Example_MarkerBasedAR_CameraCalibration_hpp
-#define Example_MarkerBasedAR_CameraCalibration_hpp
+#ifndef CameraCalibration_hpp
+#define CameraCalibration_hpp
 
 #include "GeometryTypes.hpp"
 
-/**
- * A camera calibraiton class that stores intrinsic matrix
- * and distorsion vector.
- */
+
 class CameraCalibration
 {
 public:

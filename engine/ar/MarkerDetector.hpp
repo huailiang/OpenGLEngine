@@ -1,5 +1,5 @@
-#ifndef Example_MarkerBasedAR_MarkerDetector_hpp
-#define Example_MarkerBasedAR_MarkerDetector_hpp
+#ifndef MarkerDetector_hpp
+#define MarkerDetector_hpp
 
 #include <vector>
 #include <opencv2/opencv.hpp>

@@ -31,7 +31,8 @@ namespace engine
     for (int i=0; i<num; i++) { \
         VERT_ATTRIB_PTR(i, *(config+i), T, offset);    \
         offset+= *(config+i);   \
-    }
+    } \
+    delete [] p;
 
     
     MeshData::~MeshData()
@@ -49,7 +50,6 @@ namespace engine
     void MeshData::ConfigAttribute(const GLenum usage)
     {
         if(num_indice) glBufferData(GL_ELEMENT_ARRAY_BUFFER, num_indice * sizeof(unsigned short), indices, usage);
-        Vert* p = nullptr;
         if(type == 0x0111 || type == 0x1011)
         {
             GET_VERTEX(Vertex);
@@ -90,7 +90,6 @@ namespace engine
         {
             std::cerr<<"not support vertex attribute: 0x"<<hex<<type<<std::endl;
         }
-        if(p) delete [] p;
     }
 
 

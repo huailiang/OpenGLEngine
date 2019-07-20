@@ -1,5 +1,5 @@
-#ifndef Example_MarkerBasedAR_GeometryTypes_hpp
-#define Example_MarkerBasedAR_GeometryTypes_hpp
+#ifndef GeometryTypes_hpp
+#define GeometryTypes_hpp
 
 #include <glm/glm.hpp>
 #include <iostream>

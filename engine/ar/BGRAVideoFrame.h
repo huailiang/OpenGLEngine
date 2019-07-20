@@ -1,9 +1,9 @@
-#ifndef Example_MarkerBasedAR_BGRAVideoFrame_h
-#define Example_MarkerBasedAR_BGRAVideoFrame_h
+#ifndef BGRAVideoFrame_h
+#define BGRAVideoFrame_h
 
 #include <cstddef>
 
-// A helper struct presenting interleaved BGRA image in memory.
+
 struct BGRAVideoFrame
 {
     size_t width;

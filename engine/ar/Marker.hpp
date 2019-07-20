@@ -1,5 +1,5 @@
-#ifndef Example_MarkerBasedAR_Marker_hpp
-#define Example_MarkerBasedAR_Marker_hpp
+#ifndef Marker_hpp
+#define Marker_hpp
 
 #include <vector>
 #include <iostream>
