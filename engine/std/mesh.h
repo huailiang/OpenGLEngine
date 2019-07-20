@@ -115,7 +115,7 @@ namespace engine
         uint num_indice;
         unsigned short *indices= nullptr;
         uint num_vert;
-        Vert** vertices = nullptr;
+        Vert* vertices = nullptr;
         VertType type;
         
         ~MeshData();

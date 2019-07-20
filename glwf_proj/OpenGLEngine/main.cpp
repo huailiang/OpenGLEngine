@@ -35,6 +35,7 @@ void processInput(GLFWwindow* window);
 
 SceneMgr SceneMgr::instance;
 
+
 int main(int argc, const char * argv[])
 {
     if (argc<=1)

@@ -10,40 +10,30 @@
 #include "util.h"
 
 namespace engine
-{    
-    
-    #define GET_VERTEX(T) \
-    T *p = new T[num_vert]; \
-    for(size_t i=0;i<num_vert;i++) {  \
-        T* v = (T*)vertices[i]; \
-        *(p+i) = *v;    \
-    }
-    
+{
     
     #define VERT_ATTRIB_PTR(idx, size, T, offset)   \
     glEnableVertexAttribArray(idx); \
     glVertexAttribPointer(idx, size, GL_FLOAT, GL_FALSE, sizeof(T), (void*)(offset * sizeof(float)));
-
+    
     
     #define MESH_VERT_CONFIG(config, num, T)   \
-    glBufferData(GL_ARRAY_BUFFER, num_vert * sizeof(T), p, usage);  \
+    glBufferData(GL_ARRAY_BUFFER, num_vert * sizeof(T), vertices, usage);  \
     int offset = 0;    \
     for (int i=0; i<num; i++) { \
         VERT_ATTRIB_PTR(i, *(config+i), T, offset);    \
         offset+= *(config+i);   \
-    } \
-    delete [] p;
+    }
 
     
     MeshData::~MeshData()
     {
-        delete []indices;
-        for(uint i = 0; i < num_vert; i++)
-            delete vertices[i];
-        delete []vertices;
-        
+        delete [] indices;
+        delete [] vertices;
         indices = nullptr;
         vertices = nullptr;
+        num_vert = 0;
+        num_indice = 0;
     }
     
     
@@ -52,37 +42,31 @@ namespace engine
         if(num_indice) glBufferData(GL_ELEMENT_ARRAY_BUFFER, num_indice * sizeof(unsigned short), indices, usage);
         if(type == 0x0111 || type == 0x1011)
         {
-            GET_VERTEX(Vertex);
             int config[] = { LEN_Pos3, LEN_UV, LEN_Normal };
             MESH_VERT_CONFIG(config, 3, Vertex);
         }
         else if(type == 0x0101)
         {
-            GET_VERTEX(NormalVert);
             int config[] = { LEN_Pos3, LEN_Normal };
             MESH_VERT_CONFIG(config, 2, NormalVert);
         }
         else if(type == 0x1111)
         {
-            GET_VERTEX(CompxVertex);
             int config[] = { LEN_Pos3, LEN_UV, LEN_Normal, LEN_Color };
             MESH_VERT_CONFIG(config, 4, CompxVertex);
         }
         else if (type == 0x0011)
         {
-            GET_VERTEX(BaseVert3);
             int config[] = { LEN_Pos3, LEN_UV };
             MESH_VERT_CONFIG(config, 2, BaseVert3);
         }
         else if (type == 0x0012)
         {
-            GET_VERTEX(BaseVert2);
             int config[] = { LEN_Pos2, LEN_UV };
             MESH_VERT_CONFIG(config, 2, BaseVert2);
         }
         else if(type == 0x2111)
         {
-            GET_VERTEX(SkeletonVertex);
             int config[] = { LEN_Pos3, LEN_UV, LEN_Normal, LEN_Skin };
             MESH_VERT_CONFIG(config, 4, SkeletonVertex);
         }
@@ -149,9 +133,6 @@ namespace engine
             uint idx0 = indices[i+0];
             uint idx1 = indices[i+1];
             uint idx2 = indices[i+2];
-            Vert* v0 = vertices[idx0];
-            Vert* v1 = vertices[idx1];
-            Vert* v2 = vertices[idx2];
             TangVertex* tv0 = ptr + idx0;
             TangVertex* tv1 = ptr + idx0;
             TangVertex* tv2 = ptr + idx0;
@@ -159,17 +140,17 @@ namespace engine
             glm::vec3 *tan = nullptr, *bit = nullptr;
             if(type == 0x0111)
             {
-                caltangent((Vertex*)v0, (Vertex*)v1, (Vertex*)v2,tan,bit);
-                ConvertVertex((Vertex*)v0, tv0);
-                ConvertVertex((Vertex*)v1, tv1);
-                ConvertVertex((Vertex*)v2, tv2);
+                caltangent((Vertex*)vertices + idx0, (Vertex*)vertices + idx1, (Vertex*)vertices + idx2,tan,bit);
+                ConvertVertex((Vertex*)vertices + idx0, tv0);
+                ConvertVertex((Vertex*)vertices + idx1, tv1);
+                ConvertVertex((Vertex*)vertices + idx2, tv2);
             }
             else if(type == 0x1111)
             {
-                caltangent((CompxVertex*)v0,(CompxVertex*)v1,(CompxVertex*)v2,tan,bit);
-                ConvertVertex((CompxVertex*)v0, tv0);
-                ConvertVertex((CompxVertex*)v1, tv1);
-                ConvertVertex((CompxVertex*)v2, tv2);
+                caltangent((CompxVertex*)vertices + idx0,(CompxVertex*)vertices + idx1,(CompxVertex*)vertices + idx2,tan,bit);
+                ConvertVertex((CompxVertex*)vertices + idx0, tv0);
+                ConvertVertex((CompxVertex*)vertices + idx1, tv1);
+                ConvertVertex((CompxVertex*)vertices + idx2, tv2);
             }
             else
             {

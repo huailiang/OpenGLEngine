@@ -430,7 +430,7 @@ namespace engine
             mesh->num_indice = inds;
             mesh->indices = new unsigned short[inds];
             mesh->num_vert = verts;
-            mesh->vertices = new Vert*[verts];
+            mesh->vertices = nullptr;
             loop0i(inds) ifs.read((char*)(&(mesh->indices[i])), sizeof(uint));
             for (short i=ilod+1; i<lod; i++) {
                 uint num =0;
@@ -438,66 +438,67 @@ namespace engine
                 ifs.seekg(num*4, std::ios_base::cur);
             }
             
+            
             for (size_t i=0; i<verts; i++)
             {
                 switch (type) {
                     case 0x0111:
                     {
-                        Vertex* vertex = new Vertex();
-                        readv3(ifs, vertex->Position);
-                        readv2(ifs, vertex->TexCoords);
-                        readv3(ifs, vertex->Normal);
-                        mesh->vertices[i] = vertex;
+                        if(mesh->vertices == nullptr) mesh->vertices = new Vertex[verts];
+                        Vertex* vert = (Vertex*)mesh->vertices + i;
+                        readv3(ifs, vert->Position);
+                        readv2(ifs, vert->TexCoords);
+                        readv3(ifs, vert->Normal);
                     } break;
                     case 0x0101:
                     {
-                        NormalVert* vert = new NormalVert();
+                        if(mesh->vertices == nullptr) mesh->vertices = new NormalVert[verts];
+                        NormalVert* vert = (NormalVert*)mesh->vertices + i;
                         readv3(ifs, vert->Position);
                         readv3(ifs, vert->Normal);
-                        std::cout<<"normal:"<<vert->Normal.x<<" "<<vert->Normal.y<<" "<<vert->Normal.z<<std::endl;
-                        mesh->vertices[i] = vert;
                     }break;
                     case 0x0012:
                     {
-                        BaseVert2* vert  = new BaseVert2();
+                        if(mesh->vertices == nullptr) mesh->vertices = new BaseVert2[verts];
+                        BaseVert2* vert  = (BaseVert2*)mesh->vertices + i;
                         readv2(ifs, vert->Position);
                         readv2(ifs, vert->TexCoords);
-                        mesh->vertices[i] = vert;
                     } break;
                     case 0x0011:
                     {
-                        BaseVert3* vert  = new BaseVert3();
+                        if(mesh->vertices == nullptr) mesh->vertices = new BaseVert3[verts];
+                        BaseVert3* vert  = (BaseVert3*)mesh->vertices + i;
                         readv3(ifs, vert->Position);
                         readv2(ifs, vert->TexCoords);
-                        mesh->vertices[i] = vert;
                     } break;
                     case 0x1011:
                     {
-                        ColorVertex* vert = new ColorVertex();
+                        if(mesh->vertices == nullptr) mesh->vertices = new ColorVertex[verts];
+                        ColorVertex* vert = (ColorVertex*)mesh->vertices + i;
                         readv3(ifs, vert->Position);
                         readv2(ifs, vert->TexCoords);
                         readv3(ifs, vert->Color);
-                        mesh->vertices[i] = vert;
                     } break;
                     case 0x1111:
                     {
-                        CompxVertex* vert = new CompxVertex();
+                        if(mesh->vertices == nullptr) mesh->vertices = new CompxVertex[verts];
+                        CompxVertex* vert = (CompxVertex*)mesh->vertices + i;
                         readv3(ifs, vert->Position);
                         readv2(ifs, vert->TexCoords);
                         readv3(ifs, vert->Normal);
                         readv3(ifs, vert->Color);
-                        mesh->vertices[i] = vert;
                     } break;
                     case 0x2111:
                     {
-                        SkeletonVertex* vert = new SkeletonVertex();
+                        if(mesh->vertices == nullptr) mesh->vertices = new SkeletonVertex[verts];
+                        SkeletonVertex* vert = (SkeletonVertex*)mesh->vertices + i;
                         readv3(ifs, vert->Position);
                         readv2(ifs, vert->TexCoords);
                         readv3(ifs, vert->Normal);
                         glm::vec3 w; readv3(ifs, w);
                         glm::ivec3 v; readv3(ifs, v);
                         vert->Bone = glm::vec4(w, 65025 * v.x+ 255 * v.y + v.z);
-                        mesh->vertices[i] = vert;
+                        mesh->vertices[i] = *vert;
                     } break;
                     default:
                     std::cerr<<"vertex config not support format: 0x"<<hex<<type<<std::endl;
