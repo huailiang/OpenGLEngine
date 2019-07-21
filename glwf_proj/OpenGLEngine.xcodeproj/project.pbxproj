@@ -205,11 +205,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4CB025E822E367F600B2B6D9 /* libopencv_features2d.4.1.1.dylib in Frameworks */,
 				4C3B7A1922831668003B212F /* Cocoa.framework in Frameworks */,
 				4C3B7A172283164E003B212F /* IOKit.framework in Frameworks */,
 				4CD27D482283070B0038AE21 /* CoreVideo.framework in Frameworks */,
 				4C9EE55722D7651D0010EED9 /* libopencv_highgui.4.1.1.dylib in Frameworks */,
+				4CB025E822E367F600B2B6D9 /* libopencv_features2d.4.1.1.dylib in Frameworks */,
 				4C9EE54922D764790010EED9 /* libopencv_imgcodecs.4.1.1.dylib in Frameworks */,
 				4C9EE54A22D764860010EED9 /* libopencv_imgproc.4.1.1.dylib in Frameworks */,
 				4C9EE54822D764530010EED9 /* libopencv_core.4.1.1.dylib in Frameworks */,

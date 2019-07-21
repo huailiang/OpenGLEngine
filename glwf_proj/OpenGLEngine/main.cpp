@@ -40,6 +40,8 @@ int main(int argc, const char * argv[])
 {
     if (argc<=1)
     {
+        tool::Recognition();
+        return 1;
         return run_engine();
     }
     else

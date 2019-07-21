@@ -102,6 +102,15 @@ ui可以画Label, Button
 
 后期会逐步扩展引擎， 比如AR模块、lua热更模块、编写更多的geomotry以便调试
 
+更多的文档链接:
+
+* [球谐光照][i10]
+* [IBL diffuse][i7]
+* [IBL specular][i8]
+* [Font render][i6]
+* [AR 探索][i9]
+
+
 # 语法
 
 ## 1. glsl中支持文件包含
@@ -183,3 +192,8 @@ penghuailiang<br>
 [i3]: http://glm.g-truc.net
 [i4]: http://www.opengl.org
 [i5]: https://glad.dav1d.de
+[i6]: https://huailiang.github.io/blog/2019/engine/
+[i7]: https://huailiang.github.io/blog/2019/ibl/
+[i8]: https://huailiang.github.io/blog/2019/ibl2/
+[i9]: https://huailiang.github.io/blog/2019/vr/
+[i10]: https://huailiang.github.io/blog/2019/harmonics/
