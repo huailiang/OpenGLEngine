@@ -40,7 +40,7 @@ namespace engine
     
     EXT getTextureFormat(const char* ext)
     {
-        for (int i=0; i<6; i++) {
+        loop (6) {
             if(strcmp(exts[i].c_str(),ext)==0)
             {
                 return (i+1)<<4;

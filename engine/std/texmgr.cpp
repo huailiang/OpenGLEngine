@@ -21,7 +21,7 @@ namespace engine
     
     Texture* TexMgr::FindTexture(GLuint& texid)
     {
-        for (size_t i=0; i<_num_tex; i++)
+        loop (_num_tex)
         {
             if (_texids[i].textureID == texid)
             {
@@ -33,7 +33,7 @@ namespace engine
     
     bool TexMgr::FindTexture(GLuint& texid, size_t& idx)
     {
-        for (size_t i=0; i<_num_tex; i++)
+        loop (_num_tex)
         {
             if (_texids[i].textureID == texid)
             {
@@ -47,7 +47,7 @@ namespace engine
     
     bool TexMgr::FindTexture(string& texture, GLuint& texid, size_t& idx)
     {
-        for (size_t i=0; i<_num_tex; i++)
+        loop (_num_tex)
         {
             if (_texids[i].path == texture)
             {

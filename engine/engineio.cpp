@@ -31,6 +31,14 @@ namespace engine
         f.read((char*)&(v.z),sizeof(int));
     }
     
+    void readv4(std::ifstream& f, glm::vec4& v)
+    {
+        f.read((char*)&(v.x),sizeof(float));
+        f.read((char*)&(v.y),sizeof(float));
+        f.read((char*)&(v.z),sizeof(float));
+        f.read((char*)&(v.w),sizeof(float));
+    }
+    
     void readstring(std::ifstream& f, std::string& str)
     {
         size_t len;
@@ -55,21 +63,6 @@ namespace engine
         loop(4) loop0j(4) f.read((char*)&mat[i][(int)j],sizeof(float));
     }
     
-    void readvec3(std::ifstream& f, glm::vec3& v)
-    {
-        f.read((char*)&(v.x),sizeof(float));
-        f.read((char*)&(v.y),sizeof(float));
-        f.read((char*)&(v.z),sizeof(float));
-    }
-    
-    void readvec4(std::ifstream& f, glm::vec4& v)
-    {
-        f.read((char*)&(v.x),sizeof(float));
-        f.read((char*)&(v.y),sizeof(float));
-        f.read((char*)&(v.z),sizeof(float));
-        f.read((char*)&(v.w),sizeof(float));
-    }
-
     void writestring(ofstream& f, std::string str)
     {
         size_t len = str.size();

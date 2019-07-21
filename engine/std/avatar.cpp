@@ -22,7 +22,7 @@ namespace engine
         type = ReadSummary(name, items);
         materials.clear();
         meshs.clear();
-        for (size_t i=0; i<items.size(); i++)
+        loop(items.size())
         {
             MeshData* mesh = ReadMesh(items[i]);
             ObjMaterial* mat = new ObjMaterial(mesh, shader);
@@ -162,7 +162,7 @@ namespace engine
     
     void Avatar::ChangeLOD(short ilod)
     {
-        for (size_t i=0; i<materials.size(); i++) {
+        loop (materials.size()) {
             MeshData* data = materials[i]->mesh;
             RecalcuteLod(data, "halo", "halo", ilod);
             materials[i]->SetupMesh();

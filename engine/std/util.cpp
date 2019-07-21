@@ -69,9 +69,7 @@ namespace engine
     size_t findVector(std::vector<int>& vect, int& key)
     {
         size_t len = vect.size();
-        for (size_t i=0; i<len; i++) {
-            if(vect[i]==key) return i;
-        }
+        loop (len) if(vect[i]==key) return i;
         return len;
     }
     
@@ -104,7 +102,7 @@ namespace engine
             ofs.write((char*)&num,sizeof(uint));
             MODEL_TYPE type = MODEL_OBJ;
             ofs.write((char*)&type, sizeof(MODEL_TYPE));
-            for (size_t i =0; i<shapes.size(); i++)
+            loop (shapes.size())
             {
                 string name = shapes[i].name;
                 if (name.empty()) name = curr_obj;
@@ -269,7 +267,7 @@ namespace engine
             ifs.read((char*)(&num), sizeof(uint));
             ifs.read((char*)&type, sizeof(MODEL_TYPE));
             string str;
-            for (size_t i=0; i<num; i++) {
+            loop (num) {
                 readstring(ifs, str);
                 items.push_back(str);
             }
@@ -432,7 +430,7 @@ namespace engine
             for (short i=ilod+1; i<lod; i++) {
                 uint num =0;
                 ifs.read((char*)&num,sizeof(uint));
-                ifs.seekg(num*2, std::ios_base::cur);
+                ifs.seekg(num*2, std::ios_base::cur); // 2 is short length
             }
             
             switch (type) {
@@ -716,8 +714,8 @@ namespace engine
             anim->tracks[i].keys=new Key[anim->tracks[i].num_key];
             for (uint j=0; j<anim->tracks[i].num_key; j++) {
                 ifs.read((char*)&anim->tracks[i].keys[j].time,sizeof(float));
-                readvec4(ifs, anim->tracks[i].keys[j].rot);
-                readvec3(ifs, anim->tracks[i].keys[j].pos);
+                readv4(ifs, anim->tracks[i].keys[j].rot);
+                readv3(ifs, anim->tracks[i].keys[j].pos);
             }
         }
     }

@@ -34,15 +34,13 @@ namespace engine
     
     void readv3(std::ifstream& f, glm::ivec3& v);
     
+    void readv4(std::ifstream& f, glm::vec4& v);
+    
     void readstring(std::ifstream& f, std::string& str);
     
     void readarray(std::ifstream& f, float arr[], int num);
     
     void readmat4(std::ifstream& f, glm::mat4& mat);
-    
-    void readvec3(std::ifstream& f, glm::vec3& v);
-    
-    void readvec4(std::ifstream& f, glm::vec4& v);
     
     void writestring(std::ofstream& f, std::string str);
     
