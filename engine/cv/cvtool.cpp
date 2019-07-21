@@ -6,8 +6,9 @@
 //  Copyright © 2019 彭怀亮. All rights reserved.
 //
 
-#include "cvtool.h"
+#include "cvtool.hpp"
 #include "harmonics.h"
+#include "ImageRecognition.hpp"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -31,6 +32,12 @@ namespace tool
         waitKey(0);
     }
     
+    void Recognition()
+    {
+        string path = "/Users/penghuailiang/Pictures/IMG_0012.JPG";
+        ImageRecognition reg;
+        reg.ProcessImage(path);
+    }
     
     string CoefficientsString(const vector<Vec3>& coefs)
     {

@@ -1,6 +1,7 @@
 #ifndef GeometryTypes_hpp
 #define GeometryTypes_hpp
 
+
 #include <glm/glm.hpp>
 #include <iostream>
 

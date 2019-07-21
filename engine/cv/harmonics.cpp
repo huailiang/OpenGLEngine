@@ -42,7 +42,7 @@ namespace tool
         }
         for (Vec3& coef : coefs)
         {
-            coef = 4*PI*coef / (float)vertices.size();
+            coef = 4 * PI * coef / (float)vertices.size();
         }
     }
 

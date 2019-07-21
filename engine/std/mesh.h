@@ -88,7 +88,7 @@ namespace engine
     
     struct SkeletonVertex : Vertex
     {
-        glm::vec4 Bone;
+        glm::vec4 Bone;        
     };
     
     

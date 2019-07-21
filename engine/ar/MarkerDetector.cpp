@@ -51,13 +51,11 @@ const std::vector<Transformation>& MarkerDetector::getTransformations() const
     return m_transformations;
 }
 
-
 bool MarkerDetector::findMarkers(const BGRAVideoFrame& frame, std::vector<Marker>& detectedMarkers)
 {
     cv::Mat bgraMat(frame.height, frame.width, CV_8UC4, frame.data, frame.stride);
 
-    // Convert the image to grayscale
-    prepareImage(bgraMat, m_grayscaleImage);
+    convert2Gray(bgraMat, m_grayscaleImage);
 
     // Make it binary
     performThreshold(m_grayscaleImage, m_thresholdImg);
@@ -79,27 +77,14 @@ bool MarkerDetector::findMarkers(const BGRAVideoFrame& frame, std::vector<Marker
     return false;
 }
 
-void MarkerDetector::prepareImage(const cv::Mat& bgraMat, cv::Mat& grayscale) const
+void MarkerDetector::convert2Gray(const cv::Mat& bgraMat, cv::Mat& grayscale) const
 {
-    // Convert to grayscale
     cv::cvtColor(bgraMat, grayscale, CV_BGRA2GRAY);
 }
 
 void MarkerDetector::performThreshold(const cv::Mat& grayscale, cv::Mat& thresholdImg) const
 {
     cv::threshold(grayscale, thresholdImg, 127, 255, cv::THRESH_BINARY_INV);
-
-    /*
-    cv::adaptiveThreshold(grayscale,   // Input image
-    thresholdImg,// Result binary image
-    255,         // 
-    cv::ADAPTIVE_THRESH_GAUSSIAN_C, //
-    cv::THRESH_BINARY_INV, //
-    7, //
-    7  //
-    );
-    */
-
 #ifdef SHOW_DEBUG_IMAGES
     cv::showAndSave("Threshold image", thresholdImg);
 #endif
@@ -137,9 +122,8 @@ void MarkerDetector::findCandidates
 ) 
 {
     std::vector<cv::Point>  approxCurve;
-    std::vector<Marker>     possibleMarkers;
-
-    // For each contour, analyze if it is a parallelepiped likely to be the marker
+    std::vector<Marker> possibleMarkers;
+    
     for (size_t i=0; i<contours.size(); i++)
     {
         // Approximate to a polygon
@@ -168,29 +152,17 @@ void MarkerDetector::findCandidates
         if (minDist < m_minContourLengthAllowed)
             continue;
 
-        // All tests are passed. Save marker candidate:
         Marker m;
-
         for (int i = 0; i<4; i++)
             m.points.push_back( cv::Point2f(approxCurve[i].x,approxCurve[i].y) );
 
-        // Sort the points in anti-clockwise order
-        // Trace a line between the first and second point.
-        // If the third point is at the right side, then the points are anti-clockwise
         cv::Point v1 = m.points[1] - m.points[0];
         cv::Point v2 = m.points[2] - m.points[0];
-
         double o = (v1.x * v2.y) - (v1.y * v2.x);
-
-        if (o < 0.0)		 //if the third point is in the left side, then sort in anti-clockwise order
-            std::swap(m.points[1], m.points[3]);
-
+        if (o < 0.0)  std::swap(m.points[1], m.points[3]);
         possibleMarkers.push_back(m);
     }
 
-
-    // Remove these elements which corners are too close to each other.  
-    // First detect candidates for removal:
     std::vector< std::pair<int,int> > tooNearCandidates;
     for (size_t i=0;i<possibleMarkers.size();i++)
     { 
@@ -235,7 +207,6 @@ void MarkerDetector::findCandidates
         removalMask[removalIndex] = true;
     }
 
-    // Return candidates
     detectedMarkers.clear();
     for (size_t i=0;i<possibleMarkers.size();i++)
     {
@@ -248,8 +219,7 @@ void MarkerDetector::findCandidates
 void MarkerDetector::recognizeMarkers(const cv::Mat& grayscale, std::vector<Marker>& detectedMarkers)
 {
     std::vector<Marker> goodMarkers;
-
-    // Identify the markers
+    
     for (size_t i=0;i<detectedMarkers.size();i++)
     {
         Marker& marker = detectedMarkers[i];
@@ -276,9 +246,7 @@ void MarkerDetector::recognizeMarkers(const cv::Mat& grayscale, std::vector<Mark
         if (id !=- 1)
         {
             marker.id = id;
-            //sort the points so that they are always in the same order no matter the camera orientation
             std::rotate(marker.points.begin(), marker.points.begin() + 4 - nRotations, marker.points.end());
-
             goodMarkers.push_back(marker);
         }
     }  
@@ -301,11 +269,9 @@ void MarkerDetector::recognizeMarkers(const cv::Mat& grayscale, std::vector<Mark
         cv::TermCriteria termCriteria = cv::TermCriteria(cv::TermCriteria::MAX_ITER | cv::TermCriteria::EPS, 30, 0.01);
         cv::cornerSubPix(grayscale, preciseCorners, cvSize(5,5), cvSize(-1,-1), termCriteria);
 
-        // Copy refined corners position back to markers
         for (size_t i=0; i<goodMarkers.size(); i++)
         {
-            Marker& marker = goodMarkers[i];      
-
+            Marker& marker = goodMarkers[i];
             for (int c=0;c<4;c++) 
             {
                 marker.points[c] = preciseCorners[i*4 + c];
@@ -317,16 +283,13 @@ void MarkerDetector::recognizeMarkers(const cv::Mat& grayscale, std::vector<Mark
     {
         cv::Mat markerCornersMat(grayscale.size(), grayscale.type());
         markerCornersMat = cv::Scalar(0);
-
         for (size_t i=0; i<goodMarkers.size(); i++)
         {
             goodMarkers[i].drawContour(markerCornersMat, cv::Scalar(255));    
         }
-
         cv::showAndSave("Markers refined edges", grayscale * 0.5 + markerCornersMat);
     }
 #endif
-
     detectedMarkers = goodMarkers;
 }
 
@@ -336,7 +299,6 @@ void MarkerDetector::estimatePosition(std::vector<Marker>& detectedMarkers)
     for (size_t i=0; i<detectedMarkers.size(); i++)
     {					
         Marker& m = detectedMarkers[i];
-
         cv::Mat Rvec;
         cv::Mat_<float> Tvec;
         cv::Mat raux,taux;
@@ -346,18 +308,14 @@ void MarkerDetector::estimatePosition(std::vector<Marker>& detectedMarkers)
 
         cv::Mat_<float> rotMat(3,3); 
         cv::Rodrigues(Rvec, rotMat);
-
-        // Copy to transformation matrix
         for (int col=0; col<3; col++)
         {
             for (int row=0; row<3; row++)
             {        
-                m.transformation.r().mat[row][col] = rotMat(row,col); // Copy rotation component
+                m.transformation.r().mat[row][col] = rotMat(row,col); // rotation
             }
-            m.transformation.t().data[col] = Tvec(col); // Copy translation component
+            m.transformation.t().data[col] = Tvec(col); // translation
         }
-
-        // Since solvePnP finds camera location, w.r.t to marker pose, to get marker pose w.r.t to the camera we invert it.
         m.transformation = m.transformation;
     }
 }
@@ -365,17 +323,13 @@ void MarkerDetector::estimatePosition(std::vector<Marker>& detectedMarkers)
 float MarkerDetector::perimeter(const std::vector<cv::Point2f> &a)
 {
     float sum=0, dx, dy;
-    
     for (size_t i=0;i<a.size();i++)
     {
         size_t i2=(i+1) % a.size();
-        
         dx = a[i].x - a[i2].x;
         dy = a[i].y - a[i2].y;
-        
         sum += sqrt(dx*dx + dy*dy);
     }
-    
     return sum;
 }
 

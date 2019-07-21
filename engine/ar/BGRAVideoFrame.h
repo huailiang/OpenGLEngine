@@ -1,7 +1,13 @@
+//
+//  BGRAVideoFrame.h
+//  GLESEngine
+//
+//  Created by 彭怀亮 on 7/12/19.
+//  Copyright © 2019 彭怀亮. All rights reserved.
+//
+
 #ifndef BGRAVideoFrame_h
 #define BGRAVideoFrame_h
-
-#include <cstddef>
 
 
 struct BGRAVideoFrame

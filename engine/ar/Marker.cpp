@@ -1,6 +1,7 @@
 #include "Marker.hpp"
 #include "DebugHelpers.hpp"
 
+
 Marker::Marker()
 : id(-1)
 {

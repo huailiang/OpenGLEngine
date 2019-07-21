@@ -18,7 +18,7 @@
 #include "asset.h"
 #include <stdlib.h>
 #ifdef _CV_
-#include "cvtool.h"
+#include "cvtool.hpp"
 #endif
 using namespace std;
 using namespace glm;

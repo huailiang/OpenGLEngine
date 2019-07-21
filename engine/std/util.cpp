@@ -30,11 +30,6 @@ namespace engine
     string curr_obj;
     map<string,GLuint> loaded_textures;
     
-    #define FETCH_VERT(T) \
-    if(mesh->vertices == nullptr) mesh->vertices = new T[verts]; \
-    T* vert = (T*)mesh->vertices + i;
-    
-    
     void WriteSummary(std::vector<tinyobj::shape_t>& shapes);
     void WriteSkeleton(vector<Bone>& bones, vector<Animation>& animations,const std::string name);
     
@@ -96,7 +91,6 @@ namespace engine
         }
     }
     
-    
     void WriteSummary(std::vector<tinyobj::shape_t>& shapes)
     {
         std::ofstream ofs;
@@ -122,7 +116,6 @@ namespace engine
             std::cout << "ERROR::MESH SUMMARY "<< std::endl;
         }
     }
-    
     
     void WriteMaterial(const string name,const std::string texture[],std::string dir)
     {
@@ -178,13 +171,13 @@ namespace engine
         Vertex* vertex = (Vertex*)vert;
         WriteVertex(ofs, vertex, Vt_Pos3 | Vt_UV | Vt_Normal);
         error_stop(vert->bonecount<=3, "skin vert inner error");
-        glm::vec3 weight(0); glm::ivec3 boneidx(0);
+        glm::vec3 weight(0), boneidx(0);
         for (int i=0; i<vert->bonecount; i++) {
             weight[i] = vert->weight[i];
             boneidx[i] = vert->boneindx[i];
         }
-        writevec3(ofs, weight);
-        writevec3(ofs, boneidx);
+        glm::vec4 bone = glm::vec4(weight, 65025 * boneidx.x + 255 * boneidx.y + boneidx.z);
+        writevec4(ofs, bone);
     }
     
     void WriteMesh(const std::string name,vector<int>& indices, vector<Vertex>& vertices, VertType type, std::string dir)
@@ -286,7 +279,6 @@ namespace engine
         }
         return type;
     }
-    
     
     bool LoadObj(const std::string name)
     {
@@ -443,64 +435,38 @@ namespace engine
                 ifs.seekg(num*4, std::ios_base::cur);
             }
             
-            
-            for (size_t i=0; i<verts; i++)
-            {
-                switch (type) {
-                    case 0x0111:
-                    {
-                        FETCH_VERT(Vertex)
-                        readv3(ifs, vert->Position);
-                        readv2(ifs, vert->TexCoords);
-                        readv3(ifs, vert->Normal);
-                    } break;
-                    case 0x0101:
-                    {
-                        FETCH_VERT(NormalVert)
-                        readv3(ifs, vert->Position);
-                        readv3(ifs, vert->Normal);
-                    }break;
-                    case 0x0012:
-                    {
-                        FETCH_VERT(BaseVert2)
-                        readv2(ifs, vert->Position);
-                        readv2(ifs, vert->TexCoords);
-                    } break;
-                    case 0x0011:
-                    {
-                        FETCH_VERT(BaseVert3)
-                        readv3(ifs, vert->Position);
-                        readv2(ifs, vert->TexCoords);
-                    } break;
-                    case 0x1011:
-                    {
-                        FETCH_VERT(ColorVertex)
-                        readv3(ifs, vert->Position);
-                        readv2(ifs, vert->TexCoords);
-                        readv3(ifs, vert->Color);
-                    } break;
-                    case 0x1111:
-                    {
-                        FETCH_VERT(CompxVertex)
-                        readv3(ifs, vert->Position);
-                        readv2(ifs, vert->TexCoords);
-                        readv3(ifs, vert->Normal);
-                        readv3(ifs, vert->Color);
-                    } break;
-                    case 0x2111:
-                    {
-                        FETCH_VERT(SkeletonVertex)
-                        readv3(ifs, vert->Position);
-                        readv2(ifs, vert->TexCoords);
-                        readv3(ifs, vert->Normal);
-                        glm::vec3 w; readv3(ifs, w);
-                        glm::ivec3 v; readv3(ifs, v);
-                        vert->Bone = glm::vec4(w, 65025 * v.x+ 255 * v.y + v.z);
-                    } break;
-                    default:
+            switch (type) {
+                case 0x0111:
+                    mesh->vertices = new Vertex[verts];
+                    ifs.read((char*)(mesh->vertices), sizeof(Vertex) * verts);
+                    break;
+                case 0x0101:
+                    mesh->vertices = new NormalVert[verts];
+                    ifs.read((char*)(mesh->vertices), sizeof(NormalVert) * verts);
+                    break;
+                case 0x0012:
+                    mesh->vertices = new BaseVert2[verts];
+                    ifs.read((char*)(mesh->vertices), sizeof(BaseVert2) * verts);
+                    break;
+                case 0x0011:
+                    mesh->vertices = new BaseVert3[verts];
+                    ifs.read((char*)(mesh->vertices), sizeof(BaseVert3) * verts);
+                    break;
+                case 0x1011:
+                    mesh->vertices = new ColorVertex[verts];
+                    ifs.read((char*)(mesh->vertices), sizeof(ColorVertex) * verts);
+                    break;
+                case 0x1111:
+                    mesh->vertices = new CompxVertex[verts];
+                    ifs.read((char*)(mesh->vertices), sizeof(CompxVertex) * verts);
+                    break;
+                case 0x2111:
+                    mesh->vertices = new SkeletonVertex[verts];
+                    ifs.read((char*)(mesh->vertices), sizeof(SkeletonVertex) * verts);
+                    break;
+                default:
                     std::cerr<<"vertex config not support format: 0x"<<hex<<type<<std::endl;
                     break;
-                }
             }
             ifs.close();
             return mesh;
@@ -724,7 +690,6 @@ namespace engine
 #endif
     }
     
-    
     void WriteTrack(std::ofstream& ofs, vector<Track>& tracks)
     {
         size_t t= tracks.size();
@@ -833,7 +798,6 @@ namespace engine
             std::cerr<<"read skeleton error "<<name<<std::endl;
         }
     }
-    
     
     void caltangent(const Vertex* v1, const Vertex* v2, const Vertex* v3, glm::vec3* tan, glm::vec3* bit)
     {

@@ -1,5 +1,5 @@
 //
-//  cvtool.h
+//  cvtool.hpp
 //  OpenGLEngine
 //
 //  Created by 彭怀亮 on 7/04/19.
@@ -23,6 +23,8 @@ namespace tool
 {
     
     void CvGray();
+    
+    void Recognition();
     
     string CoefficientsString(const vector<Vec3>& coefs);
     

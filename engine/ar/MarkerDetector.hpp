@@ -1,3 +1,11 @@
+//
+//  MarkerDetector.hpp
+//  GLESEngine
+//
+//  Created by 彭怀亮 on 7/12/19.
+//  Copyright © 2019 彭怀亮. All rights reserved.
+//
+
 #ifndef MarkerDetector_hpp
 #define MarkerDetector_hpp
 
@@ -9,9 +17,6 @@
 
 class Marker;
 
-/**
- * A top-level class that encapsulate marker detector algorithm
- */
 class MarkerDetector
 {
 public:
@@ -19,10 +24,6 @@ public:
     typedef std::vector<cv::Point>    PointsVector;
     typedef std::vector<PointsVector> ContoursVector;
 
-    /**
-    * Initialize a new instance of marker detector object
-    * @calibration[in] - Camera calibration (intrinsic and distortion components) necessary for pose estimation.
-    */
     MarkerDetector(CameraCalibration calibration);
 
     //! Searches for markes and fills the list of transformation for found markers
@@ -32,25 +33,24 @@ public:
   
 protected:
 
-    //! Main marker detection routine
     bool findMarkers(const BGRAVideoFrame& frame, std::vector<Marker>& detectedMarkers);
 
-    //! Converts image to grayscale
-    void prepareImage(const cv::Mat& bgraMat, cv::Mat& grayscale) const;
+    // Converts image to grayscale
+    void convert2Gray(const cv::Mat& bgraMat, cv::Mat& grayscale) const;
 
-    //! Performs binary threshold
+    // Performs binary threshold
     void performThreshold(const cv::Mat& grayscale, cv::Mat& thresholdImg) const;
 
-    //! Detects appropriate contours
+    // Detects appropriate contours
     void findContours(cv::Mat& thresholdImg, ContoursVector& contours, int minContourPointsAllowed) const;
 
     //! Finds marker candidates among all contours
     void findCandidates(const ContoursVector& contours, std::vector<Marker>& detectedMarkers);
 
-    //! Tries to recognize markers by detecting marker code
+    // Tries to recognize markers by detecting marker code
     void recognizeMarkers(const cv::Mat& grayscale, std::vector<Marker>& detectedMarkers);
 
-    //! Calculates marker poses in 3D
+    // Calculates marker poses in 3D
     void estimatePosition(std::vector<Marker>& detectedMarkers);
     
     float perimeter(const std::vector<cv::Point2f> &a);

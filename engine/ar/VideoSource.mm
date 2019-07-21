@@ -76,7 +76,7 @@
 
 - (void) addRawViewOutput
 {
-	/*We setupt the output*/
+	
 	AVCaptureVideoDataOutput *captureOutput = [[AVCaptureVideoDataOutput alloc] init];
 	
     /*While a frame is processes in -captureOutput:didOutputSampleBuffer:fromConnection: delegate methods no other frames are added in the queue.

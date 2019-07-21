@@ -60,11 +60,8 @@ namespace engine
 
     extern uint SCR_WIDTH;
     extern uint SCR_HEIGHT;
-    
     extern uint UI_WIDTH;
     extern uint UI_HEIGHT;
-
-    //initial with sreen*2
     extern uint RENDER_WIDTH;
     extern uint RENDER_HEIGTH;
 
@@ -90,7 +87,7 @@ namespace engine
 
     #define SAFE_DELETE(ptr) \
     if(ptr != nullptr) \
-    {delete ptr; ptr = nullptr;}
+    { delete ptr; ptr = nullptr; }
     
     
     #define DELETE_TEXTURE(texID)   \

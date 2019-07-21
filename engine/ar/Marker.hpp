@@ -1,3 +1,11 @@
+//
+//  Marker.hpp
+//  GLESEngine
+//
+//  Created by 彭怀亮 on 7/12/19.
+//  Copyright © 2019 彭怀亮. All rights reserved.
+//
+
 #ifndef Marker_hpp
 #define Marker_hpp
 
@@ -7,9 +15,7 @@
 
 #include "GeometryTypes.hpp"
 
-/**
- * This class represents a marker
- */
+
 class Marker
 {  
 public:
@@ -24,17 +30,13 @@ public:
   static int getMarkerId(cv::Mat &in,int &nRotations);
   
 public:
-  
-  // Id of  the marker
+    void drawContour(cv::Mat& image, cv::Scalar color = CV_RGB(0,250,0)) const;
+    
+public:
   int id;
-  
-  // Marker transformation with regards to the camera
   Transformation transformation;
-  
   std::vector<cv::Point2f> points;
-
-  // Helper function to draw the marker contour over the image
-  void drawContour(cv::Mat& image, cv::Scalar color = CV_RGB(0,250,0)) const;
+  
 };
 
 #endif

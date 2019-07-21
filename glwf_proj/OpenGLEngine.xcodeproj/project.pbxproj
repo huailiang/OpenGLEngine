@@ -39,6 +39,8 @@
 		4C9EE55522D764E40010EED9 /* harmonics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C9EE54F22D764E30010EED9 /* harmonics.cpp */; };
 		4C9EE55622D764E40010EED9 /* cvtool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C9EE55022D764E30010EED9 /* cvtool.cpp */; };
 		4C9EE55722D7651D0010EED9 /* libopencv_highgui.4.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEFDBF422CE281A00E5B6DD /* libopencv_highgui.4.1.1.dylib */; };
+		4CB025E622E366F300B2B6D9 /* ImageRecognition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CB025E522E366F300B2B6D9 /* ImageRecognition.cpp */; };
+		4CB025E822E367F600B2B6D9 /* libopencv_features2d.4.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CB025E722E367F600B2B6D9 /* libopencv_features2d.4.1.1.dylib */; };
 		4CCACC2722D35ABD008ACBD0 /* engineio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CCACC2522D35ABD008ACBD0 /* engineio.cpp */; };
 		4CD27D46228307050038AE21 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD27D3E2283022D0038AE21 /* OpenGL.framework */; };
 		4CD27D482283070B0038AE21 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD27D472283070B0038AE21 /* CoreVideo.framework */; };
@@ -162,13 +164,16 @@
 		4C73C0F422A8C18C002A8AD0 /* uimgr.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = uimgr.cpp; sourceTree = "<group>"; };
 		4C7D4A2922CDDFF000A8A77B /* harmonics.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = harmonics.fs; sourceTree = "<group>"; };
 		4C9450F722C0EB30005E5065 /* scene6.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = scene6.h; path = OpenGLEngine/scene/scene6.h; sourceTree = SOURCE_ROOT; };
-		4C9EE54D22D764E30010EED9 /* cvtool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cvtool.h; sourceTree = "<group>"; };
+		4C9EE54D22D764E30010EED9 /* cvtool.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cvtool.hpp; sourceTree = "<group>"; };
 		4C9EE54E22D764E30010EED9 /* cubemap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cubemap.cpp; sourceTree = "<group>"; };
 		4C9EE54F22D764E30010EED9 /* harmonics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = harmonics.cpp; sourceTree = "<group>"; };
 		4C9EE55022D764E30010EED9 /* cvtool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cvtool.cpp; sourceTree = "<group>"; };
 		4C9EE55122D764E30010EED9 /* harmonics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = harmonics.h; sourceTree = "<group>"; };
 		4C9EE55222D764E30010EED9 /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
 		4C9EE55322D764E30010EED9 /* cubemap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cubemap.h; sourceTree = "<group>"; };
+		4CB025E422E366F300B2B6D9 /* ImageRecognition.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ImageRecognition.hpp; sourceTree = "<group>"; };
+		4CB025E522E366F300B2B6D9 /* ImageRecognition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageRecognition.cpp; sourceTree = "<group>"; };
+		4CB025E722E367F600B2B6D9 /* libopencv_features2d.4.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_features2d.4.1.1.dylib; path = ../../../../../../../usr/local/lib/libopencv_features2d.4.1.1.dylib; sourceTree = "<group>"; };
 		4CB544CC22B5F4F8007BAE5F /* scene5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = scene5.h; path = OpenGLEngine/scene/scene5.h; sourceTree = SOURCE_ROOT; };
 		4CCACC2522D35ABD008ACBD0 /* engineio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = engineio.cpp; path = ../engine/engineio.cpp; sourceTree = "<group>"; };
 		4CCACC2622D35ABD008ACBD0 /* engineio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = engineio.h; path = ../engine/engineio.h; sourceTree = "<group>"; };
@@ -200,6 +205,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CB025E822E367F600B2B6D9 /* libopencv_features2d.4.1.1.dylib in Frameworks */,
 				4C3B7A1922831668003B212F /* Cocoa.framework in Frameworks */,
 				4C3B7A172283164E003B212F /* IOKit.framework in Frameworks */,
 				4CD27D482283070B0038AE21 /* CoreVideo.framework in Frameworks */,
@@ -363,8 +369,10 @@
 		4C9EE54C22D764E30010EED9 /* cv */ = {
 			isa = PBXGroup;
 			children = (
-				4C9EE54D22D764E30010EED9 /* cvtool.h */,
+				4C9EE54D22D764E30010EED9 /* cvtool.hpp */,
 				4C9EE55022D764E30010EED9 /* cvtool.cpp */,
+				4CB025E422E366F300B2B6D9 /* ImageRecognition.hpp */,
+				4CB025E522E366F300B2B6D9 /* ImageRecognition.cpp */,
 				4C9EE55322D764E30010EED9 /* cubemap.h */,
 				4C9EE54E22D764E30010EED9 /* cubemap.cpp */,
 				4C9EE55122D764E30010EED9 /* harmonics.h */,
@@ -396,6 +404,7 @@
 		4CD27D352282F5320038AE21 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4CB025E722E367F600B2B6D9 /* libopencv_features2d.4.1.1.dylib */,
 				4CEFDBF522CE281A00E5B6DD /* libopencv_core.4.1.1.dylib */,
 				4CEFDBF422CE281A00E5B6DD /* libopencv_highgui.4.1.1.dylib */,
 				4CEFDBF622CE281A00E5B6DD /* libopencv_imgcodecs.4.1.1.dylib */,
@@ -518,6 +527,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C37752322A54FA20074744F /* uievent.cpp in Sources */,
+				4CB025E622E366F300B2B6D9 /* ImageRecognition.cpp in Sources */,
 				4C37750E22A54F6F0074744F /* terrain.cpp in Sources */,
 				4C37750822A54F6F0074744F /* camera.cpp in Sources */,
 				4CD71DB222B0CF0500466683 /* tinyxmlerror.cpp in Sources */,
