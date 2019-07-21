@@ -36,7 +36,7 @@ namespace engine
         
     bool LoadObj(const std::string name);
     
-    void WriteMesh(const std::string name,vector<int>& indices, vector<Vertex>& vertices, VertType type, std::string dir="");
+    void WriteMesh(const std::string name,vector<ushort>& indices, vector<Vertex>& vertices, VertType type, std::string dir="");
     
     MeshData* ReadMesh(const std::string name, const std::string objdir = "", const short ilod = 0);
     

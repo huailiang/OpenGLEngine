@@ -180,7 +180,7 @@ namespace engine
         writevec4(ofs, bone);
     }
     
-    void WriteMesh(const std::string name,vector<int>& indices, vector<Vertex>& vertices, VertType type, std::string dir)
+    void WriteMesh(const std::string name,vector<ushort>& indices, vector<Vertex>& vertices, VertType type, std::string dir)
     {
         std::ofstream ofs;
         ofs.exceptions (std::ofstream::failbit | std::ofstream::badbit);
@@ -196,7 +196,7 @@ namespace engine
             ofs.write((char*)&type,sizeof(VertType));
             num = (uint)indices.size();
             ofs.write((char*)&num,sizeof(uint));
-            loop0i(indices.size()) ofs.write((char*)&indices[i],sizeof(uint));
+            loop0i(indices.size()) ofs.write((char*)&indices[i],sizeof(ushort));
             loop0i(vertices.size()) WriteVertex(ofs, &vertices[i], type);
             ofs.close();
         } catch (std::ofstream::failure e)
@@ -205,7 +205,7 @@ namespace engine
         }
     }
     
-    void WriteSkinMesh(const std::string name,vector<vector<int>>& indices, vector<SkinVertex> vertices, std::string dir)
+    void WriteSkinMesh(const std::string name,vector<vector<ushort>>& indices, vector<SkinVertex> vertices, std::string dir)
     {
         std::ofstream ofs;
         ofs.exceptions (std::ofstream::failbit | std::ofstream::badbit);
@@ -242,7 +242,7 @@ namespace engine
             {
                 num = (uint)indices[i].size();
                 ofs.write((char*)&num,sizeof(uint));
-                loop0j(num) ofs.write((char*)&(indices[i][j]),sizeof(int));
+                loop0j(num) ofs.write((char*)&(indices[i][j]),sizeof(ushort));
             }
             loop0i(vertices.size()) WriteSkinVertex(ofs, &vertices[i]);
             ofs.close();
@@ -296,11 +296,11 @@ namespace engine
         for (size_t s=0; s<shapes.size(); s++)
         {
             tinyobj::mesh_t mesh = shapes[s].mesh;
-            vector<int> indices;
+            vector<ushort> indices;
             vector<int> old_indices;
             vector<Vertex> vertices;
             size_t index_offset = 0;
-            int indx_new = 0;
+            ushort indx_new = 0;
             bool has_texcoord = attrib.texcoords.size() > 0;
             for(size_t i = 0; i < mesh.num_face_vertices.size(); i++) {
                 size_t num = mesh.num_face_vertices[i];
@@ -310,7 +310,7 @@ namespace engine
                     size_t find = findVector(old_indices, idx.vertex_index);
                     if(find != old_indices.size())
                     {
-                        indices.push_back((int)find);
+                        indices.push_back((ushort)find);
                     }
                     else
                     {
@@ -390,8 +390,8 @@ namespace engine
             ifs.read((char*)(&inds), sizeof(uint));
             delete [] data->indices;
             data->num_indice = inds;
-            data->indices = new unsigned short[inds];
-            loop0i(inds) ifs.read((char*)(&(data->indices[i])), sizeof(uint));
+            data->indices = new ushort[inds];
+            ifs.read((char*)data->indices, sizeof(ushort) * inds);
             ifs.close();
         } catch (std::ifstream::failure e)
         {
@@ -425,14 +425,14 @@ namespace engine
             MeshData* mesh = new MeshData();
             mesh->type = type;
             mesh->num_indice = inds;
-            mesh->indices = new unsigned short[inds];
+            mesh->indices = new ushort[inds];
             mesh->num_vert = verts;
             mesh->vertices = nullptr;
-            loop0i(inds) ifs.read((char*)(&(mesh->indices[i])), sizeof(uint));
+            ifs.read((char*)mesh->indices, sizeof(ushort) * inds);
             for (short i=ilod+1; i<lod; i++) {
                 uint num =0;
                 ifs.read((char*)&num,sizeof(uint));
-                ifs.seekg(num*4, std::ios_base::cur);
+                ifs.seekg(num*2, std::ios_base::cur);
             }
             
             switch (type) {
@@ -488,18 +488,18 @@ namespace engine
         memset(line, 0, 100);
         memset(name, 0, 100);
         
-        vector<vector<int>> indices;
+        vector<vector<ushort>> indices;
         std::vector<SkinVertex> vertices;
         int x,y,z;
         float f1,f2,f3;
         uint normal_id = 0, texcoord_id = 0;
         int lod = 0;
-        vector<int> v; indices.push_back(v);
+        vector<ushort> v; indices.push_back(v);
         while(fgets(line, 1000, fn) != NULL)
         {
             if(sscanf(line," <face v1=\"%d\" v2=\"%d\" v3=\"%d\" />",&x,&y,&z) == 3)
             {
-                indices[lod].push_back(x); indices[lod].push_back(y); indices[lod].push_back(z);
+                indices[lod].push_back((ushort)x); indices[lod].push_back((ushort)y); indices[lod].push_back((ushort)z);
             }
             if(sscanf(line," <position x=\"%f\" y=\"%f\" z=\"%f\" />",&f1,&f2,&f3) == 3)
             {
@@ -522,7 +522,7 @@ namespace engine
             }
             if(sscanf(line," <lodgenerated value=\"%f\">",&f1)==1)
             {
-                vector<int> v; indices.push_back(v);
+                vector<ushort> v; indices.push_back(v);
                 lod++;
             }
         }
