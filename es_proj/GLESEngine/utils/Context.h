@@ -21,6 +21,7 @@
 #include <EGL/eglext.h>
 #endif
 
+#include "IARInterface.h"
 
 #define ES_WINDOW_RGB           0
 #define ES_WINDOW_ALPHA         1
@@ -33,21 +34,7 @@ typedef struct ESContext ESContext;
 struct ESContext
 {
     GLint width;
-    
     GLint height;
-    
-#ifndef __APPLE__
-    
-    EGLNativeDisplayType eglNativeDisplay;
-    
-    EGLNativeWindowType eglNativeWindow;
-    
-    EGLDisplay eglDisplay;
-    
-    EGLContext eglContext;
-    
-    EGLSurface  eglSurface;
-#endif
     
     void (*drawFunc) (ESContext*);
     void (*shutdownFunc) (ESContext*);
@@ -59,6 +46,7 @@ struct ESContext
     void (*frameReadyFunc)(ESContext*, const BGRAVideoFrame&);
     void (*frameDetectFunc)(ESContext*, const std::vector<Transformation>&);
     void (*frameInitFunc)(ESContext*, float width, float height, const glm::mat3&);
+    void (*arProcess)(ESContext*,IARInterface* ar);
 };
 
 

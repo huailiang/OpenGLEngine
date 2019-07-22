@@ -10,13 +10,16 @@
 #define scenemgr_h
 
 #include "scene.h"
+#include "vrscene.h"
 #include "scene1.h"
 #include "scene2.h"
 #include "scene3.h"
 #include "scene4.h"
 #include "scene5.h"
 #include "scene6.h"
+#include "scene7.h"
 #include "texmgr.h"
+#include "IARInterface.h"
 
 using namespace engine;
 
@@ -34,6 +37,7 @@ private:
         SAFE_DELETE(lb_scene4);
         SAFE_DELETE(lb_scene5);
         SAFE_DELETE(lb_scene6);
+        SAFE_DELETE(lb_scene7);
         SAFE_DELETE(lb_fps);
         SAFE_DELETE(lb_copy);
     }
@@ -56,6 +60,7 @@ public:
         lb_scene4 = new engine::UILabel(vec2(60,315), vec3(1), 1, "Scene4", TY_Scene4);
         lb_scene5 = new engine::UILabel(vec2(60,270), vec3(1), 1, "Scene5", TY_Scene5);
         lb_scene6 = new engine::UILabel(vec2(60,225), vec3(1), 1, "Scene6", TY_Scene6);
+        lb_scene7 = new engine::UILabel(vec2(60,180), vec3(1), 1, "Scene7", TY_Scene7);
         lb_fps = new engine::UILabel(vec2(740,580), vec3(1,0,0), 0.5f);
         lb_copy = new engine::UILabel(vec2(20), vec3(1), 0.4f);
         lb_scene1->RegistCallback(ClickScene, this);
@@ -64,6 +69,7 @@ public:
         lb_scene4->RegistCallback(ClickScene, this);
         lb_scene5->RegistCallback(ClickScene, this);
         lb_scene6->RegistCallback(ClickScene, this);
+        lb_scene7->RegistCallback(ClickScene, this);
     }
     
     void LeaveScene()
@@ -86,7 +92,7 @@ public:
     {
         if(current && type == current->getType())
         {
-            std::cout<<"You are already enter scene "<<current->getType()<<std::endl;
+            std::cout<<"You are already enter scene "<<(current->getType() + 1)<<std::endl;
             return false;
         }
         else
@@ -98,7 +104,16 @@ public:
             if(type == TY_Scene4)   current = new Scene4();
             if(type == TY_Scene5)   current = new Scene5();
             if(type == TY_Scene6)   current = new Scene6();
-            if(current) current->Initial();
+            if(type == TY_Scene7)   current = new Scene7();
+            if(current)
+            {
+                current->Initial();
+                if(current->isVRScene())
+                {
+                    auto vr = (VRScene*)current;
+                    vr->Process(ptr_ar);
+                }
+            }
             return true;
         }
     }
@@ -106,9 +121,10 @@ public:
 
 public:
     Scene *current = nullptr;
+    IARInterface* ptr_ar;
     
 private:
-    engine::UILabel *lb_scene1, *lb_scene2, *lb_scene3, *lb_scene4, *lb_scene5, *lb_scene6;
+    engine::UILabel *lb_scene1, *lb_scene2, *lb_scene3, *lb_scene4, *lb_scene5, *lb_scene6, *lb_scene7;
     engine::UILabel *lb_fps, *lb_copy;
     uint delay;
 };

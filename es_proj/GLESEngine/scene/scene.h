@@ -26,6 +26,7 @@
 #define TY_Scene4 3
 #define TY_Scene5 4
 #define TY_Scene6 5
+#define TY_Scene7 6
 
 using namespace engine;
 
@@ -124,6 +125,7 @@ public:
     
     void ClearScene()
     {
+        glDepthMask(true);
         glDisable(GL_BLEND);
         glDisable(GL_CULL_FACE);
         glEnable(GL_DEPTH_TEST);

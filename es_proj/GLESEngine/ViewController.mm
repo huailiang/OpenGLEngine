@@ -8,18 +8,23 @@
 
 #import "ViewController.h"
 #import "VideoSource.h"
+#import "AlbumSource.h"
+#import "IARInterface.h"
 #import "MarkerDetector.hpp"
 #include "Context.h"
 #include "scene/scenewrap.h"
 
+
 @interface ViewController () <VideoSourceDelegate>
 {
     ESContext _esContext;
+    BOOL initial;
 }
 
 @property (strong, nonatomic)EAGLContext *context;
 @property (strong, nonatomic) GLKBaseEffect *effect;
-@property (strong, nonatomic) VideoSource * videoSource;
+@property (strong, nonatomic) VideoSource *videoSource;
+@property (strong, nonatomic) AlbumSource *albumSource;
 @property (nonatomic) MarkerDetector * markerDetector;
 
 - (void)setupGL:(int)w with:(int)h;
@@ -31,6 +36,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    initial = FALSE;
     self.context = [[EAGLContext alloc]initWithAPI:kEAGLRenderingAPIOpenGLES3];
     if(!self.context)
     {
@@ -42,11 +48,11 @@
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
     view.drawableStencilFormat = GLKViewDrawableStencilFormat8;
     view.drawableColorFormat = GLKViewDrawableColorFormatRGBA8888;
-    
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
+    if(initial) return;
     GLKView *view = (GLKView *)self.view;
     [self setupGL:(int)view.drawableWidth  with:(int)view.drawableHeight];
     if(_esContext.width != (GLint)view.drawableWidth || _esContext.height != (GLint)view.drawableHeight)
@@ -57,6 +63,18 @@
             _esContext.updateWindow(&_esContext);
         }
     }
+    
+    if(self.albumSource == nil)
+    {
+        self.albumSource = [[AlbumSource alloc] init];
+        [self.albumSource setController:self];
+        iOSAR* ar = new iOSAR();
+        ar->source = self.albumSource;
+        if(_esContext.arProcess) {
+            _esContext.arProcess(&_esContext, (IARInterface*)ar);
+        }
+    }
+    initial = TRUE;
     [super viewDidAppear:animated];
 }
 

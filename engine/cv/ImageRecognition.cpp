@@ -15,17 +15,13 @@ ImageRecognition::ImageRecognition()
     matcher = cv::DescriptorMatcher::create("BruteForce-Hamming");
 }
 
-ImageRecognition::~ImageRecognition()
-{
-}
+ImageRecognition::~ImageRecognition() { }
 
 std::vector<cv::Point2f> ImageRecognition::Keypoint2Point(std::vector<cv::KeyPoint> keypoints)
 {
     std::vector<cv::Point2f> vectorOfPoints;
     for(unsigned i = 0; i < keypoints.size(); i++) {
-        
         vectorOfPoints.push_back(keypoints[i].pt);
-        
     }
     return vectorOfPoints;
 }

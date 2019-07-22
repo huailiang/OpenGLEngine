@@ -10,12 +10,14 @@
 #include "scenemgr.h"
 #include "BGRAVideoFrame.h"
 #include "GeometryTypes.hpp"
+#include "IARInterface.h"
 
 using namespace engine;
 
 SceneMgr SceneMgr::instance;
 
 ESContext* esContext;
+
 float lastTime;
 
 void Clean()
@@ -79,7 +81,7 @@ void OnFrameReady(ESContext *esContext,const BGRAVideoFrame& frame)
     auto scene = SceneMgr::getInstance()->current;
     if(scene->isVRScene() && !ENG_PAUSE)
     {
-        Scene6* sc = static_cast<Scene6*>(scene);
+        VRScene* sc = static_cast<VRScene*>(scene);
         sc->SetCameraFrame(frame);
     }
 }
@@ -90,7 +92,7 @@ void OnFrameDetect(ESContext *esContext,const std::vector<Transformation>& trans
     auto scene = SceneMgr::getInstance()->current;
     if(scene->isVRScene() && !ENG_PAUSE)
     {
-        Scene6* sc = static_cast<Scene6*>(scene);
+        VRScene* sc = static_cast<VRScene*>(scene);
         sc->DrawAR(transforms);
     }
 }
@@ -100,9 +102,14 @@ void OnFrameInit(ESContext *esContext, float width, float height,const glm::mat3
     auto scene = SceneMgr::getInstance()->current;
     if(scene->isVRScene())
     {
-        Scene6* sc = static_cast<Scene6*>(scene);
+        VRScene* sc = static_cast<VRScene*>(scene);
         sc->InitialVR(width, height, intrinsic);
     }
+}
+
+void OnProcessAR(ESContext *esContext, IARInterface* ar)
+{
+     SceneMgr::getInstance()->ptr_ar = ar;
 }
 
 bool InitScene(ESContext* context, int width, int height)
@@ -120,6 +127,7 @@ bool InitScene(ESContext* context, int width, int height)
     context->frameReadyFunc = OnFrameReady;
     context->frameDetectFunc = OnFrameDetect;
     context->frameInitFunc = OnFrameInit;
+    context->arProcess = OnProcessAR;
     return true;
 }
 
