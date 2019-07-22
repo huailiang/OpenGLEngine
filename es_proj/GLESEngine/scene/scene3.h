@@ -15,6 +15,7 @@ class Scene3 : public Scene
 {
     
 public:
+    
     ~Scene3()
     {
         glDeleteVertexArrays(1, &planeVAO);

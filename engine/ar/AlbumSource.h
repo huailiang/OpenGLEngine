@@ -21,7 +21,7 @@
     UIViewController *viewController;
 }
 
--(void)startPicker;
+-(void)startPicker: (PickerCallback) callback withArg:(void*) arg;
 
 -(void)setController:(UIViewController*)controller;
 
@@ -36,14 +36,17 @@
 
 class iOSAR : public IARInterface
 {
+    
 public:
-    bool GetAlbumPicker() const;
+    
+    bool GetAlbumPicker(PickerCallback pick, void* arg);
     
     void OnDestroy() const;
     
     void* GetImageData(float* width, float* height) const;
     
     AlbumSource *source;
+    
 };
 
 

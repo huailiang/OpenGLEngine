@@ -12,7 +12,10 @@
 
 // _OBJ_C_
 @interface AlbumSource() <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
-
+{
+    PickerCallback m_callback;
+    void* cb_arg;
+}
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker;
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info;
@@ -26,9 +29,11 @@
     viewController = controller;
 }
 
--(void)startPicker
+-(void)startPicker : (PickerCallback) callback withArg:(void*) arg;
 {
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) return;
+    m_callback = callback;
+    cb_arg = arg;
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = YES;
@@ -51,6 +56,7 @@
     m_height = image.size.height;
     imageData = UIImageJPEGRepresentation(image, 0.5f);
     [picker dismissViewControllerAnimated:YES completion:nil];
+    if(m_callback) m_callback(cb_arg);
 }
 
 -(void*)getImageData:(float*) width withHeight:(float*)height
@@ -68,11 +74,11 @@
 
 
 // __cplusplus__
-bool iOSAR::GetAlbumPicker() const
+bool iOSAR::GetAlbumPicker(PickerCallback pick, void* arg)
 {
     if(source != nil)
     {
-        [source startPicker];
+        [source startPicker: pick withArg:arg];
     }
     return true;
 }

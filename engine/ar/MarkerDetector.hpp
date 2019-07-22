@@ -68,7 +68,7 @@ private:
     cv::Mat m_thresholdImg;
     cv::Mat canonicalMarkerImage;
     
-    ContoursVector           m_contours;
+    ContoursVector m_contours;
     std::vector<cv::Point3f> m_markerCorners3d;
     std::vector<cv::Point2f> m_markerCorners2d;
 };

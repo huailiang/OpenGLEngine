@@ -15,6 +15,7 @@ class Scene4 : public Scene
 {
     
 public:
+    
     ~Scene4()
     {
         SAFE_DELETE(shader);

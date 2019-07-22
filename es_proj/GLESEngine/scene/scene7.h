@@ -46,27 +46,26 @@ public:
         match->RegistCallback(OnClick, this);
     }
     
-    
     void DrawAR(const std::vector<Transformation> &transforms)
     {
         VRScene::DrawAR(transforms);
     }
     
-    
     void StartPick()
     {
         if(arPtr)
         {
-            arPtr->GetAlbumPicker();
-            
-            return;
-            
-//            std::cout<<"pick finish: "<<std::endl;
-//            float *width = nullptr, *height = nullptr;
-//            void* data = arPtr->GetImageData(width, height);
-//            std::cout<<"width:"<<*width<<" height:"<<*height<<std::endl;
-//            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, *width, *height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+            arPtr->GetAlbumPicker(OnPickerFinish, this);
         }
+    }
+    
+    void OnPicker()
+    {
+        std::cout<<"pick finish: "<<std::endl;
+        float width = 0, height = 0;
+        void* data = arPtr->GetImageData(&width, &height);
+        std::cout<<"width:"<<width<<" height:"<<height<<" data"<<data<<std::endl;
+        // glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, *width, *height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
     }
     
     void StartMatch()
@@ -81,6 +80,12 @@ public:
     
 private:
     
+    static void OnPickerFinish(void* arg)
+    {
+        Scene7* sc = (Scene7*)arg;
+        sc->OnPicker();
+    }
+
     static void OnClick(engine::UIEvent* contex, void* arg)
     {
         Scene7* scene = (Scene7*)(arg);
@@ -92,6 +97,7 @@ private:
 private:
     engine::UIButton* pick, *match;
     IARInterface* arPtr = nullptr;
+    
 };
 
 

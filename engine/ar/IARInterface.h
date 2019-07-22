@@ -10,10 +10,12 @@
 #define IARInterface_h
 
 
+typedef void (*PickerCallback)(void*);
+
 struct IARInterface
 {
     
-    virtual bool GetAlbumPicker() const = 0;
+    virtual bool GetAlbumPicker(PickerCallback callback, void* arg) = 0;
     
     virtual void OnDestroy() const = 0;
     

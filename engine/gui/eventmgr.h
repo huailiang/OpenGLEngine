@@ -36,6 +36,7 @@ namespace engine
         
     private:
         std::vector<UIEvent*> ui_events;
+        
     };
 
 }
