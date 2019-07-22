@@ -95,7 +95,7 @@ void OnFrameDetect(ESContext *esContext,const std::vector<Transformation>& trans
     }
 }
 
-void OnFrameInit(ESContext *esContext, float width, float height,const Matrix33& intrinsic)
+void OnFrameInit(ESContext *esContext, float width, float height,const glm::mat3& intrinsic)
 {
     auto scene = SceneMgr::getInstance()->current;
     if(scene->isVRScene())

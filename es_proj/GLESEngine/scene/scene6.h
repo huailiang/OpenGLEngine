@@ -66,10 +66,10 @@ public:
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
     
-    void InitialVR(float width, float height,const Matrix33& intrinsic)
+    void InitialVR(float width, float height,const glm::mat3& intrinsic)
     {
         proj = glm::mat4(0);
-        float fx = intrinsic.data[0], n= -0.01f, f = -100.0;
+        float fx = intrinsic[0][0], n= -0.01f, f = -100.0;
         proj[0][0] = 2.0 * fx / width;
         proj[1][1] = 2.0 * fx / height;
         proj[2][2] = (f + n) / (n - f);

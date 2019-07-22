@@ -81,7 +81,7 @@
             
             CGSize frameSize = [self.videoSource getFrameSize];
             CameraCalibration camCalib = [self.videoSource getCalibration];
-            Matrix33 intrinsic = camCalib.getIntrinsic();
+            glm::mat3 intrinsic = camCalib.getIntrinsic();
             if(_esContext.frameInitFunc)
             {
                 _esContext.frameInitFunc(&_esContext, (float)frameSize.width, (float)frameSize.height, intrinsic);
