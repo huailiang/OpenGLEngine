@@ -27,5 +27,5 @@ void main()
     vec4 arg = gs_in[0].arg;
     arg.x = arg.x * 2.0f - 1.0f;
     arg.y = arg.y * 2.0f - 1.0f;
-    Generate(vec4(arg.x, arg.y, 0.9, 1.0), arg.z*0.5f, arg.w*0.5f);
+    Generate(vec4(arg.x, arg.y, -0.98, 1.0), arg.z*0.5f, arg.w*0.5f);
 }

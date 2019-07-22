@@ -13,5 +13,5 @@ out VS_OUT
 void main()
 {
     vs_out.arg = aArg;
-    gl_Position = vec4(0, 0, -1.0, 1.0);
+    gl_Position = vec4(0, 0, -0.98, 1.0);
 }

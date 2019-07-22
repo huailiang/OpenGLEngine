@@ -331,8 +331,8 @@
 				4C402CEC22A51AF2008C89D4 /* normal.gs */,
 				4C402CED22A51AF2008C89D4 /* camera.vs */,
 				4C402CEE22A51AF2008C89D4 /* button.vs */,
-				4C402CEF22A51AF2008C89D4 /* camera.gs */,
 				4C402CF022A51AF2008C89D4 /* button.gs */,
+				4C402CEF22A51AF2008C89D4 /* camera.gs */,
 			);
 			path = gizmos;
 			sourceTree = "<group>";
