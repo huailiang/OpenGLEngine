@@ -200,6 +200,12 @@
     }
 }
 
+- (BOOL)shouldAutorotate
+{
+    return YES;
+}
+
+
 #pragma mark - VideoSourceDelegate
 -(void)frameReady:(BGRAVideoFrame) frame
 {

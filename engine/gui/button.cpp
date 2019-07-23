@@ -28,9 +28,11 @@ namespace engine
 
     UIButton::~UIButton()
     {
+#ifndef _GLES_
         glDeleteVertexArrays(1, &vao);
         glDeleteBuffers(1, &vbo);
         SAFE_DELETE(shader);
+#endif
     }
 
 

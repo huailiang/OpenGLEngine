@@ -19,6 +19,7 @@
 @synthesize viewController = _viewController;
 
 
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     if (self.viewController==nil) {
@@ -72,6 +73,11 @@
     }
     [self.viewController OnApplicationQuit];
 }
+
+//- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+//    return UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
+//}
+
 
 -(void)dealloc
 {

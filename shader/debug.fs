@@ -21,7 +21,7 @@ float LinearizeDepth(float depth)
 void main()
 {
 #ifdef _AR_
-    FragColor = vec4(TexCoords,0,1);
+    FragColor = vec4(TexCoords, 0, 1);
 #else
 #ifdef _FLIP_Y_
     vec4 color = texture(texture1, vec2(TexCoords.x, 1.0 - TexCoords.y));

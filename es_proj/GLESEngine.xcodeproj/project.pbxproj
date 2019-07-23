@@ -506,7 +506,6 @@
 		4CE2224422A91F0B0095ECCA /* ttfont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ttfont.h; sourceTree = "<group>"; };
 		4CE2224522A91F0B0095ECCA /* eventmgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eventmgr.h; sourceTree = "<group>"; };
 		4CE8DA6D22AEA7E60077C6AF /* appdata.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = appdata.glsl; sourceTree = "<group>"; };
-		4CF3FC6622E555FA002CC978 /* scene7.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = scene7.h; sourceTree = "<group>"; };
 		4CF3FC6722E55DDC002CC978 /* arscene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = arscene.h; sourceTree = "<group>"; };
 		4CF3FC6822E56302002CC978 /* AlbumSource.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AlbumSource.mm; sourceTree = "<group>"; };
 		4CF3FC6A22E56315002CC978 /* AlbumSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlbumSource.h; sourceTree = "<group>"; };
@@ -868,7 +867,6 @@
 				4C9EE53B22D715660010EED9 /* scene4.h */,
 				4C9EE53D22D715660010EED9 /* scene5.h */,
 				4CE03F8B22DB208E00DB9A28 /* scene6.h */,
-				4CF3FC6622E555FA002CC978 /* scene7.h */,
 				4C443B8022A25D2D00866F29 /* scenewrap.h */,
 				4C443B7F22A25D2D00866F29 /* scenewrap.cpp */,
 			);

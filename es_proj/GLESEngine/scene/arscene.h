@@ -44,6 +44,7 @@ public:
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
         shader = new Shader("debug.vs", "debug.fs");
         shader->attach("_FLIP_Y_");
+        shader->attach("_AR_BG_");
         InitFullQuad(&quadVao, &quadVbo, shader);
     }
     

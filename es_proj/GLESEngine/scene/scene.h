@@ -70,13 +70,14 @@ public:
     virtual bool isEquirectangularMap() { return false; }
     
     /*
-     init: camera-> skybox-> light-> scene-> ui
+     * init seq: camera-> skybox-> light-> scene-> ui
      */
     void Initial()
     {
         glCheckError();
         debugShader = new Shader("debug.vs", "debug.fs");
-        debugShader->attach("_DEBUG_DEPTH_");
+        if(drawShadow())
+            debugShader->attach("_DEBUG_DEPTH_");
         InitQuad(&quadVAO, &quadVBO, debugShader);
         if(drawShadow())
         {
@@ -129,11 +130,7 @@ public:
         glDisable(GL_BLEND);
         glDisable(GL_CULL_FACE);
         glEnable(GL_DEPTH_TEST);
-        glEnable(GL_STENCIL_TEST);
-        glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
-        glStencilMask(0x00);
-        glClearColor(0.2f,0.2f,0.2f,1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
     
     void DrawScenes()
@@ -151,6 +148,7 @@ public:
         DrawScene();
         if(drawShadow() && debug) RenderQuad();
         if(skybox) skybox->Draw();
+        glCheckError();
     }
     
     void RebuildSky()

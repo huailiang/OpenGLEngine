@@ -1,136 +1,115 @@
 //
-//  scene5.h
-//  OpenGLEngine
+//  scene7.h
+//  GLESEngine
 //
-//  Created by 彭怀亮 on 5/26/19.
+//  Created by 彭怀亮 on 7/22/19.
 //  Copyright © 2019 彭怀亮. All rights reserved.
 //
 
 #ifndef scene5_h
 #define scene5_h
 
-#include "scene.h"
+#include "arscene.h"
+#ifdef _GLES_
+#include "IARInterface.h"
+#endif
 
-class Scene5 : public Scene
+class Scene5 : public ARScene
 {
     
 public:
     
     ~Scene5()
     {
-        SAFE_DELETE(halo);
-        SAFE_DELETE(shader);
-        SAFE_DELETE(btn1);
-        SAFE_DELETE(btn2);
-        SAFE_DELETE(btn3);
-        SAFE_DELETE(btn4);
-        SAFE_DELETE(btn5);
-        SAFE_DELETE(lod1);
-        SAFE_DELETE(lod2);
-        SAFE_DELETE(lod3);
-        SAFE_DELETE(lod4);
-        SAFE_DELETE(lod5);
+        SAFE_DELETE(pick);
+        SAFE_DELETE(match);
+        DELETE_TEXTURE(texID);
     }
     
     int getType() { return TY_Scene5; }
     
-    std::string getSkybox() { return "mp_5dim"; }
+    void InitLight() { light = new DirectLight(vec3(1.0f), vec3(0.0f, 0.0f, -2.0f)); }
     
-    glm::vec3 getCameraPos() { return glm::vec3(0.0f,0.0f,16.0f); }
-    
-    static void OnClick(engine::UIEvent* e, void* arg)
+    virtual void InitScene()
     {
-        Scene5* scene = (Scene5*)(arg);
-        int evtid = e->evtid;
-        scene->Click(evtid);
-    }
-    
-    static void OnLodClick(engine::UIEvent* e, void* arg)
-    {
-        Scene5* scene = (Scene5*)(arg);
-        int evtid = e->evtid;
-        scene->LodSelect(evtid);
-    }
-    
-    void InitLight()
-    {
-        light = new DirectLight(vec3(1.0f), vec3(0.0f,0.0f,-2.0f));
+        ARScene::InitScene();
+        glGenTextures(1, &m_backgroundTextureId);
+        glBindTexture(GL_TEXTURE_2D, m_backgroundTextureId);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        
+        Texture tex("textures/awesomeface", _PNG, &texID);
     }
     
     void DrawUI()
     {
         Scene::DrawUI();
-        btn1 = new engine::UIButton(vec2(660, 360), vec3(1,1,0), 0.6f, "  pose  ",0);
-        btn1->RegistCallback(OnClick, this);
-        btn2 = new engine::UIButton(vec2(660, 330), vec3(1,1,0), 0.6f, "   idle   ",1);
-        btn2->RegistCallback(OnClick, this);
-        btn3 = new engine::UIButton(vec2(660, 300), vec3(1,1,0), 0.6f, " pause ",2);
-        btn3->RegistCallback(OnClick, this);
-        btn4 = new engine::UIButton(vec2(660, 270), vec3(1,1,0), 0.6f, "resume",3);
-        btn4->RegistCallback(OnClick, this);
-        btn5 = new engine::UIButton(vec2(660, 240), vec3(1,1,0), 0.6f, "T-pose",4);
-        btn5->RegistCallback(OnClick, this);
-        lod1 = new engine::UIButton(vec2(740, 360), vec3(1,1,0), 0.6f, "lod1",0);
-        lod1->RegistCallback(OnLodClick, this);
-        lod2 = new engine::UIButton(vec2(740, 330), vec3(1,1,0), 0.6f, "lod2",2);
-        lod2->RegistCallback(OnLodClick, this);
-        lod3 = new engine::UIButton(vec2(740, 300), vec3(1,1,0), 0.6f, "lod3",3);
-        lod3->RegistCallback(OnLodClick, this);
-        lod4 = new engine::UIButton(vec2(740, 270), vec3(1,1,0), 0.6f, "lod4",4);
-        lod4->RegistCallback(OnLodClick, this);
-        lod5 = new engine::UIButton(vec2(740, 240), vec3(1,1,0), 0.6f, "lod5",5);
-        lod5->RegistCallback(OnLodClick, this);
+        pick = new engine::UIButton(vec2(720, 360), vec3(1,1,0), 0.6f, "pick", 0);
+        match = new  engine::UIButton(vec2(720, 330), vec3(1,1,0), 0.6f, "match", 1);
+        pick->RegistCallback(OnClick, this);
+        match->RegistCallback(OnClick, this);
     }
     
-    void InitScene()
-    {
-        shader = new LightShader("model.vs", "model.fs");
-        halo = new Avatar("halo", vec3(-1.0f, -4.0f, -1.5f), vec3(1.0f), -60, shader);
-        shader->compile();
-        ApplyCamera(shader);
-    }
-
     void DrawScene()
     {
-        halo->Rotate(0.2f);
-        halo->Draw(shader, light, camera);
+        DrawBackground();
+        RenderQuad(texID);
     }
     
-    void Click(int anim)
+    
+    void StartPick()
     {
-        switch (anim) {
-            case 0:
-                halo->PlayAnim("something");
-                break;
-            case 1:
-                halo->PlayAnim("idle");
-                break;
-            case 2:
-                halo->PauseAnim();
-                break;
-            case 3:
-                halo->ResumeAnim();
-                break;
-            case 4:
-                halo->SetTPose();
-                break;
-            default:
-                break;
+        if(arPtr)
+        {
+            arPtr->GetAlbumPicker(OnPickerFinish, this);
         }
     }
     
-    void LodSelect(int lod)
+    void OnPicker()
     {
-        halo->ChangeLOD(lod);
+        std::cout<<"pick finish: "<<std::endl;
+        float width = 0, height = 0;
+        void* data = arPtr->GetImageData(&width, &height);
+        std::cout<<"width:"<<width<<" height:"<<height<<" data"<<data<<std::endl;
+        glActiveTexture(GL_TEXTURE0);
+        glPixelStorei(GL_PACK_ALIGNMENT, 1);
+        glBindTexture(GL_TEXTURE_2D, texID);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
     }
     
+    void StartMatch()
+    {
+        std::cout<<"match finish"<<std::endl;
+    }
+    
+    void Process(IARInterface* ar)
+    {
+        arPtr = ar;
+    }
     
 private:
-    LightShader* shader;
-    Avatar *halo;
-    engine::UIButton *btn1,*btn2,*btn3,*btn4,*btn5;
-    engine::UIButton *lod1,*lod2,*lod3,*lod4,*lod5;
+    
+    static void OnPickerFinish(void* arg)
+    {
+        Scene5* sc = (Scene5*)arg;
+        sc->OnPicker();
+    }
+    
+    static void OnClick(engine::UIEvent* contex, void* arg)
+    {
+        Scene5* scene = (Scene5*)(arg);
+        int evtid = contex->evtid;
+        if(evtid == 0) scene->StartPick();
+        if(evtid == 1) scene->StartMatch();
+    }
+    
+private:
+    engine::UIButton* pick, *match;
+    IARInterface* arPtr = nullptr;
+    GLuint texID;
 };
 
 
-#endif /* scene5_h */
+#endif /* scene7_h */
