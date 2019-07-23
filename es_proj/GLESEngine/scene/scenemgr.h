@@ -10,7 +10,7 @@
 #define scenemgr_h
 
 #include "scene.h"
-#include "vrscene.h"
+#include "arscene.h"
 #include "scene1.h"
 #include "scene2.h"
 #include "scene3.h"
@@ -108,9 +108,9 @@ public:
             if(current)
             {
                 current->Initial();
-                if(current->isVRScene())
+                if(current->isARScene())
                 {
-                    auto vr = (VRScene*)current;
+                    auto vr = (ARScene*)current;
                     vr->Process(ptr_ar);
                 }
             }

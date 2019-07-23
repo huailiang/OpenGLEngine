@@ -75,18 +75,18 @@ public:
     void Initial()
     {
         glCheckError();
-         bool draw = !isVRScene();
-        if(drawShadow() && draw)
+        debugShader = new Shader("debug.vs", "debug.fs");
+        debugShader->attach("_DEBUG_DEPTH_");
+        InitQuad(&quadVAO, &quadVBO, debugShader);
+        if(drawShadow())
         {
             depthShader  = new Shader("depth.vs","depth.fs");
-            debugShader = new Shader("debug.vs", "debug.fs");
-            debugShader->attach("_DEBUG_DEPTH_");
             InitDepthBuffer();
             glCheckError();
-            InitQuad(&quadVAO, &quadVBO, debugShader);
         }
         camera = new Camera(getCameraPos());
-        if(draw) skybox = new Skybox(camera, getSkybox(), isEquirectangularMap());
+        string sky = getSkybox();
+        if(!sky.empty()) skybox = new Skybox(camera, sky, isEquirectangularMap());
         lightMatrix = glm::mat4(1);
         InitLight();
         InitScene();
@@ -101,7 +101,7 @@ public:
     
     virtual void DrawUI() { }
     
-    virtual bool isVRScene() { return false; }
+    virtual bool isARScene() { return false; }
     
     virtual void DrawShadow(Shader *depthShader)
     {
@@ -139,22 +139,18 @@ public:
     void DrawScenes()
     {
         timeValue = GetRuntime();
-        bool draw = !isVRScene();
-        if(draw)
+        if(drawShadow())
         {
-            if(drawShadow())
-            {
-                glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
-                ClearScene();
-                DrawShadow(depthShader);
-                glBindFramebuffer(GL_FRAMEBUFFER, 0);
-            }
+            glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
             ClearScene();
-            glViewport(0, 0, RENDER_WIDTH, RENDER_HEIGTH);
-            DrawScene();
-            if(drawShadow() && debug) RenderQuad();
-            if(skybox) skybox->Draw();
+            DrawShadow(depthShader);
+            glBindFramebuffer(GL_FRAMEBUFFER, 0);
         }
+        ClearScene();
+        glViewport(0, 0, RENDER_WIDTH, RENDER_HEIGTH);
+        DrawScene();
+        if(drawShadow() && debug) RenderQuad();
+        if(skybox) skybox->Draw();
     }
     
     void RebuildSky()

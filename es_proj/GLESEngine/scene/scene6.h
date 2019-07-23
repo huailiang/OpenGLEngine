@@ -9,9 +9,9 @@
 #ifndef scene6_h
 #define scene6_h
 #include <cmath>
-#include "vrscene.h"
+#include "arscene.h"
 
-class Scene6 : public VRScene
+class Scene6 : public ARScene
 {
     
 public:
@@ -20,11 +20,11 @@ public:
     {
         SAFE_DELETE(shader);
         DELETE_TEXTURE(m_backgroundTextureId);
-        SAFE_DELETE(vrShader);
+        SAFE_DELETE(arShader);
         glDeleteVertexArrays(1, &quadVao);
         glDeleteBuffers(1, &quadVbo);
-        glDeleteVertexArrays(1, &vrVao);
-        glDeleteBuffers(1, &vrVBo);
+        glDeleteVertexArrays(1, &arVao);
+        glDeleteBuffers(1, &arVBo);
     }
     
     int getType() { return TY_Scene6; }
@@ -33,33 +33,35 @@ public:
     
     void InitScene()
     {
-        VRScene::InitScene();
+        ARScene::InitScene();
         
-        vrShader = new Shader("debug.vs","debug.fs");
-        vrShader->attach("_AR_");
-        InitCube(&vrVao, &vrVBo, vrShader);
-        vrShader->compile();
+        arShader = new Shader("debug.vs","debug.fs");
+        arShader->attach("_AR_");
+        InitCube(&arVao, &arVBo, arShader);
+        arShader->compile();
     }
     
-    void DrawAR(const std::vector<Transformation>& transforms)
+    
+    void DrawScene()
     {
-        VRScene::DrawAR(transforms);
+        DrawBackground();
+        ARScene::DrawAR(transforms);
         loop(transforms.size())
         {
             glm::mat4 view = transforms[i].getMat44(); //camera's position & rotation
             view = reverse * view;
-            vrShader->use();
-            vrShader->setMat4("view",  view);
-            vrShader->setMat4("proj", proj);
-            glBindVertexArray(vrVao);
+            arShader->use();
+            arShader->setMat4("view",  view);
+            arShader->setMat4("proj", proj);
+            glBindVertexArray(arVao);
             glDrawArrays(DRAW_MODE, 0, 36);
             glBindVertexArray(0);
         }
     }
 
 private:
-    Shader* vrShader;
-    GLuint vrVao, vrVBo;
+    Shader* arShader;
+    GLuint arVao, arVBo;
     
 };
 

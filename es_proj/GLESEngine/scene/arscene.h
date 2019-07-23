@@ -12,12 +12,12 @@
 #include "scene.h"
 #include "IARInterface.h"
 
-class VRScene: public Scene
+class ARScene: public Scene
 {
     
 public:
     
-    virtual ~VRScene()
+    virtual ~ARScene()
     {
         SAFE_DELETE(shader);
         DELETE_TEXTURE(m_backgroundTextureId);
@@ -25,11 +25,13 @@ public:
         glDeleteBuffers(1, &quadVbo);
     }
     
-    virtual bool isVRScene() { return true; }
+    virtual bool isARScene() { return true; }
     
     virtual std::string getSkybox() { return ""; }
     
     virtual glm::vec3 getCameraPos() { return glm::vec3(0.0f); }
+    
+    virtual bool drawShadow() { return false; }
     
     virtual void InitScene()
     {
@@ -79,19 +81,17 @@ public:
         glBindVertexArray(0);
     }
     
-    virtual void DrawAR(const std::vector<Transformation>& transforms)
+    void DrawAR(const std::vector<Transformation>& transforms)
     {
-        ClearScene();
-        DrawBackground();
+        this->transforms = transforms;
     }
     
-    virtual void Process(IARInterface* ar)
-    {
-    }
+    virtual void Process(IARInterface* ar) { }
     
     
 protected:
     BGRAVideoFrame camFrame;
+    std::vector<Transformation> transforms;
     Shader* shader;
     GLuint m_backgroundTextureId;
     GLuint quadVao, quadVbo;

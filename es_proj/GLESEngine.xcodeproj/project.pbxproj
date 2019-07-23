@@ -507,7 +507,7 @@
 		4CE2224522A91F0B0095ECCA /* eventmgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eventmgr.h; sourceTree = "<group>"; };
 		4CE8DA6D22AEA7E60077C6AF /* appdata.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = appdata.glsl; sourceTree = "<group>"; };
 		4CF3FC6622E555FA002CC978 /* scene7.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = scene7.h; sourceTree = "<group>"; };
-		4CF3FC6722E55DDC002CC978 /* vrscene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vrscene.h; sourceTree = "<group>"; };
+		4CF3FC6722E55DDC002CC978 /* arscene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = arscene.h; sourceTree = "<group>"; };
 		4CF3FC6822E56302002CC978 /* AlbumSource.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AlbumSource.mm; sourceTree = "<group>"; };
 		4CF3FC6A22E56315002CC978 /* AlbumSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlbumSource.h; sourceTree = "<group>"; };
 		4CF3FC6C22E567F5002CC978 /* IARInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IARInterface.h; sourceTree = "<group>"; };
@@ -861,7 +861,7 @@
 			children = (
 				4C9EE53922D715560010EED9 /* scenemgr.h */,
 				4C9EE54122D715AB0010EED9 /* scene.h */,
-				4CF3FC6722E55DDC002CC978 /* vrscene.h */,
+				4CF3FC6722E55DDC002CC978 /* arscene.h */,
 				4C9EE53C22D715660010EED9 /* scene1.h */,
 				4C9EE53A22D715660010EED9 /* scene2.h */,
 				4C9EE54022D715660010EED9 /* scene3.h */,

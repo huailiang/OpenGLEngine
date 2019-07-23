@@ -9,12 +9,12 @@
 #ifndef scene7_h
 #define scene7_h
 
-#include "vrscene.h"
+#include "arscene.h"
 #ifdef _GLES_
 #include "IARInterface.h"
 #endif
 
-class Scene7 : public VRScene
+class Scene7 : public ARScene
 {
     
 public:
@@ -23,18 +23,25 @@ public:
     {
         SAFE_DELETE(pick);
         SAFE_DELETE(match);
+        DELETE_TEXTURE(texID);
     }
     
     int getType() { return TY_Scene7; }
     
     void InitLight() { light = new DirectLight(vec3(1.0f), vec3(0.0f, 0.0f, -2.0f)); }
     
-    bool drawShadow() { return false; }
-    
     virtual void InitScene()
     {
-        VRScene::InitScene();
-        std::cout<<"scene7 initial"<<std::endl;
+        ARScene::InitScene();
+        glGenTextures(1, &m_backgroundTextureId);
+        glBindTexture(GL_TEXTURE_2D, m_backgroundTextureId);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        
+        Texture tex("textures/container", _JPG, &texID);
+        RenderQuad(texID);
     }
     
     void DrawUI()
@@ -46,10 +53,11 @@ public:
         match->RegistCallback(OnClick, this);
     }
     
-    void DrawAR(const std::vector<Transformation> &transforms)
+    void DrawScene()
     {
-        VRScene::DrawAR(transforms);
+        DrawBackground();
     }
+    
     
     void StartPick()
     {
@@ -65,7 +73,10 @@ public:
         float width = 0, height = 0;
         void* data = arPtr->GetImageData(&width, &height);
         std::cout<<"width:"<<width<<" height:"<<height<<" data"<<data<<std::endl;
-        // glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, *width, *height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+        glActiveTexture(GL_TEXTURE0);
+        glPixelStorei(GL_PACK_ALIGNMENT, 1);
+        glBindTexture(GL_TEXTURE_2D, texID);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
     }
     
     void StartMatch()
@@ -97,7 +108,7 @@ private:
 private:
     engine::UIButton* pick, *match;
     IARInterface* arPtr = nullptr;
-    
+    GLuint texID;
 };
 
 

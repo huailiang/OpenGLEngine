@@ -20,14 +20,6 @@ ESContext* esContext;
 
 float lastTime;
 
-void Clean()
-{
-    glClearColor(0.2, 0.2, 0.2, 1.f);
-    glEnable(GL_DEPTH_TEST);
-    glEnable(GL_CULL_FACE);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-}
-
 void init_engine()
 {
     SystemInfo();
@@ -38,7 +30,7 @@ void init_engine()
 bool OpenCamera()
 {
     auto scene = SceneMgr::getInstance()->current;
-    return scene!= nullptr && scene->isVRScene();
+    return scene!= nullptr && scene->isARScene();
 }
 
 
@@ -79,9 +71,9 @@ void OnClickTriger(ESContext *esContext, float x, float y)
 void OnFrameReady(ESContext *esContext,const BGRAVideoFrame& frame)
 {
     auto scene = SceneMgr::getInstance()->current;
-    if(scene->isVRScene() && !ENG_PAUSE)
+    if(scene->isARScene() && !ENG_PAUSE)
     {
-        VRScene* sc = static_cast<VRScene*>(scene);
+        ARScene* sc = static_cast<ARScene*>(scene);
         sc->SetCameraFrame(frame);
     }
 }
@@ -90,9 +82,9 @@ void OnFrameReady(ESContext *esContext,const BGRAVideoFrame& frame)
 void OnFrameDetect(ESContext *esContext,const std::vector<Transformation>& transforms)
 {
     auto scene = SceneMgr::getInstance()->current;
-    if(scene->isVRScene() && !ENG_PAUSE)
+    if(scene->isARScene() && !ENG_PAUSE)
     {
-        VRScene* sc = static_cast<VRScene*>(scene);
+        ARScene* sc = static_cast<ARScene*>(scene);
         sc->DrawAR(transforms);
     }
 }
@@ -100,9 +92,9 @@ void OnFrameDetect(ESContext *esContext,const std::vector<Transformation>& trans
 void OnFrameInit(ESContext *esContext, float width, float height,const glm::mat3& intrinsic)
 {
     auto scene = SceneMgr::getInstance()->current;
-    if(scene->isVRScene())
+    if(scene->isARScene())
     {
-        VRScene* sc = static_cast<VRScene*>(scene);
+        ARScene* sc = static_cast<ARScene*>(scene);
         sc->InitialVR(width, height, intrinsic);
     }
 }
