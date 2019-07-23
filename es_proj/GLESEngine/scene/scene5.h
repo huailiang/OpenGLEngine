@@ -9,6 +9,7 @@
 #ifndef scene5_h
 #define scene5_h
 
+#include <opencv2/opencv.hpp>
 #include "arscene.h"
 #ifdef _GLES_
 #include "IARInterface.h"
@@ -24,6 +25,7 @@ public:
         SAFE_DELETE(pick);
         SAFE_DELETE(match);
         DELETE_TEXTURE(texID);
+        if(arPtr) arPtr->OnDestroy();
     }
     
     int getType() { return TY_Scene5; }
@@ -33,14 +35,15 @@ public:
     virtual void InitScene()
     {
         ARScene::InitScene();
-        glGenTextures(1, &m_backgroundTextureId);
-        glBindTexture(GL_TEXTURE_2D, m_backgroundTextureId);
+        glGenTextures(1, &texID);
+        glBindTexture(GL_TEXTURE_2D, texID);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
         
-        Texture tex("textures/awesomeface", _PNG, &texID);
+        cornerDetector = cv::ORB::create(750);
+        matcher = cv::DescriptorMatcher::create("BruteForce-Hamming");
     }
     
     void DrawUI()
@@ -58,7 +61,6 @@ public:
         RenderQuad(texID);
     }
     
-    
     void StartPick()
     {
         if(arPtr)
@@ -69,14 +71,15 @@ public:
     
     void OnPicker()
     {
-        std::cout<<"pick finish: "<<std::endl;
-        float width = 0, height = 0;
-        void* data = arPtr->GetImageData(&width, &height);
-        std::cout<<"width:"<<width<<" height:"<<height<<" data"<<data<<std::endl;
-        glActiveTexture(GL_TEXTURE0);
-        glPixelStorei(GL_PACK_ALIGNMENT, 1);
+        float x = 0, y = 0;
+        void* data = arPtr->GetImageData(&x, &y);
+        std::cout<<"width:"<<x<<" height:"<<y<<std::endl;
         glBindTexture(GL_TEXTURE_2D, texID);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, x, y, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+        
+        cv::Mat image(x, y, CV_8UC4, data);
+        cornerDetector->detect(image, referenceKeypoints);
+        std::cout<<"image key points size:"<<referenceKeypoints.size()<<std::endl;
     }
     
     void StartMatch()
@@ -109,6 +112,11 @@ private:
     engine::UIButton* pick, *match;
     IARInterface* arPtr = nullptr;
     GLuint texID;
+    
+    cv::Mat referenceDescriptors;
+    std::vector<cv::KeyPoint> referenceKeypoints;
+    cv::Ptr<cv::Feature2D> cornerDetector;
+    cv::Ptr<cv::DescriptorMatcher> matcher;
 };
 
 

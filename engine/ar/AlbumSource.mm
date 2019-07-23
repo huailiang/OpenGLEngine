@@ -51,10 +51,13 @@
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
     UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
-    NSLog(@"pick start width %f, height: %f", image.size.width, image.size.height);
-    m_width = image.size.width;
-    m_height = image.size.height;
-    imageData = UIImageJPEGRepresentation(image, 0.5f);
+    m_width = (int)CGImageGetWidth(image.CGImage);
+    m_height = (int)CGImageGetHeight(image.CGImage);
+    NSLog(@"pick start width %f, height: %f", m_width, m_height);
+    
+    CFDataRef dataRef = CGDataProviderCopyData(CGImageGetDataProvider(image.CGImage));
+    imageData = (unsigned char*)[[NSData dataWithData:(NSData*) dataRef] bytes];
+    CFRelease(dataRef);
     [picker dismissViewControllerAnimated:YES completion:nil];
     if(m_callback) m_callback(cb_arg);
 }
@@ -63,12 +66,12 @@
 {
     *width = m_width;
     *height = m_height;
-    return (void*)[imageData bytes];
+    return (void*)imageData;
 }
 
 -(void)clearImageData
 {
-    [imageData dealloc];
+    free(imageData);
     imageData =  nil;
 }
 

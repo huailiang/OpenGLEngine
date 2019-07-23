@@ -16,7 +16,7 @@
 
 @interface AlbumSource : NSObject
 {
-    NSData *imageData; // pick data
+    unsigned char *imageData; // pick data
     float m_width, m_height;
     UIViewController *viewController;
 }

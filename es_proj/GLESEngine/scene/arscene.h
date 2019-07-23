@@ -81,7 +81,7 @@ public:
         glDrawArrays(DRAW_MODE, 0, 6);
         glBindVertexArray(0);
     }
-    
+        
     void DrawAR(const std::vector<Transformation>& transforms)
     {
         this->transforms = transforms;

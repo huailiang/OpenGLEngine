@@ -78,6 +78,8 @@ public:
         debugShader = new Shader("debug.vs", "debug.fs");
         if(drawShadow())
             debugShader->attach("_DEBUG_DEPTH_");
+        if(isARScene())
+            debugShader->attach("_FLIP_Y_");
         InitQuad(&quadVAO, &quadVBO, debugShader);
         if(drawShadow())
         {
@@ -193,6 +195,7 @@ protected:
     {
         debugShader->use();
         glActiveTexture(GL_TEXTURE0);
+        glPixelStorei(GL_PACK_ALIGNMENT, 1);
         glBindTexture(GL_TEXTURE_2D, map);
         DrawQuad();
     }
@@ -208,7 +211,6 @@ private:
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
         glCheckError();
         glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, SHADOW_WIDTH, SHADOW_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, nullptr);
-        glCheckError();
         glBindTexture(GL_TEXTURE_2D, 0);
         
         glGenFramebuffers(1, &depthMapFBO);
