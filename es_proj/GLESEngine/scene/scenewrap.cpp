@@ -39,8 +39,11 @@ void Draw(ESContext *esContext)
     float timeValue = GetRuntime();
     deltatime  = timeValue-lastTime;
     lastTime= timeValue;
-    SceneMgr::getInstance()->Draw(deltatime);
-    UIManager::getInstance()->Draw();
+    if(!ENG_PAUSE)
+    {
+        SceneMgr::getInstance()->Draw(deltatime);
+        UIManager::getInstance()->Draw();
+    }
 }
 
 void ShutDown(ESContext* context)

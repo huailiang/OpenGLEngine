@@ -17,7 +17,7 @@
 
 #define MIN_KPS_IN_FRAME            300
 #define MIN_INLIER_COUNT            30
-#define NN_MATCH_RATIO              0.8f
+#define NN_MATCH_RATIO              1.8f
 #define RANSAC_THRESH               2.5f
 
 class Scene5 : public ARScene
@@ -55,7 +55,6 @@ public:
         InitCube(&arVao, &arVBo, arShader);
         arShader->compile();
 
-        
         cornerDetector = cv::ORB::create(750);
         matcher = cv::DescriptorMatcher::create("BruteForce-Hamming");
         cvmatch =false;
@@ -64,44 +63,45 @@ public:
     void DrawUI()
     {
         Scene::DrawUI();
-        pick = new engine::UIButton(vec2(720, 360), vec3(1,1,0), 0.6f, "pick", 0);
-        match = new  engine::UIButton(vec2(720, 330), vec3(1,1,0), 0.6f, "match", 1);
+        state = new engine::UILabel(vec2(680, 440), vec3(1,0,0), 0.7f, "state info");
+        pick = new engine::UIButton(vec2(720, 360), vec3(1,1,0), 1.f, "pick", 0);
+        match = new  engine::UIButton(vec2(720, 310), vec3(1,1,0), 1.f, "match", 1);
         pick->RegistCallback(OnClick, this);
         match->RegistCallback(OnClick, this);
     }
     
     void DrawScene()
     {
+        if(matched) return;
         DrawBackground();
         RenderQuad(texID);
-        if(cvmatch && !matched)
+        
+        if(cvmatch)
         {
-            cv::Mat qimg(camFrame.width, camFrame.height, CV_8UC4, camFrame.data);
+            cv::Mat qimg((int)camFrame.width, (int)camFrame.height, CV_8UC4, camFrame.data);
             std::vector<cv::KeyPoint> queryKeypoints;
             cv::Mat descriptor;
             cornerDetector->detectAndCompute(qimg, cv::noArray(), queryKeypoints, descriptor);
             
-            if(queryKeypoints.size()<=0) exit(2);
+            if(queryKeypoints.size() <= 0) return;
             
-            std::vector<cv::KeyPoint> sourceMatches,queryMatches;
-            
-            std::vector<std::vector<cv::DMatch> > descriptorMatches;
+            std::vector<cv::KeyPoint> sourceMatches;
+            std::vector<std::vector<cv::DMatch>> descriptorMatches;
             matcher->knnMatch(referenceDescriptors, descriptor, descriptorMatches, 2);
             for (unsigned i = 0; i < descriptorMatches.size(); i++)
             {
                 if (descriptorMatches[i][0].distance < NN_MATCH_RATIO * descriptorMatches[i][1].distance)
                 {
                     sourceMatches.push_back(referenceKeypoints[descriptorMatches[i][0].queryIdx]);
-                    queryMatches.push_back(queryKeypoints[descriptorMatches[i][0].trainIdx]);
                 }
             }
+            size_t s1 = sourceMatches.size();
+            size_t s2 = referenceKeypoints.size();
+            size_t s3 = queryKeypoints.size();
+            state->setText("key points:" + std::to_string(s1)+":"+std::to_string(s2)+":"+std::to_string(s3));
             if (sourceMatches.size() >= MIN_INLIER_COUNT) {
-                std::cout<<" key points matched"<<sourceMatches.size()<<std::endl;
+                std::cout<<" key points matched "<<std::endl;
                 matched = true;
-            }
-            else
-            {
-                std::cerr<<"Very few kps match, cannot proceed further!"<<sourceMatches.size()<<std::endl;
             }
         }
     }
@@ -124,7 +124,6 @@ public:
         
         cv::Mat image(x, y, CV_8UC4, data);
         cornerDetector->detect(image, referenceKeypoints);
-        std::cout<<"image key points size:"<<referenceKeypoints.size()<<std::endl;
     }
     
     void StartMatch()
@@ -168,6 +167,7 @@ private:
     
 private:
     engine::UIButton* pick, *match;
+    engine::UILabel *state;
     GLuint texID;
     Shader* arShader;
     GLuint arVao, arVBo;
