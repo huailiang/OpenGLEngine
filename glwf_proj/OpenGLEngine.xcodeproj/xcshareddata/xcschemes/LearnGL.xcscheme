@@ -61,6 +61,18 @@
             ReferencedContainer = "container:OpenGLEngine.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "VK_ICD_FILENAMES"
+            value = "/Users/penghuailiang/Documents/projects/GL/OpenGLEngine/lib/vulkansdk/macOS/etc/vulkan/icd.d/MoltenVK_icd.json"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "VK_LAYER_PATH"
+            value = "/Users/penghuailiang/Documents/projects/GL/OpenGLEngine/lib/vulkansdk/macOS/etc/vulkan/explicit_layer.d"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
       <AdditionalOptions>
          <AdditionalOption
             key = "NSZombieEnabled"

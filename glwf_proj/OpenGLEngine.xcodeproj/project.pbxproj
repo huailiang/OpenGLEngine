@@ -29,6 +29,7 @@
 		4C40A86322BC789800F910AE /* profile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C40A86222BC789800F910AE /* profile.cpp */; };
 		4C42797E22A54AD0003AE42A /* engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C42797A22A54AD0003AE42A /* engine.cpp */; };
 		4C4279AD22A54C26003AE42A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C4279AC22A54C26003AE42A /* main.cpp */; };
+		4C5BDE1722E84DE600BAE9F9 /* libglfw.3.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C5BDE1622E84DE600BAE9F9 /* libglfw.3.4.dylib */; };
 		4C5F3FD322ABF95C005B7CFD /* asset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C5F3FD222ABF95C005B7CFD /* asset.cpp */; };
 		4C73C0F322A8C0F9002A8AD0 /* eventmgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C73C0F222A8C0F9002A8AD0 /* eventmgr.cpp */; };
 		4C73C0F522A8C18C002A8AD0 /* uimgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C73C0F422A8C18C002A8AD0 /* uimgr.cpp */; };
@@ -50,7 +51,6 @@
 		4CD71DB322B0CF0500466683 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CD71DAF22B0CF0500466683 /* tinyxml.cpp */; };
 		4CD71DB622B0E30100466683 /* animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CD71DB422B0E30100466683 /* animation.cpp */; };
 		4CE861ED22A4F86F000677DC /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE861EB22A4F86F000677DC /* libfreetype.a */; };
-		4CE861EE22A4F86F000677DC /* libglfw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE861EC22A4F86F000677DC /* libglfw3.a */; };
 		4CE861F222A4F87F000677DC /* libfreetype.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE861F022A4F87F000677DC /* libfreetype.6.dylib */; };
 /* End PBXBuildFile section */
 
@@ -58,8 +58,8 @@
 		4CD27D292282F4E30038AE21 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			dstPath = usr/share/man/man1;
+			dstSubfolderSpec = 10;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 1;
@@ -158,6 +158,7 @@
 		4C46A61C22C4EBF30055058C /* brdf.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = brdf.fs; sourceTree = "<group>"; };
 		4C52BE9522ACC2BE00D78ACB /* mesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mesh.h; sourceTree = "<group>"; };
 		4C5680D222A61B5600D313AC /* tiny_obj_loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tiny_obj_loader.h; sourceTree = "<group>"; };
+		4C5BDE1622E84DE600BAE9F9 /* libglfw.3.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.4.dylib; path = "../../../../../../../usr/local/Cellar/glfw/HEAD-b430bc4/lib/libglfw.3.4.dylib"; sourceTree = "<group>"; };
 		4C5F3FD122ABF95C005B7CFD /* asset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asset.h; sourceTree = "<group>"; };
 		4C5F3FD222ABF95C005B7CFD /* asset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = asset.cpp; sourceTree = "<group>"; };
 		4C73C0F222A8C0F9002A8AD0 /* eventmgr.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = eventmgr.cpp; sourceTree = "<group>"; };
@@ -192,7 +193,6 @@
 		4CDFB1ED22CF4EDF0010E697 /* harmonics.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = harmonics.vs; sourceTree = "<group>"; };
 		4CE03F8E22DB238700DB9A28 /* prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = prefix.pch; path = ../engine/prefix.pch; sourceTree = "<group>"; };
 		4CE861EB22A4F86F000677DC /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = ../lib/libfreetype.a; sourceTree = "<group>"; };
-		4CE861EC22A4F86F000677DC /* libglfw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglfw3.a; path = ../lib/libglfw3.a; sourceTree = "<group>"; };
 		4CE861F022A4F87F000677DC /* libfreetype.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfreetype.6.dylib; path = ../lib/libfreetype.6.dylib; sourceTree = "<group>"; };
 		4CEFDBF422CE281A00E5B6DD /* libopencv_highgui.4.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_highgui.4.1.1.dylib; path = ../../../../../../../usr/local/lib/libopencv_highgui.4.1.1.dylib; sourceTree = "<group>"; };
 		4CEFDBF522CE281A00E5B6DD /* libopencv_core.4.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_core.4.1.1.dylib; path = ../../../../../../../usr/local/lib/libopencv_core.4.1.1.dylib; sourceTree = "<group>"; };
@@ -205,6 +205,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C5BDE1722E84DE600BAE9F9 /* libglfw.3.4.dylib in Frameworks */,
 				4C3B7A1922831668003B212F /* Cocoa.framework in Frameworks */,
 				4C3B7A172283164E003B212F /* IOKit.framework in Frameworks */,
 				4CD27D482283070B0038AE21 /* CoreVideo.framework in Frameworks */,
@@ -215,7 +216,6 @@
 				4C9EE54822D764530010EED9 /* libopencv_core.4.1.1.dylib in Frameworks */,
 				4CE861ED22A4F86F000677DC /* libfreetype.a in Frameworks */,
 				4CE861F222A4F87F000677DC /* libfreetype.6.dylib in Frameworks */,
-				4CE861EE22A4F86F000677DC /* libglfw3.a in Frameworks */,
 				4CD27D46228307050038AE21 /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -404,6 +404,7 @@
 		4CD27D352282F5320038AE21 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4C5BDE1622E84DE600BAE9F9 /* libglfw.3.4.dylib */,
 				4CB025E722E367F600B2B6D9 /* libopencv_features2d.4.1.1.dylib */,
 				4CEFDBF522CE281A00E5B6DD /* libopencv_core.4.1.1.dylib */,
 				4CEFDBF422CE281A00E5B6DD /* libopencv_highgui.4.1.1.dylib */,
@@ -411,7 +412,6 @@
 				4CEFDBF722CE281A00E5B6DD /* libopencv_imgproc.4.1.1.dylib */,
 				4CE861F022A4F87F000677DC /* libfreetype.6.dylib */,
 				4CE861EB22A4F86F000677DC /* libfreetype.a */,
-				4CE861EC22A4F86F000677DC /* libglfw3.a */,
 				4C3B7A1822831668003B212F /* Cocoa.framework */,
 				4C3B7A162283164E003B212F /* IOKit.framework */,
 				4CD27D472283070B0038AE21 /* CoreVideo.framework */,
