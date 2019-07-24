@@ -52,9 +52,7 @@ namespace engine
             glDeleteTextures(1, &irradianceMap);
             glDeleteTextures(1, &brdfLUTTexture);
             glDeleteTextures(1, &prefilterMap);
-            glCheckError();
-            glDeleteFramebuffers(1, &captureFBO);
-            glDeleteRenderbuffers(1, &captureRBO);
+            
         }
         else
         {
@@ -169,13 +167,15 @@ namespace engine
     {
         if(hdr)
         {
+            glDisable(GL_CULL_FACE);
+            glDisable(GL_DEPTH_TEST);
             glGenFramebuffers(1, &captureFBO);
             glGenRenderbuffers(1, &captureRBO);
             glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
             glBindRenderbuffer(GL_RENDERBUFFER, captureRBO);
             glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, 512, 512);
             glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, captureRBO);
-
+            
             glm::mat4 captureProjection = glm::perspective(glm::radians(90.0f), 1.0f, 0.1f, 10.0f);
             glm::mat4 captureViews[] =
             {
@@ -192,6 +192,8 @@ namespace engine
             GeneratePrefilter(captureViews, captureProjection);
             GenerateLut();
             
+            glDeleteFramebuffers(1, &captureFBO);
+            glDeleteRenderbuffers(1, &captureRBO);
             skyTexture = envCubemap;
             glViewport(0, 0, RENDER_WIDTH, RENDER_HEIGTH);
         }
@@ -203,6 +205,9 @@ namespace engine
     
     void Skybox::GenerateEnvmap(glm::mat4 captureViews[], const glm::mat4 captureProjection)
     {
+        glViewport(0, 0, 512, 512);
+        glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
+        glBindRenderbuffer(GL_RENDERBUFFER, captureRBO);
         MakeCube(&envCubemap, 512, true);
         equirectangularToCubemapShader->use();
         equirectangularToCubemapShader->setInt("equirectangularMap", 0);
@@ -210,9 +215,6 @@ namespace engine
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, hdrTexture);
         
-        glViewport(0, 0, 512, 512);
-        glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
-        glBindRenderbuffer(GL_RENDERBUFFER, captureRBO);
         for (unsigned int i = 0; i < 6; ++i)
         {
             equirectangularToCubemapShader->setMat4("view", captureViews[i]);

@@ -71,7 +71,7 @@
 
 -(void)clearImageData
 {
-    free(imageData);
+//    free(imageData);
     imageData =  nil;
 }
 

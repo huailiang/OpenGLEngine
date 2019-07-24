@@ -87,7 +87,10 @@ public:
         this->transforms = transforms;
     }
     
-    virtual void Process(IARInterface* ar) { }
+    void Process(IARInterface* ar)
+    {
+         arPtr = ar;
+    }
     
     
 protected:
@@ -97,6 +100,7 @@ protected:
     GLuint m_backgroundTextureId;
     GLuint quadVao, quadVbo;
     glm::mat4 proj, reverse;
+    IARInterface* arPtr = nullptr;
     
 };
 

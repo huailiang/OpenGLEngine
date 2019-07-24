@@ -45,7 +45,6 @@ public:
     void DrawScene()
     {
         DrawBackground();
-        ARScene::DrawAR(transforms);
         loop(transforms.size())
         {
             glm::mat4 view = transforms[i].getMat44(); //camera's position & rotation
