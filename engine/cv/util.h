@@ -118,8 +118,8 @@ namespace tool
         {
             c = { p.z >= 0 ? 4 : 5, p.x / p.z, p.y / az };
         }
-        c.u = c.u*0.5f + 0.5f;
-        c.v = c.v*0.5f + 0.5f;
+        c.u = c.u * 0.5f + 0.5f;
+        c.v = c.v * 0.5f + 0.5f;
         return c;
     }
     

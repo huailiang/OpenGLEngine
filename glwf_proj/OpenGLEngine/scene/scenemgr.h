@@ -49,7 +49,7 @@ public:
     
     void Init()
     {
-        ChangeTo(TY_Scene6);
+        ChangeTo(TY_Scene5);
         glCheckError();
         lb_scene1 = new UILabel(vec2(60,450), vec3(1), 1, "Scene1", TY_Scene1);
         lb_scene2 = new UILabel(vec2(60,405), vec3(1), 1, "Scene2", TY_Scene2);
