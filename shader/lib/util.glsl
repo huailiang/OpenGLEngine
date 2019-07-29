@@ -167,7 +167,7 @@ float LinearizeDepth(float depth, float near_plane, float far_plane)
     return (2.0 * near_plane * far_plane) / (far_plane + near_plane - z * (far_plane - near_plane));
 }
 
-// 
+
 vec3 Proj2Coord01(vec4 pos)
 {
     vec3 projCoords = pos.xyz / pos.w;
@@ -184,7 +184,12 @@ float ShadowCalculation(sampler2D shadowmap,  vec4 lightspacePos)
     // calculate bias (based on depth map resolution and slope)
     float bias = 0.005;
     float shadow = currentDepth - bias > closestDepth  ? 1.0 : 0.0;
-    if(projCoords.z > 1.0) shadow = 0.0;
+    
+    //if projCoords.xy 不在[0,1]区间，即shadowmap没有绘制，则不画shadow
+    shadow = shadow * step(0.0, projCoords.x);
+    shadow = shadow * step(projCoords.x, 1.0);
+    shadow = shadow * step(0.0, projCoords.y);
+    shadow = shadow * step(projCoords.y, 1.0);
     return shadow;
 }
 

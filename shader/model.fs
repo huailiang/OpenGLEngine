@@ -14,9 +14,9 @@ in vec2 TexCoords;
 
 
 uniform sampler2D texture_diffuse;
-//uniform sampler2D texture_normal;
-//uniform sampler2D texture_specular;
-//uniform sampler2D texture_ambient;
+uniform sampler2D texture_normal;
+uniform sampler2D texture_specular;
+uniform sampler2D texture_ambient;
 
 void main()
 {

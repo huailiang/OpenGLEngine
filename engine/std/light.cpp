@@ -49,7 +49,7 @@ namespace engine
     {
         vec3 dir = normalize(direction);
         int sc = 4;
-        vec3 pos = target - vec3(sc*dir.x, sc*dir.y,sc*dir.z);
+        vec3 pos = target - vec3(sc * dir.x, sc * dir.y, sc * dir.z);
         mat4 view =  lookAt(pos, target, vec3(0,1,0));
         mat4 proj = glm::ortho(-left, left, -up, up, near, far);
         return proj * view;

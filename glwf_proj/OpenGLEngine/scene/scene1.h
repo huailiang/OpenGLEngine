@@ -25,6 +25,7 @@ public:
         SAFE_DELETE(terrain);
         SAFE_DELETE(shader);
         SAFE_DELETE(btn_normal);
+        glCheckError();
     }
     
     int getType() { return TY_Scene1; }
@@ -55,6 +56,11 @@ public:
         btn_normal->RegistCallback(OnNormalClick, this);
     }
     
+    void DrawShadow(Shader *depthShader)
+    {
+        Scene::DrawShadow(depthShader);
+        nano->Draw(depthShader, light, camera);
+    }
     
     void DrawScene()
     {

@@ -49,7 +49,7 @@ public:
     
     void Init()
     {
-        ChangeTo(TY_Scene5);
+        ChangeTo(TY_Scene3);
         glCheckError();
         lb_scene1 = new UILabel(vec2(60,450), vec3(1), 1, "Scene1", TY_Scene1);
         lb_scene2 = new UILabel(vec2(60,405), vec3(1), 1, "Scene2", TY_Scene2);
@@ -81,7 +81,7 @@ public:
             current->DrawScenes();
         }
         delay++;
-        if(delay%4==0)
+        if(delay % 8 ==0)
         {
             lb_fps->setText("FPS: "+to_string_with_precision(1/delta,4));
             lb_copy->setText("@copyright (c) penghuailiang");
@@ -97,6 +97,7 @@ public:
         }
         else
         {
+            glCheckError();
             LeaveScene();
             glCheckError();
             if(type == TY_Scene1)   current = new Scene1();

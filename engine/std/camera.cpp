@@ -69,10 +69,12 @@ namespace engine
 
     void Camera::Attach(const Shader* shader)
     {
-        if(shader->ID == 0 || shader->ID>10000)
+        static uint max  = 10000;
+        if(shader->ID == 0 || shader->ID>max)
             std::cout<<"camera shader error: "<<shader->ID<<" compiled:"<<shader->compiled<<std::endl;
         //config
         GLuint uniform = glGetUniformBlockIndex(shader->ID, "Block");
+        if(uniform > max) return;
         //link
         glUniformBlockBinding(shader->ID, uniform, 0);
         //bind to ubo

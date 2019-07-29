@@ -29,7 +29,6 @@ namespace tool
         union { float x, r, radius; };
         union { float y, g, theta; };
         union { float z, b, phi; };
-        
     };
     
     inline Vec3 operator+(const Vec3& a, const Vec3& b)
@@ -85,8 +84,8 @@ namespace tool
     
     inline Vec3 CubeUV2XYZ(const CubeUV& c)
     {
-        float u = c.u*2.f - 1.f;
-        float v = c.v*2.f - 1.f;
+        float u = c.u * 2.f - 1.f;
+        float v = c.v * 2.f - 1.f;
         switch (c.index)
         {
             case 0: return {  1,  v, -u };     // +x
@@ -98,7 +97,6 @@ namespace tool
         }
         return Vec3();
     }
-    
     
     inline CubeUV XYZ2CubeUV(const Vec3& p)
     {
