@@ -10,7 +10,7 @@
 #define uimgr_h
 
 
-#include "uibase.h"
+#include "uibase.hpp"
 #include "../engine.h"
 
 

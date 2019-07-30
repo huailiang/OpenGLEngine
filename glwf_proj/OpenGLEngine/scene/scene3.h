@@ -18,13 +18,11 @@ public:
     
     ~Scene3()
     {
-        glCheckError();
         glDeleteVertexArrays(1, &planeVAO);
         glDeleteVertexArrays(1, &cubeVAO);
         glDeleteBuffers(1, &planeVBO);
         glDeleteBuffers(1, &cubeVBO);
         SAFE_DELETE(shader);
-        glCheckError();
     }
     
     glm::vec3 getCameraPos() { return glm::vec3(0.0f, 0.4f, 4.0f); }
@@ -40,7 +38,6 @@ public:
     {
         debug = true;
         shader  = new LightShader("shadow.vs","shadow.fs");
-        
         InitPlane(&planeVAO, &planeVBO, shader);
         InitCube(&cubeVAO, &cubeVBO);
         Texture("textures/wood", _PNG, &woodTexture, true, GL_REPEAT, true); // open mipmap

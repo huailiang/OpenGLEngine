@@ -8,7 +8,7 @@
 
 #include "engine.h"
 #include <sys/timeb.h>
-#include "std/util.h"
+#include "std/util.hpp"
 
 namespace engine
 {

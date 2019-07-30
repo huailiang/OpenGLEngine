@@ -9,8 +9,8 @@
 #ifndef texmgr_h
 #define texmgr_h
 
-#include "texture.h"
-#include "asset.h"
+#include "texture.hpp"
+#include "asset.hpp"
 
 
 using namespace std;

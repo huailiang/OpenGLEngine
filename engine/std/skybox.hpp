@@ -15,8 +15,8 @@
 
 #include <vector>
 #include <glm/glm.hpp>
-#include "shader.h"
-#include "camera.h"
+#include "shader.hpp"
+#include "camera.hpp"
 
 namespace engine
 {

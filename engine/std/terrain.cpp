@@ -6,8 +6,8 @@
 //  Copyright © 2019 彭怀亮. All rights reserved.
 //
 
-#include "terrain.h"
-#include "asset.h"
+#include "terrain.hpp"
+#include "asset.hpp"
 
 namespace engine
 {

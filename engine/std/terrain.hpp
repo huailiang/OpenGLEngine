@@ -9,11 +9,11 @@
 #ifndef terrain_h
 #define terrain_h
 
-#include "shader.h"
-#include "texture.h"
-#include "camera.h"
-#include "light.h"
-#include "util.h"
+#include "shader.hpp"
+#include "texture.hpp"
+#include "camera.hpp"
+#include "light.hpp"
+#include "util.hpp"
 
 #define _Instance_
 

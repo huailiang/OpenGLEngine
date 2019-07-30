@@ -10,7 +10,7 @@
 #define texture_h
 
 #include <glm/glm.hpp>
-#include "asset.h"
+#include "asset.hpp"
 
 
 using namespace glm;

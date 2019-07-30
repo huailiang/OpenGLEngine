@@ -65,32 +65,32 @@ SOURCES += \
 
 HEADERS += \
     ../engine/profile.h \
-    ../engine/std/shader.h \
+    ../engine/std/shader.hpp \
     ../engine/ext/stb_image.h \
     ../engine/ext/xml/tinyxml.h \
     ../engine/ext/xml/tinystr.h \
     ../engine/ext/tiny_obj_loader.h \
-    ../engine/std/texture.h \
-    ../engine/std/camera.h \
-    ../engine/std/light.h \
-    ../engine/std/util.h \
-    ../engine/std/texmgr.h \
-    ../engine/std/skybox.h \
-    ../engine/std/terrain.h \
-    ../engine/std/asset.h \
+    ../engine/std/texture.hpp \
+    ../engine/std/camera.hpp \
+    ../engine/std/light.hpp \
+    ../engine/std/util.hpp \
+    ../engine/std/texmgr.hpp \
+    ../engine/std/skybox.hpp \
+    ../engine/std/terrain.hpp \
+    ../engine/std/asset.hpp \
     ../engine/engine.h \
     ../engine/engineio.h \
-    ../engine/std/avatar.h \
-    ../engine/std/mesh.h \
-    ../engine/std/animation.h \
-    ../engine/std/material.h \
-    ../engine/gui/eventmgr.h \
-    ../engine/gui/button.h \
-    ../engine/gui/label.h \
-    ../engine/gui/ttfont.h \
-    ../engine/gui/uibase.h \
-    ../engine/gui/uimgr.h \
-    ../engine/gui/uievent.h \
+    ../engine/std/avatar.hpp \
+    ../engine/std/mesh.hpp \
+    ../engine/std/animation.hpp \
+    ../engine/std/material.hpp \
+    ../engine/gui/eventmgr.hpp \
+    ../engine/gui/button.hpp \
+    ../engine/gui/label.hpp \
+    ../engine/gui/ttfont.hpp \
+    ../engine/gui/uibase.hpp \
+    ../engine/gui/uimgr.hpp \
+    ../engine/gui/uievent.hpp \
     ui/ui_project.h \
     ui/prev_mat.h \
     ui/prev_mesh.h \

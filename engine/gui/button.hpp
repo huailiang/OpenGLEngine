@@ -10,12 +10,12 @@
 #define button_h
 
 #include <glm/glm.hpp>
-#include "uibase.h"
-#include "uievent.h"
-#include "eventmgr.h"
-#include "uimgr.h"
-#include "ttfont.h"
-#include "label.h"
+#include "uibase.hpp"
+#include "uievent.hpp"
+#include "eventmgr.hpp"
+#include "uimgr.hpp"
+#include "ttfont.hpp"
+#include "label.hpp"
 
 namespace engine
 {

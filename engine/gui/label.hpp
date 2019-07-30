@@ -11,11 +11,11 @@
 
 #include <glm/glm.hpp>
 #include <string>
-#include "uibase.h"
-#include "uievent.h"
-#include "eventmgr.h"
-#include "uimgr.h"
-#include "ttfont.h"
+#include "uibase.hpp"
+#include "uievent.hpp"
+#include "eventmgr.hpp"
+#include "uimgr.hpp"
+#include "ttfont.hpp"
 
 namespace engine
 {

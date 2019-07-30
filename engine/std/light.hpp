@@ -10,7 +10,7 @@
 #define light_h
 
 #include <glm/glm.hpp>
-#include "material.h"
+#include "material.hpp"
 
 using namespace glm;
 

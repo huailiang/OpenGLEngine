@@ -10,7 +10,7 @@
 #define CAMERA_H
 
 
-#include "shader.h"
+#include "shader.hpp"
 
 using namespace glm;
 

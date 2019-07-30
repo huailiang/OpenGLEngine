@@ -10,12 +10,12 @@
 #define avatar_h
 
 
-#include "camera.h"
-#include "light.h"
-#include "material.h"
-#include "shader.h"
-#include "util.h"
-#include "animation.h"
+#include "camera.hpp"
+#include "light.hpp"
+#include "material.hpp"
+#include "shader.hpp"
+#include "util.hpp"
+#include "animation.hpp"
 
 using namespace std;
 

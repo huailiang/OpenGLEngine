@@ -10,7 +10,7 @@
 #define scene7_h
 
 #include "scene.h"
-#include "avatar.h"
+#include "avatar.hpp"
 
 
 class Scene7 : public Scene

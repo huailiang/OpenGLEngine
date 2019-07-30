@@ -6,7 +6,7 @@
 //  Copyright © 2019 彭怀亮. All rights reserved.
 //
 
-#include "camera.h"
+#include "camera.hpp"
 
 namespace engine
 {

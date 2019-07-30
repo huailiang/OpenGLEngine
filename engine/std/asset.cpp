@@ -6,7 +6,7 @@
 //  Copyright © 2019 彭怀亮. All rights reserved.
 //
 
-#include "asset.h"
+#include "asset.hpp"
 
 #ifdef _GLES_
 #include "FilePath.h"

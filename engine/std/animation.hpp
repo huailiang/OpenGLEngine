@@ -9,7 +9,7 @@
 #ifndef animation_h
 #define animation_h
 
-#include "shader.h"
+#include "shader.hpp"
 
 
 namespace engine

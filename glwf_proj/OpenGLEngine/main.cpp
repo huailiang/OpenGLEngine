@@ -5,17 +5,17 @@
 //
 
 #include "engine.h"
-#include "camera.h"
-#include "shader.h"
-#include "texture.h"
-#include "skybox.h"
-#include "light.h"
-#include "uimgr.h"
-#include "eventmgr.h"
-#include "label.h"
+#include "camera.hpp"
+#include "shader.hpp"
+#include "texture.hpp"
+#include "skybox.hpp"
+#include "light.hpp"
+#include "uimgr.hpp"
+#include "eventmgr.hpp"
+#include "label.hpp"
 #include "scene/scenemgr.h"
-#include "util.h"
-#include "asset.h"
+#include "util.hpp"
+#include "asset.hpp"
 #include <stdlib.h>
 #ifdef _CV_
 #include "cvtool.hpp"

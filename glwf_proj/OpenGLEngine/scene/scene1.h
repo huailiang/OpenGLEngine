@@ -10,8 +10,8 @@
 #define scene1_h
 
 #include "scene.h"
-#include "terrain.h"
-#include "avatar.h"
+#include "terrain.hpp"
+#include "avatar.hpp"
 #include "util.h"
 
 class Scene1 : public Scene
@@ -25,7 +25,6 @@ public:
         SAFE_DELETE(terrain);
         SAFE_DELETE(shader);
         SAFE_DELETE(btn_normal);
-        glCheckError();
     }
     
     int getType() { return TY_Scene1; }

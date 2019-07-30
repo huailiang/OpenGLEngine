@@ -6,7 +6,7 @@
 //  Copyright © 2019 彭怀亮. All rights reserved.
 //
 
-#include "texmgr.h"
+#include "texmgr.hpp"
 #ifdef _GLES_
 #include "FilePath.h"
 #else
@@ -141,6 +141,7 @@ namespace engine
         filter = GL_LINEAR; // es such as pvrtc is not support mipmap
 #endif
         glTexParameteri(target, GL_TEXTURE_MIN_FILTER, filter);
+        if(filter == GL_LINEAR_MIPMAP_LINEAR) filter = GL_LINEAR;
         glTexParameteri(target, GL_TEXTURE_MAG_FILTER, filter);
         glTexParameteri(target, GL_TEXTURE_WRAP_S, wrap);
         glTexParameteri(target, GL_TEXTURE_WRAP_T, wrap);
@@ -158,7 +159,6 @@ namespace engine
         glGenTextures(1, &textureID);
         glBindTexture(GL_TEXTURE_2D, textureID);
         SetTextureFormat(GL_TEXTURE_2D, tex->mipmap ? GL_LINEAR_MIPMAP_LINEAR: GL_LINEAR, tex->wrap);
-        
         GLenum glformat = GL_RED;
         GLint level = 0;
         int bitsPerPixel =0;

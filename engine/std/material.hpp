@@ -9,9 +9,9 @@
 #ifndef material_h
 #define material_h
 
-#include "mesh.h"
-#include "shader.h"
-#include "texmgr.h"
+#include "mesh.hpp"
+#include "shader.hpp"
+#include "texmgr.hpp"
 
 #define TEXTURE_NUM 4
 

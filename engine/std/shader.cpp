@@ -6,8 +6,8 @@
 //  Copyright © 2019 彭怀亮. All rights reserved.
 //
 
-#include "shader.h"
-#include "util.h"
+#include "shader.hpp"
+#include "util.hpp"
 #ifdef _GLES_
 #include "FilePath.h"
 #endif

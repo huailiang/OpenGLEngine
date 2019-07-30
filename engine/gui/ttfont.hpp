@@ -13,7 +13,7 @@
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
-#include "../std/shader.h"
+#include "../std/shader.hpp"
 
 using namespace std;
 using namespace glm;

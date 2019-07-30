@@ -11,9 +11,9 @@
 
 
 #include "../engine.h"
-#include "material.h"
-#include "texmgr.h"
-#include "animation.h"
+#include "material.hpp"
+#include "texmgr.hpp"
+#include "animation.hpp"
 
 namespace engine
 {

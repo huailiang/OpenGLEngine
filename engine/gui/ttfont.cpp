@@ -6,8 +6,8 @@
 //  Copyright © 2019 彭怀亮. All rights reserved.
 //
 
-#include "ttfont.h"
-#include "../std/asset.h"
+#include "ttfont.hpp"
+#include "../std/asset.hpp"
 #ifdef _GLES_
 #include "FilePath.h"
 #endif

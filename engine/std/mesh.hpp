@@ -10,8 +10,8 @@
 #define mesh_h
 
 
-#include "texmgr.h"
-#include "shader.h"
+#include "texmgr.hpp"
+#include "shader.hpp"
 
 namespace engine
 {

@@ -6,7 +6,7 @@
 //  Copyright © 2019 彭怀亮. All rights reserved.
 //
 
-#include "util.h"
+#include "util.hpp"
 
 #include <memory>
 #ifdef __APPLE__
@@ -22,7 +22,7 @@
 
 #define TINYOBJLOADER_IMPLEMENTATION
 #include "../ext/tiny_obj_loader.h"
-#include "animation.h"
+#include "animation.hpp"
 #include "../engineio.h"
 
 namespace engine

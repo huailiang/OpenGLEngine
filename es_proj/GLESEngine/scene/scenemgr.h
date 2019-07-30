@@ -17,7 +17,7 @@
 #include "scene4.h"
 #include "scene5.h"
 #include "scene6.h"
-#include "texmgr.h"
+#include "texmgr.hpp"
 #include "IARInterface.h"
 
 using namespace engine;

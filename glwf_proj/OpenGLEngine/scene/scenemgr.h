@@ -17,7 +17,7 @@
 #include "scene5.h"
 #include "scene6.h"
 #include "scene7.h"
-#include "texmgr.h"
+#include "texmgr.hpp"
 
 class SceneMgr
 {
@@ -97,7 +97,6 @@ public:
         }
         else
         {
-            glCheckError();
             LeaveScene();
             glCheckError();
             if(type == TY_Scene1)   current = new Scene1();

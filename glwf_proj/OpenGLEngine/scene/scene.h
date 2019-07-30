@@ -10,14 +10,14 @@
 #define scene_h
 
 #include "engine.h"
-#include "camera.h"
-#include "light.h"
-#include "uimgr.h"
-#include "label.h"
-#include "button.h"
-#include "uievent.h"
-#include "shader.h"
-#include "texture.h"
+#include "camera.hpp"
+#include "light.hpp"
+#include "uimgr.hpp"
+#include "label.hpp"
+#include "button.hpp"
+#include "uievent.hpp"
+#include "shader.hpp"
+#include "texture.hpp"
 
 
 #define TY_Scene1 0

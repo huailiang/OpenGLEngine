@@ -6,8 +6,8 @@
 //  Copyright © 2019 彭怀亮. All rights reserved.
 //
 
-#include "animation.h"
-#include "util.h"
+#include "animation.hpp"
+#include "util.hpp"
 
 namespace engine
 {

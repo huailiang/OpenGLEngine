@@ -6,15 +6,15 @@
 //  Copyright © 2019 彭怀亮. All rights reserved.
 //
 
-#include "skybox.h"
-#include "asset.h"
+#include "skybox.hpp"
+#include "asset.hpp"
 #ifdef _GLES_
 #include "FilePath.h"
 #else
 #define STB_IMAGE_IMPLEMENTATION
 #include "../ext/stb_image.h"
 #endif
-#include "texmgr.h"
+#include "texmgr.hpp"
 
 namespace engine
 {

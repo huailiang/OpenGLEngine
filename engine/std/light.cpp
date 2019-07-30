@@ -6,7 +6,7 @@
 //  Copyright © 2019 彭怀亮. All rights reserved.
 //
 
-#include "light.h"
+#include "light.hpp"
 
 namespace engine
 {
