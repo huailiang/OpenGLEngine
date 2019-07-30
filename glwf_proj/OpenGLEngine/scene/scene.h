@@ -66,6 +66,7 @@ public:
         lightMatrix = glm::mat4(1);
         InitLight();
         InitScene();
+        
         if(drawShadow())
         {
             depthShader  = new Shader("depth.vs","depth.fs");

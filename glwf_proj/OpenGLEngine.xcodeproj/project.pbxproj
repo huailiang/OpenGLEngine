@@ -30,6 +30,7 @@
 		4C42797E22A54AD0003AE42A /* engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C42797A22A54AD0003AE42A /* engine.cpp */; };
 		4C4279AD22A54C26003AE42A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C4279AC22A54C26003AE42A /* main.cpp */; };
 		4C5BDE1722E84DE600BAE9F9 /* libglfw.3.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C5BDE1622E84DE600BAE9F9 /* libglfw.3.4.dylib */; };
+		4C5E298922EFE69000C24273 /* shadow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C5E298722EFE69000C24273 /* shadow.cpp */; };
 		4C5F3FD322ABF95C005B7CFD /* asset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C5F3FD222ABF95C005B7CFD /* asset.cpp */; };
 		4C73C0F322A8C0F9002A8AD0 /* eventmgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C73C0F222A8C0F9002A8AD0 /* eventmgr.cpp */; };
 		4C73C0F522A8C18C002A8AD0 /* uimgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C73C0F422A8C18C002A8AD0 /* uimgr.cpp */; };
@@ -159,6 +160,8 @@
 		4C52BE9522ACC2BE00D78ACB /* mesh.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = mesh.hpp; sourceTree = "<group>"; };
 		4C5680D222A61B5600D313AC /* tiny_obj_loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tiny_obj_loader.h; sourceTree = "<group>"; };
 		4C5BDE1622E84DE600BAE9F9 /* libglfw.3.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.4.dylib; path = "../../../../../../../usr/local/Cellar/glfw/HEAD-b430bc4/lib/libglfw.3.4.dylib"; sourceTree = "<group>"; };
+		4C5E298722EFE69000C24273 /* shadow.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = shadow.cpp; sourceTree = "<group>"; };
+		4C5E298822EFE69000C24273 /* shadow.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = shadow.hpp; sourceTree = "<group>"; };
 		4C5F3FD122ABF95C005B7CFD /* asset.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = asset.hpp; sourceTree = "<group>"; };
 		4C5F3FD222ABF95C005B7CFD /* asset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = asset.cpp; sourceTree = "<group>"; };
 		4C73C0F222A8C0F9002A8AD0 /* eventmgr.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = eventmgr.cpp; sourceTree = "<group>"; };
@@ -242,6 +245,8 @@
 				4C01AB8A22ADEE2C001C5070 /* mesh.cpp */,
 				4C3774F822A54F6F0074744F /* shader.hpp */,
 				4C37750122A54F6F0074744F /* shader.cpp */,
+				4C5E298822EFE69000C24273 /* shadow.hpp */,
+				4C5E298722EFE69000C24273 /* shadow.cpp */,
 				4C3774F922A54F6F0074744F /* skybox.hpp */,
 				4C37750222A54F6F0074744F /* skybox.cpp */,
 				4C37750022A54F6F0074744F /* terrain.hpp */,
@@ -543,6 +548,7 @@
 				4C37752122A54FA20074744F /* ttfont.cpp in Sources */,
 				4C37751F22A54FA20074744F /* glad.c in Sources */,
 				4C01AB8B22ADEE2C001C5070 /* mesh.cpp in Sources */,
+				4C5E298922EFE69000C24273 /* shadow.cpp in Sources */,
 				4C73C0F322A8C0F9002A8AD0 /* eventmgr.cpp in Sources */,
 				4C42797E22A54AD0003AE42A /* engine.cpp in Sources */,
 				4C9EE55622D764E40010EED9 /* cvtool.cpp in Sources */,

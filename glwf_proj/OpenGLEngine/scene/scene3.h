@@ -65,7 +65,6 @@ public:
         RenderScene(shader);
     }
     
-    
     void RenderScene(const Shader *shader)
     {
         // floor

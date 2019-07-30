@@ -14,7 +14,7 @@ uniform sampler2D diffuseTexture;
 #ifdef CASCADES
 
 const int NUM_CASCADES = 3;
-in float ClipSpacePosZ;
+in float clipSpacePosZ;
 uniform float gCascadeEndClipSpace[NUM_CASCADES];
 uniform sampler2D gShadowMap[NUM_CASCADES];
 
@@ -49,7 +49,7 @@ void main()
     
     for (int i = 0 ; i < NUM_CASCADES ; i++)
     {
-        if (ClipSpacePosZ <= gCascadeEndClipSpace[i])
+        if (clipSpacePosZ <= gCascadeEndClipSpace[i])
         {
             shadow = CalcShadowFactor(i, LightSpacePos[i]);
             
