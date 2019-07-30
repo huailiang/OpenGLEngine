@@ -31,6 +31,8 @@ namespace engine
     : Shadow(width, rsh)
     {
         Init();
+        rsh->use();
+        rsh->setInt("shadowMap", SHADOW_TEXTURE_UNIT);
     }
 
     GeneralShadow::~GeneralShadow()
@@ -84,6 +86,7 @@ namespace engine
         Init();
         
         rsh->attach("CASCADES");
+        rsh->use();
         rsh->setInt("gShadowMap[0]", CASCACDE_SHADOW_TEXTURE_UNIT0_INDEX);
         rsh->setInt("gShadowMap[1]", CASCACDE_SHADOW_TEXTURE_UNIT1_INDEX);
         rsh->setInt("gShadowMap[2]", CASCACDE_SHADOW_TEXTURE_UNIT2_INDEX);

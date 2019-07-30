@@ -56,6 +56,8 @@ public:
     
     virtual bool isEquirectangularMap() { return false; }
     
+    virtual uint bufferBit() { return GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT ; }
+    
     /*
      init: camera-> skybox-> light-> scene-> ui
      */
@@ -110,14 +112,18 @@ public:
     
     void ClearScene()
     {
+        uint bit = bufferBit();
         glDisable(GL_BLEND);
         glDisable(GL_CULL_FACE);
         glEnable(GL_DEPTH_TEST);
-        glEnable(GL_STENCIL_TEST);
-        glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
-        glStencilMask(0x00);
+        if(bit & GL_STENCIL_BUFFER_BIT)
+        {
+            glEnable(GL_STENCIL_TEST);
+            glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+            glStencilMask(0x00);
+        }
         glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+        glClear(bit);
     }
     
     void DrawScenes()
@@ -126,7 +132,9 @@ public:
         if(drawShadow())
         {
             glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
-            ClearScene();
+            glDisable(GL_CULL_FACE);
+            glEnable(GL_DEPTH_TEST);
+            glClear(GL_DEPTH_BUFFER_BIT);
             DrawShadow(depthShader);
             glBindFramebuffer(GL_FRAMEBUFFER, 0);
         }

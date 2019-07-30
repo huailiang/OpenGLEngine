@@ -33,6 +33,10 @@ namespace engine
         
         virtual ~Shadow();
         
+        void UpdateMatrix(const glm::mat4 matrix);
+        
+        void UpdateModel(const glm::mat4 model);
+        
     protected:
         Shader* dShader = nullptr;  // depth shader
         Shader* rShader = nullptr;  // render shader
