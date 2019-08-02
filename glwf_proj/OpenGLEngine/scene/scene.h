@@ -18,7 +18,7 @@
 #include "uievent.hpp"
 #include "shader.hpp"
 #include "texture.hpp"
-
+#include "shadow.hpp"
 
 #define TY_Scene1 0
 #define TY_Scene2 1
@@ -33,6 +33,8 @@ using namespace engine;
 class Scene
 {
     
+    #define NUM_FRUSTUM_CORNERS 8
+    
 public:
     
     virtual ~Scene()
@@ -40,11 +42,10 @@ public:
         SAFE_DELETE(camera);
         SAFE_DELETE(skybox);
         SAFE_DELETE(light);
-        SAFE_DELETE(depthShader);
+        SAFE_DELETE(shadow);
         SAFE_DELETE(debugShader);
         glDeleteVertexArrays(1, &quadVAO);
         glDeleteBuffers(1, &quadVBO);
-        glDeleteFramebuffers(1, &depthMapFBO);
         glCheckError();
     }
     
@@ -68,14 +69,12 @@ public:
         lightMatrix = glm::mat4(1);
         InitLight();
         InitScene();
-        
         if(drawShadow())
         {
-            depthShader  = new Shader("depth.vs","depth.fs");
             debugShader = new Shader("debug.vs", "debug.fs");
             debugShader->attach("_DEBUG_DEPTH_");
-            InitDepthBuffer();
             InitQuad(&quadVAO, &quadVBO, debugShader);
+            InitShadow();
         }
         DrawUI();
     }
@@ -86,29 +85,15 @@ public:
     
     virtual void InitScene() { }
     
+    virtual void InitShadow() { }
+    
     virtual void DrawUI() { }
     
-    virtual void DrawShadow(Shader *depthShader)
-    {
-        float near_plane = 0.1f, far_plane = 7.5f, bound = 4.0;
-        if(light->getType() == LightDirect)
-        {
-            glm::vec3 pos = camera->Position;
-            glm::vec3 target = glm::vec3(pos.x, 0, pos.z - 5.0);
-            lightMatrix = static_cast<DirectLight*>(light)->GetLigthSpaceMatrix(target, near_plane, far_plane, bound, bound);
-        }
-        else
-        {
-            lightMatrix = dynamic_cast<PointLight*>(light)->GetLigthSpaceMatrix(near_plane, far_plane, bound, bound);
-        }
-        depthShader->use();
-        depthShader->setMat4("lightSpaceMatrix", lightMatrix);
-        glViewport(0, 0, SHADOW_WIDTH, SHADOW_WIDTH);
-    }
+    virtual void DrawShadow() { }
     
     virtual void DrawScene() { }
     
-    virtual void OnLightChange(int key) { }
+    virtual void OnKeyboard(GLFWwindow *window) { }
     
     void ClearScene()
     {
@@ -126,22 +111,26 @@ public:
         glClear(bit);
     }
     
+    void ClearDepth()
+    {
+        glDisable(GL_CULL_FACE);
+        glEnable(GL_DEPTH_TEST);
+        glClear(GL_DEPTH_BUFFER_BIT);
+    }
+    
     void DrawScenes()
     {
         timeValue = GetRuntime();
-        if(drawShadow())
+        if(shadow && drawShadow())
         {
-            glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
-            glDisable(GL_CULL_FACE);
-            glEnable(GL_DEPTH_TEST);
-            glClear(GL_DEPTH_BUFFER_BIT);
-            DrawShadow(depthShader);
+            glViewport(0, 0, SHADOW_WIDTH, SHADOW_WIDTH);
+            DrawShadow();
             glBindFramebuffer(GL_FRAMEBUFFER, 0);
         }
         ClearScene();
         glViewport(0, 0, RENDER_WIDTH, RENDER_HEIGTH);
         DrawScene();
-        if(drawShadow() && debug) RenderQuad();
+        if(drawShadow() && debug) RenderShadow();
         if(skybox) skybox->Draw();
     }
     
@@ -153,19 +142,20 @@ public:
     
     void ProcessKeyboard(GLFWwindow *window, float deltatime)
     {
+        OnKeyboard(window);
         if(camera)
         {
-            if (glfwGetKey(window, GLFW_KEY_A)== GLFW_PRESS)
+            if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
                 camera->ProcessKeyboard(LEFT, deltatime);
-            if (glfwGetKey(window, GLFW_KEY_D)== GLFW_PRESS)
+            if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
                 camera->ProcessKeyboard(RIGHT, deltatime);
-            if (glfwGetKey(window, GLFW_KEY_W)== GLFW_PRESS)
+            if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
                 camera->ProcessKeyboard(FORWARD, deltatime);
-            if (glfwGetKey(window, GLFW_KEY_S)== GLFW_PRESS)
+            if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
                 camera->ProcessKeyboard(BACKWARD, deltatime);
-            if (glfwGetKey(window, GLFW_KEY_SPACE)== GLFW_PRESS)
+            if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
             {
-                float timeValue = GetRuntime()*0.04f;
+                float timeValue = GetRuntime() * 0.04f;
                 float ang = radians(timeValue);
                 vec3 center = vec3(0.0f, 0.0f, -2.0f);
                 vec3 pos = camera->Position;
@@ -174,31 +164,18 @@ public:
                 npos.z = (pos.z - center.z) * cos(ang) + (pos.x - center.x) * sin(ang) + center.z;
                 camera->RotateAt(npos, center);
             }
-            if (glfwGetKey(window, GLFW_KEY_K)== GLFW_PRESS)
-                skybox->Equirect2Cube();
+            if (glfwGetKey(window, GLFW_KEY_K) == GLFW_PRESS) skybox->Equirect2Cube();
         }
         if(light)
         {
-            if (glfwGetKey(window, GLFW_KEY_LEFT)== GLFW_PRESS)
-            {
+            if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
                 light->UpdateX(-deltatime);
-                OnLightChange(GLFW_KEY_LEFT);
-            }
             if (glfwGetKey(window, GLFW_KEY_RIGHT)== GLFW_PRESS)
-            {
                 light->UpdateX(deltatime);
-                OnLightChange(GLFW_KEY_RIGHT);
-            }
             if (glfwGetKey(window, GLFW_KEY_UP)== GLFW_PRESS)
-            {
                 light->UpdateY(deltatime);
-                OnLightChange(GLFW_KEY_UP);
-            }
             if (glfwGetKey(window, GLFW_KEY_DOWN)== GLFW_PRESS)
-            {
                 light->UpdateY(-deltatime);
-                OnLightChange(GLFW_KEY_DOWN);
-            }
         }
     }
     
@@ -241,32 +218,70 @@ protected:
         glBindTexture(GL_TEXTURE_2D, map);
         DrawQuad();
     }
-        
-private:
-    void InitDepthBuffer()
+    
+    void CulLightMatrix(float l, float r, float b, float t, float near, float far)
     {
-        glGenFramebuffers(1, &depthMapFBO);
-        glGenTextures(1, &depthMap);
-        glBindTexture(GL_TEXTURE_2D, depthMap);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, SHADOW_WIDTH, SHADOW_WIDTH, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-        
-        glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthMap, 0);
-        glDrawBuffer(GL_NONE);
-        glReadBuffer(GL_NONE);
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        far_plane = far;
+        near_plane = near;
+        left = l;
+        right = r;
+        btm = b;
+        top = t;
+        lightMatrix = light->getLigthSpaceMatrix(left, right, btm, top, near_plane, far_plane);
     }
     
-    void RenderQuad()
+    void CulLightMatrix(float n, float f)
+    {
+        mat4 camInv = glm::inverse(camera->GetViewMatrix());
+        mat4 lightView = light->getViewMatrix();
+        float aspect = SCR_WIDTH / (float)SCR_HEIGHT;
+        float tanFov = tan(glm::radians(camera->FOV/2.0));
+        float yn = n * tanFov;
+        float xn = yn * aspect;
+        float yf = f * tanFov;
+        float xf = yf * aspect;
+        vec4 frustumCorners[] = {
+            vec4(xn,   yn, -n, 1.0),
+            vec4(-xn,  yn, -n, 1.0),
+            vec4(xn,  -yn, -n, 1.0),
+            vec4(-xn, -yn, -n, 1.0),
+            
+            vec4(xf,   yf, -f, 1.0),
+            vec4(-xf,  yf, -f, 1.0),
+            vec4(xf,  -yf, -f, 1.0),
+            vec4(-xf, -yf, -f, 1.0)
+        };
+        float max = 2e31;
+        float minX = max;
+        float maxX = -max;
+        float minY = max;
+        float maxY = -max;
+        float minZ = max;
+        float maxZ = -max;
+        loop0j(NUM_FRUSTUM_CORNERS) {
+            vec4 world = camInv * frustumCorners[j];
+            vec4 light = lightView * world;
+            minX = min(minX, light.x);
+            maxX = max(maxX, light.x);
+            minY = min(minY, light.y);
+            maxY = max(maxY, light.y);
+            minZ = min(minZ, light.z);
+            maxZ = max(maxZ, light.z);
+        }
+        mat4 proj = glm::ortho(minX, maxX, minY, maxY, minZ, maxZ);
+        lightMatrix = proj * lightView;
+        
+//        lightMatrix = light->getLigthSpaceMatrix(left, right, btm, top, n, f);
+    }
+
+private:
+    
+    void RenderShadow()
     {
         debugShader->use();
-        debugShader->setFloat("near_plane", 1.0f);
-        debugShader->setFloat("far_plane", 7.5f);
-        RenderQuad(depthMap);
+        debugShader->setFloat("near_plane", near_plane);
+        debugShader->setFloat("far_plane", far_plane);
+        if(debugTexID) RenderQuad(debugTexID);
     }
     
     void DrawQuad()
@@ -275,21 +290,22 @@ private:
         glDrawArrays(DRAW_MODE, 0, 6);
         glBindVertexArray(0);
     }
-
     
 protected:
     Camera* camera = nullptr;
     Light*  light = nullptr;
     Skybox* skybox = nullptr;
-    uint SHADOW_WIDTH = 1024;
-    GLuint depthMap;
-    float timeValue;
-    mat4 lightMatrix;
+    
+    // shadow releted
     bool debug;
-    GLuint quadVAO, quadVBO;
-    Shader* depthShader = nullptr;
+    GLuint quadVAO, quadVBO, debugTexID = 0;
+    uint SHADOW_WIDTH = 1024;
+    mat4 lightMatrix;
+    Shadow* shadow = nullptr;
+    float near_plane = .2f, far_plane = 7.5f, left = -4.0, right = 4.0,btm = -4.0, top = 4.0;
     Shader* debugShader = nullptr;
-    GLuint depthMapFBO;
+
+    float timeValue;
 };
 
 

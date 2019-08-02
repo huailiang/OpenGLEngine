@@ -10,14 +10,14 @@
 
 namespace engine
 {
-
+    
     Light::Light(vec3 color,vec3 direction)
     {
         this->color = color;
         this->direction = direction;
     }
-
-
+    
+    
     void Light::UpdateX(float dx)
     {
         if(direction.x + dx < radians(60.0f))
@@ -25,7 +25,7 @@ namespace engine
             direction.x += dx;
         }
     }
-
+    
     void Light::UpdateY(float dy)
     {
         if(direction.y + dy < radians(60.0f))
@@ -33,7 +33,7 @@ namespace engine
             direction.y += dy;
         }
     }
-
+    
     void DirectLight::Apply(const Material* mat)
     {
         if(mat && mat->shader) Apply(mat->shader);
@@ -44,22 +44,26 @@ namespace engine
         shader->setVec3("light.color", color);
         shader->setVec3("light.direction", direction);
     }
-
-    mat4 DirectLight::GetLigthSpaceMatrix(vec3 target,float near, float far, float up, float left)
+    
+    mat4 DirectLight::getViewMatrix() const
     {
-        vec3 dir = normalize(direction);
-        int sc = 4;
-        vec3 pos = target - vec3(sc * dir.x, sc * dir.y, sc * dir.z);
-        mat4 view =  lookAt(pos, target, vec3(0,1,0));
-        mat4 proj = glm::ortho(-left, left, -up, up, near, far);
+        return lookAt(vec3(0,0,-1), direction, vec3(0,1,0));
+    }
+    
+    mat4 DirectLight::getLigthSpaceMatrix(float l, float r, float b, float t, float near, float far)
+    {
+//        mat4 view =  getViewMatrix();
+        vec3 pos = vec3((l+r)/2,(t+b)/2,near-1);
+        mat4 view = lookAt(vec3((l+r)/2,(t+b)/2,(near+far)/2), direction, vec3(0,1,0));
+        mat4 proj = glm::ortho(l, r, b, t, near, far);
         return proj * view;
     }
-
+    
     LightType  DirectLight::getType() const
     {
         return LightDirect;
     }
-
+    
     std::string DirectLight::getMacro() const
     {
         return "_DirectLight_";
@@ -72,11 +76,16 @@ namespace engine
         this->constant=constant;
     }
     
-    mat4 PointLight::GetLigthSpaceMatrix(float near, float far, float up, float left)
+    mat4 PointLight::getViewMatrix() const
     {
         vec3 center = pos + direction;
-        mat4 view = lookAt(pos, center, vec3(0,1,0));
-        mat4 proj = glm::ortho(-left, left, -up, up, near, far);
+        return lookAt(pos, center, vec3(0,1,0));
+    }
+    
+    mat4 PointLight::getLigthSpaceMatrix(float l, float r, float b, float t, float near, float far)
+    {
+        mat4 view = getViewMatrix();
+        mat4 proj = glm::ortho(l, r, b, t, near, far);
         return proj * view;
     }
     
@@ -84,7 +93,7 @@ namespace engine
     {
         if(mat && mat->shader) Apply(mat->shader);
     }
-
+    
     void PointLight::Apply(const Shader* shader)
     {
         shader->setVec3("light.color", this->color);
@@ -92,12 +101,12 @@ namespace engine
         shader->setVec3("light.constant", this->constant);
         shader->setVec3("light.position", this->pos);
     }
-
+    
     LightType PointLight::getType() const
     {
         return LightPoint;
     }
-
+    
     std::string PointLight::getMacro() const
     {
         return "_PointLight_";
@@ -114,22 +123,22 @@ namespace engine
     {
         if(mat && mat->shader) Apply(mat->shader);
     }
-
+    
     void SpotLight::Apply(const Shader* shader)
     {
         PointLight::Apply(shader);
         shader->setFloat("light.cutOff", this->cutOff);
         shader->setFloat("light.outerCutOff", this->outerCutOff);
     }
-
+    
     LightType SpotLight::getType() const
     {
         return LightSpot;
     }
-
+    
     std::string SpotLight::getMacro() const
     {
         return "_SpotLight_";
     }
-
+    
 }

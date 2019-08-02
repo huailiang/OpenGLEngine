@@ -88,22 +88,20 @@ namespace engine
         shader2->setInt("texture1", 0);
     }
 
-    void Terrain::Draw(Camera* camera, glm::mat4 lightMatrix, Light* light, GLuint depthMap)
+    void Terrain::Draw(Camera* camera, glm::mat4 lightMatrix[], Light* light, Shadow* shadow)
     {
         shader->use();
         glBindVertexArray(floor_vao);
         shader->setMat4("vp", camera->GetVP());
         shader->setMat4("model", glm::mat4(1));
         light->Apply(shader);
-        shader->setMat4("lightSpaceMatrix", lightMatrix);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, floorTexture);
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, depthMap);
+        shadow->BindRender(lightMatrix);
         glDrawArrays(DRAW_MODE, 0, 6);
         glBindVertexArray(0);
         
-        DrawGrassInstance(camera);
+//        DrawGrassInstance(camera);
     }
 
     void Terrain::DrawGrassInstance(Camera* camera)

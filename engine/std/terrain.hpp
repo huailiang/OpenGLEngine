@@ -18,7 +18,7 @@
 #include "camera.hpp"
 #include "light.hpp"
 #include "util.hpp"
-
+#include "shadow.hpp"
 
 namespace engine
 {
@@ -35,9 +35,12 @@ namespace engine
         
         void InitInstance();
         
-        void Draw(Camera* camera, glm::mat4 lightMatrix, Light* light, GLuint depthMap);
+        void Draw(Camera* camera, glm::mat4 lightMatrix[], Light* light, Shadow* shadow);
         
         void DrawGrassInstance(Camera* camera);
+        
+    public:
+        Shader* shader = nullptr;
         
     private:
         GLuint floor_vao, floor_vbo;
@@ -45,7 +48,6 @@ namespace engine
         GLuint floorTexture, grassTexture;
         std::vector<vec3> vegetation;
         uint grass_num;
-        Shader* shader = nullptr;
         Shader* shader2 = nullptr;
         MeshData* gdata = nullptr;
     };

@@ -41,6 +41,10 @@ namespace engine
         
         std::string virtual getMacro() const = 0;
         
+        mat4 virtual getViewMatrix() const = 0;
+        
+        mat4 virtual getLigthSpaceMatrix(float l, float r, float b, float t,float near,float far) = 0;
+        
         void virtual Apply(const Shader* shader) = 0;
         
         void virtual Apply(const Material* mat) = 0;
@@ -64,7 +68,9 @@ namespace engine
         
         void Apply(const Material* mat);
         
-        mat4 GetLigthSpaceMatrix(vec3 target,float near, float far, float up = 8, float left = 8);
+        mat4 getViewMatrix() const;
+        
+        mat4 getLigthSpaceMatrix(float l, float r, float b, float t,float near,float far);
 
         LightType  getType() const;
         
@@ -80,7 +86,9 @@ namespace engine
         
         virtual ~PointLight() { }
         
-        mat4 GetLigthSpaceMatrix(float near, float far, float up = 8, float left = 8);
+        mat4 getViewMatrix() const;
+        
+        mat4 getLigthSpaceMatrix(float l, float r, float b, float t,float near,float far);
         
         void Apply(const Shader* shader);
         

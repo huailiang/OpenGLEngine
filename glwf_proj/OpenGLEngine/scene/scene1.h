@@ -31,7 +31,7 @@ public:
     
     void InitLight()
     {
-        light = new DirectLight(vec3(1.0f), vec3(-3.0f));
+        light = new DirectLight(color_white, vec3(-3.0f));
     }
     
     void InitScene()
@@ -48,6 +48,13 @@ public:
         ApplyCamera(nmShader);
     }
     
+    void InitShadow()
+    {
+        shadow = new GeneralShadow(SHADOW_WIDTH, terrain->shader);
+        GeneralShadow *gShadow = static_cast<GeneralShadow*>(shadow);
+        debugTexID = gShadow->map;
+    }
+    
     void DrawUI()
     {
         Scene::DrawUI();
@@ -55,21 +62,23 @@ public:
         btn_normal->RegistCallback(OnNormalClick, this);
     }
     
-    void DrawShadow(Shader *depthShader)
+    void DrawShadow()
     {
-        Scene::DrawShadow(depthShader);
-        nano->Draw(depthShader, light, camera);
+        Scene::DrawShadow();
+        CulLightMatrix(near_plane, far_plane);
+        GeneralShadow *gShadow = static_cast<GeneralShadow*>(shadow);
+        gShadow->BindFbo(lightMatrix);
+        ClearDepth();
+        nano->Draw(shadow->getShader(), light, camera);
     }
     
     void DrawScene()
     {
-        terrain->Draw(camera, lightMatrix, light, depthMap);
+        mat4 mtx[] = { lightMatrix };
+        terrain->Draw(camera, mtx, light, shadow);
         nano->Rotate(0.2f);
         nano->Draw(shader, light, camera);
-        if(shownormal)
-        {
-            nano->Draw(nmShader, light, camera);
-        }
+        if(shownormal) nano->Draw(nmShader, light, camera);
     }
     
     static void OnNormalClick(UIEvent* e, void* arg)
@@ -83,7 +92,6 @@ public:
         Scene1* scene = (Scene1*)(arg);
         scene->debug=!scene->debug;
     }
-
     
 private:
     UIButton* btn_normal = nullptr;

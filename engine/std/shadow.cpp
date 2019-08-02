@@ -22,10 +22,14 @@ namespace engine
 
     Shadow::~Shadow()
     {
-        if(fbo!=0) glDeleteFramebuffers(1, &fbo);
+        if(fbo != 0) glDeleteFramebuffers(1, &fbo);
         SAFE_DELETE(dShader);
     }
 
+    Shader* Shadow::getShader() const
+    {
+        return dShader;
+    }
 
     GeneralShadow::GeneralShadow(uint width, Shader* rsh)
     : Shadow(width, rsh)
@@ -68,14 +72,18 @@ namespace engine
         return true;
     }
 
-    void GeneralShadow::BindForWriting()
+    void GeneralShadow::BindFbo(const glm::mat4 lightMatrix)
     {
         glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fbo);
+        dShader->use();
+        dShader->setMat4("lightSpaceMatrix", lightMatrix);
     }
 
-    void GeneralShadow::BindForReading(GLenum TextureUnit)
+    void GeneralShadow::BindRender(const glm::mat4 lightMatrix[])
     {
-        glActiveTexture(TextureUnit);
+        rShader->use();
+        rShader->setMat4("lightSpaceMatrix", lightMatrix[0]);
+        glActiveTexture(SHADOW_TEXTURE_UNIT);
         glBindTexture(GL_TEXTURE_2D, map);
     }
 
@@ -101,9 +109,9 @@ namespace engine
     bool CascadedShadow::Init()
     {
         glGenFramebuffers(1, &fbo);
-        glGenTextures(ARRAY_SIZE_IN_ELEMENTS(map), map);
+        glGenTextures(CASCACDE_NUM, map);
         
-        for (uint i = 0 ; i < ARRAY_SIZE_IN_ELEMENTS(map) ; i++) {
+        for (uint i = 0 ; i < CASCACDE_NUM ; i++) {
             glBindTexture(GL_TEXTURE_2D, map[i]);
             glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32, width, width, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -128,15 +136,24 @@ namespace engine
         return  true;
     }
 
-    void CascadedShadow::BindForWriting(uint CascadeIndex)
+    void CascadedShadow::BindFbo(uint CascadeIndex,const glm::mat4 lightMatrix)
     {
-        assert(CascadeIndex < ARRAY_SIZE_IN_ELEMENTS(map));
+        assert(CascadeIndex < CASCACDE_NUM);
         glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fbo);
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, map[CascadeIndex], 0);
+        dShader->use();
+        dShader->setMat4("lightSpaceMatrix", lightMatrix);
     }
 
-    void CascadedShadow::BindForReading()
+    void CascadedShadow::BindRender(const glm::mat4 lightMatrix[])
     {
+        rShader->use();
+        loop(CASCACDE_NUM) {
+            char Name[128] = { 0 };
+            snprintf(Name, sizeof(Name), "lightSpaceMatrix[%d]", i);
+            rShader->setMat4(Name, lightMatrix[i]);
+        }
+        
         glActiveTexture(CASCACDE_SHADOW_TEXTURE_UNIT0);
         glBindTexture(GL_TEXTURE_2D, map[0]);
         
@@ -147,6 +164,5 @@ namespace engine
         glBindTexture(GL_TEXTURE_2D, map[2]);
     }
 
-    
 }
 

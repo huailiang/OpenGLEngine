@@ -23,11 +23,13 @@ void main()
 #ifdef _AR_
     FragColor = vec4(TexCoords, 0, 1);
 #else
+    
 #ifdef _FLIP_Y_
     vec4 color = texture(texture1, vec2(TexCoords.x, 1.0 - TexCoords.y));
 #else
     vec4 color = texture(texture1, TexCoords);
 #endif // _FLIP_Y_
+    
 #ifdef _DEBUG_DEPTH_
     float depth = LinearizeDepth(color.r) / far_plane ;
     FragColor = vec4(depth, depth, depth, 1);

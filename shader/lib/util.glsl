@@ -179,17 +179,19 @@ float ShadowCalculation(sampler2D shadowmap,  vec4 lightspacePos)
 {
     vec3 projCoords = Proj2Coord01(lightspacePos);
     float closestDepth = texture(shadowmap, projCoords.xy).r;
-    // get depth of current fragment from light's perspective
+    
     float currentDepth = projCoords.z;
-    // calculate bias (based on depth map resolution and slope)
+    
     float bias = 0.005;
     float shadow = currentDepth - bias > closestDepth  ? 1.0 : 0.0;
     
-    //if projCoords.xy 不在[0,1]区间，即shadowmap没有绘制，则不画shadow
+//    //if projCoords.xy 不在[0,1]区间，即shadowmap没有绘制，则不画shadow
     shadow = shadow * step(0.0, projCoords.x);
     shadow = shadow * step(projCoords.x, 1.0);
     shadow = shadow * step(0.0, projCoords.y);
     shadow = shadow * step(projCoords.y, 1.0);
+    shadow = shadow * step(currentDepth, 1.0);
+    
     return shadow;
 }
 

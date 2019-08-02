@@ -71,7 +71,7 @@ namespace engine
     extern bool ENG_PAUSE;
     
     class Shader;
-
+    
     #define WORKDIR "/Users/penghuailiang/Documents/projects/GL/OpenGLEngine/"
 
 
@@ -115,6 +115,12 @@ namespace engine
     
     #define frac(a) (a-floor(a))
     
+    #define color_red      vec3(1,0,0)
+    #define color_green    vec3(0,1,0)
+    #define color_blue     vec3(0,0,1)
+    #define color_black    vec3(0)
+    #define color_white    vec3(1)
+    #define color_yellow   vec3(1,1,0)
     
     const float zeroVertices[] = {0.0f,  0.0f};
     
