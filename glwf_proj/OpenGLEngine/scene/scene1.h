@@ -65,17 +65,16 @@ public:
     void DrawShadow()
     {
         Scene::DrawShadow();
-        CulLightMatrix(near_plane, far_plane);
+        CulLightMatrix(near_plane, far_plane, 0);
         GeneralShadow *gShadow = static_cast<GeneralShadow*>(shadow);
-        gShadow->BindFbo(lightMatrix);
+        gShadow->BindFbo(lightMatrix[0]);
         ClearDepth();
         nano->Draw(shadow->getShader(), light, camera);
     }
     
     void DrawScene()
     {
-        mat4 mtx[] = { lightMatrix };
-        terrain->Draw(camera, mtx, light, shadow);
+        terrain->Draw(camera, lightMatrix, light, shadow);
         nano->Rotate(0.2f);
         nano->Draw(shader, light, camera);
         if(shownormal) nano->Draw(nmShader, light, camera);

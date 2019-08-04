@@ -55,7 +55,7 @@ public:
         dist[0] = 0.4;
         dist[1] = 5.0;
         dist[2] = 10.0;
-        dist[3] = 45.0;
+        dist[3] = 20.0;
         loop(CASCACDE_NUM) {
             vec4 vpos(0.0, 0.0, -dist[i+1], 1.0);
             mat4 proj = camera->GetProjMatrix();
@@ -105,7 +105,7 @@ public:
             maxZ = max(maxZ, light.z);
         }
         mat4 proj = glm::ortho(minX, maxX, minY, maxY, minZ, maxZ);
-        lightMatrix = proj * lightView;
+        lightMatrix[i] = proj * lightView;
     }
     
     void DrawShadow()
@@ -115,7 +115,7 @@ public:
         Shader* shader = shadow->getShader();
         loop(CASCACDE_NUM) {
             CalShadowMatrix(i);
-            cShadow->BindFbo(i, lightMatrix);
+            cShadow->BindFbo(i, lightMatrix[i]);
             ClearDepth();
             RenderCubes(shader);
         }
@@ -128,13 +128,8 @@ public:
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, woodTexture);
         CascadedShadow *cShadow = static_cast<CascadedShadow*>(shadow);
-        mat4 mtx[CASCACDE_NUM];
-        loop(CASCACDE_NUM)
-        {
-            CalShadowMatrix(i);
-            mtx[i] = lightMatrix;
-        }
-        cShadow->BindRender(mtx);
+        loop(CASCACDE_NUM) CalShadowMatrix(i);
+        cShadow->BindRender(lightMatrix);
         RenderScene(shader);
     }
     

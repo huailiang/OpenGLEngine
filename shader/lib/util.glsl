@@ -174,6 +174,18 @@ vec3 Proj2Coord01(vec4 pos)
     return projCoords * 0.5 + 0.5;
 }
 
+void ClipShadow(vec3 projCoords, inout float shadow)
+{
+    // projCoords.xy is not range of [0,1], thus shadowmap uv range，it is will not draw shadow
+    shadow = shadow * step(0.0, projCoords.x);
+    shadow = shadow * step(projCoords.x, 1.0);
+    shadow = shadow * step(0.0, projCoords.y);
+    shadow = shadow * step(projCoords.y, 1.0);
+    
+    // if depth overange ndc's z， it is will be not to draw shadow
+    shadow = shadow * step(projCoords.z, 1.0);
+}
+
 // for direct light
 float ShadowCalculation(sampler2D shadowmap,  vec4 lightspacePos)
 {
@@ -182,15 +194,10 @@ float ShadowCalculation(sampler2D shadowmap,  vec4 lightspacePos)
     
     float currentDepth = projCoords.z;
     
-    float bias = 0.005;
-    float shadow = currentDepth - bias > closestDepth  ? 1.0 : 0.0;
+    float bias = 1e-4;
+    float shadow = currentDepth + bias > closestDepth  ? 1.0 : 0.0;
     
-//    //if projCoords.xy 不在[0,1]区间，即shadowmap没有绘制，则不画shadow
-    shadow = shadow * step(0.0, projCoords.x);
-    shadow = shadow * step(projCoords.x, 1.0);
-    shadow = shadow * step(0.0, projCoords.y);
-    shadow = shadow * step(projCoords.y, 1.0);
-    shadow = shadow * step(currentDepth, 1.0);
+    ClipShadow(projCoords, shadow);
     
     return shadow;
 }

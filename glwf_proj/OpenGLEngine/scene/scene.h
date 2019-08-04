@@ -66,7 +66,7 @@ public:
     {
         camera = new Camera(getCameraPos());
         skybox = new Skybox(camera, getSkybox(), isEquirectangularMap());
-        lightMatrix = glm::mat4(1);
+        loop(CASCACDE_NUM) lightMatrix[i] = mat4(1);
         InitLight();
         InitScene();
         if(drawShadow())
@@ -219,18 +219,7 @@ protected:
         DrawQuad();
     }
     
-    void CulLightMatrix(float l, float r, float b, float t, float near, float far)
-    {
-        far_plane = far;
-        near_plane = near;
-        left = l;
-        right = r;
-        btm = b;
-        top = t;
-        lightMatrix = light->getLigthSpaceMatrix(left, right, btm, top, near_plane, far_plane);
-    }
-    
-    void CulLightMatrix(float n, float f)
+    void CulLightMatrix(float n, float f, int indx=0)
     {
         mat4 camInv = glm::inverse(camera->GetViewMatrix());
         mat4 lightView = light->getViewMatrix();
@@ -251,7 +240,7 @@ protected:
             vec4(xf,  -yf, -f, 1.0),
             vec4(-xf, -yf, -f, 1.0)
         };
-        float max = 2e31;
+        float max = 1e16;
         float minX = max;
         float maxX = -max;
         float minY = max;
@@ -269,9 +258,7 @@ protected:
             maxZ = max(maxZ, light.z);
         }
         mat4 proj = glm::ortho(minX, maxX, minY, maxY, minZ, maxZ);
-        lightMatrix = proj * lightView;
-        
-//        lightMatrix = light->getLigthSpaceMatrix(left, right, btm, top, n, f);
+        lightMatrix[indx] = proj * lightView;
     }
 
 private:
@@ -291,18 +278,21 @@ private:
         glBindVertexArray(0);
     }
     
+    
+public:
+    Shadow* shadow = nullptr;
+    
 protected:
     Camera* camera = nullptr;
     Light*  light = nullptr;
     Skybox* skybox = nullptr;
     
-    // shadow releted
+    // shadow reinference
     bool debug;
     GLuint quadVAO, quadVBO, debugTexID = 0;
     uint SHADOW_WIDTH = 1024;
-    mat4 lightMatrix;
-    Shadow* shadow = nullptr;
-    float near_plane = .2f, far_plane = 7.5f, left = -4.0, right = 4.0,btm = -4.0, top = 4.0;
+    mat4 lightMatrix[CASCACDE_NUM];
+    float near_plane = 0.2f, far_plane = 7.5f;
     Shader* debugShader = nullptr;
 
     float timeValue;

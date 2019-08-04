@@ -16,17 +16,13 @@ in vec4 LightSpacePos[NUM_CASCADES];
 uniform float gCascadeEndClipSpace[NUM_CASCADES];
 uniform sampler2D gShadowMap[NUM_CASCADES];
 
-float CalCascadeShadow(int CascadeIndex, vec4 LightSpacePos)
+float CalCascadeShadow(int CascadeIndex, vec4 lightspacePos)
 {
-    vec3 projCoords = Proj2Coord01(LightSpacePos);
+    vec3 projCoords = Proj2Coord01(lightspacePos);
     float closestDepth = texture(gShadowMap[CascadeIndex], projCoords.xy).x;
     float currDepth = projCoords.z;
-    float shadow =  currDepth - 0.001 > closestDepth ? 1.0 : 0.0;
-    shadow = shadow * step(0.0, projCoords.x);
-    shadow = shadow * step(projCoords.x, 1.0);
-    shadow = shadow * step(0.0, projCoords.y);
-    shadow = shadow * step(projCoords.y, 1.0);
-    shadow = shadow * step(currDepth, 1.0);
+    float shadow =  currDepth + 1e-4 > closestDepth ? 1.0 : 0.0;
+    ClipShadow(projCoords, shadow);
     return shadow;
 }
 
@@ -52,6 +48,7 @@ void main()
 #ifdef DEBUG
     mat3 arr = mat3(0.1);
 #endif
+    int find = 0;
     for (int i = 0 ; i < NUM_CASCADES ; i++)
     {
         if (clipSpacePosZ <= gCascadeEndClipSpace[i])
@@ -60,10 +57,12 @@ void main()
 #ifdef DEBUG
             indicator = arr[i];
 #endif
+            find = 1;
             break;
         }
     }
     
+    shadow = find * shadow; // if clipSpacePosZ greater than gCascadeEndClipSpace max, will not darw shadow
 #else
     
     shadow = ShadowCalculation(shadowMap, fragPosLightSpace);

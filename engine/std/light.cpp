@@ -53,8 +53,9 @@ namespace engine
     mat4 DirectLight::getLigthSpaceMatrix(float l, float r, float b, float t, float near, float far)
     {
 //        mat4 view =  getViewMatrix();
-        vec3 pos = vec3((l+r)/2,(t+b)/2,near-1);
-        mat4 view = lookAt(vec3((l+r)/2,(t+b)/2,(near+far)/2), direction, vec3(0,1,0));
+        
+        vec3 pos = vec3((l+r)/2,(t+b)/2, 0);
+        mat4 view = lookAt(pos, pos+direction, vec3(0,1,0));
         mat4 proj = glm::ortho(l, r, b, t, near, far);
         return proj * view;
     }
