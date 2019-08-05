@@ -78,6 +78,7 @@ HEADERS += \
     ../engine/std/skybox.hpp \
     ../engine/std/terrain.hpp \
     ../engine/std/asset.hpp \
+    ../engine/std/iScene.h \
     ../engine/engine.h \
     ../engine/engineio.h \
     ../engine/std/avatar.hpp \

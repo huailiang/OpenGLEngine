@@ -24,8 +24,4 @@ void main()
     texCoords = aTexCoords;
     fragPosLightSpace = lightSpaceMatrix * vec4(worldPos, 1.0);
     gl_Position = Engine_MVP(model) * vec4(aPos, 1.0);
-
-#ifdef CASCADES
-    clipSpacePosZ = gl_Position.z;
-#endif
 }

@@ -19,7 +19,7 @@
 #include "scene7.h"
 #include "texmgr.hpp"
 
-class SceneMgr
+class SceneMgr : iSceneMgr
 {
     DeclareSington(SceneMgr)
     
@@ -106,9 +106,19 @@ public:
             if(type == TY_Scene5)   current = new Scene5();
             if(type == TY_Scene6)   current = new Scene6();
             if(type == TY_Scene7)   current = new Scene7();
-            if(current) current->Initial();
+            if(current)
+            {
+                current->Initial();
+                setEngineScene();
+            }
             return true;
         }
+    }
+    
+    
+    void setEngineScene()
+    {
+        scene = (iScene*)(current);
     }
     
     void ProcessKeyboard(GLFWwindow *window, float deltatime)
@@ -134,6 +144,8 @@ public:
             current->ProcessMouseScroll(xoffset, yoffset);
         }
     }
+    
+    
     
 private:
     Scene *current = nullptr;

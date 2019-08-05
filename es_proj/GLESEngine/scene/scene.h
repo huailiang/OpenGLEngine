@@ -19,6 +19,7 @@
 #include "shader.hpp"
 #include "texture.hpp"
 #include "skybox.hpp"
+#include "iScene.h"
 
 #define TY_Scene1 0
 #define TY_Scene2 1
@@ -30,7 +31,7 @@
 
 using namespace engine;
 
-class Scene
+class Scene : iScene
 {
     
 public:
@@ -68,6 +69,8 @@ public:
     }
     
     virtual bool isEquirectangularMap() { return false; }
+    
+    Camera* getCamera() { return camera; }
     
     /*
      * init seq: camera-> skybox-> light-> scene-> ui
@@ -109,14 +112,7 @@ public:
     virtual void DrawShadow(Shader *depthShader)
     {
         float near_plane = 0.1f, far_plane = 7.5f;
-        if(light->getType() == LightDirect)
-        {
-            lightMatrix = static_cast<DirectLight*>(light)->GetLigthSpaceMatrix(glm::vec3(0,0,-2),near_plane, far_plane, 4, 4);
-        }
-        else
-        {
-            lightMatrix = dynamic_cast<PointLight*>(light)->GetLigthSpaceMatrix(near_plane, far_plane, 4, 4);
-        }
+        lightMatrix = light->GetLigthSpaceMatrix(near_plane, far_plane, 4, 4);
         depthShader->use();
         depthShader->setMat4("lightSpaceMatrix", lightMatrix);
         glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);

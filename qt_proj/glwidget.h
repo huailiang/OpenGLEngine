@@ -5,9 +5,9 @@
 #include <QDebug>
 #include <QOpenGLFunctions_3_3_Core>
 #include <qtimer.h>
-#include "../engine/std/shader.h"
-#include "../engine/std/camera.h"
-#include "../engine/std/light.h"
+#include "../engine/std/shader.hpp"
+#include "../engine/std/camera.hpp"
+#include "../engine/std/light.hpp"
 
 using namespace engine;
 

@@ -402,6 +402,7 @@
 		4C5E298522EFE28900C24273 /* uimgr.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = uimgr.hpp; sourceTree = "<group>"; };
 		4C5E298622EFE28900C24273 /* uibase.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = uibase.hpp; sourceTree = "<group>"; };
 		4C5F3FE422ABFD6D005B7CFD /* asset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = asset.cpp; sourceTree = "<group>"; };
+		4C6511B422F839CE0075FA1F /* iScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iScene.h; sourceTree = "<group>"; };
 		4C66666F22A29D85002BA996 /* Helpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Helpers.h; sourceTree = "<group>"; };
 		4C66674822A2A3A3002BA996 /* FilePath.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FilePath.cpp; sourceTree = "<group>"; };
 		4C66674922A2A3A3002BA996 /* FilePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilePath.h; sourceTree = "<group>"; };
@@ -714,6 +715,7 @@
 		4C7AF65B22A54EA700B63173 /* std */ = {
 			isa = PBXGroup;
 			children = (
+				4C6511B422F839CE0075FA1F /* iScene.h */,
 				4C5E297322EFE1C900C24273 /* animation.hpp */,
 				4C6D757222B37AD00098F22C /* animation.cpp */,
 				4C5E297422EFE1D400C24273 /* asset.hpp */,

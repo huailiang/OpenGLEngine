@@ -1,5 +1,5 @@
 #include "prev_mat.h"
-#include "../engine/std/material.h"
+#include "../engine/std/material.hpp"
 
 
 string readtex(ifstream& f)

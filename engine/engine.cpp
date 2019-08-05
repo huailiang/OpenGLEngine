@@ -24,6 +24,7 @@ namespace engine
     uint DRAW_MODE = GL_TRIANGLES;
     bool ENG_PAUSE = false;
     
+    iScene* scene = nullptr;
     MeshData* plane = nullptr;
     MeshData* cube = nullptr;
     MeshData* quad = nullptr;

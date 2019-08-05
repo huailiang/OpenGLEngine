@@ -45,6 +45,8 @@ namespace engine
         
         void virtual Apply(const Material* mat) = 0;
         
+        mat4 virtual GetLigthSpaceMatrix(float near, float far, float up, float left) = 0;
+        
     public:
         vec3 color;
         vec3 direction;
@@ -64,7 +66,7 @@ namespace engine
         
         void Apply(const Material* mat);
         
-        mat4 GetLigthSpaceMatrix(vec3 target,float near, float far, float up = 8, float left = 8);
+        mat4 GetLigthSpaceMatrix(float near, float far, float up, float left);
 
         LightType  getType() const;
         
@@ -80,7 +82,7 @@ namespace engine
         
         virtual ~PointLight() { }
         
-        mat4 GetLigthSpaceMatrix(float near, float far, float up = 8, float left = 8);
+        mat4 GetLigthSpaceMatrix(float near, float far, float up, float left);
         
         void Apply(const Shader* shader);
         

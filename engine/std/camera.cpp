@@ -54,7 +54,7 @@ namespace engine
     {
         xoffset *= MouseSensitivity;
         yoffset *= MouseSensitivity;
-        Front.x   += xoffset;
+        Front.x += xoffset;
         Front.y += yoffset;
         updateCameraVectors();
     }

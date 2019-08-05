@@ -57,7 +57,7 @@ public:
     {
         glm::mat4 lightSpaceMatrix;
         float near_plane = 0.1f, far_plane = 7.5f;
-        lightSpaceMatrix = static_cast<DirectLight*>(light)->GetLigthSpaceMatrix(glm::vec3(0,0,-2), near_plane, far_plane, 4, 4);
+        lightSpaceMatrix = light->GetLigthSpaceMatrix(near_plane, far_plane, 4, 4);
         shadowShader->use();
         light->Apply(shadowShader);
         shadowShader->setMat4("lightSpaceMatrix", lightSpaceMatrix);

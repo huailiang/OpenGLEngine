@@ -7,6 +7,8 @@
 //
 
 #include "light.hpp"
+#include "iScene.h"
+#include "camera.hpp"
 
 namespace engine
 {
@@ -45,12 +47,18 @@ namespace engine
         shader->setVec3("light.direction", direction);
     }
 
-    mat4 DirectLight::GetLigthSpaceMatrix(vec3 target,float near, float far, float up, float left)
+    mat4 DirectLight::GetLigthSpaceMatrix(float near, float far, float up, float left)
     {
+        error_stop(scene, "not implement iScene in your scenemgr & scene");
+        Camera* camera = scene->getCamera();
+        glm::vec3 pos = camera->Position;
+        glm::vec3 frt = vec3(4) * glm::normalize(camera->Front);
+        glm::vec3 target = pos + frt;
+        
         vec3 dir = normalize(direction);
         int sc = 4;
-        vec3 pos = target - vec3(sc * dir.x, sc * dir.y, sc * dir.z);
-        mat4 view =  lookAt(pos, target, vec3(0,1,0));
+        vec3 pos2 = target - vec3(sc * dir.x, sc * dir.y, sc * dir.z);
+        mat4 view =  lookAt(pos2, target, vec3(0,1,0));
         mat4 proj = glm::ortho(-left, left, -up, up, near, far);
         return proj * view;
     }

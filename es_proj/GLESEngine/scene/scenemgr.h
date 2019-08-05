@@ -22,7 +22,7 @@
 
 using namespace engine;
 
-class SceneMgr
+class SceneMgr : iSceneMgr
 {
     DeclareSington(SceneMgr)
     
@@ -108,10 +108,17 @@ public:
                     auto vr = (ARScene*)current;
                     vr->Process(ptr_ar);
                 }
+                setEngineScene();
             }
             return true;
         }
     }
+    
+    void setEngineScene()
+    {
+        scene = (iScene*)(current);
+    }
+
 
 
 public:

@@ -4,7 +4,7 @@
 #include <QtDebug>
 #include <iostream>
 #include "../engine/profile.h"
-#include "../engine/std/shader.h"
+#include "../engine/std/shader.hpp"
 #include "glwidget.h"
 #include "mainwindow.h"
 

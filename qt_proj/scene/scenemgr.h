@@ -15,11 +15,11 @@
 #include "scene3.h"
 #include "scene4.h"
 #include "scene5.h"
-#include "../engine/std/texmgr.h"
+#include "../engine/std/texmgr.hpp"
 
 using namespace engine;
 
-class SceneMgr
+class SceneMgr: iSceneMgr
 {
     DeclareSington(SceneMgr)
     
@@ -81,6 +81,12 @@ public:
             lb_copy->setText("@copyright (c) penghuailiang");
         }
     }
+
+    void setEngineScene()
+    {
+        scene = (iScene*)(current);
+    }
+
     
     bool ChangeTo(int type)
     {
@@ -97,7 +103,11 @@ public:
             if(type == TY_Scene3)   current = new Scene3();
             if(type == TY_Scene4)   current = new Scene4();
             if(type == TY_Scene5)   current = new Scene5();
-            if(current) current->Initial();
+            if(current)
+            {
+                current->Initial();
+                setEngineScene();
+            }
             return true;
         }
     }

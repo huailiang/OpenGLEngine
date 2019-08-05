@@ -18,7 +18,7 @@
 #include "uievent.hpp"
 #include "shader.hpp"
 #include "texture.hpp"
-
+#include "iScene.h"
 
 #define TY_Scene1 0
 #define TY_Scene2 1
@@ -30,7 +30,7 @@
 
 using namespace engine;
 
-class Scene
+class Scene : iScene
 {
     
 public:
@@ -57,6 +57,8 @@ public:
     virtual bool isEquirectangularMap() { return false; }
     
     virtual uint bufferBit() { return GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT ; }
+    
+    Camera* getCamera() { return camera; }
     
     /*
      init: camera-> skybox-> light-> scene-> ui
@@ -91,16 +93,7 @@ public:
     virtual void DrawShadow(Shader *depthShader)
     {
         float near_plane = 0.1f, far_plane = 7.5f, bound = 4.0;
-        if(light->getType() == LightDirect)
-        {
-            glm::vec3 pos = camera->Position;
-            glm::vec3 target = glm::vec3(pos.x, 0, pos.z - 5.0);
-            lightMatrix = static_cast<DirectLight*>(light)->GetLigthSpaceMatrix(target, near_plane, far_plane, bound, bound);
-        }
-        else
-        {
-            lightMatrix = dynamic_cast<PointLight*>(light)->GetLigthSpaceMatrix(near_plane, far_plane, bound, bound);
-        }
+        lightMatrix = light->GetLigthSpaceMatrix(near_plane, far_plane, bound, bound);
         depthShader->use();
         depthShader->setMat4("lightSpaceMatrix", lightMatrix);
         glViewport(0, 0, SHADOW_WIDTH, SHADOW_WIDTH);
@@ -170,7 +163,7 @@ public:
                 vec3 center = vec3(0.0f, 0.0f, -2.0f);
                 vec3 pos = camera->Position;
                 vec3 npos = pos;
-                npos.x = (pos.x - center.x) * cos(ang) - (pos.z- center.z)*sin(ang) + center.x;
+                npos.x = (pos.x - center.x) * cos(ang) - (pos.z - center.z) * sin(ang) + center.x;
                 npos.z = (pos.z - center.z) * cos(ang) + (pos.x - center.x) * sin(ang) + center.z;
                 camera->RotateAt(npos, center);
             }

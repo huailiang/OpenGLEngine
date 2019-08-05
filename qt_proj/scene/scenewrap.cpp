@@ -1,8 +1,8 @@
 #include "scenewrap.h"
 #include "ui_enginewidget.h"
-#include "../engine/std/texture.h"
-#include "../engine/std/asset.h"
-#include "../engine/gui/ttfont.h"
+#include "../engine/std/texture.hpp"
+#include "../engine/std/asset.hpp"
+#include "../engine/gui/ttfont.hpp"
 
 SceneMgr SceneMgr::instance;
 

@@ -10,8 +10,8 @@
 #define scene1_h
 
 #include "scene.h"
-#include "../engine/std/terrain.h"
-#include "../engine/std/avatar.h"
+#include "../engine/std/terrain.hpp"
+#include "../engine/std/avatar.hpp"
 #include "util.h"
 
 class Scene1 : public Scene

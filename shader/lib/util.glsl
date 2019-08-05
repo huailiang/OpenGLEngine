@@ -190,6 +190,7 @@ float ShadowCalculation(sampler2D shadowmap,  vec4 lightspacePos)
     shadow = shadow * step(projCoords.x, 1.0);
     shadow = shadow * step(0.0, projCoords.y);
     shadow = shadow * step(projCoords.y, 1.0);
+    shadow = shadow * step(projCoords.z, 1.0);
     return shadow;
 }
 

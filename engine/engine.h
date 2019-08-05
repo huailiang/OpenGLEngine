@@ -71,6 +71,7 @@ namespace engine
     extern bool ENG_PAUSE;
     
     class Shader;
+    class iScene;
 
     #define WORKDIR "/Users/penghuailiang/Documents/projects/GL/OpenGLEngine/"
 
@@ -115,6 +116,7 @@ namespace engine
     
     #define frac(a) (a-floor(a))
     
+    extern iScene* scene;
     
     const float zeroVertices[] = {0.0f,  0.0f};
     
