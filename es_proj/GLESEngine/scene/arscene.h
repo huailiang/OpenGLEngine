@@ -25,7 +25,7 @@ public:
         glDeleteBuffers(1, &quadVbo);
     }
     
-    virtual bool isARScene() { return true; }
+    virtual bool isARScene() { return !captrue; }
     
     virtual std::string getSkybox() { return ""; }
     
@@ -65,7 +65,10 @@ public:
     
     void SetCameraFrame(const BGRAVideoFrame& frame)
     {
-        this->camFrame = frame;
+        if(!captrue)
+        {
+            this->camFrame = frame;
+        }
     }
     
     void DrawBackground()
@@ -101,7 +104,7 @@ protected:
     GLuint quadVao, quadVbo;
     glm::mat4 proj, reverse;
     IARInterface* arPtr = nullptr;
-    
+    bool captrue = false;
 };
 
 #endif /* vrscene_h */

@@ -15,6 +15,7 @@
 {
     PickerCallback m_callback;
     void* cb_arg;
+    int e_id;
 }
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker;
 
@@ -29,11 +30,12 @@
     viewController = controller;
 }
 
--(void)startPicker : (PickerCallback) callback withArg:(void*) arg;
+-(void)startPicker : (PickerCallback) callback withArg:(void*) arg withId:(int)eid
 {
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) return;
     m_callback = callback;
     cb_arg = arg;
+    e_id = eid;
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = YES;
@@ -51,15 +53,17 @@
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
     UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
-    m_width = (int)CGImageGetWidth(image.CGImage);
-    m_height = (int)CGImageGetHeight(image.CGImage);
-    NSLog(@"pick start width %f, height: %f", m_width, m_height);
     
-    CFDataRef dataRef = CGDataProviderCopyData(CGImageGetDataProvider(image.CGImage));
-    imageData = (unsigned char*)[[NSData dataWithData:(NSData*) dataRef] bytes];
-    CFRelease(dataRef);
-    [picker dismissViewControllerAnimated:YES completion:nil];
-    if(m_callback) m_callback(cb_arg);
+    [picker dismissViewControllerAnimated:YES completion:^{
+        m_width = (int)CGImageGetWidth(image.CGImage);
+        m_height = (int)CGImageGetHeight(image.CGImage);
+        NSLog(@"pick start width %f, height: %f", m_width, m_height);
+        CFDataRef dataRef = CGDataProviderCopyData(CGImageGetDataProvider(image.CGImage));
+        imageData = (unsigned char*)[[NSData dataWithData:(NSData*) dataRef] bytes];
+        CFRelease(dataRef);
+        if(m_callback) m_callback(e_id, cb_arg);
+    }];
+    
 }
 
 -(void*)getImageData:(float*) width withHeight:(float*)height
@@ -77,11 +81,11 @@
 
 
 // __cplusplus__
-bool iOSAR::GetAlbumPicker(PickerCallback pick, void* arg)
+bool iOSAR::GetAlbumPicker(PickerCallback pick, void* arg, int eid)
 {
     if(source != nil)
     {
-        [source startPicker: pick withArg:arg];
+        [source startPicker: pick withArg:arg withId:eid];
     }
     return true;
 }

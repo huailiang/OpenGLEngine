@@ -16,8 +16,8 @@
 #endif
 
 #define MIN_KPS_IN_FRAME            300
-#define MIN_INLIER_COUNT            30
-#define NN_MATCH_RATIO              1.8f
+#define MIN_INLIER_COUNT            16
+#define NN_MATCH_RATIO              0.8f
 #define RANSAC_THRESH               2.5f
 
 class Scene5 : public ARScene
@@ -28,7 +28,6 @@ public:
     ~Scene5()
     {
         SAFE_DELETE(pick);
-        SAFE_DELETE(match);
         DELETE_TEXTURE(texID);
         SAFE_DELETE(arShader);
         glDeleteVertexArrays(1, &arVao);
@@ -63,79 +62,62 @@ public:
     void DrawUI()
     {
         Scene::DrawUI();
-        state = new engine::UILabel(vec2(680, 440), vec3(1,0,0), 0.7f, "state info");
-        pick = new engine::UIButton(vec2(720, 360), vec3(1,1,0), 1.f, "pick", 0);
-        match = new  engine::UIButton(vec2(720, 310), vec3(1,1,0), 1.f, "match", 1);
+        state = new engine::UILabel(vec2(640, 440), vec3(1,0,0), 0.7f, "");
+        pick = new engine::UIButton(vec2(640, 360), vec3(1,1,0), 1.0f, "pick1",1);
         pick->RegistCallback(OnClick, this);
-        match->RegistCallback(OnClick, this);
     }
     
     void DrawScene()
     {
-        if(matched) return;
         DrawBackground();
         RenderQuad(texID);
         
-        if(cvmatch)
+        if(cvmatch && !captrue)
         {
-            cv::Mat qimg((int)camFrame.width, (int)camFrame.height, CV_8UC4, camFrame.data);
+            cv::Mat cam_img((int)camFrame.width, (int)camFrame.height, CV_8UC4, camFrame.data);
             std::vector<cv::KeyPoint> queryKeypoints;
             cv::Mat descriptor;
-            cornerDetector->detectAndCompute(qimg, cv::noArray(), queryKeypoints, descriptor);
-            
+            cornerDetector->detectAndCompute(cam_img, cv::noArray(), queryKeypoints, descriptor);
             if(queryKeypoints.size() <= 0) return;
-            
-            std::vector<cv::KeyPoint> sourceMatches;
+            int matchcnt = 0;
             std::vector<std::vector<cv::DMatch>> descriptorMatches;
             matcher->knnMatch(referenceDescriptors, descriptor, descriptorMatches, 2);
             for (unsigned i = 0; i < descriptorMatches.size(); i++)
             {
-                if (descriptorMatches[i][0].distance < NN_MATCH_RATIO * descriptorMatches[i][1].distance)
-                {
-                    sourceMatches.push_back(referenceKeypoints[descriptorMatches[i][0].queryIdx]);
-                }
+                if (descriptorMatches[i][0].distance < NN_MATCH_RATIO * descriptorMatches[i][1].distance) matchcnt++;
             }
-            size_t s1 = sourceMatches.size();
             size_t s2 = referenceKeypoints.size();
             size_t s3 = queryKeypoints.size();
-            state->setText("key points:" + std::to_string(s1)+":"+std::to_string(s2)+":"+std::to_string(s3));
-            if (sourceMatches.size() >= MIN_INLIER_COUNT) {
-                std::cout<<" key points matched "<<std::endl;
-                matched = true;
+            state->setText("key points:" + std::to_string(matchcnt)+":"+std::to_string(s2)+":"+std::to_string(s3));
+            if (matchcnt >= MIN_INLIER_COUNT) {
+                state->setText(" key points matched "+std::to_string(matchcnt));
+                captrue = true;
             }
         }
     }
     
-    void StartPick()
+    void StartPick(int eid)
     {
-        if(arPtr)
-        {
-            arPtr->GetAlbumPicker(OnPickerFinish, this);
-        }
+        if(arPtr) arPtr->GetAlbumPicker(OnPickerFinish, this, eid);
     }
     
-    void OnPicker()
+    void OnPicker(int eid)
     {
         float x = 0, y = 0;
         void* data = arPtr->GetImageData(&x, &y);
-        std::cout<<"width:"<<x<<" height:"<<y<<std::endl;
         glBindTexture(GL_TEXTURE_2D, texID);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, x, y, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-        
         cv::Mat image(x, y, CV_8UC4, data);
-        cornerDetector->detect(image, referenceKeypoints);
-    }
-    
-    void StartMatch()
-    {
-        std::cout<<"match finish"<<std::endl;
+        cornerDetector->detectAndCompute(image, cv::noArray(), referenceKeypoints, referenceDescriptors);
+        std::cout<<eid<<" width:"<<x<<" height:"<<y<<"compute keypoints: "<<referenceKeypoints.size()<<" descriptor:"<<referenceDescriptors.size<<std::endl;
         cvmatch = true;
-        matched  = false;
+        captrue  = false;
     }
     
     
     void RenderAR()
     {
+        std::cout<<"matched:"<< transforms.size()<<std::endl;
         loop(transforms.size())
         {
             glm::mat4 view = transforms[i].getMat44(); //camera's position & rotation
@@ -151,22 +133,21 @@ public:
 
 private:
     
-    static void OnPickerFinish(void* arg)
+    static void OnPickerFinish(int eid, void* arg)
     {
         Scene5* sc = (Scene5*)arg;
-        sc->OnPicker();
+        sc->OnPicker(eid);
     }
     
     static void OnClick(engine::UIEvent* contex, void* arg)
     {
         Scene5* scene = (Scene5*)(arg);
-        int evtid = contex->evtid;
-        if(evtid == 0) scene->StartPick();
-        if(evtid == 1) scene->StartMatch();
+        auto eid = contex->evtid;
+        scene->StartPick(eid);
     }
     
 private:
-    engine::UIButton* pick, *match;
+    engine::UIButton *pick;
     engine::UILabel *state;
     GLuint texID;
     Shader* arShader;
@@ -176,7 +157,7 @@ private:
     std::vector<cv::KeyPoint> referenceKeypoints;
     cv::Ptr<cv::Feature2D> cornerDetector;
     cv::Ptr<cv::DescriptorMatcher> matcher;
-    bool cvmatch, matched;
+    bool cvmatch;
 };
 
 

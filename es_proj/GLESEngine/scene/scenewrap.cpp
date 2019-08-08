@@ -52,7 +52,7 @@ void ShutDown(ESContext* context)
     OnApplicationQuit();
 }
 
-void OnPause(ESContext *esContext,bool pause)
+void OnPause(ESContext *esContext, bool pause)
 {
     OnApplicationPause(pause);
 }
@@ -71,7 +71,7 @@ void OnClickTriger(ESContext *esContext, float x, float y)
     EventMgr::getInstance()->DoTriger(xx, yy);
 }
 
-void OnFrameReady(ESContext *esContext,const BGRAVideoFrame& frame)
+void OnFrameReady(ESContext *esContext, const BGRAVideoFrame& frame)
 {
     auto scene = SceneMgr::getInstance()->current;
     if(scene->isARScene() && !ENG_PAUSE)
@@ -81,8 +81,8 @@ void OnFrameReady(ESContext *esContext,const BGRAVideoFrame& frame)
     }
 }
 
-// ready for draw vr
-void OnFrameDetect(ESContext *esContext,const std::vector<Transformation>& transforms)
+// ready for draw ar
+void OnFrameDetect(ESContext *esContext, const std::vector<Transformation>& transforms)
 {
     auto scene = SceneMgr::getInstance()->current;
     if(scene->isARScene() && !ENG_PAUSE)
@@ -92,7 +92,7 @@ void OnFrameDetect(ESContext *esContext,const std::vector<Transformation>& trans
     }
 }
 
-void OnFrameInit(ESContext *esContext, float width, float height,const glm::mat3& intrinsic)
+void OnFrameInit(ESContext *esContext, float width, float height, const glm::mat3& intrinsic)
 {
     auto scene = SceneMgr::getInstance()->current;
     if(scene->isARScene())

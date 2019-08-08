@@ -38,10 +38,7 @@
     [super viewDidLoad];
     initial = FALSE;
     self.context = [[EAGLContext alloc]initWithAPI:kEAGLRenderingAPIOpenGLES3];
-    if(!self.context)
-    {
-        NSLog(@"Failed to create ES context");
-    }
+    if(!self.context) NSLog(@"Failed to create ES context");
     
     GLKView *view = (GLKView *)self.view;
     view.context = self.context;
@@ -59,9 +56,7 @@
     {
         _esContext.width = (GLint)view.drawableWidth;
         _esContext.height = (GLint)view.drawableHeight;
-        if (_esContext.updateWindow) {
-            _esContext.updateWindow(&_esContext);
-        }
+        if (_esContext.updateWindow) _esContext.updateWindow(&_esContext);
     }
     
     if(self.albumSource == nil)
