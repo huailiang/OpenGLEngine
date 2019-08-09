@@ -221,11 +221,9 @@
 		4CE03F8822DB1FFB00DB9A28 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE03F8722DB1FFB00DB9A28 /* CoreVideo.framework */; };
 		4CE03F8A22DB201400DB9A28 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE03F8922DB201400DB9A28 /* CoreMedia.framework */; };
 		4CE2223322A91EE00095ECCA /* libFreetype2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE2223222A91EE00095ECCA /* libFreetype2.a */; };
-		4CE2224622A91F0B0095ECCA /* eventmgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2223922A91F0B0095ECCA /* eventmgr.cpp */; };
 		4CE2224722A91F0B0095ECCA /* uibase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2223A22A91F0B0095ECCA /* uibase.cpp */; };
 		4CE2224822A91F0B0095ECCA /* ttfont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2223B22A91F0B0095ECCA /* ttfont.cpp */; };
 		4CE2224922A91F0B0095ECCA /* button.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2223D22A91F0B0095ECCA /* button.cpp */; };
-		4CE2224A22A91F0B0095ECCA /* uievent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2224022A91F0B0095ECCA /* uievent.cpp */; };
 		4CE2224B22A91F0B0095ECCA /* label.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2224122A91F0B0095ECCA /* label.cpp */; };
 		4CE2224C22A91F0B0095ECCA /* uimgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE2224222A91F0B0095ECCA /* uimgr.cpp */; };
 		4CE8DA6E22AEA7E60077C6AF /* appdata.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 4CE8DA6D22AEA7E60077C6AF /* appdata.glsl */; };
@@ -396,9 +394,7 @@
 		4C5E297F22EFE23E00C24273 /* terrain.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = terrain.hpp; sourceTree = "<group>"; };
 		4C5E298022EFE28800C24273 /* button.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = button.hpp; sourceTree = "<group>"; };
 		4C5E298122EFE28800C24273 /* label.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = label.hpp; sourceTree = "<group>"; };
-		4C5E298222EFE28900C24273 /* uievent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = uievent.hpp; sourceTree = "<group>"; };
 		4C5E298322EFE28900C24273 /* ttfont.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ttfont.hpp; sourceTree = "<group>"; };
-		4C5E298422EFE28900C24273 /* eventmgr.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = eventmgr.hpp; sourceTree = "<group>"; };
 		4C5E298522EFE28900C24273 /* uimgr.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = uimgr.hpp; sourceTree = "<group>"; };
 		4C5E298622EFE28900C24273 /* uibase.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = uibase.hpp; sourceTree = "<group>"; };
 		4C5F3FE422ABFD6D005B7CFD /* asset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = asset.cpp; sourceTree = "<group>"; };
@@ -457,6 +453,7 @@
 		4C97AAA122A50D01005F6388 /* ttfont.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ttfont.vs; sourceTree = "<group>"; };
 		4C97AAA222A50D01005F6388 /* pbr.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = pbr.vs; sourceTree = "<group>"; };
 		4C97AAA322A50D01005F6388 /* light.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = light.fs; sourceTree = "<group>"; };
+		4C97F2D422FD742700465C02 /* uiobject.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = uiobject.hpp; sourceTree = "<group>"; };
 		4C9EE53922D715560010EED9 /* scenemgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scenemgr.h; sourceTree = "<group>"; };
 		4C9EE53A22D715660010EED9 /* scene2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scene2.h; sourceTree = "<group>"; };
 		4C9EE53B22D715660010EED9 /* scene4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scene4.h; sourceTree = "<group>"; };
@@ -499,11 +496,9 @@
 		4CE03F8B22DB208E00DB9A28 /* scene6.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scene6.h; sourceTree = "<group>"; };
 		4CE03F8C22DB22CF00DB9A28 /* prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = prefix.pch; path = ../../engine/prefix.pch; sourceTree = "<group>"; };
 		4CE2223222A91EE00095ECCA /* libFreetype2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFreetype2.a; sourceTree = "<group>"; };
-		4CE2223922A91F0B0095ECCA /* eventmgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = eventmgr.cpp; sourceTree = "<group>"; };
 		4CE2223A22A91F0B0095ECCA /* uibase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = uibase.cpp; sourceTree = "<group>"; };
 		4CE2223B22A91F0B0095ECCA /* ttfont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ttfont.cpp; sourceTree = "<group>"; };
 		4CE2223D22A91F0B0095ECCA /* button.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = button.cpp; sourceTree = "<group>"; };
-		4CE2224022A91F0B0095ECCA /* uievent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = uievent.cpp; sourceTree = "<group>"; };
 		4CE2224122A91F0B0095ECCA /* label.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = label.cpp; sourceTree = "<group>"; };
 		4CE2224222A91F0B0095ECCA /* uimgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = uimgr.cpp; sourceTree = "<group>"; };
 		4CE8DA6D22AEA7E60077C6AF /* appdata.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = appdata.glsl; sourceTree = "<group>"; };
@@ -933,18 +928,15 @@
 		4CE2223722A91F0B0095ECCA /* gui */ = {
 			isa = PBXGroup;
 			children = (
+				4C97F2D422FD742700465C02 /* uiobject.hpp */,
 				4C5E298522EFE28900C24273 /* uimgr.hpp */,
 				4CE2224222A91F0B0095ECCA /* uimgr.cpp */,
-				4C5E298422EFE28900C24273 /* eventmgr.hpp */,
-				4CE2223922A91F0B0095ECCA /* eventmgr.cpp */,
-				4C5E298222EFE28900C24273 /* uievent.hpp */,
 				4C5E298622EFE28900C24273 /* uibase.hpp */,
 				4CE2223A22A91F0B0095ECCA /* uibase.cpp */,
 				4C5E298322EFE28900C24273 /* ttfont.hpp */,
 				4CE2223B22A91F0B0095ECCA /* ttfont.cpp */,
 				4C5E298122EFE28800C24273 /* label.hpp */,
 				4CE2224122A91F0B0095ECCA /* label.cpp */,
-				4CE2224022A91F0B0095ECCA /* uievent.cpp */,
 				4C5E298022EFE28800C24273 /* button.hpp */,
 				4CE2223D22A91F0B0095ECCA /* button.cpp */,
 			);
@@ -1196,7 +1188,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4CE2224A22A91F0B0095ECCA /* uievent.cpp in Sources */,
 				4C443B8122A25D2D00866F29 /* scenewrap.cpp in Sources */,
 				4C02E1D022AB77A0002821B9 /* avatar.cpp in Sources */,
 				4C7AF67022A54EA700B63173 /* shader.cpp in Sources */,
@@ -1211,7 +1202,6 @@
 				4C02E1CF22AB77A0002821B9 /* material.cpp in Sources */,
 				4C73C0EB22A8BAB3002A8AD0 /* texmgr.cpp in Sources */,
 				4CF3FC6922E56302002CC978 /* AlbumSource.mm in Sources */,
-				4CE2224622A91F0B0095ECCA /* eventmgr.cpp in Sources */,
 				4C7AF66D22A54EA700B63173 /* camera.cpp in Sources */,
 				4C5F3FE622ABFD6D005B7CFD /* asset.cpp in Sources */,
 				4C01AB8D22ADF6B3001C5070 /* mesh.cpp in Sources */,

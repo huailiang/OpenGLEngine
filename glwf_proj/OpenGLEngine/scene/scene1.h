@@ -52,7 +52,8 @@ public:
     {
         Scene::DrawUI();
         btn_normal = new UIButton(vec2(720, 360), vec3(1,1,0), 0.6f, "normal");
-        btn_normal->RegistCallback(OnNormalClick, this);
+        auto f = Bindfunc(Scene1::OnNormalClick);
+        btn_normal->RegistCallback(f);
     }
     
     void DrawShadow(Shader *depthShader)
@@ -72,18 +73,11 @@ public:
         }
     }
     
-    static void OnNormalClick(UIEvent* e, void* arg)
+    void OnNormalClick(UIObject* e)
     {
-        Scene1* scene = (Scene1*)(arg);
-        scene->shownormal=!scene->shownormal;
+        shownormal=!shownormal;
+        std::cout<<"show normal: "<<shownormal<<std::endl;
     }
-    
-    static void OnDebugClick(UIEvent* e, void* arg)
-    {
-        Scene1* scene = (Scene1*)(arg);
-        scene->debug=!scene->debug;
-    }
-
     
 private:
     UIButton* btn_normal = nullptr;
@@ -92,8 +86,6 @@ private:
     Shader* nmShader = nullptr;
     GLuint texture1, texture2;
     Avatar *nano = nullptr;
-    
-public:
     bool shownormal;
 };
 

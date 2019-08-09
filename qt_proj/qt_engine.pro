@@ -49,13 +49,11 @@ SOURCES += \
     ../engine/std/material.cpp \
     ../engine/std/asset.cpp \
     ../engine/std/mesh.cpp \
-    ../engine/gui/eventmgr.cpp \
     ../engine/gui/button.cpp \
     ../engine/gui/label.cpp \
     ../engine/gui/ttfont.cpp \
     ../engine/gui/uibase.cpp \
     ../engine/gui/uimgr.cpp \
-    ../engine/gui/uievent.cpp \
     ui/ui_project.cpp \
     ui/prev_mat.cpp \
     ui/prev_mesh.cpp \
@@ -85,13 +83,12 @@ HEADERS += \
     ../engine/std/mesh.hpp \
     ../engine/std/animation.hpp \
     ../engine/std/material.hpp \
-    ../engine/gui/eventmgr.hpp \
+    ../engine/gui/uiobject.hpp \
     ../engine/gui/button.hpp \
     ../engine/gui/label.hpp \
     ../engine/gui/ttfont.hpp \
     ../engine/gui/uibase.hpp \
     ../engine/gui/uimgr.hpp \
-    ../engine/gui/uievent.hpp \
     ui/ui_project.h \
     ui/prev_mat.h \
     ui/prev_mesh.h \

@@ -11,7 +11,6 @@
 #include "skybox.hpp"
 #include "light.hpp"
 #include "uimgr.hpp"
-#include "eventmgr.hpp"
 #include "label.hpp"
 #include "scene/scenemgr.h"
 #include "util.hpp"
@@ -162,7 +161,7 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
     switch(button)
     {
         case GLFW_MOUSE_BUTTON_LEFT:
-             EventMgr::getInstance()->Triger(lastX, lastY, action);
+             UIManager::getInstance()->Triger(lastX, lastY, action);
             break;
         case GLFW_MOUSE_BUTTON_RIGHT:
             cout<<"Mosue right button"<<endl;

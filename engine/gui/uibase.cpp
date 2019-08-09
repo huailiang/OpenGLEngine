@@ -11,12 +11,12 @@
 namespace engine
 {
 
-    UIBase::UIBase(float x, float y): posx(x), posy(y)
+    UIBase::UIBase(float x, float y, const int uid) : posx(x), posy(y), UIObject(uid)
     {
     }
 
 
-    UIBase::UIBase(const glm::vec2 pos): posx(pos.x), posy(pos.y)
+    UIBase::UIBase(const glm::vec2 pos, const int uid) : posx(pos.x), posy(pos.y),  UIObject(uid)
     {
     }
 
@@ -25,5 +25,19 @@ namespace engine
         this->posx = x;
         this->posy = y;
     }
+
+    void UIBase::Dispacher()
+    {
+        if(callback)
+        {
+            (callback)(this);
+        }
+    }
+    
+    void UIBase::RegistCallback(ClickCallback callback)
+    {
+        this->callback = callback;
+    }
+    
 
 }

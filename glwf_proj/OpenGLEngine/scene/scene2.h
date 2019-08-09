@@ -61,12 +61,13 @@ public:
     void DrawUI()
     {
         Scene::DrawUI();
+        auto f = Bindfunc(Scene2::OnLightClick);
         btn_direct = new UIButton(vec2(720, 360), vec3(1,1,0), 0.6f, " dirct-light", 0);
-        btn_direct->RegistCallback(OnLightClick, this);
+        btn_direct->RegistCallback(f);
         btn_point = new UIButton(vec2(720, 330), vec3(1,1,0), 0.6f, "point-light", 1);
-        btn_point->RegistCallback(OnLightClick, this);
+        btn_point->RegistCallback(f);
         btn_spot = new UIButton(vec2(720, 300), vec3(1,1,0), 0.6f, " spot-light", 2);
-        btn_spot->RegistCallback(OnLightClick, this);
+        btn_spot->RegistCallback(f);
     }
     
     
@@ -98,30 +99,23 @@ public:
         }
     }
     
-    void HandleClick(int evtid)
+    void OnLightClick(UIObject* oj)
     {
         delete shader;
         delete light;
+        int evtid = oj->uid;
         if(evtid == 0) light = new DirectLight(vec3(1), vec3(-1,0,-2));
         if(evtid == 1) light = new PointLight(vec3(1), vec3(0,0,-1), vec3(0,0,2), vec3(0.1,0.2,0.01));
         if(evtid == 2) light = new SpotLight(vec3(1), vec3(0,0,-1), vec3(0,0,2), vec3(1,0.1,0), 6, 9);
         InitShader();
     }
     
-private:
-    static void OnLightClick(UIEvent* contex, void* arg)
-    {
-        int evtid = contex->evtid;
-        Scene2* scene = (Scene2*)(arg);
-        scene->HandleClick(evtid);
-    }
-
     
 private:
     UIButton* btn_direct, *btn_point, *btn_spot;
     Material* mat = nullptr;
+    LightShader* shader = nullptr;
     GLuint vbo, vao;
-    LightShader* shader;
 };
 
 

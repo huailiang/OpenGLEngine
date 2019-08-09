@@ -84,28 +84,22 @@ public:
     void DrawUI()
     {
         Scene::DrawUI();
-        btn1 = new UIButton(vec2(690, 360), vec3(1,1,0), 0.6f, envs[0],0);
-        btn1->RegistCallback(OnClick, this);
-        btn2 = new UIButton(vec2(690, 330), vec3(1,1,0), 0.6f, envs[1],1);
-        btn2->RegistCallback(OnClick, this);
-        btn3 = new UIButton(vec2(690, 300), vec3(1,1,0), 0.6f, envs[2],2);
-        btn3->RegistCallback(OnClick, this);
-        btn4 = new UIButton(vec2(690, 270), vec3(1,1,0), 0.6f, envs[3],3);
-        btn4->RegistCallback(OnClick, this);
-        btn5 = new UIButton(vec2(690, 240), vec3(1,1,0), 0.6f, envs[4],4);
-        btn5->RegistCallback(OnClick, this);
+        auto f = Bindfunc(Scene7::OnClick);
+        btn1 = new UIButton(vec2(690, 360), vec3(1,1,0), 0.6f, envs[0], 0);
+        btn1->RegistCallback(f);
+        btn2 = new UIButton(vec2(690, 330), vec3(1,1,0), 0.6f, envs[1], 1);
+        btn2->RegistCallback(f);
+        btn3 = new UIButton(vec2(690, 300), vec3(1,1,0), 0.6f, envs[2], 2);
+        btn3->RegistCallback(f);
+        btn4 = new UIButton(vec2(690, 270), vec3(1,1,0), 0.6f, envs[3], 3);
+        btn4->RegistCallback(f);
+        btn5 = new UIButton(vec2(690, 240), vec3(1,1,0), 0.6f, envs[4], 4);
+        btn5->RegistCallback(f);
     }
     
-    static void OnClick(UIEvent* e, void* arg)
+    void OnClick(UIObject* e)
     {
-        Scene7* scene = (Scene7*)(arg);
-        int evtid = e->evtid;
-        scene->Click(evtid);
-    }
-
-    void Click(int eid)
-    {
-        env= envs[eid];
+        env= envs[e->uid];
         LoadCoef();
         RebuildSky();
     }

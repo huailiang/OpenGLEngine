@@ -38,18 +38,14 @@ public:
     
     glm::vec3 getCameraPos() { return glm::vec3(0.0f,0.0f,16.0f); }
     
-    static void OnClick(UIEvent* e, void* arg)
+    void OnClick(UIObject* e)
     {
-        Scene5* scene = (Scene5*)(arg);
-        int evtid = e->evtid;
-        scene->Click(evtid);
+        Click(e->uid);
     }
     
-    static void OnLodClick(UIEvent* e, void* arg)
+    void OnLodClick(UIObject* e)
     {
-        Scene5* scene = (Scene5*)(arg);
-        int evtid = e->evtid;
-        scene->LodSelect(evtid);
+        LodSelect(e->uid);
     }
     
     void InitLight()
@@ -60,26 +56,28 @@ public:
     void DrawUI()
     {
         Scene::DrawUI();
-        btn1 = new UIButton(vec2(660, 360), vec3(1,1,0), 0.6f, "  pose  ",0);
-        btn1->RegistCallback(OnClick, this);
-        btn2 = new UIButton(vec2(660, 330), vec3(1,1,0), 0.6f, "   idle   ",1);
-        btn2->RegistCallback(OnClick, this);
-        btn3 = new UIButton(vec2(660, 300), vec3(1,1,0), 0.6f, " pause ",2);
-        btn3->RegistCallback(OnClick, this);
-        btn4 = new UIButton(vec2(660, 270), vec3(1,1,0), 0.6f, "resume",3);
-        btn4->RegistCallback(OnClick, this);
-        btn5 = new UIButton(vec2(660, 240), vec3(1,1,0), 0.6f, "T-pose",4);
-        btn5->RegistCallback(OnClick, this);
-        lod1 = new UIButton(vec2(740, 360), vec3(1,1,0), 0.6f, "lod1",0);
-        lod1->RegistCallback(OnLodClick, this);
-        lod2 = new UIButton(vec2(740, 330), vec3(1,1,0), 0.6f, "lod2",2);
-        lod2->RegistCallback(OnLodClick, this);
-        lod3 = new UIButton(vec2(740, 300), vec3(1,1,0), 0.6f, "lod3",3);
-        lod3->RegistCallback(OnLodClick, this);
-        lod4 = new UIButton(vec2(740, 270), vec3(1,1,0), 0.6f, "lod4",4);
-        lod4->RegistCallback(OnLodClick, this);
-        lod5 = new UIButton(vec2(740, 240), vec3(1,1,0), 0.6f, "lod5",5);
-        lod5->RegistCallback(OnLodClick, this);
+        auto f1 = Bindfunc(Scene5::OnClick);
+        auto f2 = Bindfunc(Scene5::OnLodClick);
+        btn1 = new UIButton(vec2(660, 360), vec3(1,1,0), 0.6f, "  pose  ", 0);
+        btn1->RegistCallback(f1);
+        btn2 = new UIButton(vec2(660, 330), vec3(1,1,0), 0.6f, "   idle   ", 1);
+        btn2->RegistCallback(f1);
+        btn3 = new UIButton(vec2(660, 300), vec3(1,1,0), 0.6f, " pause ", 2);
+        btn3->RegistCallback(f1);
+        btn4 = new UIButton(vec2(660, 270), vec3(1,1,0), 0.6f, "resume", 3);
+        btn4->RegistCallback(f1);
+        btn5 = new UIButton(vec2(660, 240), vec3(1,1,0), 0.6f, "T-pose", 4);
+        btn5->RegistCallback(f1);
+        lod1 = new UIButton(vec2(740, 360), vec3(1,1,0), 0.6f, "lod1", 0);
+        lod1->RegistCallback(f2);
+        lod2 = new UIButton(vec2(740, 330), vec3(1,1,0), 0.6f, "lod2", 1);
+        lod2->RegistCallback(f2);
+        lod3 = new UIButton(vec2(740, 300), vec3(1,1,0), 0.6f, "lod3", 2);
+        lod3->RegistCallback(f2);
+        lod4 = new UIButton(vec2(740, 270), vec3(1,1,0), 0.6f, "lod4", 3);
+        lod4->RegistCallback(f2);
+        lod5 = new UIButton(vec2(740, 240), vec3(1,1,0), 0.6f, "lod5", 4);
+        lod5->RegistCallback(f2);
     }
     
     void InitScene()

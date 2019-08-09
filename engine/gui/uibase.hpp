@@ -10,24 +10,33 @@
 #define UIBase_h
 
 #include <glm/glm.hpp>
+#include "uiobject.hpp"
 
 namespace engine
 {
     
-    class UIBase
+    class UIBase : public UIObject
     {
     public:
         
-        UIBase(float x, float y);
+        UIBase(float x, float y, const int uid );
         
-        UIBase(const glm::vec2 pos);
+        UIBase(const glm::vec2 pos, const int uid );
         
         virtual void Draw() = 0;
         
         void SetPos(float x, float y);
         
+        virtual bool IsHit(float x,float y) = 0;
+        
+        void Dispacher();
+        
+        void RegistCallback(ClickCallback callback);
+        
     protected:
         float posx, posy;
+        ClickCallback callback;
+        int iarg = 0;
     };
     
 }

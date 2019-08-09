@@ -22,7 +22,6 @@
 		4C37752022A54FA20074744F /* uibase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C37751422A54FA20074744F /* uibase.cpp */; };
 		4C37752122A54FA20074744F /* ttfont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C37751522A54FA20074744F /* ttfont.cpp */; };
 		4C37752222A54FA20074744F /* button.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C37751722A54FA20074744F /* button.cpp */; };
-		4C37752322A54FA20074744F /* uievent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C37751A22A54FA20074744F /* uievent.cpp */; };
 		4C37752422A54FA20074744F /* label.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C37751B22A54FA20074744F /* label.cpp */; };
 		4C3B7A172283164E003B212F /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C3B7A162283164E003B212F /* IOKit.framework */; };
 		4C3B7A1922831668003B212F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C3B7A1822831668003B212F /* Cocoa.framework */; };
@@ -31,7 +30,6 @@
 		4C4279AD22A54C26003AE42A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C4279AC22A54C26003AE42A /* main.cpp */; };
 		4C5BDE1722E84DE600BAE9F9 /* libglfw.3.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C5BDE1622E84DE600BAE9F9 /* libglfw.3.4.dylib */; };
 		4C5F3FD322ABF95C005B7CFD /* asset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C5F3FD222ABF95C005B7CFD /* asset.cpp */; };
-		4C73C0F322A8C0F9002A8AD0 /* eventmgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C73C0F222A8C0F9002A8AD0 /* eventmgr.cpp */; };
 		4C73C0F522A8C18C002A8AD0 /* uimgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C73C0F422A8C18C002A8AD0 /* uimgr.cpp */; };
 		4C9EE54822D764530010EED9 /* libopencv_core.4.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEFDBF522CE281A00E5B6DD /* libopencv_core.4.1.1.dylib */; };
 		4C9EE54922D764790010EED9 /* libopencv_imgcodecs.4.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEFDBF622CE281A00E5B6DD /* libopencv_imgcodecs.4.1.1.dylib */; };
@@ -96,12 +94,10 @@
 		4C37751622A54FA20074744F /* label.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = label.hpp; sourceTree = "<group>"; };
 		4C37751722A54FA20074744F /* button.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = button.cpp; sourceTree = "<group>"; };
 		4C37751822A54FA20074744F /* uibase.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = uibase.hpp; sourceTree = "<group>"; };
-		4C37751922A54FA20074744F /* uievent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = uievent.hpp; sourceTree = "<group>"; };
-		4C37751A22A54FA20074744F /* uievent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = uievent.cpp; sourceTree = "<group>"; };
+		4C37751922A54FA20074744F /* uiobject.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = uiobject.hpp; sourceTree = "<group>"; };
 		4C37751B22A54FA20074744F /* label.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = label.cpp; sourceTree = "<group>"; };
 		4C37751C22A54FA20074744F /* button.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = button.hpp; sourceTree = "<group>"; };
 		4C37751D22A54FA20074744F /* ttfont.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ttfont.hpp; sourceTree = "<group>"; };
-		4C37751E22A54FA20074744F /* eventmgr.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = eventmgr.hpp; sourceTree = "<group>"; };
 		4C3B7A162283164E003B212F /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		4C3B7A1822831668003B212F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		4C3CEA5222AE823F00252F84 /* appdata.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = appdata.glsl; sourceTree = "<group>"; };
@@ -162,7 +158,6 @@
 		4C5F3FD122ABF95C005B7CFD /* asset.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = asset.hpp; sourceTree = "<group>"; };
 		4C5F3FD222ABF95C005B7CFD /* asset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = asset.cpp; sourceTree = "<group>"; };
 		4C6511B322F82CCB0075FA1F /* iScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iScene.h; sourceTree = "<group>"; };
-		4C73C0F222A8C0F9002A8AD0 /* eventmgr.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = eventmgr.cpp; sourceTree = "<group>"; };
 		4C73C0F422A8C18C002A8AD0 /* uimgr.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = uimgr.cpp; sourceTree = "<group>"; };
 		4C7D4A2922CDDFF000A8A77B /* harmonics.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = harmonics.fs; sourceTree = "<group>"; };
 		4C9450F722C0EB30005E5065 /* scene6.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = scene6.h; path = OpenGLEngine/scene/scene6.h; sourceTree = SOURCE_ROOT; };
@@ -276,12 +271,9 @@
 			children = (
 				4C37751322A54FA20074744F /* uimgr.hpp */,
 				4C73C0F422A8C18C002A8AD0 /* uimgr.cpp */,
-				4C37751E22A54FA20074744F /* eventmgr.hpp */,
-				4C73C0F222A8C0F9002A8AD0 /* eventmgr.cpp */,
+				4C37751922A54FA20074744F /* uiobject.hpp */,
 				4C37751822A54FA20074744F /* uibase.hpp */,
 				4C37751422A54FA20074744F /* uibase.cpp */,
-				4C37751922A54FA20074744F /* uievent.hpp */,
-				4C37751A22A54FA20074744F /* uievent.cpp */,
 				4C37751D22A54FA20074744F /* ttfont.hpp */,
 				4C37751522A54FA20074744F /* ttfont.cpp */,
 				4C37751622A54FA20074744F /* label.hpp */,
@@ -528,7 +520,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C37752322A54FA20074744F /* uievent.cpp in Sources */,
 				4CB025E622E366F300B2B6D9 /* ImageRecognition.cpp in Sources */,
 				4C37750E22A54F6F0074744F /* terrain.cpp in Sources */,
 				4C37750822A54F6F0074744F /* camera.cpp in Sources */,
@@ -545,7 +536,6 @@
 				4C37752122A54FA20074744F /* ttfont.cpp in Sources */,
 				4C37751F22A54FA20074744F /* glad.c in Sources */,
 				4C01AB8B22ADEE2C001C5070 /* mesh.cpp in Sources */,
-				4C73C0F322A8C0F9002A8AD0 /* eventmgr.cpp in Sources */,
 				4C42797E22A54AD0003AE42A /* engine.cpp in Sources */,
 				4C9EE55622D764E40010EED9 /* cvtool.cpp in Sources */,
 				4C5F3FD322ABF95C005B7CFD /* asset.cpp in Sources */,

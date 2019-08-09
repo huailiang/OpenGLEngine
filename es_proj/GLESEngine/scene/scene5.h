@@ -63,8 +63,9 @@ public:
     {
         Scene::DrawUI();
         state = new engine::UILabel(vec2(640, 440), vec3(1,0,0), 0.7f, "");
-        pick = new engine::UIButton(vec2(640, 360), vec3(1,1,0), 1.0f, "pick1",1);
-        pick->RegistCallback(OnClick, this);
+        auto f = Bindfunc(Scene5::OnClick);
+        pick = new engine::UIButton(vec2(640, 360), vec3(1,1,0), 1.0f, "pick", 1);
+        pick->RegistCallback(f);
     }
     
     void DrawScene()
@@ -139,11 +140,9 @@ private:
         sc->OnPicker(eid);
     }
     
-    static void OnClick(engine::UIEvent* contex, void* arg)
+    void OnClick(UIObject* oj)
     {
-        Scene5* scene = (Scene5*)(arg);
-        auto eid = contex->evtid;
-        scene->StartPick(eid);
+        StartPick(oj->uid);
     }
     
 private:

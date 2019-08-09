@@ -61,12 +61,13 @@ public:
     void DrawUI()
     {
         Scene::DrawUI();
-        btn_direct = new engine::UIButton(vec2(720, 360), vec3(1,1,0), 0.6f, " dirct-light", 0);
-        btn_direct->RegistCallback(OnLightClick, this);
-        btn_point = new engine::UIButton(vec2(720, 330), vec3(1,1,0), 0.6f, "point-light", 1);
-        btn_point->RegistCallback(OnLightClick, this);
-        btn_spot = new engine::UIButton(vec2(720, 300), vec3(1,1,0), 0.6f, " spot-light", 2);
-        btn_spot->RegistCallback(OnLightClick, this);
+        auto f = Bindfunc(Scene2::OnLightClick);
+        btn_direct = new engine::UIButton(vec2(720, 360), vec3(1,1,0), 0.6f, " dirct-light",0);
+        btn_direct->RegistCallback(f);
+        btn_point = new engine::UIButton(vec2(720, 330), vec3(1,1,0), 0.6f, "point-light",1);
+        btn_point->RegistCallback(f);
+        btn_spot = new engine::UIButton(vec2(720, 300), vec3(1,1,0), 0.6f, " spot-light",2);
+        btn_spot->RegistCallback(f);
     }
     
     
@@ -97,22 +98,17 @@ public:
         }
     }
     
-    void HandleClick(int evtid)
+    
+private:
+    void OnLightClick(UIObject* obj)
     {
         delete shader;
         delete light;
+        int evtid = obj->uid;
         if(evtid == 0) light = new DirectLight(vec3(1), vec3(-1,0,-2));
         if(evtid == 1) light = new PointLight(vec3(1), vec3(0,0,-1), vec3(0,0,2), vec3(0.1,0.2,0.01));
         if(evtid == 2) light = new SpotLight(vec3(1), vec3(0,0,-1), vec3(0,0,2), vec3(1,0.1,0), 6, 9);
         InitShader();
-    }
-    
-private:
-    static void OnLightClick(engine::UIEvent* contex, void* arg)
-    {
-        int evtid = contex->evtid;
-        Scene2* scene = (Scene2*)(arg);
-        scene->HandleClick(evtid);
     }
 
     

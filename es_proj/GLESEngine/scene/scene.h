@@ -15,7 +15,6 @@
 #include "uimgr.hpp"
 #include "label.hpp"
 #include "button.hpp"
-#include "uievent.hpp"
 #include "shader.hpp"
 #include "texture.hpp"
 #include "skybox.hpp"

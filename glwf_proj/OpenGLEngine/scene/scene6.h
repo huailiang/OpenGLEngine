@@ -82,16 +82,17 @@ public:
     void DrawUI()
     {
         Scene::DrawUI();
+        auto f = Bindfunc(Scene6::OnClick);
         btn1 = new UIButton(vec2(660, 360), vec3(1,1,0), 0.6f, "  diffuse ", 0);
-        btn1->RegistCallback(OnClick, this);
-        btn2 = new UIButton(vec2(660, 330), vec3(1,1,0), 0.6f, " specular",1);
-        btn2->RegistCallback(OnClick, this);
-        btn3 = new UIButton(vec2(660, 300), vec3(1,1,0), 0.6f, "   brdf   ",2);
-        btn3->RegistCallback(OnClick, this);
-        btn4 = new UIButton(vec2(660, 270), vec3(1,1,0), 0.6f, "  fresnel ",3);
-        btn4->RegistCallback(OnClick, this);
-        btn5 = new UIButton(vec2(660, 240), vec3(1,1,0), 0.6f, "rendering",4);
-        btn5->RegistCallback(OnClick, this);
+        btn1->RegistCallback(f);
+        btn2 = new UIButton(vec2(660, 330), vec3(1,1,0), 0.6f, " specular", 1);
+        btn2->RegistCallback(f);
+        btn3 = new UIButton(vec2(660, 300), vec3(1,1,0), 0.6f, "   brdf   ", 2);
+        btn3->RegistCallback(f);
+        btn4 = new UIButton(vec2(660, 270), vec3(1,1,0), 0.6f, "  fresnel ", 3);
+        btn4->RegistCallback(f);
+        btn5 = new UIButton(vec2(660, 240), vec3(1,1,0), 0.6f, "rendering", 4);
+        btn5->RegistCallback(f);
     }
     
     void DrawScene()
@@ -132,18 +133,12 @@ public:
         RenderQuad(skybox->hdrTexture);
     }
     
-    static void OnClick(UIEvent* e, void* arg)
-    {
-        Scene6* scene = (Scene6*)(arg);
-        int evtid = e->evtid;
-        scene->Click(evtid);
-    }
-    
-    void Click(int eid)
+    void OnClick(UIObject* e)
     {
         shader->use();
-        shader->setInt("debug", eid);
+        shader->setInt("debug", e->uid);
     }
+    
  
     
 private:

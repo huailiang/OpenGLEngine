@@ -38,10 +38,9 @@ private:
         SAFE_DELETE(lb_copy);
     }
     
-    static void ClickScene(UIEvent* contex, void* arg)
+    void ClickScene(UIObject* oj)
     {
-        int evtid = contex->evtid;
-        instance.ChangeTo(TY_Scene1 + evtid);
+        instance.ChangeTo(TY_Scene1 + oj->uid);
     }
 
     
@@ -60,13 +59,14 @@ public:
         lb_scene7 = new UILabel(vec2(60,180), vec3(1), 1, "Scene7", TY_Scene7);
         lb_fps = new UILabel(vec2(740,580), vec3(1,0,0), 0.5f);
         lb_copy = new UILabel(vec2(20), vec3(1), 0.4f);
-        lb_scene1->RegistCallback(ClickScene, this);
-        lb_scene2->RegistCallback(ClickScene, this);
-        lb_scene3->RegistCallback(ClickScene, this);
-        lb_scene4->RegistCallback(ClickScene, this);
-        lb_scene5->RegistCallback(ClickScene, this);
-        lb_scene6->RegistCallback(ClickScene, this);
-        lb_scene7->RegistCallback(ClickScene, this);
+        auto f  = Bindfunc(SceneMgr::ClickScene);
+        lb_scene1->RegistCallback(f);
+        lb_scene2->RegistCallback(f);
+        lb_scene3->RegistCallback(f);
+        lb_scene4->RegistCallback(f);
+        lb_scene5->RegistCallback(f);
+        lb_scene6->RegistCallback(f);
+        lb_scene7->RegistCallback(f);
     }
     
     void LeaveScene()

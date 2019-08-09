@@ -11,33 +11,23 @@
 namespace engine
 {
     
-    UILabel::UILabel(const glm::vec2 pos) :UIBase(pos)
+    UILabel::UILabel(const glm::vec2 pos, const int uid ) :UIBase(pos, uid)
     {
         std::cout<<"warn: called default constructor of label"<<std::endl;
     }
 
-    UILabel::UILabel(const glm::vec2 pos,const glm::vec3 color, const float scale, const std::string text, const int evtid,const bool interact)
-        :UIBase(pos)
+    UILabel::UILabel(const glm::vec2 pos,const glm::vec3 color, const float scale, const std::string text, const int uid)
+        :UIBase(pos, uid)
     {
-        UIEvent::evtid = evtid;
         this->scales = scale;
-        this->interact = interact;
         this->color = color;
         SetPos(pos.x, pos.y);
-        if(interact)
-        {
-            EventMgr::getInstance()->RegistEvt(this);
-        }
         UIManager::getInstance()->Regist(this);
         drawText(text);
     }
 
     UILabel::~UILabel()
     {
-        if(interact)
-        {
-            EventMgr::getInstance()->RemoveEvt(this);
-        }
         UIManager::getInstance()->Remove(this);
         TTFont::getInstance()->RenderText("", 0, 0, 0, glm::vec3(0));
     }

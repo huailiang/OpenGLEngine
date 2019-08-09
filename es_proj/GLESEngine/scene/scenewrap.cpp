@@ -68,7 +68,7 @@ void OnClickTriger(ESContext *esContext, float x, float y)
 {
     float xx = UI_WIDTH  * x;
     float yy = UI_HEIGHT * y;
-    EventMgr::getInstance()->DoTriger(xx, yy);
+    UIManager::getInstance()->DoTriger(xx, yy);
 }
 
 void OnFrameReady(ESContext *esContext, const BGRAVideoFrame& frame)

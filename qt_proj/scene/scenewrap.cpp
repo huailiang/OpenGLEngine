@@ -23,7 +23,7 @@ SceneWrap::~SceneWrap()
 
 void SceneWrap::OnClickGL(int x, int y)
 {
-    EventMgr::getInstance()->Triger((float)x, (float)y, GLFW_RELEASE);
+    UIManager::getInstance()->Triger((float)x, (float)y, GLFW_RELEASE);
 }
 
 void SceneWrap::HandleClick(int evtid)

@@ -15,7 +15,6 @@
 #include "../engine/gui/uimgr.hpp"
 #include "../engine/gui/label.hpp"
 #include "../engine/gui/button.hpp"
-#include "../engine/gui/uievent.hpp"
 #include "../engine/std/shader.hpp"
 #include "../engine/std/texture.hpp"
 #include "../engine/std/skybox.hpp"

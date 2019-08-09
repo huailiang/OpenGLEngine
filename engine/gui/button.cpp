@@ -19,8 +19,8 @@
 namespace engine
 {
     
-    UIButton::UIButton(const glm::vec2 pos,const glm::vec3 color, const float scale,const std::string text, const int evtid,const bool interact):
-    UILabel(pos,color,scale,text, evtid, interact)
+    UIButton::UIButton(const glm::vec2 pos,const glm::vec3 color, const float scale,const std::string text, const int uid ):
+    UILabel(pos,color,scale,text,uid)
     {
         InitBackground();
     }

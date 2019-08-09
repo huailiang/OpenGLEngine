@@ -30,6 +30,10 @@ namespace engine
         
         void Draw();
         
+        void Triger(float x, float y, int action);
+        
+        void DoTriger(float x, float y);
+        
     private:
         
         std::vector<UIBase*> vector;

@@ -48,7 +48,8 @@ public:
     {
         Scene::DrawUI();
         btn_normal = new engine::UIButton(vec2(720, 360), vec3(1,1,0), 0.6f, "normal");
-        btn_normal->RegistCallback(OnNormalClick, this);
+        auto f = Bindfunc(Scene1::OnNormalClick);
+        btn_normal->RegistCallback(f);
     }
     
     
@@ -63,18 +64,10 @@ public:
         }
     }
     
-    static void OnNormalClick(engine::UIEvent* e, void* arg)
+    void OnNormalClick(UIObject* e)
     {
-        Scene1* scene = (Scene1*)(arg);
-        scene->shownormal=!scene->shownormal;
+        shownormal=!shownormal;
     }
-    
-    static void OnDebugClick(engine::UIEvent* e, void* arg)
-    {
-        Scene1* scene = (Scene1*)(arg);
-        scene->debug=!scene->debug;
-    }
-
     
 private:
     engine::UIButton* btn_normal = nullptr;

@@ -45,4 +45,28 @@ namespace engine
         }
     }
     
+    void UIManager::Triger(float x, float y, int action)
+    {
+#ifndef _GLES_
+        float scale = RENDER_WIDTH / (SCR_WIDTH * 2.0f);
+        float xx = x / scale;
+        scale = RENDER_HEIGTH / (SCR_HEIGHT * 2.0f);
+        float yy = y / scale;
+        if(action == GLFW_RELEASE) DoTriger(xx, yy);
+#endif
+    }
+    
+    void UIManager::DoTriger(float x, float y)
+    {
+        for (size_t i=0; i<vector.size(); i++)
+        {
+            auto it = vector[i];
+            if(it->IsHit(x, y))
+            {
+                it->Dispacher();
+            }
+        }
+    }
+    
+    
 }

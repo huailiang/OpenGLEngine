@@ -12,8 +12,7 @@
 #include <glm/glm.hpp>
 #include <string>
 #include "uibase.hpp"
-#include "uievent.hpp"
-#include "eventmgr.hpp"
+#include "uiobject.hpp"
 #include "uimgr.hpp"
 #include "ttfont.hpp"
 
@@ -21,14 +20,14 @@ namespace engine
 {
 
 
-    class UILabel : public UIBase, public UIEvent
+    class UILabel : public UIBase
     {
     public:
         
-        UILabel(const glm::vec2 pos);
+        UILabel(const glm::vec2 pos, const int uid = 0);
         
         UILabel(const glm::vec2 pos,const glm::vec3 color = glm::vec3(1), const float scale = 1.0f,
-              const std::string text="", const int evtid = 0,const bool interact=true);
+              const std::string text="", const int uid = 0);
         
         virtual ~UILabel();
         
