@@ -48,6 +48,7 @@ SOURCES += \
     ../engine/std/avatar.cpp \
     ../engine/std/material.cpp \
     ../engine/std/asset.cpp \
+    ../engine/std/transform.cpp \
     ../engine/std/mesh.cpp \
     ../engine/gui/button.cpp \
     ../engine/gui/label.cpp \
@@ -76,6 +77,7 @@ HEADERS += \
     ../engine/std/skybox.hpp \
     ../engine/std/terrain.hpp \
     ../engine/std/asset.hpp \
+    ../engine/std/transform.hpp \
     ../engine/std/iScene.h \
     ../engine/engine.h \
     ../engine/engineio.h \

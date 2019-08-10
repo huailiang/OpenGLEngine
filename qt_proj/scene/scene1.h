@@ -56,7 +56,7 @@ public:
     void DrawScene()
     {
         terrain->Draw(camera, lightMatrix, light, depthMap);
-        nano->Rotate(0.2f);
+        nano->RotateY(0.2f);
         nano->Draw(shader, light, camera);
         if(shownormal)
         {
