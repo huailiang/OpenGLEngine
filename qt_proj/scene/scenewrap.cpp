@@ -9,10 +9,7 @@ SceneMgr SceneMgr::instance;
 float lastTime = 0;
 
 
-SceneWrap::SceneWrap()
-{
-
-}
+SceneWrap::SceneWrap() { }
 
 SceneWrap::~SceneWrap()
 {

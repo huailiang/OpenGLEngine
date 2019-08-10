@@ -11,14 +11,11 @@
 namespace engine
 {
 
-    Avatar::Avatar(const char* name, glm::vec3 pos, glm::vec3 scale, float angle, Shader* shader)
+    Avatar::Avatar(const char* name, glm::vec3 pos, glm::vec3 scale, float angle, Shader* shader) :
+    Transform(pos, angle, scale)
     {
         vector<string> items;
         this->name = name;
-        this->pos = pos;
-        this->scale = scale;
-        this->angle= angle;
-        RecalModelMatrix();
         type = ReadSummary(name, items);
         materials.clear();
         meshs.clear();
@@ -55,23 +52,13 @@ namespace engine
     {
         loop(materials.size()) materials[i]->Compile(shader);
     }
-
-    void Avatar::RecalModelMatrix()
-    {
-        mat4 model(1);
-        model = translate(model, pos);
-        model = glm::scale(model, scale);
-        model = rotate(model, radians(angle), vec3(0.0f,1.0f,0.0f));
-        matrix = model;
-    }
     
-
     void Avatar::Draw(Shader* shader, Light* light, Camera* camera)
     {
         loop(materials.size())  materials[i]->Draw(shader);
         shader->use();
         light->Apply(shader);
-        shader->setMat4("model", matrix);
+        shader->setMat4("model", getWorldMatrix());
         LightShader* lshader =static_cast<LightShader*>(shader);
         if(lshader) lshader->ApplyLight();
         if(skeleton) skeleton->Draw(shader);
@@ -83,39 +70,10 @@ namespace engine
     {
         loop(materials.size()) materials[i]->DrawMesh();
         shader->use();
-        shader->setMat4("model", matrix);
+        shader->setMat4("model", getWorldMatrix());
         if(camera) camera->Attach(shader);
     }
-    
-    
-    void Avatar::Rotate(float delta)
-    {
-        angle += delta;
-        RecalModelMatrix();
-    }
-    
-    
-    void Avatar::Move(glm::vec3 move)
-    {
-        this->pos += move;
-        RecalModelMatrix();
-    }
-    
-    
-    void Avatar::Scale(float scale)
-    {
-        this->scale *= scale;
-        RecalModelMatrix();
-    }
-    
-    
-    void Avatar::Scale(glm::vec3 scale)
-    {
-        this->scale = scale;
-        RecalModelMatrix();
-    }
-    
-    
+        
     void Avatar::LoadSkeleton()
     {
         if(skeleton == nullptr)

@@ -13,62 +13,60 @@
 
 class Scene3 : public Scene
 {
-    
+
 public:
+
     ~Scene3()
     {
         glDeleteVertexArrays(1, &planeVAO);
         glDeleteVertexArrays(1, &cubeVAO);
         glDeleteBuffers(1, &planeVBO);
         glDeleteBuffers(1, &cubeVBO);
-        SAFE_DELETE(shadowShader);
+        SAFE_DELETE(shader);
     }
-    
-    glm::vec3 getCameraPos() { return glm::vec3(0.0f,0.0f,4.0f); }
+
+    glm::vec3 getCameraPos() { return glm::vec3(0.0f, 0.4f, 4.0f); }
 
     int getType() { return TY_Scene3; }
-    
+
+     bool drawShadow() { return false; }
+
     void InitLight()
     {
         light = new DirectLight(vec3(1.0f), vec3(1.0f,-2.0f,2.0f));
     }
-    
+
     void InitScene()
     {
-        debug = true;
-        shadowShader  = new LightShader("shadow.vs","shadow.fs");
-        
-        InitPlane(&planeVAO, &planeVBO, shadowShader);
+        debug = false;
+        shader  = new LightShader("shadow.vs","shadow.fs");
+        InitPlane(&planeVAO, &planeVBO, shader);
         InitCube(&cubeVAO, &cubeVBO);
-        Texture("textures/wood",_PNG, &woodTexture);
-        shadowShader->use();
-        ApplyCamera(shadowShader);
-        shadowShader->setInt("diffuseTexture", 0);
-        shadowShader->setInt("shadowMap", 1);
+        Texture("textures/wood", _PNG, &woodTexture, true, GL_REPEAT, true); // open mipmap
+        shader->use();
+        ApplyCamera(shader);
+        shader->setInt("diffuseTexture", 0);
+        shader->setInt("shadowMap", 1);
     }
-    
+
     void DrawShadow(Shader *depthShader)
     {
         Scene::DrawShadow(depthShader);
         RenderScene(depthShader);
     }
-    
+
     void DrawScene()
     {
-        glm::mat4 lightSpaceMatrix;
-        float near_plane = 0.1f, far_plane = 7.5f;
-        lightSpaceMatrix = light->GetLigthSpaceMatrix(near_plane, far_plane, 4, 4);
-        shadowShader->use();
-        light->Apply(shadowShader);
-        shadowShader->setMat4("lightSpaceMatrix", lightSpaceMatrix);
+        shader->use();
+        light->Apply(shader);
+        shader->setMat4("lightSpaceMatrix", lightMatrix);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, woodTexture);
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, depthMap);
-        RenderScene(shadowShader);
+        RenderScene(shader);
     }
-    
-    
+
     void RenderScene(const Shader *shader)
     {
         // floor
@@ -77,12 +75,13 @@ public:
         glBindVertexArray(planeVAO);
         glDrawArrays(DRAW_MODE, 0, 6);
         // cubes
-        renderCube(glm::vec3(0.0f, 0.2f, -1.6), 0.5f, 0.0f, shader);
+        renderCube(glm::vec3(0.0f, 0.0f, -3.6), 0.5f, 0.0f, shader);
         renderCube(glm::vec3(2.0f, 0.0f, -1.0), 0.5f, 0.0f, shader);
         renderCube(glm::vec3(-1.0f,0.0f, -2.0), 0.25f, 16 * timeValue, shader);
+        renderCube(glm::vec3(1.5f, 0.1f, -8.0), 0.36f, 16 * timeValue, shader);
     }
-    
-    
+
+
     void renderCube(glm::vec3 pos, float scale, float ang, const Shader *shader)
     {
         glBindVertexArray(cubeVAO);
@@ -95,13 +94,13 @@ public:
         glBindVertexArray(0);
     }
 
-    
+
 private:
-    LightShader *shadowShader = nullptr;
-    GLuint woodTexture ;
+    LightShader *shader = nullptr;
+    GLuint woodTexture;
     GLuint planeVBO, planeVAO;
     GLuint cubeVAO, cubeVBO;
-    
+
 };
 
 #endif /* scene3_h */

@@ -16,13 +16,14 @@
 #include "shader.hpp"
 #include "util.hpp"
 #include "animation.hpp"
+#include "transform.hpp"
 
 using namespace std;
 
 namespace engine
 {
 
-    class Avatar
+    class Avatar : public Transform
     {
         
     public:
@@ -35,19 +36,9 @@ namespace engine
         
         void Compile(Shader* shader = nullptr);
         
-        void RecalModelMatrix();
-        
         void Draw(Shader* shader, Light* light, Camera* camera);
         
         void DrawShadow(Shader* shader, Light* light, Camera* camera);
-        
-        void Rotate(float delta);
-        
-        void Move(const glm::vec3 move);
-        
-        void Scale(const float scale);
-        
-        void Scale(const glm::vec3 scale);
         
         void PlayAnim(std::string anim);
         
@@ -72,12 +63,6 @@ namespace engine
         vector<MeshData*> meshs;
         
         MODEL_TYPE type;
-        
-        glm::mat4 matrix;
-        
-        glm::vec3 pos, scale;
-        
-        float angle;
         
         const char* name;
         

@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
     setWindowTitle("OpenGL Engine");
     project = new Ui_Project();
     project->setupTree(this, ui->treeWidget);
+    setFocusPolicy(Qt::ClickFocus);
     QObject::connect(ui->treeWidget,SIGNAL(itemClicked(QTreeWidgetItem*,int)), this, SLOT(checkself(QTreeWidgetItem* ,int)));
 }
 

@@ -75,7 +75,7 @@ public:
             current->DrawScenes();
         }
         delay++;
-        if(delay%4==0)
+        if(delay%8==0)
         {
             lb_fps->setText("FPS: "+to_string_with_precision(1/delta,4));
             lb_copy->setText("@copyright (c) penghuailiang");

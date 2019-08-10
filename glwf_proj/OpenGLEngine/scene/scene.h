@@ -74,6 +74,7 @@ public:
         if(drawShadow())
         {
             depthShader  = new Shader("depth.vs","depth.fs");
+            depthShader->attach(Vt_Pos3);
             debugShader = new Shader("debug.vs", "debug.fs");
             debugShader->attach("_DEBUG_DEPTH_");
             InitDepthBuffer();

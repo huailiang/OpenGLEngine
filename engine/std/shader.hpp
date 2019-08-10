@@ -27,6 +27,8 @@ namespace engine
         
         void attach(const char* k1, const char* v1);
         
+        void attach(uint type);
+        
         void compile();
         
         virtual bool use();

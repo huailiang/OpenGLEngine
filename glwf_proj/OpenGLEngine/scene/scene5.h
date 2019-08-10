@@ -88,7 +88,7 @@ public:
 
     void DrawScene()
     {
-        halo->Rotate(0.2f);
+        halo->RotateY(0.2f);
         halo->Draw(shader, light, camera);
     }
     

@@ -31,6 +31,7 @@
 		4C5BDE1722E84DE600BAE9F9 /* libglfw.3.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C5BDE1622E84DE600BAE9F9 /* libglfw.3.4.dylib */; };
 		4C5F3FD322ABF95C005B7CFD /* asset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C5F3FD222ABF95C005B7CFD /* asset.cpp */; };
 		4C73C0F522A8C18C002A8AD0 /* uimgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C73C0F422A8C18C002A8AD0 /* uimgr.cpp */; };
+		4C97F2D722FD9CD400465C02 /* transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C97F2D522FD9CD400465C02 /* transform.cpp */; };
 		4C9EE54822D764530010EED9 /* libopencv_core.4.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEFDBF522CE281A00E5B6DD /* libopencv_core.4.1.1.dylib */; };
 		4C9EE54922D764790010EED9 /* libopencv_imgcodecs.4.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEFDBF622CE281A00E5B6DD /* libopencv_imgcodecs.4.1.1.dylib */; };
 		4C9EE54A22D764860010EED9 /* libopencv_imgproc.4.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEFDBF722CE281A00E5B6DD /* libopencv_imgproc.4.1.1.dylib */; };
@@ -161,6 +162,8 @@
 		4C73C0F422A8C18C002A8AD0 /* uimgr.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = uimgr.cpp; sourceTree = "<group>"; };
 		4C7D4A2922CDDFF000A8A77B /* harmonics.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = harmonics.fs; sourceTree = "<group>"; };
 		4C9450F722C0EB30005E5065 /* scene6.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = scene6.h; path = OpenGLEngine/scene/scene6.h; sourceTree = SOURCE_ROOT; };
+		4C97F2D522FD9CD400465C02 /* transform.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = transform.cpp; sourceTree = "<group>"; };
+		4C97F2D622FD9CD400465C02 /* transform.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = transform.hpp; sourceTree = "<group>"; };
 		4C9EE54D22D764E30010EED9 /* cvtool.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cvtool.hpp; sourceTree = "<group>"; };
 		4C9EE54E22D764E30010EED9 /* cubemap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cubemap.cpp; sourceTree = "<group>"; };
 		4C9EE54F22D764E30010EED9 /* harmonics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = harmonics.cpp; sourceTree = "<group>"; };
@@ -246,6 +249,8 @@
 				4C3774FE22A54F6F0074744F /* texture.cpp */,
 				4C1B57BB22A7BE3800A7AFF1 /* texmgr.hpp */,
 				4C1B57BA22A7BE3800A7AFF1 /* texmgr.cpp */,
+				4C97F2D622FD9CD400465C02 /* transform.hpp */,
+				4C97F2D522FD9CD400465C02 /* transform.cpp */,
 				4C1B57B122A68D7900A7AFF1 /* util.hpp */,
 				4C1B57B222A68D7900A7AFF1 /* util.cpp */,
 				4C6511B322F82CCB0075FA1F /* iScene.h */,
@@ -546,6 +551,7 @@
 				4CD71DB322B0CF0500466683 /* tinyxml.cpp in Sources */,
 				4C4279AD22A54C26003AE42A /* main.cpp in Sources */,
 				4C37750A22A54F6F0074744F /* texture.cpp in Sources */,
+				4C97F2D722FD9CD400465C02 /* transform.cpp in Sources */,
 				4C37750B22A54F6F0074744F /* shader.cpp in Sources */,
 				4C37750922A54F6F0074744F /* light.cpp in Sources */,
 				4C73C0F522A8C18C002A8AD0 /* uimgr.cpp in Sources */,

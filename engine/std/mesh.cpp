@@ -110,12 +110,7 @@ namespace engine
     {
         if(shader && !shader->compiled)
         {
-            std::stringstream stream;
-            stream.width(4);
-            stream.fill('0');
-            stream<<std::hex<<type;
-            std::string macro = "0x"+stream.str();
-            shader->attach("VERT_TYPE", macro.c_str());
+            shader->attach(type);
             return true;
         }
         return false;

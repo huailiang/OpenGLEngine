@@ -56,6 +56,16 @@ namespace engine
         stream.clear();
     }
     
+    void Shader::attach(VertType type)
+    {
+        std::stringstream stream;
+        stream.width(4);
+        stream.fill('0');
+        stream<<std::hex<<type;
+        std::string macro = "0x"+stream.str();
+        attach("VERT_TYPE", macro.c_str());
+    }
+    
     void Shader::compile()
     {
         vertexCode = pre_process(vertexCode, macro);

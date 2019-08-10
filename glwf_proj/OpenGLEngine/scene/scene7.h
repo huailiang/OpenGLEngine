@@ -78,7 +78,7 @@ public:
     void DrawScene()
     {
         dragon->Draw(shader, light, camera);
-        dragon->Rotate(deltatime*30);
+        dragon->RotateY(deltatime*30);
     }
     
     void DrawUI()
