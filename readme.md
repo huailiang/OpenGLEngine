@@ -111,11 +111,11 @@ ui可以画Label, Button
 * [AR 探索][i9]
 
 
-# 语法
+# 扩展语法
 
 ## 1. glsl中支持文件包含
 
-默认的glsl羽凡是不支持#include的， 我们这里实现了预编译扩展的效果， 使用如下：
+默认的glsl语法是不支持#include的， 我们这里实现了预编译扩展的效果， 使用如下：
 
 ```c
 #include "lib/brdf.glsl"
