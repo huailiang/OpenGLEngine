@@ -40,7 +40,7 @@ namespace tool
     {
         int w = Width();
         int h = Height();
-        std::vector<Vertex> vertices(w*h * 6);
+        std::vector<Vertex> vertices(w * h * 6);
         for (int k = 0; k < 6; k++)
         {
             cv::Mat img = images_[k];
@@ -49,7 +49,7 @@ namespace tool
                 for (int i = 0; i < h; i++)
                 {
                     auto c = img.at<cv::Vec3f>(i, j);
-                    int idx = k * w*h + i * img.cols + j;
+                    int idx = k * w * h + i * img.cols + j;
                     float u = (float)j / (img.cols - 1);
                     float v = 1.0f - (float)i / (img.rows - 1);
                     Vec3 p = CubeUV2XYZ({ k, u, v });
@@ -68,7 +68,7 @@ namespace tool
         if (h > maxsize) h = maxsize;
         
         int xarr[6] = {2*w, 0, w, w, w, 3*w};
-        int yarr[6] = {h, h, 0, 2*h, h, h};
+        int yarr[6] = {h, h, 0, 2 * h, h, h};
         cv::Mat expandimg(3 * h, 4 * w, CV_32FC3, cv::Scalar(0,0,0));
         
         for (int i = 0; i < 6; i++)
