@@ -1,5 +1,6 @@
 **/temp/
 **/.vs/
+**/.idea/
 **/.vscode/
 ios/
 qt_proj/qt_engine.app/
