@@ -4,10 +4,6 @@
 # @Date  : 12/28/19
 
 
-def blue():
-    return Vector3(0, 0, 1)
-
-
 class Vector3:
 
     def __init__(self, x=0, y=0, z=0):
@@ -16,32 +12,34 @@ class Vector3:
         self.z = z
 
     def __add__(self, other):
-        v = Vector3.one()
-        v.x = self.x + other.x
-        v.y = self.y + other.y
-        v.z = self.z + other.z
-        return v
+        return Vector3(self.x + other.x, self.y + other.y, self.z + other.z)
 
     def __sub__(self, other):
-        v = Vector3.one()
-        v.x = self.x - other.x
-        v.y = self.y - other.y
-        v.z = self.z - other.z
-        return v
+        return Vector3(self.x - other.x, self.y - other.y, self.z - other.z)
 
     def __mul__(self, other):
-        v = Vector3.one()
-        v.x = self.x * other.x
-        v.y = self.y * other.y
-        v.z = self.z * other.z
-        return v
+        if type(other) == type(self):
+            return Vector3(self.x * other.x, self.y * other.y, self.z * other.z)
+        else:
+            return Vector3(self.x * other, self.y * other, self.z * other)
 
     def __truediv__(self, other):
-        v = Vector3.one()
-        v.x = self.x / other.x
-        v.y = self.y / other.y
-        v.z = self.z / other.z
-        return v
+        if type(other) == type(self):
+            return Vector3(self.x / other.x, self.y / other.y, self.z / other.z)
+        else:
+            return Vector3(self.x / other, self.y / other, self.z / other)
+
+    def __mod__(self, other):
+        if type(other) == type(self):
+            return Vector3(self.x % other.x, self.y % other.y, self.z % other.z)
+        else:
+            return Vector3(self.x % other, self.y % other, self.z % other)
+
+    def __pow__(self, power, modulo=None):
+        if type(power) == type(self):
+            return Vector3(self.x ** power.x, self.y ** power.y, self.z ** power.z)
+        else:
+            return Vector3(self.x ** power, self.y ** power, self.z ** power)
 
     def __str__(self):
         return "vector x:{0}, y:{1}, z:{2}".format(self.x, self.y, self.z)
@@ -68,6 +66,30 @@ class Vector3:
 
     @b.setter
     def b(self, v):
+        self.z = v
+
+    @property
+    def radius(self):
+        return self.x
+
+    @radius.setter
+    def radius(self, v):
+        self.x = v
+
+    @property
+    def theta(self):
+        return self.y
+
+    @theta.setter
+    def theta(self, v):
+        self.y = v
+
+    @property
+    def phi(self):
+        return self.z
+
+    @phi.setter
+    def phi(self, v):
         self.z = v
 
     @staticmethod
@@ -126,11 +148,29 @@ class Vector3:
         return Vector3(self.x / mag, self.y / mag, self.z / mag)
 
 
-print(Vector3.one() / Vector3(1, 2, 4))
-vec = Vector3(3, 2, 1)
-print(vec.r)
-vec.b = 4
-print(vec)
-print(vec.magnitude())
-print(vec.normal())
-print(vec * 2)
+class Vertex:
+    def __init__(self, pos=Vector3.zero(), color=Vector3.white()):
+        """
+        :param pos: 顶点位置
+        :param color: 顶点色
+        """
+        self.pos = pos
+        self.color = color
+
+
+class CubeUV:
+    def __init__(self, u=0, v=0, index=0):
+        """
+        :param u: u
+        :param v: v
+        :param index: cubemap六个面
+            0 +x
+            1 -x
+            2 +y
+            3 -y
+            4 +z
+            5 -z
+        """
+        self.u = u
+        self.v = v
+        self.index = index
