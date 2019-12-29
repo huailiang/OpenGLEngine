@@ -27,11 +27,10 @@ cube = Cubemap(path)
 img = cube.GenExpandImage(256)
 cv2.imwrite("cube.jpg", img)
 
-degree = 4
-samplenum = 1000000
+degree = 3
+samplenum = 100000
 harmonics = Harmonic(degree)
 verticies = cube.RandomSample(samplenum)
-harmonics.Evaluate(verticies)
-coefs = harmonics.getCoefficients()
-txt = CoefficientsString(coefs)
+harmonics.evaluate(verticies)
+txt = CoefficientsString(harmonics.coefs)
 print(txt)

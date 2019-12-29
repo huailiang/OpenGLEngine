@@ -7,10 +7,11 @@ from vector import Vector3
 from util import *
 import math
 import numpy as np
+from tqdm import tqdm
 
 
 class Harmonic:
-    def __init__(self, degree):
+    def __init__(self, degree=3):
         self.degree = degree
         self.coefs = []
         self.factorial = []
@@ -34,24 +35,23 @@ class Harmonic:
         https://huailiang.github.io/blog/2019/harmonics/
         :type pos: Vector3
         """
-        n = (self.degree + 1) ** 2
         PI = math.pi
         normal = pos.normal()
         x, y, z = normal.x, normal.y, normal.z
         Y = []
         if self.degree >= 0:
             Y.append(1. / 2. * (1. / PI) ** 0.5)
-        elif self.degree >= 1:
+        if self.degree >= 1:
             Y.append(((3. / 4. * PI) * z) ** 0.5)
             Y.append(((3. / 4. * PI) * y) ** 0.5)
             Y.append(((3. / 4. * PI) * x) ** 0.5)
-        elif self.degree >= 2:
+        if self.degree >= 2:
             Y.append(((15. / PI) ** 0.5) * 0.5 * x * z)
             Y.append(((15. / PI) ** 0.5) * 0.5 * y * z)
             Y.append(((5. / PI) ** 0.5) * 0.25 * (-x * x - z * z + 2 * y * y))
             Y.append(((15. / PI) ** 0.5) * 0.5 * x * y)
             Y.append(((5. / PI) ** 0.5) * 0.25 * (x * x - z * z))
-        elif self.degree >= 3:
+        if self.degree >= 3:
             Y.append(0.25 * (35 / (2 * PI) ** 0.5) * (3 * x * x - z * z) * z)
             Y.append(0.5 * (105 / PI) ** 0.5 * x * z * y)
             Y.append(0.25 * (21 / (2 * PI)) * 0.5 * z * (4 * y * y - x * x - z * z))
@@ -69,13 +69,15 @@ class Harmonic:
         """
         n = (self.degree + 1) ** 2
         self.coefs = [Vector3.zero() for _ in range(n)]
-        for v in vertices:
-            print(v)
+        count = len(vertices)
+        m_progress = tqdm(range(count))
+        for idx in m_progress:
+            v = vertices[idx]
             Y = self.basis(v.pos)
             for i in range(n):
-                self.coefs[i] = self.coefs[i] + Y[i] * v.color
-        for coef in self.coefs:
-            coef = 4 * math.pi * coef / len(vertices)
+                self.coefs[i] = self.coefs[i] + v.color * Y[i]
+        for i in range(n):
+            self.coefs[i] = self.coefs[i] / len(vertices) * 4 * math.pi
 
     def renderCubemap(self, width, height):
         imgs = []

@@ -6,7 +6,6 @@
 from vector import Vector3, CubeUV
 import math
 import random
-import io
 
 
 def Cartesian2Spherical(p):
@@ -63,11 +62,11 @@ def XYZ2CubeUV(p):
     ay = abs(p.y)
     az = abs(p.z)
     if ax >= ay and ax >= az:
-        c = CubeUV(0 if p.x >= 0 else 0, -p.z / p.x, p.y / ax)
+        c = CubeUV(-p.z / p.x, p.y / ax, 0 if p.x >= 0 else 0)
     elif ay >= az:
-        c = CubeUV(2 if p.y >= 0 else 3, p.x / ay, -p.z / p.y)
+        c = CubeUV(p.x / ay, -p.z / p.y, 2 if p.y >= 0 else 3)
     else:
-        c = CubeUV(4 if p.z > 0 else 5, p.x / p.z, p.y / az)
+        c = CubeUV(p.x / p.z, p.y / az, 4 if p.z > 0 else 5)
     c.u = c.u * 0.5 + 0.5
     c.v = c.v * 0.5 + 0.5
     return c
@@ -85,5 +84,5 @@ def NormalRandom(mu=0, sigma=1):
 def CoefficientsString(coefs):
     st = ""
     for c in coefs:
-        st += c.r + "\t" + c.g + "\t" + c.b + "\n"
+        st += "{0:.5}\t{1:.5}\t{2:.5}\n".format(c.r, c.g, c.b)
     return st
