@@ -2,6 +2,7 @@
 **/.vs/
 **/.idea/
 **/.vscode/
+**/__pycache__/
 ios/
 qt_proj/qt_engine.app/
 qt_proj/build/*.h

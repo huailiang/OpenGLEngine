@@ -143,6 +143,9 @@ class Vector3:
     def magnitude(self):
         return (self.x ** 2 + self.y ** 2 + self.z ** 2) ** 0.5
 
+    def distance(self):
+        return self.magnitude()
+
     def normal(self):
         mag = self.magnitude()
         return Vector3(self.x / mag, self.y / mag, self.z / mag)
@@ -156,6 +159,9 @@ class Vertex:
         """
         self.pos = pos
         self.color = color
+
+    def __str__(self):
+        return "pos:{0} color:{1}".format(self.pos, self.color)
 
 
 class CubeUV:
@@ -174,3 +180,6 @@ class CubeUV:
         self.u = u
         self.v = v
         self.index = index
+
+    def __str__(self):
+        return "u:{0} v:{1} index:{2}".format(self.u, self.v, self.index)

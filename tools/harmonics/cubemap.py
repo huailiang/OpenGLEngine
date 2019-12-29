@@ -6,17 +6,22 @@
 from vector import Vertex
 from util import *
 import cv2
+import os
 import numpy as np
 
 
 class Cubemap:
 
-    def __init__(self, files):
+    def __init__(self, directory):
         """
-        :type files: list
-        :param files: 文件路径 len=6
+        :type directory: str
+        :param directory: directory
         """
-        self.files = files
+        self.files = []
+        posts = ["posx", "negx", "posy", "negy", "posz", "negz"]
+        for i, it in enumerate(posts):
+            p = os.path.join(directory, it + ".jpg")
+            self.files.append(p)
         self._open_files()
 
     def __str__(self):
@@ -25,7 +30,6 @@ class Cubemap:
     def _open_files(self):
         count = len(self.files)
         assert count == 6
-        print(count)
         self.images = []
         for i in range(count):
             img = cv2.imread(self.files[i])
@@ -53,14 +57,15 @@ class Cubemap:
     def GenExpandImage(self, maxsize):
         w = min(self.width, maxsize)
         h = min(self.height, maxsize)
-        xarr = [2 * w, 0, w, w, w, 3 * w]
-        yarr = [h, h, 0, 2 * h, h, h]
-        expandimg = np.zeros((w * 3, h * 4))
+        xarr = [h,     h, 0, 2 * h, h, h]
+        yarr = [2 * w, 0, w, w,     w, 3 * w]
+        expanding = np.zeros((3 * h, 4 * w, 3))
         for i in range(6):
-            img = None
-            cv2.resize(self.images[i], (w, h), img)
-            cv2.copyTo(img, i, expandimg)
-        return expandimg
+            img = cv2.resize(self.images[i], (w, h))
+            x = xarr[i]
+            y = yarr[i]
+            expanding[x:x + w, y: y + h] = img
+        return expanding
 
     def RandomSample(self, n):
         samples = []
@@ -83,7 +88,8 @@ class Cubemap:
         cubeuv = XYZ2CubeUV(pos)
         j = int(cubeuv.u * (self.width - 1))
         i = int((1. - cubeuv.v) * (self.height - 1))
-        c = self.images[cubeuv.index][i, j]
+        k = int(cubeuv.index)
+        c = self.images[k][i, j]
         return Vector3(c[2], c[1], c[0])
 
     def sampleT(self, theta, phi):

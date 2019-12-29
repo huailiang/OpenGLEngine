@@ -6,6 +6,7 @@
 from vector import Vector3, CubeUV
 import math
 import random
+import io
 
 
 def Cartesian2Spherical(p):
@@ -79,3 +80,10 @@ def NormalRandom(mu=0, sigma=1):
     :param sigma: 标准差
     """
     return random.normalvariate(mu, sigma=sigma)
+
+
+def CoefficientsString(coefs):
+    st = ""
+    for c in coefs:
+        st += c.r + "\t" + c.g + "\t" + c.b + "\n"
+    return st
