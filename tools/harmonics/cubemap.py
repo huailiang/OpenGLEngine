@@ -57,8 +57,8 @@ class Cubemap:
     def GenExpandImage(self, maxsize):
         w = min(self.width, maxsize)
         h = min(self.height, maxsize)
-        xarr = [h,     h, 0, 2 * h, h, h]
-        yarr = [2 * w, 0, w, w,     w, 3 * w]
+        xarr = [h, h, 0, 2 * h, h, h]
+        yarr = [2 * w, 0, w, w, w, 3 * w]
         expanding = np.zeros((3 * h, 4 * w, 3))
         for i in range(6):
             img = cv2.resize(self.images[i], (w, h))
@@ -79,18 +79,33 @@ class Cubemap:
             samples.append(v)
         return samples
 
+    def NumpySample(self, n):
+        samples = []
+        for i in range(n):
+            x = NormalRandom()
+            y = NormalRandom()
+            z = NormalRandom()
+            p = Vector3(x, y, z)
+            c = self.sampleColor(p)
+            samples.append(c)
+        return np.array(samples)
+
     def sample(self, pos):
         """
         采样空间某一点
         :param pos: Vector3
         :return: vector<Vertex>
         """
+        c = self.sampleColor(pos)
+        return Vector3(c[2], c[1], c[0])
+
+    def sampleColor(self, pos):
         cubeuv = XYZ2CubeUV(pos)
         j = int(cubeuv.u * (self.width - 1))
         i = int((1. - cubeuv.v) * (self.height - 1))
         k = int(cubeuv.index)
-        c = self.images[k][i, j]
-        return Vector3(c[2], c[1], c[0])
+        c = self.images[k][i, j] / 255.
+        return c
 
     def sampleT(self, theta, phi):
         s = Vector3(1, theta, phi)

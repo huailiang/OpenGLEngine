@@ -15,6 +15,7 @@ class Harmonic:
         self.degree = degree
         self.coefs = []
         self.factorial = []
+        self.Y = [0 for _ in range(16)]
         maxfact = degree * degree
         for i in range(maxfact):
             if i == 0:
@@ -24,10 +25,10 @@ class Harmonic:
 
     def render(self, pos):
         n = (self.degree + 1) ** 2
-        Y = self.basis(pos)
+        self.basis(pos)
         color = Vector3.zero()
         for i in range(n):
-            color = color + Y[i] * self.coefs[i]
+            color = color + self.Y[i] * self.coefs[i]
         return color
 
     def basis(self, pos):
@@ -38,34 +39,31 @@ class Harmonic:
         PI = math.pi
         normal = pos.normal()
         x, y, z = normal.x, normal.y, normal.z
-        Y = []
         if self.degree >= 0:
-            Y.append(1. / 2. * (1. / PI) ** 0.5)
+            self.Y[0] = 0.5 * (1 / PI) ** 0.5
         if self.degree >= 1:
-            Y.append(((3. / 4. * PI) * z) ** 0.5)
-            Y.append(((3. / 4. * PI) * y) ** 0.5)
-            Y.append(((3. / 4. * PI) * x) ** 0.5)
+            self.Y[1] = (3 / (4 * PI)) ** 0.5 * z
+            self.Y[2] = (3 / (4 * PI)) ** 0.5 * y
+            self.Y[3] = (3 / (4 * PI)) ** 0.5 * x
         if self.degree >= 2:
-            Y.append(((15. / PI) ** 0.5) * 0.5 * x * z)
-            Y.append(((15. / PI) ** 0.5) * 0.5 * y * z)
-            Y.append(((5. / PI) ** 0.5) * 0.25 * (-x * x - z * z + 2 * y * y))
-            Y.append(((15. / PI) ** 0.5) * 0.5 * x * y)
-            Y.append(((5. / PI) ** 0.5) * 0.25 * (x * x - z * z))
+            self.Y[4] = ((15 / PI) ** 0.5) * 0.5 * x * z
+            self.Y[5] = ((15 / PI) ** 0.5) * 0.5 * y * z
+            self.Y[6] = ((15 / PI) ** 0.5) * 0.25 * (-x * x - z * z + 2 * y * y)
+            self.Y[7] = ((15 / PI) ** 0.5) * 0.5 * x * y
+            self.Y[8] = ((15 / PI) ** 0.5) * 0.25 * (x * x - z * z)
         if self.degree >= 3:
-            Y.append(0.25 * (35 / (2 * PI) ** 0.5) * (3 * x * x - z * z) * z)
-            Y.append(0.5 * (105 / PI) ** 0.5 * x * z * y)
-            Y.append(0.25 * (21 / (2 * PI)) * 0.5 * z * (4 * y * y - x * x - z * z))
-            Y.append(0.25 * (7. / PI) ** 0.5 * y * (2 * y * y - 3 * x * x - 3 * z * z))
-            Y.append(0.25 * (21 / (2 * PI)) ** 0.5 * x * (4 * y * y - x * x - z * z))
-            Y.append(0.25 * (105 / PI) ** 0.5 * (x * x - z * z) * y)
-            Y.append(0.25 * (35 / (2 * PI)) ** 0.5 * (x * x - 3 * z * z) * x)
-        return Y
+            self.Y[9] = 0.25 * (35 / (2 * PI) ** 0.5) * (3 * x * x - z * z) * z
+            self.Y[10] = 0.5 * (105 / PI) ** 0.5 * x * z * y
+            self.Y[11] = 0.25 * (21 / (2 * PI)) * 0.5 * z * (4 * y * y - x * x - z * z)
+            self.Y[12] = 0.25 * (7 / PI) ** 0.5 * y * (2 * y * y - 3 * x * x - 3 * z * z)
+            self.Y[13] = 0.25 * (21 / (2 * PI)) ** 0.5 * x * (4 * y * y - x * x - z * z)
+            self.Y[14] = 0.25 * (105 / PI) ** 0.5 * (x * x - z * z) * y
+            self.Y[15] = 0.25 * (35 / (2 * PI)) ** 0.5 * (x * x - 3 * z * z) * x
 
     def evaluate(self, vertices):
         """
         :type vertices: list<Vertex>
         :param vertices: 顶点数组
-        :return:
         """
         n = (self.degree + 1) ** 2
         self.coefs = [Vector3.zero() for _ in range(n)]
@@ -73,9 +71,12 @@ class Harmonic:
         m_progress = tqdm(range(count))
         for idx in m_progress:
             v = vertices[idx]
-            Y = self.basis(v.pos)
+            self.basis(v.pos)
             for i in range(n):
-                self.coefs[i] = self.coefs[i] + v.color * Y[i]
+                # self.coefs[i].x += v.color.x * self.Y[i]
+                # self.coefs[i].y += v.color.y * self.Y[i]
+                # self.coefs[i].z += v.color.z * self.Y[i]
+                self.coefs[i] = self.coefs[i] + v.color * self.Y[i]
         for i in range(n):
             self.coefs[i] = self.coefs[i] / len(vertices) * 4 * math.pi
 

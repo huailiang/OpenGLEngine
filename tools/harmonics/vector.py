@@ -150,6 +150,9 @@ class Vector3:
         mag = self.magnitude()
         return Vector3(self.x / mag, self.y / mag, self.z / mag)
 
+    def toarray(self):
+        return self.x, self.y, self.z
+
 
 class Vertex:
     def __init__(self, pos=Vector3.zero(), color=Vector3.white()):
