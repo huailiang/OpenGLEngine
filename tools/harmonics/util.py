@@ -62,7 +62,7 @@ def XYZ2CubeUV(p):
     ay = abs(p.y)
     az = abs(p.z)
     if ax >= ay and ax >= az:
-        c = CubeUV(-p.z / p.x, p.y / ax, 0 if p.x >= 0 else 0)
+        c = CubeUV(-p.z / p.x, p.y / ax, 0 if p.x >= 0 else 1)
     elif ay >= az:
         c = CubeUV(p.x / ay, -p.z / p.y, 2 if p.y >= 0 else 3)
     else:

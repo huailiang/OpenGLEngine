@@ -11,6 +11,10 @@ import numpy as np
 
 
 class Cubemap:
+    """
+    cube index:
+    0 +x, 1 -x, 2 +y, 3 -y, 4 +z, 5 -z
+    """
 
     def __init__(self, directory):
         """
@@ -103,6 +107,11 @@ class Cubemap:
         return Vector3(x, y, z)
 
     def sampleColor(self, pos):
+        """
+        采样空间某一点
+        :type pos: Vector3
+        :param pos: 点的位置 normalized
+        """
         cubeuv = XYZ2CubeUV(pos)
         j = int(cubeuv.u * (self.width - 1))
         i = int((1. - cubeuv.v) * (self.height - 1))

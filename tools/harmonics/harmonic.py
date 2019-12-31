@@ -108,11 +108,14 @@ class Harmonic:
             self.coefs[i] = self.coefs[i] / count * 4 * math.pi
 
     def numpyEval(self, pos, colors):
+        """
+        :param pos: vertex pos - shape:(num, 3)
+        :param colors: vertex color - shape(num, 3)
+        :return: coef str
+        """
         n = (self.degree + 1) ** 2
         Y = self.numpyBasis(pos)  # (num, 16)
         num = pos.shape[0]
-        count = colors.shape[0]
-        t = np.zeros((count, 3))
         str_ = ""
         for i in range(n):
             t = colors * Y[0:num, i:i + 1]
@@ -135,6 +138,9 @@ class Harmonic:
         return imgs
 
     def __str__(self):
+        """
+        harmonic coef
+        """
         st = ""
         for c in self.coefs:
             st += "{0:.5}\t{1:.5}\t{2:.5}\n".format(c.r, c.g, c.b)
