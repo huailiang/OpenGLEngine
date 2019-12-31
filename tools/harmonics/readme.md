@@ -21,6 +21,20 @@ numpy exec time:1.3972785
 cpu exec time:6.490745
 ```
 
+同样的代码支持[cupy][i1], GPU并行计算， 只需要将代码里的
+
+```py
+# 替换 import numpy as np
+import cupy as np
+```
+
+实际运行下来，由于数据量还是不太大，所以反而还比numpy实现的运行时间更长
+
+
+
 #### c++实现
 
 除了这里py实现方式， 还有c++实现(纯CPU计算， 在engine/cv目录下)， 效率比py里cpu计算要好， 后期可以考虑把c++部分运算移植到cuda里计算。
+
+
+[i1]: https://docs-cupy.chainer.org/en/stable/
