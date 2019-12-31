@@ -3,7 +3,6 @@
 # @Author: penghuailiang
 # @Date  : 12/28/19
 
-from vector import Vector3
 from util import *
 import math
 import numpy as np
@@ -13,9 +12,9 @@ from tqdm import tqdm
 class Harmonic:
     def __init__(self, degree=3):
         self.degree = degree
-        self.coefs = []
+        n = (degree + 1) ** 2
+        self.coefs = [Vector3.zero() for _ in range(n)]
         self.factorial = []
-        self.Y = [0 for _ in range(16)]
         maxfact = degree * degree
         for i in range(maxfact):
             if i == 0:
@@ -34,31 +33,63 @@ class Harmonic:
     def basis(self, pos):
         """
         https://huailiang.github.io/blog/2019/harmonics/
-        :type pos: Vector3
+        :type pos: Vector3 normalized
         """
         PI = math.pi
-        normal = pos.normal()
-        x, y, z = normal.x, normal.y, normal.z
+        Y = [0 for _ in range(16)]
+        x, y, z = pos.x, pos.y, pos.z
         if self.degree >= 0:
-            self.Y[0] = 0.5 * (1 / PI) ** 0.5
+            Y[0] = 0.5 * (1 / PI) ** 0.5
         if self.degree >= 1:
-            self.Y[1] = (3 / (4 * PI)) ** 0.5 * z
-            self.Y[2] = (3 / (4 * PI)) ** 0.5 * y
-            self.Y[3] = (3 / (4 * PI)) ** 0.5 * x
+            Y[1] = (3 / (4 * PI)) ** 0.5 * z
+            Y[2] = (3 / (4 * PI)) ** 0.5 * y
+            Y[3] = (3 / (4 * PI)) ** 0.5 * x
         if self.degree >= 2:
-            self.Y[4] = ((15 / PI) ** 0.5) * 0.5 * x * z
-            self.Y[5] = ((15 / PI) ** 0.5) * 0.5 * y * z
-            self.Y[6] = ((15 / PI) ** 0.5) * 0.25 * (-x * x - z * z + 2 * y * y)
-            self.Y[7] = ((15 / PI) ** 0.5) * 0.5 * x * y
-            self.Y[8] = ((15 / PI) ** 0.5) * 0.25 * (x * x - z * z)
+            Y[4] = ((15 / PI) ** 0.5) * 0.5 * x * z
+            Y[5] = ((15 / PI) ** 0.5) * 0.5 * y * z
+            Y[6] = ((15 / PI) ** 0.5) * 0.25 * (-x * x - z * z + 2 * y * y)
+            Y[7] = ((15 / PI) ** 0.5) * 0.5 * x * y
+            Y[8] = ((15 / PI) ** 0.5) * 0.25 * (x * x - z * z)
         if self.degree >= 3:
-            self.Y[9] = 0.25 * (35 / (2 * PI) ** 0.5) * (3 * x * x - z * z) * z
-            self.Y[10] = 0.5 * (105 / PI) ** 0.5 * x * z * y
-            self.Y[11] = 0.25 * (21 / (2 * PI)) * 0.5 * z * (4 * y * y - x * x - z * z)
-            self.Y[12] = 0.25 * (7 / PI) ** 0.5 * y * (2 * y * y - 3 * x * x - 3 * z * z)
-            self.Y[13] = 0.25 * (21 / (2 * PI)) ** 0.5 * x * (4 * y * y - x * x - z * z)
-            self.Y[14] = 0.25 * (105 / PI) ** 0.5 * (x * x - z * z) * y
-            self.Y[15] = 0.25 * (35 / (2 * PI)) ** 0.5 * (x * x - 3 * z * z) * x
+            Y[9] = 0.25 * (35 / (2 * PI) ** 0.5) * (3 * x * x - z * z) * z
+            Y[10] = 0.5 * (105 / PI) ** 0.5 * x * z * y
+            Y[11] = 0.25 * (21 / (2 * PI)) * 0.5 * z * (4 * y * y - x * x - z * z)
+            Y[12] = 0.25 * (7 / PI) ** 0.5 * y * (2 * y * y - 3 * x * x - 3 * z * z)
+            Y[13] = 0.25 * (21 / (2 * PI)) ** 0.5 * x * (4 * y * y - x * x - z * z)
+            Y[14] = 0.25 * (105 / PI) ** 0.5 * (x * x - z * z) * y
+            Y[15] = 0.25 * (35 / (2 * PI)) ** 0.5 * (x * x - 3 * z * z) * x
+        return Y
+
+    @staticmethod
+    def numpyBasis(pos):
+        """
+        :param pos: ndarray (number, 3)
+        :return (number, 16)
+        """
+        PI = np.pi
+        shape = pos.shape
+        num = shape[0]
+        rs = np.zeros((num, 16))
+        x = pos[0:num, 0:1]
+        y = pos[0:num, 1:2]
+        z = pos[0:num, 2:3]
+        rs[0:num, 0:1] = 0.5 * (1 / PI) ** 0.5
+        rs[0:num, 1:2] = (3 / (4 * PI)) ** 0.5 * z
+        rs[0:num, 2:3] = (3 / (4 * PI)) ** 0.5 * y
+        rs[0:num, 3:4] = (3 / (4 * PI)) ** 0.5 * x
+        rs[0:num, 4:5] = ((15 / PI) ** 0.5) * 0.5 * x * z
+        rs[0:num, 5:6] = ((15 / PI) ** 0.5) * 0.5 * y * z
+        rs[0:num, 6:7] = ((15 / PI) ** 0.5) * 0.25 * (-x * x - z * z + 2 * y * y)
+        rs[0:num, 7:8] = ((15 / PI) ** 0.5) * 0.5 * x * y
+        rs[0:num, 8:9] = ((15 / PI) ** 0.5) * 0.25 * (x * x - z * z)
+        rs[0:num, 9:10] = 0.25 * (35 / (2 * PI) ** 0.5) * (3 * x * x - z * z) * z
+        rs[0:num, 10:11] = 0.5 * (105 / PI) ** 0.5 * x * z * y
+        rs[0:num, 11:12] = 0.25 * (21 / (2 * PI)) * 0.5 * z * (4 * y * y - x * x - z * z)
+        rs[0:num, 12:13] = 0.25 * (7 / PI) ** 0.5 * y * (2 * y * y - 3 * x * x - 3 * z * z)
+        rs[0:num, 13:14] = 0.25 * (21 / (2 * PI)) ** 0.5 * x * (4 * y * y - x * x - z * z)
+        rs[0:num, 14:15] = 0.25 * (105 / PI) ** 0.5 * (x * x - z * z) * y
+        rs[0:num, 15:16] = 0.25 * (35 / (2 * PI)) ** 0.5 * (x * x - 3 * z * z) * x
+        return rs
 
     def evaluate(self, vertices):
         """
@@ -66,19 +97,28 @@ class Harmonic:
         :param vertices: 顶点数组
         """
         n = (self.degree + 1) ** 2
-        self.coefs = [Vector3.zero() for _ in range(n)]
         count = len(vertices)
         m_progress = tqdm(range(count))
         for idx in m_progress:
             v = vertices[idx]
-            self.basis(v.pos)
+            Y = self.basis(v.pos)
             for i in range(n):
-                # self.coefs[i].x += v.color.x * self.Y[i]
-                # self.coefs[i].y += v.color.y * self.Y[i]
-                # self.coefs[i].z += v.color.z * self.Y[i]
-                self.coefs[i] = self.coefs[i] + v.color * self.Y[i]
+                self.coefs[i] = self.coefs[i] + v.color * Y[i]
         for i in range(n):
-            self.coefs[i] = self.coefs[i] / len(vertices) * 4 * math.pi
+            self.coefs[i] = self.coefs[i] / count * 4 * math.pi
+
+    def numpyEval(self, pos, colors):
+        n = (self.degree + 1) ** 2
+        Y = self.numpyBasis(pos)  # (num, 16)
+        num = pos.shape[0]
+        count = colors.shape[0]
+        t = np.zeros((count, 3))
+        str_ = ""
+        for i in range(n):
+            t = colors * Y[0:num, i:i + 1]
+            v = t.sum(axis=0) / num * 4 * np.pi
+            str_ += "{0:.5}\t{1:.5}\t{2:.5}\n".format(v[0], v[1], v[2])
+        return str_
 
     def renderCubemap(self, width, height):
         imgs = []
@@ -93,3 +133,9 @@ class Harmonic:
                     img[i, j] = Vector3(color.b, color.g, color.r)
             imgs.append(img)
         return imgs
+
+    def __str__(self):
+        st = ""
+        for c in self.coefs:
+            st += "{0:.5}\t{1:.5}\t{2:.5}\n".format(c.r, c.g, c.b)
+        return st

@@ -81,8 +81,7 @@ def NormalRandom(mu=0, sigma=1):
     return random.normalvariate(mu, sigma=sigma)
 
 
-def CoefficientsString(coefs):
-    st = ""
-    for c in coefs:
-        st += "{0:.5}\t{1:.5}\t{2:.5}\n".format(c.r, c.g, c.b)
-    return st
+def Write(name, content):
+    f = open("output/{0}.txt".format(name), 'w')
+    f.write(content)
+    f.close()

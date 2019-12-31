@@ -6,8 +6,10 @@
 import cv2
 from cubemap import Cubemap
 from harmonic import Harmonic
-from util import *
+from util import Write
 import os
+import time
+
 
 if not os.path.exists("output"):
     os.mkdir("output")
@@ -18,15 +20,19 @@ cube = Cubemap(path)
 img = cube.GenExpandImage(256)
 cv2.imwrite("output/cube.jpg", img)
 
-print("sampleing ...")
+print("sampling ...")
 degree = 3
 samplenum = 100000
 harmonics = Harmonic(degree)
+
+start = time.clock()
+pos, col = cube.NumpySample(samplenum)
+txt = harmonics.numpyEval(pos, col)
+Write("coef", txt)
+print("numpy exec time:{}".format(time.clock() - start))
+
+start = time.clock()
 verticies = cube.RandomSample(samplenum)
-# colors = cube.NumpySample(samplenum)
-# print(colors.shape)
 harmonics.evaluate(verticies)
-txt = CoefficientsString(harmonics.coefs)
-f = open("output/coef.txt", 'w')
-f.write(txt)
-f.close()
+Write("coef2", str(harmonics))
+print("\ncpu exec time:{}".format(time.clock() - start))

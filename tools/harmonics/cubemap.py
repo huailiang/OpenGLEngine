@@ -73,22 +73,25 @@ class Cubemap:
             x = NormalRandom()
             y = NormalRandom()
             z = NormalRandom()
-            p = Vector3(x, y, z)
+            p = Vector3(x, y, z).normal()
             c = self.sample(p)
             v = Vertex(p, c)
             samples.append(v)
         return samples
 
     def NumpySample(self, n):
-        samples = []
+        col = np.zeros((n, 3))
+        pos = np.zeros((n, 3))
         for i in range(n):
             x = NormalRandom()
             y = NormalRandom()
             z = NormalRandom()
             p = Vector3(x, y, z)
+            p = p.normal()
+            pos[i] = p.toarray()
             c = self.sampleColor(p)
-            samples.append(c)
-        return np.array(samples)
+            col[i] = c
+        return pos, col
 
     def sample(self, pos):
         """
@@ -96,8 +99,8 @@ class Cubemap:
         :param pos: Vector3
         :return: vector<Vertex>
         """
-        c = self.sampleColor(pos)
-        return Vector3(c[2], c[1], c[0])
+        x, y, z = self.sampleColor(pos)
+        return Vector3(x, y, z)
 
     def sampleColor(self, pos):
         cubeuv = XYZ2CubeUV(pos)
@@ -105,7 +108,7 @@ class Cubemap:
         i = int((1. - cubeuv.v) * (self.height - 1))
         k = int(cubeuv.index)
         c = self.images[k][i, j] / 255.
-        return c
+        return c[2], c[1], c[0]
 
     def sampleT(self, theta, phi):
         s = Vector3(1, theta, phi)
