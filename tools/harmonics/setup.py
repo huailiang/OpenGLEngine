@@ -21,6 +21,6 @@ setup(name="neural",
       ],
       packages=find_packages(),
       zip_safe=False,
-      install_requires=["tqdm", "numpy>=1.13.3,<2.0", 'cv2'],
+      install_requires=["tqdm", "numpy>=1.13.3,<2.0", 'cv2', 'matplotlib', 'scipy'],
       python_requires=">=3.5"
       )
