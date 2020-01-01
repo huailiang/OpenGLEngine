@@ -25,14 +25,14 @@ degree = 3
 samplenum = 100000
 harmonics = Harmonic(degree)
 
-start = time.clock()
+start = time.time()
 pos, col = cube.NumpySample(samplenum)
 txt = harmonics.numpyEval(pos, col)
 Write("coef", txt)
-print("numpy exec time:{}".format(time.clock() - start))
+print("numpy exec time:{}".format(time.time() - start))
 
-start = time.clock()
+start = time.time()
 verticies = cube.RandomSample(samplenum)
 harmonics.evaluate(verticies)
 Write("coef2", str(harmonics))
-print("\ncpu exec time:{}".format(time.clock() - start))
+print("\ncpu exec time:{}".format(time.time() - start))

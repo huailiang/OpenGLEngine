@@ -2,12 +2,12 @@
 
 采用pyton写的球谐因子生成工具， 实现采用两种方式
 
-* 纯CPU计算
-* GPU加速计算
+* 纯数组计算
+* Numpy加速计算
 
-其中gpu的部分实现主要依据是python库-numpy， 利用矩阵并行性质实现得到了
 
-运行main.py 在我的主机（显卡GTX 1060 3GB）快了大概4-5倍的样子
+
+Numpy加速计算运行main.py 在我的主机（显卡GTX 1060 3GB）快了大概4-5倍的样子
 
 运行结果参见：
 
@@ -21,6 +21,20 @@ numpy exec time:1.3972785
 cpu exec time:6.490745
 ```
 
+同样的代码支持[cupy][i1], GPU并行计算， 只需要将代码里的
+
+```py
+# 替换 import numpy as np
+import cupy as np
+```
+
+实际运行下来，由于数据量还是不太大，所以反而还比numpy实现的运行时间更长
+
+
+
 #### c++实现
 
-除了这里py实现方式， 还有c++实现(纯CPU计算， 在engine/cv目录下)， 效率比py里cpu计算要好， 后期可以考虑把c++部分运算移植到cuda或者numcpp里计算。
+除了这里py实现方式， 还有c++实现(纯CPU计算， 在engine/cv目录下)， 效率比py里cpu计算要好， 后期可以考虑把c++部分运算移植到cuda里计算。
+
+
+[i1]: https://docs-cupy.chainer.org/en/stable/
