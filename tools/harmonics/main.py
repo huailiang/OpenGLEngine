@@ -25,11 +25,11 @@ degree = 3
 samplenum = 100000
 harmonics = Harmonic(degree)
 
-start = time.time()
-pos, col = cube.NumpySample(samplenum)
-txt = harmonics.numpyEval(pos, col)
-Write("coef", txt)
-print("numpy exec time:{}".format(time.time() - start))
+# start = time.time()
+# pos, col = cube.NumpySample(samplenum)
+# txt = harmonics.numpyEval(pos, col)
+# Write("coef", txt)
+# print("numpy exec time:{}".format(time.time() - start))
 
 start = time.time()
 verticies = cube.RandomSample(samplenum)

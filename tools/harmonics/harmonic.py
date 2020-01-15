@@ -24,10 +24,10 @@ class Harmonic:
 
     def render(self, pos):
         n = (self.degree + 1) ** 2
-        self.basis(pos)
+        Y = self.basis(pos)
         color = Vector3.zero()
         for i in range(n):
-            color = color + self.Y[i] * self.coefs[i]
+            color = color + Y[i] * self.coefs[i]
         return color
 
     def basis(self, pos):
@@ -47,13 +47,13 @@ class Harmonic:
         if self.degree >= 2:
             Y[4] = ((15 / PI) ** 0.5) * 0.5 * x * z
             Y[5] = ((15 / PI) ** 0.5) * 0.5 * y * z
-            Y[6] = ((15 / PI) ** 0.5) * 0.25 * (-x * x - z * z + 2 * y * y)
+            Y[6] = ((5 / PI) ** 0.5) * 0.25 * (-x * x - z * z + 2 * y * y)
             Y[7] = ((15 / PI) ** 0.5) * 0.5 * x * y
             Y[8] = ((15 / PI) ** 0.5) * 0.25 * (x * x - z * z)
         if self.degree >= 3:
             Y[9] = 0.25 * (35 / (2 * PI) ** 0.5) * (3 * x * x - z * z) * z
             Y[10] = 0.5 * (105 / PI) ** 0.5 * x * z * y
-            Y[11] = 0.25 * (21 / (2 * PI)) * 0.5 * z * (4 * y * y - x * x - z * z)
+            Y[11] = 0.25 * (21 / (2 * PI)) ** 0.5 * z * (4 * y * y - x * x - z * z)
             Y[12] = 0.25 * (7 / PI) ** 0.5 * y * (2 * y * y - 3 * x * x - 3 * z * z)
             Y[13] = 0.25 * (21 / (2 * PI)) ** 0.5 * x * (4 * y * y - x * x - z * z)
             Y[14] = 0.25 * (105 / PI) ** 0.5 * (x * x - z * z) * y
