@@ -14,13 +14,6 @@ class Harmonic:
         self.degree = degree
         n = (degree + 1) ** 2
         self.coefs = [Vector3.zero() for _ in range(n)]
-        self.factorial = []
-        maxfact = degree * degree
-        for i in range(maxfact):
-            if i == 0:
-                self.factorial.append(1)
-            else:
-                self.factorial.append(i * self.factorial[i - 1])
 
     def render(self, pos):
         n = (self.degree + 1) ** 2
@@ -51,7 +44,7 @@ class Harmonic:
             Y[7] = ((15 / PI) ** 0.5) * 0.5 * x * y
             Y[8] = ((15 / PI) ** 0.5) * 0.25 * (x * x - z * z)
         if self.degree >= 3:
-            Y[9] = 0.25 * (35 / (2 * PI) ** 0.5) * (3 * x * x - z * z) * z
+            Y[9] = 0.25 * (35 / (2 * PI)) ** 0.5 * (3 * x * x - z * z) * z
             Y[10] = 0.5 * (105 / PI) ** 0.5 * x * z * y
             Y[11] = 0.25 * (21 / (2 * PI)) ** 0.5 * z * (4 * y * y - x * x - z * z)
             Y[12] = 0.25 * (7 / PI) ** 0.5 * y * (2 * y * y - 3 * x * x - 3 * z * z)

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # @Author: penghuailiang
 # @Date  : 12/29/19
-
+import struct
 from vector import Vector3, CubeUV
 import math
 import random
@@ -84,4 +84,16 @@ def NormalRandom(mu=0, sigma=1):
 def Write(name, content):
     f = open("output/{0}.txt".format(name), 'w')
     f.write(content)
+    f.close()
+
+
+def writef(f, v):
+    p = struct.pack("f", v)
+    f.write(p)
+
+
+def WriteRecord(name, record):
+    f = open("output/{0}.txt".format(name), 'wb')
+    for it in record:
+        writef(f, it)
     f.close()

@@ -42,7 +42,7 @@ class Vector3:
             return Vector3(self.x ** power, self.y ** power, self.z ** power)
 
     def __str__(self):
-        return "vector x:{0}, y:{1}, z:{2}".format(self.x, self.y, self.z)
+        return "({0}, {1}, {2})".format(self.x, self.y, self.z)
 
     @property
     def r(self):
